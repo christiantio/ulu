@@ -1,0 +1,178 @@
+import { describe, expect, it } from 'vitest'
+import { dailyPrompts, diveNumber, msUntilNextDive, singaporeDateKey } from './daily'
+import { editDistance, matchAnswer } from './match'
+import { normalize } from './normalize'
+import { MAX_SCORE, destinationFor } from './scoring'
+import { shareText } from './share'
+import { CATEGORIES, type Prompt, type Tier } from './types'
+import { validatePacks } from './validate'
+
+function makePrompt(id: string, answers: [string, Tier, string[]?][], category: Prompt['category'] = 'places'): Prompt {
+  return { id, category, text: id, answers: answers.map(([name, tier, aliases]) => ({ name, tier, aliases })) }
+}
+
+const towns = makePrompt('towns', [
+  ['Ang Mo Kio', 'common', ['AMK']],
+  ['Bedok', 'common'],
+  ['Bishan', 'solid'],
+  ['Bukit Batok', 'solid'],
+  ['Bukit Panjang', 'rare'],
+  ['Bukit Merah', 'solid'],
+  ['Choa Chu Kang', 'solid', ['CCK']],
+  ['Toa Payoh', 'common', ['TPY']],
+  ['Sembawang', 'rare'],
+  ['Kallang/Whampoa', 'ulu', ['Kallang Whampoa', 'Whampoa']],
+  ['Marine Parade', 'ulu'],
+  ['Bukit Timah', 'gem'],
+])
+
+describe('normalize', () => {
+  it('ignores case, punctuation, spacing, accents and a leading "the"', () => {
+    expect(normalize('Char Kway Teow')).toBe(normalize('char-kway-teow'))
+    expect(normalize('  CHARKWAYTEOW ')).toBe('charkwayteow')
+    expect(normalize('Café')).toBe('cafe')
+    expect(normalize('The Esplanade')).toBe('esplanade')
+    expect(normalize("Prata'")).toBe('prata')
+    expect(normalize('Kallang/Whampoa')).toBe('kallangwhampoa')
+    expect(normalize('A&W')).toBe('aandw')
+  })
+})
+
+describe('matchAnswer', () => {
+  it('matches names and aliases exactly', () => {
+    expect(matchAnswer('ang mo kio', towns)?.answer.name).toBe('Ang Mo Kio')
+    expect(matchAnswer('AMK', towns)).toEqual({ answer: towns.answers[0], corrected: false })
+    expect(matchAnswer('whampoa', towns)?.answer.name).toBe('Kallang/Whampoa')
+  })
+
+  it('tolerates small typos on longer answers', () => {
+    expect(matchAnswer('Sembawan', towns)).toMatchObject({ answer: { name: 'Sembawang' }, corrected: true })
+    expect(matchAnswer('Choa Chu Kong', towns)?.answer.name).toBe('Choa Chu Kang')
+  })
+
+  it('does not fuzz short inputs', () => {
+    expect(matchAnswer('Bedk', towns)).toBeNull()
+    expect(matchAnswer('AMX', towns)).toBeNull()
+  })
+
+  it('refuses ambiguous corrections', () => {
+    // One edit from both Bukit Batok and Bukit Timah? No, but equidistant to two names should fail
+    const p = makePrompt('ambiguous', [
+      ['Bukit Batok', 'common'],
+      ['Bukit Bator', 'common'],
+    ])
+    expect(matchAnswer('Bukit Bato', p)).toBeNull()
+  })
+
+  it('rejects unrelated and empty input', () => {
+    expect(matchAnswer('Johor Bahru', towns)).toBeNull()
+    expect(matchAnswer('   ', towns)).toBeNull()
+  })
+
+  it('computes bounded edit distance', () => {
+    expect(editDistance('kitten', 'sitting', 5)).toBe(3)
+    expect(editDistance('abc', 'abc', 0)).toBe(0)
+    expect(editDistance('abcdef', 'a', 2)).toBe(3)
+  })
+})
+
+describe('daily selection', () => {
+  const pool = CATEGORIES.flatMap((category) =>
+    Array.from({ length: 5 }, (_, i) => makePrompt(`${category}-${i}`, [], category)),
+  )
+
+  it('uses the Singapore date regardless of device timezone', () => {
+    // 20:00 UTC on 31 Oct is 04:00 on 1 Nov in Singapore
+    expect(singaporeDateKey(new Date('2026-10-31T20:00:00Z'))).toBe('2026-11-01')
+    expect(singaporeDateKey(new Date('2026-10-31T15:59:59Z'))).toBe('2026-10-31')
+  })
+
+  it('counts time to the next Singapore midnight', () => {
+    expect(msUntilNextDive(new Date('2026-10-31T15:59:00Z'))).toBe(60_000)
+    expect(msUntilNextDive(new Date('2026-10-31T16:00:00Z'))).toBe(86_400_000)
+  })
+
+  it('numbers dives from launch', () => {
+    expect(diveNumber('2026-10-27')).toBe(1)
+    expect(diveNumber('2026-11-05')).toBe(10)
+  })
+
+  it('is deterministic for a date and different across dates', () => {
+    const a = dailyPrompts(pool, '2026-11-03').map((p) => p.id)
+    expect(dailyPrompts([...pool].reverse(), '2026-11-03').map((p) => p.id)).toEqual(a)
+    expect(dailyPrompts(pool, '2026-11-04').map((p) => p.id)).not.toEqual(a)
+  })
+
+  it('picks 7 prompts from 7 different categories', () => {
+    const picked = dailyPrompts(pool, '2026-12-25')
+    expect(picked).toHaveLength(7)
+    expect(new Set(picked.map((p) => p.category)).size).toBe(7)
+  })
+
+  it('does not repeat a prompt until its category has cycled', () => {
+    const seen = new Map<string, number>()
+    for (let d = 0; d < 5; d++) {
+      const date = new Date(Date.UTC(2026, 10, 1 + d)).toISOString().slice(0, 10)
+      for (const p of dailyPrompts(pool, date)) seen.set(p.id, (seen.get(p.id) ?? 0) + 1)
+    }
+    expect(Math.max(...seen.values())).toBe(1)
+  })
+
+  it('still fills a dive when there are few categories', () => {
+    const small = Array.from({ length: 10 }, (_, i) => makePrompt(`food-${i}`, [], 'food'))
+    const picked = dailyPrompts(small, '2026-11-02')
+    expect(picked).toHaveLength(7)
+    expect(new Set(picked).size).toBe(7)
+  })
+})
+
+describe('scoring and sharing', () => {
+  it('maps scores to destinations', () => {
+    expect(destinationFor(0).name).toBe('Raffles Place')
+    expect(destinationFor(99).name).toBe('Raffles Place')
+    expect(destinationFor(450).name).toBe('Lim Chu Kang')
+    expect(destinationFor(MAX_SCORE).name).toBe('Pedra Branca')
+  })
+
+  it('builds a spoiler-free share string', () => {
+    const text = shareText(
+      [
+        { promptId: 'a', input: 'x', answer: 'Bukit Timah', tier: 'gem', points: 100 },
+        { promptId: 'b', input: '', answer: null, tier: null, points: 0 },
+        { promptId: 'c', input: 'amk', answer: 'Ang Mo Kio', tier: 'common', points: 10 },
+      ],
+      'Ulu #3',
+      'https://ulu.sg',
+    )
+    expect(text).toBe('Ulu #3 🇸🇬 110/700\n💎❌⚪\nReached Bishan\nhttps://ulu.sg')
+    expect(text).not.toContain('Timah')
+  })
+})
+
+describe('validatePacks', () => {
+  const pack = (prompts: Prompt[]) => ({ 'test.json': { name: 'Test', asOf: '2026-10-27', prompts } })
+
+  it('accepts a well-formed prompt', () => {
+    expect(validatePacks(pack([towns]))).toEqual([])
+  })
+
+  it('flags missing or duplicate gems, alias collisions and duplicate ids', () => {
+    const noGem = { ...towns, id: 'no-gem', answers: towns.answers.map((a) => ({ ...a, tier: 'solid' as Tier })) }
+    const collide = {
+      ...towns,
+      id: 'collide',
+      answers: [...towns.answers, { name: 'Bishan Park', aliases: ['bishan'], tier: 'rare' as Tier }],
+    }
+    const errors = validatePacks(pack([towns, towns, noGem, collide]))
+    expect(errors.some((e) => e.includes('id already used'))).toBe(true)
+    expect(errors.some((e) => e.includes('exactly 1 gem'))).toBe(true)
+    expect(errors.some((e) => e.includes('collides with Bishan'))).toBe(true)
+  })
+
+  it('flags thin prompts and bad categories', () => {
+    const thin = makePrompt('thin', [['A thing', 'gem']])
+    const errors = validatePacks(pack([{ ...thin, category: 'sports' as Prompt['category'] }]))
+    expect(errors.some((e) => e.includes('min 12'))).toBe(true)
+    expect(errors.some((e) => e.includes('unknown category'))).toBe(true)
+  })
+})

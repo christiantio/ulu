@@ -1,0 +1,2516 @@
+{
+  "name": "Nature",
+  "asOf": "2026-10-27",
+  "prompts": [
+    {
+      "id": "nature-wild-mammals",
+      "category": "nature",
+      "text": "Name a wild mammal you could spot in Singapore",
+      "note": "Wild animals only — no pets or zoo residents.",
+      "answers": [
+        {
+          "name": "Smooth-coated Otter",
+          "aliases": [
+            "Otter",
+            "Otters",
+            "Smooth Coated Otter",
+            "Smooth-coated Otters"
+          ],
+          "tier": "common"
+        },
+        {
+          "name": "Long-tailed Macaque",
+          "aliases": [
+            "Monkey",
+            "Monkeys",
+            "Macaque",
+            "Macaques",
+            "Long Tailed Macaque",
+            "Crab-eating Macaque",
+            "Long-tailed Monkey",
+            "Crab-eating Monkey"
+          ],
+          "tier": "common"
+        },
+        {
+          "name": "Wild Boar",
+          "aliases": [
+            "Boar",
+            "Wild Pig",
+            "Wild Boars"
+          ],
+          "tier": "common"
+        },
+        {
+          "name": "Sunda Pangolin",
+          "aliases": [
+            "Pangolin",
+            "Malayan Pangolin",
+            "Scaly Anteater",
+            "Pangolins"
+          ],
+          "tier": "trap"
+        },
+        {
+          "name": "Sunda Colugo",
+          "aliases": [
+            "Colugo",
+            "Flying Lemur",
+            "Malayan Colugo",
+            "Malayan Flying Lemur",
+            "Colugos"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "Plantain Squirrel",
+          "aliases": [
+            "Squirrel",
+            "Squirrels",
+            "Tri-coloured Squirrel"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "Common Palm Civet",
+          "aliases": [
+            "Civet",
+            "Palm Civet",
+            "Musang",
+            "Toddy Cat",
+            "Civet Cat"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "Fruit Bat",
+          "aliases": [
+            "Bat",
+            "Bats",
+            "Lesser Dog-faced Fruit Bat",
+            "Dog-faced Fruit Bat",
+            "Fruit Bats",
+            "Short-nosed Fruit Bat"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "Lesser Mousedeer",
+          "aliases": [
+            "Mousedeer",
+            "Mouse Deer",
+            "Kancil",
+            "Lesser Mouse Deer",
+            "Chevrotain"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "Rat",
+          "aliases": [
+            "Rats",
+            "Norway Rat",
+            "Brown Rat",
+            "Black Rat",
+            "House Rat",
+            "Sewer Rat"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "Indo-Pacific Humpback Dolphin",
+          "aliases": [
+            "Dolphin",
+            "Dolphins",
+            "Pink Dolphin",
+            "Humpback Dolphin",
+            "Indo Pacific Humpback Dolphin"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "Dugong",
+          "aliases": [
+            "Dugongs",
+            "Sea Cow"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "Sunda Slow Loris",
+          "aliases": [
+            "Slow Loris",
+            "Loris",
+            "Greater Slow Loris"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "Leopard Cat",
+          "aliases": [
+            "Wild Cat"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "Slender Squirrel",
+          "aliases": [
+            "Slender Squirrels"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "Common Treeshrew",
+          "aliases": [
+            "Treeshrew",
+            "Tree Shrew",
+            "Common Tree Shrew"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "House Shrew",
+          "aliases": [
+            "Shrew",
+            "Asian House Shrew",
+            "Musk Shrew",
+            "Asian Musk Shrew"
+          ],
+          "tier": "ulu"
+        },
+        {
+          "name": "Small-clawed Otter",
+          "aliases": [
+            "Oriental Small-clawed Otter",
+            "Asian Small-clawed Otter",
+            "Small Clawed Otter"
+          ],
+          "tier": "ulu"
+        },
+        {
+          "name": "Large Flying Fox",
+          "aliases": [
+            "Flying Fox",
+            "Malayan Flying Fox",
+            "Flying Foxes"
+          ],
+          "tier": "ulu"
+        },
+        {
+          "name": "Red-cheeked Flying Squirrel",
+          "aliases": [
+            "Flying Squirrel",
+            "Red Cheeked Flying Squirrel"
+          ],
+          "tier": "ulu"
+        },
+        {
+          "name": "Cave Nectar Bat",
+          "aliases": [
+            "Nectar Bat",
+            "Dawn Bat"
+          ],
+          "tier": "ulu"
+        },
+        {
+          "name": "Malayan Porcupine",
+          "aliases": [
+            "Porcupine",
+            "Porcupines"
+          ],
+          "tier": "ulu"
+        },
+        {
+          "name": "Raffles' Banded Langur",
+          "aliases": [
+            "Banded Langur",
+            "Raffles Banded Langur",
+            "Banded Leaf Monkey",
+            "Langur",
+            "Raffles' Banded Leaf Monkey",
+            "Leaf Monkey"
+          ],
+          "tier": "gem"
+        }
+      ]
+    },
+    {
+      "id": "nature-reptiles",
+      "category": "nature",
+      "text": "Name a reptile that lives in the wild in Singapore",
+      "note": "Snakes, lizards, turtles and crocs. Common names are fine.",
+      "answers": [
+        {
+          "name": "Malayan Water Monitor",
+          "aliases": [
+            "Monitor Lizard",
+            "Water Monitor",
+            "Monitor",
+            "Biawak",
+            "Asian Water Monitor",
+            "Monitor Lizards"
+          ],
+          "tier": "common"
+        },
+        {
+          "name": "Reticulated Python",
+          "aliases": [
+            "Python",
+            "Pythons"
+          ],
+          "tier": "common"
+        },
+        {
+          "name": "House Gecko",
+          "aliases": [
+            "Gecko",
+            "Cicak",
+            "Chichak",
+            "Cichak",
+            "Common House Gecko",
+            "Geckos",
+            "House Lizard",
+            "Wall Lizard"
+          ],
+          "tier": "common"
+        },
+        {
+          "name": "Equatorial Spitting Cobra",
+          "aliases": [
+            "Cobra",
+            "Spitting Cobra",
+            "Black Spitting Cobra",
+            "Sumatran Spitting Cobra"
+          ],
+          "tier": "trap"
+        },
+        {
+          "name": "Estuarine Crocodile",
+          "aliases": [
+            "Crocodile",
+            "Saltwater Crocodile",
+            "Croc",
+            "Saltie",
+            "Crocodiles"
+          ],
+          "tier": "trap"
+        },
+        {
+          "name": "King Cobra",
+          "aliases": [
+            "King Cobras"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "Changeable Lizard",
+          "aliases": [
+            "Garden Lizard",
+            "Oriental Garden Lizard",
+            "Bloodsucker",
+            "Bloodsucker Lizard",
+            "Garden Fence Lizard"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "Green Crested Lizard",
+          "aliases": [
+            "Green Lizard",
+            "Crested Lizard"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "Flying Lizard",
+          "aliases": [
+            "Draco",
+            "Common Gliding Lizard",
+            "Flying Dragon",
+            "Gliding Lizard"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "Red-eared Slider",
+          "aliases": [
+            "Terrapin",
+            "Red-eared Terrapin",
+            "Red Eared Slider",
+            "Red Ear Terrapin",
+            "Slider"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "Wagler's Pit Viper",
+          "aliases": [
+            "Temple Pit Viper",
+            "Pit Viper",
+            "Waglers Pit Viper",
+            "Temple Viper"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "Paradise Tree Snake",
+          "aliases": [
+            "Flying Snake",
+            "Paradise Flying Snake",
+            "Paradise Snake"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "Hawksbill Turtle",
+          "aliases": [
+            "Sea Turtle",
+            "Hawksbill",
+            "Hawksbill Sea Turtle",
+            "Turtle"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "Green Turtle",
+          "aliases": [
+            "Green Sea Turtle"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "Clouded Monitor",
+          "aliases": [
+            "Clouded Monitor Lizard"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "Tokay Gecko",
+          "aliases": [
+            "Tokay",
+            "Tokek"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "Common Sun Skink",
+          "aliases": [
+            "Skink",
+            "Sun Skink",
+            "Many-lined Sun Skink",
+            "Many-lined Skink"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "Oriental Whip Snake",
+          "aliases": [
+            "Whip Snake",
+            "Green Vine Snake",
+            "Vine Snake",
+            "Asian Vine Snake"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "Malayan Box Turtle",
+          "aliases": [
+            "Box Turtle",
+            "Amboina Box Turtle",
+            "Southeast Asian Box Turtle"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "Shore Pit Viper",
+          "aliases": [
+            "Mangrove Pit Viper"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "Gold-ringed Cat Snake",
+          "aliases": [
+            "Mangrove Snake",
+            "Mangrove Cat Snake",
+            "Cat Snake",
+            "Gold Ringed Cat Snake"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "Dog-faced Water Snake",
+          "aliases": [
+            "Dog Faced Water Snake",
+            "Water Snake"
+          ],
+          "tier": "ulu"
+        },
+        {
+          "name": "Blue Coral Snake",
+          "aliases": [
+            "Blue Malaysian Coral Snake",
+            "Coral Snake",
+            "Blue Long-glanded Coral Snake"
+          ],
+          "tier": "ulu"
+        },
+        {
+          "name": "Painted Bronzeback",
+          "aliases": [
+            "Bronzeback",
+            "Painted Bronzeback Snake"
+          ],
+          "tier": "ulu"
+        },
+        {
+          "name": "Keeled Rat Snake",
+          "aliases": [
+            "Rat Snake"
+          ],
+          "tier": "ulu"
+        },
+        {
+          "name": "Asiatic Softshell Turtle",
+          "aliases": [
+            "Softshell Turtle",
+            "Malayan Softshell Turtle",
+            "Soft-shelled Turtle",
+            "Asian Softshell Turtle"
+          ],
+          "tier": "ulu"
+        },
+        {
+          "name": "Brahminy Blind Snake",
+          "aliases": [
+            "Blind Snake",
+            "Flowerpot Snake",
+            "Worm Snake",
+            "Brahminy Blindsnake"
+          ],
+          "tier": "gem"
+        }
+      ]
+    },
+    {
+      "id": "nature-birds",
+      "category": "nature",
+      "text": "Name a bird you can spot in Singapore",
+      "note": "Wild birds only — not pets or Bird Paradise residents.",
+      "answers": [
+        {
+          "name": "House Crow",
+          "aliases": [
+            "Crow",
+            "Crows",
+            "Indian House Crow"
+          ],
+          "tier": "common"
+        },
+        {
+          "name": "Javan Myna",
+          "aliases": [
+            "Myna",
+            "Mynah",
+            "Javan Mynah",
+            "White-vented Myna",
+            "Mynas",
+            "Mynahs"
+          ],
+          "tier": "common"
+        },
+        {
+          "name": "Rock Dove",
+          "aliases": [
+            "Pigeon",
+            "Pigeons",
+            "Rock Pigeon",
+            "Feral Pigeon",
+            "City Pigeon"
+          ],
+          "tier": "common"
+        },
+        {
+          "name": "Eurasian Tree Sparrow",
+          "aliases": [
+            "Sparrow",
+            "Sparrows",
+            "Tree Sparrow"
+          ],
+          "tier": "common"
+        },
+        {
+          "name": "Asian Koel",
+          "aliases": [
+            "Koel",
+            "Koels",
+            "Common Koel"
+          ],
+          "tier": "trap"
+        },
+        {
+          "name": "Oriental Pied Hornbill",
+          "aliases": [
+            "Hornbill",
+            "Hornbills",
+            "Pied Hornbill"
+          ],
+          "tier": "trap"
+        },
+        {
+          "name": "Collared Kingfisher",
+          "aliases": [
+            "Kingfisher",
+            "Kingfishers"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "White-throated Kingfisher",
+          "aliases": [
+            "White-breasted Kingfisher",
+            "Smyrna Kingfisher"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "Black-naped Oriole",
+          "aliases": [
+            "Oriole",
+            "Black Naped Oriole"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "Yellow-vented Bulbul",
+          "aliases": [
+            "Bulbul",
+            "Bulbuls"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "Zebra Dove",
+          "aliases": [
+            "Dove",
+            "Merbok",
+            "Peaceful Dove",
+            "Doves"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "Spotted Dove",
+          "aliases": [
+            "Spotted-necked Dove"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "Olive-backed Sunbird",
+          "aliases": [
+            "Sunbird",
+            "Sunbirds",
+            "Yellow-bellied Sunbird"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "Red Junglefowl",
+          "aliases": [
+            "Junglefowl",
+            "Jungle Fowl",
+            "Wild Chicken",
+            "Wild Chickens",
+            "Red Jungle Fowl",
+            "Chicken"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "Grey Heron",
+          "aliases": [
+            "Heron",
+            "Herons",
+            "Gray Heron"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "Little Egret",
+          "aliases": [
+            "Egret",
+            "Egrets"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "White-bellied Sea Eagle",
+          "aliases": [
+            "Sea Eagle",
+            "Eagle",
+            "White Bellied Sea Eagle",
+            "Eagles"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "Brahminy Kite",
+          "aliases": [
+            "Brahminy"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "Oriental Magpie-Robin",
+          "aliases": [
+            "Magpie Robin",
+            "Magpie-Robin",
+            "Oriental Magpie Robin"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "Common Myna",
+          "aliases": [
+            "Common Mynah",
+            "Indian Myna",
+            "Indian Mynah"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "Pink-necked Green Pigeon",
+          "aliases": [
+            "Green Pigeon",
+            "Pink-necked Pigeon"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "Common Tailorbird",
+          "aliases": [
+            "Tailorbird",
+            "Tailor Bird"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "Ashy Tailorbird",
+          "tier": "ulu"
+        },
+        {
+          "name": "Stork-billed Kingfisher",
+          "aliases": [
+            "Stork Billed Kingfisher"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "Asian Glossy Starling",
+          "aliases": [
+            "Glossy Starling",
+            "Starling"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "Red-breasted Parakeet",
+          "aliases": [
+            "Parakeet",
+            "Parakeets",
+            "Parrot",
+            "Parrots"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "Long-tailed Parakeet",
+          "aliases": [
+            "Long Tailed Parakeet"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "Coppersmith Barbet",
+          "aliases": [
+            "Barbet"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "Common Iora",
+          "aliases": [
+            "Iora"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "Scarlet-backed Flowerpecker",
+          "aliases": [
+            "Flowerpecker"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "Purple Heron",
+          "tier": "rare"
+        },
+        {
+          "name": "Black-crowned Night Heron",
+          "aliases": [
+            "Night Heron",
+            "Black Crowned Night Heron"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "Striated Heron",
+          "aliases": [
+            "Little Heron",
+            "Green-backed Heron"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "White-breasted Waterhen",
+          "aliases": [
+            "Waterhen",
+            "White Breasted Waterhen"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "Large-tailed Nightjar",
+          "aliases": [
+            "Nightjar",
+            "Large Tailed Nightjar",
+            "Tok Tok Bird"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "Pacific Swallow",
+          "aliases": [
+            "Swallow",
+            "Swallows",
+            "House Swallow"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "Barn Swallow",
+          "tier": "ulu"
+        },
+        {
+          "name": "Swiftlet",
+          "aliases": [
+            "Swiftlets",
+            "Edible-nest Swiftlet",
+            "Germain's Swiftlet",
+            "Swift"
+          ],
+          "tier": "ulu"
+        },
+        {
+          "name": "Tanimbar Corella",
+          "aliases": [
+            "Corella",
+            "Goffin's Cockatoo",
+            "Cockatoo",
+            "Cockatoos"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "Sulphur-crested Cockatoo",
+          "aliases": [
+            "Sulphur Crested Cockatoo",
+            "Yellow-crested Cockatoo"
+          ],
+          "tier": "ulu"
+        },
+        {
+          "name": "White-crested Laughingthrush",
+          "aliases": [
+            "Laughingthrush",
+            "White Crested Laughingthrush"
+          ],
+          "tier": "ulu"
+        },
+        {
+          "name": "Changeable Hawk-Eagle",
+          "aliases": [
+            "Hawk Eagle",
+            "Hawk-Eagle",
+            "Changeable Hawk Eagle"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "Blue-throated Bee-eater",
+          "aliases": [
+            "Bee-eater",
+            "Bee Eater",
+            "Bee-eaters"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "Blue-tailed Bee-eater",
+          "aliases": [
+            "Blue Tailed Bee-eater"
+          ],
+          "tier": "ulu"
+        },
+        {
+          "name": "Barn Owl",
+          "aliases": [
+            "Owl",
+            "Owls"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "Spotted Wood Owl",
+          "aliases": [
+            "Wood Owl"
+          ],
+          "tier": "ulu"
+        },
+        {
+          "name": "Buffy Fish Owl",
+          "aliases": [
+            "Fish Owl"
+          ],
+          "tier": "ulu"
+        },
+        {
+          "name": "Straw-headed Bulbul",
+          "aliases": [
+            "Straw Headed Bulbul",
+            "Barau-barau"
+          ],
+          "tier": "ulu"
+        },
+        {
+          "name": "Red-whiskered Bulbul",
+          "aliases": [
+            "Red Whiskered Bulbul"
+          ],
+          "tier": "ulu"
+        },
+        {
+          "name": "Oriental Dollarbird",
+          "aliases": [
+            "Dollarbird",
+            "Dollar Bird"
+          ],
+          "tier": "ulu"
+        },
+        {
+          "name": "Pied Triller",
+          "aliases": [
+            "Triller"
+          ],
+          "tier": "ulu"
+        },
+        {
+          "name": "Black-naped Tern",
+          "aliases": [
+            "Tern",
+            "Terns"
+          ],
+          "tier": "ulu"
+        },
+        {
+          "name": "Chinese Pond Heron",
+          "aliases": [
+            "Pond Heron"
+          ],
+          "tier": "ulu"
+        },
+        {
+          "name": "Red-wattled Lapwing",
+          "aliases": [
+            "Lapwing",
+            "Red Wattled Lapwing"
+          ],
+          "tier": "ulu"
+        },
+        {
+          "name": "Lesser Whistling Duck",
+          "aliases": [
+            "Whistling Duck",
+            "Lesser Whistling-Duck",
+            "Duck",
+            "Ducks"
+          ],
+          "tier": "ulu"
+        },
+        {
+          "name": "Greater Racket-tailed Drongo",
+          "aliases": [
+            "Drongo",
+            "Racket-tailed Drongo"
+          ],
+          "tier": "ulu"
+        },
+        {
+          "name": "Blue-crowned Hanging Parrot",
+          "aliases": [
+            "Hanging Parrot"
+          ],
+          "tier": "ulu"
+        },
+        {
+          "name": "Oriental Honey Buzzard",
+          "aliases": [
+            "Honey Buzzard",
+            "Crested Honey Buzzard"
+          ],
+          "tier": "ulu"
+        },
+        {
+          "name": "Black Baza",
+          "aliases": [
+            "Baza"
+          ],
+          "tier": "ulu"
+        },
+        {
+          "name": "Sunda Pygmy Woodpecker",
+          "aliases": [
+            "Woodpecker",
+            "Pygmy Woodpecker",
+            "Woodpeckers"
+          ],
+          "tier": "ulu"
+        },
+        {
+          "name": "Asian Openbill",
+          "aliases": [
+            "Openbill",
+            "Openbill Stork",
+            "Stork"
+          ],
+          "tier": "ulu"
+        },
+        {
+          "name": "Crimson Sunbird",
+          "aliases": [
+            "Crimson Sunbirds"
+          ],
+          "tier": "gem"
+        }
+      ]
+    },
+    {
+      "id": "nature-trees",
+      "category": "nature",
+      "text": "Name a tree you'd commonly see in Singapore",
+      "note": "Common or scientific names are fine. Palms count.",
+      "answers": [
+        {
+          "name": "Rain Tree",
+          "aliases": [
+            "Raintree",
+            "Rain Trees",
+            "Samanea Saman",
+            "Pukul Lima"
+          ],
+          "tier": "common"
+        },
+        {
+          "name": "Angsana",
+          "aliases": [
+            "Angsana Tree",
+            "Pterocarpus Indicus",
+            "Burmese Rosewood"
+          ],
+          "tier": "common"
+        },
+        {
+          "name": "Tembusu",
+          "aliases": [
+            "Tembusu Tree",
+            "Fagraea Fragrans",
+            "Cyrtophyllum Fragrans"
+          ],
+          "tier": "common"
+        },
+        {
+          "name": "Coconut Tree",
+          "aliases": [
+            "Coconut Palm",
+            "Coconut",
+            "Coconut Trees",
+            "Pokok Kelapa"
+          ],
+          "tier": "common"
+        },
+        {
+          "name": "Banyan",
+          "aliases": [
+            "Banyan Tree",
+            "Banyan Fig",
+            "Strangling Fig",
+            "Fig Tree"
+          ],
+          "tier": "trap"
+        },
+        {
+          "name": "Yellow Flame",
+          "aliases": [
+            "Yellow Flame Tree",
+            "Yellow Flamboyant",
+            "Batai Laut",
+            "Peltophorum"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "Flame of the Forest",
+          "aliases": [
+            "Flame Tree",
+            "Flamboyant",
+            "Royal Poinciana",
+            "Delonix Regia",
+            "Flame of Forest",
+            "Flame-of-the-forest"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "Trumpet Tree",
+          "aliases": [
+            "Pink Trumpet Tree",
+            "Tabebuia",
+            "Tabebuia Rosea",
+            "Singapore Sakura",
+            "Sakura",
+            "Pink Poui"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "Sea Almond",
+          "aliases": [
+            "Ketapang",
+            "Indian Almond",
+            "Terminalia Catappa",
+            "Tropical Almond"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "Casuarina",
+          "aliases": [
+            "Casuarina Tree",
+            "Rhu",
+            "Pokok Rhu",
+            "Ru Tree",
+            "Australian Pine"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "Frangipani",
+          "aliases": [
+            "Frangipani Tree",
+            "Plumeria",
+            "Temple Tree",
+            "Kemboja"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "Mango Tree",
+          "aliases": [
+            "Mango"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "Rubber Tree",
+          "aliases": [
+            "Para Rubber",
+            "Rubber",
+            "Hevea",
+            "Hevea Brasiliensis",
+            "Pokok Getah"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "Broad-leafed Mahogany",
+          "aliases": [
+            "Mahogany",
+            "Big-leaf Mahogany",
+            "Broad-leaved Mahogany",
+            "Honduras Mahogany"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "African Mahogany",
+          "aliases": [
+            "Khaya",
+            "Senegal Mahogany",
+            "Khaya Senegalensis"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "Golden Shower",
+          "aliases": [
+            "Golden Shower Tree",
+            "Cassia Fistula",
+            "Indian Laburnum",
+            "Cassia"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "Saga Tree",
+          "aliases": [
+            "Saga",
+            "Saga Seed Tree",
+            "Red Saga",
+            "Adenanthera",
+            "Red Sandalwood Tree"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "Cannonball Tree",
+          "aliases": [
+            "Cannon Ball Tree",
+            "Couroupita"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "Traveller's Palm",
+          "aliases": [
+            "Travellers Palm",
+            "Traveler's Palm",
+            "Ravenala"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "Sealing Wax Palm",
+          "aliases": [
+            "Lipstick Palm",
+            "Red Palm",
+            "Red Sealing Wax Palm",
+            "Pinang Rajah"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "Fishtail Palm",
+          "aliases": [
+            "Fish Tail Palm",
+            "Caryota"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "Royal Palm",
+          "aliases": [
+            "Cuban Royal Palm",
+            "Roystonea"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "Sea Apple",
+          "aliases": [
+            "Syzygium Grande",
+            "Jambu Laut"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "Kapok",
+          "aliases": [
+            "Kapok Tree",
+            "Ceiba"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "Tamarind",
+          "aliases": [
+            "Tamarind Tree",
+            "Asam",
+            "Assam",
+            "Asam Jawa"
+          ],
+          "tier": "ulu"
+        },
+        {
+          "name": "Madras Thorn",
+          "aliases": [
+            "Pithecellobium",
+            "Manila Tamarind"
+          ],
+          "tier": "ulu"
+        },
+        {
+          "name": "Sea Hibiscus",
+          "aliases": [
+            "Waru",
+            "Baru Baru",
+            "Hibiscus Tiliaceus"
+          ],
+          "tier": "ulu"
+        },
+        {
+          "name": "Penaga Laut",
+          "aliases": [
+            "Alexandrian Laurel",
+            "Calophyllum",
+            "Beach Calophyllum",
+            "Calophyllum Inophyllum"
+          ],
+          "tier": "ulu"
+        },
+        {
+          "name": "Acacia",
+          "aliases": [
+            "Acacia Auriculiformis",
+            "Earpod Wattle"
+          ],
+          "tier": "ulu"
+        },
+        {
+          "name": "Albizia",
+          "aliases": [
+            "Batai",
+            "Falcataria",
+            "Albizzia"
+          ],
+          "tier": "ulu"
+        },
+        {
+          "name": "Jelutong",
+          "aliases": [
+            "Jelutong Tree",
+            "Dyera"
+          ],
+          "tier": "ulu"
+        },
+        {
+          "name": "Bodhi Tree",
+          "aliases": [
+            "Bo Tree",
+            "Sacred Fig",
+            "Peepal",
+            "Pipal",
+            "Bodhi"
+          ],
+          "tier": "ulu"
+        },
+        {
+          "name": "Pong Pong",
+          "aliases": [
+            "Pong Pong Tree",
+            "Suicide Tree",
+            "Cerbera Odollam",
+            "Pong-pong",
+            "Cerbera"
+          ],
+          "tier": "gem"
+        }
+      ]
+    },
+    {
+      "id": "nature-flowers",
+      "category": "nature",
+      "text": "Name a flower or flowering plant you'd see in Singapore's parks and gardens",
+      "note": "Orchids, shrubs, climbers and water plants all count.",
+      "answers": [
+        {
+          "name": "Orchid",
+          "aliases": [
+            "Orchids"
+          ],
+          "tier": "common"
+        },
+        {
+          "name": "Vanda Miss Joaquim",
+          "aliases": [
+            "Miss Joaquim",
+            "Papilionanthe Miss Joaquim",
+            "Vanda",
+            "National Flower",
+            "Miss Joaquim Orchid"
+          ],
+          "tier": "common"
+        },
+        {
+          "name": "Hibiscus",
+          "aliases": [
+            "Bunga Raya",
+            "Shoe Flower"
+          ],
+          "tier": "common"
+        },
+        {
+          "name": "Bougainvillea",
+          "aliases": [
+            "Bougainvillaea",
+            "Bougainvilla",
+            "Bunga Kertas",
+            "Paper Flower"
+          ],
+          "tier": "common"
+        },
+        {
+          "name": "Frangipani",
+          "aliases": [
+            "Plumeria",
+            "Temple Flower",
+            "Kemboja",
+            "Bunga Kemboja"
+          ],
+          "tier": "trap"
+        },
+        {
+          "name": "Lotus",
+          "aliases": [
+            "Lotus Flower",
+            "Sacred Lotus",
+            "Lotuses"
+          ],
+          "tier": "trap"
+        },
+        {
+          "name": "Ixora",
+          "aliases": [
+            "Jungle Geranium",
+            "Siantan",
+            "Jungle Flame",
+            "Bunga Siantan"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "Heliconia",
+          "aliases": [
+            "Lobster Claw",
+            "Heliconias",
+            "False Bird of Paradise"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "Bird of Paradise",
+          "aliases": [
+            "Strelitzia",
+            "Bird-of-Paradise",
+            "Crane Flower"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "Water Lily",
+          "aliases": [
+            "Waterlily",
+            "Water Lilies",
+            "Nymphaea",
+            "Giant Water Lily",
+            "Victoria Amazonica"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "Jasmine",
+          "aliases": [
+            "Melati",
+            "Arabian Jasmine",
+            "Jasmin",
+            "Sampaguita"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "Morning Glory",
+          "aliases": [
+            "Ipomoea",
+            "Railway Creeper"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "Allamanda",
+          "aliases": [
+            "Golden Trumpet",
+            "Yellow Bell",
+            "Allamanda Cathartica"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "Lantana",
+          "aliases": [
+            "Lantana Camara"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "Torch Ginger",
+          "aliases": [
+            "Bunga Kantan",
+            "Kantan",
+            "Torch Ginger Flower",
+            "Ginger Flower",
+            "Red Ginger Lily",
+            "Ginger Lily"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "Periwinkle",
+          "aliases": [
+            "Madagascar Periwinkle",
+            "Vinca",
+            "Catharanthus",
+            "Rose Periwinkle"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "Pitcher Plant",
+          "aliases": [
+            "Nepenthes",
+            "Pitcher Plants",
+            "Monkey Cup",
+            "Periuk Kera"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "Singapore Rhododendron",
+          "aliases": [
+            "Melastoma",
+            "Sendudok",
+            "Straits Rhododendron",
+            "Senduduk",
+            "Melastoma Malabathricum",
+            "Malabar Melastome"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "Golden Penda",
+          "aliases": [
+            "Xanthostemon",
+            "Xanthostemon Chrysanthus",
+            "Penda"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "Rose",
+          "aliases": [
+            "Roses"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "Marigold",
+          "aliases": [
+            "Marigolds"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "Chrysanthemum",
+          "aliases": [
+            "Chrysanthemums",
+            "Mums"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "Sunflower",
+          "aliases": [
+            "Sunflowers"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "Golden Shower",
+          "aliases": [
+            "Cassia Fistula",
+            "Indian Laburnum"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "Water Hyacinth",
+          "aliases": [
+            "Eichhornia"
+          ],
+          "tier": "ulu"
+        },
+        {
+          "name": "Bleeding Heart Vine",
+          "aliases": [
+            "Bleeding Heart",
+            "Bleeding Glory Bower",
+            "Clerodendrum"
+          ],
+          "tier": "ulu"
+        },
+        {
+          "name": "Crown Flower",
+          "aliases": [
+            "Calotropis",
+            "Giant Milkweed"
+          ],
+          "tier": "ulu"
+        },
+        {
+          "name": "Ylang-Ylang",
+          "aliases": [
+            "Kenanga",
+            "Ylang Ylang",
+            "Cananga"
+          ],
+          "tier": "ulu"
+        },
+        {
+          "name": "Spider Lily",
+          "aliases": [
+            "Crinum",
+            "Crinum Lily",
+            "Spider Lilies"
+          ],
+          "tier": "ulu"
+        },
+        {
+          "name": "Mussaenda",
+          "aliases": [
+            "Mussaendas",
+            "Buddha's Lamp"
+          ],
+          "tier": "ulu"
+        },
+        {
+          "name": "Coral Vine",
+          "aliases": [
+            "Mexican Creeper",
+            "Antigonon",
+            "Chain of Love"
+          ],
+          "tier": "ulu"
+        },
+        {
+          "name": "Cempaka",
+          "aliases": [
+            "Champak",
+            "Chempaka",
+            "Magnolia Champaca",
+            "Michelia",
+            "Joy Perfume Tree"
+          ],
+          "tier": "ulu"
+        },
+        {
+          "name": "Kopsia Singapurensis",
+          "aliases": [
+            "Singapore Kopsia",
+            "Kopsia"
+          ],
+          "tier": "ulu"
+        },
+        {
+          "name": "Gardenia",
+          "aliases": [
+            "Cape Jasmine",
+            "Gardenias"
+          ],
+          "tier": "ulu"
+        },
+        {
+          "name": "Rain Lily",
+          "aliases": [
+            "Zephyranthes",
+            "Rain Lilies",
+            "Fairy Lily"
+          ],
+          "tier": "ulu"
+        },
+        {
+          "name": "Tiger Orchid",
+          "aliases": [
+            "Grammatophyllum Speciosum",
+            "Giant Orchid",
+            "Sugarcane Orchid",
+            "Queen of Orchids"
+          ],
+          "tier": "gem"
+        }
+      ]
+    },
+    {
+      "id": "nature-marine-life",
+      "category": "nature",
+      "text": "Name a sea creature you might find on Singapore's shores or reefs",
+      "note": "Animals only — not seaweed or seagrass. Broad names like 'crab' count.",
+      "answers": [
+        {
+          "name": "Crab",
+          "aliases": [
+            "Crabs",
+            "Mud Crab",
+            "Flower Crab",
+            "Swimming Crab",
+            "Blue Swimmer Crab",
+            "Mangrove Crab",
+            "Red Egg Crab"
+          ],
+          "tier": "common"
+        },
+        {
+          "name": "Jellyfish",
+          "aliases": [
+            "Jelly Fish",
+            "Box Jellyfish",
+            "Moon Jellyfish"
+          ],
+          "tier": "common"
+        },
+        {
+          "name": "Starfish",
+          "aliases": [
+            "Sea Star",
+            "Sea Stars",
+            "Knobbly Sea Star",
+            "Starfishes",
+            "Cake Sea Star",
+            "Biscuit Sea Star",
+            "Common Sea Star"
+          ],
+          "tier": "common"
+        },
+        {
+          "name": "Clownfish",
+          "aliases": [
+            "Anemonefish",
+            "Anemone Fish",
+            "Nemo",
+            "Clown Fish",
+            "Clownfishes"
+          ],
+          "tier": "common"
+        },
+        {
+          "name": "Horseshoe Crab",
+          "aliases": [
+            "Horseshoe Crabs",
+            "Mangrove Horseshoe Crab",
+            "Coastal Horseshoe Crab",
+            "Belangkas"
+          ],
+          "tier": "trap"
+        },
+        {
+          "name": "Sea Anemone",
+          "aliases": [
+            "Anemone",
+            "Anemones",
+            "Carpet Anemone",
+            "Sea Anemones"
+          ],
+          "tier": "trap"
+        },
+        {
+          "name": "Coral",
+          "aliases": [
+            "Corals",
+            "Hard Coral",
+            "Soft Coral",
+            "Mushroom Coral",
+            "Brain Coral"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "Sea Cucumber",
+          "aliases": [
+            "Sea Cucumbers",
+            "Gamat",
+            "Hai Som"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "Sea Urchin",
+          "aliases": [
+            "Urchin",
+            "Sea Urchins",
+            "Urchins"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "Octopus",
+          "aliases": [
+            "Octopuses",
+            "Octopi"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "Hermit Crab",
+          "aliases": [
+            "Hermit Crabs"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "Fiddler Crab",
+          "aliases": [
+            "Fiddler Crabs"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "Mudskipper",
+          "aliases": [
+            "Mudskippers",
+            "Ikan Belacak"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "Seahorse",
+          "aliases": [
+            "Sea Horse",
+            "Seahorses"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "Stingray",
+          "aliases": [
+            "Ray",
+            "Rays",
+            "Stingrays",
+            "Blue-spotted Stingray",
+            "Eagle Ray"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "Sea Turtle",
+          "aliases": [
+            "Turtle",
+            "Hawksbill Turtle",
+            "Green Turtle",
+            "Turtles",
+            "Sea Turtles"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "Dolphin",
+          "aliases": [
+            "Dolphins",
+            "Indo-Pacific Humpback Dolphin",
+            "Pink Dolphin"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "Dugong",
+          "aliases": [
+            "Dugongs",
+            "Sea Cow"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "Blacktip Reef Shark",
+          "aliases": [
+            "Shark",
+            "Sharks",
+            "Black-tip Reef Shark",
+            "Black Tip Shark",
+            "Reef Shark"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "Giant Clam",
+          "aliases": [
+            "Giant Clams",
+            "Fluted Giant Clam",
+            "Clam",
+            "Clams"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "Nudibranch",
+          "aliases": [
+            "Nudibranchs",
+            "Sea Slug",
+            "Sea Slugs"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "Cuttlefish",
+          "aliases": [
+            "Cuttlefishes",
+            "Sotong Katak"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "Squid",
+          "aliases": [
+            "Squids",
+            "Sotong"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "Pufferfish",
+          "aliases": [
+            "Puffer Fish",
+            "Puffer",
+            "Blowfish",
+            "Porcupinefish",
+            "Porcupine Fish",
+            "Ikan Buntal"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "Sea Fan",
+          "aliases": [
+            "Sea Fans",
+            "Gorgonian",
+            "Gorgonians"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "Sponge",
+          "aliases": [
+            "Sponges",
+            "Sea Sponge",
+            "Sea Sponges"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "Sea Hare",
+          "aliases": [
+            "Sea Hares"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "Mantis Shrimp",
+          "aliases": [
+            "Mantis Shrimps",
+            "Mantis Prawn"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "Moray Eel",
+          "aliases": [
+            "Eel",
+            "Eels",
+            "Moray"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "Feather Star",
+          "aliases": [
+            "Feather Stars",
+            "Crinoid",
+            "Crinoids"
+          ],
+          "tier": "ulu"
+        },
+        {
+          "name": "Sand Dollar",
+          "aliases": [
+            "Sand Dollars"
+          ],
+          "tier": "ulu"
+        },
+        {
+          "name": "Sea Pen",
+          "aliases": [
+            "Sea Pens"
+          ],
+          "tier": "ulu"
+        },
+        {
+          "name": "Fan Worm",
+          "aliases": [
+            "Fanworm",
+            "Feather Duster Worm",
+            "Featherduster Worm",
+            "Christmas Tree Worm",
+            "Tube Worm"
+          ],
+          "tier": "ulu"
+        },
+        {
+          "name": "Flatworm",
+          "aliases": [
+            "Flatworms",
+            "Marine Flatworm"
+          ],
+          "tier": "ulu"
+        },
+        {
+          "name": "Pipefish",
+          "aliases": [
+            "Pipefishes"
+          ],
+          "tier": "ulu"
+        },
+        {
+          "name": "Brittle Star",
+          "aliases": [
+            "Brittle Stars",
+            "Brittlestar"
+          ],
+          "tier": "ulu"
+        },
+        {
+          "name": "Archerfish",
+          "aliases": [
+            "Archer Fish",
+            "Archerfishes"
+          ],
+          "tier": "ulu"
+        },
+        {
+          "name": "Sea Snail",
+          "aliases": [
+            "Sea Snails",
+            "Moon Snail",
+            "Moon Snails",
+            "Cowrie",
+            "Cowries",
+            "Spider Conch",
+            "Conch",
+            "Whelk"
+          ],
+          "tier": "ulu"
+        },
+        {
+          "name": "Snapping Shrimp",
+          "aliases": [
+            "Pistol Shrimp",
+            "Snapping Shrimps"
+          ],
+          "tier": "ulu"
+        },
+        {
+          "name": "Barnacle",
+          "aliases": [
+            "Barnacles"
+          ],
+          "tier": "ulu"
+        },
+        {
+          "name": "Mussel",
+          "aliases": [
+            "Mussels",
+            "Green Mussel",
+            "Green Mussels"
+          ],
+          "tier": "ulu"
+        },
+        {
+          "name": "Oyster",
+          "aliases": [
+            "Oysters",
+            "Rock Oyster"
+          ],
+          "tier": "ulu"
+        },
+        {
+          "name": "Neptune's Cup Sponge",
+          "aliases": [
+            "Neptune's Cup",
+            "Neptunes Cup Sponge",
+            "Cliona Patera",
+            "Neptune Cup"
+          ],
+          "tier": "gem"
+        }
+      ]
+    },
+    {
+      "id": "nature-tropical-fruits",
+      "category": "nature",
+      "text": "Name a tropical fruit you can find in Singapore",
+      "note": "Fruits grown here or in the region.",
+      "answers": [
+        {
+          "name": "Durian",
+          "aliases": [
+            "Durians",
+            "King of Fruits"
+          ],
+          "tier": "common"
+        },
+        {
+          "name": "Rambutan",
+          "aliases": [
+            "Rambutans"
+          ],
+          "tier": "common"
+        },
+        {
+          "name": "Mangosteen",
+          "aliases": [
+            "Mangosteens",
+            "Manggis",
+            "Queen of Fruits"
+          ],
+          "tier": "common"
+        },
+        {
+          "name": "Mango",
+          "aliases": [
+            "Mangoes",
+            "Mangos",
+            "Mangga"
+          ],
+          "tier": "common"
+        },
+        {
+          "name": "Dragon Fruit",
+          "aliases": [
+            "Pitaya",
+            "Dragonfruit",
+            "Pitahaya",
+            "Buah Naga"
+          ],
+          "tier": "trap"
+        },
+        {
+          "name": "Chiku",
+          "aliases": [
+            "Ciku",
+            "Sapodilla",
+            "Chikoo",
+            "Sapota",
+            "Chico"
+          ],
+          "tier": "trap"
+        },
+        {
+          "name": "Papaya",
+          "aliases": [
+            "Betik",
+            "Pawpaw",
+            "Papayas"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "Pineapple",
+          "aliases": [
+            "Nanas",
+            "Pineapples",
+            "Ong Lai"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "Banana",
+          "aliases": [
+            "Pisang",
+            "Bananas"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "Jackfruit",
+          "aliases": [
+            "Nangka",
+            "Jack Fruit"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "Starfruit",
+          "aliases": [
+            "Carambola",
+            "Star Fruit",
+            "Belimbing",
+            "Belimbing Manis"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "Guava",
+          "aliases": [
+            "Jambu Batu",
+            "Guavas"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "Longan",
+          "aliases": [
+            "Longans",
+            "Dragon Eye",
+            "Lengkeng"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "Lychee",
+          "aliases": [
+            "Litchi",
+            "Laici",
+            "Lychees",
+            "Lichee"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "Pomelo",
+          "aliases": [
+            "Limau Bali",
+            "Pomelos",
+            "Shaddock",
+            "Limau Besar"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "Coconut",
+          "aliases": [
+            "Coconuts",
+            "Kelapa",
+            "Young Coconut"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "Soursop",
+          "aliases": [
+            "Durian Belanda",
+            "Graviola",
+            "Guanabana"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "Jambu",
+          "aliases": [
+            "Wax Apple",
+            "Rose Apple",
+            "Jambu Air",
+            "Water Apple",
+            "Jambu Merah",
+            "Wax Jambu"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "Cempedak",
+          "aliases": [
+            "Chempedak",
+            "Champedak"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "Duku",
+          "aliases": [
+            "Langsat",
+            "Duku Langsat",
+            "Dokong",
+            "Lanzones"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "Passion Fruit",
+          "aliases": [
+            "Passionfruit",
+            "Markisa"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "Calamansi",
+          "aliases": [
+            "Kalamansi",
+            "Limau Kasturi",
+            "Calamondin",
+            "Lime"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "Salak",
+          "aliases": [
+            "Snake Fruit",
+            "Snakefruit",
+            "Snake Skin Fruit"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "Custard Apple",
+          "aliases": [
+            "Sugar Apple",
+            "Sweetsop",
+            "Buah Nona",
+            "Sri Kaya",
+            "Seri Kaya"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "Watermelon",
+          "aliases": [
+            "Water Melon",
+            "Tembikai"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "Tamarind",
+          "aliases": [
+            "Asam Jawa",
+            "Assam",
+            "Asam"
+          ],
+          "tier": "ulu"
+        },
+        {
+          "name": "Pulasan",
+          "aliases": [
+            "Pulasans"
+          ],
+          "tier": "ulu"
+        },
+        {
+          "name": "Rambai",
+          "tier": "ulu"
+        },
+        {
+          "name": "Kedondong",
+          "aliases": [
+            "Ambarella",
+            "June Plum",
+            "Hog Plum"
+          ],
+          "tier": "ulu"
+        },
+        {
+          "name": "Bilimbi",
+          "aliases": [
+            "Belimbing Buluh",
+            "Belimbing Asam",
+            "Belimbing Wuluh",
+            "Cucumber Tree"
+          ],
+          "tier": "ulu"
+        },
+        {
+          "name": "Breadfruit",
+          "aliases": [
+            "Sukun",
+            "Bread Fruit"
+          ],
+          "tier": "ulu"
+        },
+        {
+          "name": "Tarap",
+          "aliases": [
+            "Terap",
+            "Marang"
+          ],
+          "tier": "ulu"
+        },
+        {
+          "name": "Kuini",
+          "tier": "ulu"
+        },
+        {
+          "name": "Noni",
+          "aliases": [
+            "Mengkudu",
+            "Indian Mulberry"
+          ],
+          "tier": "ulu"
+        },
+        {
+          "name": "Mata Kucing",
+          "aliases": [
+            "Cat's Eye",
+            "Cats Eye",
+            "Cat's Eye Fruit",
+            "Wild Longan"
+          ],
+          "tier": "gem"
+        }
+      ]
+    },
+    {
+      "id": "nature-reservoirs",
+      "category": "nature",
+      "text": "Name a reservoir in Singapore",
+      "note": "All 17 count. Upper and Lower are separate reservoirs.",
+      "answers": [
+        {
+          "name": "MacRitchie Reservoir",
+          "aliases": [
+            "MacRitchie",
+            "Thomson Road Reservoir"
+          ],
+          "tier": "common"
+        },
+        {
+          "name": "Bedok Reservoir",
+          "aliases": [
+            "Bedok"
+          ],
+          "tier": "common"
+        },
+        {
+          "name": "Marina Reservoir",
+          "aliases": [
+            "Marina",
+            "Marina Barrage",
+            "Marina Bay Reservoir"
+          ],
+          "tier": "common"
+        },
+        {
+          "name": "Jurong Lake",
+          "aliases": [
+            "Jurong Lake Reservoir",
+            "Jurong"
+          ],
+          "tier": "trap"
+        },
+        {
+          "name": "Lower Peirce Reservoir",
+          "aliases": [
+            "Lower Peirce",
+            "Peirce Reservoir",
+            "Peirce",
+            "Kallang River Reservoir"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "Upper Peirce Reservoir",
+          "aliases": [
+            "Upper Peirce"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "Upper Seletar Reservoir",
+          "aliases": [
+            "Upper Seletar",
+            "Seletar Reservoir",
+            "Seletar"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "Lower Seletar Reservoir",
+          "aliases": [
+            "Lower Seletar"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "Kranji Reservoir",
+          "aliases": [
+            "Kranji"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "Punggol Reservoir",
+          "aliases": [
+            "Punggol"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "Serangoon Reservoir",
+          "aliases": [
+            "Serangoon"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "Pandan Reservoir",
+          "aliases": [
+            "Pandan"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "Pulau Tekong Reservoir",
+          "aliases": [
+            "Pulau Tekong",
+            "Tekong Reservoir",
+            "Tekong"
+          ],
+          "tier": "ulu"
+        },
+        {
+          "name": "Murai Reservoir",
+          "aliases": [
+            "Murai"
+          ],
+          "tier": "ulu"
+        },
+        {
+          "name": "Poyan Reservoir",
+          "aliases": [
+            "Poyan"
+          ],
+          "tier": "ulu"
+        },
+        {
+          "name": "Sarimbun Reservoir",
+          "aliases": [
+            "Sarimbun"
+          ],
+          "tier": "ulu"
+        },
+        {
+          "name": "Tengeh Reservoir",
+          "aliases": [
+            "Tengeh"
+          ],
+          "tier": "gem"
+        }
+      ]
+    }
+  ]
+}

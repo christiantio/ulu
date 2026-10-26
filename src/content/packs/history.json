@@ -1,0 +1,1930 @@
+{
+  "name": "History",
+  "asOf": "2026-10-27",
+  "prompts": [
+    {
+      "id": "history-national-monuments",
+      "category": "history",
+      "text": "Name a gazetted National Monument of Singapore",
+      "note": "As of October 2026. Buildings gazetted together (e.g. the three river bridges, the Istana and Sri Temasek) each count.",
+      "answers": [
+        {
+          "name": "Raffles Hotel",
+          "tier": "common"
+        },
+        {
+          "name": "Sultan Mosque",
+          "aliases": [
+            "Masjid Sultan"
+          ],
+          "tier": "common"
+        },
+        {
+          "name": "National Museum of Singapore",
+          "aliases": [
+            "National Museum"
+          ],
+          "tier": "common"
+        },
+        {
+          "name": "Sri Mariamman Temple",
+          "tier": "common"
+        },
+        {
+          "name": "Padang",
+          "tier": "trap"
+        },
+        {
+          "name": "Lau Pa Sat",
+          "aliases": [
+            "Telok Ayer Market",
+            "Former Telok Ayer Market"
+          ],
+          "tier": "trap"
+        },
+        {
+          "name": "Thian Hock Keng",
+          "aliases": [
+            "Thian Hock Keng Temple"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "Victoria Theatre and Concert Hall",
+          "aliases": [
+            "Victoria Theatre",
+            "Victoria Concert Hall"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "Former City Hall",
+          "aliases": [
+            "City Hall",
+            "Municipal Building"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "Old Supreme Court Building",
+          "aliases": [
+            "Old Supreme Court",
+            "Former Supreme Court",
+            "Supreme Court Building"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "National Gallery Singapore",
+          "aliases": [
+            "National Gallery"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "Fullerton Building",
+          "aliases": [
+            "Former Fullerton Building",
+            "Fullerton Hotel",
+            "Fullerton",
+            "General Post Office"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "St Andrew's Cathedral",
+          "aliases": [
+            "Saint Andrew's Cathedral"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "The Istana",
+          "tier": "solid"
+        },
+        {
+          "name": "Former Empress Place Building",
+          "aliases": [
+            "Empress Place Building",
+            "Empress Place",
+            "Asian Civilisations Museum",
+            "ACM"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "Old Parliament House",
+          "aliases": [
+            "The Arts House",
+            "Arts House at the Old Parliament",
+            "Old Parliament House and Annex"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "CHIJMES",
+          "aliases": [
+            "Convent of the Holy Infant Jesus"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "Former Tanjong Pagar Railway Station",
+          "aliases": [
+            "Tanjong Pagar Railway Station",
+            "Tanjong Pagar Station",
+            "Keretapi Tanjong Pagar"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "Fort Siloso",
+          "tier": "solid"
+        },
+        {
+          "name": "Civilian War Memorial",
+          "aliases": [
+            "Chopsticks Memorial"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "Former Ford Factory",
+          "aliases": [
+            "Ford Factory",
+            "Old Ford Factory",
+            "Memories at Old Ford Factory"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "Armenian Church",
+          "aliases": [
+            "Armenian Church of St Gregory the Illuminator",
+            "Armenian Apostolic Church of St Gregory the Illuminator"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "Cathedral of the Good Shepherd",
+          "aliases": [
+            "Good Shepherd Cathedral"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "Cavenagh Bridge",
+          "tier": "solid"
+        },
+        {
+          "name": "Lim Bo Seng Memorial",
+          "tier": "solid"
+        },
+        {
+          "name": "38 Oxley Road",
+          "aliases": [
+            "Oxley Road"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "Anderson Bridge",
+          "tier": "rare"
+        },
+        {
+          "name": "Elgin Bridge",
+          "tier": "rare"
+        },
+        {
+          "name": "The Cenotaph",
+          "tier": "rare"
+        },
+        {
+          "name": "Tan Kim Seng Fountain",
+          "tier": "rare"
+        },
+        {
+          "name": "Central Fire Station",
+          "tier": "rare"
+        },
+        {
+          "name": "Changi Prison Entrance Gate, Turret and Wall",
+          "aliases": [
+            "Changi Prison",
+            "Changi Prison Gate",
+            "Changi Prison Wall",
+            "Old Changi Prison"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "Chinese High School Clock Tower",
+          "aliases": [
+            "Chinese High School Clock Tower Building",
+            "Chinese High School",
+            "Hwa Chong Clock Tower"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "Church of Our Lady of Lourdes",
+          "aliases": [
+            "Our Lady of Lourdes"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "Church of Saints Peter and Paul",
+          "aliases": [
+            "Saints Peter and Paul Church",
+            "Church of St Peter and Paul",
+            "Church of Sts Peter and Paul"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "Church of St Teresa",
+          "aliases": [
+            "Church of Saint Teresa",
+            "St Teresa's Church"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "St Joseph's Church",
+          "aliases": [
+            "Saint Joseph's Church"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "Former St Joseph's Institution",
+          "aliases": [
+            "St Joseph's Institution",
+            "Saint Joseph's Institution",
+            "Old SJI",
+            "Singapore Art Museum"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "St James Power Station",
+          "aliases": [
+            "Saint James Power Station"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "Former Hill Street Police Station",
+          "aliases": [
+            "Hill Street Police Station",
+            "Old Hill Street Police Station",
+            "MICA Building"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "Former Raffles College",
+          "aliases": [
+            "Raffles College",
+            "NUS Bukit Timah Campus"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "Goodwood Park Hotel",
+          "aliases": [
+            "Goodwood Park Hotel Tower Block",
+            "Teutonia Club"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "Istana Kampong Gelam",
+          "aliases": [
+            "Istana Kampong Glam",
+            "Malay Heritage Centre"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "Jurong Town Hall",
+          "tier": "rare"
+        },
+        {
+          "name": "MacDonald House",
+          "tier": "rare"
+        },
+        {
+          "name": "Maghain Aboth Synagogue",
+          "aliases": [
+            "Maghain Aboth"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "Masjid Abdul Gaffoor",
+          "aliases": [
+            "Abdul Gaffoor Mosque"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "Masjid Hajjah Fatimah",
+          "aliases": [
+            "Hajjah Fatimah Mosque"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "Masjid Jamae",
+          "aliases": [
+            "Jamae Mosque",
+            "Masjid Jamae Chulia",
+            "Jamae Chulia Mosque"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "Nagore Durgha",
+          "aliases": [
+            "Nagore Dargah",
+            "Nagore Durgha Shrine"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "Nanyang University Arch, Memorial and Library",
+          "aliases": [
+            "Nanyang University Arch",
+            "Nantah Arch",
+            "Nanyang University Library and Administration Building",
+            "Nanyang University Memorial",
+            "Chinese Heritage Centre"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "Old Tao Nan School",
+          "aliases": [
+            "Tao Nan School",
+            "Peranakan Museum"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "Singapore Conference Hall",
+          "aliases": [
+            "Conference Hall"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "Siong Lim Temple",
+          "aliases": [
+            "Lian Shan Shuang Lin Monastery",
+            "Shuang Lin Monastery",
+            "Siong Lim"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "Sri Srinivasa Perumal Temple",
+          "aliases": [
+            "Srinivasa Perumal Temple"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "Sri Thendayuthapani Temple",
+          "aliases": [
+            "Thendayuthapani Temple",
+            "Chettiars' Temple",
+            "Tank Road Temple"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "Sun Yat Sen Nanyang Memorial Hall",
+          "aliases": [
+            "Sun Yat Sen Villa",
+            "Wan Qing Yuan"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "Cathay Building",
+          "aliases": [
+            "The Cathay",
+            "Former Cathay Building"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "Bowyer Block",
+          "aliases": [
+            "Bowyer Block SGH",
+            "SGH Museum"
+          ],
+          "tier": "ulu"
+        },
+        {
+          "name": "Caldwell House",
+          "tier": "ulu"
+        },
+        {
+          "name": "Chapel of the Convent of the Holy Infant Jesus",
+          "aliases": [
+            "CHIJ Chapel",
+            "CHIJMES Hall",
+            "Convent of the Holy Infant Jesus Chapel"
+          ],
+          "tier": "ulu"
+        },
+        {
+          "name": "Chesed-El Synagogue",
+          "aliases": [
+            "Chesed El"
+          ],
+          "tier": "ulu"
+        },
+        {
+          "name": "Chung Cheng High School (Main) Administration Building",
+          "aliases": [
+            "Chung Cheng High School",
+            "Chung Cheng High"
+          ],
+          "tier": "ulu"
+        },
+        {
+          "name": "Church of the Nativity of the Blessed Virgin Mary",
+          "aliases": [
+            "Nativity Church"
+          ],
+          "tier": "ulu"
+        },
+        {
+          "name": "College of Medicine Building",
+          "tier": "ulu"
+        },
+        {
+          "name": "Former Admiralty House",
+          "aliases": [
+            "Admiralty House"
+          ],
+          "tier": "ulu"
+        },
+        {
+          "name": "Former Attorney-General's Chambers",
+          "aliases": [
+            "Attorney-General's Chambers"
+          ],
+          "tier": "ulu"
+        },
+        {
+          "name": "Former Command House",
+          "aliases": [
+            "Command House"
+          ],
+          "tier": "ulu"
+        },
+        {
+          "name": "Former Kandang Kerbau Hospital",
+          "aliases": [
+            "Kandang Kerbau Hospital",
+            "Old Kandang Kerbau Hospital"
+          ],
+          "tier": "ulu"
+        },
+        {
+          "name": "Former Keng Teck Whay Building",
+          "aliases": [
+            "Keng Teck Whay",
+            "Singapore Yu Huang Gong",
+            "Yu Huang Gong"
+          ],
+          "tier": "ulu"
+        },
+        {
+          "name": "Hong San See",
+          "aliases": [
+            "Hong San See Temple"
+          ],
+          "tier": "ulu"
+        },
+        {
+          "name": "House of Tan Yeok Nee",
+          "aliases": [
+            "Tan Yeok Nee House"
+          ],
+          "tier": "ulu"
+        },
+        {
+          "name": "Masjid Al-Abrar",
+          "aliases": [
+            "Al-Abrar Mosque"
+          ],
+          "tier": "ulu"
+        },
+        {
+          "name": "Masjid Alkaff Upper Serangoon",
+          "aliases": [
+            "Alkaff Upper Serangoon Mosque",
+            "Masjid Alkaff"
+          ],
+          "tier": "ulu"
+        },
+        {
+          "name": "Old Ministry of Labour Building",
+          "aliases": [
+            "Ministry of Labour Building",
+            "Former Ministry of Labour Building"
+          ],
+          "tier": "ulu"
+        },
+        {
+          "name": "Old Thong Chai Medical Institution",
+          "aliases": [
+            "Thong Chai Medical Institution",
+            "Thong Chai Building"
+          ],
+          "tier": "ulu"
+        },
+        {
+          "name": "Prinsep Street Presbyterian Church",
+          "tier": "ulu"
+        },
+        {
+          "name": "St George's Church",
+          "aliases": [
+            "Saint George's Church"
+          ],
+          "tier": "ulu"
+        },
+        {
+          "name": "Tan Si Chong Su",
+          "aliases": [
+            "Tan Si Chong Su Temple"
+          ],
+          "tier": "ulu"
+        },
+        {
+          "name": "Tan Teck Guan Building",
+          "tier": "ulu"
+        },
+        {
+          "name": "Telok Ayer Chinese Methodist Church",
+          "tier": "ulu"
+        },
+        {
+          "name": "Tou Mu Kung Temple",
+          "aliases": [
+            "Tou Mu Kung"
+          ],
+          "tier": "ulu"
+        },
+        {
+          "name": "Ying Fo Fui Kun",
+          "tier": "ulu"
+        },
+        {
+          "name": "Yueh Hai Ching Temple",
+          "aliases": [
+            "Wak Hai Cheng Bio",
+            "Yueh Hai Ching"
+          ],
+          "tier": "ulu"
+        },
+        {
+          "name": "Sri Temasek",
+          "tier": "gem"
+        }
+      ]
+    },
+    {
+      "id": "history-wwii-sites",
+      "category": "history",
+      "text": "Name a place in Singapore linked to WWII or the Japanese Occupation",
+      "note": "Battle sites, camps, massacre sites, memorials and wartime buildings all count.",
+      "answers": [
+        {
+          "name": "Kranji War Memorial",
+          "aliases": [
+            "Kranji War Cemetery",
+            "Kranji",
+            "Battle of Kranji"
+          ],
+          "tier": "common"
+        },
+        {
+          "name": "Bukit Chandu",
+          "aliases": [
+            "Reflections at Bukit Chandu",
+            "Opium Hill",
+            "Battle of Bukit Chandu"
+          ],
+          "tier": "common"
+        },
+        {
+          "name": "Former Ford Factory",
+          "aliases": [
+            "Ford Factory",
+            "Old Ford Factory",
+            "Memories at Old Ford Factory"
+          ],
+          "tier": "common"
+        },
+        {
+          "name": "Civilian War Memorial",
+          "aliases": [
+            "Chopsticks Memorial"
+          ],
+          "tier": "common"
+        },
+        {
+          "name": "Changi Chapel and Museum",
+          "aliases": [
+            "Changi Museum",
+            "Changi Chapel"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "Changi Prison",
+          "aliases": [
+            "Changi Gaol",
+            "Old Changi Prison"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "Fort Canning Battlebox",
+          "aliases": [
+            "Battlebox",
+            "Fort Canning",
+            "Fort Canning Bunker"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "Fort Siloso",
+          "tier": "solid"
+        },
+        {
+          "name": "Pasir Panjang",
+          "aliases": [
+            "Battle of Pasir Panjang",
+            "Pasir Panjang Ridge"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "Bukit Timah",
+          "aliases": [
+            "Battle of Bukit Timah"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "Lim Bo Seng Memorial",
+          "tier": "solid"
+        },
+        {
+          "name": "Selarang Barracks",
+          "aliases": [
+            "Selarang",
+            "Selarang Barracks Incident"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "Labrador Battery",
+          "aliases": [
+            "Labrador Park",
+            "Labrador Nature Reserve"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "Johore Battery",
+          "aliases": [
+            "Johor Battery"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "Alexandra Hospital",
+          "aliases": [
+            "Alexandra Hospital Massacre"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "Former City Hall",
+          "aliases": [
+            "City Hall",
+            "Municipal Building"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "The Cenotaph",
+          "tier": "rare"
+        },
+        {
+          "name": "Japanese Cemetery Park",
+          "aliases": [
+            "Japanese Cemetery"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "Changi Murals",
+          "aliases": [
+            "Roberts Barracks Murals"
+          ],
+          "tier": "ulu"
+        },
+        {
+          "name": "Sarimbun Beach",
+          "aliases": [
+            "Sarimbun",
+            "Sarimbun Landing Site"
+          ],
+          "tier": "ulu"
+        },
+        {
+          "name": "Changi Beach",
+          "aliases": [
+            "Changi Beach Massacre"
+          ],
+          "tier": "ulu"
+        },
+        {
+          "name": "Punggol Point",
+          "aliases": [
+            "Punggol Beach",
+            "Punggol Beach Massacre"
+          ],
+          "tier": "ulu"
+        },
+        {
+          "name": "Adam Park",
+          "aliases": [
+            "Battle of Adam Park"
+          ],
+          "tier": "ulu"
+        },
+        {
+          "name": "Sime Road Camp",
+          "aliases": [
+            "Sime Road",
+            "Sime Road Internment Camp"
+          ],
+          "tier": "ulu"
+        },
+        {
+          "name": "Jalan Besar Stadium",
+          "aliases": [
+            "Jalan Besar Sook Ching Centre"
+          ],
+          "tier": "ulu"
+        },
+        {
+          "name": "Former YMCA Building",
+          "aliases": [
+            "YMCA",
+            "Kempeitai YMCA",
+            "Kempeitai Headquarters"
+          ],
+          "tier": "ulu"
+        },
+        {
+          "name": "Syonan Jinja",
+          "aliases": [
+            "Syonan Shrine"
+          ],
+          "tier": "ulu"
+        },
+        {
+          "name": "Cathay Building",
+          "aliases": [
+            "The Cathay"
+          ],
+          "tier": "ulu"
+        },
+        {
+          "name": "Syonan Chureito",
+          "aliases": [
+            "Bukit Batok Memorial",
+            "Bukit Batok Hill",
+            "Chureito"
+          ],
+          "tier": "gem"
+        }
+      ]
+    },
+    {
+      "id": "history-wwii-people",
+      "category": "history",
+      "text": "Name a person linked to WWII or the Japanese Occupation of Singapore",
+      "note": "Soldiers, commanders, resistance fighters, civilians and POWs all count.",
+      "answers": [
+        {
+          "name": "Lim Bo Seng",
+          "tier": "common"
+        },
+        {
+          "name": "Adnan Saidi",
+          "aliases": [
+            "Lieutenant Adnan",
+            "Lt Adnan",
+            "Adnan bin Saidi"
+          ],
+          "tier": "common"
+        },
+        {
+          "name": "Arthur Percival",
+          "aliases": [
+            "Percival",
+            "General Percival"
+          ],
+          "tier": "common"
+        },
+        {
+          "name": "Tomoyuki Yamashita",
+          "aliases": [
+            "Yamashita",
+            "Tiger of Malaya",
+            "Yamashita Tomoyuki"
+          ],
+          "tier": "common"
+        },
+        {
+          "name": "Winston Churchill",
+          "aliases": [
+            "Churchill"
+          ],
+          "tier": "trap"
+        },
+        {
+          "name": "Lee Kuan Yew",
+          "aliases": [
+            "LKY"
+          ],
+          "tier": "trap"
+        },
+        {
+          "name": "Elizabeth Choy",
+          "tier": "solid"
+        },
+        {
+          "name": "Shenton Thomas",
+          "aliases": [
+            "Sir Shenton Thomas"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "Louis Mountbatten",
+          "aliases": [
+            "Lord Mountbatten",
+            "Mountbatten"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "Mamoru Shinozaki",
+          "aliases": [
+            "Shinozaki"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "Subhas Chandra Bose",
+          "aliases": [
+            "Netaji",
+            "Bose"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "Tan Kah Kee",
+          "tier": "rare"
+        },
+        {
+          "name": "Henry Gordon Bennett",
+          "aliases": [
+            "Gordon Bennett"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "Masanobu Tsuji",
+          "aliases": [
+            "Tsuji",
+            "Tsuji Masanobu"
+          ],
+          "tier": "ulu"
+        },
+        {
+          "name": "Seishiro Itagaki",
+          "aliases": [
+            "Itagaki",
+            "Itagaki Seishiro"
+          ],
+          "tier": "ulu"
+        },
+        {
+          "name": "Hisaichi Terauchi",
+          "aliases": [
+            "Terauchi",
+            "Terauchi Hisaichi"
+          ],
+          "tier": "ulu"
+        },
+        {
+          "name": "Saburo Kawamura",
+          "aliases": [
+            "Kawamura",
+            "Kawamura Saburo"
+          ],
+          "tier": "ulu"
+        },
+        {
+          "name": "Ivan Lyon",
+          "tier": "ulu"
+        },
+        {
+          "name": "John Dalley",
+          "aliases": [
+            "Dalley"
+          ],
+          "tier": "ulu"
+        },
+        {
+          "name": "Tan Chong Tee",
+          "tier": "ulu"
+        },
+        {
+          "name": "Leonard Wilson",
+          "aliases": [
+            "Bishop Leonard Wilson",
+            "John Leonard Wilson"
+          ],
+          "tier": "ulu"
+        },
+        {
+          "name": "Ronald Searle",
+          "tier": "ulu"
+        },
+        {
+          "name": "Robert Brooke-Popham",
+          "aliases": [
+            "Brooke-Popham"
+          ],
+          "tier": "ulu"
+        },
+        {
+          "name": "Archibald Wavell",
+          "aliases": [
+            "Wavell"
+          ],
+          "tier": "ulu"
+        },
+        {
+          "name": "Tom Phillips",
+          "aliases": [
+            "Admiral Tom Phillips"
+          ],
+          "tier": "ulu"
+        },
+        {
+          "name": "Stanley Warren",
+          "tier": "gem"
+        }
+      ]
+    },
+    {
+      "id": "history-early-figures",
+      "category": "history",
+      "text": "Name a figure from Singapore's history before 1900",
+      "note": "Real or legendary figures, from Temasek days to the Victorian era.",
+      "answers": [
+        {
+          "name": "Stamford Raffles",
+          "aliases": [
+            "Raffles",
+            "Sir Stamford Raffles",
+            "Thomas Stamford Raffles"
+          ],
+          "tier": "common"
+        },
+        {
+          "name": "William Farquhar",
+          "aliases": [
+            "Farquhar"
+          ],
+          "tier": "common"
+        },
+        {
+          "name": "Sang Nila Utama",
+          "tier": "common"
+        },
+        {
+          "name": "Tan Tock Seng",
+          "tier": "solid"
+        },
+        {
+          "name": "John Crawfurd",
+          "aliases": [
+            "Crawfurd"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "Sultan Hussein Shah",
+          "aliases": [
+            "Hussein Shah",
+            "Tengku Hussein",
+            "Tengku Long"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "Temenggong Abdul Rahman",
+          "aliases": [
+            "Temenggong"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "George Drumgoole Coleman",
+          "aliases": [
+            "George Coleman",
+            "G. D. Coleman",
+            "Coleman"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "Badang",
+          "tier": "rare"
+        },
+        {
+          "name": "Parameswara",
+          "tier": "rare"
+        },
+        {
+          "name": "Munshi Abdullah",
+          "aliases": [
+            "Abdullah bin Abdul Kadir",
+            "Abdullah Abdul Kadir"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "Philip Jackson",
+          "aliases": [
+            "Lieutenant Philip Jackson"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "Naraina Pillai",
+          "tier": "rare"
+        },
+        {
+          "name": "Hoo Ah Kay",
+          "aliases": [
+            "Whampoa",
+            "Hoo Ah Kay Whampoa"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "Seah Eu Chin",
+          "tier": "rare"
+        },
+        {
+          "name": "Syed Omar Aljunied",
+          "aliases": [
+            "Syed Omar bin Ali Aljunied"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "Gan Eng Seng",
+          "tier": "rare"
+        },
+        {
+          "name": "Tan Kim Seng",
+          "tier": "rare"
+        },
+        {
+          "name": "Hajjah Fatimah",
+          "tier": "rare"
+        },
+        {
+          "name": "Hang Nadim",
+          "tier": "rare"
+        },
+        {
+          "name": "Iskandar Shah",
+          "aliases": [
+            "Sri Iskandar Shah"
+          ],
+          "tier": "ulu"
+        },
+        {
+          "name": "Cheang Hong Lim",
+          "tier": "ulu"
+        },
+        {
+          "name": "Temenggong Daeng Ibrahim",
+          "aliases": [
+            "Daeng Ibrahim"
+          ],
+          "tier": "ulu"
+        },
+        {
+          "name": "Alexander Laurie Johnston",
+          "tier": "ulu"
+        },
+        {
+          "name": "Thomas Dunman",
+          "tier": "ulu"
+        },
+        {
+          "name": "Catchick Moses",
+          "tier": "ulu"
+        },
+        {
+          "name": "Orfeur Cavenagh",
+          "aliases": [
+            "William Orfeur Cavenagh",
+            "Cavenagh"
+          ],
+          "tier": "ulu"
+        },
+        {
+          "name": "Harry Ord",
+          "aliases": [
+            "Harry St George Ord"
+          ],
+          "tier": "ulu"
+        },
+        {
+          "name": "Andrew Clarke",
+          "tier": "ulu"
+        },
+        {
+          "name": "Alfred Russel Wallace",
+          "aliases": [
+            "Alfred Wallace"
+          ],
+          "tier": "ulu"
+        },
+        {
+          "name": "Wang Dayuan",
+          "aliases": [
+            "Wang Ta-yuan"
+          ],
+          "tier": "gem"
+        }
+      ]
+    },
+    {
+      "id": "history-lost-attractions",
+      "category": "history",
+      "text": "Name a Singapore attraction or landmark that's gone",
+      "note": "Closed, demolished or moved away. A surviving building with a new use still counts if the attraction itself is gone.",
+      "answers": [
+        {
+          "name": "Great World Amusement Park",
+          "aliases": [
+            "Great World"
+          ],
+          "tier": "common"
+        },
+        {
+          "name": "New World Amusement Park",
+          "aliases": [
+            "New World"
+          ],
+          "tier": "common"
+        },
+        {
+          "name": "National Theatre",
+          "tier": "common"
+        },
+        {
+          "name": "Old National Library",
+          "aliases": [
+            "National Library at Stamford Road",
+            "Stamford Road National Library",
+            "Old National Library Building"
+          ],
+          "tier": "common"
+        },
+        {
+          "name": "Underwater World",
+          "aliases": [
+            "Underwater World Singapore",
+            "Underwater World Sentosa"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "Sentosa Merlion",
+          "aliases": [
+            "Merlion at Sentosa",
+            "Merlion Tower"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "Jurong Bird Park",
+          "tier": "solid"
+        },
+        {
+          "name": "Escape Theme Park",
+          "aliases": [
+            "Escape"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "Fantasy Island",
+          "tier": "solid"
+        },
+        {
+          "name": "Satay Club",
+          "aliases": [
+            "Esplanade Satay Club"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "Gay World Amusement Park",
+          "aliases": [
+            "Gay World",
+            "Happy World",
+            "Happy World Amusement Park"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "Old National Stadium",
+          "aliases": [
+            "Kallang National Stadium",
+            "Old Kallang Stadium"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "Rochor Centre",
+          "tier": "solid"
+        },
+        {
+          "name": "The Float at Marina Bay",
+          "aliases": [
+            "Float @ Marina Bay",
+            "Marina Bay Floating Platform"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "Pearl Bank Apartments",
+          "aliases": [
+            "Pearl Bank"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "Sentosa Musical Fountain",
+          "aliases": [
+            "Musical Fountain"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "Sentosa Monorail",
+          "tier": "rare"
+        },
+        {
+          "name": "Kranji Racecourse",
+          "aliases": [
+            "Singapore Racecourse",
+            "Singapore Turf Club",
+            "Turf Club"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "Kallang Airport",
+          "tier": "rare"
+        },
+        {
+          "name": "Van Kleef Aquarium",
+          "tier": "rare"
+        },
+        {
+          "name": "Big Splash",
+          "tier": "ulu"
+        },
+        {
+          "name": "Volcanoland",
+          "tier": "ulu"
+        },
+        {
+          "name": "Jurong Crocodile Paradise",
+          "aliases": [
+            "Jurong Reptile Park"
+          ],
+          "tier": "ulu"
+        },
+        {
+          "name": "Bukit Timah Racecourse",
+          "aliases": [
+            "Bukit Timah Turf Club"
+          ],
+          "tier": "ulu"
+        },
+        {
+          "name": "Odeon Theatre",
+          "aliases": [
+            "Odeon Cinema"
+          ],
+          "tier": "ulu"
+        },
+        {
+          "name": "Tang Dynasty City",
+          "tier": "gem"
+        }
+      ]
+    },
+    {
+      "id": "history-names-for-singapore",
+      "category": "history",
+      "text": "Name an old name or nickname for Singapore",
+      "note": "Historical names, other-language names and well-known nicknames all count.",
+      "answers": [
+        {
+          "name": "Temasek",
+          "aliases": [
+            "Tumasik",
+            "Temasik",
+            "Danmaxi"
+          ],
+          "tier": "common"
+        },
+        {
+          "name": "Singapura",
+          "aliases": [
+            "Singapur",
+            "Singappur"
+          ],
+          "tier": "common"
+        },
+        {
+          "name": "Lion City",
+          "tier": "common"
+        },
+        {
+          "name": "Little Red Dot",
+          "aliases": [
+            "Red Dot"
+          ],
+          "tier": "common"
+        },
+        {
+          "name": "Fine City",
+          "tier": "trap"
+        },
+        {
+          "name": "Syonan-to",
+          "aliases": [
+            "Syonan",
+            "Shonan",
+            "Shonan-to"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "Garden City",
+          "tier": "solid"
+        },
+        {
+          "name": "City in a Garden",
+          "tier": "rare"
+        },
+        {
+          "name": "City in Nature",
+          "tier": "rare"
+        },
+        {
+          "name": "Xinjiapo",
+          "aliases": [
+            "Sin Ka Pho"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "Pulau Ujong",
+          "aliases": [
+            "Pu Luo Zhong"
+          ],
+          "tier": "ulu"
+        },
+        {
+          "name": "Xingzhou",
+          "aliases": [
+            "Sing Chew"
+          ],
+          "tier": "ulu"
+        },
+        {
+          "name": "Longyamen",
+          "aliases": [
+            "Dragon's Tooth Gate",
+            "Dragon's Teeth Gate"
+          ],
+          "tier": "gem"
+        }
+      ]
+    },
+    {
+      "id": "history-museums",
+      "category": "history",
+      "text": "Name a museum or heritage gallery in Singapore",
+      "note": "Existing museums, heritage centres and galleries; ones temporarily closed for renovation still count.",
+      "answers": [
+        {
+          "name": "National Museum of Singapore",
+          "aliases": [
+            "National Museum",
+            "Raffles Museum",
+            "Raffles Library and Museum"
+          ],
+          "tier": "common"
+        },
+        {
+          "name": "Asian Civilisations Museum",
+          "aliases": [
+            "ACM"
+          ],
+          "tier": "common"
+        },
+        {
+          "name": "National Gallery Singapore",
+          "aliases": [
+            "National Gallery"
+          ],
+          "tier": "common"
+        },
+        {
+          "name": "ArtScience Museum",
+          "tier": "common"
+        },
+        {
+          "name": "Peranakan Museum",
+          "tier": "solid"
+        },
+        {
+          "name": "Singapore Art Museum",
+          "aliases": [
+            "SAM"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "Science Centre Singapore",
+          "aliases": [
+            "Science Centre",
+            "Singapore Science Centre"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "Changi Chapel and Museum",
+          "aliases": [
+            "Changi Museum",
+            "Changi Chapel"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "Reflections at Bukit Chandu",
+          "aliases": [
+            "Bukit Chandu"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "Fort Canning Battlebox",
+          "aliases": [
+            "Battlebox"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "Malay Heritage Centre",
+          "tier": "solid"
+        },
+        {
+          "name": "Fort Siloso",
+          "tier": "solid"
+        },
+        {
+          "name": "Indian Heritage Centre",
+          "tier": "rare"
+        },
+        {
+          "name": "Chinatown Heritage Centre",
+          "tier": "rare"
+        },
+        {
+          "name": "Former Ford Factory",
+          "aliases": [
+            "Memories at Old Ford Factory",
+            "Ford Factory",
+            "Old Ford Factory"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "Sun Yat Sen Nanyang Memorial Hall",
+          "aliases": [
+            "Sun Yat Sen Villa",
+            "Wan Qing Yuan"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "Children's Museum Singapore",
+          "aliases": [
+            "Children's Museum",
+            "Singapore Philatelic Museum",
+            "Philatelic Museum"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "Lee Kong Chian Natural History Museum",
+          "aliases": [
+            "Natural History Museum",
+            "LKCNHM"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "Singapore Discovery Centre",
+          "aliases": [
+            "SDC",
+            "Discovery Centre"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "Army Museum of Singapore",
+          "aliases": [
+            "Army Museum"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "RSAF Museum",
+          "aliases": [
+            "Air Force Museum",
+            "Republic of Singapore Air Force Museum"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "Police Heritage Centre",
+          "tier": "rare"
+        },
+        {
+          "name": "Singapore City Gallery",
+          "aliases": [
+            "URA City Gallery",
+            "City Gallery"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "NUS Museum",
+          "tier": "ulu"
+        },
+        {
+          "name": "NUS Baba House",
+          "aliases": [
+            "Baba House"
+          ],
+          "tier": "ulu"
+        },
+        {
+          "name": "Eurasian Heritage Gallery",
+          "aliases": [
+            "Eurasian Heritage Centre"
+          ],
+          "tier": "ulu"
+        },
+        {
+          "name": "Navy Museum",
+          "aliases": [
+            "RSN Museum"
+          ],
+          "tier": "ulu"
+        },
+        {
+          "name": "SGH Museum",
+          "aliases": [
+            "Singapore General Hospital Museum"
+          ],
+          "tier": "ulu"
+        },
+        {
+          "name": "Singapore Maritime Gallery",
+          "aliases": [
+            "Maritime Gallery"
+          ],
+          "tier": "ulu"
+        },
+        {
+          "name": "HDB LIVINGSPACE",
+          "aliases": [
+            "HDB Gallery",
+            "HDB Hub Gallery",
+            "Living Space"
+          ],
+          "tier": "ulu"
+        },
+        {
+          "name": "Singapore Botanic Gardens Heritage Museum",
+          "aliases": [
+            "Botanic Gardens Heritage Museum",
+            "SBG Heritage Museum"
+          ],
+          "tier": "ulu"
+        },
+        {
+          "name": "Civil Defence Heritage Gallery",
+          "aliases": [
+            "SCDF Heritage Gallery"
+          ],
+          "tier": "gem"
+        }
+      ]
+    },
+    {
+      "id": "history-colonial-governors",
+      "category": "history",
+      "text": "Name a British Resident or Governor who ran colonial Singapore",
+      "note": "Residents (1819–1826), Governors of the Straits Settlements and Governors of the Colony of Singapore (to 1959); acting governors count. Raffles was never one.",
+      "answers": [
+        {
+          "name": "William Farquhar",
+          "aliases": [
+            "Farquhar"
+          ],
+          "tier": "common"
+        },
+        {
+          "name": "Shenton Thomas",
+          "aliases": [
+            "Sir Shenton Thomas",
+            "Shenton"
+          ],
+          "tier": "common"
+        },
+        {
+          "name": "John Crawfurd",
+          "aliases": [
+            "Crawfurd"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "Robert Fullerton",
+          "aliases": [
+            "Fullerton"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "Cecil Clementi",
+          "aliases": [
+            "Clementi"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "Orfeur Cavenagh",
+          "aliases": [
+            "William Orfeur Cavenagh",
+            "Cavenagh"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "John Nicoll",
+          "aliases": [
+            "John Fearns Nicoll",
+            "Nicoll"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "Edward Anson",
+          "aliases": [
+            "Edward Archibald Harbord Anson",
+            "Anson"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "John Anderson",
+          "aliases": [
+            "Anderson"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "George Bonham",
+          "aliases": [
+            "Samuel George Bonham",
+            "Bonham"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "Harry Ord",
+          "aliases": [
+            "Harry St George Ord",
+            "Ord"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "William Jervois",
+          "aliases": [
+            "Jervois"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "William Robinson",
+          "aliases": [
+            "William Cleaver Francis Robinson",
+            "Robinson"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "Hugh Clifford",
+          "aliases": [
+            "Clifford"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "Laurence Guillemard",
+          "aliases": [
+            "Guillemard"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "Andrew Caldecott",
+          "aliases": [
+            "Caldecott"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "Frank Swettenham",
+          "aliases": [
+            "Swettenham"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "William John Butterworth",
+          "aliases": [
+            "William Butterworth",
+            "Butterworth"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "Frederick Weld",
+          "aliases": [
+            "Weld"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "William Goode",
+          "aliases": [
+            "Goode"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "Robert Black",
+          "aliases": [
+            "Robin Black"
+          ],
+          "tier": "ulu"
+        },
+        {
+          "name": "Franklin Gimson",
+          "aliases": [
+            "Franklin Charles Gimson",
+            "Gimson"
+          ],
+          "tier": "ulu"
+        },
+        {
+          "name": "Robert Ibbetson",
+          "aliases": [
+            "Ibbetson"
+          ],
+          "tier": "ulu"
+        },
+        {
+          "name": "Kenneth Murchison",
+          "aliases": [
+            "Murchison"
+          ],
+          "tier": "ulu"
+        },
+        {
+          "name": "Edmund Augustus Blundell",
+          "aliases": [
+            "Edmund Blundell",
+            "Blundell"
+          ],
+          "tier": "ulu"
+        },
+        {
+          "name": "Cecil Clementi Smith",
+          "aliases": [
+            "Clementi Smith"
+          ],
+          "tier": "ulu"
+        },
+        {
+          "name": "Charles Mitchell",
+          "aliases": [
+            "Mitchell"
+          ],
+          "tier": "ulu"
+        },
+        {
+          "name": "Arthur Young",
+          "aliases": [
+            "Arthur Henderson Young"
+          ],
+          "tier": "ulu"
+        },
+        {
+          "name": "William Edward Maxwell",
+          "aliases": [
+            "William Maxwell"
+          ],
+          "tier": "ulu"
+        },
+        {
+          "name": "James Alexander Swettenham",
+          "aliases": [
+            "Alexander Swettenham",
+            "James Swettenham"
+          ],
+          "tier": "ulu"
+        },
+        {
+          "name": "John Scott",
+          "tier": "ulu"
+        },
+        {
+          "name": "Wilfred Lawson Blythe",
+          "aliases": [
+            "Wilfred Blythe",
+            "Blythe"
+          ],
+          "tier": "ulu"
+        },
+        {
+          "name": "Andrew Clarke",
+          "aliases": [
+            "Clarke"
+          ],
+          "tier": "gem"
+        }
+      ]
+    }
+  ]
+}
