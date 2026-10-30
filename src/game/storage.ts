@@ -90,6 +90,13 @@ export function recordDive(dateKey: string, results: RoundResult[]): Stats {
   return next
 }
 
+/** The streak as of today. It's broken once a day passes without a dive, even before the next dive is recorded */
+export function displayStreak(stats: Stats, todayKey: string): number {
+  if (stats.lastPlayed === null) return 0
+  const gap = daysBetween(stats.lastPlayed, todayKey)
+  return gap === 0 || gap === 1 ? stats.currentStreak : 0
+}
+
 export function hasSeenHelp(): boolean {
   return read<boolean>(SEEN_HELP_KEY) === true
 }

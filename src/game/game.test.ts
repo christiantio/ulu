@@ -5,6 +5,7 @@ import { editDistance, matchAnswer } from './match'
 import { normalize } from './normalize'
 import { MAX_SCORE, destinationFor } from './scoring'
 import { shareText } from './share'
+import { displayStreak, type Stats } from './storage'
 import { CATEGORIES, type Prompt, type Tier } from './types'
 import { validatePacks } from './validate'
 
@@ -217,6 +218,32 @@ describe('scoring and sharing', () => {
     )
     expect(text).toBe('Ulu #3 🇸🇬 110/700\n💎❌⚪\nReached Bishan\nhttps://ulu.sg')
     expect(text).not.toContain('Timah')
+  })
+})
+
+describe('displayStreak', () => {
+  const stats: Stats = {
+    played: 3,
+    totalScore: 900,
+    bestScore: 400,
+    currentStreak: 3,
+    maxStreak: 3,
+    lastPlayed: '2026-11-04',
+    gems: 2,
+  }
+
+  it('keeps the streak if the last dive was today or yesterday', () => {
+    expect(displayStreak(stats, '2026-11-04')).toBe(3)
+    expect(displayStreak(stats, '2026-11-05')).toBe(3)
+  })
+
+  it('shows 0 once a day has been missed', () => {
+    expect(displayStreak(stats, '2026-11-06')).toBe(0)
+    expect(displayStreak(stats, '2026-11-07')).toBe(0)
+  })
+
+  it('shows 0 if you have never played', () => {
+    expect(displayStreak({ ...stats, currentStreak: 0, lastPlayed: null }, '2026-11-04')).toBe(0)
   })
 })
 

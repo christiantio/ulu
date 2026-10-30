@@ -8,7 +8,16 @@ import { diveNumber, singaporeDateKey } from './game/daily'
 import { promptsForDate, unlimitedPrompts } from './game/schedule'
 import { ROUNDS_PER_DIVE } from './game/scoring'
 import { totalScore } from './game/share'
-import { hasSeenHelp, loadDaily, loadStats, markHelpSeen, recordDive, saveDaily, type Stats } from './game/storage'
+import {
+  displayStreak,
+  hasSeenHelp,
+  loadDaily,
+  loadStats,
+  markHelpSeen,
+  recordDive,
+  saveDaily,
+  type Stats,
+} from './game/storage'
 import type { Prompt, RoundResult } from './game/types'
 
 type Screen =
@@ -123,7 +132,7 @@ export default function App() {
 
           {stats.played > 0 && (
             <p className="muted small center">
-              {stats.played} dives · {stats.currentStreak} day streak · best {stats.bestScore}
+              {stats.played} dives · {displayStreak(stats, dateKey)} day streak · best {stats.bestScore}
             </p>
           )}
         </main>

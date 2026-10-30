@@ -2,7 +2,8 @@ import { useState } from 'react'
 import { promptById } from '../content'
 import { MAX_SCORE, MISS_EMOJI, TIER_INFO, destinationFor } from '../game/scoring'
 import { shareText, totalScore } from '../game/share'
-import type { Stats } from '../game/storage'
+import { singaporeDateKey } from '../game/daily'
+import { displayStreak, type Stats } from '../game/storage'
 import type { RoundResult } from '../game/types'
 import { Countdown } from './Countdown'
 import { RouteLine } from './RouteLine'
@@ -77,7 +78,7 @@ export function Results({ title, results, stats, isDaily, onHome, onUnlimited }:
       {isDaily && stats && (
         <div className="stats">
           <Stat label="Played" value={stats.played} />
-          <Stat label="Streak" value={stats.currentStreak} />
+          <Stat label="Streak" value={displayStreak(stats, singaporeDateKey())} />
           <Stat label="Best" value={stats.bestScore} />
           <Stat label="Gems" value={stats.gems} />
         </div>
