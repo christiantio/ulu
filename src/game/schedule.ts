@@ -1,4 +1,4 @@
-import { LAUNCH_DATE, addDays, dailyPrompts, daysBetween, hashString, mulberry32, shuffle } from './daily'
+import { LAUNCH_DATE, addDays, dailyPrompts, daysBetween, hashString, mulberry32, randomPrompts, shuffle } from './daily'
 import { ROUNDS_PER_DIVE } from './scoring'
 import type { Prompt } from './types'
 
@@ -23,6 +23,31 @@ export function promptsForDate(prompts: readonly Prompt[], dateKey: string, sche
     if (scheduled.every((p) => p !== undefined)) return scheduled as Prompt[]
   }
   return dailyPrompts(prompts, dateKey)
+}
+
+/**
+ * Prompts for an Unlimited game. It replays prompts from past dives, which
+ * players have already had their chance at, and skips the previous game's
+ * prompts. Today's dive is never included. While the archive is too small to
+ * fill a game, it draws from the rest of the bank.
+ */
+export function unlimitedPrompts(
+  prompts: readonly Prompt[],
+  schedule: Schedule,
+  today: string,
+  avoid: { daily: readonly string[]; recent: readonly string[] },
+  rand: () => number = Math.random,
+): Prompt[] {
+  const past = new Set(Object.keys(schedule).flatMap((date) => (date < today ? schedule[date] : [])))
+  const fresh = (p: Prompt) => !avoid.recent.includes(p.id)
+  const pools = [
+    prompts.filter((p) => past.has(p.id) && fresh(p)),
+    prompts.filter((p) => past.has(p.id)),
+    prompts.filter(fresh),
+    prompts,
+  ]
+  const enough = (pool: readonly Prompt[]) => pool.filter((p) => !avoid.daily.includes(p.id)).length >= ROUNDS_PER_DIVE
+  return randomPrompts(pools.find(enough) ?? prompts, avoid.daily, rand)
 }
 
 /**

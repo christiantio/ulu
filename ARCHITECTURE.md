@@ -13,7 +13,7 @@ go somewhere nobody else thought of.
 | Scoring | Each accepted answer has a rarity tier (below). Timeout = 0 |
 | Max | 7 × 100 = 700 |
 | Theme | The score is a journey out of town: Raffles Place → Bishan → Sengkang → Woodlands → Lim Chu Kang → Pulau Ubin → Pulau Tekong → Pedra Branca (700) |
-| Unlimited | 7 random prompts, no stats, replay as often as you like |
+| Unlimited | 7 random prompts from past dives (never today's), no stats, replay as often as you like. Back-to-back games don't share prompts. While the archive is too small to fill a game, it uses the rest of the bank |
 | Sharing | Spoiler-free emoji grid: `Ulu #3 🇸🇬 410/700 / 💎🟢⚪🔵❌🟣🟡 / Reached Lim Chu Kang` |
 
 | Tier | Label | Points | Meaning |
@@ -38,7 +38,7 @@ src/
     match.ts         exact + typo-tolerant matching
     scoring.ts       tier points, labels, destinations
     daily.ts         Singapore date, seeded daily selection, unlimited shuffle
-    schedule.ts      frozen daily schedule: lookup, append-only extension, checks
+    schedule.ts      frozen daily schedule: lookup, append-only extension, checks, unlimited pool
     storage.ts       localStorage progress + stats (fails safe)
     share.ts         share text
     validate.ts      content rules, shared by tests and scripts

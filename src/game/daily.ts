@@ -108,12 +108,17 @@ export function dailyPrompts(prompts: readonly Prompt[], dateKey: string): Promp
   return picked
 }
 
-/** A random set for Unlimited mode, still one prompt per category where possible */
-export function randomPrompts(prompts: readonly Prompt[], rand: () => number = Math.random): Prompt[] {
-  const groups = groupByCategory(prompts)
+/** A random set for Unlimited mode that never uses an excluded id, still one prompt per category where possible */
+export function randomPrompts(
+  prompts: readonly Prompt[],
+  exclude: readonly string[] = [],
+  rand: () => number = Math.random,
+): Prompt[] {
+  const allowed = prompts.filter((p) => !exclude.includes(p.id))
+  const groups = groupByCategory(allowed)
   const firsts = shuffle([...groups.values()].map((g) => shuffle(g, rand)[0]), rand)
   const rest = shuffle(
-    prompts.filter((p) => !firsts.includes(p)),
+    allowed.filter((p) => !firsts.includes(p)),
     rand,
   )
   return [...firsts, ...rest].slice(0, ROUNDS_PER_DIVE)

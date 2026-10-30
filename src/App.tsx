@@ -4,8 +4,8 @@ import { Game } from './components/Game'
 import { HowToPlay } from './components/HowToPlay'
 import { Results } from './components/Results'
 import { ALL_PROMPTS, SCHEDULE, promptById } from './content'
-import { diveNumber, randomPrompts, singaporeDateKey } from './game/daily'
-import { promptsForDate } from './game/schedule'
+import { diveNumber, singaporeDateKey } from './game/daily'
+import { promptsForDate, unlimitedPrompts } from './game/schedule'
 import { ROUNDS_PER_DIVE } from './game/scoring'
 import { totalScore } from './game/share'
 import { hasSeenHelp, loadDaily, loadStats, markHelpSeen, recordDive, saveDaily, type Stats } from './game/storage'
@@ -32,6 +32,7 @@ export default function App() {
   const [showHelp, setShowHelp] = useState(() => !hasSeenHelp())
   const [stats, setStats] = useState<Stats>(loadStats)
   const [unlimitedRound, setUnlimitedRound] = useState(0)
+  const [lastUnlimited, setLastUnlimited] = useState<string[]>([])
 
   const dateKey = singaporeDateKey()
   const dive = todaysDive(dateKey)
@@ -45,8 +46,11 @@ export default function App() {
   }
 
   const startUnlimited = () => {
+    const daily = dive.prompts.map((p) => p.id)
+    const prompts = unlimitedPrompts(ALL_PROMPTS, SCHEDULE, dateKey, { daily, recent: lastUnlimited })
+    setLastUnlimited(prompts.map((p) => p.id))
     setUnlimitedRound((n) => n + 1)
-    setScreen({ kind: 'unlimited', prompts: randomPrompts(ALL_PROMPTS), round: unlimitedRound + 1 })
+    setScreen({ kind: 'unlimited', prompts, round: unlimitedRound + 1 })
   }
 
   const finishDaily = (results: RoundResult[]) => {
