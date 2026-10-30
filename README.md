@@ -1,5 +1,7 @@
 # ulu
 
+[![CI](https://github.com/christiantio/ulu/actions/workflows/ci.yml/badge.svg)](https://github.com/christiantio/ulu/actions/workflows/ci.yml)
+
 **How ulu can you go?** A daily Singapore trivia game where the most obscure valid answer scores the most.
 It's inspired by [Krillion](https://krillion.io).
 
