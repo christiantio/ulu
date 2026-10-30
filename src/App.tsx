@@ -1,10 +1,10 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { Countdown } from './components/Countdown'
 import { Game } from './components/Game'
 import { HowToPlay } from './components/HowToPlay'
 import { Results } from './components/Results'
 import { ALL_PROMPTS, SCHEDULE, promptById } from './content'
-import { diveNumber, singaporeDateKey } from './game/daily'
+import { diveNumber, msUntilNextDive, singaporeDateKey } from './game/daily'
 import { promptsForDate, unlimitedPrompts } from './game/schedule'
 import { ROUNDS_PER_DIVE } from './game/scoring'
 import { totalScore } from './game/share'
@@ -22,12 +22,13 @@ import type { Prompt, RoundResult } from './game/types'
 
 type Screen =
   | { kind: 'home' }
-  | { kind: 'daily' }
+  // A daily keeps the date it started on, so a dive in progress at midnight can still be finished
+  | { kind: 'daily'; dateKey: string }
   | { kind: 'unlimited'; prompts: Prompt[]; round: number }
-  | { kind: 'results'; results: RoundResult[]; daily: boolean }
+  | { kind: 'results'; results: RoundResult[]; dateKey: string | null }
 
-/** Today's prompts, preferring the saved set so a content update mid-day can't swap them */
-function todaysDive(dateKey: string) {
+/** A day's prompts, preferring the saved set so a content update mid-day can't swap them */
+function diveFor(dateKey: string) {
   const saved = loadDaily(dateKey)
   if (saved) {
     const prompts = saved.promptIds.map(promptById)
@@ -36,6 +37,32 @@ function todaysDive(dateKey: string) {
   return { prompts: promptsForDate(ALL_PROMPTS, dateKey, SCHEDULE), saved: null }
 }
 
+/** Today's Singapore date, kept current past midnight and whenever the tab comes back into view */
+function useSingaporeDateKey(): string {
+  const [dateKey, setDateKey] = useState(singaporeDateKey)
+  useEffect(() => {
+    const refresh = () => setDateKey(singaporeDateKey())
+    let timer = 0
+    const arm = () => {
+      timer = window.setTimeout(() => {
+        refresh()
+        arm()
+      }, msUntilNextDive() + 1000)
+    }
+    arm()
+    document.addEventListener('visibilitychange', refresh)
+    window.addEventListener('focus', refresh)
+    return () => {
+      window.clearTimeout(timer)
+      document.removeEventListener('visibilitychange', refresh)
+      window.removeEventListener('focus', refresh)
+    }
+  }, [])
+  return dateKey
+}
+
+const diveTitle = (dateKey: string) => `Ulu #${diveNumber(dateKey)}`
+
 export default function App() {
   const [screen, setScreen] = useState<Screen>({ kind: 'home' })
   const [showHelp, setShowHelp] = useState(() => !hasSeenHelp())
@@ -43,9 +70,8 @@ export default function App() {
   const [unlimitedRound, setUnlimitedRound] = useState(0)
   const [lastUnlimited, setLastUnlimited] = useState<string[]>([])
 
-  const dateKey = singaporeDateKey()
-  const dive = todaysDive(dateKey)
-  const dailyTitle = `Ulu #${diveNumber(dateKey)}`
+  const dateKey = useSingaporeDateKey()
+  const dive = diveFor(dateKey)
   const played = dive.saved?.results ?? []
   const dailyDone = played.length >= ROUNDS_PER_DIVE
 
@@ -62,9 +88,9 @@ export default function App() {
     setScreen({ kind: 'unlimited', prompts, round: unlimitedRound + 1 })
   }
 
-  const finishDaily = (results: RoundResult[]) => {
-    setStats(recordDive(dateKey, results))
-    setScreen({ kind: 'results', results, daily: true })
+  const finishDaily = (diveDate: string, results: RoundResult[]) => {
+    setStats(recordDive(diveDate, results))
+    setScreen({ kind: 'results', results, dateKey: diveDate })
   }
 
   if (ALL_PROMPTS.length === 0) {
@@ -90,7 +116,7 @@ export default function App() {
 
           <div className="home__card">
             <div className="home__dive">
-              <span>{dailyTitle}</span>
+              <span>{diveTitle(dateKey)}</span>
               <span className="muted">
                 {new Date(`${dateKey}T00:00:00`).toLocaleDateString('en-SG', {
                   weekday: 'short',
@@ -106,7 +132,7 @@ export default function App() {
                 </p>
                 <button
                   className="btn btn--primary btn--block btn--big"
-                  onClick={() => setScreen({ kind: 'results', results: played, daily: true })}
+                  onClick={() => setScreen({ kind: 'results', results: played, dateKey })}
                 >
                   See today's results
                 </button>
@@ -115,7 +141,7 @@ export default function App() {
                 </p>
               </>
             ) : (
-              <button className="btn btn--primary btn--block btn--big" onClick={() => setScreen({ kind: 'daily' })}>
+              <button className="btn btn--primary btn--block btn--big" onClick={() => setScreen({ kind: 'daily', dateKey })}>
                 {played.length ? `Continue dive (${played.length}/${ROUNDS_PER_DIVE})` : "Start today's dive"}
               </button>
             )}
@@ -139,15 +165,9 @@ export default function App() {
       )}
 
       {screen.kind === 'daily' && (
-        <Game
-          title={dailyTitle}
-          prompts={dive.prompts}
-          initialResults={played}
-          initialStartedAt={dive.saved?.startedAt}
-          onProgress={(results, startedAt) =>
-            saveDaily({ dateKey, promptIds: dive.prompts.map((p) => p.id), results, startedAt })
-          }
-          onFinish={finishDaily}
+        <DailyGame
+          dateKey={screen.dateKey}
+          onFinish={(results) => finishDaily(screen.dateKey, results)}
           onQuit={() => setScreen({ kind: 'home' })}
         />
       )}
@@ -157,17 +177,17 @@ export default function App() {
           key={screen.round}
           title="Unlimited"
           prompts={screen.prompts}
-          onFinish={(results) => setScreen({ kind: 'results', results, daily: false })}
+          onFinish={(results) => setScreen({ kind: 'results', results, dateKey: null })}
           onQuit={() => setScreen({ kind: 'home' })}
         />
       )}
 
       {screen.kind === 'results' && (
         <Results
-          title={screen.daily ? dailyTitle : 'Ulu Unlimited'}
+          title={screen.dateKey ? diveTitle(screen.dateKey) : 'Ulu Unlimited'}
           results={screen.results}
           stats={stats}
-          isDaily={screen.daily}
+          isDaily={screen.dateKey !== null}
           onHome={() => setScreen({ kind: 'home' })}
           onUnlimited={startUnlimited}
         />
@@ -175,5 +195,29 @@ export default function App() {
 
       {showHelp && <HowToPlay onClose={closeHelp} />}
     </>
+  )
+}
+
+interface DailyGameProps {
+  dateKey: string
+  onFinish: (results: RoundResult[]) => void
+  onQuit: () => void
+}
+
+/** The daily dive for one date; the prompts are fixed when it mounts so they can't change mid-dive */
+function DailyGame({ dateKey, onFinish, onQuit }: DailyGameProps) {
+  const [dive] = useState(() => diveFor(dateKey))
+  return (
+    <Game
+      title={diveTitle(dateKey)}
+      prompts={dive.prompts}
+      initialResults={dive.saved?.results ?? []}
+      initialStartedAt={dive.saved?.startedAt}
+      onProgress={(results, startedAt) =>
+        saveDaily({ dateKey, promptIds: dive.prompts.map((p) => p.id), results, startedAt })
+      }
+      onFinish={onFinish}
+      onQuit={onQuit}
+    />
   )
 }

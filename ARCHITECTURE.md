@@ -132,7 +132,11 @@ must match exactly, so `Bedk` won't become `Bedok` and abbreviations like `AMK` 
 - Progress (prompt ids, results and the start time of the current round) is stored in `localStorage` after
   every round start and end. Reloading mid-round resumes with the **same deadline**, so you can't refresh to
   peek at a prompt and reset the clock.
-- Stats (played, streak, best, gems) update once per Singapore day.
+- Stats (played, streak, best, gems) update once per Singapore day. The shown streak drops to 0 once a whole
+  day passes without a dive.
+- The home screen moves to the new dive at Singapore midnight, and checks the date again whenever the tab comes
+  back into view (phones often keep a tab open overnight). A dive in progress at midnight can still be finished:
+  it keeps its prompts and counts toward the date it started on.
 - All storage access is wrapped; private browsing just means nothing is remembered.
 - Answers ship in the client bundle. This is fine for a casual daily game (Wordle did the same); a backend
   would be needed for verified leaderboards.
