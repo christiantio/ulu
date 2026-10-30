@@ -13,7 +13,7 @@ out to Pedra Branca.
 npm install
 npm run dev        # http://localhost:5173
 npm test           # unit tests + content validation
-npm run validate   # check the question bank only
+npm run validate   # check the question bank and schedule only
 npm run build      # static build in dist/
 ```
 
@@ -30,5 +30,17 @@ ANTHROPIC_API_KEY=... npm run draft -- --category food "Name a kueh"
 
 Drafts land in `content/drafts/`. Check every answer and tier, then move the prompt into a pack and run
 `npm run validate`.
+
+## Daily schedule
+
+Which prompts run on which day is frozen in `src/content/schedule.json`. Extend it when the tests say it's
+running out (they need two weeks of runway):
+
+```bash
+npm run schedule   # schedule up to 30 days past today; existing days never change
+```
+
+New prompts only appear on days scheduled after they're added. Once a prompt is scheduled, don't delete or
+rename it.
 
 See [ARCHITECTURE.md](ARCHITECTURE.md) for the design, the content pipeline, how rarity works and the roadmap.

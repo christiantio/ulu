@@ -19,6 +19,11 @@ export function daysBetween(from: string, to: string): number {
   return Math.round((Date.parse(`${to}T00:00:00Z`) - Date.parse(`${from}T00:00:00Z`)) / 86_400_000)
 }
 
+/** The YYYY-MM-DD key `days` days after `dateKey` */
+export function addDays(dateKey: string, days: number): string {
+  return new Date(Date.parse(`${dateKey}T00:00:00Z`) + days * 86_400_000).toISOString().slice(0, 10)
+}
+
 /** 1-based dive number for a date key (can be ≤ 0 before launch) */
 export function diveNumber(dateKey: string): number {
   return daysBetween(LAUNCH_DATE, dateKey) + 1
@@ -71,10 +76,14 @@ function groupByCategory(prompts: readonly Prompt[]): Map<Category, Prompt[]> {
 }
 
 /**
- * The prompts for a given day. Everyone gets the same set for the same
+ * The seeded prompts for a given day. Everyone gets the same set for the same
  * Singapore date. Each category walks through its own fixed shuffled order,
  * one step per day, so a prompt only repeats once its category has cycled.
  * Each day draws from different categories while there are enough of them.
+ *
+ * The game reads days from the frozen schedule (see schedule.ts); this is
+ * only the fallback for an unscheduled date, because changing a category's
+ * prompt count reshuffles its whole order.
  */
 export function dailyPrompts(prompts: readonly Prompt[], dateKey: string): Prompt[] {
   const day = daysBetween(LAUNCH_DATE, dateKey)

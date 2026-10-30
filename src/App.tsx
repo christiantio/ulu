@@ -3,8 +3,9 @@ import { Countdown } from './components/Countdown'
 import { Game } from './components/Game'
 import { HowToPlay } from './components/HowToPlay'
 import { Results } from './components/Results'
-import { ALL_PROMPTS, promptById } from './content'
-import { dailyPrompts, diveNumber, randomPrompts, singaporeDateKey } from './game/daily'
+import { ALL_PROMPTS, SCHEDULE, promptById } from './content'
+import { diveNumber, randomPrompts, singaporeDateKey } from './game/daily'
+import { promptsForDate } from './game/schedule'
 import { ROUNDS_PER_DIVE } from './game/scoring'
 import { totalScore } from './game/share'
 import { hasSeenHelp, loadDaily, loadStats, markHelpSeen, recordDive, saveDaily, type Stats } from './game/storage'
@@ -23,7 +24,7 @@ function todaysDive(dateKey: string) {
     const prompts = saved.promptIds.map(promptById)
     if (prompts.every((p) => p !== undefined)) return { prompts: prompts as Prompt[], saved }
   }
-  return { prompts: dailyPrompts(ALL_PROMPTS, dateKey), saved: null }
+  return { prompts: promptsForDate(ALL_PROMPTS, dateKey, SCHEDULE), saved: null }
 }
 
 export default function App() {

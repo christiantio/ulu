@@ -1,5 +1,6 @@
 import { describe, expect, it } from 'vitest'
-import { dailyPrompts, diveNumber, msUntilNextDive, singaporeDateKey } from './daily'
+import { addDays, dailyPrompts, diveNumber, msUntilNextDive, singaporeDateKey } from './daily'
+import { extendSchedule, promptsForDate, validateSchedule } from './schedule'
 import { editDistance, matchAnswer } from './match'
 import { normalize } from './normalize'
 import { MAX_SCORE, destinationFor } from './scoring'
@@ -123,6 +124,51 @@ describe('daily selection', () => {
     const picked = dailyPrompts(small, '2026-11-02')
     expect(picked).toHaveLength(7)
     expect(new Set(picked).size).toBe(7)
+  })
+})
+
+describe('frozen schedule', () => {
+  const pool = CATEGORIES.flatMap((category) =>
+    Array.from({ length: 8 }, (_, i) => makePrompt(`${category}-${i}`, [], category)),
+  )
+  const today = '2026-10-30'
+  const schedule = extendSchedule({}, pool, addDays(today, 30), today)
+
+  it('backfills past days with the seeded prompts players already got', () => {
+    for (const date of ['2026-10-27', '2026-10-28', '2026-10-29', today]) {
+      expect(schedule[date]).toEqual(dailyPrompts(pool, date).map((p) => p.id))
+    }
+  })
+
+  it('schedules valid days with no early repeats', () => {
+    expect(Object.keys(schedule)).toHaveLength(34)
+    expect(validateSchedule(schedule, pool, today)).toEqual([])
+  })
+
+  it('never changes a scheduled day when prompts are added or reordered', () => {
+    const grown = [...pool, ...Array.from({ length: 5 }, (_, i) => makePrompt(`food-new-${i}`, [], 'food'))].reverse()
+    const extended = extendSchedule(schedule, grown, addDays(today, 60), addDays(today, 10))
+    for (const [date, ids] of Object.entries(schedule)) {
+      expect(extended[date]).toEqual(ids)
+      expect(promptsForDate(grown, date, schedule).map((p) => p.id)).toEqual(ids)
+    }
+    expect(Object.keys(extended)).toHaveLength(64)
+    expect(validateSchedule(extended, grown, today)).toEqual([])
+  })
+
+  it('falls back to the seeded prompts for an unscheduled date', () => {
+    expect(promptsForDate(pool, '2027-06-01', schedule)).toEqual(dailyPrompts(pool, '2027-06-01'))
+  })
+
+  it('flags deleted prompts, early repeats, gaps and a short runway', () => {
+    const [first, second] = Object.keys(schedule)
+    const broken = { ...schedule, [second]: [schedule[first][0], ...schedule[second].slice(1)] }
+    delete broken[addDays(today, 5)]
+    const errors = validateSchedule(broken, pool.slice(1), addDays(today, 20))
+    expect(errors.some((e) => e.includes('no longer exists'))).toBe(true)
+    expect(errors.some((e) => e.includes(`repeats 1 days after ${first}`))).toBe(true)
+    expect(errors.some((e) => e.includes('skips from'))).toBe(true)
+    expect(errors.some((e) => e.includes('run npm run schedule'))).toBe(true)
   })
 })
 

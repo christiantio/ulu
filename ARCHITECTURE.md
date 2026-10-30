@@ -38,16 +38,19 @@ src/
     match.ts         exact + typo-tolerant matching
     scoring.ts       tier points, labels, destinations
     daily.ts         Singapore date, seeded daily selection, unlimited shuffle
+    schedule.ts      frozen daily schedule: lookup, append-only extension, checks
     storage.ts       localStorage progress + stats (fails safe)
     share.ts         share text
     validate.ts      content rules, shared by tests and scripts
   content/
     packs/*.json     the question bank, one pack per category
+    schedule.json    which prompts run on which day
     index.ts         loads every pack at build time
   components/        Game, Round, Reveal, Results, HowToPlay, RouteLine, Countdown
   App.tsx            screen routing (home / daily / unlimited / results)
 scripts/
   validate-content.ts   npm run validate
+  schedule.ts           npm run schedule  (extend the daily schedule)
   draft-prompt.ts       npm run draft  (Claude-assisted drafting, offline)
 ```
 
@@ -107,15 +110,22 @@ must match exactly, so `Bedk` won't become `Bedok` and abbreviations like `AMK` 
 ## Daily selection
 
 - The date key is today's date in `Asia/Singapore`, independent of the device timezone.
-- A seeded PRNG (FNV-1a hash → mulberry32) shuffles the categories for that date. Each dive takes one prompt
-  from each of 7 different categories.
-- Every category has its own fixed shuffled order and advances one step per day, so a prompt only repeats after
-  its whole category has cycled. With ~8–10 prompts per category, that is roughly a week and a half of
-  fresh dives. **Growing the bank is the main lever for longevity.**
-- The chosen prompt ids are saved with the player's progress, so a content deploy mid-day doesn't swap prompts
-  under someone who has already started.
-- Known limitation: adding prompts to a category reshuffles its future order. Past dives aren't stored, so this
-  only matters once there is an archive. At that point, freeze schedules into a generated `schedule.json`.
+- Each day's prompt ids are **frozen** in `src/content/schedule.json` (`{ "2026-10-27": ["id", …], … }`). The
+  file only grows, so adding, editing or reordering prompts never changes a day that's already scheduled.
+- `npm run schedule -- --days 30` appends days until the schedule reaches 30 days past today (30 is the default). Each new day takes
+  the least recently used prompt from each of 7 different categories, so a prompt rests as long as the bank
+  allows before it comes back. With ~8–10 prompts per category that's about 8 days. **Growing the bank is the
+  main lever for longevity.** New prompts only appear on days scheduled after they were added, which is why
+  the schedule runs a month ahead and not further.
+- `npm test` and `npm run validate` check the schedule: every scheduled id still exists (so a prompt can't be
+  deleted or renamed once it's scheduled), there are no gaps, no prompt repeats within 7 days
+  (`MIN_REPEAT_GAP`, raise it as the bank grows), and it reaches at least 14 days past today. When that last check
+  fails, run `npm run schedule` and commit the result.
+- If a date is missing from the schedule, the game falls back to the original seeded selection: a seeded PRNG
+  (FNV-1a hash → mulberry32) shuffles the categories for the date, and each category walks its own shuffled
+  order one step per day. The days before the schedule existed (27–30 Oct 2026) were backfilled with it.
+- The chosen prompt ids are also saved with the player's progress, so a content deploy mid-day doesn't swap
+  prompts under someone who has already started.
 
 ## Fairness & persistence
 
@@ -132,5 +142,5 @@ must match exactly, so `Bedk` won't become `Bedok` and abbreviations like `AMK` 
 1. Host it (static) and add basic privacy-friendly analytics.
 2. A small backend (e.g. Supabase or Cloudflare Workers + D1) for anonymous answer logging, then
    frequency-based tiers and "X% of players found this" on the reveal.
-3. Archive of past dives (needs a frozen schedule), themed packs, friends leaderboards.
+3. Archive of past dives (read from the schedule), themed packs, friends leaderboards.
 4. A party mode: same prompts, live room, rarest answer *within the room* wins.
