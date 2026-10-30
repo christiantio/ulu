@@ -97,3 +97,14 @@ export function hasSeenHelp(): boolean {
 export function markHelpSeen(): void {
   write(SEEN_HELP_KEY, true)
 }
+
+/**
+ * The streak to show on screen. The stored streak only counts while the run
+ * is alive: it stays after today's or yesterday's dive, and reads 0 once a
+ * day has been missed (the stored value stays put until the next dive).
+ */
+export function displayStreak(stats: Stats, todayKey: string): number {
+  if (stats.lastPlayed === null) return 0
+  const gap = daysBetween(stats.lastPlayed, todayKey)
+  return gap === 0 || gap === 1 ? stats.currentStreak : 0
+}
