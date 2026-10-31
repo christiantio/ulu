@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState, type FormEvent } from 'react'
+import { useEffect, useId, useRef, useState, type FormEvent } from 'react'
 import { matchAnswer } from '../game/match'
 import { SECONDS_PER_ROUND, TIER_INFO } from '../game/scoring'
 import type { Prompt, RoundResult } from '../game/types'
@@ -10,12 +10,19 @@ interface Props {
   onResult: (result: RoundResult) => void
 }
 
+/** Seconds remaining at which the time left is announced to screen readers */
+const TIME_WARNINGS = [10, 5]
+
 /** One prompt: the timer, the input box and retrying unrecognised answers */
 export function Round({ prompt, deadline, onResult }: Props) {
   const [input, setInput] = useState('')
   const [remaining, setRemaining] = useState(() => Math.max(0, deadline - Date.now()))
   const [rejected, setRejected] = useState<string | null>(null)
   const [shake, setShake] = useState(0)
+  // Only warn for thresholds still ahead when the round mounted, so a resumed round with 7s left doesn't say "10"
+  const [startSeconds] = useState(() => Math.ceil(Math.max(0, deadline - Date.now()) / 1000))
+  const promptId = useId()
+  const noteId = useId()
   const done = useRef(false)
   const inputRef = useRef<HTMLInputElement>(null)
   // Keep the latest input for the timeout handler without restarting the timer
@@ -66,6 +73,7 @@ export function Round({ prompt, deadline, onResult }: Props) {
 
   const seconds = Math.ceil(remaining / 1000)
   const fraction = remaining / (SECONDS_PER_ROUND * 1000)
+  const warning = TIME_WARNINGS.filter((t) => seconds <= t && startSeconds > t).at(-1)
 
   return (
     <section className="round">
@@ -75,12 +83,23 @@ export function Round({ prompt, deadline, onResult }: Props) {
           style={{ transform: `scaleX(${fraction})` }}
         />
       </div>
-      <div className="round__clock" aria-live="off">
-        {seconds}s
+      <div className="round__clock" role="timer" aria-live="off">
+        <span aria-hidden="true">{seconds}s</span>
+        <span className="visually-hidden">{seconds} seconds left</span>
       </div>
+      {/* Present (empty) from mount so screen readers pick up the change at each threshold */}
+      <p className="visually-hidden" aria-live="polite" aria-atomic="true">
+        {warning ? `${warning} seconds left` : ''}
+      </p>
 
-      <h2 className="round__prompt">{prompt.text}</h2>
-      {prompt.note && <p className="round__note">{prompt.note}</p>}
+      <h2 className="round__prompt" id={promptId}>
+        {prompt.text}
+      </h2>
+      {prompt.note && (
+        <p className="round__note" id={noteId}>
+          {prompt.note}
+        </p>
+      )}
 
       <form className="round__form" onSubmit={submit}>
         <input
@@ -97,6 +116,7 @@ export function Round({ prompt, deadline, onResult }: Props) {
           spellCheck={false}
           enterKeyHint="go"
           aria-label="Your answer"
+          aria-describedby={prompt.note ? `${promptId} ${noteId}` : promptId}
         />
         <button className="btn btn--primary" type="submit" disabled={!input.trim()}>
           Go
@@ -104,9 +124,10 @@ export function Round({ prompt, deadline, onResult }: Props) {
       </form>
       <p className="round__feedback" role="status">
         {rejected ? (
-          <>
+          // Keyed so the same rejected answer twice is still announced again
+          <span key={shake}>
             <strong>“{rejected}”</strong> not on our list leh. Try another one!
-          </>
+          </span>
         ) : (
           'First valid answer locks in. Go ulu or go home.'
         )}

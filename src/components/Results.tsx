@@ -59,15 +59,26 @@ export function Results({ title, results, stats, isDaily, dateKey, onHome, onUnl
           const gem = prompt?.answers.find((a) => a.tier === 'gem')
           return (
             <li key={r.promptId} className={`breakdown__row ${r.tier ? `tier--${r.tier}` : 'verdict--miss'}`}>
-              <span className="breakdown__emoji">{r.tier ? TIER_INFO[r.tier].emoji : MISS_EMOJI}</span>
+              <span className="breakdown__emoji" aria-hidden="true">
+                {r.tier ? TIER_INFO[r.tier].emoji : MISS_EMOJI}
+              </span>
               <span className="breakdown__body">
                 <span className="breakdown__prompt">{prompt?.text ?? r.promptId}</span>
                 <span className="breakdown__answer">
                   {r.answer ?? <em>No answer</em>}
-                  {gem && r.tier !== 'gem' && <span className="muted"> · 💎 {gem.name}</span>}
+                  {gem && r.tier !== 'gem' && (
+                    <span className="muted">
+                      <span aria-hidden="true"> · 💎</span>
+                      <span className="visually-hidden">. The gem:</span> {gem.name}
+                    </span>
+                  )}
                 </span>
               </span>
-              <span className="breakdown__points">{r.points}</span>
+              <span className="breakdown__points">
+                <span className="visually-hidden">{r.tier ? TIER_INFO[r.tier].label : 'Time up'}, </span>
+                {r.points}
+                <span className="visually-hidden"> points</span>
+              </span>
             </li>
           )
         })}

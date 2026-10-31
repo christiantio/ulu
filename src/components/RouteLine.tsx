@@ -1,10 +1,15 @@
-import { DESTINATIONS, MAX_SCORE } from '../game/scoring'
+import { DESTINATIONS, MAX_SCORE, destinationFor } from '../game/scoring'
 
 /** MRT-map style strip showing how far out of town the score has taken you */
 export function RouteLine({ score, compact = false }: { score: number; compact?: boolean }) {
   const progress = Math.min(score / MAX_SCORE, 1)
   return (
-    <div className={`route ${compact ? 'route--compact' : ''}`} aria-label={`${score} of ${MAX_SCORE} points`}>
+    // role="img" makes the label count and hides the decorative stops, train and end labels
+    <div
+      className={`route ${compact ? 'route--compact' : ''}`}
+      role="img"
+      aria-label={`${score} of ${MAX_SCORE} points, reached ${destinationFor(score).name}`}
+    >
       <div className="route__track">
         <div className="route__fill" style={{ width: `${progress * 100}%` }} />
         {DESTINATIONS.map((d) => (

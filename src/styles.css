@@ -8,13 +8,16 @@
   --brand: #d7263d;
   --brand-ink: #ffffff;
   --brand-soft: #fde4e7;
+  /* Brand red as small text on --brand-soft; plain --brand is 4.1:1 there */
+  --brand-on-soft: #c82339;
   --track: #e6ddd2;
   --shadow: 0 1px 2px rgb(0 0 0 / 0.05), 0 8px 24px rgb(0 0 0 / 0.06);
 
-  --tier-common: #9a9087;
-  --tier-trap: #d49a00;
-  --tier-solid: #2f9e5b;
-  --tier-rare: #2f6fdb;
+  /* Darkened from #9a9087, #d49a00, #2f9e5b, #2f6fdb so tier labels reach 4.5:1 on --bg */
+  --tier-common: #796f66;
+  --tier-trap: #906900;
+  --tier-solid: #268049;
+  --tier-rare: #2b6cda;
   --tier-ulu: #8a3ffc;
   --tier-gem: #d7263d;
   --miss: #b3261e;
@@ -36,6 +39,7 @@
     --brand: #ff4d5e;
     --brand-ink: #1a0b0d;
     --brand-soft: #3d1a1f;
+    --brand-on-soft: #ff4d5e;
     --track: #3a322c;
     --shadow: 0 1px 2px rgb(0 0 0 / 0.4), 0 8px 24px rgb(0 0 0 / 0.35);
 
@@ -70,6 +74,19 @@ body {
   margin: 0 auto;
   padding: 16px 16px 48px;
   min-height: 100dvh;
+}
+
+.visually-hidden {
+  position: absolute !important;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  clip-path: inset(50%);
+  white-space: nowrap;
+  border: 0;
 }
 
 h1,
@@ -115,9 +132,9 @@ h3 {
   opacity: 0.45;
   cursor: default;
 }
-.btn:focus-visible,
-.round__input:focus-visible {
-  outline: 3px solid color-mix(in srgb, var(--brand) 45%, transparent);
+.btn:focus-visible {
+  /* Solid: the old 45% tint was about 2:1 against the page, under the 3:1 needed for a focus indicator */
+  outline: 3px solid var(--brand);
   outline-offset: 2px;
 }
 .btn--primary {
@@ -299,6 +316,11 @@ h3 {
   background: var(--surface);
   color: var(--text);
 }
+.round__input::placeholder {
+  color: var(--muted);
+  opacity: 1;
+}
+/* The input's focus indicator is its border turning brand red (4.96:1 light, 5.32:1 dark on --surface) */
 .round__input:focus {
   border-color: var(--brand);
   outline: none;
@@ -394,7 +416,7 @@ h3 {
 }
 .gem__label {
   font-weight: 600;
-  color: var(--brand);
+  color: var(--brand-on-soft);
   white-space: nowrap;
 }
 .gem__name {
@@ -577,21 +599,24 @@ h3 {
   color: var(--text);
 }
 
-/* How to play */
+/* How to play: a native <dialog> sized to its card, so a click on the dialog itself is a backdrop click */
 .modal {
-  position: fixed;
-  inset: 0;
+  padding: 0;
+  border: none;
+  background: transparent;
+  color: var(--text);
+  width: calc(100% - 32px);
+  max-width: 480px;
+  max-height: calc(100dvh - 32px);
+  overflow: visible;
+}
+.modal::backdrop {
   background: rgb(0 0 0 / 0.45);
-  display: grid;
-  place-items: center;
-  padding: 16px;
-  z-index: 10;
 }
 .modal__card {
   background: var(--surface);
   border-radius: 20px;
   padding: 20px;
-  max-width: 480px;
   width: 100%;
   max-height: calc(100dvh - 32px);
   overflow-y: auto;

@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useRef } from 'react'
+import { useEffect, useId, useMemo, useRef } from 'react'
 import { MISS_EMOJI, TIER_INFO } from '../game/scoring'
 import { TIERS, type Prompt, type RoundResult, type Tier } from '../game/types'
 
@@ -15,6 +15,7 @@ interface Props {
 /** After a round: how the player did, the gem, and what else was possible */
 export function Reveal({ prompt, result, isLast, onNext }: Props) {
   const nextRef = useRef<HTMLButtonElement>(null)
+  const verdictId = useId()
   useEffect(() => nextRef.current?.focus(), [])
 
   const gem = prompt.answers.find((a) => a.tier === 'gem')
@@ -38,8 +39,10 @@ export function Reveal({ prompt, result, isLast, onNext }: Props) {
     <section className="reveal">
       <p className="reveal__prompt">{prompt.text}</p>
 
-      <div className={`verdict ${result.tier ? `tier--${result.tier}` : 'verdict--miss'}`}>
-        <div className="verdict__emoji">{info?.emoji ?? MISS_EMOJI}</div>
+      <div className={`verdict ${result.tier ? `tier--${result.tier}` : 'verdict--miss'}`} id={verdictId}>
+        <div className="verdict__emoji" aria-hidden="true">
+          {info?.emoji ?? MISS_EMOJI}
+        </div>
         <div>
           <div className="verdict__label">{info?.label ?? 'Time up!'}</div>
           <div className="verdict__answer">
@@ -54,12 +57,17 @@ export function Reveal({ prompt, result, isLast, onNext }: Props) {
           </div>
           {info && <div className="verdict__blurb">{info.blurb}</div>}
         </div>
-        <div className="verdict__points">+{result.points}</div>
+        <div className="verdict__points">
+          +{result.points}
+          <span className="visually-hidden"> points</span>
+        </div>
       </div>
 
       {gem && result.tier !== 'gem' && (
         <div className="gem">
-          <span className="gem__label">💎 The gem</span>
+          <span className="gem__label">
+            <span aria-hidden="true">💎</span> The gem
+          </span>
           <span className="gem__name">{gem.name}</span>
         </div>
       )}
@@ -69,7 +77,7 @@ export function Reveal({ prompt, result, isLast, onNext }: Props) {
         {[...samples].map(([tier, names]) => (
           <div key={tier} className={`samples__row tier--${tier}`}>
             <span className="samples__tier">
-              {TIER_INFO[tier].emoji} {TIER_INFO[tier].label}
+              <span aria-hidden="true">{TIER_INFO[tier].emoji}</span> {TIER_INFO[tier].label}
             </span>
             <span className="samples__names">{names.join(', ')}</span>
           </div>
@@ -77,7 +85,8 @@ export function Reveal({ prompt, result, isLast, onNext }: Props) {
         <p className="muted small">{prompt.answers.length} accepted answers in total.</p>
       </div>
 
-      <button ref={nextRef} className="btn btn--primary btn--block" onClick={onNext}>
+      {/* Focus lands here, so the verdict is read with it */}
+      <button ref={nextRef} className="btn btn--primary btn--block" onClick={onNext} aria-describedby={verdictId}>
         {isLast ? 'See results' : 'Next prompt →'}
       </button>
     </section>

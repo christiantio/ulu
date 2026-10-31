@@ -63,13 +63,18 @@ export function Game({ title, prompts, initialResults = [], initialStartedAt, on
       <ol className="pips" aria-label="Rounds">
         {prompts.map((p, i) => {
           const r = results[i]
+          const current = i === index
+          const label = r
+            ? `Round ${i + 1}: ${r.tier ? TIER_INFO[r.tier].label : 'Time up'}, ${r.points} points`
+            : `Round ${i + 1}${current ? '' : ', not played yet'}`
           return (
             <li
               key={p.id}
-              className={`pip ${i === index ? 'pip--current' : ''} ${r ? 'pip--done' : ''}`}
-              aria-label={`Round ${i + 1}`}
+              className={`pip ${current ? 'pip--current' : ''} ${r ? 'pip--done' : ''}`}
+              aria-current={current ? 'step' : undefined}
             >
-              {r ? (r.tier ? TIER_INFO[r.tier].emoji : MISS_EMOJI) : i + 1}
+              <span aria-hidden="true">{r ? (r.tier ? TIER_INFO[r.tier].emoji : MISS_EMOJI) : i + 1}</span>
+              <span className="visually-hidden">{label}</span>
             </li>
           )
         })}
