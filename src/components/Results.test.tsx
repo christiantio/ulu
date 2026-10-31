@@ -71,10 +71,32 @@ describe('Results', () => {
     const missed = screen.getByText(prompts[0].text).closest('li')!.textContent
     const gem = prompts[0].answers.find((a) => a.tier === 'gem')!
     expect(missed).toContain(`The gem: ${gem.name}`)
-    expect(missed).toMatch(/Time up, 0 points$/)
+    const points = (i: number) => screen.getByText(prompts[i].text).closest('li')!.querySelector('.breakdown__points')!
+    expect(points(0).textContent).toBe('Time up, 0 points')
     const hit = screen.getByText(prompts[1].text).closest('li')!.textContent
     expect(hit).toContain(results[1].answer)
-    expect(hit).toMatch(/Everybody Say, 10 points$/)
+    expect(points(1).textContent).toBe('Everybody Say, 10 points')
+  })
+
+  it('gives each prompt its own closed disclosure with every answer, deepest tier first', () => {
+    renderResults('2026-11-10')
+    const rows = screen.getAllByRole('listitem').filter((li) => li.classList.contains('breakdown__row'))
+    expect(rows).toHaveLength(prompts.length)
+    for (const [i, row] of rows.entries()) {
+      const details = row.querySelector('details.all-answers') as HTMLDetailsElement
+      expect(details.open).toBe(false)
+      // Told apart by the prompt for screen readers
+      expect(details.querySelector('summary')!.textContent).toBe(
+        `Show all ${prompts[i].answers.length} answers for ${prompts[i].text}`,
+      )
+      expect(details.querySelectorAll('.all-answers__names li')).toHaveLength(prompts[i].answers.length)
+      const tiers = [...details.querySelectorAll('.all-answers__group')].map((g) => g.className.match(/tier--(\w+)/)![1])
+      expect(tiers[0]).toBe('gem')
+      expect(tiers.at(-1)).toBe('common')
+      // The player's answer is marked; a miss marks nothing
+      const marked = [...details.querySelectorAll('.all-answers__yours')].map((li) => li.firstChild!.textContent)
+      expect(marked).toEqual(results[i].answer ? [results[i].answer] : [])
+    }
   })
 
   it("counts down to the next dive when the dive is today's", () => {
@@ -99,13 +121,15 @@ describe('Results', () => {
   })
 
   it('copies the share text when there is no share sheet', async () => {
-    const writeText = vi.fn(() => Promise.resolve())
+    const writeText = vi.fn<(text: string) => Promise<void>>(() => Promise.resolve())
     stubNavigator('clipboard', { writeText })
     renderResults('2026-11-10')
 
     await act(async () => fireEvent.click(screen.getByRole('button', { name: 'Share result' })))
     expect(writeText).toHaveBeenCalledTimes(1)
-    expect(writeText.mock.calls[0]).toEqual([expect.stringMatching(/^Ulu #15 🇸🇬 60\/700\n❌⚪⚪⚪⚪⚪⚪\n/)])
+    // Spoiler-free: just the score, the grid and the destination, none of the answer lists
+    expect(writeText.mock.calls[0]).toEqual([`Ulu #15 🇸🇬 60/700\n❌⚪⚪⚪⚪⚪⚪\nReached Raffles Place\n${window.location.origin}`])
+    expect(writeText.mock.calls[0][0]).not.toContain('Show all')
     expect(screen.getByRole('button', { name: 'Copied! Go paste in the group chat' })).toBeDefined()
 
     act(() => vi.advanceTimersByTime(2000))

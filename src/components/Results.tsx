@@ -6,6 +6,7 @@ import { shareText, totalScore } from '../game/share'
 import { singaporeDateKey } from '../game/daily'
 import { displayStreak, type Stats } from '../game/storage'
 import type { RoundResult } from '../game/types'
+import { AllAnswers } from './AllAnswers'
 import { Countdown } from './Countdown'
 import { RouteLine } from './RouteLine'
 
@@ -82,6 +83,11 @@ export function Results({ title, results, stats, isDaily, dateKey, onHome, onUnl
                 {r.points}
                 <span className="visually-hidden"> points</span>
               </span>
+              {prompt && (
+                <div className="breakdown__more">
+                  <AllAnswers prompt={prompt} yours={r.answer} context={prompt.text} />
+                </div>
+              )}
             </li>
           )
         })}

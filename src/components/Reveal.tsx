@@ -1,6 +1,8 @@
 import { useEffect, useId, useMemo, useRef } from 'react'
+import { shuffle } from '../game/daily'
 import { MISS_EMOJI, TIER_INFO } from '../game/scoring'
 import { TIERS, type Prompt, type RoundResult, type Tier } from '../game/types'
+import { AllAnswers } from './AllAnswers'
 
 const SAMPLES_PER_TIER = 3
 const DEEPEST_FIRST = [...TIERS].reverse().filter((t) => t !== 'gem')
@@ -22,11 +24,10 @@ export function Reveal({ prompt, result, isLast, onNext }: Props) {
   const samples = useMemo(() => {
     const byTier = new Map<Tier, string[]>()
     for (const tier of DEEPEST_FIRST) {
-      const names = prompt.answers
-        .filter((a) => a.tier === tier && a.name !== result.answer)
-        .map((a) => a.name)
-        .sort(() => Math.random() - 0.5)
-        .slice(0, SAMPLES_PER_TIER)
+      const names = shuffle(
+        prompt.answers.filter((a) => a.tier === tier && a.name !== result.answer).map((a) => a.name),
+        Math.random,
+      ).slice(0, SAMPLES_PER_TIER)
       if (names.length) byTier.set(tier, names)
     }
     return byTier
@@ -82,7 +83,7 @@ export function Reveal({ prompt, result, isLast, onNext }: Props) {
             <span className="samples__names">{names.join(', ')}</span>
           </div>
         ))}
-        <p className="muted small">{prompt.answers.length} accepted answers in total.</p>
+        <AllAnswers prompt={prompt} yours={result.answer} />
       </div>
 
       {/* Focus lands here, so the verdict is read with it */}

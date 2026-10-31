@@ -469,6 +469,61 @@ h3 {
   white-space: nowrap;
 }
 
+/* Every accepted answer, behind a native disclosure. Tier labels use the tier colours (4.5:1+ on --bg and
+   --surface in both themes); the "your answer" badge is --brand-on-soft on --brand-soft (4.6:1 light, 4.7:1 dark) */
+.all-answers {
+  margin-top: 8px;
+  font-size: 0.92rem;
+}
+.all-answers summary {
+  cursor: pointer;
+  font-weight: 600;
+  color: var(--text);
+  padding: 4px 0;
+  border-radius: 6px;
+  width: fit-content;
+}
+.all-answers summary:focus-visible {
+  outline: 3px solid var(--brand);
+  outline-offset: 2px;
+}
+.all-answers__groups {
+  display: grid;
+  gap: 8px;
+  margin-top: 6px;
+}
+.all-answers__tier {
+  margin: 0;
+  font-weight: 600;
+  font-size: 0.85rem;
+  color: var(--tier);
+}
+.all-answers__points {
+  color: var(--muted);
+  font-weight: 500;
+}
+.all-answers__names {
+  list-style: none;
+  padding: 0;
+  margin: 2px 0 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2px 14px;
+}
+.all-answers__yours {
+  font-weight: 700;
+}
+.all-answers__badge {
+  margin-left: 6px;
+  padding: 0 8px;
+  border-radius: 999px;
+  background: var(--brand-soft);
+  color: var(--brand-on-soft);
+  font-size: 0.75rem;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
 /* Route */
 .route {
   padding: 14px 4px 0;
@@ -599,6 +654,15 @@ h3 {
   font-family: var(--font-display);
   font-weight: 800;
   color: var(--tier);
+}
+.breakdown__more {
+  grid-column: 2 / -1;
+  min-width: 0;
+  margin-top: -6px;
+}
+.breakdown__more .all-answers {
+  margin-top: 0;
+  font-size: 0.85rem;
 }
 
 .stats {
