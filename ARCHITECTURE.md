@@ -103,7 +103,8 @@ complete. Open sets (hawker dishes, Singlish words) carry long answer lists with
   and recompute tiers from real frequency, e.g. top 10% of answers by share = `common`, under 1% = `ulu`.
   Editorial tiers then become the cold-start prior, and `trap` can be detected automatically as "listed
   as rare but heavily picked". Unrecognised inputs that many players type are a review queue for missing
-  answers.
+  answers. The proposed formula, thresholds and review-queue rule are in
+  [ADR 001](docs/adr/001-answer-stats-backend.md#recomputing-tiers).
 - **Until then: player reports.** Every rejected guess is kept on the round result (`attempts`, deduplicated
   by normalised text). The reveal and the results screen list them with a "Should this count?" link, and each
   prompt on the results screen can be reported as having a wrong answer or a tier that feels off. The links
@@ -206,5 +207,8 @@ retention.
 1. Host it (static) and add basic privacy-friendly analytics.
 2. A small backend (e.g. Supabase or Cloudflare Workers + D1) for anonymous answer logging, then
    frequency-based tiers and "X% of players found this" on the reveal.
+   Design and recommendation (proposed, for the team to decide):
+   [ADR 001: answer stats backend](docs/adr/001-answer-stats-backend.md), with a throwaway prototype in
+   `prototypes/answer-stats/`.
 3. Archive of past dives (read from the schedule), themed packs, friends leaderboards.
 4. A party mode: same prompts, live room, rarest answer *within the room* wins.

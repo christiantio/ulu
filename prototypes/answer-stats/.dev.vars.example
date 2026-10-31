@@ -1,0 +1,2 @@
+# Copy to .dev.vars (gitignored) for `npm run dev`. Any long random string works locally
+DEVICE_HASH_SECRET=local-dev-only-not-a-real-secret
