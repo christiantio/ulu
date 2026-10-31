@@ -52,6 +52,8 @@ scripts/
   validate-content.ts   npm run validate
   schedule.ts           npm run schedule  (extend the daily schedule)
   draft-prompt.ts       npm run draft  (Claude-assisted drafting, offline)
+  site-meta.ts          Vite plugin: absolute link-preview tags from VITE_SITE_URL
+design/                 SVG sources for the share image and the iOS icon, rendered into public/
 ```
 
 ## How questions are created

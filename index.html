@@ -2,10 +2,26 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
+    <link rel="icon" type="image/png" sizes="48x48" href="/favicon-48.png" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="description" content="Ulu: a daily Singapore trivia game where the most obscure answers score the most." />
     <meta name="theme-color" content="#d7263d" />
+
+    <!-- Link previews. og:url and og:image need the site's absolute URL, so the build adds them in place of the
+         site-meta marker below when VITE_SITE_URL is set (see scripts/site-meta.ts) -->
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Ulu" />
+    <meta property="og:title" content="Ulu · How ulu can you go?" />
+    <meta
+      property="og:description"
+      content="A daily Singapore trivia game. Seven prompts a day; the more obscure your answer, the further out of town you go."
+    />
+    <meta property="og:locale" content="en_SG" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <!-- site-meta -->
+
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
