@@ -5,7 +5,7 @@ import { Game } from './components/Game'
 import { HowToPlay } from './components/HowToPlay'
 import { PrivacyNote } from './components/PrivacyNote'
 import { Results } from './components/Results'
-import { ALL_PROMPTS, SCHEDULE, promptById } from './content'
+import { loadBank, loadDive, type Bank } from './content'
 import { diveNumber, msUntilNextDive, singaporeDateKey } from './game/daily'
 import { promptsForDate, unlimitedPrompts } from './game/schedule'
 import { ROUNDS_PER_DIVE } from './game/scoring'
@@ -24,19 +24,53 @@ import type { Prompt, RoundResult } from './game/types'
 
 type Screen =
   | { kind: 'home' }
-  // A daily keeps the date it started on, so a dive in progress at midnight can still be finished
-  | { kind: 'daily'; dateKey: string }
+  // A daily keeps the date it started on and the prompts loaded for it, so a dive in progress at midnight can
+  // still be finished
+  | { kind: 'daily'; dateKey: string; prompts: Prompt[] }
+  | { kind: 'loading-unlimited'; failed: boolean }
   | { kind: 'unlimited'; prompts: Prompt[]; round: number }
-  | { kind: 'results'; results: RoundResult[]; dateKey: string | null }
+  | { kind: 'results'; results: RoundResult[]; prompts: Prompt[]; dateKey: string | null }
+
+const sameIds = (ids: readonly string[], prompts: readonly Prompt[]) =>
+  ids.length === prompts.length && ids.every((id, i) => prompts[i].id === id)
 
 /** A day's prompts, preferring the saved set so a content update mid-day can't swap them */
-function diveFor(dateKey: string) {
+async function diveFor(dateKey: string): Promise<Prompt[]> {
+  const prompts = await loadDive(dateKey)
   const saved = loadDaily(dateKey)
-  if (saved) {
-    const prompts = saved.promptIds.map(promptById)
-    if (prompts.every((p) => p !== undefined)) return { prompts: prompts as Prompt[], saved }
-  }
-  return { prompts: promptsForDate(ALL_PROMPTS, dateKey, SCHEDULE), saved: null }
+  if (!saved || sameIds(saved.promptIds, prompts)) return prompts
+  const bank = await loadBank()
+  const savedPrompts = saved.promptIds.map(bank.promptById)
+  return savedPrompts.every((p) => p !== undefined) ? (savedPrompts as Prompt[]) : prompts
+}
+
+type DiveState =
+  | { status: 'loading' }
+  | { status: 'error'; retry: () => void }
+  | { status: 'ready'; prompts: Prompt[] }
+
+/** A date's prompts, fetched again when the date changes or on retry. An answer for an earlier date is dropped */
+function useDive(dateKey: string): DiveState {
+  const [attempt, setAttempt] = useState(0)
+  const [loaded, setLoaded] = useState<{ key: string; prompts: Prompt[] | null } | null>(null)
+  const key = `${dateKey}#${attempt}`
+  useEffect(() => {
+    let current = true
+    diveFor(dateKey).then(
+      (prompts) => {
+        if (current) setLoaded({ key, prompts })
+      },
+      () => {
+        if (current) setLoaded({ key, prompts: null })
+      },
+    )
+    return () => {
+      current = false
+    }
+  }, [dateKey, key])
+  if (loaded?.key !== key) return { status: 'loading' }
+  if (!loaded.prompts) return { status: 'error', retry: () => setAttempt((n) => n + 1) }
+  return { status: 'ready', prompts: loaded.prompts }
 }
 
 /** Today's Singapore date, kept current past midnight and whenever the tab comes back into view */
@@ -74,10 +108,15 @@ export default function App() {
   const helpWasOpen = useRef(showHelp)
   const [lastUnlimited, setLastUnlimited] = useState<string[]>([])
   const completedDives = useRef(new Set<string>())
+  // Loaded the first time Unlimited starts, then kept so the next game starts straight away
+  const bank = useRef<Bank | null>(null)
+  // Bumped by every Unlimited start and by going home, so a bank that arrives late can't start a stale game
+  const unlimitedRequest = useRef(0)
 
   const dateKey = useSingaporeDateKey()
-  const dive = diveFor(dateKey)
-  const played = dive.saved?.results ?? []
+  const today = useDive(dateKey)
+  const saved = loadDaily(dateKey)
+  const played = saved?.results ?? []
   const dailyDone = played.length >= ROUNDS_PER_DIVE
 
   // HowToPlay hands focus back to whatever opened it, but Safari doesn't focus buttons on click (and the first
@@ -97,13 +136,39 @@ export default function App() {
     setShowHelp(false)
   }
 
-  const startUnlimited = () => {
-    const daily = dive.prompts.map((p) => p.id)
-    const prompts = unlimitedPrompts(ALL_PROMPTS, SCHEDULE, dateKey, { daily, recent: lastUnlimited })
+  const goHome = () => {
+    unlimitedRequest.current++
+    setScreen({ kind: 'home' })
+  }
+
+  const playUnlimited = (loaded: Bank) => {
+    // Keep today's prompts out whether or not today's dive file has loaded: the saved set and the scheduled one
+    const daily = [
+      ...(loadDaily(dateKey)?.promptIds ?? []),
+      ...promptsForDate(loaded.ALL_PROMPTS, dateKey, loaded.SCHEDULE).map((p) => p.id),
+    ]
+    const prompts = unlimitedPrompts(loaded.ALL_PROMPTS, loaded.SCHEDULE, dateKey, { daily, recent: lastUnlimited })
     setLastUnlimited(prompts.map((p) => p.id))
     setUnlimitedRound((n) => n + 1)
     setScreen({ kind: 'unlimited', prompts, round: unlimitedRound + 1 })
     track('unlimited_started')
+  }
+
+  /** The bank is only downloaded here, the first time Unlimited starts */
+  const startUnlimited = () => {
+    const request = ++unlimitedRequest.current
+    if (bank.current) return playUnlimited(bank.current)
+    setScreen({ kind: 'loading-unlimited', failed: false })
+    loadBank().then(
+      (loaded) => {
+        // Kept even if the player has left, so the next start is immediate
+        bank.current = loaded
+        if (request === unlimitedRequest.current) playUnlimited(loaded)
+      },
+      () => {
+        if (request === unlimitedRequest.current) setScreen({ kind: 'loading-unlimited', failed: true })
+      },
+    )
   }
 
   /** Fold a finished dive into the stats. Safe to call more than once: recordDive ignores repeats */
@@ -118,9 +183,9 @@ export default function App() {
     }
   }
 
-  const finishDaily = (diveDate: string, results: RoundResult[]) => {
+  const finishDaily = (diveDate: string, prompts: Prompt[], results: RoundResult[]) => {
     recordDaily(diveDate, results)
-    setScreen({ kind: 'results', results, dateKey: diveDate })
+    setScreen({ kind: 'results', results, prompts, dateKey: diveDate })
   }
 
   // Backstop for a finished dive that never reached the stats, e.g. progress saved by an older build that only
@@ -131,14 +196,6 @@ export default function App() {
     const saved = loadDaily(dateKey)
     if (saved) setStats(recordDive(dateKey, saved.results))
   }, [unrecorded, dateKey])
-
-  if (ALL_PROMPTS.length === 0) {
-    return (
-      <main className="home">
-        <p>No prompts loaded yet. Add packs under src/content/packs.</p>
-      </main>
-    )
-  }
 
   return (
     <>
@@ -153,7 +210,7 @@ export default function App() {
             further out of town you go.
           </p>
 
-          <div className="home__card">
+          <div className="home__card" aria-busy={today.status === 'loading'}>
             <div className="home__dive">
               <span>{diveTitle(dateKey)}</span>
               <span className="muted">
@@ -164,27 +221,50 @@ export default function App() {
                 })}
               </span>
             </div>
-            {dailyDone ? (
+            {dailyDone && (
+              <p className="home__done">
+                Done for today: <strong>{totalScore(played)}</strong> pts
+              </p>
+            )}
+            {today.status === 'loading' && (
+              <p className="home__status muted center" role="status">
+                Loading today's dive…
+              </p>
+            )}
+            {today.status === 'error' && (
               <>
-                <p className="home__done">
-                  Done for today: <strong>{totalScore(played)}</strong> pts
+                <p className="home__status center" role="alert">
+                  Couldn't load today's dive. Check your connection and try again.
                 </p>
+                <button className="btn btn--primary btn--block" onClick={today.retry}>
+                  Retry
+                </button>
+              </>
+            )}
+            {today.status === 'ready' &&
+              (today.prompts.length === 0 ? (
+                <p className="home__status">No prompts loaded yet. Add packs under src/content/packs.</p>
+              ) : dailyDone ? (
                 <button
                   className="btn btn--primary btn--block btn--big"
-                  onClick={() => setScreen({ kind: 'results', results: played, dateKey })}
+                  onClick={() => setScreen({ kind: 'results', results: played, prompts: today.prompts, dateKey })}
                 >
                   See today's results
                 </button>
-                <p className="muted small center">
-                  Next dive in <Countdown />
-                </p>
-              </>
-            ) : (
-              <button className="btn btn--primary btn--block btn--big" onClick={() => setScreen({ kind: 'daily', dateKey })}>
-                {played.length || dive.saved?.startedAt
-                  ? `Continue dive (${played.length}/${ROUNDS_PER_DIVE})`
-                  : "Start today's dive"}
-              </button>
+              ) : (
+                <button
+                  className="btn btn--primary btn--block btn--big"
+                  onClick={() => setScreen({ kind: 'daily', dateKey, prompts: today.prompts })}
+                >
+                  {played.length || saved?.startedAt
+                    ? `Continue dive (${played.length}/${ROUNDS_PER_DIVE})`
+                    : "Start today's dive"}
+                </button>
+              ))}
+            {dailyDone && (
+              <p className="muted small center">
+                Next dive in <Countdown />
+              </p>
             )}
           </div>
 
@@ -210,10 +290,33 @@ export default function App() {
       {screen.kind === 'daily' && (
         <DailyGame
           dateKey={screen.dateKey}
+          prompts={screen.prompts}
           onComplete={(results) => recordDaily(screen.dateKey, results)}
-          onFinish={(results) => finishDaily(screen.dateKey, results)}
-          onQuit={() => setScreen({ kind: 'home' })}
+          onFinish={(results) => finishDaily(screen.dateKey, screen.prompts, results)}
+          onQuit={goHome}
         />
+      )}
+
+      {screen.kind === 'loading-unlimited' && (
+        <main className="home" aria-busy={!screen.failed}>
+          {screen.failed ? (
+            <>
+              <p className="home__status center" role="alert">
+                Couldn't load Unlimited. Check your connection and try again.
+              </p>
+              <button className="btn btn--primary btn--block" onClick={startUnlimited}>
+                Retry
+              </button>
+            </>
+          ) : (
+            <p className="home__status muted center" role="status">
+              Loading Unlimited…
+            </p>
+          )}
+          <button className="btn btn--ghost btn--block" onClick={goHome}>
+            Home
+          </button>
+        </main>
       )}
 
       {screen.kind === 'unlimited' && (
@@ -221,8 +324,8 @@ export default function App() {
           key={screen.round}
           title="Unlimited"
           prompts={screen.prompts}
-          onFinish={(results) => setScreen({ kind: 'results', results, dateKey: null })}
-          onQuit={() => setScreen({ kind: 'home' })}
+          onFinish={(results) => setScreen({ kind: 'results', results, prompts: screen.prompts, dateKey: null })}
+          onQuit={goHome}
         />
       )}
 
@@ -230,10 +333,11 @@ export default function App() {
         <Results
           title={screen.dateKey ? diveTitle(screen.dateKey) : 'Ulu Unlimited'}
           results={screen.results}
+          prompts={screen.prompts}
           stats={stats}
           isDaily={screen.dateKey !== null}
           dateKey={screen.dateKey}
-          onHome={() => setScreen({ kind: 'home' })}
+          onHome={goHome}
           onUnlimited={startUnlimited}
         />
       )}
@@ -245,27 +349,31 @@ export default function App() {
 
 interface DailyGameProps {
   dateKey: string
+  prompts: Prompt[]
   /** Called as soon as the last result is saved, so the dive counts even if the results screen is skipped */
   onComplete: (results: RoundResult[]) => void
   onFinish: (results: RoundResult[]) => void
   onQuit: () => void
 }
 
-/** The daily dive for one date; the prompts are fixed when it mounts so they can't change mid-dive */
-function DailyGame({ dateKey, onComplete, onFinish, onQuit }: DailyGameProps) {
-  const [dive] = useState(() => diveFor(dateKey))
+/**
+ * The daily dive for one date. Its prompts come with the screen, loaded before it started, so they can't change
+ * mid-dive. The saved progress is read once, when it mounts
+ */
+function DailyGame({ dateKey, prompts, onComplete, onFinish, onQuit }: DailyGameProps) {
+  const [saved] = useState(() => loadDaily(dateKey))
   return (
     <Game
       title={diveTitle(dateKey)}
-      prompts={dive.prompts}
+      prompts={prompts}
       reportDate={dateKey}
-      initialResults={dive.saved?.results ?? []}
-      initialStartedAt={dive.saved?.startedAt}
+      initialResults={saved?.results ?? []}
+      initialStartedAt={saved?.startedAt}
       onProgress={(results, startedAt) => {
-        saveDaily({ dateKey, promptIds: dive.prompts.map((p) => p.id), results, startedAt })
+        saveDaily({ dateKey, promptIds: prompts.map((p) => p.id), results, startedAt })
         // Round 1 starting is the only progress with no results and a start time, so this fires once per dive
         if (results.length === 0 && startedAt !== null) track('dive_started')
-        if (results.length >= dive.prompts.length) onComplete(results)
+        if (results.length >= prompts.length) onComplete(results)
       }}
       onFinish={onFinish}
       onQuit={onQuit}

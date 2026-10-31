@@ -1,12 +1,11 @@
 import { useState } from 'react'
 import { track } from '../analytics'
-import { promptById } from '../content'
 import { MAX_SCORE, MISS_EMOJI, TIER_INFO, destinationFor } from '../game/scoring'
 import { shareText, totalScore } from '../game/share'
 import { singaporeDateKey } from '../game/daily'
 import { UNLIMITED_DATE } from '../game/report'
 import { displayStreak, type Stats } from '../game/storage'
-import type { RoundResult } from '../game/types'
+import type { Prompt, RoundResult } from '../game/types'
 import { AllAnswers } from './AllAnswers'
 import { Countdown } from './Countdown'
 import { ProblemLinks, RejectedGuesses } from './Report'
@@ -15,6 +14,8 @@ import { RouteLine } from './RouteLine'
 interface Props {
   title: string
   results: RoundResult[]
+  /** The dive's prompts, for each row's text, gem, answer list and report links */
+  prompts: readonly Prompt[]
   stats?: Stats
   isDaily: boolean
   /** The daily dive's date, which is earlier than today if it was finished past midnight */
@@ -23,8 +24,9 @@ interface Props {
   onUnlimited: () => void
 }
 
-export function Results({ title, results, stats, isDaily, dateKey, onHome, onUnlimited }: Props) {
+export function Results({ title, results, prompts, stats, isDaily, dateKey, onHome, onUnlimited }: Props) {
   const [copied, setCopied] = useState(false)
+  const byId = new Map(prompts.map((p) => [p.id, p]))
   const score = totalScore(results)
   const destination = destinationFor(score)
   const reportDate = isDaily && dateKey ? dateKey : UNLIMITED_DATE
@@ -62,7 +64,7 @@ export function Results({ title, results, stats, isDaily, dateKey, onHome, onUnl
 
       <ol className="breakdown">
         {results.map((r) => {
-          const prompt = promptById(r.promptId)
+          const prompt = byId.get(r.promptId)
           const gem = prompt?.answers.find((a) => a.tier === 'gem')
           return (
             <li key={r.promptId} className={`breakdown__row ${r.tier ? `tier--${r.tier}` : 'verdict--miss'}`}>

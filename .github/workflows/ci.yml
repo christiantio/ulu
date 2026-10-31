@@ -32,3 +32,5 @@ jobs:
       # Also part of npm test; run on its own for a readable list of content problems
       - run: npm run validate
       - run: npm run build
+      # The entry JS stays under budget with no question data in it, and every scheduled day has its dive file
+      - run: npm run check:bundle

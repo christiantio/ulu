@@ -2,7 +2,7 @@
 import { cleanup, render, screen, within } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest'
-import { ALL_PROMPTS } from '../content'
+import { ALL_PROMPTS } from '../content/bank'
 import { mulberry32, shuffle } from '../game/daily'
 import { buildReportUrl } from '../game/report'
 import { TIER_INFO } from '../game/scoring'

@@ -22,7 +22,8 @@ are listed in `.env.example`. Copy it to `.env.local` if you need one locally.
 | `npm test` | Unit and component tests, plus content and schedule validation |
 | `npm run validate` | Content and schedule validation only, with a readable list of problems |
 | `npm run lint` | ESLint |
-| `npm run build` | Type-check (`tsc -b`) and build to `dist/` |
+| `npm run build` | Type-check (`tsc -b`) and build to `dist/`, including one `dives/<date>.json` per scheduled day |
+| `npm run check:bundle` | After a build: check the entry JS against its size budget, check it has no question data, and check every day's dive file is there |
 | `npm run schedule` | Extend the daily schedule (see [The daily schedule](#the-daily-schedule)) |
 | `npm run draft -- --category <category> "Name a …"` | Draft a prompt with Claude (needs `ANTHROPIC_API_KEY` or an `ant auth login` profile) |
 
@@ -52,8 +53,22 @@ from `.tool-versions` and runs, in order:
 3. `npm test`
 4. `npm run validate` (also part of `npm test`, but run on its own for a readable list of content problems)
 5. `npm run build` (which includes `tsc -b`)
+6. `npm run check:bundle`
 
-Run the same commands locally before you push. Note that one check depends on the calendar: the schedule has
+Run the same commands locally before you push.
+
+### The bundle check
+
+The first load should only download the app and today's prompts (see
+[ARCHITECTURE.md](ARCHITECTURE.md#loading-content)). `npm run check:bundle` reads `dist/` and prints the
+sizes. It fails if:
+
+- the entry JS is over its budget, 300 kB raw or 95 kB gzipped (`ENTRY_BUDGET` in `scripts/check-bundle.ts`);
+- any prompt id, prompt text or gem name is in the entry JS. That usually means something imported
+  `src/content/bank.ts` or `schedule.json` directly. Go through `loadBank()` instead;
+- a scheduled day has no `dives/<date>.json`, or the file doesn't match the schedule.
+
+If a feature really needs a bigger entry, raise the budget in the same PR and say why in the description. Note that one check depends on the calendar: the schedule has
 to reach 14 days past today, so CI can go red on a PR that didn't touch content. See below.
 
 ## Content PRs

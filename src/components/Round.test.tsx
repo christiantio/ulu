@@ -2,7 +2,7 @@
 import { act, cleanup, render, screen, within } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest'
-import { ALL_PROMPTS } from '../content'
+import { ALL_PROMPTS } from '../content/bank'
 import { matchAnswer } from '../game/match'
 import { SECONDS_PER_ROUND, TIER_INFO } from '../game/scoring'
 import type { Prompt, RoundResult, Tier } from '../game/types'

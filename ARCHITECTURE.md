@@ -47,18 +47,72 @@ src/
   content/
     packs/*.json     the question bank, one pack per category
     schedule.json    which prompts run on which day
-    index.ts         loads every pack at build time
+    index.ts         loadDive(date): fetches dives/<date>.json, falls back to the bank
+    bank.ts          every pack plus the schedule, a lazily loaded chunk (see "Loading content" below)
+    bank-loader.ts   loadBank(): the dynamic import of bank.ts
   components/        Game, Round, Reveal, Results, AllAnswers, Report, HowToPlay, RouteLine, Countdown,
                      PrivacyNote
   analytics.ts       optional cookie-less analytics: track(), score bands, script loader
-  App.tsx            screen routing (home / daily / unlimited / results)
+  App.tsx            screen routing (home / daily / unlimited / results), loading today's dive
+  test/dives.ts      test helper: a fetch stub that serves the dive files
 scripts/
   validate-content.ts   npm run validate
   schedule.ts           npm run schedule  (extend the daily schedule)
   draft-prompt.ts       npm run draft  (Claude-assisted drafting, offline)
   site-meta.ts          Vite plugin: absolute link-preview tags from VITE_SITE_URL
+  dives.ts              Vite plugin: one dives/<date>.json per scheduled day, built and served in dev
+  check-bundle.ts       npm run check:bundle  (entry size budget, no question data in the entry)
 design/                 SVG sources for the share image and the iOS icon, rendered into public/
 ```
+
+### Loading content
+
+The first visit downloads the app and today's prompts, and nothing else. The question bank and the schedule
+stay out of the entry chunk:
+
+| What | Where it comes from | When it loads |
+|---|---|---|
+| The app (entry chunk) | `dist/assets/index-<hash>.js` | First load. About 255 kB, 81 kB gzipped |
+| Today's prompts | `dist/dives/<date>.json`, the day's 7 full prompts in schedule order | First load, and again when the date rolls over. About 23–35 kB, 6–7 kB gzipped |
+| The bank (every pack plus `schedule.json`) | `dist/assets/bank-<hash>.js`, from `import('./bank')` | Only when Unlimited starts, when a date has no dive file, or when saved progress names prompts the day's file doesn't have. About 230 kB, 49 kB gzipped |
+
+- **The dive files.** `scripts/dives.ts` is a Vite plugin. At build time it emits `dives/<date>.json` for every
+  date in the schedule. In dev, middleware serves the same files from the current packs, so edits show up
+  without a restart, and answers a date that isn't scheduled with a 404. `vite preview` serves them from
+  `dist/` like any other file. The app fetches `${BASE_URL}dives/<date>.json`, so it works under a sub-path
+  base too.
+- **Today's dive on home.** The home card shows "Loading today's dive…" (`role="status"`, with `aria-busy` on
+  the card) until the file arrives. If the request fails (offline, or a server error), the card shows an error
+  with a **Retry** button instead. It doesn't download the bank in that case. A finished dive's score still
+  shows while the file loads, because it comes from `localStorage`. When the date rolls over, home fetches the
+  new day's file. A reply for a date that has already passed is ignored.
+- **A dive in progress keeps the prompts it started with.** They're stored in the screen state when the dive
+  starts, so a dive started before midnight finishes, and shows its results, with the prompts from the file it
+  loaded. It never needs a second fetch.
+- **Results.** `Results` gets the dive's prompts as a prop, whether that's the daily or an Unlimited set,
+  instead of looking them up in a global bank.
+- **A missing day.** A 404, or a 200 that isn't a dive file (some hosts, `vite preview` included, answer
+  unknown paths with `index.html`), loads the bank and uses `promptsForDate`. That gives the scheduled prompts
+  if the bank's schedule has the date, and the seeded fallback if not.
+- **Unlimited.** Unlimited downloads the bank the first time it starts, with a "Loading Unlimited…" screen
+  and Retry if that fails. After that it keeps the bank, so "Play again" starts at once. Today's prompts are
+  excluded using both the saved progress and the bank's schedule, so the exclusion holds even when today's
+  file didn't load.
+- **The size check.** `npm run check:bundle` runs after `npm run build`, locally and in CI. It fails if the
+  entry JS (the module script plus anything `index.html` preloads) is over budget: 300 kB raw, 95 kB gzipped,
+  set in `ENTRY_BUDGET`. It also fails if any prompt id, prompt text or gem name appears in the entry. Strings
+  the app's own source also uses (for example "ulu") can't tell anything, so they're skipped and listed. Last,
+  every scheduled date must have its dive file, matching the schedule. Before this change the entry was
+  482.5 kB (129.4 kB gzipped) with the whole bank inside, and the check fails on it.
+- **Spoilers.** This keeps answers out of the first load, but it doesn't hide them. Future days' files sit in
+  `dist/dives/` under guessable names. The bank chunk, whose URL is in the entry chunk, holds every prompt,
+  every answer and the whole schedule. Non-guessable dive file names (a content hash plus a manifest) would add
+  complexity and hide nothing. The manifest would have to list future names, and the bank already gives the
+  schedule away. Really hiding future days needs a server that only releases a day's file once that day has
+  started.
+- **Caching.** Dive files keep the same name when a content fix changes a day's answers, so a host that
+  caches `/dives/*` for a long time would delay the fix. Use the host's default (revalidate) for that path. The
+  hashed `assets/` files can be cached forever.
 
 ## How questions are created
 
@@ -90,7 +144,8 @@ Pipeline:
 3. **Validate.** `npm run validate` (also run in `npm test`) enforces: unique kebab-case ids, known
    category, ≥ 12 answers, ≥ 3 easy (common/trap/solid) answers, exactly one gem, and that no two answers share
    a normalised name or alias, which would make matching ambiguous.
-4. **Ship.** Move the prompt into `src/content/packs/<category>.json`. It is bundled at build time.
+4. **Ship.** Move the prompt into `src/content/packs/<category>.json`. At build time it goes into the dive files
+   of the days it's scheduled on and into the lazily loaded bank (see [Loading content](#loading-content)).
 
 Prompts favour **closed, verifiable sets** (stations on a line, Presidents, HDB towns) because they can be
 complete. Open sets (hawker dishes, Singlish words) carry long answer lists with spelling variants.
@@ -146,7 +201,8 @@ must match exactly, so `Bedk` won't become `Bedok` and abbreviations like `AMK` 
   got. Those days can repeat prompts early, which is why the repeat check skips past days: they can't be edited,
   and checking them would keep validation red for good.
 - The chosen prompt ids are also saved with the player's progress, so a content deploy mid-day doesn't swap
-  prompts under someone who has already started.
+  prompts under someone who has already started. If the day's file lists different ids from the saved ones,
+  the app loads the bank and resumes with the saved prompts.
 
 ## Fairness & persistence
 
@@ -164,8 +220,9 @@ must match exactly, so `Bedk` won't become `Bedok` and abbreviations like `AMK` 
 - With two tabs open across midnight, finishing the older dive last can't rewind the stats or overwrite the
   newer dive's progress: storage ignores a dive older than the last one recorded or saved.
 - All storage access is wrapped; private browsing just means nothing is remembered.
-- Answers ship in the client bundle. This is fine for a casual daily game (Wordle did the same); a backend
-  would be needed for verified leaderboards.
+- Answers ship to the client: today's in its dive file, the rest in the lazily loaded bank chunk. Future days
+  can still be read by anyone who looks (see [Loading content](#loading-content)). This is fine for a casual
+  daily game (Wordle did the same); a backend would be needed for verified leaderboards.
 
 ## Analytics
 

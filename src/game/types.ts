@@ -56,3 +56,10 @@ export interface RoundResult {
   tier: Tier | null
   points: number
 }
+
+/** One day's dive as the build emits it, at dives/<date>.json: that day's prompts in schedule order */
+export interface DiveFile {
+  /** The Singapore date, YYYY-MM-DD */
+  date: string
+  prompts: Prompt[]
+}

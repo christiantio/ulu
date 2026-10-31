@@ -1,7 +1,7 @@
 // @vitest-environment jsdom
 import { act, cleanup, fireEvent, render, screen, within } from '@testing-library/react'
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest'
-import { ALL_PROMPTS, SCHEDULE } from '../content'
+import { ALL_PROMPTS, SCHEDULE } from '../content/bank'
 import { buildReportUrl } from '../game/report'
 import { promptsForDate } from '../game/schedule'
 import { TIER_INFO } from '../game/scoring'
@@ -39,6 +39,7 @@ function renderResults(dateKey: string | null) {
     <Results
       title="Ulu #15"
       results={results}
+      prompts={prompts}
       stats={stats}
       isDaily={dateKey !== null}
       dateKey={dateKey}

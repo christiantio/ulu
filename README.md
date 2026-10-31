@@ -16,10 +16,15 @@ npm install
 npm run dev        # http://localhost:5173
 npm test           # unit tests + content validation
 npm run validate   # check the question bank and schedule only
-npm run build      # static build in dist/
+npm run build      # static build in dist/, with one dives/<date>.json per scheduled day
+npm run check:bundle   # after a build: entry size budget, and no question data in the entry
 ```
 
 Node version is pinned in `.tool-versions` (asdf).
+
+The first load only fetches the app and today's prompts (`dives/<date>.json`). The full question bank is a
+separate chunk that loads when Unlimited starts. Deploy all of `dist/`, `dives/` included. See
+[ARCHITECTURE.md](ARCHITECTURE.md#loading-content).
 
 ## Deploy settings
 
