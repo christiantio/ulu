@@ -16,7 +16,7 @@ npm run dev        # http://localhost:5173
 | Command | What it does |
 |---|---|
 | `npm run dev` | Local dev server |
-| `npm test` | Unit tests, plus content and schedule validation |
+| `npm test` | Unit and component tests, plus content and schedule validation |
 | `npm run validate` | Content and schedule validation only, with a readable list of problems |
 | `npm run lint` | ESLint |
 | `npm run build` | Type-check (`tsc -b`) and build to `dist/` |
