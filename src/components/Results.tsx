@@ -4,10 +4,12 @@ import { promptById } from '../content'
 import { MAX_SCORE, MISS_EMOJI, TIER_INFO, destinationFor } from '../game/scoring'
 import { shareText, totalScore } from '../game/share'
 import { singaporeDateKey } from '../game/daily'
+import { UNLIMITED_DATE } from '../game/report'
 import { displayStreak, type Stats } from '../game/storage'
 import type { RoundResult } from '../game/types'
 import { AllAnswers } from './AllAnswers'
 import { Countdown } from './Countdown'
+import { ProblemLinks, RejectedGuesses } from './Report'
 import { RouteLine } from './RouteLine'
 
 interface Props {
@@ -25,6 +27,7 @@ export function Results({ title, results, stats, isDaily, dateKey, onHome, onUnl
   const [copied, setCopied] = useState(false)
   const score = totalScore(results)
   const destination = destinationFor(score)
+  const reportDate = isDaily && dateKey ? dateKey : UNLIMITED_DATE
 
   const share = async () => {
     const text = shareText(results, title, window.location.origin)
@@ -85,7 +88,16 @@ export function Results({ title, results, stats, isDaily, dateKey, onHome, onUnl
               </span>
               {prompt && (
                 <div className="breakdown__more">
-                  <AllAnswers prompt={prompt} yours={r.answer} context={prompt.text} />
+                  <RejectedGuesses
+                    guesses={r.attempts}
+                    date={reportDate}
+                    promptId={prompt.id}
+                    context={`for ${prompt.text}`}
+                    compact
+                  />
+                  <AllAnswers prompt={prompt} yours={r.answer} context={prompt.text}>
+                    <ProblemLinks date={reportDate} promptId={prompt.id} context={`for ${prompt.text}`} />
+                  </AllAnswers>
                 </div>
               )}
             </li>

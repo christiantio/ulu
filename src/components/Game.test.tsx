@@ -19,7 +19,7 @@ function answerOf(p: Prompt, tier: Tier) {
 
 const result = (p: Prompt, tier: Tier): RoundResult => {
   const answer = answerOf(p, tier)
-  return { promptId: p.id, input: answer.name, answer: answer.name, tier, points: TIER_INFO[tier].points }
+  return { promptId: p.id, input: answer.name, attempts: [], answer: answer.name, tier, points: TIER_INFO[tier].points }
 }
 
 function setup(props: Partial<Parameters<typeof Game>[0]> = {}) {
@@ -80,7 +80,10 @@ describe('Game', () => {
     expect(pip('Round 2: Time up, 0 points')).toBeDefined()
     expect(onProgress).toHaveBeenCalledTimes(1)
     expect(onProgress).toHaveBeenCalledWith(
-      [result(prompts[0], 'common'), { promptId: prompts[1].id, input: '', answer: null, tier: null, points: 0 }],
+      [
+        result(prompts[0], 'common'),
+        { promptId: prompts[1].id, input: '', attempts: [], answer: null, tier: null, points: 0 },
+      ],
       null,
     )
     expect(onFinish).not.toHaveBeenCalled()

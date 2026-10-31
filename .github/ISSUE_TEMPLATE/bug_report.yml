@@ -6,7 +6,7 @@ body:
   - type: markdown
     attributes:
       value: |
-        Thanks for reporting! If the problem is with a prompt's answers or tiers, use the **Content correction** form instead.
+        Thanks for reporting! If the problem is with a prompt's answers or tiers, use the **Answer report** form instead.
   - type: textarea
     id: what-happened
     attributes:

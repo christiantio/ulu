@@ -33,6 +33,7 @@ All are optional, and local dev needs none of them.
 | `VITE_ANALYTICS_SRC` | `https://plausible.io/js/script.js` | The provider's script URL (Plausible's script, or Umami's `script.js`, hosted or self-hosted) |
 | `VITE_ANALYTICS_DOMAIN` | `ulu.sg` | The production hostname. Events are only sent from it (or `www.` it), so a preview deploy built with the same settings sends nothing. Also Plausible's site domain |
 | `VITE_ANALYTICS_WEBSITE_ID` | `6f9c2a1e-…` | Umami's website id. Required for Umami, unused by Plausible |
+| `VITE_REPORT_URL` | `https://tally.so/r/<form-id>?kind={kind}&…` | The player form for answer reports (see [Answer reports](#answer-reports)). Unset, report links open the team's GitHub issue form |
 
 Set the analytics variables on the **production** build only. All four are needed (three for Plausible), and
 analytics also stays off on the dev server (`npm run dev`) whatever they say.
@@ -105,6 +106,21 @@ New prompts only appear on days scheduled after they're added. Once a prompt is 
 rename it.
 
 See [ARCHITECTURE.md](ARCHITECTURE.md) for the design, the content pipeline, how rarity works and the roadmap.
+
+## Answer reports
+
+After each round, the reveal lists the player's rejected guesses with a "Should this count?" link. The results
+screen also has "An answer is wrong" and "A tier feels off" links for each prompt. Every link opens a form,
+prefilled with the dive date (or `unlimited`), the prompt id and the guesses. Set the form at build time:
+
+```bash
+# .env.local, or the host's build settings. See .env.example for the placeholders
+VITE_REPORT_URL='https://tally.so/r/<form-id>?kind={kind}&date={date}&prompt={prompt}&guesses={guesses}'
+```
+
+`{date}`, `{prompt}`, `{guesses}` and `{kind}` are URL-encoded when they're filled in, which works with Google
+Forms (`entry.N={…}`) and Tally prefill links. Without `VITE_REPORT_URL`, the links open the team's GitHub issue
+form ([answer-report.yml](.github/ISSUE_TEMPLATE/answer-report.yml)), which players without repo access can't use.
 
 ## Contributing
 

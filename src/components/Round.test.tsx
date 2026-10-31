@@ -64,6 +64,7 @@ describe('Round', () => {
     expect(onResult).toHaveBeenCalledWith({
       promptId: prompt.id,
       input: rare.name,
+      attempts: [],
       answer: rare.name,
       tier: 'rare',
       points: TIER_INFO.rare.points,
@@ -92,7 +93,43 @@ describe('Round', () => {
     const solid = answerOf(prompt, 'solid')
     await user.type(input(), `${solid.name}{Enter}`)
     expect(onResult).toHaveBeenCalledTimes(1)
-    expect(onResult).toHaveBeenCalledWith(expect.objectContaining({ answer: solid.name, tier: 'solid', points: 30 }))
+    expect(onResult).toHaveBeenCalledWith(
+      expect.objectContaining({ answer: solid.name, tier: 'solid', points: 30, attempts: [JUNK] }),
+    )
+  })
+
+  it('keeps every rejected guess once, by normalised text, and reports them on timeout', async () => {
+    const { onResult, user, input } = setup()
+    const other = 'qqzzyy xx'
+    expect(matchAnswer(other, prompt)).toBeNull()
+
+    await user.type(input(), `  ${JUNK}  {Enter}`)
+    await user.type(input(), `${other}{Enter}`)
+    // The same guesses again, in another case and with punctuation: not kept twice
+    await user.type(input(), `${JUNK.toUpperCase()}!{Enter}`)
+    await user.type(input(), `qqzzyy-xx{Enter}`)
+    // Typed but never submitted: stays in input, not attempts
+    await user.type(input(), 'half typ')
+    advance(SECONDS_PER_ROUND * 1000)
+
+    expect(onResult).toHaveBeenCalledTimes(1)
+    expect(onResult).toHaveBeenCalledWith({
+      promptId: prompt.id,
+      input: 'half typ',
+      attempts: [JUNK, other],
+      answer: null,
+      tier: null,
+      points: 0,
+    })
+  })
+
+  it('keeps guesses that normalise to nothing, compared as typed', async () => {
+    const { onResult, user, input } = setup()
+    await user.type(input(), '???{Enter}')
+    await user.type(input(), '!!!{Enter}')
+    await user.type(input(), '???{Enter}')
+    advance(SECONDS_PER_ROUND * 1000)
+    expect(onResult).toHaveBeenCalledWith(expect.objectContaining({ attempts: ['???', '!!!'] }))
   })
 
   it('does not submit an empty answer', async () => {
@@ -110,7 +147,14 @@ describe('Round', () => {
     expect(onResult).not.toHaveBeenCalled()
     advance(300)
     expect(onResult).toHaveBeenCalledTimes(1)
-    expect(onResult).toHaveBeenCalledWith({ promptId: prompt.id, input: 'half an answ', answer: null, tier: null, points: 0 })
+    expect(onResult).toHaveBeenCalledWith({
+      promptId: prompt.id,
+      input: 'half an answ',
+      attempts: [],
+      answer: null,
+      tier: null,
+      points: 0,
+    })
   })
 
   it('reports an empty input on timeout after a rejected answer was cleared', async () => {

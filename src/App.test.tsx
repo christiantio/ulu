@@ -25,6 +25,7 @@ const common = (p: Prompt) => p.answers.find((a) => a.tier === 'common')!
 const hit = (p: Prompt): RoundResult => ({
   promptId: p.id,
   input: common(p).name,
+  attempts: [],
   answer: common(p).name,
   tier: 'common',
   points: 10,
@@ -79,11 +80,14 @@ beforeEach(() => {
   localStorage.clear()
   localStorage.setItem('ulu:seen-help', 'true')
   setItem = vi.spyOn(Storage.prototype, 'setItem')
+  // Report links go to the GitHub issue form, whatever the local .env says
+  vi.stubEnv('VITE_REPORT_URL', '')
 })
 
 afterEach(() => {
   cleanup()
   vi.restoreAllMocks()
+  vi.unstubAllEnvs()
   vi.unstubAllGlobals()
   vi.useRealTimers()
 })
@@ -195,6 +199,39 @@ describe('App daily flow', () => {
     renderApp()
     expect(statsLine()).toBe('1 dives · 1 day streak · best 70')
     expect(statsWrites()).toBe(1)
+  })
+
+  it('resumes progress saved by a build without attempts, and saves them from then on (#9)', async () => {
+    // Written as an older build did: no attempts on the results
+    const old = today.slice(0, 2).map((p) => {
+      const { attempts: _, ...rest } = hit(p)
+      void _
+      return rest
+    })
+    localStorage.setItem(
+      'ulu:daily',
+      JSON.stringify({ dateKey: TODAY, promptIds: SCHEDULE[TODAY], results: old, startedAt: null }),
+    )
+    const { user } = renderApp()
+    await user.click(button('Continue dive (2/7)'))
+    expect(screen.getByText('Prompt 3 of 7')).toBeDefined()
+    await user.click(button('Go'))
+    expect(promptHeading()).toBe(today[2].text)
+    await user.type(screen.getByRole('textbox', { name: 'Your answer' }), 'zzqqxxjj{Enter}')
+    await user.type(screen.getByRole('textbox', { name: 'Your answer' }), `${common(today[2]).name}{Enter}`)
+    expect(read<DailyProgress>('ulu:daily')?.results).toEqual([
+      hit(today[0]),
+      hit(today[1]),
+      { ...hit(today[2]), attempts: ['zzqqxxjj'] },
+    ])
+    expect(screen.getByRole('list', { name: 'Not on our list' }).textContent).toBe('“zzqqxxjj”')
+
+    await user.click(button(/Next prompt/))
+    await playDive(user, today, 3)
+    await user.click(button('See results'))
+    expect(screen.getByRole('img', { name: '70 of 700 points, reached Raffles Place' })).toBeDefined()
+    const link = screen.getByRole('link', { name: /^Should this count\?/ })
+    expect(new URL(link.getAttribute('href')!).searchParams.get('dive')).toBe(TODAY)
   })
 
   it('records a finished dive that was saved without reaching the stats', () => {

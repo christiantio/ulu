@@ -1,9 +1,10 @@
 // @vitest-environment jsdom
-import { cleanup, render, within } from '@testing-library/react'
+import { cleanup, render, screen, within } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
-import { afterEach, describe, expect, it, vi } from 'vitest'
+import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest'
 import { ALL_PROMPTS } from '../content'
 import { mulberry32, shuffle } from '../game/daily'
+import { buildReportUrl } from '../game/report'
 import { TIER_INFO } from '../game/scoring'
 import { TIERS, type Prompt, type RoundResult, type Tier } from '../game/types'
 import { Reveal } from './Reveal'
@@ -19,20 +20,26 @@ function answerOf(p: Prompt, tier: Tier) {
 
 const hit = (tier: Tier): RoundResult => {
   const answer = answerOf(prompt, tier)
-  return { promptId: prompt.id, input: answer.name, answer: answer.name, tier, points: TIER_INFO[tier].points }
+  return { promptId: prompt.id, input: answer.name, attempts: [], answer: answer.name, tier, points: TIER_INFO[tier].points }
 }
-const miss: RoundResult = { promptId: prompt.id, input: '', answer: null, tier: null, points: 0 }
+const miss: RoundResult = { promptId: prompt.id, input: '', attempts: [], answer: null, tier: null, points: 0 }
 
-function renderReveal(result: RoundResult) {
+function renderReveal(result: RoundResult, reportDate?: string) {
   const onNext = vi.fn()
-  render(<Reveal prompt={prompt} result={result} isLast={false} onNext={onNext} />)
+  render(<Reveal prompt={prompt} result={result} isLast={false} reportDate={reportDate} onNext={onNext} />)
   const details = document.querySelector('details.all-answers') as HTMLDetailsElement
   return { onNext, details }
 }
 
+beforeEach(() => {
+  // No player form configured unless a test sets one, whatever the local .env says
+  vi.stubEnv('VITE_REPORT_URL', '')
+})
+
 afterEach(() => {
   cleanup()
   vi.restoreAllMocks()
+  vi.unstubAllEnvs()
 })
 
 describe('Reveal', () => {
@@ -106,5 +113,35 @@ describe('Reveal', () => {
     const { details } = renderReveal(miss)
     expect(details.querySelector('.all-answers__yours')).toBeNull()
     expect(within(details).queryByText(/your answer/)).toBeNull()
+  })
+
+  it('lists the rejected guesses and links to report them as a missing answer', () => {
+    const guesses = ['zzqq', 'Pulau Hantu & co']
+    renderReveal({ ...miss, attempts: guesses }, '2026-11-10')
+    const list = screen.getByRole('list', { name: 'Not on our list' })
+    expect(within(list).getAllByRole('listitem').map((li) => li.textContent)).toEqual(['“zzqq”', '“Pulau Hantu & co”'])
+
+    const link = screen.getByRole('link', { name: /^Should this count\?/ })
+    expect(link.getAttribute('href')).toBe(
+      buildReportUrl({ kind: 'missing', date: '2026-11-10', promptId: prompt.id, guesses }),
+    )
+    expect(new URL(link.getAttribute('href')!).searchParams.get('answer')).toBe('zzqq; Pulau Hantu & co')
+    expect(link.getAttribute('target')).toBe('_blank')
+    expect(link.getAttribute('rel')).toBe('noopener noreferrer')
+    expect(link.textContent).toContain('(opens in a new tab)')
+  })
+
+  it('shows no guesses or missing-answer link when nothing was rejected', () => {
+    renderReveal(hit('common'), '2026-11-10')
+    expect(screen.queryByRole('list', { name: 'Not on our list' })).toBeNull()
+    expect(screen.queryByRole('link', { name: /Should this count/ })).toBeNull()
+  })
+
+  it('offers wrong-answer and tier reports under the full list, dated "unlimited" without a dive date', () => {
+    const { details } = renderReveal(hit('common'))
+    const wrong = within(details).getByRole('link', { name: /^An answer is wrong/ })
+    const tier = within(details).getByRole('link', { name: /^A tier feels off/ })
+    expect(wrong.getAttribute('href')).toBe(buildReportUrl({ kind: 'wrong', date: 'unlimited', promptId: prompt.id }))
+    expect(tier.getAttribute('href')).toBe(buildReportUrl({ kind: 'tier', date: 'unlimited', promptId: prompt.id }))
   })
 })

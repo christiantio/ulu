@@ -1,8 +1,10 @@
 import { useEffect, useId, useMemo, useRef } from 'react'
 import { shuffle } from '../game/daily'
+import { UNLIMITED_DATE } from '../game/report'
 import { MISS_EMOJI, TIER_INFO } from '../game/scoring'
 import { TIERS, type Prompt, type RoundResult, type Tier } from '../game/types'
 import { AllAnswers } from './AllAnswers'
+import { ProblemLinks, RejectedGuesses } from './Report'
 
 const SAMPLES_PER_TIER = 3
 const DEEPEST_FIRST = [...TIERS].reverse().filter((t) => t !== 'gem')
@@ -11,11 +13,13 @@ interface Props {
   prompt: Prompt
   result: RoundResult
   isLast: boolean
+  /** The dive's date for reports, or "unlimited" */
+  reportDate?: string
   onNext: () => void
 }
 
 /** After a round: how the player did, the gem, and what else was possible */
-export function Reveal({ prompt, result, isLast, onNext }: Props) {
+export function Reveal({ prompt, result, isLast, reportDate = UNLIMITED_DATE, onNext }: Props) {
   const nextRef = useRef<HTMLButtonElement>(null)
   const verdictId = useId()
   useEffect(() => nextRef.current?.focus(), [])
@@ -64,6 +68,8 @@ export function Reveal({ prompt, result, isLast, onNext }: Props) {
         </div>
       </div>
 
+      <RejectedGuesses guesses={result.attempts} date={reportDate} promptId={prompt.id} />
+
       {gem && result.tier !== 'gem' && (
         <div className="gem">
           <span className="gem__label">
@@ -83,7 +89,9 @@ export function Reveal({ prompt, result, isLast, onNext }: Props) {
             <span className="samples__names">{names.join(', ')}</span>
           </div>
         ))}
-        <AllAnswers prompt={prompt} yours={result.answer} />
+        <AllAnswers prompt={prompt} yours={result.answer}>
+          <ProblemLinks date={reportDate} promptId={prompt.id} />
+        </AllAnswers>
       </div>
 
       {/* Focus lands here, so the verdict is read with it */}

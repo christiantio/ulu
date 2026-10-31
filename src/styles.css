@@ -524,6 +524,62 @@ h3 {
   white-space: nowrap;
 }
 
+/* Answer reports. Links are --brand (4.6:1+ on --bg and --surface in both themes); guesses are --text */
+.report-link {
+  color: var(--brand);
+  font-weight: 600;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+  border-radius: 4px;
+}
+.report-link:focus-visible {
+  outline: 3px solid var(--brand);
+  outline-offset: 2px;
+}
+.attempts {
+  font-size: 0.9rem;
+}
+.attempts__label {
+  margin: 0;
+  color: var(--muted);
+  font-weight: 600;
+}
+.attempts__list {
+  list-style: none;
+  padding: 0;
+  margin: 2px 0 4px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2px 12px;
+  overflow-wrap: anywhere;
+}
+.attempts--compact {
+  font-size: 0.85rem;
+  margin-bottom: 4px;
+}
+.attempts--compact .attempts__label,
+.attempts--compact .attempts__list {
+  display: inline;
+}
+.attempts--compact .attempts__label::after {
+  content: ': ';
+}
+.attempts--compact .attempts__list li {
+  display: inline;
+}
+.attempts--compact .attempts__list li + li::before {
+  content: ', ';
+}
+.attempts--compact .attempts__list::after {
+  content: ' · ';
+  color: var(--muted);
+}
+.report-problems {
+  margin: 8px 0 0;
+  color: var(--muted);
+  font-size: 0.85rem;
+}
+
 /* Route */
 .route {
   padding: 14px 4px 0;

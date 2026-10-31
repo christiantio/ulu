@@ -17,11 +17,22 @@ interface Props {
   onProgress?: (results: RoundResult[], startedAt: number | null) => void
   onFinish: (results: RoundResult[]) => void
   onQuit: () => void
+  /** The dive's date for answer reports, or "unlimited" */
+  reportDate?: string
 }
 
 type Phase = { kind: 'ready' } | { kind: 'playing'; startedAt: number } | { kind: 'reveal' }
 
-export function Game({ title, prompts, initialResults = [], initialStartedAt, onProgress, onFinish, onQuit }: Props) {
+export function Game({
+  title,
+  prompts,
+  initialResults = [],
+  initialStartedAt,
+  onProgress,
+  onFinish,
+  onQuit,
+  reportDate,
+}: Props) {
   const [results, setResults] = useState<RoundResult[]>(initialResults)
   const [phase, setPhase] = useState<Phase>(() =>
     initialStartedAt ? { kind: 'playing', startedAt: initialStartedAt } : { kind: 'ready' },
@@ -111,6 +122,7 @@ export function Game({ title, prompts, initialResults = [], initialStartedAt, on
           prompt={prompt}
           result={results[index]}
           isLast={results.length >= prompts.length}
+          reportDate={reportDate}
           onNext={handleNext}
         />
       )}

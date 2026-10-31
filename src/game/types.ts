@@ -46,6 +46,11 @@ export interface RoundResult {
   promptId: string
   /** What the player typed (empty if they ran out of time) */
   input: string
+  /**
+   * Every submitted guess that wasn't recognised, in order, deduplicated by normalised text. Not the text left
+   * in the box at the timeout, which is `input`. Progress saved before this field existed loads with `[]`
+   */
+  attempts: string[]
   /** Matched canonical answer name, or null for a miss */
   answer: string | null
   tier: Tier | null

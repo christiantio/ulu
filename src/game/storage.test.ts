@@ -17,6 +17,7 @@ const results = (points: number[]): RoundResult[] =>
   points.map((p, i) => ({
     promptId: `p${i}`,
     input: 'x',
+    attempts: [],
     answer: p ? 'x' : null,
     tier: p === 100 ? 'gem' : p ? 'solid' : null,
     points: p,
@@ -79,6 +80,31 @@ describe('saveDaily', () => {
     saveDaily(progress('2026-11-04', 7))
     saveDaily(progress('2026-11-05', 1))
     expect(loadDaily('2026-11-05')?.results).toHaveLength(1)
+  })
+
+  it('loads progress saved before rejected guesses were kept, with no attempts', () => {
+    const { attempts: _, ...old } = results([30])[0]
+    void _
+    localStorage.setItem(
+      'ulu:daily',
+      JSON.stringify({ dateKey: '2026-11-04', promptIds: ['a'], results: [old, { ...old, attempts: 'junk' }], startedAt: 5 }),
+    )
+    expect(loadDaily('2026-11-04')).toEqual({
+      dateKey: '2026-11-04',
+      promptIds: ['a'],
+      results: [
+        { ...old, attempts: [] },
+        { ...old, attempts: [] },
+      ],
+      startedAt: 5,
+    })
+  })
+
+  it('keeps saved attempts', () => {
+    const saved = progress('2026-11-04', 1)
+    saved.results[0].attempts = ['nope', 'nah']
+    saveDaily(saved)
+    expect(loadDaily('2026-11-04')?.results[0].attempts).toEqual(['nope', 'nah'])
   })
 
   it("doesn't overwrite a later day's progress with an earlier day's", () => {

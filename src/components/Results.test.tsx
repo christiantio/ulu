@@ -1,7 +1,8 @@
 // @vitest-environment jsdom
-import { act, cleanup, fireEvent, render, screen } from '@testing-library/react'
+import { act, cleanup, fireEvent, render, screen, within } from '@testing-library/react'
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest'
 import { ALL_PROMPTS, SCHEDULE } from '../content'
+import { buildReportUrl } from '../game/report'
 import { promptsForDate } from '../game/schedule'
 import { TIER_INFO } from '../game/scoring'
 import type { Stats } from '../game/storage'
@@ -12,10 +13,15 @@ import { Results } from './Results'
 const NOW = Date.parse('2026-11-10T04:00:00Z')
 const prompts = promptsForDate(ALL_PROMPTS, '2026-11-10', SCHEDULE)
 
+// Rejected guesses for round 1, with characters that need encoding
+const GUESSES = ['Pulau Hantu & co', 'Count On Me, Singapore']
+
 const results: RoundResult[] = prompts.map((p, i) => {
-  if (i === 0) return { promptId: p.id, input: 'nope', answer: null, tier: null, points: 0 }
+  if (i === 0) return { promptId: p.id, input: 'nope', attempts: GUESSES, answer: null, tier: null, points: 0 }
   const answer = p.answers.find((a) => a.tier === 'common')!
-  return { promptId: p.id, input: answer.name, answer: answer.name, tier: 'common', points: TIER_INFO.common.points }
+  // Round 2 locked in after one rejected guess
+  const attempts = i === 1 ? ['zzqq'] : []
+  return { promptId: p.id, input: answer.name, attempts, answer: answer.name, tier: 'common', points: TIER_INFO.common.points }
 })
 
 const stats: Stats = {
@@ -52,6 +58,8 @@ let stubbed: string[] = []
 beforeEach(() => {
   vi.useFakeTimers({ shouldAdvanceTime: false })
   vi.setSystemTime(NOW)
+  // No player form configured unless a test sets one, whatever the local .env says
+  vi.stubEnv('VITE_REPORT_URL', '')
 })
 
 afterEach(() => {
@@ -59,8 +67,11 @@ afterEach(() => {
   for (const key of stubbed) delete (navigator as unknown as Record<string, unknown>)[key]
   stubbed = []
   vi.unstubAllGlobals()
+  vi.unstubAllEnvs()
   vi.useRealTimers()
 })
+
+const row = (i: number) => screen.getByText(prompts[i].text).closest('li')!
 
 describe('Results', () => {
   it('shows the score, destination and each prompt with its gem', () => {
@@ -97,6 +108,69 @@ describe('Results', () => {
       const marked = [...details.querySelectorAll('.all-answers__yours')].map((li) => li.firstChild!.textContent)
       expect(marked).toEqual(results[i].answer ? [results[i].answer] : [])
     }
+  })
+
+  it("shows each prompt's rejected guesses with a link to report them as a missing answer", () => {
+    renderResults('2026-11-10')
+    const guesses = within(row(0)).getByRole('list', { name: 'Not on our list' })
+    expect(within(guesses).getAllByRole('listitem').map((li) => li.textContent)).toEqual(GUESSES.map((g) => `“${g}”`))
+
+    const link = within(row(0)).getByRole('link', { name: /^Should this count\?/ })
+    expect(link.textContent).toContain(`for ${prompts[0].text}`)
+    expect(link.textContent).toContain('(opens in a new tab)')
+    expect(link.getAttribute('target')).toBe('_blank')
+    expect(link.getAttribute('rel')).toBe('noopener noreferrer')
+    const href = link.getAttribute('href')!
+    expect(href).toBe(buildReportUrl({ kind: 'missing', date: '2026-11-10', promptId: prompts[0].id, guesses: GUESSES }))
+    // The team's GitHub issue form, prefilled
+    const url = new URL(href)
+    expect(url.origin + url.pathname).toBe('https://github.com/christiantio/ulu/issues/new')
+    expect(Object.fromEntries(url.searchParams)).toMatchObject({
+      template: 'answer-report.yml',
+      kind: 'Missing answer',
+      prompt: prompts[0].id,
+      dive: '2026-11-10',
+      answer: 'Pulau Hantu & co; Count On Me, Singapore',
+    })
+
+    // A round that locked in after a rejected guess still shows it
+    expect(within(within(row(1)).getByRole('list', { name: 'Not on our list' })).getByText('“zzqq”')).toBeDefined()
+    // No guesses, no list or link
+    expect(within(row(2)).queryByRole('list', { name: 'Not on our list' })).toBeNull()
+    expect(within(row(2)).queryByRole('link', { name: /Should this count/ })).toBeNull()
+  })
+
+  it('offers wrong-answer and tier reports for every prompt', () => {
+    renderResults('2026-11-10')
+    for (const [i, p] of prompts.entries()) {
+      const wrong = within(row(i)).getByRole('link', { name: /^An answer is wrong/ })
+      const tier = within(row(i)).getByRole('link', { name: /^A tier feels off/ })
+      expect(wrong.getAttribute('href')).toBe(buildReportUrl({ kind: 'wrong', date: '2026-11-10', promptId: p.id }))
+      expect(tier.getAttribute('href')).toBe(buildReportUrl({ kind: 'tier', date: '2026-11-10', promptId: p.id }))
+      expect(new URL(tier.getAttribute('href')!).searchParams.get('kind')).toBe('Tier feels off')
+      for (const link of [wrong, tier]) {
+        expect(link.getAttribute('target')).toBe('_blank')
+        expect(link.textContent).toContain('(opens in a new tab)')
+      }
+    }
+  })
+
+  it('reports Unlimited games as "unlimited"', () => {
+    renderResults(null)
+    const href = within(row(0)).getByRole('link', { name: /^Should this count\?/ }).getAttribute('href')!
+    expect(new URL(href).searchParams.get('dive')).toBe('unlimited')
+    const wrong = within(row(3)).getByRole('link', { name: /^An answer is wrong/ }).getAttribute('href')!
+    expect(new URL(wrong).searchParams.get('dive')).toBe('unlimited')
+  })
+
+  it('links to the player form when VITE_REPORT_URL is set', () => {
+    vi.stubEnv('VITE_REPORT_URL', 'https://tally.so/r/ulu?date={date}&prompt={prompt}&guesses={guesses}&kind={kind}')
+    renderResults('2026-11-10')
+    const href = within(row(0)).getByRole('link', { name: /^Should this count\?/ }).getAttribute('href')
+    expect(href).toBe(
+      `https://tally.so/r/ulu?date=2026-11-10&prompt=${prompts[0].id}` +
+        '&guesses=Pulau%20Hantu%20%26%20co%3B%20Count%20On%20Me%2C%20Singapore&kind=Missing%20answer',
+    )
   })
 
   it("counts down to the next dive when the dive is today's", () => {

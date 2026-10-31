@@ -1,5 +1,6 @@
 import { useEffect, useId, useRef, useState, type FormEvent } from 'react'
 import { matchAnswer } from '../game/match'
+import { normalize } from '../game/normalize'
 import { SECONDS_PER_ROUND, TIER_INFO } from '../game/scoring'
 import type { Prompt, RoundResult } from '../game/types'
 
@@ -28,6 +29,8 @@ export function Round({ prompt, deadline, onResult }: Props) {
   // Keep the latest input for the timeout handler without restarting the timer
   const lastInput = useRef('')
   lastInput.current = input
+  // Every unrecognised guess, kept in a ref so the timeout handler sees the latest list
+  const attempts = useRef<string[]>([])
 
   const finish = (result: RoundResult) => {
     if (done.current) return
@@ -40,7 +43,14 @@ export function Round({ prompt, deadline, onResult }: Props) {
       const left = Math.max(0, deadline - Date.now())
       setRemaining(left)
       if (left === 0) {
-        finish({ promptId: prompt.id, input: lastInput.current.trim(), answer: null, tier: null, points: 0 })
+        finish({
+          promptId: prompt.id,
+          input: lastInput.current.trim(),
+          attempts: attempts.current,
+          answer: null,
+          tier: null,
+          points: 0,
+        })
       }
     }
     tick()
@@ -55,6 +65,10 @@ export function Round({ prompt, deadline, onResult }: Props) {
     if (!guess || done.current) return
     const match = matchAnswer(guess, prompt)
     if (!match) {
+      // One entry per distinct guess: "Bedok" and "bedok!" count once. Text that normalises to nothing (e.g. only
+      // Chinese characters) is compared as typed
+      const key = (text: string) => normalize(text) || text.toLowerCase()
+      if (!attempts.current.some((a) => key(a) === key(guess))) attempts.current = [...attempts.current, guess]
       setRejected(guess)
       setShake((n) => n + 1)
       setInput('')
@@ -65,6 +79,7 @@ export function Round({ prompt, deadline, onResult }: Props) {
     finish({
       promptId: prompt.id,
       input: guess,
+      attempts: attempts.current,
       answer: answer.name,
       tier: answer.tier,
       points: TIER_INFO[answer.tier].points,

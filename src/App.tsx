@@ -258,6 +258,7 @@ function DailyGame({ dateKey, onComplete, onFinish, onQuit }: DailyGameProps) {
     <Game
       title={diveTitle(dateKey)}
       prompts={dive.prompts}
+      reportDate={dateKey}
       initialResults={dive.saved?.results ?? []}
       initialStartedAt={dive.saved?.startedAt}
       onProgress={(results, startedAt) => {

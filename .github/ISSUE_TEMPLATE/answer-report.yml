@@ -1,11 +1,13 @@
-name: Content correction
+# The app links here, prefilled, when VITE_REPORT_URL isn't set (src/game/report.ts). It fills the fields by id
+# (?kind=…&prompt=…&dive=…&answer=…), so keep these ids, and keep the "kind" options equal to REPORT_KINDS there.
+name: Answer report
 description: A missing answer, a wrong answer, or a tier that feels off.
 title: "Content: "
 body:
   - type: markdown
     attributes:
       value: |
-        Thanks! One prompt per report, please. Heads up: issues are public, so this may spoil the prompt for anyone who hasn't played it yet.
+        Thanks! One prompt per report, please. Heads up: anyone who can see this repo can read the report, so it may spoil the prompt for people who haven't played it yet.
   - type: dropdown
     id: kind
     attributes:
@@ -28,13 +30,13 @@ body:
     id: dive
     attributes:
       label: Dive date
-      description: The Singapore date (YYYY-MM-DD) or the number from the share text (e.g. "Ulu #3"). Write "Unlimited" if it came up in Unlimited.
-      placeholder: "2026-10-31, Ulu #5 or Unlimited"
+      description: The Singapore date (YYYY-MM-DD) or the number from the share text (e.g. "Ulu #3"). Write "unlimited" if it came up in Unlimited.
+      placeholder: "2026-10-31, Ulu #5 or unlimited"
   - type: input
     id: answer
     attributes:
       label: The answer
-      description: What you typed, or the answer you're reporting.
+      description: What you typed, or the answer you're reporting. Separate several with semicolons.
       placeholder: "Bras Basah"
     validations:
       required: true

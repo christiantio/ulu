@@ -42,12 +42,14 @@ src/
     schedule.ts      frozen daily schedule: lookup, append-only extension, checks, unlimited pool
     storage.ts       localStorage progress + stats (fails safe)
     share.ts         share text
+    report.ts        answer report links (VITE_REPORT_URL or the GitHub issue form)
     validate.ts      content rules, shared by tests and scripts
   content/
     packs/*.json     the question bank, one pack per category
     schedule.json    which prompts run on which day
     index.ts         loads every pack at build time
-  components/        Game, Round, Reveal, Results, HowToPlay, RouteLine, Countdown, PrivacyNote
+  components/        Game, Round, Reveal, Results, AllAnswers, Report, HowToPlay, RouteLine, Countdown,
+                     PrivacyNote
   analytics.ts       optional cookie-less analytics: track(), score bands, script loader
   App.tsx            screen routing (home / daily / unlimited / results)
 scripts/
@@ -102,6 +104,12 @@ complete. Open sets (hawker dishes, Singlish words) carry long answer lists with
   Editorial tiers then become the cold-start prior, and `trap` can be detected automatically as "listed
   as rare but heavily picked". Unrecognised inputs that many players type are a review queue for missing
   answers.
+- **Until then: player reports.** Every rejected guess is kept on the round result (`attempts`, deduplicated
+  by normalised text). The reveal and the results screen list them with a "Should this count?" link, and each
+  prompt on the results screen can be reported as having a wrong answer or a tier that feels off. The links
+  open a form prefilled with the dive date (`unlimited` for Unlimited), prompt id and guesses: the player form
+  set at build time with `VITE_REPORT_URL`, or the GitHub issue form `answer-report.yml` without it (see
+  [CONTRIBUTING.md](CONTRIBUTING.md#answer-reports-from-players)). None of this goes in the share text.
 
 ## Answer matching
 
@@ -144,6 +152,8 @@ must match exactly, so `Bedk` won't become `Bedok` and abbreviations like `AMK` 
 - Progress (prompt ids, results and the start time of the current round) is stored in `localStorage` after
   every round start and end. Reloading mid-round resumes with the **same deadline**, so you can't refresh to
   peek at a prompt and reset the clock.
+- Progress saved by a build from before rejected guesses were kept has no `attempts`; `loadDaily` fills in `[]`,
+  so it still loads and resumes.
 - Stats (played, streak, best, gems) update once per Singapore day, as soon as the last answer is saved, so
   leaving or reloading before the results screen still counts the dive. The shown streak drops to 0 once a whole
   day passes without a dive.

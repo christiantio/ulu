@@ -13,6 +13,9 @@ npm ci             # install exactly what's in package-lock.json
 npm run dev        # http://localhost:5173
 ```
 
+Build-time settings (only `VITE_REPORT_URL` so far, see [Answer reports from players](#answer-reports-from-players))
+are listed in `.env.example`. Copy it to `.env.local` if you need one locally.
+
 | Command | What it does |
 |---|---|
 | `npm run dev` | Local dev server |
@@ -104,6 +107,30 @@ Use the issue forms:
 
 - **Bug report**: something in the app is broken.
 - **Prompt idea**: a prompt you'd like to see (or write).
-- **Content correction**: a missing answer, a wrong answer, or a tier that feels off.
+- **Answer report** (`answer-report.yml`): a missing answer, a wrong answer, or a tier that feels off.
 
-> **TODO (team):** decide who triages bug reports, prompt ideas and content corrections, and how often.
+### Answer reports from players
+
+Players report answers from inside the game. The reveal lists their rejected guesses with a "Should this
+count?" link (a missing answer). Each prompt on the results screen has "An answer is wrong" and "A tier feels
+off" links. Each link opens a form prefilled with the dive date (`unlimited` for Unlimited), the prompt id and,
+for a missing answer, the guesses separated by `; `.
+
+Most players don't have GitHub, so the player form is a Google Form or Tally form, set at build time with
+`VITE_REPORT_URL`:
+
+- It's a prefill URL with `{date}`, `{prompt}`, `{guesses}` and `{kind}` placeholders. Each one is URL-encoded
+  when it's filled in. `.env.example` has examples for both services.
+- `{kind}` becomes `Missing answer`, `Wrong answer` or `Tier feels off`. Make the form's choices exactly these,
+  because both services prefill a choice by its text.
+- Set it in the host's build settings for production. Locally, put it in `.env.local` (git-ignored), not `.env`.
+- Without it, the links open `answer-report.yml` on GitHub, prefilled through its field ids (`kind`, `prompt`,
+  `dive`, `answer`). That's fine for the team, but players without repo access can't use it. If you change
+  those ids or the `kind` options, update `src/game/report.ts` to match.
+
+The URL is built in `src/game/report.ts` and tested in `report.test.ts`. A fix that comes out of a report is an
+ordinary content PR (see [Content PRs](#content-prs)).
+
+> **TODO (team):** decide who triages bug reports, prompt ideas and answer reports (the GitHub form and the
+> player form's responses), and how often. Also create the player form and set `VITE_REPORT_URL` in the
+> production build. Later, the backend (#17) can collect rejected guesses automatically.

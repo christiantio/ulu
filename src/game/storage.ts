@@ -55,10 +55,21 @@ function write(key: string, value: unknown): void {
   }
 }
 
+/** A saved round result, as older builds may have written it */
+type StoredRoundResult = Omit<RoundResult, 'attempts'> & { attempts?: unknown }
+
 /** Today's saved progress, or null if the saved dive is from another day */
 export function loadDaily(dateKey: string): DailyProgress | null {
-  const saved = read<DailyProgress>(DAILY_KEY)
-  return saved?.dateKey === dateKey ? saved : null
+  const saved = read<Omit<DailyProgress, 'results'> & { results: StoredRoundResult[] }>(DAILY_KEY)
+  if (saved?.dateKey !== dateKey) return null
+  // Results saved before rejected guesses were kept have no attempts
+  const results = (Array.isArray(saved.results) ? saved.results : []).map(
+    (r): RoundResult => ({
+      ...r,
+      attempts: Array.isArray(r.attempts) ? r.attempts.filter((a): a is string => typeof a === 'string') : [],
+    }),
+  )
+  return { ...saved, results }
 }
 
 /**

@@ -237,15 +237,17 @@ describe('scoring and sharing', () => {
   it('builds a spoiler-free share string', () => {
     const text = shareText(
       [
-        { promptId: 'a', input: 'x', answer: 'Bukit Timah', tier: 'gem', points: 100 },
-        { promptId: 'b', input: '', answer: null, tier: null, points: 0 },
-        { promptId: 'c', input: 'amk', answer: 'Ang Mo Kio', tier: 'common', points: 10 },
+        { promptId: 'a', input: 'x', attempts: ['Holland Village'], answer: 'Bukit Timah', tier: 'gem', points: 100 },
+        { promptId: 'b', input: '', attempts: ['Sentosa Cove'], answer: null, tier: null, points: 0 },
+        { promptId: 'c', input: 'amk', attempts: [], answer: 'Ang Mo Kio', tier: 'common', points: 10 },
       ],
       'Ulu #3',
       'https://ulu.sg',
     )
     expect(text).toBe('Ulu #3 🇸🇬 110/700\n💎❌⚪\nReached Bishan\nhttps://ulu.sg')
     expect(text).not.toContain('Timah')
+    // Nor the rejected guesses
+    expect(text).not.toMatch(/Holland|Sentosa/)
   })
 })
 
