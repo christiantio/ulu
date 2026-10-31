@@ -31,7 +31,7 @@ if (!idea || !category || !CATEGORIES.includes(category)) {
 }
 
 const DraftSchema = z.object({
-  id: z.string().describe('kebab-case id, e.g. "circle-line-stations"'),
+  id: z.string().describe('kebab-case id as <category>-<topic>, e.g. "transport-ccl-stations"'),
   text: z.string().describe('The prompt shown to players'),
   note: z.string().optional().describe('Optional rule clarification, e.g. "As of October 2026"'),
   answers: z.array(

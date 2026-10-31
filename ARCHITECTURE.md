@@ -60,7 +60,7 @@ Questions are **curated data, not generated at runtime**. A prompt is a JSON obj
 
 ```json
 {
-  "id": "circle-line-stations",
+  "id": "transport-ccl-stations",
   "category": "transport",
   "text": "Name a station on the Circle Line",
   "note": "As of October 2026",
