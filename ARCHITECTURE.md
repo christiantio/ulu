@@ -132,7 +132,8 @@ must match exactly, so `Bedk` won't become `Bedok` and abbreviations like `AMK` 
 - Progress (prompt ids, results and the start time of the current round) is stored in `localStorage` after
   every round start and end. Reloading mid-round resumes with the **same deadline**, so you can't refresh to
   peek at a prompt and reset the clock.
-- Stats (played, streak, best, gems) update once per Singapore day. The shown streak drops to 0 once a whole
+- Stats (played, streak, best, gems) update once per Singapore day, as soon as the last answer is saved, so
+  leaving or reloading before the results screen still counts the dive. The shown streak drops to 0 once a whole
   day passes without a dive.
 - The home screen moves to the new dive at Singapore midnight, and checks the date again whenever the tab comes
   back into view (phones often keep a tab open overnight). A dive in progress at midnight can still be finished:

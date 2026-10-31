@@ -88,10 +88,22 @@ export default function App() {
     setScreen({ kind: 'unlimited', prompts, round: unlimitedRound + 1 })
   }
 
+  /** Fold a finished dive into the stats. Safe to call more than once: recordDive ignores repeats */
+  const recordDaily = (diveDate: string, results: RoundResult[]) => setStats(recordDive(diveDate, results))
+
   const finishDaily = (diveDate: string, results: RoundResult[]) => {
-    setStats(recordDive(diveDate, results))
+    recordDaily(diveDate, results)
     setScreen({ kind: 'results', results, dateKey: diveDate })
   }
+
+  // Backstop for a finished dive that never reached the stats, e.g. progress saved by an older build that only
+  // recorded the dive from the results screen. Reads storage itself so it only depends on primitives
+  const unrecorded = screen.kind === 'home' && dailyDone && (stats.lastPlayed === null || stats.lastPlayed < dateKey)
+  useEffect(() => {
+    if (!unrecorded) return
+    const saved = loadDaily(dateKey)
+    if (saved) setStats(recordDive(dateKey, saved.results))
+  }, [unrecorded, dateKey])
 
   if (ALL_PROMPTS.length === 0) {
     return (
@@ -167,6 +179,7 @@ export default function App() {
       {screen.kind === 'daily' && (
         <DailyGame
           dateKey={screen.dateKey}
+          onComplete={(results) => recordDaily(screen.dateKey, results)}
           onFinish={(results) => finishDaily(screen.dateKey, results)}
           onQuit={() => setScreen({ kind: 'home' })}
         />
@@ -200,12 +213,14 @@ export default function App() {
 
 interface DailyGameProps {
   dateKey: string
+  /** Called as soon as the last result is saved, so the dive counts even if the results screen is skipped */
+  onComplete: (results: RoundResult[]) => void
   onFinish: (results: RoundResult[]) => void
   onQuit: () => void
 }
 
 /** The daily dive for one date; the prompts are fixed when it mounts so they can't change mid-dive */
-function DailyGame({ dateKey, onFinish, onQuit }: DailyGameProps) {
+function DailyGame({ dateKey, onComplete, onFinish, onQuit }: DailyGameProps) {
   const [dive] = useState(() => diveFor(dateKey))
   return (
     <Game
@@ -213,9 +228,10 @@ function DailyGame({ dateKey, onFinish, onQuit }: DailyGameProps) {
       prompts={dive.prompts}
       initialResults={dive.saved?.results ?? []}
       initialStartedAt={dive.saved?.startedAt}
-      onProgress={(results, startedAt) =>
+      onProgress={(results, startedAt) => {
         saveDaily({ dateKey, promptIds: dive.prompts.map((p) => p.id), results, startedAt })
-      }
+        if (results.length >= dive.prompts.length) onComplete(results)
+      }}
       onFinish={onFinish}
       onQuit={onQuit}
     />
