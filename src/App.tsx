@@ -1,7 +1,9 @@
 import { useEffect, useRef, useState } from 'react'
+import { scoreBucket, track } from './analytics'
 import { Countdown } from './components/Countdown'
 import { Game } from './components/Game'
 import { HowToPlay } from './components/HowToPlay'
+import { PrivacyNote } from './components/PrivacyNote'
 import { Results } from './components/Results'
 import { ALL_PROMPTS, SCHEDULE, promptById } from './content'
 import { diveNumber, msUntilNextDive, singaporeDateKey } from './game/daily'
@@ -71,6 +73,7 @@ export default function App() {
   const helpButton = useRef<HTMLButtonElement>(null)
   const helpWasOpen = useRef(showHelp)
   const [lastUnlimited, setLastUnlimited] = useState<string[]>([])
+  const completedDives = useRef(new Set<string>())
 
   const dateKey = useSingaporeDateKey()
   const dive = diveFor(dateKey)
@@ -84,6 +87,11 @@ export default function App() {
     else if (helpWasOpen.current && document.activeElement === document.body) helpButton.current?.focus()
   }, [showHelp])
 
+  const openHelp = () => {
+    setShowHelp(true)
+    track('howto_opened')
+  }
+
   const closeHelp = () => {
     markHelpSeen()
     setShowHelp(false)
@@ -95,10 +103,20 @@ export default function App() {
     setLastUnlimited(prompts.map((p) => p.id))
     setUnlimitedRound((n) => n + 1)
     setScreen({ kind: 'unlimited', prompts, round: unlimitedRound + 1 })
+    track('unlimited_started')
   }
 
   /** Fold a finished dive into the stats. Safe to call more than once: recordDive ignores repeats */
-  const recordDaily = (diveDate: string, results: RoundResult[]) => setStats(recordDive(diveDate, results))
+  const recordDaily = (diveDate: string, results: RoundResult[]) => {
+    const played = loadStats().played
+    const next = recordDive(diveDate, results)
+    setStats(next)
+    // Counted once per dive: only when it reached the stats, and only once per session in case storage is blocked
+    if (next.played > played && !completedDives.current.has(diveDate)) {
+      completedDives.current.add(diveDate)
+      track('dive_completed', { score: scoreBucket(totalScore(results)) })
+    }
+  }
 
   const finishDaily = (diveDate: string, results: RoundResult[]) => {
     recordDaily(diveDate, results)
@@ -174,7 +192,7 @@ export default function App() {
             <button className="btn btn--secondary btn--block" onClick={startUnlimited}>
               <span aria-hidden="true">∞</span> Unlimited
             </button>
-            <button ref={helpButton} className="btn btn--ghost btn--block" onClick={() => setShowHelp(true)}>
+            <button ref={helpButton} className="btn btn--ghost btn--block" onClick={openHelp}>
               How to play
             </button>
           </div>
@@ -184,6 +202,8 @@ export default function App() {
               {stats.played} dives · {displayStreak(stats, dateKey)} day streak · best {stats.bestScore}
             </p>
           )}
+
+          <PrivacyNote />
         </main>
       )}
 
@@ -242,6 +262,8 @@ function DailyGame({ dateKey, onComplete, onFinish, onQuit }: DailyGameProps) {
       initialStartedAt={dive.saved?.startedAt}
       onProgress={(results, startedAt) => {
         saveDaily({ dateKey, promptIds: dive.prompts.map((p) => p.id), results, startedAt })
+        // Round 1 starting is the only progress with no results and a start time, so this fires once per dive
+        if (results.length === 0 && startedAt !== null) track('dive_started')
         if (results.length >= dive.prompts.length) onComplete(results)
       }}
       onFinish={onFinish}

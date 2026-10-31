@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { track } from '../analytics'
 import { promptById } from '../content'
 import { MAX_SCORE, MISS_EMOJI, TIER_INFO, destinationFor } from '../game/scoring'
 import { shareText, totalScore } from '../game/share'
@@ -28,9 +29,11 @@ export function Results({ title, results, stats, isDaily, dateKey, onHome, onUnl
     const text = shareText(results, title, window.location.origin)
     try {
       if (navigator.share && matchMedia('(pointer: coarse)').matches) {
+        track('share_tapped', { method: 'share' })
         await navigator.share({ text })
         return
       }
+      track('share_tapped', { method: 'copy' })
       await navigator.clipboard.writeText(text)
       setCopied(true)
       window.setTimeout(() => setCopied(false), 2000)

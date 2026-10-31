@@ -346,3 +346,97 @@ describe('streak display (#8)', () => {
     expect(statsLine()).toBe('5 dives · 5 day streak · best 300')
   })
 })
+
+describe('analytics (#16)', () => {
+  let plausible = vi.fn<(event: string, options?: { props?: Record<string, string> }) => void>()
+  const events = (name: string) => plausible.mock.calls.filter(([event]) => event === name)
+
+  beforeEach(() => {
+    // A production build with Plausible on this host (jsdom's is localhost)
+    vi.stubEnv('DEV', false)
+    vi.stubEnv('VITE_ANALYTICS_PROVIDER', 'plausible')
+    vi.stubEnv('VITE_ANALYTICS_SRC', 'https://plausible.io/js/script.js')
+    vi.stubEnv('VITE_ANALYTICS_DOMAIN', 'localhost')
+    plausible = vi.fn()
+    vi.stubGlobal('plausible', plausible)
+  })
+
+  afterEach(() => {
+    vi.unstubAllEnvs()
+  })
+
+  it('counts a finished daily once, with only its score band', async () => {
+    const { user, unmount } = renderApp()
+    await user.click(button("Start today's dive"))
+    await playDive(user, today)
+    expect(events('dive_started')).toHaveLength(1)
+    expect(events('dive_completed')).toEqual([['dive_completed', { props: { score: '0-99' } }]])
+
+    // Seeing the results records the dive again, and so does the home screen after a reload; neither counts
+    await user.click(button('See results'))
+    await user.click(button('Home'))
+    unmount()
+    renderApp()
+    expect(events('dive_started')).toHaveLength(1)
+    expect(events('dive_completed')).toHaveLength(1)
+
+    // Nothing the player typed, and no prompt ids
+    const sent = JSON.stringify(plausible.mock.calls)
+    for (const p of today) {
+      expect(sent).not.toContain(common(p).name)
+      expect(sent).not.toContain(p.id)
+    }
+  })
+
+  it('counts a finished daily once even when storage is blocked and every record looks new', async () => {
+    setItem.mockImplementation(() => {
+      throw new Error('blocked')
+    })
+    const { user } = renderApp()
+    await user.click(button("Start today's dive"))
+    await playDive(user, today)
+    await user.click(button('See results'))
+    expect(screen.getByText('Ulu #15')).toBeDefined()
+    expect(events('dive_completed')).toHaveLength(1)
+  })
+
+  it('counts Unlimited, How to play and Share, and says what it measures', async () => {
+    const { user } = renderApp()
+    expect(screen.getByText('No cookies, no tracking of what you type.', { exact: false })).toBeDefined()
+    expect(screen.getByText(/We count visits and a few anonymous events with Plausible/)).toBeDefined()
+
+    await user.click(button('How to play'))
+    await user.click(button("Can, let's go"))
+    expect(events('howto_opened')).toHaveLength(1)
+
+    await user.click(button(/Unlimited/))
+    expect(events('unlimited_started')).toHaveLength(1)
+    for (let i = 0; i < 7; i++) {
+      await user.click(button(/^(Start dive|Go)$/))
+      advance(SECONDS_PER_ROUND * 1000)
+      await user.click(button(i < 6 ? /Next prompt/ : 'See results'))
+    }
+    Object.defineProperty(navigator, 'clipboard', { value: { writeText: vi.fn() }, configurable: true })
+    try {
+      await user.click(button('Share result'))
+    } finally {
+      delete (navigator as unknown as Record<string, unknown>).clipboard
+    }
+    expect(events('share_tapped')).toEqual([['share_tapped', { props: { method: 'copy' } }]])
+
+    await user.click(button('Play again'))
+    expect(events('unlimited_started')).toHaveLength(2)
+    // Unlimited is not the daily dive
+    expect(events('dive_started')).toEqual([])
+    expect(events('dive_completed')).toEqual([])
+  })
+
+  it('says nothing is measured when analytics is not configured', () => {
+    vi.stubEnv('VITE_ANALYTICS_PROVIDER', '')
+    renderApp()
+    expect(screen.getByText('No cookies, no analytics.', { exact: false })).toBeDefined()
+    expect(screen.getByText("This site doesn't use analytics.")).toBeDefined()
+    expect(screen.queryByText(/We count visits/)).toBeNull()
+    expect(plausible).not.toHaveBeenCalled()
+  })
+})

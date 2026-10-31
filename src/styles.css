@@ -208,6 +208,34 @@ h3 {
   gap: 8px;
 }
 
+/* Privacy footer on the home screen */
+.privacy {
+  margin-top: 16px;
+  font-size: 0.8rem;
+  color: var(--muted);
+  text-align: center;
+}
+.privacy summary {
+  cursor: pointer;
+  list-style: none;
+  border-radius: 6px;
+}
+.privacy summary::-webkit-details-marker {
+  display: none;
+}
+.privacy summary:focus-visible {
+  outline: 3px solid var(--brand);
+  outline-offset: 2px;
+}
+.privacy__more {
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+.privacy p {
+  margin: 8px 0 0;
+  text-align: left;
+}
+
 /* Game */
 .game {
   display: flex;

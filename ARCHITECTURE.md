@@ -46,7 +46,8 @@ src/
     packs/*.json     the question bank, one pack per category
     schedule.json    which prompts run on which day
     index.ts         loads every pack at build time
-  components/        Game, Round, Reveal, Results, HowToPlay, RouteLine, Countdown
+  components/        Game, Round, Reveal, Results, HowToPlay, RouteLine, Countdown, PrivacyNote
+  analytics.ts       optional cookie-less analytics: track(), score bands, script loader
   App.tsx            screen routing (home / daily / unlimited / results)
 scripts/
   validate-content.ts   npm run validate
@@ -153,6 +154,41 @@ must match exactly, so `Bedk` won't become `Bedok` and abbreviations like `AMK` 
 - All storage access is wrapped; private browsing just means nothing is remembered.
 - Answers ship in the client bundle. This is fine for a casual daily game (Wordle did the same); a backend
   would be needed for verified leaderboards.
+
+## Analytics
+
+Analytics is optional and off unless the production build sets the `VITE_ANALYTICS_*` variables (listed in the
+README). `src/analytics.ts` is provider-agnostic: `track(event, props?)` calls Plausible's
+`window.plausible(name, { props })` or Umami's `window.umami.track(name, data)`, and `loadAnalytics()` (from
+`main.tsx`) adds the provider's script. Both do nothing on the dev server, without the variables, or on any
+host other than `VITE_ANALYTICS_DOMAIN`. The script is added at runtime, after that host check, so a preview
+deploy built with production settings doesn't even send page views. `track()` never throws.
+
+Events are listed in the README's Privacy section. The rules: no typed answers, no prompt ids, no personal
+data, and only coarse properties (a 100-point score band, share vs copy). Answer logging for data-driven tiers
+is a separate, backend job (roadmap step 2). `dive_completed` fires where the dive reaches the stats
+(`recordDaily` in `App.tsx`), and only when `recordDive` actually counted it, once per session per date, so
+seeing the results, a reload or blocked storage can't count a dive twice.
+
+**Choosing a tool** (the team's call, tied to the host):
+
+| | Cloudflare Web Analytics | Plausible | Umami |
+|---|---|---|---|
+| Cookie-less, no consent banner | Yes | Yes | Yes |
+| Custom events with properties | **No**: page views and Web Vitals only | Yes | Yes |
+| Cost | Free | Paid cloud plans; free to self-host (AGPL) | Free cloud tier for small sites; free to self-host (MIT) |
+| Self-hosting needs | n/a | A server with Postgres and ClickHouse | A server with Postgres (or MySQL) |
+| Works with `src/analytics.ts` | No | Yes | Yes |
+
+Cloudflare's tool can't record the events this game needs, so it's out as the only tool, though it could
+still sit alongside for page views if we host on Cloudflare. **Recommendation: Umami Cloud's free tier** to
+start, because it covers the events at no cost and with no server to run; move to Plausible (or self-hosted
+Umami) if we outgrow it or want EU-hosted data. Switching is a change of environment variables, not code.
+Check current pricing and limits before deciding.
+
+One limit of any cookie-less tool: it can't follow a visitor across days, so "do people come back" has to be
+read from daily totals (daily visitors against `dive_started` and `dive_completed`) rather than per-person
+retention.
 
 ## Roadmap
 
