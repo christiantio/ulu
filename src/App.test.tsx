@@ -154,8 +154,8 @@ describe('App daily flow', () => {
 
     unmount()
     const again = renderApp()
-    // No round finished yet, so the home screen still says "Start", but the clock carries on
-    await again.user.click(button("Start today's dive"))
+    // No round finished yet, but round 1 is underway, so it's a dive to continue and the clock carries on
+    await again.user.click(button('Continue dive (0/7)'))
     // Straight back into the same prompt, without a ready screen and without a fresh clock
     expect(screen.queryByRole('button', { name: 'Start dive' })).toBeNull()
     expect(promptHeading()).toBe(today[0].text)

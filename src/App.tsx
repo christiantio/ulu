@@ -163,7 +163,9 @@ export default function App() {
               </>
             ) : (
               <button className="btn btn--primary btn--block btn--big" onClick={() => setScreen({ kind: 'daily', dateKey })}>
-                {played.length ? `Continue dive (${played.length}/${ROUNDS_PER_DIVE})` : "Start today's dive"}
+                {played.length || dive.saved?.startedAt
+                  ? `Continue dive (${played.length}/${ROUNDS_PER_DIVE})`
+                  : "Start today's dive"}
               </button>
             )}
           </div>
