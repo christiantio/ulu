@@ -187,7 +187,7 @@ describe('frozen schedule', () => {
   })
 
   it('flags deleted prompts, early repeats, gaps and a short runway', () => {
-    const [first, second] = Object.keys(schedule)
+    const [first, second] = [addDays(today, 21), addDays(today, 22)]
     const broken = { ...schedule, [second]: [schedule[first][0], ...schedule[second].slice(1)] }
     delete broken[addDays(today, 5)]
     const errors = validateSchedule(broken, pool.slice(1), addDays(today, 20))
@@ -195,6 +195,34 @@ describe('frozen schedule', () => {
     expect(errors.some((e) => e.includes(`repeats 1 days after ${first}`))).toBe(true)
     expect(errors.some((e) => e.includes('skips from'))).toBe(true)
     expect(errors.some((e) => e.includes('run npm run schedule'))).toBe(true)
+  })
+
+  describe('after the schedule lapses', () => {
+    // Nobody ran npm run schedule, so the days after the last scheduled one were served by the seeded fallback
+    const lastScheduled = Object.keys(schedule).sort().at(-1)!
+    const later = addDays(lastScheduled, 10)
+    const lapsed = extendSchedule(schedule, pool, addDays(later, 30), later)
+
+    it('backfills the lapsed days with what was served, which can repeat prompts early', () => {
+      for (let d = 1; d <= 10; d++) {
+        const date = addDays(lastScheduled, d)
+        expect(lapsed[date]).toEqual(dailyPrompts(pool, date).map((p) => p.id))
+      }
+      // Had those days still been in the future, they would break the repeat rule
+      expect(validateSchedule(lapsed, pool, lastScheduled).some((e) => e.includes('repeats'))).toBe(true)
+    })
+
+    it('passes again once backfilled, since past days can no longer change', () => {
+      expect(validateSchedule(lapsed, pool, later)).toEqual([])
+    })
+
+    it('still catches a repeat on a future day, counting past days as history', () => {
+      const tomorrow = addDays(later, 1)
+      const broken = { ...lapsed, [tomorrow]: [lapsed[later][0], ...lapsed[tomorrow].slice(1)] }
+      expect(validateSchedule(broken, pool, later)).toContainEqual(
+        `${tomorrow}: "${lapsed[later][0]}" repeats 1 days after ${later}`,
+      )
+    })
   })
 })
 

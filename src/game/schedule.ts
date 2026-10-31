@@ -90,7 +90,15 @@ function leastRecentlyUsed(sorted: readonly Prompt[], dateKey: string, lastUsed:
   return shuffle(picked, rand).map((p) => p.id)
 }
 
-/** Check the schedule against the prompts. Returns human-readable problems; empty means valid */
+/**
+ * Check the schedule against the prompts. Returns human-readable problems; empty means valid.
+ *
+ * Every day must list existing prompts, with no gaps, and the schedule must reach far enough ahead. The
+ * repeat-gap and category checks only apply to days after `today`: earlier days have already been served and
+ * the file is append-only, so they can't be fixed. If the schedule ever lapses, the seeded fallback served
+ * on those days can repeat prompts early, and that mustn't keep validation red forever. Past days still
+ * count as history when checking a future day's repeats.
+ */
 export function validateSchedule(schedule: Schedule, prompts: readonly Prompt[], today: string): string[] {
   const errors: string[] = []
   const byId = new Map(prompts.map((p) => [p.id, p]))
@@ -112,13 +120,14 @@ export function validateSchedule(schedule: Schedule, prompts: readonly Prompt[],
     ids.forEach((id, j) => {
       if (!day[j]) errors.push(`${dateKey}: "${id}" is scheduled but no longer exists (don't delete or rename it)`)
     })
+    const editable = dateKey > today
     const categories = new Set(day.filter((p) => p !== undefined).map((p) => p.category)).size
-    if (day.every((p) => p !== undefined) && categories < Math.min(categoryCount, ids.length))
+    if (editable && day.every((p) => p !== undefined) && categories < Math.min(categoryCount, ids.length))
       errors.push(`${dateKey}: only uses ${categories} categories`)
 
     for (const id of ids) {
       const previous = lastSeen.get(id)
-      if (previous && daysBetween(previous, dateKey) < MIN_REPEAT_GAP)
+      if (editable && previous && daysBetween(previous, dateKey) < MIN_REPEAT_GAP)
         errors.push(`${dateKey}: "${id}" repeats ${daysBetween(previous, dateKey)} days after ${previous}`)
       lastSeen.set(id, dateKey)
     }

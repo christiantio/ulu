@@ -117,13 +117,21 @@ must match exactly, so `Bedk` won't become `Bedok` and abbreviations like `AMK` 
   allows before it comes back. With ~8–10 prompts per category that's about 8 days. **Growing the bank is the
   main lever for longevity.** New prompts only appear on days scheduled after they were added, which is why
   the schedule runs a month ahead and not further.
-- `npm test` and `npm run validate` check the schedule: every scheduled id still exists (so a prompt can't be
-  deleted or renamed once it's scheduled), there are no gaps, no prompt repeats within 7 days
-  (`MIN_REPEAT_GAP`, raise it as the bank grows), and it reaches at least 14 days past today. When that last check
-  fails, run `npm run schedule` and commit the result.
+- `npm test` and `npm run validate` check the schedule. For every day: each scheduled id still exists (so a
+  prompt can't be deleted or renamed once it's scheduled), it has 7 different prompts, and there are no gaps.
+  For days after today, which are the only ones that can still change: no prompt repeats within 7 days
+  (`MIN_REPEAT_GAP`, raise it as the bank grows; past days still count as history), and each day uses 7
+  categories. The schedule must also reach at least 14 days past today. When that last check fails, run
+  `npm run schedule` and commit the result. `npm run schedule` runs the same checks and leaves the file alone if
+  they fail.
+- CI also runs daily on a cron, because the 14-day check depends on the date: a quiet repo still goes red two
+  weeks before the schedule runs out.
 - If a date is missing from the schedule, the game falls back to the original seeded selection: a seeded PRNG
   (FNV-1a hash → mulberry32) shuffles the categories for the date, and each category walks its own shuffled
-  order one step per day. The days before the schedule existed (27–30 Oct 2026) were backfilled with it.
+  order one step per day. The days before the schedule existed (27–30 Oct 2026) were backfilled with it. If the
+  schedule ever lapses, `npm run schedule` backfills the missed days the same way, since that's what players
+  got. Those days can repeat prompts early, which is why the repeat check skips past days: they can't be edited,
+  and checking them would keep validation red for good.
 - The chosen prompt ids are also saved with the player's progress, so a content deploy mid-day doesn't swap
   prompts under someone who has already started.
 

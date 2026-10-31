@@ -4,6 +4,10 @@ on:
   pull_request:
   push:
     branches: [main]
+  # The schedule check depends on today's date: it needs the schedule to reach 14 days ahead. Run daily so a
+  # quiet repo with no pushes still goes red, and someone runs npm run schedule, before the runway runs out
+  schedule:
+    - cron: '0 1 * * *'
 
 permissions:
   contents: read
