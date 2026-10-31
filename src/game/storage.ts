@@ -61,7 +61,13 @@ export function loadDaily(dateKey: string): DailyProgress | null {
   return saved?.dateKey === dateKey ? saved : null
 }
 
+/**
+ * Save a dive's progress. Progress for a later date is kept, so a tab still finishing yesterday's dive past
+ * midnight can't wipe out today's dive from another tab
+ */
 export function saveDaily(progress: DailyProgress): void {
+  const saved = read<DailyProgress>(DAILY_KEY)
+  if (saved && saved.dateKey > progress.dateKey) return
   write(DAILY_KEY, progress)
 }
 
@@ -69,10 +75,13 @@ export function loadStats(): Stats {
   return { ...EMPTY_STATS, ...read<Stats>(STATS_KEY) }
 }
 
-/** Fold a finished daily dive into the stats; ignores repeat calls for a day */
+/**
+ * Fold a finished daily dive into the stats. Ignores repeat calls for a day, and a dive older than the last
+ * one recorded (finished late in another tab), which would otherwise rewind the streak
+ */
 export function recordDive(dateKey: string, results: RoundResult[]): Stats {
   const stats = loadStats()
-  if (stats.lastPlayed === dateKey) return stats
+  if (stats.lastPlayed !== null && dateKey <= stats.lastPlayed) return stats
 
   const score = results.reduce((sum, r) => sum + r.points, 0)
   const continues = stats.lastPlayed !== null && daysBetween(stats.lastPlayed, dateKey) === 1

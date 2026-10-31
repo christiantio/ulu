@@ -146,6 +146,8 @@ must match exactly, so `Bedk` won't become `Bedok` and abbreviations like `AMK` 
 - The home screen moves to the new dive at Singapore midnight, and checks the date again whenever the tab comes
   back into view (phones often keep a tab open overnight). A dive in progress at midnight can still be finished:
   it keeps its prompts and counts toward the date it started on.
+- With two tabs open across midnight, finishing the older dive last can't rewind the stats or overwrite the
+  newer dive's progress: storage ignores a dive older than the last one recorded or saved.
 - All storage access is wrapped; private browsing just means nothing is remembered.
 - Answers ship in the client bundle. This is fine for a casual daily game (Wordle did the same); a backend
   would be needed for verified leaderboards.
