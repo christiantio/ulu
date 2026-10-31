@@ -1,0 +1,65 @@
+name: Prompt idea
+description: Suggest a new prompt for the question bank.
+title: "Prompt idea: "
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Good prompts have a few answers everyone knows and a long tail of deep cuts. See [docs/writing-prompts.md](https://github.com/christiantio/ulu/blob/main/docs/writing-prompts.md) for what we look for.
+  - type: input
+    id: prompt-text
+    attributes:
+      label: Prompt
+      description: What the player would see.
+      placeholder: "Name a zi char dish"
+    validations:
+      required: true
+  - type: dropdown
+    id: category
+    attributes:
+      label: Category
+      options:
+        - transport
+        - places
+        - food
+        - history
+        - politics
+        - culture
+        - language
+        - nature
+        - New category (explain below)
+    validations:
+      required: true
+  - type: dropdown
+    id: set-type
+    attributes:
+      label: Closed or open set?
+      description: A closed set has a complete official list (stations on a line, reservoirs). An open set doesn't (hawker dishes, Singlish words).
+      options:
+        - Closed
+        - Open
+        - Not sure
+    validations:
+      required: true
+  - type: textarea
+    id: answers
+    attributes:
+      label: Example answers
+      description: A few easy ones everyone would say, a few deep cuts, and your pick for the gem.
+      placeholder: |
+        Easy: Sweet and sour pork, Cereal prawns, ...
+        Deep cuts: ...
+        Gem: ...
+    validations:
+      required: true
+  - type: textarea
+    id: sources
+    attributes:
+      label: Sources
+      description: Where a writer could check the full list, especially for a closed set.
+  - type: checkboxes
+    id: write-it
+    attributes:
+      label: Writing it
+      options:
+        - label: I'd like to write this prompt myself.

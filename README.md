@@ -23,8 +23,9 @@ Node version is pinned in `.tool-versions` (asdf).
 
 ## Add questions
 
-Prompts live in `src/content/packs/<category>.json`. Write one by hand, or draft one with Claude and then
-review it:
+Prompts live in `src/content/packs/<category>.json`. Read [docs/writing-prompts.md](docs/writing-prompts.md)
+first: it covers tiers, aliases, the gem, notes and the reviewer checklist. Write a prompt by hand, or draft
+one with Claude and then review it:
 
 ```bash
 ANTHROPIC_API_KEY=... npm run draft -- --category food "Name a kueh"
@@ -46,3 +47,7 @@ New prompts only appear on days scheduled after they're added. Once a prompt is 
 rename it.
 
 See [ARCHITECTURE.md](ARCHITECTURE.md) for the design, the content pipeline, how rarity works and the roadmap.
+
+## Contributing
+
+See [CONTRIBUTING.md](CONTRIBUTING.md) for setup, branch names, the PR flow and what CI checks.
