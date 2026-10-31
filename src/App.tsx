@@ -201,6 +201,7 @@ export default function App() {
           results={screen.results}
           stats={stats}
           isDaily={screen.dateKey !== null}
+          dateKey={screen.dateKey}
           onHome={() => setScreen({ kind: 'home' })}
           onUnlimited={startUnlimited}
         />

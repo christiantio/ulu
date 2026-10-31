@@ -13,11 +13,13 @@ interface Props {
   results: RoundResult[]
   stats?: Stats
   isDaily: boolean
+  /** The daily dive's date, which is earlier than today if it was finished past midnight */
+  dateKey?: string | null
   onHome: () => void
   onUnlimited: () => void
 }
 
-export function Results({ title, results, stats, isDaily, onHome, onUnlimited }: Props) {
+export function Results({ title, results, stats, isDaily, dateKey, onHome, onUnlimited }: Props) {
   const [copied, setCopied] = useState(false)
   const score = totalScore(results)
   const destination = destinationFor(score)
@@ -86,7 +88,8 @@ export function Results({ title, results, stats, isDaily, onHome, onUnlimited }:
 
       {isDaily && (
         <p className="muted center">
-          Next dive in <Countdown />
+          {/* Finished past midnight: the next dive is already out, so don't count down to tomorrow's */}
+          {dateKey && dateKey !== singaporeDateKey() ? "Today's dive is ready" : <>Next dive in <Countdown /></>}
         </p>
       )}
 
