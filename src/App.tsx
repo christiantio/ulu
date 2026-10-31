@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { Countdown } from './components/Countdown'
 import { Game } from './components/Game'
 import { HowToPlay } from './components/HowToPlay'
@@ -68,12 +68,21 @@ export default function App() {
   const [showHelp, setShowHelp] = useState(() => !hasSeenHelp())
   const [stats, setStats] = useState<Stats>(loadStats)
   const [unlimitedRound, setUnlimitedRound] = useState(0)
+  const helpButton = useRef<HTMLButtonElement>(null)
+  const helpWasOpen = useRef(showHelp)
   const [lastUnlimited, setLastUnlimited] = useState<string[]>([])
 
   const dateKey = useSingaporeDateKey()
   const dive = diveFor(dateKey)
   const played = dive.saved?.results ?? []
   const dailyDone = played.length >= ROUNDS_PER_DIVE
+
+  // HowToPlay hands focus back to whatever opened it, but Safari doesn't focus buttons on click (and the first
+  // visit opens it with nothing focused), so fall back to the How to play button
+  useEffect(() => {
+    if (showHelp) helpWasOpen.current = true
+    else if (helpWasOpen.current && document.activeElement === document.body) helpButton.current?.focus()
+  }, [showHelp])
 
   const closeHelp = () => {
     markHelpSeen()
@@ -161,9 +170,9 @@ export default function App() {
 
           <div className="home__links">
             <button className="btn btn--secondary btn--block" onClick={startUnlimited}>
-              ∞ Unlimited
+              <span aria-hidden="true">∞</span> Unlimited
             </button>
-            <button className="btn btn--ghost btn--block" onClick={() => setShowHelp(true)}>
+            <button ref={helpButton} className="btn btn--ghost btn--block" onClick={() => setShowHelp(true)}>
               How to play
             </button>
           </div>
