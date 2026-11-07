@@ -818,6 +818,847 @@ h3 {
   font-weight: 800;
 }
 
+/* Journey: the ride out of town after each answer (components/Journey.tsx). The scene is decorative and
+   aria-hidden; its colours are its own, and switch to dusk and night in dark mode */
+.journey {
+  --j-sky-top: #8fcbff;
+  --j-sky-bottom: #e6f4ff;
+  --j-late-top: #ff9a6a;
+  --j-late-bottom: #ffe1b8;
+  --j-sun: #fff3bf;
+  --j-cloud: #ffffff;
+  --j-far: #b8cadd;
+  --j-far-sea: #7fb7e0;
+  --j-far-island: #93b0c8;
+  --j-tower-0: #5d7690;
+  --j-tower-1: #7a91a7;
+  --j-tower-2: #465f78;
+  --j-window: rgb(255 255 255 / 0.32);
+  --j-shop-0: #f4a6b5;
+  --j-shop-1: #93d3bd;
+  --j-shop-2: #f5d36e;
+  --j-shop-3: #a4c4ef;
+  --j-shop-4: #f2b47c;
+  --j-roof: #b5543c;
+  --j-shutter: #3f6e8c;
+  --j-shade: rgb(0 0 0 / 0.2);
+  --j-hdb-0: #f2e4cc;
+  --j-hdb-1: #e4ecf1;
+  --j-hdb-top-0: #e07a5f;
+  --j-hdb-top-1: #3d9970;
+  --j-hdb-window: rgb(40 52 64 / 0.3);
+  --j-void: rgb(0 0 0 / 0.22);
+  --j-laundry-0: #e63946;
+  --j-laundry-1: #457b9d;
+  --j-laundry-2: #f4d35e;
+  --j-laundry-3: #ffffff;
+  --j-leaf-0: #3f9e5a;
+  --j-leaf-1: #2e7c45;
+  --j-trunk: #7a5434;
+  --j-kampung: #c99a63;
+  --j-attap: #8a6a3a;
+  --j-ground: #a39d95;
+  --j-road: #77716a;
+  --j-grass: #7cbf6a;
+  --j-sand: #ecd9a8;
+  --j-water: #3b9ad9;
+  --j-water-deep: #2c7fbf;
+  --j-wave: rgb(255 255 255 / 0.55);
+  --j-island: #4f9e57;
+  --j-rock: #8d8a85;
+  --j-lighthouse: #f7f5f0;
+  --j-lamp: #ffd34d;
+  --j-deck: #dcd6ce;
+  --j-pillar: #c1b9ae;
+  --j-rail: #857d74;
+  --j-canopy: #4b4743;
+  --j-post: #6d6964;
+  --j-jetty: #8a6440;
+  --j-sign-ink: #ffffff;
+  --j-train: #f3f5f7;
+  --j-glass: #2a3440;
+  --j-door: rgb(0 0 0 / 0.18);
+  --j-bogie: #3a3633;
+  --j-hull: #9c6b3f;
+  --j-hull-dark: #6e4627;
+  --j-boat-canopy: #2b6cda;
+  --j-skin-0: #f1c7a1;
+  --j-skin-1: #d9a27a;
+  --j-skin-2: #a8714c;
+  --j-shirt-0: #e07a5f;
+  --j-shirt-1: #3d9970;
+  --j-shirt-2: #2b6cda;
+  --j-shirt-3: #f5c542;
+  --j-legs: #3a3633;
+  --j-streak: rgb(255 255 255 / 0.85);
+
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+@media (prefers-color-scheme: dark) {
+  .journey {
+    --j-sky-top: #1c2b4d;
+    --j-sky-bottom: #4a3d63;
+    --j-late-top: #060a18;
+    --j-late-bottom: #1b1938;
+    --j-sun: #f3ede7;
+    --j-cloud: #3c4566;
+    --j-far: #2a3552;
+    --j-far-sea: #1a3654;
+    --j-far-island: #24324d;
+    --j-tower-0: #2b3446;
+    --j-tower-1: #353f53;
+    --j-tower-2: #222a39;
+    --j-window: rgb(255 214 120 / 0.55);
+    --j-shop-0: #8a5560;
+    --j-shop-1: #4b7a6a;
+    --j-shop-2: #8d7a3c;
+    --j-shop-3: #4b6588;
+    --j-shop-4: #8a6440;
+    --j-roof: #7a3a2a;
+    --j-shutter: #ffd98a;
+    --j-shade: rgb(0 0 0 / 0.35);
+    --j-hdb-0: #4a4440;
+    --j-hdb-1: #3d454b;
+    --j-hdb-top-0: #9c4a36;
+    --j-hdb-top-1: #2d6b52;
+    --j-hdb-window: rgb(255 214 120 / 0.5);
+    --j-void: rgb(0 0 0 / 0.4);
+    --j-leaf-0: #2d6139;
+    --j-leaf-1: #214a2c;
+    --j-trunk: #4a3524;
+    --j-kampung: #6e5436;
+    --j-attap: #4f3d22;
+    --j-ground: #3b3734;
+    --j-road: #2a2725;
+    --j-grass: #2f4f2a;
+    --j-sand: #6f6450;
+    --j-water: #1d4f7a;
+    --j-water-deep: #143a5c;
+    --j-wave: rgb(255 255 255 / 0.25);
+    --j-island: #2c5e3a;
+    --j-rock: #57544f;
+    --j-lighthouse: #d9d4cc;
+    --j-deck: #57524c;
+    --j-pillar: #46423d;
+    --j-rail: #8a837a;
+    --j-canopy: #262321;
+    --j-post: #4f4b47;
+    --j-jetty: #5c432b;
+    --j-sign-ink: #141110;
+    --j-train: #c9ced3;
+    --j-glass: #ffe2a0;
+    --j-door: rgb(0 0 0 / 0.3);
+    --j-hull: #7a5230;
+    --j-hull-dark: #4f3420;
+    --j-boat-canopy: #6b9cff;
+    --j-streak: rgb(255 255 255 / 0.45);
+  }
+}
+
+.journey__viewport {
+  position: relative;
+  aspect-ratio: 2 / 1;
+  overflow: hidden;
+  border-radius: var(--radius);
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow);
+  background: linear-gradient(var(--j-sky-top), var(--j-sky-bottom));
+  container-type: inline-size;
+  cursor: pointer;
+  user-select: none;
+  -webkit-user-select: none;
+  -webkit-tap-highlight-color: transparent;
+  isolation: isolate;
+}
+.journey__late {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  background: linear-gradient(var(--j-late-top), var(--j-late-bottom));
+}
+.journey__stars {
+  display: none;
+}
+.journey__sun {
+  position: absolute;
+  left: 78%;
+  top: 9%;
+  width: 9cqw;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background: var(--j-sun);
+  box-shadow: 0 0 5cqw var(--j-sun);
+}
+.journey__layer {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  will-change: transform;
+}
+.journey__layer svg,
+.journey__vehicle svg,
+.journey__person svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+}
+.journey__layer--far {
+  width: calc(1240 / 480 * 100%);
+}
+.journey__layer--near {
+  width: calc(2560 / 480 * 100%);
+}
+
+/* Scenery fills */
+.j-cloud { fill: var(--j-cloud); opacity: 0.85; }
+.j-far { fill: var(--j-far); }
+.j-far-sea { fill: var(--j-far-sea); }
+.j-far-island { fill: var(--j-far-island); }
+.j-tower-0 { fill: var(--j-tower-0); }
+.j-tower-1 { fill: var(--j-tower-1); }
+.j-tower-2 { fill: var(--j-tower-2); }
+.j-window { fill: var(--j-window); }
+.j-shop-0 { fill: var(--j-shop-0); }
+.j-shop-1 { fill: var(--j-shop-1); }
+.j-shop-2 { fill: var(--j-shop-2); }
+.j-shop-3 { fill: var(--j-shop-3); }
+.j-shop-4 { fill: var(--j-shop-4); }
+.j-roof { fill: var(--j-roof); }
+.j-shutter { fill: var(--j-shutter); }
+.j-shade { fill: var(--j-shade); }
+.j-hdb-0 { fill: var(--j-hdb-0); }
+.j-hdb-1 { fill: var(--j-hdb-1); }
+.j-hdb-top-0 { fill: var(--j-hdb-top-0); }
+.j-hdb-top-1 { fill: var(--j-hdb-top-1); }
+.j-hdb-window { fill: var(--j-hdb-window); }
+.j-void { fill: var(--j-void); }
+.j-laundry-0 { fill: var(--j-laundry-0); }
+.j-laundry-1 { fill: var(--j-laundry-1); }
+.j-laundry-2 { fill: var(--j-laundry-2); }
+.j-laundry-3 { fill: var(--j-laundry-3); }
+.j-leaf-0 { fill: var(--j-leaf-0); }
+.j-leaf-1 { fill: var(--j-leaf-1); }
+.j-trunk { fill: var(--j-trunk); }
+.j-kampung { fill: var(--j-kampung); }
+.j-attap { fill: var(--j-attap); }
+.j-ground { fill: var(--j-ground); }
+.j-road { fill: var(--j-road); }
+.j-grass { fill: var(--j-grass); }
+.j-sand { fill: var(--j-sand); }
+.j-water { fill: var(--j-water); }
+.j-water-deep { fill: var(--j-water-deep); }
+.j-wave { fill: none; stroke: var(--j-wave); stroke-width: 1.4; stroke-linecap: round; }
+.j-island { fill: var(--j-island); }
+.j-rock { fill: var(--j-rock); }
+.j-lighthouse { fill: var(--j-lighthouse); }
+.j-lighthouse-band { fill: var(--brand); }
+.j-lighthouse-top { fill: var(--j-canopy); }
+.j-deck { fill: var(--j-deck); }
+.j-pillar { fill: var(--j-pillar); }
+.j-rail { fill: var(--j-rail); }
+.j-buffer { fill: var(--brand); }
+.j-canopy { fill: var(--j-canopy); }
+.j-post { fill: var(--j-post); }
+.j-jetty { fill: var(--j-jetty); }
+
+.journey__waves {
+  animation: j-waves 2.4s linear infinite;
+}
+.journey__lamp {
+  fill: var(--j-lamp);
+}
+.journey__beam,
+.journey__halo {
+  opacity: 0;
+  transform-box: view-box;
+}
+
+/* Station signs: the tier colour, with the points in a badge like a line code */
+.j-sign {
+  fill: var(--tier);
+}
+.journey__sign--start {
+  --tier: var(--brand);
+}
+.j-sign-badge {
+  fill: var(--j-sign-ink);
+}
+.j-sign-badge-text {
+  fill: var(--tier);
+  font: 800 11px var(--font-display);
+}
+.j-sign-text {
+  fill: var(--j-sign-ink);
+  font: 800 12.5px var(--font-display);
+  letter-spacing: 0.03em;
+}
+.journey__sign {
+  transform-box: fill-box;
+  transform-origin: center;
+}
+
+/* The vehicle stays put while the world scrolls; at the shore the train becomes a bumboat */
+.journey__vehicle {
+  position: absolute;
+  left: calc(120 / 480 * 100%);
+  top: calc(132 / 240 * 100%);
+  width: calc(140 / 480 * 100%);
+  aspect-ratio: 2 / 1;
+  will-change: transform;
+}
+.j-train { fill: var(--j-train); }
+.j-glass { fill: var(--j-glass); }
+.j-stripe { fill: var(--brand); }
+.j-door { stroke: var(--j-door); stroke-width: 0.8; }
+.j-bogie { fill: var(--j-bogie); }
+.j-headlight { fill: #ffe27a; }
+.journey__door-light { fill: transparent; }
+.j-hull { fill: var(--j-hull); }
+.j-hull-stripe { stroke: var(--j-hull-dark); stroke-width: 1.6; fill: none; }
+.j-eye { fill: #ffffff; }
+.j-eye-pupil { fill: #1d1a17; }
+.j-boat-canopy { fill: var(--j-boat-canopy); }
+.j-boat-post { fill: var(--j-hull-dark); stroke: var(--j-hull-dark); stroke-width: 1.4; }
+.j-flag { fill: var(--brand); }
+.j-wake { fill: none; stroke: var(--j-wave); stroke-width: 2; stroke-linecap: round; }
+
+.journey__train,
+.journey__boat {
+  transform-box: fill-box;
+  transition: opacity 0.12s ease, transform 0.2s ease;
+}
+.journey__boat {
+  opacity: 0;
+  transform: scale(0.6);
+  transform-origin: 50% 100%;
+}
+.journey__vehicle--sea .journey__train {
+  opacity: 0;
+}
+.journey__vehicle--sea .journey__boat {
+  opacity: 1;
+  transform: none;
+  animation: j-bob 1.4s ease-in-out infinite alternate;
+}
+.journey--depart .journey__door-light {
+  animation: j-blink 0.24s steps(2, jump-none) infinite;
+}
+.journey--travel .journey__train {
+  transform-origin: 50% 100%;
+  animation: j-rumble 0.16s steps(2, jump-none) infinite;
+}
+.journey--arrive .journey__vehicle-body {
+  transform-origin: 50% 100%;
+  animation: j-lurch 0.5s ease-out;
+}
+
+.journey__streaks {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  pointer-events: none;
+}
+.journey__streaks i {
+  position: absolute;
+  left: 0;
+  top: var(--y);
+  width: 22cqw;
+  height: 0.5cqw;
+  border-radius: 1cqw;
+  background: linear-gradient(90deg, transparent, var(--j-streak));
+  animation: j-streak 0.5s linear infinite;
+  animation-delay: var(--d);
+}
+
+.journey__splash {
+  position: absolute;
+  left: calc(250 / 480 * 100%);
+  top: calc(186 / 240 * 100%);
+}
+.journey__splash i {
+  position: absolute;
+  width: 1.4cqw;
+  height: 1.4cqw;
+  border-radius: 50%;
+  background: var(--j-wave);
+  animation: j-drop 0.6s ease-out both;
+}
+
+/* Heads-up: the answer on a ticket, and the points of the last station passed */
+.journey__hud {
+  position: absolute;
+  top: 3.5%;
+  left: 2.5%;
+  right: 2.5%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 2cqw;
+  pointer-events: none;
+}
+.journey__ticket {
+  min-width: 0;
+  max-width: 70%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  padding: 0.8cqw 2.4cqw;
+  border-radius: 1.4cqw;
+  border-left: 1.2cqw solid var(--brand);
+  background: var(--surface);
+  color: var(--text);
+  font-weight: 700;
+  font-size: max(11px, 3.4cqw);
+  box-shadow: var(--shadow);
+  animation: j-ticket 0.35s cubic-bezier(0.2, 1.4, 0.4, 1) both;
+}
+.journey__meter {
+  margin-left: auto;
+  padding: 0.3cqw 2.6cqw;
+  border-radius: 999px;
+  background: var(--surface);
+  color: var(--tier, var(--muted));
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: max(14px, 5.6cqw);
+  font-variant-numeric: tabular-nums;
+  box-shadow: var(--shadow);
+  animation: j-bump 0.3s ease both;
+}
+
+/* Arrival */
+.journey__stamp {
+  --stamp: translate(-50%, -50%) rotate(-7deg);
+  position: absolute;
+  left: 46%;
+  top: 26%;
+  transform: var(--stamp);
+  padding: 1.2cqw 3cqw 1cqw;
+  border: 0.9cqw solid var(--tier);
+  border-radius: 2cqw;
+  background: color-mix(in srgb, var(--surface) 90%, transparent);
+  color: var(--tier);
+  font-family: var(--font-display);
+  font-weight: 800;
+  text-align: center;
+  text-transform: uppercase;
+  line-height: 1;
+  white-space: nowrap;
+  box-shadow: var(--shadow);
+  animation: j-stamp 0.45s cubic-bezier(0.2, 1.5, 0.4, 1) both;
+}
+.journey--miss {
+  --tier: var(--miss);
+}
+.journey__stamp-label {
+  display: block;
+  font-size: max(17px, 5.8cqw);
+  letter-spacing: 0.01em;
+}
+.journey__stamp-emoji {
+  font-size: 0.8em;
+}
+.journey__stamp-points {
+  display: block;
+  margin-top: 0.6cqw;
+  font-size: max(12px, 3.8cqw);
+}
+.journey--arrive .journey__sign--here {
+  animation: j-sign 0.7s ease-out both;
+}
+.journey--arrive .journey__beam {
+  animation: j-beam 1.6s ease-in-out both;
+}
+.journey--arrive .journey__halo {
+  animation: j-halo 0.8s ease-out both, j-halo-pulse 0.5s ease-in-out 0.8s infinite alternate;
+}
+/* The stamp takes the ticket's place */
+.journey--arrive .journey__ticket {
+  animation: j-ticket-out 0.25s ease-in both;
+}
+.journey--arrive .journey__lamp {
+  animation: j-glow 0.4s ease-in-out infinite alternate;
+}
+
+.journey__flash {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at 46% 26%, rgb(255 255 255 / 0.9), transparent 65%);
+  pointer-events: none;
+  animation: j-flash 0.6s ease-out both;
+}
+.journey__confetti {
+  position: absolute;
+  left: 46%;
+  top: 26%;
+}
+.journey__confetti i {
+  position: absolute;
+  width: 2.2cqw;
+  height: 1.2cqw;
+  border-radius: 1px;
+  background: var(--c);
+  animation: j-confetti var(--dur) linear var(--delay) both;
+}
+.journey__sparkles i {
+  position: absolute;
+  color: #ffd34d;
+  font-style: normal;
+  font-size: 4cqw;
+  text-shadow: 0 0 2cqw #fff3bf;
+  animation: j-twinkle 0.9s ease-in-out calc(var(--i) * 90ms) both;
+}
+
+.journey__crowd {
+  position: absolute;
+  left: calc(270 / 480 * 100%);
+  width: calc(166 / 480 * 100%);
+  bottom: calc((240 - 172) / 240 * 100%);
+  display: flex;
+  justify-content: space-around;
+  align-items: flex-end;
+}
+.journey__crowd--lonely {
+  left: calc(296 / 480 * 100%);
+  width: auto;
+}
+.journey__person {
+  position: relative;
+  width: 2.8cqw;
+  height: 6.4cqw;
+  transform-origin: 50% 100%;
+  animation: j-popup 0.35s cubic-bezier(0.2, 1.6, 0.4, 1) calc(var(--i) * 70ms + 120ms) both;
+}
+.journey__bubble {
+  position: absolute;
+  bottom: calc(100% + 1.4cqw);
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 0.5cqw 1.6cqw;
+  border-radius: 999px;
+  background: var(--surface);
+  color: var(--text);
+  font-size: max(9px, 2.8cqw);
+  font-weight: 700;
+  white-space: nowrap;
+  box-shadow: var(--shadow);
+}
+.journey__bubble--high {
+  bottom: calc(100% + 5cqw);
+}
+.j-skin-0 { fill: var(--j-skin-0); }
+.j-skin-1 { fill: var(--j-skin-1); }
+.j-skin-2 { fill: var(--j-skin-2); }
+.j-shirt-0 { fill: var(--j-shirt-0); }
+.j-shirt-1 { fill: var(--j-shirt-1); }
+.j-shirt-2 { fill: var(--j-shirt-2); }
+.j-shirt-3 { fill: var(--j-shirt-3); }
+.j-legs { fill: var(--j-legs); }
+
+.journey__bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  min-height: 2.6em;
+}
+.journey__caption {
+  margin: 0;
+  color: var(--muted);
+  font-weight: 600;
+  animation: j-fade 0.25s ease both;
+}
+.journey--arrive .journey__caption {
+  color: var(--text);
+}
+.journey__bar .btn {
+  flex-shrink: 0;
+}
+
+@media (prefers-color-scheme: dark) {
+  .journey__stars {
+    display: block;
+  }
+  .journey__stars i {
+    position: absolute;
+    width: 0.5cqw;
+    height: 0.5cqw;
+    border-radius: 50%;
+    background: #fff;
+    opacity: 0.8;
+    animation: j-twinkle-soft 1.8s ease-in-out calc(var(--i) * 0.3s) infinite alternate;
+  }
+  .journey__sun {
+    box-shadow: 0 0 3cqw rgb(243 237 231 / 0.5);
+  }
+}
+
+/* The score in the header jumps when the ride lands, and the points float up from it */
+.game__score {
+  position: relative;
+}
+.game__points--bump {
+  display: inline-block;
+  animation: j-bump 0.45s ease both;
+}
+.game__gain {
+  position: absolute;
+  right: 0;
+  bottom: 100%;
+  color: var(--brand);
+  font-family: var(--font-display);
+  font-weight: 800;
+  pointer-events: none;
+  animation: gain 1.1s ease-out both;
+}
+
+@keyframes gain {
+  0% {
+    transform: translateY(12px);
+    opacity: 0;
+  }
+  20% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(-14px);
+    opacity: 0;
+  }
+}
+@keyframes j-waves {
+  to {
+    transform: translateX(-20px);
+  }
+}
+@keyframes j-blink {
+  from {
+    fill: transparent;
+  }
+  to {
+    fill: #ff3b30;
+  }
+}
+@keyframes j-rumble {
+  from {
+    transform: translateY(0);
+  }
+  to {
+    transform: translateY(-0.6px);
+  }
+}
+@keyframes j-bob {
+  from {
+    transform: translateY(0) rotate(-1.2deg);
+  }
+  to {
+    transform: translateY(-2px) rotate(1.2deg);
+  }
+}
+@keyframes j-lurch {
+  0% {
+    transform: rotate(0);
+  }
+  30% {
+    transform: rotate(1.8deg);
+  }
+  65% {
+    transform: rotate(-0.8deg);
+  }
+  100% {
+    transform: rotate(0);
+  }
+}
+@keyframes j-streak {
+  from {
+    transform: translateX(110cqw);
+  }
+  to {
+    transform: translateX(-30cqw);
+  }
+}
+@keyframes j-drop {
+  0% {
+    transform: translate(0, 0) scale(0.6);
+    opacity: 1;
+  }
+  45% {
+    transform: translate(calc(var(--dx) * 0.6cqw), calc(var(--dy) * 1cqw)) scale(1);
+    opacity: 1;
+  }
+  100% {
+    transform: translate(calc(var(--dx) * 1cqw), 4cqw) scale(0.4);
+    opacity: 0;
+  }
+}
+@keyframes j-ticket {
+  from {
+    transform: translateY(-140%) rotate(-4deg);
+    opacity: 0;
+  }
+  to {
+    transform: none;
+    opacity: 1;
+  }
+}
+@keyframes j-bump {
+  0% {
+    transform: scale(1);
+  }
+  40% {
+    transform: scale(1.25);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+@keyframes j-stamp {
+  from {
+    transform: var(--stamp) scale(2.4);
+    opacity: 0;
+  }
+  50% {
+    opacity: 1;
+  }
+  to {
+    transform: var(--stamp) scale(1);
+    opacity: 1;
+  }
+}
+@keyframes j-sign {
+  0% {
+    transform: scale(1);
+    filter: brightness(1);
+  }
+  35% {
+    transform: scale(1.14);
+    filter: brightness(1.25);
+  }
+  100% {
+    transform: scale(1);
+    filter: brightness(1);
+  }
+}
+@keyframes j-beam {
+  0% {
+    opacity: 0;
+    transform: rotate(14deg);
+  }
+  25% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0.8;
+    transform: rotate(-10deg);
+  }
+}
+@keyframes j-halo {
+  0% {
+    opacity: 0;
+    transform: scale(0.2);
+  }
+  40% {
+    opacity: 1;
+    transform: scale(1.6);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+@keyframes j-halo-pulse {
+  from {
+    opacity: 1;
+    transform: scale(1);
+  }
+  to {
+    opacity: 0.75;
+    transform: scale(1.2);
+  }
+}
+@keyframes j-ticket-out {
+  to {
+    transform: translateY(-140%);
+    opacity: 0;
+  }
+}
+@keyframes j-glow {
+  from {
+    filter: brightness(1);
+  }
+  to {
+    filter: brightness(1.5) drop-shadow(0 0 6px #ffd34d);
+  }
+}
+@keyframes j-flash {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+@keyframes j-confetti {
+  0% {
+    transform: translate(0, 0) rotate(0) scale(0.4);
+    opacity: 1;
+    animation-timing-function: cubic-bezier(0.1, 0.7, 0.3, 1);
+  }
+  30% {
+    transform: translate(calc(var(--dx) * 1cqw), calc(var(--dy) * 1cqw)) rotate(calc(var(--rot) * 0.3)) scale(1);
+    opacity: 1;
+    animation-timing-function: cubic-bezier(0.5, 0, 0.9, 0.6);
+  }
+  100% {
+    transform: translate(calc(var(--dx) * 1.35cqw), calc((var(--dy) + var(--fall)) * 1cqw)) rotate(var(--rot)) scale(1);
+    opacity: 0;
+  }
+}
+@keyframes j-twinkle {
+  0% {
+    transform: scale(0) rotate(0);
+    opacity: 0;
+  }
+  50% {
+    transform: scale(1.2) rotate(45deg);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(0.8) rotate(90deg);
+    opacity: 0.85;
+  }
+}
+@keyframes j-twinkle-soft {
+  from {
+    opacity: 0.25;
+  }
+  to {
+    opacity: 0.9;
+  }
+}
+@keyframes j-popup {
+  from {
+    transform: scaleY(0);
+    opacity: 0;
+  }
+  to {
+    transform: scaleY(1);
+    opacity: 1;
+  }
+}
+@keyframes j-fade {
+  from {
+    opacity: 0;
+    transform: translateY(3px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
 @keyframes shake {
   0%,
   100% {
@@ -855,5 +1696,9 @@ h3 {
   *::after {
     animation: none !important;
     transition: none !important;
+  }
+  /* Its fade-out is an animation, so without one it would stay on screen. The journey itself is skipped */
+  .game__gain {
+    display: none;
   }
 }

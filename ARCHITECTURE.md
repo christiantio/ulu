@@ -14,6 +14,7 @@ go somewhere nobody else thought of.
 | Max | 7 × 100 = 700 |
 | Theme | The score is a journey out of town: Raffles Place → Bishan → Sengkang → Woodlands → Lim Chu Kang → Pulau Ubin → Pulau Tekong → Pedra Branca (700) |
 | Unlimited | 7 random prompts from past dives (never today's), no stats, replay as often as you like. Back-to-back games don't share prompts. While the archive is too small to fill a game, it uses the rest of the bank |
+| Answer animation | After each answer, a ride out of town on the "Ulu Line", whose stations are the tiers in order (Everybody Say → Act Smart → Can Lah → Steady → Damn Ulu → Sibei Ulu). The train passes every station below the answer's tier, slowing at each as if it might stop, and stops at its own. Past Steady it becomes a bumboat, and the gem ends at the Pedra Branca lighthouse. A miss is the train leaving without you. It takes 2.4–5.4 s, the pips, score and route only update when it lands, and Skip (or a tap on the scene) jumps to the reveal. With `prefers-reduced-motion`, it's skipped |
 | Reveal | The verdict, the gem, up to 3 other answers per tier, and every accepted answer behind a "Show all N answers" disclosure, grouped by tier from the gem down. The results screen has the same disclosure for each prompt |
 | Sharing | Spoiler-free emoji grid: `Ulu #3 🇸🇬 410/700 / 💎🟢⚪🔵❌🟣🟡 / Reached Lim Chu Kang` |
 
@@ -38,6 +39,7 @@ src/
     normalize.ts     answer → comparison key
     match.ts         exact + typo-tolerant matching
     scoring.ts       tier points, labels, destinations
+    journey.ts       the answer animation's timing: its stations, the ride's motion curve, captions
     daily.ts         Singapore date, seeded daily selection, unlimited shuffle
     schedule.ts      frozen daily schedule: lookup, append-only extension, checks, unlimited pool
     storage.ts       localStorage progress + stats (fails safe)
@@ -50,11 +52,12 @@ src/
     index.ts         loadDive(date): fetches dives/<date>.json, falls back to the bank
     bank.ts          every pack plus the schedule, a lazily loaded chunk (see "Loading content" below)
     bank-loader.ts   loadBank(): the dynamic import of bank.ts
-  components/        Game, Round, Reveal, Results, AllAnswers, Report, HowToPlay, RouteLine, Countdown,
-                     PrivacyNote
+  components/        Game, Round, Journey, Reveal, Results, AllAnswers, Report, HowToPlay, RouteLine,
+                     Countdown, PrivacyNote
   analytics.ts       optional cookie-less analytics: track(), score bands, script loader
   App.tsx            screen routing (home / daily / unlimited / results), loading today's dive
   test/dives.ts      test helper: a fetch stub that serves the dive files
+  test/motion.ts     test helper: a matchMedia stub for prefers-reduced-motion
 scripts/
   validate-content.ts   npm run validate
   schedule.ts           npm run schedule  (extend the daily schedule)
@@ -72,7 +75,7 @@ stay out of the entry chunk:
 
 | What | Where it comes from | When it loads |
 |---|---|---|
-| The app (entry chunk) | `dist/assets/index-<hash>.js` | First load. About 255 kB, 81 kB gzipped |
+| The app (entry chunk) | `dist/assets/index-<hash>.js` | First load. About 275 kB, 87 kB gzipped |
 | Today's prompts | `dist/dives/<date>.json`, the day's 7 full prompts in schedule order | First load, and again when the date rolls over. About 23–35 kB, 6–7 kB gzipped |
 | The bank (every pack plus `schedule.json`) | `dist/assets/bank-<hash>.js`, from `import('./bank')` | Only when Unlimited starts, when a date has no dive file, or when saved progress names prompts the day's file doesn't have. About 230 kB, 49 kB gzipped |
 
@@ -174,6 +177,31 @@ complete. Open sets (hawker dishes, Singlish words) carry long answer lists with
 matches on names and aliases first. If none match, it allows 1 typo for 5–9 character keys and 2 for longer
 ones, and accepts the correction only when a **single** answer is closest. Short inputs (under 5 characters)
 must match exactly, so `Bedk` won't become `Bedok` and abbreviations like `AMK` stay precise.
+
+## The answer animation
+
+`components/Journey.tsx` plays between a round and its reveal. `Game` gives it its own phase, `journey`, after
+the result is saved (so a reload mid-ride resumes at the next round, as a reload on the reveal does).
+
+- **One scene, scrolled.** The scenery is inline SVG in scene units (a 480 × 240 viewport), laid out once from a
+  fixed seed: CBD towers, shophouses, HDB blocks with laundry out, kampung trees, the shore, Pulau Ubin and Pedra
+  Branca. The vehicle stays still and two layers scroll under it at different speeds, using `translate3d` on
+  plain `div`s so the browser only moves composited layers. Sizes inside the scene are in `cqw` (container
+  query units), so it scales with the card.
+- **Motion.** `position()` in `game/journey.ts` is a piecewise cubic Hermite curve: from rest, through each
+  passed station at 45% of a leg's average speed (the "will it stop?" moment), and braking to rest at the
+  answer's station, with continuous speed throughout. It's unit tested for monotonicity and for no jumps.
+- **Timing.** A `requestAnimationFrame` loop draws the motion straight to the DOM. React only re-renders when a
+  station is passed or the coast is crossed. `setTimeout`s drive the stages (doors closing, travel, arrival,
+  done), so the ride ends on time even if frames are throttled, as in a background tab.
+- **Accessibility.** The scene is `aria-hidden`; focus moves to the Skip button, then to the reveal's Next button
+  as before, which reads the verdict. Taps and key presses in the first 400 ms are ignored, so a double-tap on
+  Go or a held Enter doesn't skip it. With `prefers-reduced-motion: reduce`, `Game` goes straight to the reveal.
+- **Colours.** The scene has its own `--j-*` tokens. Light mode rides from day into sunset, and dark mode from
+  dusk into night, with lit windows and stars.
+- **Tests.** jsdom has no `matchMedia`, which the app reads as no preference, so component tests play the ride
+  on Vitest's fake clock (which also fakes `requestAnimationFrame` and `performance.now`). `App.test.tsx` turns
+  on reduced motion with `test/motion.ts`, since it tests storage and flow rather than the ride.
 
 ## Daily selection
 
