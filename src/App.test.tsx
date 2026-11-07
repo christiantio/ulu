@@ -11,6 +11,7 @@ import { SECONDS_PER_ROUND } from './game/scoring'
 import type { DailyProgress, Stats } from './game/storage'
 import type { Prompt, RoundResult } from './game/types'
 import { fetched, serveDives, settle } from './test/dives'
+import { stubReducedMotion } from './test/motion'
 
 // The real loader, watched, so a test can tell when the bank was asked for
 vi.mock('./content/bank-loader', async (importOriginal) => {
@@ -108,6 +109,8 @@ beforeEach(() => {
   vi.stubEnv('VITE_REPORT_URL', '')
   fetch = serveDives()
   vi.mocked(loadBank).mockClear()
+  // Rounds go straight to their reveal. The ride out of town after each answer is tested in Game and Journey
+  stubReducedMotion()
 })
 
 afterEach(() => {

@@ -6,8 +6,9 @@
 It's inspired by [Krillion](https://krillion.io).
 
 Every day you get 7 Singapore prompts ("Name a station on the Circle Line", "Name a kueh", …) with 25 seconds
-each. "Toa Payoh" gets you 10 points; the hand-picked gem gets you 100. Your score takes you from Raffles Place
-out to Pedra Branca.
+each. "Toa Payoh" gets you 10 points; the hand-picked gem gets you 100. Every answer is a ride out of town: the
+more ulu it is, the further the train goes, past the CBD and the heartland and out by bumboat to the
+lighthouse. Your score takes you from Raffles Place out to Pedra Branca.
 
 ## Run it
 
