@@ -1,0 +1,2372 @@
+{
+  "name": "Places",
+  "asOf": "2026-10-27",
+  "prompts": [
+    {
+      "id": "places-hdb-towns",
+      "category": "places",
+      "text": "Name an HDB town",
+      "note": "Any of HDB's official towns or estates.",
+      "answers": [
+        {
+          "name": "Ang Mo Kio",
+          "tier": "common",
+          "aliases": [
+            "AMK",
+            "Ang Mo Kio Town",
+            "Ang Mo Kio New Town",
+            "AMK Town",
+            "AMK New Town"
+          ]
+        },
+        {
+          "name": "Tampines",
+          "tier": "common",
+          "aliases": [
+            "Tampines Town",
+            "Tampines New Town"
+          ]
+        },
+        {
+          "name": "Toa Payoh",
+          "tier": "common",
+          "aliases": [
+            "TPY",
+            "Toa Payoh Town",
+            "Toa Payoh New Town",
+            "TPY Town",
+            "TPY New Town"
+          ]
+        },
+        {
+          "name": "Woodlands",
+          "tier": "common",
+          "aliases": [
+            "Woodlands Town",
+            "Woodlands New Town"
+          ]
+        },
+        {
+          "name": "Tengah",
+          "tier": "trap",
+          "aliases": [
+            "Tengah Town",
+            "Tengah New Town"
+          ]
+        },
+        {
+          "name": "Bedok",
+          "tier": "solid",
+          "aliases": [
+            "Bedok Town",
+            "Bedok New Town"
+          ]
+        },
+        {
+          "name": "Bishan",
+          "tier": "solid",
+          "aliases": [
+            "Bishan Town",
+            "Bishan New Town"
+          ]
+        },
+        {
+          "name": "Jurong West",
+          "tier": "solid",
+          "aliases": [
+            "Jurong West Town",
+            "Jurong West New Town"
+          ]
+        },
+        {
+          "name": "Jurong East",
+          "tier": "solid",
+          "aliases": [
+            "Jurong East Town",
+            "Jurong East New Town"
+          ]
+        },
+        {
+          "name": "Yishun",
+          "tier": "solid",
+          "aliases": [
+            "Yishun Town",
+            "Yishun New Town"
+          ]
+        },
+        {
+          "name": "Punggol",
+          "tier": "solid",
+          "aliases": [
+            "Punggol Town",
+            "Punggol New Town"
+          ]
+        },
+        {
+          "name": "Sengkang",
+          "tier": "solid",
+          "aliases": [
+            "Sengkang Town",
+            "Sengkang New Town"
+          ]
+        },
+        {
+          "name": "Hougang",
+          "tier": "solid",
+          "aliases": [
+            "Hougang Town",
+            "Hougang New Town"
+          ]
+        },
+        {
+          "name": "Clementi",
+          "tier": "solid",
+          "aliases": [
+            "Clementi Town",
+            "Clementi New Town"
+          ]
+        },
+        {
+          "name": "Pasir Ris",
+          "tier": "solid",
+          "aliases": [
+            "Pasir Ris Town",
+            "Pasir Ris New Town"
+          ]
+        },
+        {
+          "name": "Choa Chu Kang",
+          "tier": "solid",
+          "aliases": [
+            "CCK",
+            "Choa Chu Kang Town",
+            "Choa Chu Kang New Town",
+            "CCK Town",
+            "CCK New Town"
+          ]
+        },
+        {
+          "name": "Serangoon",
+          "tier": "solid",
+          "aliases": [
+            "Serangoon Town",
+            "Serangoon New Town"
+          ]
+        },
+        {
+          "name": "Queenstown",
+          "tier": "rare",
+          "aliases": [
+            "Queenstown Town",
+            "Queenstown New Town"
+          ]
+        },
+        {
+          "name": "Bukit Batok",
+          "tier": "rare",
+          "aliases": [
+            "Bt Batok",
+            "Bukit Batok Town",
+            "Bukit Batok New Town",
+            "Bt Batok Town",
+            "Bt Batok New Town"
+          ]
+        },
+        {
+          "name": "Geylang",
+          "tier": "rare",
+          "aliases": [
+            "Geylang Town",
+            "Geylang New Town"
+          ]
+        },
+        {
+          "name": "Bukit Merah",
+          "tier": "rare",
+          "aliases": [
+            "Bt Merah",
+            "Bukit Merah Town",
+            "Bukit Merah New Town",
+            "Bt Merah Town",
+            "Bt Merah New Town"
+          ]
+        },
+        {
+          "name": "Bukit Panjang",
+          "tier": "rare",
+          "aliases": [
+            "Bt Panjang",
+            "Bukit Panjang Town",
+            "Bukit Panjang New Town",
+            "Bt Panjang Town",
+            "Bt Panjang New Town"
+          ]
+        },
+        {
+          "name": "Sembawang",
+          "tier": "rare",
+          "aliases": [
+            "Sembawang Town",
+            "Sembawang New Town"
+          ]
+        },
+        {
+          "name": "Kallang/Whampoa",
+          "tier": "rare",
+          "aliases": [
+            "Kallang",
+            "Whampoa",
+            "Kallang/Whampoa Town",
+            "Kallang/Whampoa New Town",
+            "Kallang Town",
+            "Kallang New Town",
+            "Whampoa Town",
+            "Whampoa New Town"
+          ]
+        },
+        {
+          "name": "Marine Parade",
+          "tier": "rare",
+          "aliases": [
+            "Marine Parade Town",
+            "Marine Parade New Town"
+          ]
+        },
+        {
+          "name": "Central Area",
+          "tier": "ulu",
+          "aliases": [
+            "Central",
+            "Central Area Town",
+            "Central Area New Town",
+            "Central Town",
+            "Central New Town"
+          ]
+        },
+        {
+          "name": "Bukit Timah",
+          "tier": "gem",
+          "aliases": [
+            "Bt Timah",
+            "Bukit Timah Town",
+            "Bukit Timah New Town",
+            "Bt Timah Town",
+            "Bt Timah New Town"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "places-planning-areas",
+      "category": "places",
+      "text": "Name one of Singapore's 55 planning areas",
+      "note": "URA's official planning areas, from Ang Mo Kio to Yishun (and some empty-sounding ones in between).",
+      "answers": [
+        {
+          "name": "Orchard",
+          "tier": "common"
+        },
+        {
+          "name": "Woodlands",
+          "tier": "common"
+        },
+        {
+          "name": "Tampines",
+          "tier": "common"
+        },
+        {
+          "name": "Ang Mo Kio",
+          "tier": "common",
+          "aliases": [
+            "AMK"
+          ]
+        },
+        {
+          "name": "Downtown Core",
+          "tier": "trap",
+          "aliases": [
+            "Downtown"
+          ]
+        },
+        {
+          "name": "Bedok",
+          "tier": "solid"
+        },
+        {
+          "name": "Bishan",
+          "tier": "solid"
+        },
+        {
+          "name": "Toa Payoh",
+          "tier": "solid",
+          "aliases": [
+            "TPY"
+          ]
+        },
+        {
+          "name": "Jurong East",
+          "tier": "solid"
+        },
+        {
+          "name": "Jurong West",
+          "tier": "solid"
+        },
+        {
+          "name": "Yishun",
+          "tier": "solid"
+        },
+        {
+          "name": "Punggol",
+          "tier": "solid"
+        },
+        {
+          "name": "Sengkang",
+          "tier": "solid"
+        },
+        {
+          "name": "Hougang",
+          "tier": "solid"
+        },
+        {
+          "name": "Clementi",
+          "tier": "solid"
+        },
+        {
+          "name": "Queenstown",
+          "tier": "solid"
+        },
+        {
+          "name": "Pasir Ris",
+          "tier": "solid"
+        },
+        {
+          "name": "Choa Chu Kang",
+          "tier": "solid",
+          "aliases": [
+            "CCK"
+          ]
+        },
+        {
+          "name": "Bukit Batok",
+          "tier": "solid"
+        },
+        {
+          "name": "Serangoon",
+          "tier": "solid"
+        },
+        {
+          "name": "Geylang",
+          "tier": "solid"
+        },
+        {
+          "name": "Changi",
+          "tier": "solid"
+        },
+        {
+          "name": "Bukit Merah",
+          "tier": "solid"
+        },
+        {
+          "name": "Bukit Panjang",
+          "tier": "solid"
+        },
+        {
+          "name": "Bukit Timah",
+          "tier": "solid"
+        },
+        {
+          "name": "Novena",
+          "tier": "solid"
+        },
+        {
+          "name": "Newton",
+          "tier": "solid"
+        },
+        {
+          "name": "Kallang",
+          "tier": "solid"
+        },
+        {
+          "name": "Marine Parade",
+          "tier": "solid"
+        },
+        {
+          "name": "Sembawang",
+          "tier": "solid"
+        },
+        {
+          "name": "Tengah",
+          "tier": "rare"
+        },
+        {
+          "name": "Paya Lebar",
+          "tier": "rare"
+        },
+        {
+          "name": "Seletar",
+          "tier": "rare"
+        },
+        {
+          "name": "Mandai",
+          "tier": "rare"
+        },
+        {
+          "name": "Lim Chu Kang",
+          "tier": "rare"
+        },
+        {
+          "name": "Tuas",
+          "tier": "rare"
+        },
+        {
+          "name": "Pioneer",
+          "tier": "rare"
+        },
+        {
+          "name": "Boon Lay",
+          "tier": "rare"
+        },
+        {
+          "name": "Outram",
+          "tier": "rare"
+        },
+        {
+          "name": "River Valley",
+          "tier": "rare"
+        },
+        {
+          "name": "Rochor",
+          "tier": "rare"
+        },
+        {
+          "name": "Museum",
+          "tier": "rare"
+        },
+        {
+          "name": "Singapore River",
+          "tier": "rare"
+        },
+        {
+          "name": "Marina South",
+          "tier": "rare"
+        },
+        {
+          "name": "Sungei Kadut",
+          "tier": "rare"
+        },
+        {
+          "name": "Southern Islands",
+          "tier": "rare"
+        },
+        {
+          "name": "Tanglin",
+          "tier": "rare"
+        },
+        {
+          "name": "Straits View",
+          "tier": "ulu"
+        },
+        {
+          "name": "Marina East",
+          "tier": "ulu"
+        },
+        {
+          "name": "Changi Bay",
+          "tier": "ulu"
+        },
+        {
+          "name": "North-Eastern Islands",
+          "tier": "ulu"
+        },
+        {
+          "name": "Western Islands",
+          "tier": "ulu"
+        },
+        {
+          "name": "Western Water Catchment",
+          "tier": "ulu"
+        },
+        {
+          "name": "Central Water Catchment",
+          "tier": "ulu"
+        },
+        {
+          "name": "Simpang",
+          "tier": "gem"
+        }
+      ]
+    },
+    {
+      "id": "places-offshore-islands",
+      "category": "places",
+      "text": "Name an island of Singapore (not the main island!)",
+      "note": "Any existing offshore island, natural or reclaimed (Sentosa Cove's islands count). Islets in lakes and the little beach islets off Sentosa don't.",
+      "answers": [
+        {
+          "name": "Sentosa",
+          "tier": "common",
+          "aliases": [
+            "Sentosa Island",
+            "Pulau Blakang Mati",
+            "Blakang Mati"
+          ]
+        },
+        {
+          "name": "Pulau Ubin",
+          "tier": "common",
+          "aliases": [
+            "Ubin",
+            "Ubin Island"
+          ]
+        },
+        {
+          "name": "Pulau Tekong",
+          "tier": "common",
+          "aliases": [
+            "Tekong",
+            "Tekong Island"
+          ]
+        },
+        {
+          "name": "St John's Island",
+          "tier": "trap",
+          "aliases": [
+            "Saint John's Island",
+            "St Johns",
+            "Pulau Sakijang Bendera"
+          ]
+        },
+        {
+          "name": "Kusu Island",
+          "tier": "trap",
+          "aliases": [
+            "Kusu",
+            "Pulau Kusu",
+            "Pulau Tembakul",
+            "Turtle Island"
+          ]
+        },
+        {
+          "name": "Jurong Island",
+          "tier": "solid",
+          "aliases": [
+            "Pulau Jurong"
+          ]
+        },
+        {
+          "name": "Coney Island",
+          "tier": "solid",
+          "aliases": [
+            "Pulau Serangoon",
+            "Coney"
+          ]
+        },
+        {
+          "name": "Lazarus Island",
+          "tier": "solid",
+          "aliases": [
+            "Lazarus",
+            "Pulau Sakijang Pelepah"
+          ]
+        },
+        {
+          "name": "Sisters' Islands",
+          "tier": "solid",
+          "aliases": [
+            "Sisters Island",
+            "Big Sister's Island",
+            "Little Sister's Island",
+            "Big Sister",
+            "Little Sister",
+            "Pulau Subar Laut",
+            "Pulau Subar Darat"
+          ]
+        },
+        {
+          "name": "Pulau Semakau",
+          "tier": "solid",
+          "aliases": [
+            "Semakau",
+            "Semakau Island"
+          ]
+        },
+        {
+          "name": "Pulau Hantu",
+          "tier": "solid",
+          "aliases": [
+            "Hantu",
+            "Hantu Island"
+          ]
+        },
+        {
+          "name": "Pulau Bukom",
+          "tier": "solid",
+          "aliases": [
+            "Bukom",
+            "Bukom Island"
+          ]
+        },
+        {
+          "name": "Pulau Brani",
+          "tier": "rare",
+          "aliases": [
+            "Brani",
+            "Brani Island"
+          ]
+        },
+        {
+          "name": "Pedra Branca",
+          "tier": "rare",
+          "aliases": [
+            "Pulau Batu Puteh"
+          ]
+        },
+        {
+          "name": "Pulau Sekudu",
+          "tier": "rare",
+          "aliases": [
+            "Sekudu",
+            "Sekudu Island",
+            "Frog Island"
+          ]
+        },
+        {
+          "name": "Pulau Seringat",
+          "tier": "rare",
+          "aliases": [
+            "Seringat",
+            "Seringat Island"
+          ]
+        },
+        {
+          "name": "Pulau Tekukor",
+          "tier": "rare",
+          "aliases": [
+            "Tekukor",
+            "Tekukor Island"
+          ]
+        },
+        {
+          "name": "Pulau Ketam",
+          "tier": "rare",
+          "aliases": [
+            "Ketam",
+            "Ketam Island"
+          ]
+        },
+        {
+          "name": "Pulau Sudong",
+          "tier": "rare",
+          "aliases": [
+            "Sudong",
+            "Sudong Island"
+          ]
+        },
+        {
+          "name": "Pulau Senang",
+          "tier": "rare",
+          "aliases": [
+            "Senang",
+            "Senang Island"
+          ]
+        },
+        {
+          "name": "Pulau Pawai",
+          "tier": "rare",
+          "aliases": [
+            "Pawai",
+            "Pawai Island"
+          ]
+        },
+        {
+          "name": "Keppel Island",
+          "tier": "rare",
+          "aliases": [
+            "Pulau Keppel"
+          ]
+        },
+        {
+          "name": "Pulau Seletar",
+          "tier": "rare",
+          "aliases": [
+            "Seletar",
+            "Seletar Island"
+          ]
+        },
+        {
+          "name": "Pulau Sebarok",
+          "tier": "rare",
+          "aliases": [
+            "Sebarok",
+            "Sebarok Island"
+          ]
+        },
+        {
+          "name": "Sultan Shoal",
+          "tier": "rare"
+        },
+        {
+          "name": "Pulau Bukom Kechil",
+          "tier": "ulu",
+          "aliases": [
+            "Bukom Kechil",
+            "Bukom Kechil Island"
+          ]
+        },
+        {
+          "name": "Pulau Biola",
+          "tier": "ulu",
+          "aliases": [
+            "Biola",
+            "Biola Island"
+          ]
+        },
+        {
+          "name": "Pulau Jong",
+          "tier": "ulu",
+          "aliases": [
+            "Jong",
+            "Jong Island"
+          ]
+        },
+        {
+          "name": "Pulau Punggol Barat",
+          "tier": "ulu",
+          "aliases": [
+            "Punggol Barat",
+            "Punggol Barat Island"
+          ]
+        },
+        {
+          "name": "Pulau Punggol Timor",
+          "tier": "ulu",
+          "aliases": [
+            "Punggol Timor",
+            "Punggol Timor Island"
+          ]
+        },
+        {
+          "name": "Pulau Sarimbun",
+          "tier": "ulu",
+          "aliases": [
+            "Sarimbun",
+            "Sarimbun Island"
+          ]
+        },
+        {
+          "name": "Pulau Unum",
+          "tier": "ulu",
+          "aliases": [
+            "Unum",
+            "Unum Island"
+          ]
+        },
+        {
+          "name": "Pulau Khatib Bongsu",
+          "tier": "ulu",
+          "aliases": [
+            "Khatib Bongsu",
+            "Khatib Bongsu Island"
+          ]
+        },
+        {
+          "name": "Pulau Damar Laut",
+          "tier": "ulu",
+          "aliases": [
+            "Damar Laut",
+            "Damar Laut Island"
+          ]
+        },
+        {
+          "name": "Pulau Salu",
+          "tier": "ulu",
+          "aliases": [
+            "Salu",
+            "Salu Island"
+          ]
+        },
+        {
+          "name": "Pulau Samulun",
+          "tier": "ulu",
+          "aliases": [
+            "Samulun",
+            "Samulun Island"
+          ]
+        },
+        {
+          "name": "Pulau Berkas",
+          "tier": "ulu",
+          "aliases": [
+            "Berkas",
+            "Berkas Island"
+          ]
+        },
+        {
+          "name": "Pulau Buloh",
+          "tier": "ulu",
+          "aliases": [
+            "Buloh",
+            "Buloh Island"
+          ]
+        },
+        {
+          "name": "Pulau Anak Bukom",
+          "tier": "ulu",
+          "aliases": [
+            "Anak Bukom",
+            "Anak Bukom Island"
+          ]
+        },
+        {
+          "name": "Pulau Ular",
+          "tier": "ulu",
+          "aliases": [
+            "Ular",
+            "Ular Island"
+          ]
+        },
+        {
+          "name": "Pulau Pergam",
+          "tier": "ulu",
+          "aliases": [
+            "Pergam",
+            "Pergam Island"
+          ]
+        },
+        {
+          "name": "Pulau Bajau",
+          "tier": "ulu",
+          "aliases": [
+            "Bajau",
+            "Bajau Island"
+          ]
+        },
+        {
+          "name": "Pulau Malang Siajar",
+          "tier": "ulu",
+          "aliases": [
+            "Malang Siajar",
+            "Malang Siajar Island"
+          ]
+        },
+        {
+          "name": "Pulau Damien",
+          "tier": "ulu",
+          "aliases": [
+            "Damien",
+            "Damien Island"
+          ]
+        },
+        {
+          "name": "Batu Belalai",
+          "tier": "ulu"
+        },
+        {
+          "name": "Pulau Renggis",
+          "tier": "ulu",
+          "aliases": [
+            "Renggis",
+            "Renggis Island"
+          ]
+        },
+        {
+          "name": "Pulau Palawan",
+          "tier": "ulu",
+          "aliases": [
+            "Palawan",
+            "Palawan Island"
+          ]
+        },
+        {
+          "name": "Pulau Seringat Kechil",
+          "tier": "ulu",
+          "aliases": [
+            "Seringat Kechil",
+            "Seringat Kechil Island"
+          ]
+        },
+        {
+          "name": "Pearl Island",
+          "tier": "ulu"
+        },
+        {
+          "name": "Coral Island",
+          "tier": "ulu"
+        },
+        {
+          "name": "Sandy Island",
+          "tier": "ulu"
+        },
+        {
+          "name": "Treasure Island",
+          "tier": "ulu"
+        },
+        {
+          "name": "Paradise Island",
+          "tier": "ulu"
+        },
+        {
+          "name": "Pulau Satumu",
+          "tier": "gem",
+          "aliases": [
+            "Satumu",
+            "Satumu Island"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "places-parks-nature-reserves",
+      "category": "places",
+      "text": "Name a park, garden or nature reserve in Singapore",
+      "note": "Parks, gardens, nature parks and nature reserves count. Park connectors don't.",
+      "answers": [
+        {
+          "name": "East Coast Park",
+          "tier": "common",
+          "aliases": [
+            "ECP",
+            "East Coast"
+          ]
+        },
+        {
+          "name": "Singapore Botanic Gardens",
+          "tier": "common",
+          "aliases": [
+            "Botanic Gardens",
+            "Botanical Gardens",
+            "Botanics",
+            "SBG"
+          ]
+        },
+        {
+          "name": "Gardens by the Bay",
+          "tier": "common",
+          "aliases": [
+            "GBTB",
+            "Gardens by the Bay East",
+            "Bay East Garden"
+          ]
+        },
+        {
+          "name": "MacRitchie Reservoir Park",
+          "tier": "common",
+          "aliases": [
+            "MacRitchie",
+            "MacRitchie Reservoir",
+            "MacRitchie Nature Trail"
+          ]
+        },
+        {
+          "name": "Fort Canning Park",
+          "tier": "trap",
+          "aliases": [
+            "Fort Canning"
+          ]
+        },
+        {
+          "name": "Bukit Timah Nature Reserve",
+          "tier": "solid",
+          "aliases": [
+            "Bukit Timah"
+          ]
+        },
+        {
+          "name": "West Coast Park",
+          "tier": "solid",
+          "aliases": [
+            "West Coast"
+          ]
+        },
+        {
+          "name": "Pasir Ris Park",
+          "tier": "solid",
+          "aliases": [
+            "Pasir Ris"
+          ]
+        },
+        {
+          "name": "Bishan-Ang Mo Kio Park",
+          "tier": "solid",
+          "aliases": [
+            "Bishan Park",
+            "Bishan AMK Park",
+            "Bishan-Ang Mo Kio"
+          ]
+        },
+        {
+          "name": "Jurong Lake Gardens",
+          "tier": "solid"
+        },
+        {
+          "name": "Labrador Nature Reserve",
+          "tier": "solid",
+          "aliases": [
+            "Labrador Park",
+            "Labrador"
+          ]
+        },
+        {
+          "name": "Sungei Buloh Wetland Reserve",
+          "tier": "solid",
+          "aliases": [
+            "Sungei Buloh Nature Reserve",
+            "Sungei Buloh"
+          ]
+        },
+        {
+          "name": "Mount Faber Park",
+          "tier": "solid",
+          "aliases": [
+            "Mount Faber"
+          ]
+        },
+        {
+          "name": "Kent Ridge Park",
+          "tier": "solid",
+          "aliases": [
+            "Kent Ridge"
+          ]
+        },
+        {
+          "name": "Punggol Waterway Park",
+          "tier": "solid",
+          "aliases": [
+            "Punggol Waterway"
+          ]
+        },
+        {
+          "name": "Changi Beach Park",
+          "tier": "solid",
+          "aliases": [
+            "Changi Beach"
+          ]
+        },
+        {
+          "name": "Coney Island Park",
+          "tier": "solid",
+          "aliases": [
+            "Coney Island"
+          ]
+        },
+        {
+          "name": "Merlion Park",
+          "tier": "solid"
+        },
+        {
+          "name": "HortPark",
+          "tier": "solid"
+        },
+        {
+          "name": "Chinese Garden",
+          "tier": "solid"
+        },
+        {
+          "name": "Japanese Garden",
+          "tier": "solid"
+        },
+        {
+          "name": "Central Catchment Nature Reserve",
+          "tier": "solid",
+          "aliases": [
+            "Central Catchment"
+          ]
+        },
+        {
+          "name": "Bedok Reservoir Park",
+          "tier": "solid",
+          "aliases": [
+            "Bedok Reservoir"
+          ]
+        },
+        {
+          "name": "Telok Blangah Hill Park",
+          "tier": "solid",
+          "aliases": [
+            "Telok Blangah Hill"
+          ]
+        },
+        {
+          "name": "Esplanade Park",
+          "tier": "solid"
+        },
+        {
+          "name": "Southern Ridges",
+          "tier": "solid"
+        },
+        {
+          "name": "Chestnut Nature Park",
+          "tier": "rare",
+          "aliases": [
+            "Chestnut"
+          ]
+        },
+        {
+          "name": "Windsor Nature Park",
+          "tier": "rare",
+          "aliases": [
+            "Windsor"
+          ]
+        },
+        {
+          "name": "Thomson Nature Park",
+          "tier": "rare",
+          "aliases": [
+            "Thomson"
+          ]
+        },
+        {
+          "name": "Dairy Farm Nature Park",
+          "tier": "rare",
+          "aliases": [
+            "Dairy Farm"
+          ]
+        },
+        {
+          "name": "Hindhede Nature Park",
+          "tier": "rare",
+          "aliases": [
+            "Hindhede"
+          ]
+        },
+        {
+          "name": "Bukit Batok Nature Park",
+          "tier": "rare",
+          "aliases": [
+            "Bukit Batok"
+          ]
+        },
+        {
+          "name": "Little Guilin",
+          "tier": "rare",
+          "aliases": [
+            "Bukit Batok Town Park"
+          ]
+        },
+        {
+          "name": "Admiralty Park",
+          "tier": "rare"
+        },
+        {
+          "name": "Sembawang Park",
+          "tier": "rare"
+        },
+        {
+          "name": "Woodlands Waterfront Park",
+          "tier": "rare",
+          "aliases": [
+            "Woodlands Waterfront"
+          ]
+        },
+        {
+          "name": "Lower Seletar Reservoir Park",
+          "tier": "rare",
+          "aliases": [
+            "Lower Seletar Reservoir"
+          ]
+        },
+        {
+          "name": "Lower Peirce Reservoir Park",
+          "tier": "rare",
+          "aliases": [
+            "Lower Peirce Reservoir"
+          ]
+        },
+        {
+          "name": "Upper Seletar Reservoir Park",
+          "tier": "rare",
+          "aliases": [
+            "Upper Seletar Reservoir"
+          ]
+        },
+        {
+          "name": "Kranji Marshes",
+          "tier": "rare"
+        },
+        {
+          "name": "Hong Lim Park",
+          "tier": "rare",
+          "aliases": [
+            "Hong Lim"
+          ]
+        },
+        {
+          "name": "Tiong Bahru Park",
+          "tier": "rare"
+        },
+        {
+          "name": "Toa Payoh Town Park",
+          "tier": "rare"
+        },
+        {
+          "name": "Yishun Park",
+          "tier": "rare"
+        },
+        {
+          "name": "Sengkang Riverside Park",
+          "tier": "rare",
+          "aliases": [
+            "Sengkang Riverside"
+          ]
+        },
+        {
+          "name": "Clementi Woods Park",
+          "tier": "rare",
+          "aliases": [
+            "Clementi Woods"
+          ]
+        },
+        {
+          "name": "Jacob Ballas Children's Garden",
+          "tier": "rare"
+        },
+        {
+          "name": "Istana Park",
+          "tier": "rare"
+        },
+        {
+          "name": "Pearl's Hill City Park",
+          "tier": "rare",
+          "aliases": [
+            "Pearl's Hill Park"
+          ]
+        },
+        {
+          "name": "Mount Emily Park",
+          "tier": "rare",
+          "aliases": [
+            "Mount Emily"
+          ]
+        },
+        {
+          "name": "Kallang Riverside Park",
+          "tier": "rare",
+          "aliases": [
+            "Kallang Riverside"
+          ]
+        },
+        {
+          "name": "Rail Corridor",
+          "tier": "rare"
+        },
+        {
+          "name": "Chek Jawa Wetlands",
+          "tier": "rare",
+          "aliases": [
+            "Chek Jawa"
+          ]
+        },
+        {
+          "name": "National Orchid Garden",
+          "tier": "rare",
+          "aliases": [
+            "Orchid Garden"
+          ]
+        },
+        {
+          "name": "Zhenghua Nature Park",
+          "tier": "ulu",
+          "aliases": [
+            "Zhenghua Park",
+            "Zhenghua"
+          ]
+        },
+        {
+          "name": "Springleaf Nature Park",
+          "tier": "ulu",
+          "aliases": [
+            "Springleaf"
+          ]
+        },
+        {
+          "name": "Rifle Range Nature Park",
+          "tier": "ulu",
+          "aliases": [
+            "Rifle Range"
+          ]
+        },
+        {
+          "name": "Kranji Coastal Nature Park",
+          "tier": "ulu",
+          "aliases": [
+            "Kranji Coastal"
+          ]
+        },
+        {
+          "name": "Lim Chu Kang Nature Park",
+          "tier": "ulu",
+          "aliases": [
+            "Lim Chu Kang"
+          ]
+        },
+        {
+          "name": "Mandai Mangrove and Mudflat Nature Park",
+          "tier": "ulu",
+          "aliases": [
+            "Mandai Mangrove and Mudflat",
+            "Mandai Mangrove"
+          ]
+        },
+        {
+          "name": "Tampines Eco Green",
+          "tier": "ulu"
+        },
+        {
+          "name": "Sembawang Hot Spring Park",
+          "tier": "gem",
+          "aliases": [
+            "Sembawang Hot Spring"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "places-orchard-malls",
+      "category": "places",
+      "text": "Name a shopping mall along Orchard Road",
+      "note": "Malls just off Orchard Road count too (Scotts Road, Tanglin Road, Dhoby Ghaut). Closed or demolished malls don't.",
+      "answers": [
+        {
+          "name": "ION Orchard",
+          "tier": "common",
+          "aliases": [
+            "ION"
+          ]
+        },
+        {
+          "name": "Ngee Ann City",
+          "tier": "common",
+          "aliases": [
+            "Takashimaya",
+            "Taka",
+            "Takashimaya Shopping Centre"
+          ]
+        },
+        {
+          "name": "Paragon",
+          "tier": "common"
+        },
+        {
+          "name": "Plaza Singapura",
+          "tier": "common",
+          "aliases": [
+            "Plaza Sing",
+            "PS",
+            "The Atrium@Orchard"
+          ]
+        },
+        {
+          "name": "Lucky Plaza",
+          "tier": "trap"
+        },
+        {
+          "name": "Wisma Atria",
+          "tier": "solid",
+          "aliases": [
+            "Wisma"
+          ]
+        },
+        {
+          "name": "Tangs",
+          "tier": "solid",
+          "aliases": [
+            "Tang Plaza",
+            "Tangs Plaza",
+            "Tangs Orchard"
+          ]
+        },
+        {
+          "name": "Far East Plaza",
+          "tier": "solid"
+        },
+        {
+          "name": "313@somerset",
+          "tier": "solid",
+          "aliases": [
+            "Somerset 313",
+            "313"
+          ]
+        },
+        {
+          "name": "Orchard Central",
+          "tier": "solid"
+        },
+        {
+          "name": "The Centrepoint",
+          "tier": "solid"
+        },
+        {
+          "name": "Orchard Gateway",
+          "tier": "solid"
+        },
+        {
+          "name": "Wheelock Place",
+          "tier": "solid"
+        },
+        {
+          "name": "Shaw House",
+          "tier": "solid",
+          "aliases": [
+            "Shaw Centre",
+            "Isetan Scotts",
+            "Shaw House and Centre"
+          ]
+        },
+        {
+          "name": "Cineleisure Orchard",
+          "tier": "solid",
+          "aliases": [
+            "Cineleisure",
+            "Cathay Cineleisure",
+            "Cathay Cineleisure Orchard"
+          ]
+        },
+        {
+          "name": "Mandarin Gallery",
+          "tier": "solid"
+        },
+        {
+          "name": "Scotts Square",
+          "tier": "solid"
+        },
+        {
+          "name": "Tanglin Mall",
+          "tier": "solid"
+        },
+        {
+          "name": "Orchard Towers",
+          "tier": "rare"
+        },
+        {
+          "name": "Palais Renaissance",
+          "tier": "rare"
+        },
+        {
+          "name": "Forum The Shopping Mall",
+          "tier": "rare",
+          "aliases": [
+            "Forum"
+          ]
+        },
+        {
+          "name": "Liat Towers",
+          "tier": "rare"
+        },
+        {
+          "name": "Orchard Plaza",
+          "tier": "rare"
+        },
+        {
+          "name": "Midpoint Orchard",
+          "tier": "rare"
+        },
+        {
+          "name": "The Heeren",
+          "tier": "rare"
+        },
+        {
+          "name": "Delfi Orchard",
+          "tier": "rare"
+        },
+        {
+          "name": "Orchard Point",
+          "tier": "rare"
+        },
+        {
+          "name": "Orchard Shopping Centre",
+          "tier": "ulu"
+        },
+        {
+          "name": "Pacific Plaza",
+          "tier": "ulu"
+        },
+        {
+          "name": "Design Orchard",
+          "tier": "ulu"
+        },
+        {
+          "name": "Cuppage Plaza",
+          "tier": "gem"
+        }
+      ]
+    },
+    {
+      "id": "places-hawker-centres",
+      "category": "places",
+      "text": "Name a hawker centre",
+      "note": "Hawker centres and markets with cooked-food stalls. Coffee shops and food courts don't count.",
+      "answers": [
+        {
+          "name": "Maxwell Food Centre",
+          "tier": "common",
+          "aliases": [
+            "Maxwell"
+          ]
+        },
+        {
+          "name": "Lau Pa Sat",
+          "tier": "common",
+          "aliases": [
+            "Telok Ayer Market",
+            "Lau Pa Sat Festival Market"
+          ]
+        },
+        {
+          "name": "Newton Food Centre",
+          "tier": "common",
+          "aliases": [
+            "Newton Circus",
+            "Newton"
+          ]
+        },
+        {
+          "name": "Old Airport Road Food Centre",
+          "tier": "common",
+          "aliases": [
+            "Old Airport Road",
+            "51 Old Airport Road",
+            "Blk 51 Old Airport Road"
+          ]
+        },
+        {
+          "name": "Chomp Chomp Food Centre",
+          "tier": "trap",
+          "aliases": [
+            "Chomp Chomp"
+          ]
+        },
+        {
+          "name": "Tiong Bahru Market",
+          "tier": "solid",
+          "aliases": [
+            "Tiong Bahru Food Centre",
+            "Tiong Bahru"
+          ]
+        },
+        {
+          "name": "Chinatown Complex",
+          "tier": "solid",
+          "aliases": [
+            "Chinatown Complex Market & Hawker Centre",
+            "Chinatown Complex Food Centre"
+          ]
+        },
+        {
+          "name": "Amoy Street Food Centre",
+          "tier": "solid",
+          "aliases": [
+            "Amoy Street"
+          ]
+        },
+        {
+          "name": "Golden Mile Food Centre",
+          "tier": "solid",
+          "aliases": [
+            "Golden Mile"
+          ]
+        },
+        {
+          "name": "Tekka Centre",
+          "tier": "solid",
+          "aliases": [
+            "Tekka Market",
+            "Tekka"
+          ]
+        },
+        {
+          "name": "Adam Road Food Centre",
+          "tier": "solid",
+          "aliases": [
+            "Adam Food Centre",
+            "Adam Road"
+          ]
+        },
+        {
+          "name": "East Coast Lagoon Food Village",
+          "tier": "solid",
+          "aliases": [
+            "East Coast Lagoon",
+            "Lagoon Food Village"
+          ]
+        },
+        {
+          "name": "Bedok 85",
+          "tier": "solid",
+          "aliases": [
+            "Fengshan Market & Food Centre",
+            "Fengshan Food Centre",
+            "Fengshan",
+            "85 Bedok North",
+            "Blk 85 Bedok North Street 4"
+          ]
+        },
+        {
+          "name": "Changi Village Hawker Centre",
+          "tier": "solid",
+          "aliases": [
+            "Changi Village",
+            "Changi Village Food Centre",
+            "Changi Village Market"
+          ]
+        },
+        {
+          "name": "Hong Lim Market & Food Centre",
+          "tier": "solid",
+          "aliases": [
+            "Hong Lim",
+            "Hong Lim Food Centre"
+          ]
+        },
+        {
+          "name": "Albert Centre",
+          "tier": "solid",
+          "aliases": [
+            "Albert Centre Market & Food Centre",
+            "Albert Centre Food Centre"
+          ]
+        },
+        {
+          "name": "Whampoa Makan Place",
+          "tier": "solid",
+          "aliases": [
+            "Whampoa",
+            "Whampoa Food Centre",
+            "Whampoa Market",
+            "Whampoa Drive Food Centre"
+          ]
+        },
+        {
+          "name": "Ghim Moh Market & Food Centre",
+          "tier": "solid",
+          "aliases": [
+            "Ghim Moh",
+            "Ghim Moh Market",
+            "Ghim Moh Food Centre"
+          ]
+        },
+        {
+          "name": "ABC Brickworks Market & Food Centre",
+          "tier": "solid",
+          "aliases": [
+            "ABC Brickworks",
+            "ABC Market",
+            "ABC Brickworks Food Centre"
+          ]
+        },
+        {
+          "name": "Alexandra Village Food Centre",
+          "tier": "solid",
+          "aliases": [
+            "Alexandra Village"
+          ]
+        },
+        {
+          "name": "Geylang Serai Market",
+          "tier": "solid",
+          "aliases": [
+            "Geylang Serai",
+            "Geylang Serai Food Centre"
+          ]
+        },
+        {
+          "name": "Kovan Market & Food Centre",
+          "tier": "solid",
+          "aliases": [
+            "Kovan Market",
+            "Kovan Food Centre",
+            "Kovan 209",
+            "Kovan"
+          ]
+        },
+        {
+          "name": "Holland Village Market & Food Centre",
+          "tier": "solid",
+          "aliases": [
+            "Holland Village Food Centre",
+            "Holland Village Market",
+            "Holland V Food Centre",
+            "Holland Village"
+          ]
+        },
+        {
+          "name": "Hawker Centre @ Our Tampines Hub",
+          "tier": "solid",
+          "aliases": [
+            "Our Tampines Hub",
+            "OTH",
+            "Our Tampines Hub Hawker Centre"
+          ]
+        },
+        {
+          "name": "Satay by the Bay",
+          "tier": "solid"
+        },
+        {
+          "name": "Bukit Timah Market",
+          "tier": "solid",
+          "aliases": [
+            "Bukit Timah Food Centre",
+            "Bukit Timah Market & Food Centre",
+            "Bukit Timah"
+          ]
+        },
+        {
+          "name": "People's Park Food Centre",
+          "tier": "rare",
+          "aliases": [
+            "People's Park"
+          ]
+        },
+        {
+          "name": "Berseh Food Centre",
+          "tier": "rare",
+          "aliases": [
+            "Berseh"
+          ]
+        },
+        {
+          "name": "Beo Crescent Market",
+          "tier": "rare",
+          "aliases": [
+            "Beo Crescent"
+          ]
+        },
+        {
+          "name": "Zion Riverside Food Centre",
+          "tier": "rare",
+          "aliases": [
+            "Zion Riverside",
+            "Zion Road Food Centre"
+          ]
+        },
+        {
+          "name": "Dunman Food Centre",
+          "tier": "rare",
+          "aliases": [
+            "Dunman"
+          ]
+        },
+        {
+          "name": "Commonwealth Crescent Market",
+          "tier": "rare",
+          "aliases": [
+            "Commonwealth Crescent"
+          ]
+        },
+        {
+          "name": "Margaret Drive Hawker Centre",
+          "tier": "rare",
+          "aliases": [
+            "Margaret Drive"
+          ]
+        },
+        {
+          "name": "Pasir Panjang Food Centre",
+          "tier": "rare",
+          "aliases": [
+            "Pasir Panjang"
+          ]
+        },
+        {
+          "name": "Sembawang Hills Food Centre",
+          "tier": "rare",
+          "aliases": [
+            "Sembawang Hills"
+          ]
+        },
+        {
+          "name": "Serangoon Garden Market",
+          "tier": "rare",
+          "aliases": [
+            "Serangoon Garden Market & Food Centre",
+            "Serangoon Garden Food Centre",
+            "Serangoon Garden"
+          ]
+        },
+        {
+          "name": "Taman Jurong Market & Food Centre",
+          "tier": "rare",
+          "aliases": [
+            "Taman Jurong",
+            "Taman Jurong Food Centre"
+          ]
+        },
+        {
+          "name": "Tanglin Halt Market",
+          "tier": "rare",
+          "aliases": [
+            "Tanglin Halt",
+            "Tanglin Halt Food Centre"
+          ]
+        },
+        {
+          "name": "Redhill Food Centre",
+          "tier": "rare",
+          "aliases": [
+            "Redhill Market",
+            "Redhill Lane",
+            "Redhill Lane Food Centre",
+            "Redhill"
+          ]
+        },
+        {
+          "name": "Mei Chin Road Market",
+          "tier": "rare",
+          "aliases": [
+            "Mei Chin",
+            "Mei Chin Food Centre",
+            "Mei Chin Market",
+            "Mei Chin Road"
+          ]
+        },
+        {
+          "name": "Haig Road Market & Food Centre",
+          "tier": "rare",
+          "aliases": [
+            "Haig Road",
+            "Haig Road Market",
+            "Haig Road Food Centre"
+          ]
+        },
+        {
+          "name": "Circuit Road Hawker Centre",
+          "tier": "rare",
+          "aliases": [
+            "Circuit Road",
+            "Circuit Road Market",
+            "Circuit Road Food Centre"
+          ]
+        },
+        {
+          "name": "Marine Parade Central Market & Food Centre",
+          "tier": "rare",
+          "aliases": [
+            "Marine Parade Central",
+            "Marine Parade Food Centre",
+            "84 Marine Parade Central"
+          ]
+        },
+        {
+          "name": "Kampung Admiralty Hawker Centre",
+          "tier": "rare",
+          "aliases": [
+            "Kampung Admiralty"
+          ]
+        },
+        {
+          "name": "Yishun Park Hawker Centre",
+          "tier": "rare",
+          "aliases": [
+            "Yishun Park"
+          ]
+        },
+        {
+          "name": "Pasir Ris Central Hawker Centre",
+          "tier": "rare",
+          "aliases": [
+            "Pasir Ris Central"
+          ]
+        },
+        {
+          "name": "Bukit Panjang Hawker Centre",
+          "tier": "rare",
+          "aliases": [
+            "Bukit Panjang Hawker Centre & Market",
+            "Bukit Panjang"
+          ]
+        },
+        {
+          "name": "Chong Pang Market & Food Centre",
+          "tier": "rare",
+          "aliases": [
+            "Chong Pang",
+            "Chong Pang Market",
+            "Chong Pang Food Centre"
+          ]
+        },
+        {
+          "name": "Ci Yuan Hawker Centre",
+          "tier": "rare",
+          "aliases": [
+            "Ci Yuan"
+          ]
+        },
+        {
+          "name": "Seah Im Food Centre",
+          "tier": "rare",
+          "aliases": [
+            "Seah Im"
+          ]
+        },
+        {
+          "name": "North Bridge Road Market & Food Centre",
+          "tier": "rare",
+          "aliases": [
+            "North Bridge Road Food Centre",
+            "North Bridge Road Market",
+            "North Bridge Road"
+          ]
+        },
+        {
+          "name": "Jurong West 505 Market & Food Centre",
+          "tier": "rare",
+          "aliases": [
+            "Jurong West 505",
+            "505 Jurong West",
+            "Blk 505 Jurong West Street 52"
+          ]
+        },
+        {
+          "name": "Clementi 448 Market & Food Centre",
+          "tier": "rare",
+          "aliases": [
+            "Clementi 448",
+            "448 Clementi",
+            "448 Clementi Ave 3"
+          ]
+        },
+        {
+          "name": "Toa Payoh Lorong 8 Market & Food Centre",
+          "tier": "rare",
+          "aliases": [
+            "Toa Payoh Lorong 8",
+            "Lorong 8 Toa Payoh",
+            "Toa Payoh Lor 8",
+            "Lor 8 Toa Payoh",
+            "210 Lorong 8 Toa Payoh"
+          ]
+        },
+        {
+          "name": "Ang Mo Kio 628 Market",
+          "tier": "rare",
+          "aliases": [
+            "628 Ang Mo Kio",
+            "AMK 628",
+            "Ang Mo Kio 628",
+            "628 Market"
+          ]
+        },
+        {
+          "name": "Bedok Corner Food Centre",
+          "tier": "rare",
+          "aliases": [
+            "Bedok Food Centre",
+            "Bedok Corner"
+          ]
+        },
+        {
+          "name": "Pek Kio Market & Food Centre",
+          "tier": "rare",
+          "aliases": [
+            "Pek Kio",
+            "Pek Kio Market",
+            "Pek Kio Food Centre"
+          ]
+        },
+        {
+          "name": "Kallang Estate Market",
+          "tier": "rare",
+          "aliases": [
+            "17 Old Airport Road",
+            "Kallang Estate Food Centre",
+            "Kallang Estate"
+          ]
+        },
+        {
+          "name": "Marsiling Mall Hawker Centre",
+          "tier": "ulu",
+          "aliases": [
+            "Marsiling Mall"
+          ]
+        },
+        {
+          "name": "Senja Hawker Centre",
+          "tier": "ulu",
+          "aliases": [
+            "Senja"
+          ]
+        },
+        {
+          "name": "Bukit Canberra Hawker Centre",
+          "tier": "ulu",
+          "aliases": [
+            "Bukit Canberra"
+          ]
+        },
+        {
+          "name": "Buangkok Hawker Centre",
+          "tier": "ulu",
+          "aliases": [
+            "Buangkok"
+          ]
+        },
+        {
+          "name": "Anchorvale Village Hawker Centre",
+          "tier": "ulu",
+          "aliases": [
+            "Anchorvale Village",
+            "Anchorvale"
+          ]
+        },
+        {
+          "name": "Woodleigh Village Hawker Centre",
+          "tier": "ulu",
+          "aliases": [
+            "Woodleigh Village",
+            "Woodleigh"
+          ]
+        },
+        {
+          "name": "Bukit Batok West Hawker Centre",
+          "tier": "ulu",
+          "aliases": [
+            "Bukit Batok West"
+          ]
+        },
+        {
+          "name": "Punggol Coast Hawker Centre",
+          "tier": "ulu",
+          "aliases": [
+            "Punggol Coast"
+          ]
+        },
+        {
+          "name": "One Punggol Hawker Centre",
+          "tier": "ulu",
+          "aliases": [
+            "One Punggol"
+          ]
+        },
+        {
+          "name": "Fernvale Hawker Centre",
+          "tier": "ulu",
+          "aliases": [
+            "Fernvale Hawker Centre and Market",
+            "Fernvale"
+          ]
+        },
+        {
+          "name": "Jurong West Hawker Centre",
+          "tier": "ulu",
+          "aliases": [
+            "Jurong West 50",
+            "JW50",
+            "Jurong West"
+          ]
+        },
+        {
+          "name": "Shunfu Market & Food Centre",
+          "tier": "ulu",
+          "aliases": [
+            "Shunfu",
+            "Shunfu Market",
+            "320 Shunfu Road"
+          ]
+        },
+        {
+          "name": "Empress Road Market & Food Centre",
+          "tier": "ulu",
+          "aliases": [
+            "Empress Road",
+            "Empress Market",
+            "7 Empress Road"
+          ]
+        },
+        {
+          "name": "Bukit Merah View Market & Food Centre",
+          "tier": "ulu",
+          "aliases": [
+            "Bukit Merah View",
+            "115 Bukit Merah View"
+          ]
+        },
+        {
+          "name": "Bukit Merah Central Food Centre",
+          "tier": "ulu",
+          "aliases": [
+            "Bukit Merah Central",
+            "163 Bukit Merah Central"
+          ]
+        },
+        {
+          "name": "Tanjong Pagar Plaza Market & Food Centre",
+          "tier": "ulu",
+          "aliases": [
+            "Tanjong Pagar Plaza",
+            "6 Tanjong Pagar Plaza"
+          ]
+        },
+        {
+          "name": "Geylang Bahru Market & Food Centre",
+          "tier": "ulu",
+          "aliases": [
+            "Geylang Bahru",
+            "69 Geylang Bahru"
+          ]
+        },
+        {
+          "name": "Bendemeer Market & Food Centre",
+          "tier": "ulu",
+          "aliases": [
+            "Bendemeer",
+            "29 Bendemeer Road"
+          ]
+        },
+        {
+          "name": "Upper Boon Keng Market & Food Centre",
+          "tier": "ulu",
+          "aliases": [
+            "Upper Boon Keng",
+            "17 Upper Boon Keng Road"
+          ]
+        },
+        {
+          "name": "Teban Gardens Market & Food Centre",
+          "tier": "ulu",
+          "aliases": [
+            "Teban Gardens",
+            "37A Teban Gardens"
+          ]
+        },
+        {
+          "name": "Toa Payoh Lorong 1 Market & Food Centre",
+          "tier": "ulu",
+          "aliases": [
+            "127 Toa Payoh Lorong 1",
+            "Toa Payoh Lorong 1",
+            "Lorong 1 Toa Payoh",
+            "Toa Payoh West Market"
+          ]
+        },
+        {
+          "name": "Marine Terrace Market",
+          "tier": "ulu",
+          "aliases": [
+            "50A Marine Terrace",
+            "Marine Terrace Food Centre",
+            "Marine Terrace"
+          ]
+        },
+        {
+          "name": "Holland Drive Market & Food Centre",
+          "tier": "ulu",
+          "aliases": [
+            "44 Holland Drive",
+            "Holland Drive"
+          ]
+        },
+        {
+          "name": "Market Street Hawker Centre",
+          "tier": "gem",
+          "aliases": [
+            "Market Street",
+            "Market Street Food Centre"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "places-bridges",
+      "category": "places",
+      "text": "Name a bridge in Singapore",
+      "note": "Road and pedestrian bridges both count, from the Singapore River to Marina Bay and beyond. The Causeway is a causeway, not a bridge!",
+      "answers": [
+        {
+          "name": "Helix Bridge",
+          "tier": "common",
+          "aliases": [
+            "Helix"
+          ]
+        },
+        {
+          "name": "Henderson Waves",
+          "tier": "common"
+        },
+        {
+          "name": "Cavenagh Bridge",
+          "tier": "common",
+          "aliases": [
+            "Cavenagh"
+          ]
+        },
+        {
+          "name": "Anderson Bridge",
+          "tier": "common",
+          "aliases": [
+            "Anderson"
+          ]
+        },
+        {
+          "name": "Benjamin Sheares Bridge",
+          "tier": "trap",
+          "aliases": [
+            "Sheares Bridge",
+            "Benjamin Sheares"
+          ]
+        },
+        {
+          "name": "Elgin Bridge",
+          "tier": "solid",
+          "aliases": [
+            "Elgin"
+          ]
+        },
+        {
+          "name": "Coleman Bridge",
+          "tier": "solid",
+          "aliases": [
+            "Coleman"
+          ]
+        },
+        {
+          "name": "Esplanade Bridge",
+          "tier": "solid",
+          "aliases": [
+            "Esplanade"
+          ]
+        },
+        {
+          "name": "Jubilee Bridge",
+          "tier": "solid",
+          "aliases": [
+            "Jubilee"
+          ]
+        },
+        {
+          "name": "Read Bridge",
+          "tier": "solid",
+          "aliases": [
+            "Read"
+          ]
+        },
+        {
+          "name": "Merdeka Bridge",
+          "tier": "solid",
+          "aliases": [
+            "Merdeka"
+          ]
+        },
+        {
+          "name": "Alexandra Arch",
+          "tier": "solid"
+        },
+        {
+          "name": "Bayfront Bridge",
+          "tier": "solid",
+          "aliases": [
+            "Bayfront"
+          ]
+        },
+        {
+          "name": "Ord Bridge",
+          "tier": "rare",
+          "aliases": [
+            "Ord"
+          ]
+        },
+        {
+          "name": "Clemenceau Bridge",
+          "tier": "rare",
+          "aliases": [
+            "Clemenceau"
+          ]
+        },
+        {
+          "name": "Robertson Bridge",
+          "tier": "rare",
+          "aliases": [
+            "Robertson"
+          ]
+        },
+        {
+          "name": "Jiak Kim Bridge",
+          "tier": "rare",
+          "aliases": [
+            "Jiak Kim"
+          ]
+        },
+        {
+          "name": "Tuas Second Link",
+          "tier": "rare",
+          "aliases": [
+            "Second Link",
+            "Malaysia-Singapore Second Link"
+          ]
+        },
+        {
+          "name": "HSBC TreeTop Walk",
+          "tier": "rare",
+          "aliases": [
+            "TreeTop Walk"
+          ]
+        },
+        {
+          "name": "Keppel Bay Bridge",
+          "tier": "rare",
+          "aliases": [
+            "Keppel Bay"
+          ]
+        },
+        {
+          "name": "Pulau Saigon Bridge",
+          "tier": "ulu",
+          "aliases": [
+            "Pulau Saigon"
+          ]
+        },
+        {
+          "name": "Kim Seng Bridge",
+          "tier": "ulu",
+          "aliases": [
+            "Kim Seng"
+          ]
+        },
+        {
+          "name": "Tanjong Rhu Bridge",
+          "tier": "ulu",
+          "aliases": [
+            "Tanjong Rhu Footbridge",
+            "Tanjong Rhu Suspension Bridge",
+            "Tanjong Rhu"
+          ]
+        },
+        {
+          "name": "Crawford Bridge",
+          "tier": "ulu",
+          "aliases": [
+            "Crawford"
+          ]
+        },
+        {
+          "name": "Sir Arthur's Bridge",
+          "tier": "ulu",
+          "aliases": [
+            "Sir Arthur's"
+          ]
+        },
+        {
+          "name": "Halus Bridge",
+          "tier": "ulu",
+          "aliases": [
+            "Lorong Halus Bridge",
+            "Halus"
+          ]
+        },
+        {
+          "name": "Jelutong Bridge",
+          "tier": "ulu",
+          "aliases": [
+            "Jelutong"
+          ]
+        },
+        {
+          "name": "Alkaff Bridge",
+          "tier": "gem",
+          "aliases": [
+            "Alkaff"
+          ]
+        }
+      ]
+    }
+  ]
+}

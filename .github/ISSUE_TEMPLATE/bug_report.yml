@@ -1,0 +1,55 @@
+name: Bug report
+description: Something in the app is broken or behaving strangely.
+title: "Bug: "
+labels: ["bug"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for reporting! If the problem is with a prompt's answers or tiers, use the **Answer report** form instead.
+  - type: textarea
+    id: what-happened
+    attributes:
+      label: What happened?
+      description: What you saw, and what you expected to see.
+    validations:
+      required: true
+  - type: textarea
+    id: steps
+    attributes:
+      label: Steps to reproduce
+      placeholder: |
+        1. Open the daily dive
+        2. Type "..." on the third prompt
+        3. ...
+    validations:
+      required: true
+  - type: dropdown
+    id: mode
+    attributes:
+      label: Mode
+      options:
+        - Daily dive
+        - Unlimited
+        - Home or results screen
+        - Not sure
+    validations:
+      required: true
+  - type: input
+    id: dive
+    attributes:
+      label: Dive
+      description: The Singapore date (YYYY-MM-DD) or the number from the share text (e.g. "Ulu #3"), if it's relevant.
+      placeholder: "2026-10-31 or Ulu #5"
+  - type: input
+    id: device
+    attributes:
+      label: Device and browser
+      placeholder: "iPhone 15, Safari 18"
+    validations:
+      required: true
+  - type: textarea
+    id: screenshots
+    attributes:
+      label: Screenshots
+      description: Drag images in here if you have any.

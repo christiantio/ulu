@@ -1,0 +1,3070 @@
+{
+  "name": "Transport",
+  "asOf": "2026-10-27",
+  "prompts": [
+    {
+      "id": "transport-nsl-stations",
+      "category": "transport",
+      "text": "Name a station on the North-South Line",
+      "note": "The red line, Jurong East to Marina South Pier. Future stations (Brickland, Sungei Kadut) don't count yet.",
+      "answers": [
+        {
+          "name": "Orchard",
+          "tier": "common",
+          "aliases": [
+            "Orchard MRT",
+            "Orchard MRT Station",
+            "Orchard Station"
+          ]
+        },
+        {
+          "name": "Ang Mo Kio",
+          "tier": "common",
+          "aliases": [
+            "AMK",
+            "Ang Mo Kio MRT",
+            "Ang Mo Kio MRT Station",
+            "Ang Mo Kio Station",
+            "AMK MRT",
+            "AMK MRT Station",
+            "AMK Station"
+          ]
+        },
+        {
+          "name": "Jurong East",
+          "tier": "common",
+          "aliases": [
+            "Jurong East MRT",
+            "Jurong East MRT Station",
+            "Jurong East Station"
+          ]
+        },
+        {
+          "name": "Woodlands",
+          "tier": "common",
+          "aliases": [
+            "Woodlands MRT",
+            "Woodlands MRT Station",
+            "Woodlands Station"
+          ]
+        },
+        {
+          "name": "Canberra",
+          "tier": "trap",
+          "aliases": [
+            "Canberra MRT",
+            "Canberra MRT Station",
+            "Canberra Station"
+          ]
+        },
+        {
+          "name": "Bishan",
+          "tier": "solid",
+          "aliases": [
+            "Bishan MRT",
+            "Bishan MRT Station",
+            "Bishan Station"
+          ]
+        },
+        {
+          "name": "Toa Payoh",
+          "tier": "solid",
+          "aliases": [
+            "TPY",
+            "Toa Payoh MRT",
+            "Toa Payoh MRT Station",
+            "Toa Payoh Station",
+            "TPY MRT",
+            "TPY MRT Station",
+            "TPY Station"
+          ]
+        },
+        {
+          "name": "Yishun",
+          "tier": "solid",
+          "aliases": [
+            "Yishun MRT",
+            "Yishun MRT Station",
+            "Yishun Station"
+          ]
+        },
+        {
+          "name": "Newton",
+          "tier": "solid",
+          "aliases": [
+            "Newton MRT",
+            "Newton MRT Station",
+            "Newton Station"
+          ]
+        },
+        {
+          "name": "Somerset",
+          "tier": "solid",
+          "aliases": [
+            "Somerset MRT",
+            "Somerset MRT Station",
+            "Somerset Station"
+          ]
+        },
+        {
+          "name": "City Hall",
+          "tier": "solid",
+          "aliases": [
+            "City Hall MRT",
+            "City Hall MRT Station",
+            "City Hall Station"
+          ]
+        },
+        {
+          "name": "Raffles Place",
+          "tier": "solid",
+          "aliases": [
+            "Raffles Place MRT",
+            "Raffles Place MRT Station",
+            "Raffles Place Station"
+          ]
+        },
+        {
+          "name": "Dhoby Ghaut",
+          "tier": "solid",
+          "aliases": [
+            "Dhoby Ghaut MRT",
+            "Dhoby Ghaut MRT Station",
+            "Dhoby Ghaut Station"
+          ]
+        },
+        {
+          "name": "Choa Chu Kang",
+          "tier": "solid",
+          "aliases": [
+            "CCK",
+            "Choa Chu Kang MRT",
+            "Choa Chu Kang MRT Station",
+            "Choa Chu Kang Station",
+            "CCK MRT",
+            "CCK MRT Station",
+            "CCK Station"
+          ]
+        },
+        {
+          "name": "Novena",
+          "tier": "solid",
+          "aliases": [
+            "Novena MRT",
+            "Novena MRT Station",
+            "Novena Station"
+          ]
+        },
+        {
+          "name": "Bukit Batok",
+          "tier": "rare",
+          "aliases": [
+            "Bukit Batok MRT",
+            "Bukit Batok MRT Station",
+            "Bukit Batok Station"
+          ]
+        },
+        {
+          "name": "Admiralty",
+          "tier": "rare",
+          "aliases": [
+            "Admiralty MRT",
+            "Admiralty MRT Station",
+            "Admiralty Station"
+          ]
+        },
+        {
+          "name": "Sembawang",
+          "tier": "rare",
+          "aliases": [
+            "Sembawang MRT",
+            "Sembawang MRT Station",
+            "Sembawang Station"
+          ]
+        },
+        {
+          "name": "Kranji",
+          "tier": "rare",
+          "aliases": [
+            "Kranji MRT",
+            "Kranji MRT Station",
+            "Kranji Station"
+          ]
+        },
+        {
+          "name": "Marsiling",
+          "tier": "rare",
+          "aliases": [
+            "Marsiling MRT",
+            "Marsiling MRT Station",
+            "Marsiling Station"
+          ]
+        },
+        {
+          "name": "Marina Bay",
+          "tier": "rare",
+          "aliases": [
+            "Marina Bay MRT",
+            "Marina Bay MRT Station",
+            "Marina Bay Station"
+          ]
+        },
+        {
+          "name": "Yio Chu Kang",
+          "tier": "rare",
+          "aliases": [
+            "YCK",
+            "Yio Chu Kang MRT",
+            "Yio Chu Kang MRT Station",
+            "Yio Chu Kang Station",
+            "YCK MRT",
+            "YCK MRT Station",
+            "YCK Station"
+          ]
+        },
+        {
+          "name": "Bukit Gombak",
+          "tier": "ulu",
+          "aliases": [
+            "Bukit Gombak MRT",
+            "Bukit Gombak MRT Station",
+            "Bukit Gombak Station"
+          ]
+        },
+        {
+          "name": "Khatib",
+          "tier": "ulu",
+          "aliases": [
+            "Khatib MRT",
+            "Khatib MRT Station",
+            "Khatib Station"
+          ]
+        },
+        {
+          "name": "Yew Tee",
+          "tier": "ulu",
+          "aliases": [
+            "Yew Tee MRT",
+            "Yew Tee MRT Station",
+            "Yew Tee Station"
+          ]
+        },
+        {
+          "name": "Braddell",
+          "tier": "ulu",
+          "aliases": [
+            "Braddell MRT",
+            "Braddell MRT Station",
+            "Braddell Station"
+          ]
+        },
+        {
+          "name": "Marina South Pier",
+          "tier": "gem",
+          "aliases": [
+            "Marina South Pier MRT",
+            "Marina South Pier MRT Station",
+            "Marina South Pier Station"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "transport-ewl-stations",
+      "category": "transport",
+      "text": "Name a station on the East-West Line",
+      "note": "The green line, Pasir Ris to Tuas Link, including the Changi Airport branch (Expo, Changi Airport).",
+      "answers": [
+        {
+          "name": "Pasir Ris",
+          "tier": "common",
+          "aliases": [
+            "Pasir Ris MRT",
+            "Pasir Ris MRT Station",
+            "Pasir Ris Station"
+          ]
+        },
+        {
+          "name": "Tampines",
+          "tier": "common",
+          "aliases": [
+            "Tampines MRT",
+            "Tampines MRT Station",
+            "Tampines Station"
+          ]
+        },
+        {
+          "name": "Bugis",
+          "tier": "common",
+          "aliases": [
+            "Bugis MRT",
+            "Bugis MRT Station",
+            "Bugis Station"
+          ]
+        },
+        {
+          "name": "Jurong East",
+          "tier": "common",
+          "aliases": [
+            "Jurong East MRT",
+            "Jurong East MRT Station",
+            "Jurong East Station"
+          ]
+        },
+        {
+          "name": "Changi Airport",
+          "tier": "trap",
+          "aliases": [
+            "Changi Airport MRT",
+            "Changi Airport MRT Station",
+            "Changi Airport Station"
+          ]
+        },
+        {
+          "name": "City Hall",
+          "tier": "solid",
+          "aliases": [
+            "City Hall MRT",
+            "City Hall MRT Station",
+            "City Hall Station"
+          ]
+        },
+        {
+          "name": "Raffles Place",
+          "tier": "solid",
+          "aliases": [
+            "Raffles Place MRT",
+            "Raffles Place MRT Station",
+            "Raffles Place Station"
+          ]
+        },
+        {
+          "name": "Tanjong Pagar",
+          "tier": "solid",
+          "aliases": [
+            "Tanjong Pagar MRT",
+            "Tanjong Pagar MRT Station",
+            "Tanjong Pagar Station"
+          ]
+        },
+        {
+          "name": "Outram Park",
+          "tier": "solid",
+          "aliases": [
+            "Outram Park MRT",
+            "Outram Park MRT Station",
+            "Outram Park Station"
+          ]
+        },
+        {
+          "name": "Bedok",
+          "tier": "solid",
+          "aliases": [
+            "Bedok MRT",
+            "Bedok MRT Station",
+            "Bedok Station"
+          ]
+        },
+        {
+          "name": "Paya Lebar",
+          "tier": "solid",
+          "aliases": [
+            "Paya Lebar MRT",
+            "Paya Lebar MRT Station",
+            "Paya Lebar Station"
+          ]
+        },
+        {
+          "name": "Clementi",
+          "tier": "solid",
+          "aliases": [
+            "Clementi MRT",
+            "Clementi MRT Station",
+            "Clementi Station"
+          ]
+        },
+        {
+          "name": "Buona Vista",
+          "tier": "solid",
+          "aliases": [
+            "Buona Vista MRT",
+            "Buona Vista MRT Station",
+            "Buona Vista Station"
+          ]
+        },
+        {
+          "name": "Boon Lay",
+          "tier": "solid",
+          "aliases": [
+            "Boon Lay MRT",
+            "Boon Lay MRT Station",
+            "Boon Lay Station"
+          ]
+        },
+        {
+          "name": "Simei",
+          "tier": "solid",
+          "aliases": [
+            "Simei MRT",
+            "Simei MRT Station",
+            "Simei Station"
+          ]
+        },
+        {
+          "name": "Tanah Merah",
+          "tier": "solid",
+          "aliases": [
+            "Tanah Merah MRT",
+            "Tanah Merah MRT Station",
+            "Tanah Merah Station"
+          ]
+        },
+        {
+          "name": "Queenstown",
+          "tier": "solid",
+          "aliases": [
+            "Queenstown MRT",
+            "Queenstown MRT Station",
+            "Queenstown Station"
+          ]
+        },
+        {
+          "name": "Expo",
+          "tier": "rare",
+          "aliases": [
+            "Expo MRT",
+            "Expo MRT Station",
+            "Expo Station"
+          ]
+        },
+        {
+          "name": "Kembangan",
+          "tier": "rare",
+          "aliases": [
+            "Kembangan MRT",
+            "Kembangan MRT Station",
+            "Kembangan Station"
+          ]
+        },
+        {
+          "name": "Eunos",
+          "tier": "rare",
+          "aliases": [
+            "Eunos MRT",
+            "Eunos MRT Station",
+            "Eunos Station"
+          ]
+        },
+        {
+          "name": "Aljunied",
+          "tier": "rare",
+          "aliases": [
+            "Aljunied MRT",
+            "Aljunied MRT Station",
+            "Aljunied Station"
+          ]
+        },
+        {
+          "name": "Kallang",
+          "tier": "rare",
+          "aliases": [
+            "Kallang MRT",
+            "Kallang MRT Station",
+            "Kallang Station"
+          ]
+        },
+        {
+          "name": "Lavender",
+          "tier": "rare",
+          "aliases": [
+            "Lavender MRT",
+            "Lavender MRT Station",
+            "Lavender Station"
+          ]
+        },
+        {
+          "name": "Tiong Bahru",
+          "tier": "rare",
+          "aliases": [
+            "Tiong Bahru MRT",
+            "Tiong Bahru MRT Station",
+            "Tiong Bahru Station"
+          ]
+        },
+        {
+          "name": "Redhill",
+          "tier": "rare",
+          "aliases": [
+            "Redhill MRT",
+            "Redhill MRT Station",
+            "Redhill Station"
+          ]
+        },
+        {
+          "name": "Commonwealth",
+          "tier": "rare",
+          "aliases": [
+            "Commonwealth MRT",
+            "Commonwealth MRT Station",
+            "Commonwealth Station"
+          ]
+        },
+        {
+          "name": "Dover",
+          "tier": "rare",
+          "aliases": [
+            "Dover MRT",
+            "Dover MRT Station",
+            "Dover Station"
+          ]
+        },
+        {
+          "name": "Chinese Garden",
+          "tier": "rare",
+          "aliases": [
+            "Chinese Garden MRT",
+            "Chinese Garden MRT Station",
+            "Chinese Garden Station"
+          ]
+        },
+        {
+          "name": "Lakeside",
+          "tier": "rare",
+          "aliases": [
+            "Lakeside MRT",
+            "Lakeside MRT Station",
+            "Lakeside Station"
+          ]
+        },
+        {
+          "name": "Joo Koon",
+          "tier": "ulu",
+          "aliases": [
+            "Joo Koon MRT",
+            "Joo Koon MRT Station",
+            "Joo Koon Station"
+          ]
+        },
+        {
+          "name": "Pioneer",
+          "tier": "ulu",
+          "aliases": [
+            "Pioneer MRT",
+            "Pioneer MRT Station",
+            "Pioneer Station"
+          ]
+        },
+        {
+          "name": "Gul Circle",
+          "tier": "ulu",
+          "aliases": [
+            "Gul Circle MRT",
+            "Gul Circle MRT Station",
+            "Gul Circle Station"
+          ]
+        },
+        {
+          "name": "Tuas Crescent",
+          "tier": "ulu",
+          "aliases": [
+            "Tuas Crescent MRT",
+            "Tuas Crescent MRT Station",
+            "Tuas Crescent Station"
+          ]
+        },
+        {
+          "name": "Tuas West Road",
+          "tier": "ulu",
+          "aliases": [
+            "Tuas West Road MRT",
+            "Tuas West Road MRT Station",
+            "Tuas West Road Station"
+          ]
+        },
+        {
+          "name": "Tuas Link",
+          "tier": "gem",
+          "aliases": [
+            "Tuas Link MRT",
+            "Tuas Link MRT Station",
+            "Tuas Link Station"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "transport-nel-stations",
+      "category": "transport",
+      "text": "Name a station on the North East Line",
+      "note": "The purple line, HarbourFront to Punggol Coast.",
+      "answers": [
+        {
+          "name": "HarbourFront",
+          "tier": "common",
+          "aliases": [
+            "HarbourFront MRT",
+            "HarbourFront MRT Station",
+            "HarbourFront Station"
+          ]
+        },
+        {
+          "name": "Dhoby Ghaut",
+          "tier": "common",
+          "aliases": [
+            "Dhoby Ghaut MRT",
+            "Dhoby Ghaut MRT Station",
+            "Dhoby Ghaut Station"
+          ]
+        },
+        {
+          "name": "Punggol",
+          "tier": "common",
+          "aliases": [
+            "Punggol MRT",
+            "Punggol MRT Station",
+            "Punggol Station"
+          ]
+        },
+        {
+          "name": "Sengkang",
+          "tier": "common",
+          "aliases": [
+            "Sengkang MRT",
+            "Sengkang MRT Station",
+            "Sengkang Station"
+          ]
+        },
+        {
+          "name": "Buangkok",
+          "tier": "trap",
+          "aliases": [
+            "Buangkok MRT",
+            "Buangkok MRT Station",
+            "Buangkok Station"
+          ]
+        },
+        {
+          "name": "Chinatown",
+          "tier": "solid",
+          "aliases": [
+            "Chinatown MRT",
+            "Chinatown MRT Station",
+            "Chinatown Station"
+          ]
+        },
+        {
+          "name": "Little India",
+          "tier": "solid",
+          "aliases": [
+            "Little India MRT",
+            "Little India MRT Station",
+            "Little India Station"
+          ]
+        },
+        {
+          "name": "Serangoon",
+          "tier": "solid",
+          "aliases": [
+            "Serangoon MRT",
+            "Serangoon MRT Station",
+            "Serangoon Station"
+          ]
+        },
+        {
+          "name": "Hougang",
+          "tier": "solid",
+          "aliases": [
+            "Hougang MRT",
+            "Hougang MRT Station",
+            "Hougang Station"
+          ]
+        },
+        {
+          "name": "Outram Park",
+          "tier": "solid",
+          "aliases": [
+            "Outram Park MRT",
+            "Outram Park MRT Station",
+            "Outram Park Station"
+          ]
+        },
+        {
+          "name": "Clarke Quay",
+          "tier": "solid",
+          "aliases": [
+            "Clarke Quay MRT",
+            "Clarke Quay MRT Station",
+            "Clarke Quay Station"
+          ]
+        },
+        {
+          "name": "Farrer Park",
+          "tier": "rare",
+          "aliases": [
+            "Farrer Park MRT",
+            "Farrer Park MRT Station",
+            "Farrer Park Station"
+          ]
+        },
+        {
+          "name": "Kovan",
+          "tier": "rare",
+          "aliases": [
+            "Kovan MRT",
+            "Kovan MRT Station",
+            "Kovan Station"
+          ]
+        },
+        {
+          "name": "Potong Pasir",
+          "tier": "rare",
+          "aliases": [
+            "Potong Pasir MRT",
+            "Potong Pasir MRT Station",
+            "Potong Pasir Station"
+          ]
+        },
+        {
+          "name": "Punggol Coast",
+          "tier": "rare",
+          "aliases": [
+            "Punggol Coast MRT",
+            "Punggol Coast MRT Station",
+            "Punggol Coast Station"
+          ]
+        },
+        {
+          "name": "Boon Keng",
+          "tier": "ulu",
+          "aliases": [
+            "Boon Keng MRT",
+            "Boon Keng MRT Station",
+            "Boon Keng Station"
+          ]
+        },
+        {
+          "name": "Woodleigh",
+          "tier": "gem",
+          "aliases": [
+            "Woodleigh MRT",
+            "Woodleigh MRT Station",
+            "Woodleigh Station"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "transport-ccl-stations",
+      "category": "transport",
+      "text": "Name a station on the Circle Line",
+      "note": "Includes the three stations that opened in July 2026 (Keppel, Cantonment, Prince Edward Road) and the unopened Bukit Brown station.",
+      "answers": [
+        {
+          "name": "Dhoby Ghaut",
+          "tier": "common",
+          "aliases": [
+            "Dhoby Ghaut MRT",
+            "Dhoby Ghaut MRT Station",
+            "Dhoby Ghaut Station"
+          ]
+        },
+        {
+          "name": "HarbourFront",
+          "tier": "common",
+          "aliases": [
+            "HarbourFront MRT",
+            "HarbourFront MRT Station",
+            "HarbourFront Station"
+          ]
+        },
+        {
+          "name": "Holland Village",
+          "tier": "common",
+          "aliases": [
+            "Holland V",
+            "Holland Village MRT",
+            "Holland Village MRT Station",
+            "Holland Village Station",
+            "Holland V MRT",
+            "Holland V MRT Station",
+            "Holland V Station"
+          ]
+        },
+        {
+          "name": "Esplanade",
+          "tier": "common",
+          "aliases": [
+            "Esplanade MRT",
+            "Esplanade MRT Station",
+            "Esplanade Station"
+          ]
+        },
+        {
+          "name": "Prince Edward Road",
+          "tier": "trap",
+          "aliases": [
+            "Prince Edward",
+            "Prince Edward Road MRT",
+            "Prince Edward Road MRT Station",
+            "Prince Edward Road Station",
+            "Prince Edward MRT",
+            "Prince Edward MRT Station",
+            "Prince Edward Station"
+          ]
+        },
+        {
+          "name": "Bishan",
+          "tier": "solid",
+          "aliases": [
+            "Bishan MRT",
+            "Bishan MRT Station",
+            "Bishan Station"
+          ]
+        },
+        {
+          "name": "Paya Lebar",
+          "tier": "solid",
+          "aliases": [
+            "Paya Lebar MRT",
+            "Paya Lebar MRT Station",
+            "Paya Lebar Station"
+          ]
+        },
+        {
+          "name": "Serangoon",
+          "tier": "solid",
+          "aliases": [
+            "Serangoon MRT",
+            "Serangoon MRT Station",
+            "Serangoon Station"
+          ]
+        },
+        {
+          "name": "Buona Vista",
+          "tier": "solid",
+          "aliases": [
+            "Buona Vista MRT",
+            "Buona Vista MRT Station",
+            "Buona Vista Station"
+          ]
+        },
+        {
+          "name": "Promenade",
+          "tier": "solid",
+          "aliases": [
+            "Promenade MRT",
+            "Promenade MRT Station",
+            "Promenade Station"
+          ]
+        },
+        {
+          "name": "Stadium",
+          "tier": "solid",
+          "aliases": [
+            "Stadium MRT",
+            "Stadium MRT Station",
+            "Stadium Station"
+          ]
+        },
+        {
+          "name": "Botanic Gardens",
+          "tier": "solid",
+          "aliases": [
+            "Botanic Gardens MRT",
+            "Botanic Gardens MRT Station",
+            "Botanic Gardens Station"
+          ]
+        },
+        {
+          "name": "Marina Bay",
+          "tier": "solid",
+          "aliases": [
+            "Marina Bay MRT",
+            "Marina Bay MRT Station",
+            "Marina Bay Station"
+          ]
+        },
+        {
+          "name": "Bayfront",
+          "tier": "solid",
+          "aliases": [
+            "Bayfront MRT",
+            "Bayfront MRT Station",
+            "Bayfront Station"
+          ]
+        },
+        {
+          "name": "Caldecott",
+          "tier": "solid",
+          "aliases": [
+            "Caldecott MRT",
+            "Caldecott MRT Station",
+            "Caldecott Station"
+          ]
+        },
+        {
+          "name": "one-north",
+          "tier": "solid",
+          "aliases": [
+            "one-north MRT",
+            "one-north MRT Station",
+            "one-north Station"
+          ]
+        },
+        {
+          "name": "Kent Ridge",
+          "tier": "solid",
+          "aliases": [
+            "Kent Ridge MRT",
+            "Kent Ridge MRT Station",
+            "Kent Ridge Station"
+          ]
+        },
+        {
+          "name": "Bras Basah",
+          "tier": "rare",
+          "aliases": [
+            "Bras Basah MRT",
+            "Bras Basah MRT Station",
+            "Bras Basah Station"
+          ]
+        },
+        {
+          "name": "Nicoll Highway",
+          "tier": "rare",
+          "aliases": [
+            "Nicoll Highway MRT",
+            "Nicoll Highway MRT Station",
+            "Nicoll Highway Station"
+          ]
+        },
+        {
+          "name": "MacPherson",
+          "tier": "rare",
+          "aliases": [
+            "MacPherson MRT",
+            "MacPherson MRT Station",
+            "MacPherson Station"
+          ]
+        },
+        {
+          "name": "Tai Seng",
+          "tier": "rare",
+          "aliases": [
+            "Tai Seng MRT",
+            "Tai Seng MRT Station",
+            "Tai Seng Station"
+          ]
+        },
+        {
+          "name": "Bartley",
+          "tier": "rare",
+          "aliases": [
+            "Bartley MRT",
+            "Bartley MRT Station",
+            "Bartley Station"
+          ]
+        },
+        {
+          "name": "Farrer Road",
+          "tier": "rare",
+          "aliases": [
+            "Farrer Road MRT",
+            "Farrer Road MRT Station",
+            "Farrer Road Station"
+          ]
+        },
+        {
+          "name": "Pasir Panjang",
+          "tier": "rare",
+          "aliases": [
+            "Pasir Panjang MRT",
+            "Pasir Panjang MRT Station",
+            "Pasir Panjang Station"
+          ]
+        },
+        {
+          "name": "Labrador Park",
+          "tier": "rare",
+          "aliases": [
+            "Labrador Park MRT",
+            "Labrador Park MRT Station",
+            "Labrador Park Station"
+          ]
+        },
+        {
+          "name": "Telok Blangah",
+          "tier": "rare",
+          "aliases": [
+            "Telok Blangah MRT",
+            "Telok Blangah MRT Station",
+            "Telok Blangah Station"
+          ]
+        },
+        {
+          "name": "Keppel",
+          "tier": "rare",
+          "aliases": [
+            "Keppel MRT",
+            "Keppel MRT Station",
+            "Keppel Station"
+          ]
+        },
+        {
+          "name": "Cantonment",
+          "tier": "rare",
+          "aliases": [
+            "Cantonment MRT",
+            "Cantonment MRT Station",
+            "Cantonment Station"
+          ]
+        },
+        {
+          "name": "Mountbatten",
+          "tier": "ulu",
+          "aliases": [
+            "Mountbatten MRT",
+            "Mountbatten MRT Station",
+            "Mountbatten Station"
+          ]
+        },
+        {
+          "name": "Dakota",
+          "tier": "ulu",
+          "aliases": [
+            "Dakota MRT",
+            "Dakota MRT Station",
+            "Dakota Station"
+          ]
+        },
+        {
+          "name": "Marymount",
+          "tier": "ulu",
+          "aliases": [
+            "Marymount MRT",
+            "Marymount MRT Station",
+            "Marymount Station"
+          ]
+        },
+        {
+          "name": "Bukit Brown",
+          "tier": "ulu",
+          "aliases": [
+            "Bukit Brown MRT",
+            "Bukit Brown MRT Station",
+            "Bukit Brown Station"
+          ]
+        },
+        {
+          "name": "Haw Par Villa",
+          "tier": "gem",
+          "aliases": [
+            "Haw Par Villa MRT",
+            "Haw Par Villa MRT Station",
+            "Haw Par Villa Station"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "transport-dtl-stations",
+      "category": "transport",
+      "text": "Name a station on the Downtown Line",
+      "note": "The blue line, Bukit Panjang to Expo, plus the extension to Xilin and Sungei Bedok (built, due to open in late 2026).",
+      "answers": [
+        {
+          "name": "Bugis",
+          "tier": "common",
+          "aliases": [
+            "Bugis MRT",
+            "Bugis MRT Station",
+            "Bugis Station"
+          ]
+        },
+        {
+          "name": "Chinatown",
+          "tier": "common",
+          "aliases": [
+            "Chinatown MRT",
+            "Chinatown MRT Station",
+            "Chinatown Station"
+          ]
+        },
+        {
+          "name": "Little India",
+          "tier": "common",
+          "aliases": [
+            "Little India MRT",
+            "Little India MRT Station",
+            "Little India Station"
+          ]
+        },
+        {
+          "name": "Newton",
+          "tier": "common",
+          "aliases": [
+            "Newton MRT",
+            "Newton MRT Station",
+            "Newton Station"
+          ]
+        },
+        {
+          "name": "Hume",
+          "tier": "trap",
+          "aliases": [
+            "Hume MRT",
+            "Hume MRT Station",
+            "Hume Station"
+          ]
+        },
+        {
+          "name": "Bukit Panjang",
+          "tier": "solid",
+          "aliases": [
+            "Bukit Panjang MRT",
+            "Bukit Panjang MRT Station",
+            "Bukit Panjang Station"
+          ]
+        },
+        {
+          "name": "Beauty World",
+          "tier": "solid",
+          "aliases": [
+            "Beauty World MRT",
+            "Beauty World MRT Station",
+            "Beauty World Station"
+          ]
+        },
+        {
+          "name": "Botanic Gardens",
+          "tier": "solid",
+          "aliases": [
+            "Botanic Gardens MRT",
+            "Botanic Gardens MRT Station",
+            "Botanic Gardens Station"
+          ]
+        },
+        {
+          "name": "Stevens",
+          "tier": "solid",
+          "aliases": [
+            "Stevens MRT",
+            "Stevens MRT Station",
+            "Stevens Station"
+          ]
+        },
+        {
+          "name": "Promenade",
+          "tier": "solid",
+          "aliases": [
+            "Promenade MRT",
+            "Promenade MRT Station",
+            "Promenade Station"
+          ]
+        },
+        {
+          "name": "Bayfront",
+          "tier": "solid",
+          "aliases": [
+            "Bayfront MRT",
+            "Bayfront MRT Station",
+            "Bayfront Station"
+          ]
+        },
+        {
+          "name": "Downtown",
+          "tier": "solid",
+          "aliases": [
+            "Downtown MRT",
+            "Downtown MRT Station",
+            "Downtown Station"
+          ]
+        },
+        {
+          "name": "Telok Ayer",
+          "tier": "solid",
+          "aliases": [
+            "Telok Ayer MRT",
+            "Telok Ayer MRT Station",
+            "Telok Ayer Station"
+          ]
+        },
+        {
+          "name": "Fort Canning",
+          "tier": "solid",
+          "aliases": [
+            "Fort Canning MRT",
+            "Fort Canning MRT Station",
+            "Fort Canning Station"
+          ]
+        },
+        {
+          "name": "Expo",
+          "tier": "solid",
+          "aliases": [
+            "Expo MRT",
+            "Expo MRT Station",
+            "Expo Station"
+          ]
+        },
+        {
+          "name": "Tampines",
+          "tier": "solid",
+          "aliases": [
+            "Tampines MRT",
+            "Tampines MRT Station",
+            "Tampines Station"
+          ]
+        },
+        {
+          "name": "MacPherson",
+          "tier": "solid",
+          "aliases": [
+            "MacPherson MRT",
+            "MacPherson MRT Station",
+            "MacPherson Station"
+          ]
+        },
+        {
+          "name": "Hillview",
+          "tier": "rare",
+          "aliases": [
+            "Hillview MRT",
+            "Hillview MRT Station",
+            "Hillview Station"
+          ]
+        },
+        {
+          "name": "King Albert Park",
+          "tier": "rare",
+          "aliases": [
+            "King Albert Park MRT",
+            "King Albert Park MRT Station",
+            "King Albert Park Station"
+          ]
+        },
+        {
+          "name": "Sixth Avenue",
+          "tier": "rare",
+          "aliases": [
+            "Sixth Avenue MRT",
+            "Sixth Avenue MRT Station",
+            "Sixth Avenue Station"
+          ]
+        },
+        {
+          "name": "Tan Kah Kee",
+          "tier": "rare",
+          "aliases": [
+            "Tan Kah Kee MRT",
+            "Tan Kah Kee MRT Station",
+            "Tan Kah Kee Station"
+          ]
+        },
+        {
+          "name": "Rochor",
+          "tier": "rare",
+          "aliases": [
+            "Rochor MRT",
+            "Rochor MRT Station",
+            "Rochor Station"
+          ]
+        },
+        {
+          "name": "Bencoolen",
+          "tier": "rare",
+          "aliases": [
+            "Bencoolen MRT",
+            "Bencoolen MRT Station",
+            "Bencoolen Station"
+          ]
+        },
+        {
+          "name": "Jalan Besar",
+          "tier": "rare",
+          "aliases": [
+            "Jalan Besar MRT",
+            "Jalan Besar MRT Station",
+            "Jalan Besar Station"
+          ]
+        },
+        {
+          "name": "Bedok North",
+          "tier": "rare",
+          "aliases": [
+            "Bedok North MRT",
+            "Bedok North MRT Station",
+            "Bedok North Station"
+          ]
+        },
+        {
+          "name": "Bedok Reservoir",
+          "tier": "rare",
+          "aliases": [
+            "Bedok Reservoir MRT",
+            "Bedok Reservoir MRT Station",
+            "Bedok Reservoir Station"
+          ]
+        },
+        {
+          "name": "Upper Changi",
+          "tier": "rare",
+          "aliases": [
+            "Upper Changi MRT",
+            "Upper Changi MRT Station",
+            "Upper Changi Station"
+          ]
+        },
+        {
+          "name": "Ubi",
+          "tier": "rare",
+          "aliases": [
+            "Ubi MRT",
+            "Ubi MRT Station",
+            "Ubi Station"
+          ]
+        },
+        {
+          "name": "Kaki Bukit",
+          "tier": "rare",
+          "aliases": [
+            "Kaki Bukit MRT",
+            "Kaki Bukit MRT Station",
+            "Kaki Bukit Station"
+          ]
+        },
+        {
+          "name": "Bendemeer",
+          "tier": "ulu",
+          "aliases": [
+            "Bendemeer MRT",
+            "Bendemeer MRT Station",
+            "Bendemeer Station"
+          ]
+        },
+        {
+          "name": "Geylang Bahru",
+          "tier": "ulu",
+          "aliases": [
+            "Geylang Bahru MRT",
+            "Geylang Bahru MRT Station",
+            "Geylang Bahru Station"
+          ]
+        },
+        {
+          "name": "Mattar",
+          "tier": "ulu",
+          "aliases": [
+            "Mattar MRT",
+            "Mattar MRT Station",
+            "Mattar Station"
+          ]
+        },
+        {
+          "name": "Tampines West",
+          "tier": "ulu",
+          "aliases": [
+            "Tampines West MRT",
+            "Tampines West MRT Station",
+            "Tampines West Station"
+          ]
+        },
+        {
+          "name": "Tampines East",
+          "tier": "ulu",
+          "aliases": [
+            "Tampines East MRT",
+            "Tampines East MRT Station",
+            "Tampines East Station"
+          ]
+        },
+        {
+          "name": "Xilin",
+          "tier": "ulu",
+          "aliases": [
+            "Xilin MRT",
+            "Xilin MRT Station",
+            "Xilin Station"
+          ]
+        },
+        {
+          "name": "Sungei Bedok",
+          "tier": "ulu",
+          "aliases": [
+            "Sungei Bedok MRT",
+            "Sungei Bedok MRT Station",
+            "Sungei Bedok Station"
+          ]
+        },
+        {
+          "name": "Cashew",
+          "tier": "gem",
+          "aliases": [
+            "Cashew MRT",
+            "Cashew MRT Station",
+            "Cashew Station"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "transport-tel-stations",
+      "category": "transport",
+      "text": "Name a station on the Thomson-East Coast Line",
+      "note": "The brown line. Built-but-unopened stations count (Mount Pleasant, Marina South, Bedok South, Sungei Bedok); Founders' Memorial, still under construction, doesn't.",
+      "answers": [
+        {
+          "name": "Orchard",
+          "tier": "common",
+          "aliases": [
+            "Orchard MRT",
+            "Orchard MRT Station",
+            "Orchard Station"
+          ]
+        },
+        {
+          "name": "Gardens by the Bay",
+          "tier": "common",
+          "aliases": [
+            "Gardens by the Bay MRT",
+            "Gardens by the Bay MRT Station",
+            "Gardens by the Bay Station"
+          ]
+        },
+        {
+          "name": "Woodlands",
+          "tier": "common",
+          "aliases": [
+            "Woodlands MRT",
+            "Woodlands MRT Station",
+            "Woodlands Station"
+          ]
+        },
+        {
+          "name": "Marine Parade",
+          "tier": "common",
+          "aliases": [
+            "Marine Parade MRT",
+            "Marine Parade MRT Station",
+            "Marine Parade Station"
+          ]
+        },
+        {
+          "name": "Maxwell",
+          "tier": "trap",
+          "aliases": [
+            "Maxwell MRT",
+            "Maxwell MRT Station",
+            "Maxwell Station"
+          ]
+        },
+        {
+          "name": "Outram Park",
+          "tier": "solid",
+          "aliases": [
+            "Outram Park MRT",
+            "Outram Park MRT Station",
+            "Outram Park Station"
+          ]
+        },
+        {
+          "name": "Shenton Way",
+          "tier": "solid",
+          "aliases": [
+            "Shenton Way MRT",
+            "Shenton Way MRT Station",
+            "Shenton Way Station"
+          ]
+        },
+        {
+          "name": "Great World",
+          "tier": "solid",
+          "aliases": [
+            "Great World MRT",
+            "Great World MRT Station",
+            "Great World Station"
+          ]
+        },
+        {
+          "name": "Stevens",
+          "tier": "solid",
+          "aliases": [
+            "Stevens MRT",
+            "Stevens MRT Station",
+            "Stevens Station"
+          ]
+        },
+        {
+          "name": "Caldecott",
+          "tier": "solid",
+          "aliases": [
+            "Caldecott MRT",
+            "Caldecott MRT Station",
+            "Caldecott Station"
+          ]
+        },
+        {
+          "name": "Marina Bay",
+          "tier": "solid",
+          "aliases": [
+            "Marina Bay MRT",
+            "Marina Bay MRT Station",
+            "Marina Bay Station"
+          ]
+        },
+        {
+          "name": "Lentor",
+          "tier": "solid",
+          "aliases": [
+            "Lentor MRT",
+            "Lentor MRT Station",
+            "Lentor Station"
+          ]
+        },
+        {
+          "name": "Woodlands North",
+          "tier": "solid",
+          "aliases": [
+            "Woodlands North MRT",
+            "Woodlands North MRT Station",
+            "Woodlands North Station"
+          ]
+        },
+        {
+          "name": "Tanjong Katong",
+          "tier": "solid",
+          "aliases": [
+            "Tanjong Katong MRT",
+            "Tanjong Katong MRT Station",
+            "Tanjong Katong Station"
+          ]
+        },
+        {
+          "name": "Siglap",
+          "tier": "solid",
+          "aliases": [
+            "Siglap MRT",
+            "Siglap MRT Station",
+            "Siglap Station"
+          ]
+        },
+        {
+          "name": "Bayshore",
+          "tier": "solid",
+          "aliases": [
+            "Bayshore MRT",
+            "Bayshore MRT Station",
+            "Bayshore Station"
+          ]
+        },
+        {
+          "name": "Springleaf",
+          "tier": "rare",
+          "aliases": [
+            "Springleaf MRT",
+            "Springleaf MRT Station",
+            "Springleaf Station"
+          ]
+        },
+        {
+          "name": "Woodlands South",
+          "tier": "rare",
+          "aliases": [
+            "Woodlands South MRT",
+            "Woodlands South MRT Station",
+            "Woodlands South Station"
+          ]
+        },
+        {
+          "name": "Upper Thomson",
+          "tier": "rare",
+          "aliases": [
+            "Upper Thomson MRT",
+            "Upper Thomson MRT Station",
+            "Upper Thomson Station"
+          ]
+        },
+        {
+          "name": "Orchard Boulevard",
+          "tier": "rare",
+          "aliases": [
+            "Orchard Boulevard MRT",
+            "Orchard Boulevard MRT Station",
+            "Orchard Boulevard Station"
+          ]
+        },
+        {
+          "name": "Havelock",
+          "tier": "rare",
+          "aliases": [
+            "Havelock MRT",
+            "Havelock MRT Station",
+            "Havelock Station"
+          ]
+        },
+        {
+          "name": "Napier",
+          "tier": "rare",
+          "aliases": [
+            "Napier MRT",
+            "Napier MRT Station",
+            "Napier Station"
+          ]
+        },
+        {
+          "name": "Bright Hill",
+          "tier": "rare",
+          "aliases": [
+            "Bright Hill MRT",
+            "Bright Hill MRT Station",
+            "Bright Hill Station"
+          ]
+        },
+        {
+          "name": "Mayflower",
+          "tier": "rare",
+          "aliases": [
+            "Mayflower MRT",
+            "Mayflower MRT Station",
+            "Mayflower Station"
+          ]
+        },
+        {
+          "name": "Tanjong Rhu",
+          "tier": "rare",
+          "aliases": [
+            "Tanjong Rhu MRT",
+            "Tanjong Rhu MRT Station",
+            "Tanjong Rhu Station"
+          ]
+        },
+        {
+          "name": "Marine Terrace",
+          "tier": "rare",
+          "aliases": [
+            "Marine Terrace MRT",
+            "Marine Terrace MRT Station",
+            "Marine Terrace Station"
+          ]
+        },
+        {
+          "name": "Mount Pleasant",
+          "tier": "ulu",
+          "aliases": [
+            "Mount Pleasant MRT",
+            "Mount Pleasant MRT Station",
+            "Mount Pleasant Station"
+          ]
+        },
+        {
+          "name": "Marina South",
+          "tier": "ulu",
+          "aliases": [
+            "Marina South MRT",
+            "Marina South MRT Station",
+            "Marina South Station"
+          ]
+        },
+        {
+          "name": "Bedok South",
+          "tier": "ulu",
+          "aliases": [
+            "Bedok South MRT",
+            "Bedok South MRT Station",
+            "Bedok South Station"
+          ]
+        },
+        {
+          "name": "Sungei Bedok",
+          "tier": "ulu",
+          "aliases": [
+            "Sungei Bedok MRT",
+            "Sungei Bedok MRT Station",
+            "Sungei Bedok Station"
+          ]
+        },
+        {
+          "name": "Katong Park",
+          "tier": "gem",
+          "aliases": [
+            "Katong Park MRT",
+            "Katong Park MRT Station",
+            "Katong Park Station"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "transport-interchange-stations",
+      "category": "transport",
+      "text": "Name an MRT interchange station",
+      "note": "Any station where you can change lines, including MRT-LRT links (e.g. Sengkang), the Changi Airport branch (Tanah Merah, Expo) and Sungei Bedok (DTL/TEL, due to open in late 2026).",
+      "answers": [
+        {
+          "name": "Dhoby Ghaut",
+          "tier": "common",
+          "aliases": [
+            "Dhoby Ghaut MRT",
+            "Dhoby Ghaut MRT Station",
+            "Dhoby Ghaut Station",
+            "Dhoby Ghaut Interchange"
+          ]
+        },
+        {
+          "name": "Jurong East",
+          "tier": "common",
+          "aliases": [
+            "Jurong East MRT",
+            "Jurong East MRT Station",
+            "Jurong East Station",
+            "Jurong East Interchange"
+          ]
+        },
+        {
+          "name": "City Hall",
+          "tier": "common",
+          "aliases": [
+            "City Hall MRT",
+            "City Hall MRT Station",
+            "City Hall Station",
+            "City Hall Interchange"
+          ]
+        },
+        {
+          "name": "Raffles Place",
+          "tier": "common",
+          "aliases": [
+            "Raffles Place MRT",
+            "Raffles Place MRT Station",
+            "Raffles Place Station",
+            "Raffles Place Interchange"
+          ]
+        },
+        {
+          "name": "Outram Park",
+          "tier": "trap",
+          "aliases": [
+            "Outram Park MRT",
+            "Outram Park MRT Station",
+            "Outram Park Station",
+            "Outram Park Interchange"
+          ]
+        },
+        {
+          "name": "Bishan",
+          "tier": "solid",
+          "aliases": [
+            "Bishan MRT",
+            "Bishan MRT Station",
+            "Bishan Station",
+            "Bishan Interchange"
+          ]
+        },
+        {
+          "name": "Paya Lebar",
+          "tier": "solid",
+          "aliases": [
+            "Paya Lebar MRT",
+            "Paya Lebar MRT Station",
+            "Paya Lebar Station",
+            "Paya Lebar Interchange"
+          ]
+        },
+        {
+          "name": "Serangoon",
+          "tier": "solid",
+          "aliases": [
+            "Serangoon MRT",
+            "Serangoon MRT Station",
+            "Serangoon Station",
+            "Serangoon Interchange"
+          ]
+        },
+        {
+          "name": "Buona Vista",
+          "tier": "solid",
+          "aliases": [
+            "Buona Vista MRT",
+            "Buona Vista MRT Station",
+            "Buona Vista Station",
+            "Buona Vista Interchange"
+          ]
+        },
+        {
+          "name": "Tampines",
+          "tier": "solid",
+          "aliases": [
+            "Tampines MRT",
+            "Tampines MRT Station",
+            "Tampines Station",
+            "Tampines Interchange"
+          ]
+        },
+        {
+          "name": "Bugis",
+          "tier": "solid",
+          "aliases": [
+            "Bugis MRT",
+            "Bugis MRT Station",
+            "Bugis Station",
+            "Bugis Interchange"
+          ]
+        },
+        {
+          "name": "Newton",
+          "tier": "solid",
+          "aliases": [
+            "Newton MRT",
+            "Newton MRT Station",
+            "Newton Station",
+            "Newton Interchange"
+          ]
+        },
+        {
+          "name": "Chinatown",
+          "tier": "solid",
+          "aliases": [
+            "Chinatown MRT",
+            "Chinatown MRT Station",
+            "Chinatown Station",
+            "Chinatown Interchange"
+          ]
+        },
+        {
+          "name": "Little India",
+          "tier": "solid",
+          "aliases": [
+            "Little India MRT",
+            "Little India MRT Station",
+            "Little India Station",
+            "Little India Interchange"
+          ]
+        },
+        {
+          "name": "HarbourFront",
+          "tier": "solid",
+          "aliases": [
+            "HarbourFront MRT",
+            "HarbourFront MRT Station",
+            "HarbourFront Station",
+            "HarbourFront Interchange"
+          ]
+        },
+        {
+          "name": "Woodlands",
+          "tier": "solid",
+          "aliases": [
+            "Woodlands MRT",
+            "Woodlands MRT Station",
+            "Woodlands Station",
+            "Woodlands Interchange"
+          ]
+        },
+        {
+          "name": "Orchard",
+          "tier": "solid",
+          "aliases": [
+            "Orchard MRT",
+            "Orchard MRT Station",
+            "Orchard Station",
+            "Orchard Interchange"
+          ]
+        },
+        {
+          "name": "Marina Bay",
+          "tier": "solid",
+          "aliases": [
+            "Marina Bay MRT",
+            "Marina Bay MRT Station",
+            "Marina Bay Station",
+            "Marina Bay Interchange"
+          ]
+        },
+        {
+          "name": "Choa Chu Kang",
+          "tier": "solid",
+          "aliases": [
+            "CCK",
+            "Choa Chu Kang MRT",
+            "Choa Chu Kang MRT Station",
+            "Choa Chu Kang Station",
+            "Choa Chu Kang Interchange",
+            "CCK MRT",
+            "CCK MRT Station",
+            "CCK Station",
+            "CCK Interchange"
+          ]
+        },
+        {
+          "name": "Botanic Gardens",
+          "tier": "rare",
+          "aliases": [
+            "Botanic Gardens MRT",
+            "Botanic Gardens MRT Station",
+            "Botanic Gardens Station",
+            "Botanic Gardens Interchange"
+          ]
+        },
+        {
+          "name": "MacPherson",
+          "tier": "rare",
+          "aliases": [
+            "MacPherson MRT",
+            "MacPherson MRT Station",
+            "MacPherson Station",
+            "MacPherson Interchange"
+          ]
+        },
+        {
+          "name": "Promenade",
+          "tier": "rare",
+          "aliases": [
+            "Promenade MRT",
+            "Promenade MRT Station",
+            "Promenade Station",
+            "Promenade Interchange"
+          ]
+        },
+        {
+          "name": "Expo",
+          "tier": "rare",
+          "aliases": [
+            "Expo MRT",
+            "Expo MRT Station",
+            "Expo Station",
+            "Expo Interchange"
+          ]
+        },
+        {
+          "name": "Sengkang",
+          "tier": "rare",
+          "aliases": [
+            "Sengkang MRT",
+            "Sengkang MRT Station",
+            "Sengkang Station",
+            "Sengkang Interchange"
+          ]
+        },
+        {
+          "name": "Punggol",
+          "tier": "rare",
+          "aliases": [
+            "Punggol MRT",
+            "Punggol MRT Station",
+            "Punggol Station",
+            "Punggol Interchange"
+          ]
+        },
+        {
+          "name": "Caldecott",
+          "tier": "rare",
+          "aliases": [
+            "Caldecott MRT",
+            "Caldecott MRT Station",
+            "Caldecott Station",
+            "Caldecott Interchange"
+          ]
+        },
+        {
+          "name": "Bayfront",
+          "tier": "ulu",
+          "aliases": [
+            "Bayfront MRT",
+            "Bayfront MRT Station",
+            "Bayfront Station",
+            "Bayfront Interchange"
+          ]
+        },
+        {
+          "name": "Tanah Merah",
+          "tier": "ulu",
+          "aliases": [
+            "Tanah Merah MRT",
+            "Tanah Merah MRT Station",
+            "Tanah Merah Station",
+            "Tanah Merah Interchange"
+          ]
+        },
+        {
+          "name": "Bukit Panjang",
+          "tier": "ulu",
+          "aliases": [
+            "Bukit Panjang MRT",
+            "Bukit Panjang MRT Station",
+            "Bukit Panjang Station",
+            "Bukit Panjang Interchange"
+          ]
+        },
+        {
+          "name": "Sungei Bedok",
+          "tier": "ulu",
+          "aliases": [
+            "Sungei Bedok MRT",
+            "Sungei Bedok MRT Station",
+            "Sungei Bedok Station",
+            "Sungei Bedok Interchange"
+          ]
+        },
+        {
+          "name": "Stevens",
+          "tier": "gem",
+          "aliases": [
+            "Stevens MRT",
+            "Stevens MRT Station",
+            "Stevens Station",
+            "Stevens Interchange"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "transport-lrt-stations",
+      "category": "transport",
+      "text": "Name an LRT station",
+      "note": "Any station on the Bukit Panjang, Sengkang or Punggol LRT. Ten Mile Junction closed in 2019, so it doesn't count.",
+      "answers": [
+        {
+          "name": "Sengkang",
+          "tier": "common",
+          "aliases": [
+            "Sengkang LRT",
+            "Sengkang LRT Station",
+            "Sengkang Station"
+          ]
+        },
+        {
+          "name": "Punggol",
+          "tier": "common",
+          "aliases": [
+            "Punggol LRT",
+            "Punggol LRT Station",
+            "Punggol Station"
+          ]
+        },
+        {
+          "name": "Choa Chu Kang",
+          "tier": "common",
+          "aliases": [
+            "CCK",
+            "Choa Chu Kang LRT",
+            "Choa Chu Kang LRT Station",
+            "Choa Chu Kang Station",
+            "CCK LRT",
+            "CCK LRT Station",
+            "CCK Station"
+          ]
+        },
+        {
+          "name": "Bukit Panjang",
+          "tier": "common",
+          "aliases": [
+            "Bukit Panjang LRT",
+            "Bukit Panjang LRT Station",
+            "Bukit Panjang Station"
+          ]
+        },
+        {
+          "name": "Compassvale",
+          "tier": "solid",
+          "aliases": [
+            "Compassvale LRT",
+            "Compassvale LRT Station",
+            "Compassvale Station"
+          ]
+        },
+        {
+          "name": "Fernvale",
+          "tier": "solid",
+          "aliases": [
+            "Fernvale LRT",
+            "Fernvale LRT Station",
+            "Fernvale Station"
+          ]
+        },
+        {
+          "name": "Keat Hong",
+          "tier": "solid",
+          "aliases": [
+            "Keat Hong LRT",
+            "Keat Hong LRT Station",
+            "Keat Hong Station"
+          ]
+        },
+        {
+          "name": "Teck Whye",
+          "tier": "solid",
+          "aliases": [
+            "Teck Whye LRT",
+            "Teck Whye LRT Station",
+            "Teck Whye Station"
+          ]
+        },
+        {
+          "name": "Phoenix",
+          "tier": "solid",
+          "aliases": [
+            "Phoenix LRT",
+            "Phoenix LRT Station",
+            "Phoenix Station"
+          ]
+        },
+        {
+          "name": "Senja",
+          "tier": "solid",
+          "aliases": [
+            "Senja LRT",
+            "Senja LRT Station",
+            "Senja Station"
+          ]
+        },
+        {
+          "name": "Punggol Point",
+          "tier": "solid",
+          "aliases": [
+            "Punggol Point LRT",
+            "Punggol Point LRT Station",
+            "Punggol Point Station"
+          ]
+        },
+        {
+          "name": "Cove",
+          "tier": "solid",
+          "aliases": [
+            "Cove LRT",
+            "Cove LRT Station",
+            "Cove Station"
+          ]
+        },
+        {
+          "name": "Damai",
+          "tier": "solid",
+          "aliases": [
+            "Damai LRT",
+            "Damai LRT Station",
+            "Damai Station"
+          ]
+        },
+        {
+          "name": "Rumbia",
+          "tier": "solid",
+          "aliases": [
+            "Rumbia LRT",
+            "Rumbia LRT Station",
+            "Rumbia Station"
+          ]
+        },
+        {
+          "name": "Bangkit",
+          "tier": "solid",
+          "aliases": [
+            "Bangkit LRT",
+            "Bangkit LRT Station",
+            "Bangkit Station"
+          ]
+        },
+        {
+          "name": "Jelapang",
+          "tier": "solid",
+          "aliases": [
+            "Jelapang LRT",
+            "Jelapang LRT Station",
+            "Jelapang Station"
+          ]
+        },
+        {
+          "name": "Segar",
+          "tier": "solid",
+          "aliases": [
+            "Segar LRT",
+            "Segar LRT Station",
+            "Segar Station"
+          ]
+        },
+        {
+          "name": "Fajar",
+          "tier": "solid",
+          "aliases": [
+            "Fajar LRT",
+            "Fajar LRT Station",
+            "Fajar Station"
+          ]
+        },
+        {
+          "name": "South View",
+          "tier": "solid",
+          "aliases": [
+            "South View LRT",
+            "South View LRT Station",
+            "South View Station"
+          ]
+        },
+        {
+          "name": "Meridian",
+          "tier": "solid",
+          "aliases": [
+            "Meridian LRT",
+            "Meridian LRT Station",
+            "Meridian Station"
+          ]
+        },
+        {
+          "name": "Coral Edge",
+          "tier": "rare",
+          "aliases": [
+            "Coral Edge LRT",
+            "Coral Edge LRT Station",
+            "Coral Edge Station"
+          ]
+        },
+        {
+          "name": "Oasis",
+          "tier": "rare",
+          "aliases": [
+            "Oasis LRT",
+            "Oasis LRT Station",
+            "Oasis Station"
+          ]
+        },
+        {
+          "name": "Petir",
+          "tier": "rare",
+          "aliases": [
+            "Petir LRT",
+            "Petir LRT Station",
+            "Petir Station"
+          ]
+        },
+        {
+          "name": "Pending",
+          "tier": "rare",
+          "aliases": [
+            "Pending LRT",
+            "Pending LRT Station",
+            "Pending Station"
+          ]
+        },
+        {
+          "name": "Kangkar",
+          "tier": "rare",
+          "aliases": [
+            "Kangkar LRT",
+            "Kangkar LRT Station",
+            "Kangkar Station"
+          ]
+        },
+        {
+          "name": "Ranggung",
+          "tier": "rare",
+          "aliases": [
+            "Ranggung LRT",
+            "Ranggung LRT Station",
+            "Ranggung Station"
+          ]
+        },
+        {
+          "name": "Bakau",
+          "tier": "rare",
+          "aliases": [
+            "Bakau LRT",
+            "Bakau LRT Station",
+            "Bakau Station"
+          ]
+        },
+        {
+          "name": "Cheng Lim",
+          "tier": "rare",
+          "aliases": [
+            "Cheng Lim LRT",
+            "Cheng Lim LRT Station",
+            "Cheng Lim Station"
+          ]
+        },
+        {
+          "name": "Farmway",
+          "tier": "rare",
+          "aliases": [
+            "Farmway LRT",
+            "Farmway LRT Station",
+            "Farmway Station"
+          ]
+        },
+        {
+          "name": "Layar",
+          "tier": "rare",
+          "aliases": [
+            "Layar LRT",
+            "Layar LRT Station",
+            "Layar Station"
+          ]
+        },
+        {
+          "name": "Tongkang",
+          "tier": "rare",
+          "aliases": [
+            "Tongkang LRT",
+            "Tongkang LRT Station",
+            "Tongkang Station"
+          ]
+        },
+        {
+          "name": "Renjong",
+          "tier": "rare",
+          "aliases": [
+            "Renjong LRT",
+            "Renjong LRT Station",
+            "Renjong Station"
+          ]
+        },
+        {
+          "name": "Riviera",
+          "tier": "rare",
+          "aliases": [
+            "Riviera LRT",
+            "Riviera LRT Station",
+            "Riviera Station"
+          ]
+        },
+        {
+          "name": "Sam Kee",
+          "tier": "rare",
+          "aliases": [
+            "Sam Kee LRT",
+            "Sam Kee LRT Station",
+            "Sam Kee Station"
+          ]
+        },
+        {
+          "name": "Samudera",
+          "tier": "rare",
+          "aliases": [
+            "Samudera LRT",
+            "Samudera LRT Station",
+            "Samudera Station"
+          ]
+        },
+        {
+          "name": "Kupang",
+          "tier": "ulu",
+          "aliases": [
+            "Kupang LRT",
+            "Kupang LRT Station",
+            "Kupang Station"
+          ]
+        },
+        {
+          "name": "Thanggam",
+          "tier": "ulu",
+          "aliases": [
+            "Thanggam LRT",
+            "Thanggam LRT Station",
+            "Thanggam Station"
+          ]
+        },
+        {
+          "name": "Kadaloor",
+          "tier": "ulu",
+          "aliases": [
+            "Kadaloor LRT",
+            "Kadaloor LRT Station",
+            "Kadaloor Station"
+          ]
+        },
+        {
+          "name": "Nibong",
+          "tier": "ulu",
+          "aliases": [
+            "Nibong LRT",
+            "Nibong LRT Station",
+            "Nibong Station"
+          ]
+        },
+        {
+          "name": "Sumang",
+          "tier": "ulu",
+          "aliases": [
+            "Sumang LRT",
+            "Sumang LRT Station",
+            "Sumang Station"
+          ]
+        },
+        {
+          "name": "Soo Teck",
+          "tier": "ulu",
+          "aliases": [
+            "Soo Teck LRT",
+            "Soo Teck LRT Station",
+            "Soo Teck Station"
+          ]
+        },
+        {
+          "name": "Teck Lee",
+          "tier": "gem",
+          "aliases": [
+            "Teck Lee LRT",
+            "Teck Lee LRT Station",
+            "Teck Lee Station"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "transport-bus-interchanges",
+      "category": "transport",
+      "text": "Name a bus interchange or bus terminal",
+      "note": "Any public bus interchange or terminal operating as of October 2026.",
+      "answers": [
+        {
+          "name": "Toa Payoh",
+          "tier": "common",
+          "aliases": [
+            "TPY",
+            "Toa Payoh Bus Interchange",
+            "Toa Payoh Interchange",
+            "Toa Payoh Bus Terminal",
+            "Toa Payoh Terminal",
+            "Toa Payoh Bus Int",
+            "Toa Payoh Int",
+            "TPY Bus Interchange",
+            "TPY Interchange",
+            "TPY Bus Terminal",
+            "TPY Terminal",
+            "TPY Bus Int",
+            "TPY Int"
+          ]
+        },
+        {
+          "name": "Ang Mo Kio",
+          "tier": "common",
+          "aliases": [
+            "AMK",
+            "Ang Mo Kio Bus Interchange",
+            "Ang Mo Kio Interchange",
+            "Ang Mo Kio Bus Terminal",
+            "Ang Mo Kio Terminal",
+            "Ang Mo Kio Bus Int",
+            "Ang Mo Kio Int",
+            "AMK Bus Interchange",
+            "AMK Interchange",
+            "AMK Bus Terminal",
+            "AMK Terminal",
+            "AMK Bus Int",
+            "AMK Int"
+          ]
+        },
+        {
+          "name": "Bedok",
+          "tier": "common",
+          "aliases": [
+            "Bedok Bus Interchange",
+            "Bedok Interchange",
+            "Bedok Bus Terminal",
+            "Bedok Terminal",
+            "Bedok Bus Int",
+            "Bedok Int"
+          ]
+        },
+        {
+          "name": "Tampines",
+          "tier": "common",
+          "aliases": [
+            "Tampines Bus Interchange",
+            "Tampines Interchange",
+            "Tampines Bus Terminal",
+            "Tampines Terminal",
+            "Tampines Bus Int",
+            "Tampines Int"
+          ]
+        },
+        {
+          "name": "Changi Village",
+          "tier": "trap",
+          "aliases": [
+            "Changi Village Bus Interchange",
+            "Changi Village Interchange",
+            "Changi Village Bus Terminal",
+            "Changi Village Terminal",
+            "Changi Village Bus Int",
+            "Changi Village Int"
+          ]
+        },
+        {
+          "name": "Jurong East",
+          "tier": "solid",
+          "aliases": [
+            "Jurong East Bus Interchange",
+            "Jurong East Interchange",
+            "Jurong East Bus Terminal",
+            "Jurong East Terminal",
+            "Jurong East Bus Int",
+            "Jurong East Int"
+          ]
+        },
+        {
+          "name": "Boon Lay",
+          "tier": "solid",
+          "aliases": [
+            "Boon Lay Bus Interchange",
+            "Boon Lay Interchange",
+            "Boon Lay Bus Terminal",
+            "Boon Lay Terminal",
+            "Boon Lay Bus Int",
+            "Boon Lay Int"
+          ]
+        },
+        {
+          "name": "Clementi",
+          "tier": "solid",
+          "aliases": [
+            "Clementi Bus Interchange",
+            "Clementi Interchange",
+            "Clementi Bus Terminal",
+            "Clementi Terminal",
+            "Clementi Bus Int",
+            "Clementi Int"
+          ]
+        },
+        {
+          "name": "Woodlands",
+          "tier": "solid",
+          "aliases": [
+            "Woodlands Temporary",
+            "Woodlands Bus Interchange",
+            "Woodlands Interchange",
+            "Woodlands Bus Terminal",
+            "Woodlands Terminal",
+            "Woodlands Bus Int",
+            "Woodlands Int",
+            "Woodlands Temporary Bus Interchange",
+            "Woodlands Temporary Interchange",
+            "Woodlands Temporary Bus Terminal",
+            "Woodlands Temporary Terminal",
+            "Woodlands Temporary Bus Int",
+            "Woodlands Temporary Int"
+          ]
+        },
+        {
+          "name": "Yishun",
+          "tier": "solid",
+          "aliases": [
+            "Yishun Bus Interchange",
+            "Yishun Interchange",
+            "Yishun Bus Terminal",
+            "Yishun Terminal",
+            "Yishun Bus Int",
+            "Yishun Int"
+          ]
+        },
+        {
+          "name": "Bishan",
+          "tier": "solid",
+          "aliases": [
+            "Bishan Bus Interchange",
+            "Bishan Interchange",
+            "Bishan Bus Terminal",
+            "Bishan Terminal",
+            "Bishan Bus Int",
+            "Bishan Int"
+          ]
+        },
+        {
+          "name": "Serangoon",
+          "tier": "solid",
+          "aliases": [
+            "Serangoon Bus Interchange",
+            "Serangoon Interchange",
+            "Serangoon Bus Terminal",
+            "Serangoon Terminal",
+            "Serangoon Bus Int",
+            "Serangoon Int"
+          ]
+        },
+        {
+          "name": "Pasir Ris",
+          "tier": "solid",
+          "aliases": [
+            "Pasir Ris Bus Interchange",
+            "Pasir Ris Interchange",
+            "Pasir Ris Bus Terminal",
+            "Pasir Ris Terminal",
+            "Pasir Ris Bus Int",
+            "Pasir Ris Int"
+          ]
+        },
+        {
+          "name": "Sengkang",
+          "tier": "solid",
+          "aliases": [
+            "Sengkang Bus Interchange",
+            "Sengkang Interchange",
+            "Sengkang Bus Terminal",
+            "Sengkang Terminal",
+            "Sengkang Bus Int",
+            "Sengkang Int"
+          ]
+        },
+        {
+          "name": "Punggol",
+          "tier": "solid",
+          "aliases": [
+            "Punggol Bus Interchange",
+            "Punggol Interchange",
+            "Punggol Bus Terminal",
+            "Punggol Terminal",
+            "Punggol Bus Int",
+            "Punggol Int"
+          ]
+        },
+        {
+          "name": "HarbourFront",
+          "tier": "solid",
+          "aliases": [
+            "HarbourFront Bus Interchange",
+            "HarbourFront Interchange",
+            "HarbourFront Bus Terminal",
+            "HarbourFront Terminal",
+            "HarbourFront Bus Int",
+            "HarbourFront Int"
+          ]
+        },
+        {
+          "name": "Choa Chu Kang",
+          "tier": "solid",
+          "aliases": [
+            "CCK",
+            "Choa Chu Kang Bus Interchange",
+            "Choa Chu Kang Interchange",
+            "Choa Chu Kang Bus Terminal",
+            "Choa Chu Kang Terminal",
+            "Choa Chu Kang Bus Int",
+            "Choa Chu Kang Int",
+            "CCK Bus Interchange",
+            "CCK Interchange",
+            "CCK Bus Terminal",
+            "CCK Terminal",
+            "CCK Bus Int",
+            "CCK Int"
+          ]
+        },
+        {
+          "name": "Bukit Panjang",
+          "tier": "solid",
+          "aliases": [
+            "Bukit Panjang Bus Interchange",
+            "Bukit Panjang Interchange",
+            "Bukit Panjang Bus Terminal",
+            "Bukit Panjang Terminal",
+            "Bukit Panjang Bus Int",
+            "Bukit Panjang Int"
+          ]
+        },
+        {
+          "name": "Bukit Batok",
+          "tier": "solid",
+          "aliases": [
+            "Bukit Batok Bus Interchange",
+            "Bukit Batok Interchange",
+            "Bukit Batok Bus Terminal",
+            "Bukit Batok Terminal",
+            "Bukit Batok Bus Int",
+            "Bukit Batok Int"
+          ]
+        },
+        {
+          "name": "Hougang Central",
+          "tier": "solid",
+          "aliases": [
+            "Hougang",
+            "Hougang Central Bus Interchange",
+            "Hougang Central Interchange",
+            "Hougang Central Bus Terminal",
+            "Hougang Central Terminal",
+            "Hougang Central Bus Int",
+            "Hougang Central Int",
+            "Hougang Bus Interchange",
+            "Hougang Interchange",
+            "Hougang Bus Terminal",
+            "Hougang Terminal",
+            "Hougang Bus Int",
+            "Hougang Int"
+          ]
+        },
+        {
+          "name": "Bukit Merah",
+          "tier": "rare",
+          "aliases": [
+            "Bukit Merah Bus Interchange",
+            "Bukit Merah Interchange",
+            "Bukit Merah Bus Terminal",
+            "Bukit Merah Terminal",
+            "Bukit Merah Bus Int",
+            "Bukit Merah Int"
+          ]
+        },
+        {
+          "name": "Eunos",
+          "tier": "rare",
+          "aliases": [
+            "Eunos Bus Interchange",
+            "Eunos Interchange",
+            "Eunos Bus Terminal",
+            "Eunos Terminal",
+            "Eunos Bus Int",
+            "Eunos Int"
+          ]
+        },
+        {
+          "name": "Sembawang",
+          "tier": "rare",
+          "aliases": [
+            "Sembawang Bus Interchange",
+            "Sembawang Interchange",
+            "Sembawang Bus Terminal",
+            "Sembawang Terminal",
+            "Sembawang Bus Int",
+            "Sembawang Int"
+          ]
+        },
+        {
+          "name": "Joo Koon",
+          "tier": "rare",
+          "aliases": [
+            "Joo Koon Bus Interchange",
+            "Joo Koon Interchange",
+            "Joo Koon Bus Terminal",
+            "Joo Koon Terminal",
+            "Joo Koon Bus Int",
+            "Joo Koon Int"
+          ]
+        },
+        {
+          "name": "Yio Chu Kang",
+          "tier": "rare",
+          "aliases": [
+            "YCK",
+            "Yio Chu Kang Bus Interchange",
+            "Yio Chu Kang Interchange",
+            "Yio Chu Kang Bus Terminal",
+            "Yio Chu Kang Terminal",
+            "Yio Chu Kang Bus Int",
+            "Yio Chu Kang Int",
+            "YCK Bus Interchange",
+            "YCK Interchange",
+            "YCK Bus Terminal",
+            "YCK Terminal",
+            "YCK Bus Int",
+            "YCK Int"
+          ]
+        },
+        {
+          "name": "Tengah",
+          "tier": "rare",
+          "aliases": [
+            "Tengah Bus Interchange",
+            "Tengah Interchange",
+            "Tengah Bus Terminal",
+            "Tengah Terminal",
+            "Tengah Bus Int",
+            "Tengah Int"
+          ]
+        },
+        {
+          "name": "Buangkok",
+          "tier": "rare",
+          "aliases": [
+            "Buangkok Bus Interchange",
+            "Buangkok Interchange",
+            "Buangkok Bus Terminal",
+            "Buangkok Terminal",
+            "Buangkok Bus Int",
+            "Buangkok Int"
+          ]
+        },
+        {
+          "name": "Woodleigh",
+          "tier": "rare",
+          "aliases": [
+            "Woodleigh Bus Interchange",
+            "Woodleigh Interchange",
+            "Woodleigh Bus Terminal",
+            "Woodleigh Terminal",
+            "Woodleigh Bus Int",
+            "Woodleigh Int"
+          ]
+        },
+        {
+          "name": "Punggol Coast",
+          "tier": "rare",
+          "aliases": [
+            "Punggol Coast Bus Interchange",
+            "Punggol Coast Interchange",
+            "Punggol Coast Bus Terminal",
+            "Punggol Coast Terminal",
+            "Punggol Coast Bus Int",
+            "Punggol Coast Int"
+          ]
+        },
+        {
+          "name": "Tampines North",
+          "tier": "rare",
+          "aliases": [
+            "Tampines North Bus Interchange",
+            "Tampines North Interchange",
+            "Tampines North Bus Terminal",
+            "Tampines North Terminal",
+            "Tampines North Bus Int",
+            "Tampines North Int"
+          ]
+        },
+        {
+          "name": "Tampines Concourse",
+          "tier": "rare",
+          "aliases": [
+            "Tampines Concourse Bus Interchange",
+            "Tampines Concourse Interchange",
+            "Tampines Concourse Bus Terminal",
+            "Tampines Concourse Terminal",
+            "Tampines Concourse Bus Int",
+            "Tampines Concourse Int"
+          ]
+        },
+        {
+          "name": "Jurong Town Hall",
+          "tier": "rare",
+          "aliases": [
+            "Jurong Town Hall Bus Interchange",
+            "Jurong Town Hall Interchange",
+            "Jurong Town Hall Bus Terminal",
+            "Jurong Town Hall Terminal",
+            "Jurong Town Hall Bus Int",
+            "Jurong Town Hall Int"
+          ]
+        },
+        {
+          "name": "Changi Airport",
+          "tier": "rare",
+          "aliases": [
+            "Changi Airport Bus Interchange",
+            "Changi Airport Interchange",
+            "Changi Airport Bus Terminal",
+            "Changi Airport Terminal",
+            "Changi Airport Bus Int",
+            "Changi Airport Int"
+          ]
+        },
+        {
+          "name": "Queen Street",
+          "tier": "rare",
+          "aliases": [
+            "Queen Street Bus Interchange",
+            "Queen Street Interchange",
+            "Queen Street Bus Terminal",
+            "Queen Street Terminal",
+            "Queen Street Bus Int",
+            "Queen Street Int"
+          ]
+        },
+        {
+          "name": "Beach Station",
+          "tier": "rare",
+          "aliases": [
+            "Sentosa Beach Station",
+            "Beach Station Bus Interchange",
+            "Beach Station Interchange",
+            "Beach Station Bus Terminal",
+            "Beach Station Terminal",
+            "Beach Station Bus Int",
+            "Beach Station Int",
+            "Sentosa Beach Station Bus Interchange",
+            "Sentosa Beach Station Interchange",
+            "Sentosa Beach Station Bus Terminal",
+            "Sentosa Beach Station Terminal",
+            "Sentosa Beach Station Bus Int",
+            "Sentosa Beach Station Int"
+          ]
+        },
+        {
+          "name": "Resorts World Sentosa",
+          "tier": "rare",
+          "aliases": [
+            "RWS",
+            "Resorts World Sentosa Bus Interchange",
+            "Resorts World Sentosa Interchange",
+            "Resorts World Sentosa Bus Terminal",
+            "Resorts World Sentosa Terminal",
+            "Resorts World Sentosa Bus Int",
+            "Resorts World Sentosa Int",
+            "RWS Bus Interchange",
+            "RWS Interchange",
+            "RWS Bus Terminal",
+            "RWS Terminal",
+            "RWS Bus Int",
+            "RWS Int"
+          ]
+        },
+        {
+          "name": "Shenton Way",
+          "tier": "rare",
+          "aliases": [
+            "Shenton Way Bus Interchange",
+            "Shenton Way Interchange",
+            "Shenton Way Bus Terminal",
+            "Shenton Way Terminal",
+            "Shenton Way Bus Int",
+            "Shenton Way Int"
+          ]
+        },
+        {
+          "name": "Kent Ridge",
+          "tier": "rare",
+          "aliases": [
+            "Kent Ridge Bus Interchange",
+            "Kent Ridge Interchange",
+            "Kent Ridge Bus Terminal",
+            "Kent Ridge Terminal",
+            "Kent Ridge Bus Int",
+            "Kent Ridge Int"
+          ]
+        },
+        {
+          "name": "Buona Vista",
+          "tier": "rare",
+          "aliases": [
+            "Buona Vista Bus Interchange",
+            "Buona Vista Interchange",
+            "Buona Vista Bus Terminal",
+            "Buona Vista Terminal",
+            "Buona Vista Bus Int",
+            "Buona Vista Int"
+          ]
+        },
+        {
+          "name": "Sims Place",
+          "tier": "ulu",
+          "aliases": [
+            "Sims Place Bus Interchange",
+            "Sims Place Interchange",
+            "Sims Place Bus Terminal",
+            "Sims Place Terminal",
+            "Sims Place Bus Int",
+            "Sims Place Int"
+          ]
+        },
+        {
+          "name": "St Michael's",
+          "tier": "ulu",
+          "aliases": [
+            "St Michael's Bus Interchange",
+            "St Michael's Interchange",
+            "St Michael's Bus Terminal",
+            "St Michael's Terminal",
+            "St Michael's Bus Int",
+            "St Michael's Int"
+          ]
+        },
+        {
+          "name": "Upper East Coast",
+          "tier": "ulu",
+          "aliases": [
+            "Upper East Coast Bus Interchange",
+            "Upper East Coast Interchange",
+            "Upper East Coast Bus Terminal",
+            "Upper East Coast Terminal",
+            "Upper East Coast Bus Int",
+            "Upper East Coast Int"
+          ]
+        },
+        {
+          "name": "Lorong 1 Geylang",
+          "tier": "ulu",
+          "aliases": [
+            "Lor 1 Geylang",
+            "Lorong 1 Geylang Bus Interchange",
+            "Lorong 1 Geylang Interchange",
+            "Lorong 1 Geylang Bus Terminal",
+            "Lorong 1 Geylang Terminal",
+            "Lorong 1 Geylang Bus Int",
+            "Lorong 1 Geylang Int",
+            "Lor 1 Geylang Bus Interchange",
+            "Lor 1 Geylang Interchange",
+            "Lor 1 Geylang Bus Terminal",
+            "Lor 1 Geylang Terminal",
+            "Lor 1 Geylang Bus Int",
+            "Lor 1 Geylang Int"
+          ]
+        },
+        {
+          "name": "Changi Business Park",
+          "tier": "ulu",
+          "aliases": [
+            "Changi Business Park Bus Interchange",
+            "Changi Business Park Interchange",
+            "Changi Business Park Bus Terminal",
+            "Changi Business Park Terminal",
+            "Changi Business Park Bus Int",
+            "Changi Business Park Int"
+          ]
+        },
+        {
+          "name": "Tuas",
+          "tier": "ulu",
+          "aliases": [
+            "Tuas Bus Interchange",
+            "Tuas Interchange",
+            "Tuas Bus Terminal",
+            "Tuas Terminal",
+            "Tuas Bus Int",
+            "Tuas Int"
+          ]
+        },
+        {
+          "name": "Kampong Bahru",
+          "tier": "ulu",
+          "aliases": [
+            "Kampong Bahru Bus Interchange",
+            "Kampong Bahru Interchange",
+            "Kampong Bahru Bus Terminal",
+            "Kampong Bahru Terminal",
+            "Kampong Bahru Bus Int",
+            "Kampong Bahru Int"
+          ]
+        },
+        {
+          "name": "Marina Centre",
+          "tier": "ulu",
+          "aliases": [
+            "Marina Centre Bus Interchange",
+            "Marina Centre Interchange",
+            "Marina Centre Bus Terminal",
+            "Marina Centre Terminal",
+            "Marina Centre Bus Int",
+            "Marina Centre Int"
+          ]
+        },
+        {
+          "name": "Rumah Tinggi",
+          "tier": "ulu",
+          "aliases": [
+            "Rumah Tinggi Bus Interchange",
+            "Rumah Tinggi Interchange",
+            "Rumah Tinggi Bus Terminal",
+            "Rumah Tinggi Terminal",
+            "Rumah Tinggi Bus Int",
+            "Rumah Tinggi Int"
+          ]
+        },
+        {
+          "name": "Gali Batu",
+          "tier": "gem",
+          "aliases": [
+            "Gali Batu Bus Interchange",
+            "Gali Batu Interchange",
+            "Gali Batu Bus Terminal",
+            "Gali Batu Terminal",
+            "Gali Batu Bus Int",
+            "Gali Batu Int"
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,36 @@
+name: CI
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+  # The schedule check depends on today's date: it needs the schedule to reach 14 days ahead. Run daily so a
+  # quiet repo with no pushes still goes red, and someone runs npm run schedule, before the runway runs out
+  schedule:
+    - cron: '0 1 * * *'
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  check:
+    name: Lint, test, validate and build
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-node@v5
+        with:
+          node-version-file: .tool-versions
+          cache: npm
+      - run: npm ci
+      - run: npm run lint
+      - run: npm test
+      # Also part of npm test; run on its own for a readable list of content problems
+      - run: npm run validate
+      - run: npm run build
+      # The entry JS stays under budget with no question data in it, and every scheduled day has its dive file
+      - run: npm run check:bundle

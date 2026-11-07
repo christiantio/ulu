@@ -1,0 +1,19 @@
+{
+  "name": "ulu-answer-stats-prototype",
+  "private": true,
+  "version": "0.0.0",
+  "description": "THROWAWAY spike for issue #17. Not production code; see README.md",
+  "type": "module",
+  "scripts": {
+    "dev": "wrangler dev --local",
+    "db:init": "wrangler d1 execute ulu-answer-stats --local --file schema.sql",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run"
+  },
+  "devDependencies": {
+    "@cloudflare/workers-types": "5.20261013.1",
+    "typescript": "5.8.3",
+    "vitest": "3.2.7",
+    "wrangler": "4.150.0"
+  }
+}

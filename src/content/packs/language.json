@@ -1,0 +1,2783 @@
+{
+  "name": "Language",
+  "asOf": "2026-10-27",
+  "prompts": [
+    {
+      "id": "language-singlish-particles",
+      "category": "language",
+      "text": "Name a Singlish sentence-ending particle",
+      "note": "The little words tacked onto the end of a sentence. Spelling variants are fine.",
+      "answers": [
+        {
+          "name": "lah",
+          "aliases": [
+            "la"
+          ],
+          "tier": "common"
+        },
+        {
+          "name": "leh",
+          "aliases": [
+            "lei"
+          ],
+          "tier": "common"
+        },
+        {
+          "name": "lor",
+          "aliases": [
+            "lo",
+            "loh"
+          ],
+          "tier": "common"
+        },
+        {
+          "name": "meh",
+          "tier": "solid"
+        },
+        {
+          "name": "sia",
+          "aliases": [
+            "siah",
+            "seh",
+            "siol"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "hor",
+          "aliases": [
+            "horh"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "mah",
+          "aliases": [
+            "ma"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "ah",
+          "aliases": [
+            "a"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "hah",
+          "aliases": [
+            "har"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "what",
+          "aliases": [
+            "wat"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "liao",
+          "tier": "rare"
+        },
+        {
+          "name": "one",
+          "tier": "rare"
+        },
+        {
+          "name": "ba",
+          "aliases": [
+            "bah"
+          ],
+          "tier": "ulu"
+        },
+        {
+          "name": "nia",
+          "aliases": [
+            "nia only"
+          ],
+          "tier": "gem"
+        }
+      ]
+    },
+    {
+      "id": "language-singlish-words",
+      "category": "language",
+      "text": "Name a Singlish word or expression",
+      "note": "Words and phrases you'd only really hear in Singapore. Common spellings are accepted.",
+      "answers": [
+        {
+          "name": "kiasu",
+          "tier": "common"
+        },
+        {
+          "name": "shiok",
+          "tier": "common"
+        },
+        {
+          "name": "paiseh",
+          "aliases": [
+            "paisay"
+          ],
+          "tier": "common"
+        },
+        {
+          "name": "lah",
+          "aliases": [
+            "la"
+          ],
+          "tier": "common"
+        },
+        {
+          "name": "sian",
+          "aliases": [
+            "sien",
+            "sian dao"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "kiasi",
+          "aliases": [
+            "kiasee"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "chope",
+          "tier": "solid"
+        },
+        {
+          "name": "jialat",
+          "tier": "solid"
+        },
+        {
+          "name": "alamak",
+          "tier": "solid"
+        },
+        {
+          "name": "bo jio",
+          "aliases": [
+            "boh jio"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "lepak",
+          "tier": "solid"
+        },
+        {
+          "name": "makan",
+          "tier": "solid"
+        },
+        {
+          "name": "atas",
+          "tier": "solid"
+        },
+        {
+          "name": "kaypoh",
+          "aliases": [
+            "kaepo"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "walao",
+          "aliases": [
+            "walao eh",
+            "wah lau",
+            "wah lau eh",
+            "walau"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "steady",
+          "aliases": [
+            "steady pom pi pi",
+            "steady bom pi pi"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "blur",
+          "aliases": [
+            "blur like sotong",
+            "blur sotong"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "can or not",
+          "aliases": [
+            "can anot"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "abuden",
+          "aliases": [
+            "abuthen"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "tapau",
+          "aliases": [
+            "da bao"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "kena",
+          "tier": "solid"
+        },
+        {
+          "name": "heng",
+          "tier": "solid"
+        },
+        {
+          "name": "suay",
+          "aliases": [
+            "suey"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "ang moh",
+          "aliases": [
+            "ang mo"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "ah beng",
+          "aliases": [
+            "beng"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "ah lian",
+          "aliases": [
+            "lian"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "chio",
+          "aliases": [
+            "chio bu"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "cheem",
+          "aliases": [
+            "chim"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "agak agak",
+          "aliases": [
+            "agaration"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "catch no ball",
+          "tier": "solid"
+        },
+        {
+          "name": "die die must",
+          "aliases": [
+            "die die also must"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "kancheong",
+          "aliases": [
+            "kancheong spider",
+            "kan chiong"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "sabo",
+          "tier": "solid"
+        },
+        {
+          "name": "leh",
+          "aliases": [
+            "lei"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "lor",
+          "aliases": [
+            "lo",
+            "loh"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "cincai",
+          "aliases": [
+            "chin chai"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "shag",
+          "aliases": [
+            "shag out"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "lobang",
+          "aliases": [
+            "lubang"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "tahan",
+          "aliases": [
+            "buay tahan",
+            "cannot tahan"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "gostan",
+          "tier": "rare"
+        },
+        {
+          "name": "meh",
+          "tier": "rare"
+        },
+        {
+          "name": "sia",
+          "aliases": [
+            "siol",
+            "seh"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "kacau",
+          "tier": "rare"
+        },
+        {
+          "name": "ponteng",
+          "tier": "rare"
+        },
+        {
+          "name": "goondu",
+          "tier": "rare"
+        },
+        {
+          "name": "gabra",
+          "tier": "rare"
+        },
+        {
+          "name": "double confirm",
+          "aliases": [
+            "double confirm plus chop"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "ownself check ownself",
+          "aliases": [
+            "ownself"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "liddat",
+          "aliases": [
+            "lidat"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "orredy",
+          "aliases": [
+            "orredi",
+            "oreddy"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "talk cock",
+          "aliases": [
+            "talk cock sing song"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "kantang",
+          "tier": "rare"
+        },
+        {
+          "name": "rabak",
+          "tier": "rare"
+        },
+        {
+          "name": "cheong",
+          "aliases": [
+            "chiong"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "mafan",
+          "aliases": [
+            "mah fan"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "pangseh",
+          "tier": "rare"
+        },
+        {
+          "name": "simi",
+          "aliases": [
+            "simi sai"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "jiak",
+          "aliases": [
+            "jiak png"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "kiam siap",
+          "tier": "rare"
+        },
+        {
+          "name": "hiao",
+          "tier": "rare"
+        },
+        {
+          "name": "sibei",
+          "aliases": [
+            "sibeh"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "lansi",
+          "tier": "rare"
+        },
+        {
+          "name": "action",
+          "tier": "rare"
+        },
+        {
+          "name": "wayang",
+          "tier": "rare"
+        },
+        {
+          "name": "arrow",
+          "aliases": [
+            "kena arrow",
+            "arrowed"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "kelong",
+          "tier": "rare"
+        },
+        {
+          "name": "bo chap",
+          "aliases": [
+            "boh chap"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "bo liao",
+          "aliases": [
+            "boh liao"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "buay song",
+          "aliases": [
+            "song"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "hum ji",
+          "aliases": [
+            "hum chi"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "ulu",
+          "tier": "rare"
+        },
+        {
+          "name": "kampung spirit",
+          "aliases": [
+            "kampong spirit"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "pai kia",
+          "tier": "rare"
+        },
+        {
+          "name": "hao lian",
+          "tier": "rare"
+        },
+        {
+          "name": "paktor",
+          "tier": "rare"
+        },
+        {
+          "name": "chut pattern",
+          "aliases": [
+            "so many pattern",
+            "pattern"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "gahmen",
+          "aliases": [
+            "garmen"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "zhun",
+          "aliases": [
+            "zun"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "swee",
+          "aliases": [
+            "sui"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "kiam pah",
+          "aliases": [
+            "kiam pa"
+          ],
+          "tier": "ulu"
+        },
+        {
+          "name": "pek chek",
+          "tier": "ulu"
+        },
+        {
+          "name": "jiak liao bee",
+          "aliases": [
+            "jiak liao bi"
+          ],
+          "tier": "ulu"
+        },
+        {
+          "name": "lim kopi",
+          "aliases": [
+            "kena lim kopi"
+          ],
+          "tier": "ulu"
+        },
+        {
+          "name": "tok kong",
+          "tier": "ulu"
+        },
+        {
+          "name": "spoil market",
+          "tier": "ulu"
+        },
+        {
+          "name": "kiang",
+          "tier": "ulu"
+        },
+        {
+          "name": "tumpang",
+          "tier": "ulu"
+        },
+        {
+          "name": "kowtim",
+          "tier": "ulu"
+        },
+        {
+          "name": "buaya",
+          "tier": "ulu"
+        },
+        {
+          "name": "eat snake",
+          "aliases": [
+            "jiak zua",
+            "jiak choa"
+          ],
+          "tier": "gem"
+        }
+      ]
+    },
+    {
+      "id": "language-malay-words-in-singlish",
+      "category": "language",
+      "text": "Name a Malay word Singaporeans of every race use",
+      "note": "Malay words that turn up in everyday Singlish, like 'makan'. Some may have wandered into Malay from elsewhere first.",
+      "answers": [
+        {
+          "name": "makan",
+          "tier": "common"
+        },
+        {
+          "name": "alamak",
+          "tier": "common"
+        },
+        {
+          "name": "lepak",
+          "tier": "common"
+        },
+        {
+          "name": "tahan",
+          "aliases": [
+            "buay tahan",
+            "cannot tahan"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "kacau",
+          "tier": "solid"
+        },
+        {
+          "name": "kena",
+          "tier": "solid"
+        },
+        {
+          "name": "habis",
+          "tier": "solid"
+        },
+        {
+          "name": "sayang",
+          "tier": "solid"
+        },
+        {
+          "name": "boleh",
+          "aliases": [
+            "boleh tak"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "jalan jalan",
+          "aliases": [
+            "jalan"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "agak agak",
+          "aliases": [
+            "agak"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "kampung",
+          "aliases": [
+            "kampong"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "bodoh",
+          "tier": "solid"
+        },
+        {
+          "name": "ponteng",
+          "tier": "solid"
+        },
+        {
+          "name": "sotong",
+          "tier": "solid"
+        },
+        {
+          "name": "ulu",
+          "tier": "solid"
+        },
+        {
+          "name": "lobang",
+          "aliases": [
+            "lubang"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "pasar malam",
+          "aliases": [
+            "pasar"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "rojak",
+          "tier": "solid"
+        },
+        {
+          "name": "botak",
+          "tier": "solid"
+        },
+        {
+          "name": "kantoi",
+          "tier": "rare"
+        },
+        {
+          "name": "cabut",
+          "tier": "rare"
+        },
+        {
+          "name": "jaga",
+          "tier": "rare"
+        },
+        {
+          "name": "mata",
+          "aliases": [
+            "mata mata"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "pandai",
+          "tier": "rare"
+        },
+        {
+          "name": "gila",
+          "tier": "rare"
+        },
+        {
+          "name": "buaya",
+          "tier": "rare"
+        },
+        {
+          "name": "senang",
+          "tier": "rare"
+        },
+        {
+          "name": "susah",
+          "tier": "rare"
+        },
+        {
+          "name": "lagi",
+          "tier": "rare"
+        },
+        {
+          "name": "sikit",
+          "aliases": [
+            "sikit sikit"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "kelong",
+          "tier": "rare"
+        },
+        {
+          "name": "longkang",
+          "tier": "rare"
+        },
+        {
+          "name": "jamban",
+          "tier": "rare"
+        },
+        {
+          "name": "kesian",
+          "aliases": [
+            "kasihan",
+            "kasian"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "sabar",
+          "tier": "rare"
+        },
+        {
+          "name": "pengsan",
+          "tier": "rare"
+        },
+        {
+          "name": "gabra",
+          "tier": "rare"
+        },
+        {
+          "name": "hantam",
+          "tier": "rare"
+        },
+        {
+          "name": "pantang",
+          "aliases": [
+            "pantang larang"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "makcik",
+          "tier": "rare"
+        },
+        {
+          "name": "pakcik",
+          "tier": "rare"
+        },
+        {
+          "name": "abang",
+          "tier": "rare"
+        },
+        {
+          "name": "adik",
+          "tier": "rare"
+        },
+        {
+          "name": "kopi",
+          "tier": "rare"
+        },
+        {
+          "name": "gotong royong",
+          "tier": "ulu"
+        },
+        {
+          "name": "kantang",
+          "aliases": [
+            "kentang"
+          ],
+          "tier": "ulu"
+        },
+        {
+          "name": "bising",
+          "tier": "ulu"
+        },
+        {
+          "name": "sedap",
+          "tier": "ulu"
+        },
+        {
+          "name": "tolong",
+          "tier": "ulu"
+        },
+        {
+          "name": "kawan",
+          "tier": "ulu"
+        },
+        {
+          "name": "bomoh",
+          "tier": "ulu"
+        },
+        {
+          "name": "tumpang",
+          "tier": "ulu"
+        },
+        {
+          "name": "suka suka",
+          "aliases": [
+            "suka"
+          ],
+          "tier": "ulu"
+        },
+        {
+          "name": "campur",
+          "tier": "ulu"
+        },
+        {
+          "name": "senang diri",
+          "tier": "ulu"
+        },
+        {
+          "name": "kaki",
+          "aliases": [
+            "mahjong kaki"
+          ],
+          "tier": "gem"
+        }
+      ]
+    },
+    {
+      "id": "language-singapore-acronyms",
+      "category": "language",
+      "text": "Name an acronym every Singaporean knows",
+      "note": "Singapore abbreviations for agencies, schools, roads, housing, NS, politics and daily life.",
+      "answers": [
+        {
+          "name": "HDB",
+          "aliases": [
+            "Housing and Development Board"
+          ],
+          "tier": "common"
+        },
+        {
+          "name": "CPF",
+          "aliases": [
+            "Central Provident Fund"
+          ],
+          "tier": "common"
+        },
+        {
+          "name": "MRT",
+          "aliases": [
+            "Mass Rapid Transit"
+          ],
+          "tier": "common"
+        },
+        {
+          "name": "NS",
+          "aliases": [
+            "National Service"
+          ],
+          "tier": "common"
+        },
+        {
+          "name": "ERP",
+          "aliases": [
+            "Electronic Road Pricing"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "COE",
+          "aliases": [
+            "Certificate of Entitlement"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "BTO",
+          "aliases": [
+            "Build-To-Order"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "LRT",
+          "aliases": [
+            "Light Rail Transit"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "PSLE",
+          "aliases": [
+            "Primary School Leaving Examination"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "CCA",
+          "aliases": [
+            "Co-Curricular Activity",
+            "Co-Curricular Activities"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "NTUC",
+          "tier": "solid"
+        },
+        {
+          "name": "SAF",
+          "aliases": [
+            "Singapore Armed Forces"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "SCDF",
+          "aliases": [
+            "Singapore Civil Defence Force"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "SPF",
+          "aliases": [
+            "Singapore Police Force"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "MOE",
+          "aliases": [
+            "Ministry of Education"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "LTA",
+          "aliases": [
+            "Land Transport Authority"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "PUB",
+          "tier": "solid"
+        },
+        {
+          "name": "SMRT",
+          "tier": "solid"
+        },
+        {
+          "name": "SBS",
+          "aliases": [
+            "SBS Transit"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "NUS",
+          "aliases": [
+            "National University of Singapore"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "NTU",
+          "aliases": [
+            "Nanyang Technological University"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "SMU",
+          "aliases": [
+            "Singapore Management University"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "ITE",
+          "aliases": [
+            "Institute of Technical Education"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "JC",
+          "aliases": [
+            "Junior College"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "CBD",
+          "aliases": [
+            "Central Business District"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "PIE",
+          "aliases": [
+            "Pan Island Expressway"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "AYE",
+          "aliases": [
+            "Ayer Rajah Expressway"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "CTE",
+          "aliases": [
+            "Central Expressway"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "ECP",
+          "aliases": [
+            "East Coast Parkway"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "PAP",
+          "aliases": [
+            "People's Action Party"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "GRC",
+          "aliases": [
+            "Group Representation Constituency"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "LKY",
+          "aliases": [
+            "Lee Kuan Yew"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "GST",
+          "aliases": [
+            "Goods and Services Tax"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "NRIC",
+          "aliases": [
+            "IC"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "PR",
+          "aliases": [
+            "Permanent Resident"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "NSF",
+          "aliases": [
+            "Full-time National Serviceman"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "ORD",
+          "aliases": [
+            "Operationally Ready Date"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "BMT",
+          "aliases": [
+            "Basic Military Training"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "IPPT",
+          "tier": "solid"
+        },
+        {
+          "name": "SIA",
+          "aliases": [
+            "Singapore Airlines"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "NDP",
+          "aliases": [
+            "National Day Parade"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "SAFRA",
+          "tier": "solid"
+        },
+        {
+          "name": "ICA",
+          "tier": "rare"
+        },
+        {
+          "name": "IRAS",
+          "tier": "rare"
+        },
+        {
+          "name": "MOH",
+          "aliases": [
+            "Ministry of Health"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "MOM",
+          "aliases": [
+            "Ministry of Manpower"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "URA",
+          "aliases": [
+            "Urban Redevelopment Authority"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "NEA",
+          "aliases": [
+            "National Environment Agency"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "SUTD",
+          "tier": "rare"
+        },
+        {
+          "name": "SIT",
+          "aliases": [
+            "Singapore Institute of Technology"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "NP",
+          "aliases": [
+            "Ngee Ann Polytechnic",
+            "Ngee Ann Poly"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "SP",
+          "aliases": [
+            "Singapore Polytechnic",
+            "Singapore Poly"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "TP",
+          "aliases": [
+            "Temasek Polytechnic",
+            "Temasek Poly"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "NYP",
+          "aliases": [
+            "Nanyang Polytechnic",
+            "Nanyang Poly"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "RP",
+          "aliases": [
+            "Republic Polytechnic",
+            "Republic Poly"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "BKE",
+          "aliases": [
+            "Bukit Timah Expressway"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "KJE",
+          "aliases": [
+            "Kranji Expressway"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "SLE",
+          "aliases": [
+            "Seletar Expressway"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "TPE",
+          "aliases": [
+            "Tampines Expressway"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "MCE",
+          "aliases": [
+            "Marina Coastal Expressway"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "KPE",
+          "aliases": [
+            "Kallang-Paya Lebar Expressway"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "WP",
+          "aliases": [
+            "Workers' Party"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "SMC",
+          "aliases": [
+            "Single Member Constituency"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "MP",
+          "aliases": [
+            "Member of Parliament"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "GE",
+          "aliases": [
+            "General Election"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "NDR",
+          "aliases": [
+            "National Day Rally"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "OCS",
+          "aliases": [
+            "Officer Cadet School"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "POP",
+          "aliases": [
+            "Passing Out Parade"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "MC",
+          "aliases": [
+            "Medical Certificate"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "CC",
+          "aliases": [
+            "Community Centre",
+            "Community Club"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "RC",
+          "aliases": [
+            "Residents' Committee"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "CDC",
+          "aliases": [
+            "CDC Vouchers",
+            "Community Development Council"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "EC",
+          "aliases": [
+            "Executive Condominium"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "PMD",
+          "aliases": [
+            "Personal Mobility Device"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "NETS",
+          "tier": "rare"
+        },
+        {
+          "name": "POSB",
+          "tier": "rare"
+        },
+        {
+          "name": "DBS",
+          "tier": "rare"
+        },
+        {
+          "name": "OCBC",
+          "tier": "rare"
+        },
+        {
+          "name": "UOB",
+          "tier": "rare"
+        },
+        {
+          "name": "SGH",
+          "aliases": [
+            "Singapore General Hospital"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "TTSH",
+          "aliases": [
+            "Tan Tock Seng Hospital"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "NUH",
+          "aliases": [
+            "National University Hospital"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "KKH",
+          "aliases": [
+            "KK Hospital",
+            "KK Women's and Children's Hospital"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "IMH",
+          "aliases": [
+            "Institute of Mental Health"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "AMK",
+          "aliases": [
+            "Ang Mo Kio"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "CCK",
+          "aliases": [
+            "Choa Chu Kang"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "MINDEF",
+          "aliases": [
+            "Ministry of Defence"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "MHA",
+          "aliases": [
+            "Ministry of Home Affairs"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "HPB",
+          "aliases": [
+            "Health Promotion Board"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "NLB",
+          "aliases": [
+            "National Library Board"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "MAS",
+          "aliases": [
+            "Monetary Authority of Singapore"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "SPH",
+          "aliases": [
+            "Singapore Press Holdings"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "GEP",
+          "aliases": [
+            "Gifted Education Programme"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "DSA",
+          "aliases": [
+            "Direct School Admission"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "BGR",
+          "aliases": [
+            "Boy-Girl Relationship"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "ACS",
+          "aliases": [
+            "Anglo-Chinese School"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "RI",
+          "aliases": [
+            "Raffles Institution"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "TPY",
+          "aliases": [
+            "Toa Payoh"
+          ],
+          "tier": "ulu"
+        },
+        {
+          "name": "SUSS",
+          "tier": "ulu"
+        },
+        {
+          "name": "NIE",
+          "aliases": [
+            "National Institute of Education"
+          ],
+          "tier": "ulu"
+        },
+        {
+          "name": "CGH",
+          "aliases": [
+            "Changi General Hospital"
+          ],
+          "tier": "ulu"
+        },
+        {
+          "name": "KTPH",
+          "aliases": [
+            "Khoo Teck Puat Hospital"
+          ],
+          "tier": "ulu"
+        },
+        {
+          "name": "PA",
+          "aliases": [
+            "People's Association"
+          ],
+          "tier": "ulu"
+        },
+        {
+          "name": "JTC",
+          "tier": "ulu"
+        },
+        {
+          "name": "EDB",
+          "aliases": [
+            "Economic Development Board"
+          ],
+          "tier": "ulu"
+        },
+        {
+          "name": "STB",
+          "aliases": [
+            "Singapore Tourism Board"
+          ],
+          "tier": "ulu"
+        },
+        {
+          "name": "NHB",
+          "aliases": [
+            "National Heritage Board"
+          ],
+          "tier": "ulu"
+        },
+        {
+          "name": "SFA",
+          "aliases": [
+            "Singapore Food Agency"
+          ],
+          "tier": "ulu"
+        },
+        {
+          "name": "HSA",
+          "aliases": [
+            "Health Sciences Authority"
+          ],
+          "tier": "ulu"
+        },
+        {
+          "name": "MFA",
+          "aliases": [
+            "Ministry of Foreign Affairs"
+          ],
+          "tier": "ulu"
+        },
+        {
+          "name": "MOF",
+          "aliases": [
+            "Ministry of Finance"
+          ],
+          "tier": "ulu"
+        },
+        {
+          "name": "MTI",
+          "aliases": [
+            "Ministry of Trade and Industry"
+          ],
+          "tier": "ulu"
+        },
+        {
+          "name": "MND",
+          "aliases": [
+            "Ministry of National Development"
+          ],
+          "tier": "ulu"
+        },
+        {
+          "name": "MOT",
+          "aliases": [
+            "Ministry of Transport"
+          ],
+          "tier": "ulu"
+        },
+        {
+          "name": "MSF",
+          "aliases": [
+            "Ministry of Social and Family Development"
+          ],
+          "tier": "ulu"
+        },
+        {
+          "name": "MCCY",
+          "tier": "ulu"
+        },
+        {
+          "name": "PMO",
+          "aliases": [
+            "Prime Minister's Office"
+          ],
+          "tier": "ulu"
+        },
+        {
+          "name": "RSAF",
+          "aliases": [
+            "Republic of Singapore Air Force"
+          ],
+          "tier": "ulu"
+        },
+        {
+          "name": "RSN",
+          "aliases": [
+            "Republic of Singapore Navy"
+          ],
+          "tier": "ulu"
+        },
+        {
+          "name": "SGX",
+          "aliases": [
+            "Singapore Exchange"
+          ],
+          "tier": "ulu"
+        },
+        {
+          "name": "ABSD",
+          "aliases": [
+            "Additional Buyer's Stamp Duty"
+          ],
+          "tier": "ulu"
+        },
+        {
+          "name": "SOTA",
+          "aliases": [
+            "School of the Arts"
+          ],
+          "tier": "ulu"
+        },
+        {
+          "name": "NAFA",
+          "tier": "ulu"
+        },
+        {
+          "name": "CNA",
+          "aliases": [
+            "Channel NewsAsia"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "ROM",
+          "aliases": [
+            "Registry of Marriages"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "NSL",
+          "aliases": [
+            "North South Line"
+          ],
+          "tier": "ulu"
+        },
+        {
+          "name": "EWL",
+          "aliases": [
+            "East West Line"
+          ],
+          "tier": "ulu"
+        },
+        {
+          "name": "NEL",
+          "aliases": [
+            "North East Line"
+          ],
+          "tier": "ulu"
+        },
+        {
+          "name": "CCL",
+          "aliases": [
+            "Circle Line"
+          ],
+          "tier": "ulu"
+        },
+        {
+          "name": "DTL",
+          "aliases": [
+            "Downtown Line"
+          ],
+          "tier": "ulu"
+        },
+        {
+          "name": "TEL",
+          "aliases": [
+            "Thomson-East Coast Line"
+          ],
+          "tier": "ulu"
+        },
+        {
+          "name": "SDU",
+          "aliases": [
+            "Social Development Unit"
+          ],
+          "tier": "gem"
+        }
+      ]
+    },
+    {
+      "id": "language-ns-slang",
+      "category": "language",
+      "text": "Name a piece of NS slang or jargon",
+      "note": "Words and abbreviations you pick up during National Service.",
+      "answers": [
+        {
+          "name": "ORD",
+          "aliases": [
+            "ORD lo",
+            "ORD loh"
+          ],
+          "tier": "common"
+        },
+        {
+          "name": "BMT",
+          "tier": "common"
+        },
+        {
+          "name": "chao keng",
+          "aliases": [
+            "keng"
+          ],
+          "tier": "common"
+        },
+        {
+          "name": "Tekong",
+          "aliases": [
+            "Pulau Tekong"
+          ],
+          "tier": "common"
+        },
+        {
+          "name": "siam",
+          "tier": "solid"
+        },
+        {
+          "name": "arrow",
+          "aliases": [
+            "kena arrow",
+            "arrowed"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "AWOL",
+          "tier": "solid"
+        },
+        {
+          "name": "NSF",
+          "tier": "solid"
+        },
+        {
+          "name": "NSman",
+          "aliases": [
+            "NSmen"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "IPPT",
+          "tier": "solid"
+        },
+        {
+          "name": "book in",
+          "tier": "solid"
+        },
+        {
+          "name": "book out",
+          "tier": "solid"
+        },
+        {
+          "name": "stand by bed",
+          "tier": "solid"
+        },
+        {
+          "name": "encik",
+          "tier": "solid"
+        },
+        {
+          "name": "POP",
+          "aliases": [
+            "Passing Out Parade"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "ICT",
+          "aliases": [
+            "In-Camp Training"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "white horse",
+          "tier": "solid"
+        },
+        {
+          "name": "kiwi",
+          "aliases": [
+            "kiwi boots"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "RT",
+          "aliases": [
+            "Remedial Training"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "ROD",
+          "aliases": [
+            "Run Out Date"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "MO",
+          "aliases": [
+            "Medical Officer"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "MC",
+          "tier": "rare"
+        },
+        {
+          "name": "RSO",
+          "aliases": [
+            "Report Sick Outside"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "PES",
+          "aliases": [
+            "PES status"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "bunk",
+          "tier": "rare"
+        },
+        {
+          "name": "cookhouse",
+          "tier": "rare"
+        },
+        {
+          "name": "chiong sua",
+          "tier": "rare"
+        },
+        {
+          "name": "tekan",
+          "aliases": [
+            "kena tekan"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "sabo",
+          "tier": "rare"
+        },
+        {
+          "name": "agar agar",
+          "tier": "rare"
+        },
+        {
+          "name": "fall in",
+          "tier": "rare"
+        },
+        {
+          "name": "sign extra",
+          "aliases": [
+            "extra"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "smoke",
+          "aliases": [
+            "smoking"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "wayang",
+          "tier": "rare"
+        },
+        {
+          "name": "botak",
+          "tier": "rare"
+        },
+        {
+          "name": "OCS",
+          "tier": "rare"
+        },
+        {
+          "name": "chao recruit",
+          "tier": "ulu"
+        },
+        {
+          "name": "keng king",
+          "tier": "ulu"
+        },
+        {
+          "name": "off",
+          "aliases": [
+            "off in lieu"
+          ],
+          "tier": "ulu"
+        },
+        {
+          "name": "senang diri",
+          "tier": "ulu"
+        },
+        {
+          "name": "eat snake",
+          "aliases": [
+            "jiak zua",
+            "jiak choa"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "outfield",
+          "tier": "rare"
+        },
+        {
+          "name": "IPT",
+          "aliases": [
+            "Individual Physical Proficiency Training"
+          ],
+          "tier": "ulu"
+        },
+        {
+          "name": "bobo shooter",
+          "aliases": [
+            "bobo"
+          ],
+          "tier": "gem"
+        }
+      ]
+    },
+    {
+      "id": "language-malay-place-name-words",
+      "category": "language",
+      "text": "Name a Malay word you'll see in Singapore place names",
+      "note": "Just the word itself, e.g. 'bukit' (hill), not the full place name.",
+      "answers": [
+        {
+          "name": "bukit",
+          "tier": "common"
+        },
+        {
+          "name": "tanjong",
+          "aliases": [
+            "tanjung"
+          ],
+          "tier": "common"
+        },
+        {
+          "name": "pasir",
+          "tier": "common"
+        },
+        {
+          "name": "pulau",
+          "tier": "common"
+        },
+        {
+          "name": "jalan",
+          "tier": "solid"
+        },
+        {
+          "name": "kampong",
+          "aliases": [
+            "kampung"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "telok",
+          "aliases": [
+            "teluk"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "sungei",
+          "aliases": [
+            "sungai"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "lorong",
+          "tier": "solid"
+        },
+        {
+          "name": "merah",
+          "tier": "solid"
+        },
+        {
+          "name": "panjang",
+          "tier": "solid"
+        },
+        {
+          "name": "tanah",
+          "tier": "solid"
+        },
+        {
+          "name": "paya",
+          "tier": "solid"
+        },
+        {
+          "name": "ayer",
+          "aliases": [
+            "air"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "lebar",
+          "tier": "rare"
+        },
+        {
+          "name": "padang",
+          "tier": "rare"
+        },
+        {
+          "name": "besar",
+          "tier": "rare"
+        },
+        {
+          "name": "bahru",
+          "aliases": [
+            "baru",
+            "baharu"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "batu",
+          "tier": "rare"
+        },
+        {
+          "name": "taman",
+          "tier": "rare"
+        },
+        {
+          "name": "timah",
+          "tier": "rare"
+        },
+        {
+          "name": "istana",
+          "tier": "rare"
+        },
+        {
+          "name": "simpang",
+          "tier": "ulu"
+        },
+        {
+          "name": "changkat",
+          "tier": "ulu"
+        },
+        {
+          "name": "kebun",
+          "tier": "ulu"
+        },
+        {
+          "name": "kayu",
+          "tier": "ulu"
+        },
+        {
+          "name": "tengah",
+          "tier": "ulu"
+        },
+        {
+          "name": "pandan",
+          "tier": "ulu"
+        },
+        {
+          "name": "kolam",
+          "tier": "ulu"
+        },
+        {
+          "name": "kubor",
+          "aliases": [
+            "kubur"
+          ],
+          "tier": "ulu"
+        },
+        {
+          "name": "lengkok",
+          "tier": "ulu"
+        },
+        {
+          "name": "lengkong",
+          "tier": "ulu"
+        },
+        {
+          "name": "ulu",
+          "aliases": [
+            "hulu"
+          ],
+          "tier": "gem"
+        }
+      ]
+    },
+    {
+      "id": "language-family-and-elder-terms",
+      "category": "language",
+      "text": "Name a word Singaporeans use for a relative or an elder",
+      "note": "Any of our languages or dialects counts, e.g. 'ah ma', 'nenek', 'paati', 'uncle'. Plain English words like grandma and grandpa count too.",
+      "answers": [
+        {
+          "name": "ah ma",
+          "aliases": [
+            "ah mah",
+            "a ma"
+          ],
+          "tier": "common"
+        },
+        {
+          "name": "ah gong",
+          "aliases": [
+            "ah kong",
+            "akong",
+            "a gong"
+          ],
+          "tier": "common"
+        },
+        {
+          "name": "uncle",
+          "tier": "common"
+        },
+        {
+          "name": "aunty",
+          "aliases": [
+            "auntie"
+          ],
+          "tier": "common"
+        },
+        {
+          "name": "mummy",
+          "aliases": [
+            "mum",
+            "mom",
+            "mommy",
+            "mama",
+            "ma",
+            "mother"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "daddy",
+          "aliases": [
+            "dad",
+            "papa",
+            "pa",
+            "ah pa",
+            "ah ba",
+            "father"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "ah pek",
+          "aliases": [
+            "ah peh"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "ah soh",
+          "aliases": [
+            "ah so"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "nenek",
+          "aliases": [
+            "nek",
+            "opah"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "atok",
+          "aliases": [
+            "atuk",
+            "tok",
+            "datuk"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "makcik",
+          "aliases": [
+            "cik"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "pakcik",
+          "tier": "solid"
+        },
+        {
+          "name": "kor kor",
+          "aliases": [
+            "gor gor",
+            "ge ge",
+            "koko"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "jie jie",
+          "aliases": [
+            "che che",
+            "je je"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "mei mei",
+          "tier": "solid"
+        },
+        {
+          "name": "di di",
+          "tier": "solid"
+        },
+        {
+          "name": "abang",
+          "aliases": [
+            "bang"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "kakak",
+          "aliases": [
+            "kak"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "adik",
+          "aliases": [
+            "dik"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "amma",
+          "tier": "rare"
+        },
+        {
+          "name": "appa",
+          "tier": "rare"
+        },
+        {
+          "name": "paati",
+          "aliases": [
+            "patti"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "thatha",
+          "aliases": [
+            "thaatha",
+            "tatha"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "anna",
+          "aliases": [
+            "annan",
+            "anneh"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "akka",
+          "tier": "rare"
+        },
+        {
+          "name": "thambi",
+          "aliases": [
+            "tambi"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "mak",
+          "aliases": [
+            "emak",
+            "ibu"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "ayah",
+          "aliases": [
+            "abah",
+            "bapak"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "ah por",
+          "aliases": [
+            "popo",
+            "por por",
+            "ah po"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "nai nai",
+          "tier": "rare"
+        },
+        {
+          "name": "ye ye",
+          "aliases": [
+            "yeh yeh"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "wai po",
+          "tier": "rare"
+        },
+        {
+          "name": "wai gong",
+          "tier": "rare"
+        },
+        {
+          "name": "ah chek",
+          "aliases": [
+            "ah cek"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "ah ee",
+          "aliases": [
+            "ah yee",
+            "ah yi",
+            "a yi"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "ah ku",
+          "aliases": [
+            "ah koo"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "ah hia",
+          "aliases": [
+            "ah hiah",
+            "hia"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "ah bu",
+          "tier": "ulu"
+        },
+        {
+          "name": "ah chi",
+          "aliases": [
+            "ah tsi"
+          ],
+          "tier": "ulu"
+        },
+        {
+          "name": "ah kim",
+          "tier": "ulu"
+        },
+        {
+          "name": "thangachi",
+          "aliases": [
+            "thangai"
+          ],
+          "tier": "ulu"
+        },
+        {
+          "name": "chithi",
+          "aliases": [
+            "chitti"
+          ],
+          "tier": "ulu"
+        },
+        {
+          "name": "pak ngah",
+          "aliases": [
+            "mak ngah"
+          ],
+          "tier": "ulu"
+        },
+        {
+          "name": "pak su",
+          "aliases": [
+            "mak su",
+            "busu",
+            "pak busu",
+            "mak busu"
+          ],
+          "tier": "ulu"
+        },
+        {
+          "name": "grandma",
+          "aliases": [
+            "granny",
+            "grandmother",
+            "nana"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "grandpa",
+          "aliases": [
+            "grandfather",
+            "gramps"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "pak long",
+          "aliases": [
+            "mak long"
+          ],
+          "tier": "gem"
+        }
+      ]
+    },
+    {
+      "id": "language-singlish-exclamations",
+      "category": "language",
+      "text": "Name a Singlish exclamation",
+      "note": "What you blurt out when something goes very right or very wrong. Spelling variants are fine. No vulgarities, please!",
+      "answers": [
+        {
+          "name": "walao",
+          "aliases": [
+            "walao eh",
+            "wah lau",
+            "wah lau eh",
+            "walau",
+            "wah lao"
+          ],
+          "tier": "common"
+        },
+        {
+          "name": "alamak",
+          "aliases": [
+            "alamak jiang"
+          ],
+          "tier": "common"
+        },
+        {
+          "name": "aiyoh",
+          "aliases": [
+            "aiyo",
+            "aiyoyo",
+            "ayoyo",
+            "aiyoh yoh"
+          ],
+          "tier": "common"
+        },
+        {
+          "name": "aiyah",
+          "aliases": [
+            "aiya",
+            "aiyer"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "wah",
+          "aliases": [
+            "wa",
+            "wah sia",
+            "wah seh"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "wah piang",
+          "aliases": [
+            "wah piang eh",
+            "wapiang",
+            "wah biang",
+            "piang"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "jialat",
+          "tier": "solid"
+        },
+        {
+          "name": "die liao",
+          "aliases": [
+            "die lor",
+            "die"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "shiok",
+          "aliases": [
+            "shiok ah"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "sian",
+          "aliases": [
+            "sian ah",
+            "sien"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "abuden",
+          "aliases": [
+            "abuthen"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "bo jio",
+          "aliases": [
+            "boh jio"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "huat ah",
+          "aliases": [
+            "huat",
+            "huat arh"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "jiayou",
+          "tier": "solid"
+        },
+        {
+          "name": "steady",
+          "aliases": [
+            "steady lah",
+            "steady pom pi pi"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "siao",
+          "aliases": [
+            "siao liao",
+            "siao eh"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "eh hello",
+          "tier": "rare"
+        },
+        {
+          "name": "simi",
+          "aliases": [
+            "simi sai"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "chey",
+          "aliases": [
+            "cheh",
+            "chey sui"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "aiseh",
+          "aliases": [
+            "aiseh man"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "aduh",
+          "aliases": [
+            "adoi",
+            "aduhai",
+            "adui"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "oi",
+          "aliases": [
+            "oei",
+            "oy"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "swee",
+          "aliases": [
+            "swee lah"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "chiong ah",
+          "aliases": [
+            "chiong"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "paiseh",
+          "tier": "rare"
+        },
+        {
+          "name": "har",
+          "aliases": [
+            "hah"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "pui",
+          "aliases": [
+            "puih"
+          ],
+          "tier": "ulu"
+        },
+        {
+          "name": "like that also can",
+          "aliases": [
+            "liddat also can",
+            "lidat also can"
+          ],
+          "tier": "ulu"
+        },
+        {
+          "name": "choi",
+          "aliases": [
+            "choy"
+          ],
+          "tier": "gem"
+        }
+      ]
+    }
+  ]
+}

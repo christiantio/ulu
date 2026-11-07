@@ -1,0 +1,5 @@
+# Throwaway prototype: versions are pinned exactly in package.json, so the lockfile isn't committed
+node_modules
+package-lock.json
+.wrangler
+.dev.vars

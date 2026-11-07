@@ -1,0 +1,1322 @@
+{
+  "name": "Politics & Civics",
+  "asOf": "2026-10-27",
+  "prompts": [
+    {
+      "id": "politics-presidents-and-pms",
+      "category": "politics",
+      "text": "Name a President or Prime Minister of Singapore",
+      "note": "As of October 2026. Elected or appointed Presidents (not acting Presidents) and Prime Ministers.",
+      "answers": [
+        {
+          "name": "Lee Kuan Yew",
+          "aliases": [
+            "LKY",
+            "Harry Lee"
+          ],
+          "tier": "common"
+        },
+        {
+          "name": "Lee Hsien Loong",
+          "aliases": [
+            "LHL"
+          ],
+          "tier": "common"
+        },
+        {
+          "name": "Lawrence Wong",
+          "aliases": [
+            "Lawrence Wong Shyun Tsai"
+          ],
+          "tier": "common"
+        },
+        {
+          "name": "Tharman Shanmugaratnam",
+          "aliases": [
+            "Tharman"
+          ],
+          "tier": "common"
+        },
+        {
+          "name": "Goh Chok Tong",
+          "aliases": [
+            "GCT"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "Halimah Yacob",
+          "aliases": [
+            "Halimah",
+            "Halimah Yaacob"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "S. R. Nathan",
+          "aliases": [
+            "Sellapan Ramanathan"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "Yusof Ishak",
+          "aliases": [
+            "Yusof bin Ishak",
+            "Encik Yusof Ishak"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "Tony Tan",
+          "aliases": [
+            "Tony Tan Keng Yam"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "Ong Teng Cheong",
+          "aliases": [
+            "OTC"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "Wee Kim Wee",
+          "tier": "rare"
+        },
+        {
+          "name": "Devan Nair",
+          "aliases": [
+            "C. V. Devan Nair",
+            "Chengara Veetil Devan Nair"
+          ],
+          "tier": "ulu"
+        },
+        {
+          "name": "Benjamin Sheares",
+          "aliases": [
+            "Benjamin Henry Sheares",
+            "Sheares"
+          ],
+          "tier": "gem"
+        }
+      ]
+    },
+    {
+      "id": "politics-deputy-pms",
+      "category": "politics",
+      "text": "Name someone who has served as Deputy Prime Minister of Singapore",
+      "note": "As of October 2026, including First and Second Deputy PMs.",
+      "answers": [
+        {
+          "name": "Heng Swee Keat",
+          "aliases": [
+            "HSK"
+          ],
+          "tier": "common"
+        },
+        {
+          "name": "Tharman Shanmugaratnam",
+          "aliases": [
+            "Tharman"
+          ],
+          "tier": "common"
+        },
+        {
+          "name": "Lawrence Wong",
+          "tier": "common"
+        },
+        {
+          "name": "Gan Kim Yong",
+          "tier": "common"
+        },
+        {
+          "name": "Teo Chee Hean",
+          "tier": "solid"
+        },
+        {
+          "name": "Lee Hsien Loong",
+          "aliases": [
+            "LHL"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "Goh Chok Tong",
+          "aliases": [
+            "GCT"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "Tony Tan",
+          "aliases": [
+            "Tony Tan Keng Yam"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "Wong Kan Seng",
+          "tier": "rare"
+        },
+        {
+          "name": "S. Jayakumar",
+          "aliases": [
+            "Shunmugam Jayakumar",
+            "Jayakumar"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "Goh Keng Swee",
+          "tier": "rare"
+        },
+        {
+          "name": "S. Rajaratnam",
+          "aliases": [
+            "Sinnathamby Rajaratnam",
+            "Rajaratnam"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "Ong Teng Cheong",
+          "aliases": [
+            "OTC"
+          ],
+          "tier": "ulu"
+        },
+        {
+          "name": "Toh Chin Chye",
+          "tier": "gem"
+        }
+      ]
+    },
+    {
+      "id": "politics-ge2025-parties",
+      "category": "politics",
+      "text": "Name a political party that contested GE2025",
+      "note": "General Election of 3 May 2025. Member parties of the PAR and SDA alliances count. Independents are not a party.",
+      "answers": [
+        {
+          "name": "People's Action Party",
+          "aliases": [
+            "PAP"
+          ],
+          "tier": "common"
+        },
+        {
+          "name": "Workers' Party",
+          "aliases": [
+            "WP"
+          ],
+          "tier": "common"
+        },
+        {
+          "name": "Progress Singapore Party",
+          "aliases": [
+            "PSP"
+          ],
+          "tier": "common"
+        },
+        {
+          "name": "Singapore Democratic Party",
+          "aliases": [
+            "SDP"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "Red Dot United",
+          "aliases": [
+            "RDU"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "People's Alliance for Reform",
+          "aliases": [
+            "PAR"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "Singapore People's Party",
+          "aliases": [
+            "SPP"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "National Solidarity Party",
+          "aliases": [
+            "NSP"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "Singapore Democratic Alliance",
+          "aliases": [
+            "SDA"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "People's Power Party",
+          "aliases": [
+            "PPP"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "Singapore United Party",
+          "aliases": [
+            "SUP"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "Peoples Voice",
+          "aliases": [
+            "PV"
+          ],
+          "tier": "ulu"
+        },
+        {
+          "name": "Reform Party",
+          "aliases": [
+            "RP"
+          ],
+          "tier": "ulu"
+        },
+        {
+          "name": "Democratic Progressive Party",
+          "aliases": [
+            "DPP"
+          ],
+          "tier": "ulu"
+        },
+        {
+          "name": "Singapore Justice Party",
+          "aliases": [
+            "SJP"
+          ],
+          "tier": "ulu"
+        },
+        {
+          "name": "PKMS",
+          "aliases": [
+            "Singapore Malay National Organisation",
+            "Pertubuhan Kebangsaan Melayu Singapura"
+          ],
+          "tier": "gem"
+        }
+      ]
+    },
+    {
+      "id": "politics-ge2025-grcs",
+      "category": "politics",
+      "text": "Name a Group Representation Constituency (GRC) at GE2025",
+      "note": "The 18 GRCs on the GE2025 electoral map (3 May 2025).",
+      "answers": [
+        {
+          "name": "Aljunied",
+          "aliases": [
+            "Aljunied GRC"
+          ],
+          "tier": "common"
+        },
+        {
+          "name": "Ang Mo Kio",
+          "aliases": [
+            "Ang Mo Kio GRC",
+            "AMK",
+            "AMK GRC"
+          ],
+          "tier": "common"
+        },
+        {
+          "name": "Tampines",
+          "aliases": [
+            "Tampines GRC"
+          ],
+          "tier": "common"
+        },
+        {
+          "name": "Sengkang",
+          "aliases": [
+            "Sengkang GRC"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "East Coast",
+          "aliases": [
+            "East Coast GRC"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "Bishan-Toa Payoh",
+          "aliases": [
+            "Bishan-Toa Payoh GRC",
+            "Bishan",
+            "Bishan GRC",
+            "Toa Payoh",
+            "Toa Payoh GRC"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "Pasir Ris-Changi",
+          "aliases": [
+            "Pasir Ris-Changi GRC",
+            "Pasir Ris",
+            "Pasir Ris GRC"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "Punggol",
+          "aliases": [
+            "Punggol GRC"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "Tanjong Pagar",
+          "aliases": [
+            "Tanjong Pagar GRC"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "Nee Soon",
+          "aliases": [
+            "Nee Soon GRC"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "Chua Chu Kang",
+          "aliases": [
+            "Chua Chu Kang GRC",
+            "CCK",
+            "CCK GRC"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "Jalan Besar",
+          "aliases": [
+            "Jalan Besar GRC"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "Holland-Bukit Timah",
+          "aliases": [
+            "Holland-Bukit Timah GRC",
+            "Holland",
+            "Holland GRC"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "Marsiling-Yew Tee",
+          "aliases": [
+            "Marsiling-Yew Tee GRC",
+            "Marsiling",
+            "Marsiling GRC",
+            "Yew Tee",
+            "Yew Tee GRC"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "Sembawang",
+          "aliases": [
+            "Sembawang GRC"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "West Coast-Jurong West",
+          "aliases": [
+            "West Coast-Jurong West GRC",
+            "West Coast",
+            "West Coast GRC",
+            "Jurong West",
+            "Jurong West GRC"
+          ],
+          "tier": "ulu"
+        },
+        {
+          "name": "Jurong East-Bukit Batok",
+          "aliases": [
+            "Jurong East-Bukit Batok GRC",
+            "Jurong East",
+            "Jurong East GRC",
+            "Bukit Batok",
+            "Bukit Batok GRC"
+          ],
+          "tier": "ulu"
+        },
+        {
+          "name": "Marine Parade-Braddell Heights",
+          "aliases": [
+            "Marine Parade-Braddell Heights GRC",
+            "Marine Parade",
+            "Marine Parade GRC",
+            "Braddell Heights",
+            "Braddell Heights GRC"
+          ],
+          "tier": "gem"
+        }
+      ]
+    },
+    {
+      "id": "politics-ge2025-smcs",
+      "category": "politics",
+      "text": "Name a Single Member Constituency (SMC) at GE2025",
+      "note": "The 15 SMCs on the GE2025 electoral map (3 May 2025).",
+      "answers": [
+        {
+          "name": "Hougang",
+          "aliases": [
+            "Hougang SMC"
+          ],
+          "tier": "common"
+        },
+        {
+          "name": "Potong Pasir",
+          "aliases": [
+            "Potong Pasir SMC"
+          ],
+          "tier": "common"
+        },
+        {
+          "name": "Bukit Panjang",
+          "aliases": [
+            "Bukit Panjang SMC"
+          ],
+          "tier": "common"
+        },
+        {
+          "name": "Pioneer",
+          "aliases": [
+            "Pioneer SMC"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "Mountbatten",
+          "aliases": [
+            "Mountbatten SMC"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "Radin Mas",
+          "aliases": [
+            "Radin Mas SMC"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "Marymount",
+          "aliases": [
+            "Marymount SMC"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "Yio Chu Kang",
+          "aliases": [
+            "Yio Chu Kang SMC"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "Queenstown",
+          "aliases": [
+            "Queenstown SMC"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "Kebun Baru",
+          "aliases": [
+            "Kebun Baru SMC"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "Jalan Kayu",
+          "aliases": [
+            "Jalan Kayu SMC"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "Jurong Central",
+          "aliases": [
+            "Jurong Central SMC"
+          ],
+          "tier": "ulu"
+        },
+        {
+          "name": "Tampines Changkat",
+          "aliases": [
+            "Tampines Changkat SMC"
+          ],
+          "tier": "ulu"
+        },
+        {
+          "name": "Sembawang West",
+          "aliases": [
+            "Sembawang West SMC"
+          ],
+          "tier": "ulu"
+        },
+        {
+          "name": "Bukit Gombak",
+          "aliases": [
+            "Bukit Gombak SMC"
+          ],
+          "tier": "gem"
+        }
+      ]
+    },
+    {
+      "id": "politics-ministries",
+      "category": "politics",
+      "text": "Name a Singapore government ministry",
+      "note": "As of October 2026. MTI became the Ministry of Energy, Trade and Industry on 1 Oct 2026.",
+      "answers": [
+        {
+          "name": "Ministry of Education",
+          "aliases": [
+            "MOE",
+            "Education"
+          ],
+          "tier": "common"
+        },
+        {
+          "name": "Ministry of Health",
+          "aliases": [
+            "MOH",
+            "Health"
+          ],
+          "tier": "common"
+        },
+        {
+          "name": "Ministry of Defence",
+          "aliases": [
+            "MINDEF",
+            "Defence",
+            "MOD"
+          ],
+          "tier": "common"
+        },
+        {
+          "name": "Ministry of Finance",
+          "aliases": [
+            "MOF",
+            "Finance"
+          ],
+          "tier": "common"
+        },
+        {
+          "name": "Ministry of Manpower",
+          "aliases": [
+            "MOM",
+            "Manpower"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "Ministry of Home Affairs",
+          "aliases": [
+            "MHA",
+            "Home Affairs"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "Ministry of Foreign Affairs",
+          "aliases": [
+            "MFA",
+            "Foreign Affairs"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "Ministry of Transport",
+          "aliases": [
+            "MOT",
+            "Transport"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "Ministry of National Development",
+          "aliases": [
+            "MND",
+            "National Development"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "Ministry of Law",
+          "aliases": [
+            "MinLaw",
+            "Law"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "Ministry of Social and Family Development",
+          "aliases": [
+            "MSF",
+            "Social and Family Development"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "Ministry of Culture, Community and Youth",
+          "aliases": [
+            "MCCY",
+            "Culture, Community and Youth"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "Prime Minister's Office",
+          "aliases": [
+            "PMO"
+          ],
+          "tier": "gem"
+        },
+        {
+          "name": "Ministry of Sustainability and the Environment",
+          "aliases": [
+            "MSE",
+            "Sustainability and the Environment"
+          ],
+          "tier": "ulu"
+        },
+        {
+          "name": "Ministry of Digital Development and Information",
+          "aliases": [
+            "MDDI",
+            "Digital Development and Information"
+          ],
+          "tier": "ulu"
+        },
+        {
+          "name": "Ministry of Energy, Trade and Industry",
+          "aliases": [
+            "METI",
+            "Energy, Trade and Industry",
+            "Ministry of Trade and Industry",
+            "MTI",
+            "Trade and Industry"
+          ],
+          "tier": "solid"
+        }
+      ]
+    },
+    {
+      "id": "politics-statutory-boards",
+      "category": "politics",
+      "text": "Name a Singapore statutory board",
+      "note": "As of October 2026. Polytechnics and ITE count; universities do not. SkillsFuture Singapore and Workforce Singapore merged into SWDA in July 2026.",
+      "answers": [
+        {
+          "name": "Housing and Development Board",
+          "aliases": [
+            "HDB",
+            "Housing Development Board",
+            "Housing Board"
+          ],
+          "tier": "common"
+        },
+        {
+          "name": "Central Provident Fund Board",
+          "aliases": [
+            "CPF Board",
+            "CPF",
+            "CPFB",
+            "Central Provident Fund"
+          ],
+          "tier": "common"
+        },
+        {
+          "name": "Land Transport Authority",
+          "aliases": [
+            "LTA"
+          ],
+          "tier": "common"
+        },
+        {
+          "name": "Urban Redevelopment Authority",
+          "aliases": [
+            "URA"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "Monetary Authority of Singapore",
+          "aliases": [
+            "MAS",
+            "Monetary Authority"
+          ],
+          "tier": "trap"
+        },
+        {
+          "name": "Singapore Polytechnic",
+          "aliases": [
+            "SP"
+          ],
+          "tier": "trap"
+        },
+        {
+          "name": "Inland Revenue Authority of Singapore",
+          "aliases": [
+            "IRAS",
+            "Inland Revenue Authority"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "National Environment Agency",
+          "aliases": [
+            "NEA"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "PUB",
+          "aliases": [
+            "Public Utilities Board",
+            "PUB Singapore's National Water Agency"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "National Parks Board",
+          "aliases": [
+            "NParks",
+            "National Parks"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "Economic Development Board",
+          "aliases": [
+            "EDB"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "Singapore Tourism Board",
+          "aliases": [
+            "STB"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "Singapore Land Authority",
+          "aliases": [
+            "SLA"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "JTC Corporation",
+          "aliases": [
+            "JTC",
+            "Jurong Town Corporation"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "Health Promotion Board",
+          "aliases": [
+            "HPB"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "National Library Board",
+          "aliases": [
+            "NLB"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "Sport Singapore",
+          "aliases": [
+            "SportSG"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "Agency for Science, Technology and Research",
+          "aliases": [
+            "A*STAR"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "People's Association",
+          "aliases": [
+            "PA"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "Institute of Technical Education",
+          "aliases": [
+            "ITE"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "Infocomm Media Development Authority",
+          "aliases": [
+            "IMDA"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "Government Technology Agency",
+          "aliases": [
+            "GovTech"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "Health Sciences Authority",
+          "aliases": [
+            "HSA"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "Singapore Food Agency",
+          "aliases": [
+            "SFA"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "Maritime and Port Authority of Singapore",
+          "aliases": [
+            "MPA",
+            "Maritime and Port Authority"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "Civil Aviation Authority of Singapore",
+          "aliases": [
+            "CAAS",
+            "Civil Aviation Authority"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "Enterprise Singapore",
+          "aliases": [
+            "EnterpriseSG",
+            "ESG"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "Accounting and Corporate Regulatory Authority",
+          "aliases": [
+            "ACRA"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "Building and Construction Authority",
+          "aliases": [
+            "BCA"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "National Heritage Board",
+          "aliases": [
+            "NHB"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "National Arts Council",
+          "aliases": [
+            "NAC"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "Singapore Examinations and Assessment Board",
+          "aliases": [
+            "SEAB"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "Science Centre Board",
+          "aliases": [
+            "Science Centre Singapore",
+            "Science Centre",
+            "Singapore Science Centre"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "Sentosa Development Corporation",
+          "aliases": [
+            "Sentosa Development Corp"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "Majlis Ugama Islam Singapura",
+          "aliases": [
+            "MUIS",
+            "Islamic Religious Council of Singapore"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "Tote Board",
+          "aliases": [
+            "Singapore Totalisator Board"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "Public Transport Council",
+          "aliases": [
+            "PTC"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "Ngee Ann Polytechnic",
+          "aliases": [
+            "NP"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "Temasek Polytechnic",
+          "aliases": [
+            "TP"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "Nanyang Polytechnic",
+          "aliases": [
+            "NYP"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "Republic Polytechnic",
+          "aliases": [
+            "RP"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "Skills and Workforce Development Agency",
+          "aliases": [
+            "SWDA"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "Energy Market Authority",
+          "aliases": [
+            "EMA"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "Communicable Diseases Agency",
+          "aliases": [
+            "CDA"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "Council for Estate Agencies",
+          "aliases": [
+            "CEA"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "Defence Science and Technology Agency",
+          "aliases": [
+            "DSTA"
+          ],
+          "tier": "ulu"
+        },
+        {
+          "name": "Home Team Science and Technology Agency",
+          "aliases": [
+            "HTX"
+          ],
+          "tier": "ulu"
+        },
+        {
+          "name": "Intellectual Property Office of Singapore",
+          "aliases": [
+            "IPOS",
+            "Intellectual Property Office"
+          ],
+          "tier": "ulu"
+        },
+        {
+          "name": "Competition and Consumer Commission of Singapore",
+          "aliases": [
+            "CCCS",
+            "Competition and Consumer Commission"
+          ],
+          "tier": "ulu"
+        },
+        {
+          "name": "Gambling Regulatory Authority of Singapore",
+          "aliases": [
+            "GRA",
+            "Gambling Regulatory Authority"
+          ],
+          "tier": "ulu"
+        },
+        {
+          "name": "National Council of Social Service",
+          "aliases": [
+            "NCSS"
+          ],
+          "tier": "ulu"
+        },
+        {
+          "name": "Singapore Medical Council",
+          "aliases": [
+            "SMC"
+          ],
+          "tier": "ulu"
+        },
+        {
+          "name": "Yellow Ribbon Singapore",
+          "aliases": [
+            "YRSG"
+          ],
+          "tier": "ulu"
+        },
+        {
+          "name": "Civil Service College",
+          "aliases": [
+            "CSC"
+          ],
+          "tier": "ulu"
+        },
+        {
+          "name": "Singapore Labour Foundation",
+          "aliases": [
+            "SLF"
+          ],
+          "tier": "ulu"
+        },
+        {
+          "name": "Professional Engineers Board",
+          "aliases": [
+            "PEB"
+          ],
+          "tier": "ulu"
+        },
+        {
+          "name": "Land Surveyors Board",
+          "aliases": [
+            "LSB"
+          ],
+          "tier": "ulu"
+        },
+        {
+          "name": "Singapore Dental Council",
+          "tier": "ulu"
+        },
+        {
+          "name": "Singapore Nursing Board",
+          "aliases": [
+            "SNB"
+          ],
+          "tier": "ulu"
+        },
+        {
+          "name": "Singapore Pharmacy Council",
+          "tier": "ulu"
+        },
+        {
+          "name": "TCM Practitioners Board",
+          "aliases": [
+            "TCMPB"
+          ],
+          "tier": "ulu"
+        },
+        {
+          "name": "Hotels Licensing Board",
+          "aliases": [
+            "HLB"
+          ],
+          "tier": "ulu"
+        },
+        {
+          "name": "ISEAS-Yusof Ishak Institute",
+          "aliases": [
+            "ISEAS",
+            "Institute of Southeast Asian Studies"
+          ],
+          "tier": "gem"
+        }
+      ]
+    },
+    {
+      "id": "politics-cabinet-ministers",
+      "category": "politics",
+      "text": "Name a current Cabinet minister",
+      "note": "As of October 2026 (after the July 2026 reshuffle). Full ministers, plus acting ministers.",
+      "answers": [
+        {
+          "name": "Lawrence Wong",
+          "aliases": [
+            "PM Wong"
+          ],
+          "tier": "common"
+        },
+        {
+          "name": "Lee Hsien Loong",
+          "aliases": [
+            "LHL",
+            "SM Lee"
+          ],
+          "tier": "common"
+        },
+        {
+          "name": "Ong Ye Kung",
+          "aliases": [
+            "OYK"
+          ],
+          "tier": "common"
+        },
+        {
+          "name": "Chan Chun Sing",
+          "aliases": [
+            "CCS"
+          ],
+          "tier": "common"
+        },
+        {
+          "name": "K. Shanmugam",
+          "aliases": [
+            "Shanmugam",
+            "Kasiviswanathan Shanmugam"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "Vivian Balakrishnan",
+          "aliases": [
+            "Vivian"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "Gan Kim Yong",
+          "aliases": [
+            "DPM Gan"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "Josephine Teo",
+          "tier": "solid"
+        },
+        {
+          "name": "Desmond Lee",
+          "tier": "solid"
+        },
+        {
+          "name": "Grace Fu",
+          "aliases": [
+            "Grace Fu Hai Yien"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "Masagos Zulkifli",
+          "aliases": [
+            "Masagos"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "Chee Hong Tat",
+          "tier": "rare"
+        },
+        {
+          "name": "Edwin Tong",
+          "tier": "rare"
+        },
+        {
+          "name": "Indranee Rajah",
+          "aliases": [
+            "Indranee"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "Tan See Leng",
+          "tier": "rare"
+        },
+        {
+          "name": "Jeffrey Siow",
+          "tier": "rare"
+        },
+        {
+          "name": "Ng Chee Meng",
+          "tier": "rare"
+        },
+        {
+          "name": "Sim Ann",
+          "tier": "ulu"
+        },
+        {
+          "name": "Jasmin Lau",
+          "tier": "ulu"
+        },
+        {
+          "name": "Zaqy Mohamad",
+          "aliases": [
+            "Zaqy"
+          ],
+          "tier": "ulu"
+        },
+        {
+          "name": "David Neo",
+          "tier": "gem"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,149 @@
+import { useState } from 'react'
+import { track } from '../analytics'
+import { MAX_SCORE, MISS_EMOJI, TIER_INFO, destinationFor } from '../game/scoring'
+import { shareText, totalScore } from '../game/share'
+import { singaporeDateKey } from '../game/daily'
+import { UNLIMITED_DATE } from '../game/report'
+import { displayStreak, type Stats } from '../game/storage'
+import type { Prompt, RoundResult } from '../game/types'
+import { AllAnswers } from './AllAnswers'
+import { Countdown } from './Countdown'
+import { ProblemLinks, RejectedGuesses } from './Report'
+import { RouteLine } from './RouteLine'
+
+interface Props {
+  title: string
+  results: RoundResult[]
+  /** The dive's prompts, for each row's text, gem, answer list and report links */
+  prompts: readonly Prompt[]
+  stats?: Stats
+  isDaily: boolean
+  /** The daily dive's date, which is earlier than today if it was finished past midnight */
+  dateKey?: string | null
+  onHome: () => void
+  onUnlimited: () => void
+}
+
+export function Results({ title, results, prompts, stats, isDaily, dateKey, onHome, onUnlimited }: Props) {
+  const [copied, setCopied] = useState(false)
+  const byId = new Map(prompts.map((p) => [p.id, p]))
+  const score = totalScore(results)
+  const destination = destinationFor(score)
+  const reportDate = isDaily && dateKey ? dateKey : UNLIMITED_DATE
+
+  const share = async () => {
+    const text = shareText(results, title, window.location.origin)
+    try {
+      if (navigator.share && matchMedia('(pointer: coarse)').matches) {
+        track('share_tapped', { method: 'share' })
+        await navigator.share({ text })
+        return
+      }
+      track('share_tapped', { method: 'copy' })
+      await navigator.clipboard.writeText(text)
+      setCopied(true)
+      window.setTimeout(() => setCopied(false), 2000)
+    } catch {
+      // Share sheet dismissed or clipboard blocked; nothing else to do
+    }
+  }
+
+  return (
+    <main className="results">
+      <p className="results__title">{title}</p>
+      <div className="results__score">
+        <span className="results__number">{score}</span>
+        <span className="muted">/ {MAX_SCORE}</span>
+      </div>
+      <p className="results__destination">
+        You reached <strong>{destination.name}</strong>
+      </p>
+      <p className="muted">{destination.blurb}</p>
+
+      <RouteLine score={score} />
+
+      <ol className="breakdown">
+        {results.map((r) => {
+          const prompt = byId.get(r.promptId)
+          const gem = prompt?.answers.find((a) => a.tier === 'gem')
+          return (
+            <li key={r.promptId} className={`breakdown__row ${r.tier ? `tier--${r.tier}` : 'verdict--miss'}`}>
+              <span className="breakdown__emoji" aria-hidden="true">
+                {r.tier ? TIER_INFO[r.tier].emoji : MISS_EMOJI}
+              </span>
+              <span className="breakdown__body">
+                <span className="breakdown__prompt">{prompt?.text ?? r.promptId}</span>
+                <span className="breakdown__answer">
+                  {r.answer ?? <em>No answer</em>}
+                  {gem && r.tier !== 'gem' && (
+                    <span className="muted">
+                      <span aria-hidden="true"> · 💎</span>
+                      <span className="visually-hidden">. The gem:</span> {gem.name}
+                    </span>
+                  )}
+                </span>
+              </span>
+              <span className="breakdown__points">
+                <span className="visually-hidden">{r.tier ? TIER_INFO[r.tier].label : 'Time up'}, </span>
+                {r.points}
+                <span className="visually-hidden"> points</span>
+              </span>
+              {prompt && (
+                <div className="breakdown__more">
+                  <RejectedGuesses
+                    guesses={r.attempts}
+                    date={reportDate}
+                    promptId={prompt.id}
+                    context={`for ${prompt.text}`}
+                    compact
+                  />
+                  <AllAnswers prompt={prompt} yours={r.answer} context={prompt.text}>
+                    <ProblemLinks date={reportDate} promptId={prompt.id} context={`for ${prompt.text}`} />
+                  </AllAnswers>
+                </div>
+              )}
+            </li>
+          )
+        })}
+      </ol>
+
+      <button className="btn btn--primary btn--block btn--big" onClick={share}>
+        {copied ? 'Copied! Go paste in the group chat' : 'Share result'}
+      </button>
+
+      {isDaily && stats && (
+        <div className="stats">
+          <Stat label="Played" value={stats.played} />
+          <Stat label="Streak" value={displayStreak(stats, singaporeDateKey())} />
+          <Stat label="Best" value={stats.bestScore} />
+          <Stat label="Gems" value={stats.gems} />
+        </div>
+      )}
+
+      {isDaily && (
+        <p className="muted center">
+          {/* Finished past midnight: the next dive is already out, so don't count down to tomorrow's */}
+          {dateKey && dateKey !== singaporeDateKey() ? "Today's dive is ready" : <>Next dive in <Countdown /></>}
+        </p>
+      )}
+
+      <div className="results__actions">
+        <button className="btn btn--ghost" onClick={onHome}>
+          Home
+        </button>
+        <button className="btn btn--secondary" onClick={onUnlimited}>
+          {isDaily ? 'Play unlimited' : 'Play again'}
+        </button>
+      </div>
+    </main>
+  )
+}
+
+function Stat({ label, value }: { label: string; value: number }) {
+  return (
+    <div className="stat">
+      <div className="stat__value">{value}</div>
+      <div className="stat__label">{label}</div>
+    </div>
+  )
+}

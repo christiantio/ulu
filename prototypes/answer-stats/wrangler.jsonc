@@ -1,0 +1,29 @@
+// THROWAWAY PROTOTYPE (issue #17). Local use only: `npm run dev` runs it with --local. Don't deploy it.
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "ulu-answer-stats-prototype",
+  "main": "src/worker.ts",
+  "compatibility_date": "2026-10-01",
+  "d1_databases": [
+    {
+      "binding": "DB",
+      "database_name": "ulu-answer-stats",
+      // Placeholder: local D1 doesn't need a real id. A real one only exists after `wrangler d1 create`,
+      // which this spike deliberately doesn't run
+      "database_id": "00000000-0000-0000-0000-000000000000"
+    }
+  ],
+  "ratelimits": [
+    {
+      "name": "RATE_LIMITER",
+      "namespace_id": "1001",
+      // Per IP, per Cloudflare location. A dive is 7 POSTs; the headroom is for shared IPs (CGNAT, schools)
+      "simple": { "limit": 60, "period": 60 }
+    }
+  ],
+  "vars": {
+    "ALLOWED_ORIGINS": "http://localhost:5173,http://localhost:4173"
+  },
+  // Purge raw, device-linked rows once yesterday's grace period has passed (00:45 SGT = 16:45 UTC)
+  "triggers": { "crons": ["45 16 * * *"] }
+}

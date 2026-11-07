@@ -1,0 +1,3603 @@
+{
+  "name": "Food",
+  "asOf": "2026-10-27",
+  "prompts": [
+    {
+      "id": "food-hawker-dishes",
+      "category": "food",
+      "text": "Name a dish you'd order at a hawker centre",
+      "note": "Main dishes and snacks. Drinks and desserts don't count here.",
+      "answers": [
+        {
+          "name": "Chicken Rice",
+          "aliases": [
+            "Hainanese Chicken Rice",
+            "Steamed Chicken Rice",
+            "Roast Chicken Rice"
+          ],
+          "tier": "common"
+        },
+        {
+          "name": "Char Kway Teow",
+          "aliases": [
+            "Char Kuey Teow",
+            "Char Kuay Teow",
+            "Char Koay Teow",
+            "CKT",
+            "Fried Kway Teow"
+          ],
+          "tier": "common"
+        },
+        {
+          "name": "Laksa",
+          "aliases": [
+            "Katong Laksa",
+            "Curry Laksa",
+            "Laksa Lemak"
+          ],
+          "tier": "common"
+        },
+        {
+          "name": "Nasi Lemak",
+          "tier": "common"
+        },
+        {
+          "name": "Bak Chor Mee",
+          "aliases": [
+            "Minced Meat Noodles",
+            "Mee Pok Tah",
+            "Minced Pork Noodles",
+            "BCM",
+            "Bak Chor Mee Pok"
+          ],
+          "tier": "trap"
+        },
+        {
+          "name": "Carrot Cake",
+          "aliases": [
+            "Chai Tow Kway",
+            "Chye Tow Kway",
+            "Fried Carrot Cake",
+            "Black Carrot Cake",
+            "White Carrot Cake",
+            "Chai Tau Kueh"
+          ],
+          "tier": "trap"
+        },
+        {
+          "name": "Hokkien Mee",
+          "aliases": [
+            "Hokkien Prawn Mee",
+            "Fried Hokkien Mee",
+            "Fried Hokkien Prawn Noodles"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "Roti Prata",
+          "aliases": [
+            "Prata",
+            "Roti Canai",
+            "Egg Prata",
+            "Plain Prata"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "Satay",
+          "aliases": [
+            "Sate",
+            "Chicken Satay",
+            "Mutton Satay"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "Wanton Mee",
+          "aliases": [
+            "Wonton Mee",
+            "Wantan Mee",
+            "Wanton Noodles",
+            "Wonton Noodles"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "Fishball Noodles",
+          "aliases": [
+            "Fish Ball Noodles",
+            "Fishball Mee Pok",
+            "Mee Pok",
+            "Fishball Noodle Soup"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "Bak Kut Teh",
+          "aliases": [
+            "BKT",
+            "Pork Rib Soup",
+            "Bak Kut"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "Prawn Noodles",
+          "aliases": [
+            "Hae Mee",
+            "Prawn Mee",
+            "Har Mee",
+            "Hae Mee Soup"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "Mee Goreng",
+          "aliases": [
+            "Mee Goreng Mamak",
+            "Mamak Mee Goreng"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "Mee Rebus",
+          "tier": "solid"
+        },
+        {
+          "name": "Mee Siam",
+          "tier": "solid"
+        },
+        {
+          "name": "Lor Mee",
+          "tier": "solid"
+        },
+        {
+          "name": "Oyster Omelette",
+          "aliases": [
+            "Orh Luak",
+            "Orh Jian",
+            "Or Luak",
+            "Oyster Omelet",
+            "Fried Oyster",
+            "O Chien"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "Rojak",
+          "aliases": [
+            "Chinese Rojak",
+            "Fruit Rojak"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "Duck Rice",
+          "aliases": [
+            "Braised Duck Rice",
+            "Roast Duck Rice",
+            "Lor Ark Png",
+            "Duck Noodles",
+            "Braised Duck"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "Economic Rice",
+          "aliases": [
+            "Cai Png",
+            "Chap Chye Png",
+            "Mixed Rice",
+            "Economy Rice",
+            "Mixed Vegetable Rice",
+            "Nasi Campur"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "Yong Tau Foo",
+          "aliases": [
+            "Yong Tau Fu",
+            "YTF",
+            "Yong Tow Foo"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "Fish Soup",
+          "aliases": [
+            "Sliced Fish Soup",
+            "Fish Bee Hoon",
+            "Sliced Fish Bee Hoon",
+            "Fish Head Bee Hoon",
+            "Fish Soup Bee Hoon"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "Kway Chap",
+          "aliases": [
+            "Kuay Chap",
+            "Kway Chup",
+            "Kueh Chap"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "Nasi Padang",
+          "tier": "solid"
+        },
+        {
+          "name": "Murtabak",
+          "aliases": [
+            "Martabak"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "Thosai",
+          "aliases": [
+            "Dosa",
+            "Dosai",
+            "Tosai",
+            "Masala Thosai"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "Chee Cheong Fun",
+          "aliases": [
+            "Chee Chong Fun",
+            "Chee Cheung Fun",
+            "Rice Rolls",
+            "Cheong Fun"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "Popiah",
+          "aliases": [
+            "Spring Roll",
+            "Poh Piah"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "Char Siew Rice",
+          "aliases": [
+            "Char Siu Rice",
+            "Roast Pork Rice",
+            "Siew Yoke Rice",
+            "Roast Meat Rice",
+            "Char Siew Noodles",
+            "Siu Yuk Rice"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "Ban Mian",
+          "aliases": [
+            "Banmian",
+            "Ban Mee",
+            "Pan Mee"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "Mee Hoon Kueh",
+          "aliases": [
+            "Mee Hoon Kway",
+            "Mee Hoon Kuih"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "Chwee Kueh",
+          "aliases": [
+            "Chwee Kuih",
+            "Chwee Kway",
+            "Water Rice Cake",
+            "Chui Kueh"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "Fried Rice",
+          "aliases": [
+            "Egg Fried Rice",
+            "Yang Chow Fried Rice",
+            "Yangzhou Fried Rice"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "Hor Fun",
+          "aliases": [
+            "Beef Hor Fun",
+            "Wat Tan Hor",
+            "Wat Dan Hor",
+            "Ho Fun",
+            "Sar Hor Fun",
+            "Horfun"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "Fish Head Curry",
+          "aliases": [
+            "Curry Fish Head"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "Nasi Briyani",
+          "aliases": [
+            "Briyani",
+            "Biryani",
+            "Nasi Biryani",
+            "Chicken Briyani",
+            "Mutton Briyani",
+            "Dum Briyani"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "Nasi Goreng",
+          "aliases": [
+            "Nasi Goreng Pattaya",
+            "Nasi Pattaya"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "Mee Soto",
+          "aliases": [
+            "Soto Ayam",
+            "Soto"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "Lontong",
+          "aliases": [
+            "Lontong Sayur"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "Ayam Penyet",
+          "aliases": [
+            "Ayam Penyek"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "Indian Rojak",
+          "aliases": [
+            "Mamak Rojak",
+            "Pasembur"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "Sambal Stingray",
+          "aliases": [
+            "BBQ Stingray",
+            "Barbecued Stingray",
+            "Ikan Bakar",
+            "Stingray",
+            "Sambal Stingray"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "Chicken Wings",
+          "aliases": [
+            "BBQ Chicken Wings",
+            "Barbecued Chicken Wings",
+            "Grilled Chicken Wings"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "Hainanese Curry Rice",
+          "aliases": [
+            "Curry Rice",
+            "Scissor Cut Curry Rice",
+            "Scissor-Cut Rice"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "Claypot Rice",
+          "aliases": [
+            "Clay Pot Rice"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "Porridge",
+          "aliases": [
+            "Congee",
+            "Teochew Porridge",
+            "Fish Porridge",
+            "Century Egg Porridge",
+            "Chok",
+            "Jook",
+            "Frog Porridge",
+            "Frog Leg Porridge"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "Kway Teow Soup",
+          "aliases": [
+            "Kuey Teow Soup",
+            "Kuay Teow Soup",
+            "Kway Teow Th'ng"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "Pig Organ Soup",
+          "aliases": [
+            "Pig's Organ Soup",
+            "Pig Organs Soup"
+          ],
+          "tier": "ulu"
+        },
+        {
+          "name": "Kiam Chye Ark",
+          "aliases": [
+            "Salted Vegetable Duck Soup",
+            "Kiam Chai Ark",
+            "Salted Vegetable Duck"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "Mala Xiang Guo",
+          "aliases": [
+            "Mala",
+            "Ma La Xiang Guo",
+            "Mala Hotpot",
+            "Mala Stir Fry",
+            "Mala Dry Pot"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "Beef Noodles",
+          "aliases": [
+            "Beef Kway Teow",
+            "Beef Noodle Soup",
+            "Hainanese Beef Noodles",
+            "Beef Kuey Teow",
+            "Beef Ball Noodles"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "Chicken Chop",
+          "aliases": [
+            "Western Chicken Chop",
+            "Grilled Chicken Chop"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "Fish and Chips",
+          "aliases": [
+            "Fish & Chips",
+            "Fish n Chips"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "Dim Sum",
+          "aliases": [
+            "Dim Sim",
+            "Siew Mai",
+            "Siu Mai",
+            "Har Gow",
+            "Char Siew Bao",
+            "Pau",
+            "Bao"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "Roti John",
+          "tier": "rare"
+        },
+        {
+          "name": "Mee Sua",
+          "aliases": [
+            "Misua",
+            "Mee Suah",
+            "Kway Teow Mee Sua"
+          ],
+          "tier": "ulu"
+        },
+        {
+          "name": "Tahu Goreng",
+          "tier": "ulu"
+        },
+        {
+          "name": "Sup Tulang",
+          "aliases": [
+            "Soup Tulang",
+            "Mutton Bone Soup",
+            "Red Bone Soup"
+          ],
+          "tier": "ulu"
+        },
+        {
+          "name": "Sup Kambing",
+          "aliases": [
+            "Mutton Soup",
+            "Soup Kambing"
+          ],
+          "tier": "ulu"
+        },
+        {
+          "name": "Prawn Paste Chicken",
+          "aliases": [
+            "Har Cheong Gai",
+            "Ha Cheong Gai",
+            "Shrimp Paste Chicken"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "Ngoh Hiang",
+          "aliases": [
+            "Ngo Hiang",
+            "Five Spice Roll"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "Otah",
+          "aliases": [
+            "Otak-Otak",
+            "Otak Otak",
+            "Otah Otah"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "Thunder Tea Rice",
+          "aliases": [
+            "Lei Cha",
+            "Hakka Lei Cha",
+            "Lui Cha",
+            "Lei Cha Fan"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "Hakka Abacus Seeds",
+          "aliases": [
+            "Abacus Seeds",
+            "Suan Pan Zi",
+            "Yam Abacus"
+          ],
+          "tier": "ulu"
+        },
+        {
+          "name": "Mee Bandung",
+          "aliases": [
+            "Mee Bandung Muar"
+          ],
+          "tier": "ulu"
+        },
+        {
+          "name": "Appam",
+          "aliases": [
+            "Appom",
+            "Apam"
+          ],
+          "tier": "ulu"
+        },
+        {
+          "name": "Putu Mayam",
+          "aliases": [
+            "Idiyappam",
+            "String Hoppers",
+            "Putu Mayong"
+          ],
+          "tier": "ulu"
+        },
+        {
+          "name": "Chapati",
+          "aliases": [
+            "Chapatti",
+            "Chapathi"
+          ],
+          "tier": "ulu"
+        },
+        {
+          "name": "Pig Trotter Rice",
+          "aliases": [
+            "Ter Kah Png",
+            "Braised Pig Trotter",
+            "Pig's Trotter Rice",
+            "Tor Kar Png",
+            "Trotter Rice"
+          ],
+          "tier": "ulu"
+        },
+        {
+          "name": "Yam Rice",
+          "tier": "ulu"
+        },
+        {
+          "name": "Fuzhou Fishball Soup",
+          "aliases": [
+            "Fuzhou Fishball",
+            "Fuzhou Fish Ball"
+          ],
+          "tier": "ulu"
+        },
+        {
+          "name": "Chilli Crab",
+          "aliases": [
+            "Black Pepper Crab",
+            "Crab"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "Satay Bee Hoon",
+          "aliases": [
+            "Satay Beehoon",
+            "Satay Mee Hoon"
+          ],
+          "tier": "gem"
+        }
+      ]
+    },
+    {
+      "id": "food-kueh",
+      "category": "food",
+      "text": "Name a kueh (traditional local cake or snack)",
+      "note": "Chinese, Nonya or Malay kueh all count.",
+      "answers": [
+        {
+          "name": "Ondeh-Ondeh",
+          "aliases": [
+            "Onde-Onde",
+            "Ondeh Ondeh",
+            "Onde Onde",
+            "Klepon",
+            "Kueh Ondeh Ondeh",
+            "Ondeh"
+          ],
+          "tier": "common"
+        },
+        {
+          "name": "Kueh Lapis",
+          "aliases": [
+            "kuih lapis",
+            "kuay lapis",
+            "kue lapis",
+            "kway lapis",
+            "Lapis",
+            "Rainbow Kueh Lapis",
+            "Nine Layer Kueh",
+            "Kueh Lapis Sagu",
+            "Rainbow Kueh"
+          ],
+          "tier": "common"
+        },
+        {
+          "name": "Ang Ku Kueh",
+          "aliases": [
+            "Ang Ku Kuih",
+            "Ang Koo Kueh",
+            "Ang Koo Kuih",
+            "Red Tortoise Cake",
+            "Ang Ku Kway"
+          ],
+          "tier": "common"
+        },
+        {
+          "name": "Kueh Salat",
+          "aliases": [
+            "kuih salat",
+            "kuay salat",
+            "kue salat",
+            "kway salat",
+            "Kueh Sarlat",
+            "Kuih Sarlat",
+            "Salat",
+            "Seri Muka",
+            "Kueh Seri Muka",
+            "Kuih Seri Muka",
+            "Serimuka"
+          ],
+          "tier": "common"
+        },
+        {
+          "name": "Kueh Tutu",
+          "aliases": [
+            "kuih tutu",
+            "kuay tutu",
+            "kue tutu",
+            "kway tutu",
+            "Tutu Kueh",
+            "Tu Tu Kueh",
+            "Tutu"
+          ],
+          "tier": "trap"
+        },
+        {
+          "name": "Putu Piring",
+          "aliases": [
+            "Kueh Putu Piring"
+          ],
+          "tier": "trap"
+        },
+        {
+          "name": "Kueh Dadar",
+          "aliases": [
+            "kuih dadar",
+            "kuay dadar",
+            "kue dadar",
+            "kway dadar",
+            "Dadar",
+            "Kueh Ketayap",
+            "Kuih Ketayap",
+            "Ketayap",
+            "Kueh Dadar Gulung"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "Kueh Bingka Ubi",
+          "aliases": [
+            "Kuih Bingka Ubi",
+            "Bingka Ubi",
+            "Kueh Bingka",
+            "Kuih Bingka",
+            "Bingka",
+            "Tapioca Cake",
+            "Baked Tapioca Cake",
+            "Kueh Bengka",
+            "Bengka Ubi"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "Kueh Talam",
+          "aliases": [
+            "kuih talam",
+            "kuay talam",
+            "kue talam",
+            "kway talam",
+            "Talam",
+            "Pandan Talam",
+            "Kueh Talam Pandan"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "Pulut Inti",
+          "aliases": [
+            "Kueh Pulut Inti",
+            "Kuih Pulut Inti"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "Kueh Bangkit",
+          "aliases": [
+            "kuih bangkit",
+            "kuay bangkit",
+            "kue bangkit",
+            "kway bangkit",
+            "Bangkit"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "Kueh Lopes",
+          "aliases": [
+            "kuih lopes",
+            "kuay lopes",
+            "kue lopes",
+            "kway lopes",
+            "Lopes",
+            "Kueh Lupis",
+            "Kuih Lupis",
+            "Lupis"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "Abok-Abok",
+          "aliases": [
+            "Abok Abok",
+            "Abok-Abok Sago",
+            "Kueh Abok Abok"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "Kueh Kosui",
+          "aliases": [
+            "kuih kosui",
+            "kuay kosui",
+            "kue kosui",
+            "kway kosui",
+            "Kosui",
+            "Kueh Ko Swee",
+            "Kueh Koswee",
+            "Ko Swee",
+            "Kuih Kaswi",
+            "Kueh Kaswi"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "Chwee Kueh",
+          "aliases": [
+            "Chwee Kuih",
+            "Chwee Kway",
+            "Water Rice Cake",
+            "Chui Kueh"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "Soon Kueh",
+          "aliases": [
+            "Soon Kuih",
+            "Soon Kway",
+            "Bamboo Shoot Dumpling",
+            "Turnip Dumpling"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "Png Kueh",
+          "aliases": [
+            "Png Kuih",
+            "Peng Kueh",
+            "Png Kway",
+            "Rice Kueh",
+            "Teochew Png Kueh"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "Kueh Pie Tee",
+          "aliases": [
+            "kuih pie tee",
+            "kuay pie tee",
+            "kue pie tee",
+            "kway pie tee",
+            "Pie Tee",
+            "Top Hats",
+            "Kueh Pai Ti",
+            "Pai Tee"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "Kueh Bahulu",
+          "aliases": [
+            "kuih bahulu",
+            "kuay bahulu",
+            "kue bahulu",
+            "kway bahulu",
+            "Bahulu",
+            "Kueh Baulu",
+            "Kuih Baulu",
+            "Baulu"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "Kueh Kapit",
+          "aliases": [
+            "kuih kapit",
+            "kuay kapit",
+            "kue kapit",
+            "kway kapit",
+            "Love Letters",
+            "Love Letter",
+            "Kapit"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "Kueh Lapis Legit",
+          "aliases": [
+            "Lapis Legit",
+            "Kuih Lapis Legit",
+            "Spekkoek",
+            "Lapis Spekkoek",
+            "Kueh Lapis Spekkoek"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "Min Jiang Kueh",
+          "aliases": [
+            "Min Jiang Kuih",
+            "Mee Chiang Kueh",
+            "Ban Chang Kueh",
+            "Apam Balik",
+            "Peanut Pancake",
+            "Mian Jian Kueh",
+            "Ban Chang Kuih"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "Huat Kueh",
+          "aliases": [
+            "Huat Kuih",
+            "Fatt Koh",
+            "Fa Gao",
+            "Prosperity Cake",
+            "Huat Kway"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "Chai Kueh",
+          "aliases": [
+            "Chye Kueh",
+            "Chai Kuih",
+            "Chye Kuih",
+            "Ku Chai Kueh",
+            "Koo Chye Kueh",
+            "Gu Cai Kueh",
+            "Chive Dumpling"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "Pineapple Tart",
+          "aliases": [
+            "Pineapple Tarts",
+            "Kueh Tart",
+            "Kuih Tart",
+            "Nastar",
+            "Ong Lai Tart"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "Kueh Rose",
+          "aliases": [
+            "Kuih Rose",
+            "Rose Cookies",
+            "Kuih Loyang",
+            "Kueh Loyang",
+            "Kueh Goyang",
+            "Honeycomb Cookies"
+          ],
+          "tier": "ulu"
+        },
+        {
+          "name": "Kueh Ubi Kayu",
+          "aliases": [
+            "Kuih Ubi Kayu",
+            "Steamed Tapioca Cake",
+            "Kueh Ubi",
+            "Kuih Ubi",
+            "Ubi Kayu"
+          ],
+          "tier": "ulu"
+        },
+        {
+          "name": "Kueh Koci",
+          "aliases": [
+            "kuih koci",
+            "kuay koci",
+            "kue koci",
+            "kway koci",
+            "Koci",
+            "Kueh Kochi",
+            "Kuih Kochi"
+          ],
+          "tier": "ulu"
+        },
+        {
+          "name": "Kueh Pisang",
+          "aliases": [
+            "Kuih Pisang",
+            "Banana Kueh",
+            "Kueh Pisang Hitam"
+          ],
+          "tier": "ulu"
+        },
+        {
+          "name": "Kueh Keria",
+          "aliases": [
+            "kuih keria",
+            "kuay keria",
+            "kue keria",
+            "kway keria",
+            "Keria",
+            "Sweet Potato Doughnut"
+          ],
+          "tier": "ulu"
+        },
+        {
+          "name": "Kueh Lompang",
+          "aliases": [
+            "kuih lompang",
+            "kuay lompang",
+            "kue lompang",
+            "kway lompang",
+            "Lompang"
+          ],
+          "tier": "ulu"
+        },
+        {
+          "name": "Lepat Pisang",
+          "aliases": [
+            "Kueh Lepat Pisang",
+            "Lepat"
+          ],
+          "tier": "ulu"
+        },
+        {
+          "name": "Kueh Wajik",
+          "aliases": [
+            "Kuih Wajik",
+            "Wajik"
+          ],
+          "tier": "ulu"
+        },
+        {
+          "name": "Pulut Panggang",
+          "aliases": [
+            "Kueh Pulut Panggang"
+          ],
+          "tier": "ulu"
+        },
+        {
+          "name": "Pulut Tai Tai",
+          "aliases": [
+            "Pulut Tekan",
+            "Pulut Taitai",
+            "Kueh Pulut Tai Tai",
+            "Blue Glutinous Rice Kueh"
+          ],
+          "tier": "gem"
+        }
+      ]
+    },
+    {
+      "id": "food-kopitiam-drinks",
+      "category": "food",
+      "text": "Name a drink you'd order at a kopitiam or hawker drink stall",
+      "note": "Freshly made drinks, not canned or bottled ones. Sweetness/ice add-ons count as the base drink — 'kopi-o kosong peng' is Kopi-O.",
+      "answers": [
+        {
+          "name": "Kopi",
+          "aliases": [
+            "Coffee",
+            "Nanyang Coffee",
+            "kopi kosong",
+            "kopi kosong peng",
+            "kopi peng kosong",
+            "kopi siew dai",
+            "kopi siew dai peng",
+            "kopi peng siew dai",
+            "kopi siu dai",
+            "kopi siu dai peng",
+            "kopi peng siu dai",
+            "kopi xiu dai",
+            "kopi xiu dai peng",
+            "kopi peng xiu dai",
+            "kopi gah dai",
+            "kopi gah dai peng",
+            "kopi peng gah dai",
+            "kopi ga dai",
+            "kopi ga dai peng",
+            "kopi peng ga dai",
+            "kopi kah dai",
+            "kopi kah dai peng",
+            "kopi peng kah dai",
+            "kopi gau",
+            "kopi gau peng",
+            "kopi peng gau",
+            "kopi gao",
+            "kopi gao peng",
+            "kopi peng gao",
+            "kopi kao",
+            "kopi kao peng",
+            "kopi peng kao",
+            "kopi po",
+            "kopi po peng",
+            "kopi peng po",
+            "kopi di lo",
+            "kopi di lo peng",
+            "kopi peng di lo",
+            "kopi dilo",
+            "kopi dilo peng",
+            "kopi peng dilo",
+            "kopi tiloh",
+            "kopi tiloh peng",
+            "kopi peng tiloh",
+            "kopi di loh",
+            "kopi di loh peng",
+            "kopi peng di loh",
+            "kopi peng",
+            "kopi bing",
+            "kopi ice"
+          ],
+          "tier": "common"
+        },
+        {
+          "name": "Teh",
+          "aliases": [
+            "Tea",
+            "Milk Tea",
+            "teh kosong",
+            "teh kosong peng",
+            "teh peng kosong",
+            "teh siew dai",
+            "teh siew dai peng",
+            "teh peng siew dai",
+            "teh siu dai",
+            "teh siu dai peng",
+            "teh peng siu dai",
+            "teh xiu dai",
+            "teh xiu dai peng",
+            "teh peng xiu dai",
+            "teh gah dai",
+            "teh gah dai peng",
+            "teh peng gah dai",
+            "teh ga dai",
+            "teh ga dai peng",
+            "teh peng ga dai",
+            "teh kah dai",
+            "teh kah dai peng",
+            "teh peng kah dai",
+            "teh gau",
+            "teh gau peng",
+            "teh peng gau",
+            "teh gao",
+            "teh gao peng",
+            "teh peng gao",
+            "teh kao",
+            "teh kao peng",
+            "teh peng kao",
+            "teh po",
+            "teh po peng",
+            "teh peng po",
+            "teh di lo",
+            "teh di lo peng",
+            "teh peng di lo",
+            "teh dilo",
+            "teh dilo peng",
+            "teh peng dilo",
+            "teh tiloh",
+            "teh tiloh peng",
+            "teh peng tiloh",
+            "teh di loh",
+            "teh di loh peng",
+            "teh peng di loh",
+            "teh peng",
+            "teh bing",
+            "teh ice"
+          ],
+          "tier": "common"
+        },
+        {
+          "name": "Milo",
+          "aliases": [
+            "Milo Peng",
+            "Milo Kosong",
+            "Tak Kiu",
+            "Milo Ice",
+            "Iced Milo",
+            "Hot Milo",
+            "Milo Siew Dai",
+            "Milo Gau"
+          ],
+          "tier": "common"
+        },
+        {
+          "name": "Teh Tarik",
+          "aliases": [
+            "Pulled Tea",
+            "Teh Tarik Peng",
+            "Teh Tarik Kosong",
+            "Teh Tarik Siew Dai"
+          ],
+          "tier": "common"
+        },
+        {
+          "name": "Milo Dinosaur",
+          "aliases": [
+            "Milo Dino"
+          ],
+          "tier": "trap"
+        },
+        {
+          "name": "Kopi-O",
+          "aliases": [
+            "Black Coffee",
+            "kopi o",
+            "kopi o kosong",
+            "kopi o kosong peng",
+            "kopi o peng kosong",
+            "kopi o siew dai",
+            "kopi o siew dai peng",
+            "kopi o peng siew dai",
+            "kopi o siu dai",
+            "kopi o siu dai peng",
+            "kopi o peng siu dai",
+            "kopi o xiu dai",
+            "kopi o xiu dai peng",
+            "kopi o peng xiu dai",
+            "kopi o gah dai",
+            "kopi o gah dai peng",
+            "kopi o peng gah dai",
+            "kopi o ga dai",
+            "kopi o ga dai peng",
+            "kopi o peng ga dai",
+            "kopi o kah dai",
+            "kopi o kah dai peng",
+            "kopi o peng kah dai",
+            "kopi o gau",
+            "kopi o gau peng",
+            "kopi o peng gau",
+            "kopi o gao",
+            "kopi o gao peng",
+            "kopi o peng gao",
+            "kopi o kao",
+            "kopi o kao peng",
+            "kopi o peng kao",
+            "kopi o po",
+            "kopi o po peng",
+            "kopi o peng po",
+            "kopi o di lo",
+            "kopi o di lo peng",
+            "kopi o peng di lo",
+            "kopi o dilo",
+            "kopi o dilo peng",
+            "kopi o peng dilo",
+            "kopi o tiloh",
+            "kopi o tiloh peng",
+            "kopi o peng tiloh",
+            "kopi o di loh",
+            "kopi o di loh peng",
+            "kopi o peng di loh",
+            "kopi o peng",
+            "kopi o bing",
+            "kopi o ice"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "Kopi-C",
+          "aliases": [
+            "kopi c",
+            "kopi c kosong",
+            "kopi c kosong peng",
+            "kopi c peng kosong",
+            "kopi c siew dai",
+            "kopi c siew dai peng",
+            "kopi c peng siew dai",
+            "kopi c siu dai",
+            "kopi c siu dai peng",
+            "kopi c peng siu dai",
+            "kopi c xiu dai",
+            "kopi c xiu dai peng",
+            "kopi c peng xiu dai",
+            "kopi c gah dai",
+            "kopi c gah dai peng",
+            "kopi c peng gah dai",
+            "kopi c ga dai",
+            "kopi c ga dai peng",
+            "kopi c peng ga dai",
+            "kopi c kah dai",
+            "kopi c kah dai peng",
+            "kopi c peng kah dai",
+            "kopi c gau",
+            "kopi c gau peng",
+            "kopi c peng gau",
+            "kopi c gao",
+            "kopi c gao peng",
+            "kopi c peng gao",
+            "kopi c kao",
+            "kopi c kao peng",
+            "kopi c peng kao",
+            "kopi c po",
+            "kopi c po peng",
+            "kopi c peng po",
+            "kopi c di lo",
+            "kopi c di lo peng",
+            "kopi c peng di lo",
+            "kopi c dilo",
+            "kopi c dilo peng",
+            "kopi c peng dilo",
+            "kopi c tiloh",
+            "kopi c tiloh peng",
+            "kopi c peng tiloh",
+            "kopi c di loh",
+            "kopi c di loh peng",
+            "kopi c peng di loh",
+            "kopi c peng",
+            "kopi c bing",
+            "kopi c ice",
+            "kopi si",
+            "kopi si kosong",
+            "kopi si kosong peng",
+            "kopi si peng kosong",
+            "kopi si siew dai",
+            "kopi si siew dai peng",
+            "kopi si peng siew dai",
+            "kopi si siu dai",
+            "kopi si siu dai peng",
+            "kopi si peng siu dai",
+            "kopi si xiu dai",
+            "kopi si xiu dai peng",
+            "kopi si peng xiu dai",
+            "kopi si gah dai",
+            "kopi si gah dai peng",
+            "kopi si peng gah dai",
+            "kopi si ga dai",
+            "kopi si ga dai peng",
+            "kopi si peng ga dai",
+            "kopi si kah dai",
+            "kopi si kah dai peng",
+            "kopi si peng kah dai",
+            "kopi si gau",
+            "kopi si gau peng",
+            "kopi si peng gau",
+            "kopi si gao",
+            "kopi si gao peng",
+            "kopi si peng gao",
+            "kopi si kao",
+            "kopi si kao peng",
+            "kopi si peng kao",
+            "kopi si po",
+            "kopi si po peng",
+            "kopi si peng po",
+            "kopi si di lo",
+            "kopi si di lo peng",
+            "kopi si peng di lo",
+            "kopi si dilo",
+            "kopi si dilo peng",
+            "kopi si peng dilo",
+            "kopi si tiloh",
+            "kopi si tiloh peng",
+            "kopi si peng tiloh",
+            "kopi si di loh",
+            "kopi si di loh peng",
+            "kopi si peng di loh",
+            "kopi si peng",
+            "kopi si bing",
+            "kopi si ice"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "Teh-O",
+          "aliases": [
+            "Black Tea",
+            "teh o",
+            "teh o kosong",
+            "teh o kosong peng",
+            "teh o peng kosong",
+            "teh o siew dai",
+            "teh o siew dai peng",
+            "teh o peng siew dai",
+            "teh o siu dai",
+            "teh o siu dai peng",
+            "teh o peng siu dai",
+            "teh o xiu dai",
+            "teh o xiu dai peng",
+            "teh o peng xiu dai",
+            "teh o gah dai",
+            "teh o gah dai peng",
+            "teh o peng gah dai",
+            "teh o ga dai",
+            "teh o ga dai peng",
+            "teh o peng ga dai",
+            "teh o kah dai",
+            "teh o kah dai peng",
+            "teh o peng kah dai",
+            "teh o gau",
+            "teh o gau peng",
+            "teh o peng gau",
+            "teh o gao",
+            "teh o gao peng",
+            "teh o peng gao",
+            "teh o kao",
+            "teh o kao peng",
+            "teh o peng kao",
+            "teh o po",
+            "teh o po peng",
+            "teh o peng po",
+            "teh o di lo",
+            "teh o di lo peng",
+            "teh o peng di lo",
+            "teh o dilo",
+            "teh o dilo peng",
+            "teh o peng dilo",
+            "teh o tiloh",
+            "teh o tiloh peng",
+            "teh o peng tiloh",
+            "teh o di loh",
+            "teh o di loh peng",
+            "teh o peng di loh",
+            "teh o peng",
+            "teh o bing",
+            "teh o ice"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "Teh-C",
+          "aliases": [
+            "teh c",
+            "teh c kosong",
+            "teh c kosong peng",
+            "teh c peng kosong",
+            "teh c siew dai",
+            "teh c siew dai peng",
+            "teh c peng siew dai",
+            "teh c siu dai",
+            "teh c siu dai peng",
+            "teh c peng siu dai",
+            "teh c xiu dai",
+            "teh c xiu dai peng",
+            "teh c peng xiu dai",
+            "teh c gah dai",
+            "teh c gah dai peng",
+            "teh c peng gah dai",
+            "teh c ga dai",
+            "teh c ga dai peng",
+            "teh c peng ga dai",
+            "teh c kah dai",
+            "teh c kah dai peng",
+            "teh c peng kah dai",
+            "teh c gau",
+            "teh c gau peng",
+            "teh c peng gau",
+            "teh c gao",
+            "teh c gao peng",
+            "teh c peng gao",
+            "teh c kao",
+            "teh c kao peng",
+            "teh c peng kao",
+            "teh c po",
+            "teh c po peng",
+            "teh c peng po",
+            "teh c di lo",
+            "teh c di lo peng",
+            "teh c peng di lo",
+            "teh c dilo",
+            "teh c dilo peng",
+            "teh c peng dilo",
+            "teh c tiloh",
+            "teh c tiloh peng",
+            "teh c peng tiloh",
+            "teh c di loh",
+            "teh c di loh peng",
+            "teh c peng di loh",
+            "teh c peng",
+            "teh c bing",
+            "teh c ice",
+            "teh si",
+            "teh si kosong",
+            "teh si kosong peng",
+            "teh si peng kosong",
+            "teh si siew dai",
+            "teh si siew dai peng",
+            "teh si peng siew dai",
+            "teh si siu dai",
+            "teh si siu dai peng",
+            "teh si peng siu dai",
+            "teh si xiu dai",
+            "teh si xiu dai peng",
+            "teh si peng xiu dai",
+            "teh si gah dai",
+            "teh si gah dai peng",
+            "teh si peng gah dai",
+            "teh si ga dai",
+            "teh si ga dai peng",
+            "teh si peng ga dai",
+            "teh si kah dai",
+            "teh si kah dai peng",
+            "teh si peng kah dai",
+            "teh si gau",
+            "teh si gau peng",
+            "teh si peng gau",
+            "teh si gao",
+            "teh si gao peng",
+            "teh si peng gao",
+            "teh si kao",
+            "teh si kao peng",
+            "teh si peng kao",
+            "teh si po",
+            "teh si po peng",
+            "teh si peng po",
+            "teh si di lo",
+            "teh si di lo peng",
+            "teh si peng di lo",
+            "teh si dilo",
+            "teh si dilo peng",
+            "teh si peng dilo",
+            "teh si tiloh",
+            "teh si tiloh peng",
+            "teh si peng tiloh",
+            "teh si di loh",
+            "teh si di loh peng",
+            "teh si peng di loh",
+            "teh si peng",
+            "teh si bing",
+            "teh si ice"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "Sugar Cane Juice",
+          "aliases": [
+            "Sugar Cane",
+            "Sugarcane",
+            "Sugarcane Juice",
+            "Sugar Cane Lemon",
+            "Sugar Cane with Lemon"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "Lime Juice",
+          "aliases": [
+            "Calamansi Juice",
+            "Kalamansi Juice",
+            "Calamansi",
+            "Kalamansi",
+            "Lime Juice with Sour Plum",
+            "Sour Plum Lime Juice",
+            "Lime Plum",
+            "Limau"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "Barley",
+          "aliases": [
+            "Barley Water",
+            "Barley Drink",
+            "Barley Lime",
+            "Barley Peng",
+            "Iced Barley"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "Soya Bean Milk",
+          "aliases": [
+            "Soya Bean",
+            "Soy Milk",
+            "Soya Milk",
+            "Soybean Milk",
+            "Tau Huay Chui",
+            "Dou Jiang",
+            "Tau Hway Chui"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "Bandung",
+          "aliases": [
+            "Rose Syrup Milk",
+            "Bandung Peng",
+            "Air Bandung",
+            "Sirap Bandung"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "Chin Chow",
+          "aliases": [
+            "Grass Jelly Drink",
+            "Grass Jelly",
+            "Chin Chow Drink",
+            "Cincau",
+            "Chincau",
+            "Leong Fun"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "Yuan Yang",
+          "aliases": [
+            "Yuenyeung",
+            "Yin Yong",
+            "Cham",
+            "Kopi Cham",
+            "Teh Cham",
+            "Coffee Tea"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "Iced Lemon Tea",
+          "aliases": [
+            "Ice Lemon Tea",
+            "Lemon Tea",
+            "Lemon Tea Peng",
+            "Lemon Ice Tea"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "Coconut",
+          "aliases": [
+            "Coconut Water",
+            "Fresh Coconut",
+            "Young Coconut",
+            "Coconut Juice"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "Fresh Fruit Juice",
+          "aliases": [
+            "Fruit Juice",
+            "Orange Juice",
+            "Apple Juice",
+            "Watermelon Juice",
+            "Carrot Juice",
+            "ABC Juice",
+            "Starfruit Juice",
+            "Pineapple Juice",
+            "Guava Juice",
+            "Mango Juice",
+            "Honeydew Juice",
+            "Papaya Juice",
+            "Carrot Milk",
+            "Celery Juice"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "Chrysanthemum Tea",
+          "aliases": [
+            "Chrysanthemum",
+            "Kek Huay",
+            "Chrysanthemum Drink"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "Horlicks",
+          "aliases": [
+            "Horlicks Peng",
+            "Horlick"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "Teh Halia",
+          "aliases": [
+            "Ginger Tea",
+            "Teh Halia Tarik",
+            "Teh O Halia"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "Ovaltine",
+          "aliases": [
+            "Ovaltine Peng",
+            "Ovomaltine"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "Luo Han Guo",
+          "aliases": [
+            "Lo Han Kuo",
+            "Luo Han Kuo",
+            "Monk Fruit Drink",
+            "Monk Fruit Tea",
+            "Lo Han Guo"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "Teh-O Limau",
+          "aliases": [
+            "Teh O Limau",
+            "Teh Limau",
+            "Lime Tea",
+            "Teh O Limau Peng",
+            "Teh O Lemon"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "Milo Godzilla",
+          "aliases": [
+            "Milo Godzilla Peng"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "Honey Lemon",
+          "aliases": [
+            "Honey Lime",
+            "Lemon Honey",
+            "Honey Lemon Peng"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "Ice Kosong",
+          "aliases": [
+            "Ice Water",
+            "Plain Water",
+            "Iced Water",
+            "Ais Kosong"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "Air Mata Kucing",
+          "aliases": [
+            "Mata Kucing Drink",
+            "Longan Monk Fruit Drink"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "Kopi Tarik",
+          "aliases": [
+            "Pulled Coffee"
+          ],
+          "tier": "ulu"
+        },
+        {
+          "name": "Sirap",
+          "aliases": [
+            "Air Sirap",
+            "Rose Syrup",
+            "Sirap Limau",
+            "Sirap Selasih"
+          ],
+          "tier": "ulu"
+        },
+        {
+          "name": "Ribena",
+          "aliases": [
+            "Ribena Peng",
+            "Hot Ribena"
+          ],
+          "tier": "ulu"
+        },
+        {
+          "name": "Michael Jackson",
+          "aliases": [
+            "MJ",
+            "Soya Bean with Grass Jelly",
+            "Soya Bean Grass Jelly",
+            "Soy Milk Grass Jelly",
+            "Soya Bean Chin Chow"
+          ],
+          "tier": "gem"
+        }
+      ]
+    },
+    {
+      "id": "food-kopi-lingo",
+      "category": "food",
+      "text": "Kopitiam lingo: name a word you add to 'kopi' or 'teh' when ordering",
+      "note": "Just the add-on word (e.g. the 'O' in kopi-o) — the full order like 'kopi-o kosong' also counts.",
+      "answers": [
+        {
+          "name": "O",
+          "aliases": [
+            "Kopi O",
+            "Teh O",
+            "Kopi-O",
+            "Teh-O",
+            "Oh"
+          ],
+          "tier": "common"
+        },
+        {
+          "name": "C",
+          "aliases": [
+            "Kopi C",
+            "Teh C",
+            "Kopi-C",
+            "Teh-C",
+            "Si",
+            "Kopi Si",
+            "Teh Si"
+          ],
+          "tier": "common"
+        },
+        {
+          "name": "Kosong",
+          "aliases": [
+            "kopi kosong",
+            "kopi o kosong",
+            "kopi c kosong",
+            "teh kosong",
+            "teh o kosong",
+            "teh c kosong",
+            "No Sugar"
+          ],
+          "tier": "common"
+        },
+        {
+          "name": "Peng",
+          "aliases": [
+            "kopi peng",
+            "kopi o peng",
+            "kopi c peng",
+            "teh peng",
+            "teh o peng",
+            "teh c peng",
+            "Bing",
+            "Iced"
+          ],
+          "tier": "common"
+        },
+        {
+          "name": "Siew Dai",
+          "aliases": [
+            "kopi siew dai",
+            "kopi siu dai",
+            "kopi xiu dai",
+            "kopi o siew dai",
+            "kopi o siu dai",
+            "kopi o xiu dai",
+            "kopi c siew dai",
+            "kopi c siu dai",
+            "kopi c xiu dai",
+            "teh siew dai",
+            "teh siu dai",
+            "teh xiu dai",
+            "teh o siew dai",
+            "teh o siu dai",
+            "teh o xiu dai",
+            "teh c siew dai",
+            "teh c siu dai",
+            "teh c xiu dai",
+            "Siu Dai",
+            "Xiu Dai",
+            "Less Sweet",
+            "Siew Tai"
+          ],
+          "tier": "trap"
+        },
+        {
+          "name": "Gah Dai",
+          "aliases": [
+            "kopi gah dai",
+            "kopi ga dai",
+            "kopi kah dai",
+            "kopi o gah dai",
+            "kopi o ga dai",
+            "kopi o kah dai",
+            "kopi c gah dai",
+            "kopi c ga dai",
+            "kopi c kah dai",
+            "teh gah dai",
+            "teh ga dai",
+            "teh kah dai",
+            "teh o gah dai",
+            "teh o ga dai",
+            "teh o kah dai",
+            "teh c gah dai",
+            "teh c ga dai",
+            "teh c kah dai",
+            "Ga Dai",
+            "Kah Dai",
+            "Extra Sweet",
+            "More Sweet"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "Gau",
+          "aliases": [
+            "kopi gau",
+            "kopi gao",
+            "kopi kao",
+            "kopi o gau",
+            "kopi o gao",
+            "kopi o kao",
+            "kopi c gau",
+            "kopi c gao",
+            "kopi c kao",
+            "teh gau",
+            "teh gao",
+            "teh kao",
+            "teh o gau",
+            "teh o gao",
+            "teh o kao",
+            "teh c gau",
+            "teh c gao",
+            "teh c kao",
+            "Gao",
+            "Kao",
+            "Kau",
+            "Strong"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "Tarik",
+          "aliases": [
+            "Kopi Tarik",
+            "Teh Tarik",
+            "Pulled"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "Ta Pau",
+          "aliases": [
+            "Tapao",
+            "Da Bao",
+            "Dabao",
+            "Tah Pau",
+            "Ta Bao",
+            "Bungkus",
+            "Take Away",
+            "Takeaway",
+            "Kopi Tapao",
+            "Teh Tapao"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "Po",
+          "aliases": [
+            "kopi po",
+            "kopi poh",
+            "kopi o po",
+            "kopi o poh",
+            "kopi c po",
+            "kopi c poh",
+            "teh po",
+            "teh poh",
+            "teh o po",
+            "teh o poh",
+            "teh c po",
+            "teh c poh",
+            "Poh",
+            "Weak",
+            "Diluted"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "Halia",
+          "aliases": [
+            "Teh Halia",
+            "Kopi Halia",
+            "Teh O Halia",
+            "Ginger"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "Limau",
+          "aliases": [
+            "Teh O Limau",
+            "Teh Limau",
+            "Lime"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "Di Lo",
+          "aliases": [
+            "kopi di lo",
+            "kopi dilo",
+            "kopi di loh",
+            "kopi tiloh",
+            "kopi tilo",
+            "kopi o di lo",
+            "kopi o dilo",
+            "kopi o di loh",
+            "kopi o tiloh",
+            "kopi o tilo",
+            "kopi c di lo",
+            "kopi c dilo",
+            "kopi c di loh",
+            "kopi c tiloh",
+            "kopi c tilo",
+            "teh di lo",
+            "teh dilo",
+            "teh di loh",
+            "teh tiloh",
+            "teh tilo",
+            "teh o di lo",
+            "teh o dilo",
+            "teh o di loh",
+            "teh o tiloh",
+            "teh o tilo",
+            "teh c di lo",
+            "teh c dilo",
+            "teh c di loh",
+            "teh c tiloh",
+            "teh c tilo",
+            "Dilo",
+            "Di Loh",
+            "Tiloh",
+            "Tilo",
+            "Extra Thick"
+          ],
+          "tier": "gem"
+        }
+      ]
+    },
+    {
+      "id": "food-desserts",
+      "category": "food",
+      "text": "Name a local dessert you'd get at a hawker centre or dessert stall",
+      "note": "A few famous kueh count here too.",
+      "answers": [
+        {
+          "name": "Ice Kacang",
+          "aliases": [
+            "Ice Kachang",
+            "Ais Kacang",
+            "Ais Kachang",
+            "ABC",
+            "Air Batu Campur",
+            "Ice Kacang Durian"
+          ],
+          "tier": "common"
+        },
+        {
+          "name": "Chendol",
+          "aliases": [
+            "Cendol",
+            "Durian Chendol",
+            "Chendol Durian"
+          ],
+          "tier": "common"
+        },
+        {
+          "name": "Bubur Cha Cha",
+          "aliases": [
+            "Bubur Chacha",
+            "Bo Bo Cha Cha",
+            "Bobo Chacha",
+            "Bubur Cha-Cha"
+          ],
+          "tier": "common"
+        },
+        {
+          "name": "Tau Huay",
+          "aliases": [
+            "Tau Huey",
+            "Tau Hway",
+            "Douhua",
+            "Dou Hua",
+            "Beancurd",
+            "Soya Beancurd",
+            "Tau Foo Fah",
+            "Tofu Pudding",
+            "Soya Bean Curd",
+            "Bean Curd"
+          ],
+          "tier": "common"
+        },
+        {
+          "name": "Orh Nee",
+          "aliases": [
+            "Or Nee",
+            "Orh Ni",
+            "Or Ni",
+            "Yam Paste",
+            "Teochew Yam Paste",
+            "Orh Nee with Gingko"
+          ],
+          "tier": "trap"
+        },
+        {
+          "name": "Cheng Tng",
+          "aliases": [
+            "Ching Tng",
+            "Chng Tng",
+            "Qing Tang"
+          ],
+          "tier": "trap"
+        },
+        {
+          "name": "Tau Suan",
+          "aliases": [
+            "Tau Suan with You Tiao",
+            "Split Mung Bean Soup",
+            "Dou Suan"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "Pulut Hitam",
+          "aliases": [
+            "Bubur Pulut Hitam",
+            "Black Glutinous Rice",
+            "Black Glutinous Rice Porridge",
+            "Black Sticky Rice"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "Red Bean Soup",
+          "aliases": [
+            "Tau Sar Tng",
+            "Ang Tau Tng",
+            "Red Bean",
+            "Hong Dou Tang"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "Green Bean Soup",
+          "aliases": [
+            "Bubur Kacang Hijau",
+            "Mung Bean Soup",
+            "Lek Tau Tng",
+            "Green Bean",
+            "Lu Dou Tang"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "Mango Sago",
+          "aliases": [
+            "Mango Pomelo Sago",
+            "Mango Sago Pomelo",
+            "Yang Zhi Gan Lu"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "Grass Jelly",
+          "aliases": [
+            "Chin Chow",
+            "Cincau",
+            "Grass Jelly Dessert"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "Almond Jelly",
+          "aliases": [
+            "Almond Tofu",
+            "Almond Beancurd",
+            "Almond Pudding"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "Sago Gula Melaka",
+          "aliases": [
+            "Sago Pudding",
+            "Gula Melaka Sago",
+            "Sago Melaka"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "Tang Yuan",
+          "aliases": [
+            "Glutinous Rice Balls",
+            "Ah Balling",
+            "Ah Bo Ling",
+            "Tangyuan",
+            "Rice Balls",
+            "Glutinous Rice Ball"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "Uncle Ice Cream",
+          "aliases": [
+            "Ice Cream",
+            "Ice Cream Sandwich",
+            "Roti Ice Cream",
+            "Ice Cream Bread",
+            "Potong Ice Cream",
+            "Ice Cream Potong",
+            "Potong",
+            "Ice Cream Wafer",
+            "Ah Pek Ice Cream",
+            "Rainbow Bread Ice Cream"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "Black Sesame Paste",
+          "aliases": [
+            "Sesame Paste",
+            "Zhi Ma Hu",
+            "Black Sesame Soup",
+            "Chi Ma Woo",
+            "Sesame Soup"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "Peanut Paste",
+          "aliases": [
+            "Peanut Soup",
+            "Hua Sheng Hu",
+            "Peanut Cream"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "Almond Paste",
+          "aliases": [
+            "Almond Cream",
+            "Xing Ren Hu",
+            "Almond Soup",
+            "Almond Milk Soup"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "Walnut Paste",
+          "aliases": [
+            "Walnut Soup",
+            "He Tao Hu",
+            "Walnut Cream"
+          ],
+          "tier": "ulu"
+        },
+        {
+          "name": "Snow Fungus Soup",
+          "aliases": [
+            "Snow Fungus",
+            "White Fungus Soup",
+            "Snow Fungus Dessert"
+          ],
+          "tier": "ulu"
+        },
+        {
+          "name": "Sweet Potato Soup",
+          "aliases": [
+            "Ginger Sweet Potato Soup",
+            "Sweet Potato Ginger Soup",
+            "Fan Shu Tng",
+            "Sweet Potato Dessert"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "Ice Jelly",
+          "aliases": [
+            "Aiyu Jelly",
+            "Ai Yu Jelly",
+            "Aiyu",
+            "Ai Yu",
+            "Lime Ice Jelly"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "Muah Chee",
+          "aliases": [
+            "Mua Chee",
+            "Muah Chi"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "Bubur Terigu",
+          "aliases": [
+            "Wheat Porridge",
+            "Terigu"
+          ],
+          "tier": "ulu"
+        },
+        {
+          "name": "Mango Pudding",
+          "tier": "rare"
+        },
+        {
+          "name": "Egg Tart",
+          "aliases": [
+            "Egg Tarts",
+            "Dan Tat",
+            "Daan Taat",
+            "Portuguese Egg Tart"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "Goreng Pisang",
+          "aliases": [
+            "Pisang Goreng",
+            "Banana Fritters",
+            "Banana Fritter",
+            "Fried Banana",
+            "Jemput Pisang",
+            "Cekodok Pisang"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "Ondeh-Ondeh",
+          "aliases": [
+            "Onde-Onde",
+            "Ondeh Ondeh",
+            "Onde Onde"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "Kueh Lapis",
+          "aliases": [
+            "Kuih Lapis",
+            "Nine Layer Kueh",
+            "Rainbow Kueh"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "Apam Balik",
+          "aliases": [
+            "Min Jiang Kueh",
+            "Peanut Pancake",
+            "Mee Chiang Kueh",
+            "Ban Chang Kueh"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "Bird's Nest",
+          "aliases": [
+            "Birds Nest Soup",
+            "Bird's Nest Soup",
+            "Bird Nest"
+          ],
+          "tier": "ulu"
+        },
+        {
+          "name": "Sea Coconut",
+          "aliases": [
+            "Sea Coconut Longan",
+            "Longan Sea Coconut",
+            "Longan Soup"
+          ],
+          "tier": "ulu"
+        },
+        {
+          "name": "Hashima",
+          "aliases": [
+            "Hasma",
+            "Hashima Soup",
+            "Snow Jelly"
+          ],
+          "tier": "ulu"
+        },
+        {
+          "name": "Steamed Milk Pudding",
+          "aliases": [
+            "Double Skin Milk",
+            "Steamed Milk",
+            "Milk Pudding"
+          ],
+          "tier": "ulu"
+        },
+        {
+          "name": "Durian Pengat",
+          "aliases": [
+            "Pengat",
+            "Pengat Durian",
+            "Pengat Pisang",
+            "Durian Pengat Dessert"
+          ],
+          "tier": "gem"
+        }
+      ]
+    },
+    {
+      "id": "food-durian-varieties",
+      "category": "food",
+      "text": "Name a durian variety",
+      "note": "Cultivar names or D-numbers, e.g. 'D24'.",
+      "answers": [
+        {
+          "name": "Mao Shan Wang",
+          "aliases": [
+            "Musang King",
+            "MSW",
+            "D197",
+            "Raja Kunyit",
+            "Mao Sang Wang",
+            "Cat Mountain King"
+          ],
+          "tier": "common"
+        },
+        {
+          "name": "D24",
+          "aliases": [
+            "Sultan",
+            "D24 Sultan",
+            "Sultan D24",
+            "Sultan King"
+          ],
+          "tier": "common"
+        },
+        {
+          "name": "Black Thorn",
+          "aliases": [
+            "D200",
+            "Ochee",
+            "Ocee",
+            "Duri Hitam",
+            "Blackthorn",
+            "Black Thorns"
+          ],
+          "tier": "trap"
+        },
+        {
+          "name": "XO",
+          "aliases": [
+            "XO Durian"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "Red Prawn",
+          "aliases": [
+            "Ang Hae",
+            "Ang Heh",
+            "Udang Merah",
+            "D175",
+            "Hong Xia",
+            "Ang Hay"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "D13",
+          "aliases": [
+            "Golden Bun"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "Kampung Durian",
+          "aliases": [
+            "Kampung",
+            "Kampong",
+            "Kampong Durian",
+            "Village Durian",
+            "Wild Durian"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "Golden Phoenix",
+          "aliases": [
+            "Jin Feng",
+            "D198"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "D101",
+          "aliases": [
+            "Durian D101"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "Monthong",
+          "aliases": [
+            "Mon Thong",
+            "Golden Pillow",
+            "Thai Durian"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "Tekka",
+          "aliases": [
+            "Teka",
+            "D160"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "D2",
+          "aliases": [
+            "Dato Nina",
+            "D2 Dato Nina"
+          ],
+          "tier": "ulu"
+        },
+        {
+          "name": "Lipan",
+          "aliases": [
+            "Centipede",
+            "Centipede Durian"
+          ],
+          "tier": "ulu"
+        },
+        {
+          "name": "Chanee",
+          "aliases": [
+            "Chani"
+          ],
+          "tier": "ulu"
+        },
+        {
+          "name": "Kan Yao",
+          "aliases": [
+            "Kanyao",
+            "Long Stem"
+          ],
+          "tier": "ulu"
+        },
+        {
+          "name": "Hor Lor",
+          "aliases": [
+            "Hulu",
+            "Gourd",
+            "Gourd Durian",
+            "Hor Lor Durian",
+            "Hoh Lor"
+          ],
+          "tier": "gem"
+        }
+      ]
+    },
+    {
+      "id": "food-yong-tau-foo",
+      "category": "food",
+      "text": "Name something you can pick at a yong tau foo stall",
+      "note": "Stuffed or plain both count — 'stuffed bitter gourd' is Bitter Gourd.",
+      "answers": [
+        {
+          "name": "Tau Pok",
+          "aliases": [
+            "Taupok",
+            "Fried Beancurd Puff",
+            "Tofu Puff",
+            "stuffed tau pok",
+            "stuffed taupok",
+            "stuffed tofu puff",
+            "Tau Pok Stuffed"
+          ],
+          "tier": "common"
+        },
+        {
+          "name": "Fishball",
+          "aliases": [
+            "Fish Ball",
+            "Fish Balls",
+            "Fishballs"
+          ],
+          "tier": "common"
+        },
+        {
+          "name": "Tofu",
+          "aliases": [
+            "Stuffed Tofu",
+            "Tau Kwa",
+            "Taukwa",
+            "Tau Hu",
+            "Beancurd",
+            "Bean Curd",
+            "Tau Foo",
+            "Taukua",
+            "Stuffed Beancurd",
+            "Stuffed Tau Kwa",
+            "Fried Tofu"
+          ],
+          "tier": "common"
+        },
+        {
+          "name": "Bitter Gourd",
+          "aliases": [
+            "stuffed bitter gourd",
+            "stuffed bittergourd",
+            "Bittergourd",
+            "Bitter Melon"
+          ],
+          "tier": "common"
+        },
+        {
+          "name": "Brinjal",
+          "aliases": [
+            "stuffed brinjal",
+            "stuffed eggplant",
+            "Eggplant",
+            "Aubergine",
+            "Terong"
+          ],
+          "tier": "trap"
+        },
+        {
+          "name": "Lady's Finger",
+          "aliases": [
+            "stuffed ladys finger",
+            "stuffed lady finger",
+            "stuffed okra",
+            "Okra",
+            "Ladies Finger",
+            "Lady Finger",
+            "Ladyfinger"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "Chilli",
+          "aliases": [
+            "stuffed chilli",
+            "stuffed chili",
+            "stuffed red chilli",
+            "Red Chilli",
+            "Chili",
+            "Chilli Padi"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "Fish Cake",
+          "aliases": [
+            "Fishcake",
+            "Fried Fish Cake",
+            "Fried Fishcake",
+            "Fish Cake Slices"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "Crab Stick",
+          "aliases": [
+            "Crabstick",
+            "Crab Sticks",
+            "Kani"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "Meatball",
+          "aliases": [
+            "Meat Ball",
+            "Pork Ball",
+            "Pork Balls",
+            "Meatballs"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "Beancurd Skin",
+          "aliases": [
+            "Fu Pi",
+            "Tau Kee",
+            "Fu Zhu",
+            "Fu Chok",
+            "Beancurd Skin Roll",
+            "Fried Beancurd Skin",
+            "Bean Curd Skin",
+            "Tofu Skin",
+            "Yuba",
+            "Fu Pei"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "Kang Kong",
+          "aliases": [
+            "Kangkong",
+            "Kangkung",
+            "Water Spinach",
+            "Morning Glory"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "Mushroom",
+          "aliases": [
+            "stuffed mushroom",
+            "stuffed shiitake",
+            "Mushrooms",
+            "Shiitake",
+            "Shiitake Mushroom",
+            "Chinese Mushroom"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "Lettuce",
+          "aliases": [
+            "Iceberg Lettuce",
+            "Romaine"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "Cuttlefish Ball",
+          "aliases": [
+            "Sotong Ball",
+            "Sotong Balls",
+            "Squid Ball",
+            "Cuttlefish Balls"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "Xiao Bai Cai",
+          "aliases": [
+            "Bok Choy",
+            "Pak Choy",
+            "Xiao Bai Chye",
+            "Siew Pak Choy",
+            "Baby Bok Choy",
+            "Bai Cai",
+            "Nai Bai"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "Chye Sim",
+          "aliases": [
+            "Choy Sum",
+            "Cai Xin",
+            "Chai Sim",
+            "Cai Sim",
+            "Caixin"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "Seaweed Roll",
+          "aliases": [
+            "Seaweed",
+            "Seaweed Fish Roll",
+            "Stuffed Seaweed"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "Fish Tofu",
+          "aliases": [
+            "Fish Beancurd",
+            "Fried Fish Tofu"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "Egg Tofu",
+          "aliases": [
+            "Japanese Tofu",
+            "Tamago Tofu",
+            "Fried Egg Tofu"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "Quail Egg",
+          "aliases": [
+            "Quail Eggs",
+            "Quail Egg Ball"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "Sausage",
+          "aliases": [
+            "Hot Dog",
+            "Hotdog",
+            "Sausages"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "Fried Wanton",
+          "aliases": [
+            "Fried Wonton",
+            "Wanton",
+            "Wonton",
+            "Fried Dumpling",
+            "Fried Wantons"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "Dumpling",
+          "aliases": [
+            "Sui Kow",
+            "Shui Jiao",
+            "Dumplings",
+            "Prawn Dumpling",
+            "Water Dumpling"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "Enoki",
+          "aliases": [
+            "Enoki Mushroom",
+            "Golden Mushroom",
+            "Enoki Mushrooms",
+            "Golden Needle Mushroom"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "Bean Sprouts",
+          "aliases": [
+            "Taugeh",
+            "Tau Gay",
+            "Beansprouts",
+            "Tau Geh"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "Spinach",
+          "aliases": [
+            "Bayam",
+            "Chinese Spinach",
+            "Puay Leng",
+            "Bo Cai"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "Chinese Cabbage",
+          "aliases": [
+            "Wong Bok",
+            "Napa Cabbage",
+            "Cabbage",
+            "Da Bai Cai",
+            "Wombok"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "Cheese Tofu",
+          "aliases": [
+            "Cheese Beancurd"
+          ],
+          "tier": "ulu"
+        },
+        {
+          "name": "Cheese Ball",
+          "aliases": [
+            "Cheese Balls",
+            "Cheese Fishball"
+          ],
+          "tier": "ulu"
+        },
+        {
+          "name": "Lobster Ball",
+          "aliases": [
+            "Lobster Balls"
+          ],
+          "tier": "ulu"
+        },
+        {
+          "name": "Ngoh Hiang",
+          "aliases": [
+            "Ngo Hiang",
+            "Five Spice Roll",
+            "Ngoh Hiang Roll"
+          ],
+          "tier": "ulu"
+        },
+        {
+          "name": "Fried Fish Skin",
+          "aliases": [
+            "Fish Skin"
+          ],
+          "tier": "ulu"
+        },
+        {
+          "name": "Tang Hoon",
+          "aliases": [
+            "Glass Noodles",
+            "Dong Fen",
+            "Tanghoon",
+            "Cellophane Noodles"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "Bee Hoon",
+          "aliases": [
+            "Beehoon",
+            "Mee Hoon",
+            "Rice Vermicelli",
+            "Vermicelli"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "Kway Teow",
+          "aliases": [
+            "Kuey Teow",
+            "Kuay Teow",
+            "Flat Rice Noodles",
+            "Hor Fun"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "Yellow Noodles",
+          "aliases": [
+            "Yellow Mee",
+            "Mee",
+            "Mee Kuning",
+            "Hokkien Noodles",
+            "Yellow Noodle"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "Rice",
+          "aliases": [
+            "White Rice",
+            "Steamed Rice"
+          ],
+          "tier": "ulu"
+        },
+        {
+          "name": "Fuzhou Fishball",
+          "aliases": [
+            "Fuzhou Fish Ball",
+            "Foochow Fishball",
+            "Fuzhou Fishballs",
+            "Meat-filled Fishball",
+            "Fishball with Meat"
+          ],
+          "tier": "gem"
+        }
+      ]
+    },
+    {
+      "id": "food-cai-png",
+      "category": "food",
+      "text": "Name a dish you'd find at a cai png (economic rice) stall",
+      "note": "Also called economy rice or mixed rice.",
+      "answers": [
+        {
+          "name": "Sweet and Sour Pork",
+          "aliases": [
+            "Sweet Sour Pork",
+            "Gu Lou Yuk",
+            "Ku Lo Yuk",
+            "Gu Lao Rou",
+            "Sweet and Sour"
+          ],
+          "tier": "common"
+        },
+        {
+          "name": "Fried Egg",
+          "aliases": [
+            "Sunny Side Up",
+            "Sunny Side Up Egg",
+            "Egg",
+            "Fried Eggs",
+            "Telur Mata",
+            "Egg Sunny Side Up"
+          ],
+          "tier": "common"
+        },
+        {
+          "name": "Curry Chicken",
+          "aliases": [
+            "Chicken Curry",
+            "Curry",
+            "Curry Chicken Potato"
+          ],
+          "tier": "common"
+        },
+        {
+          "name": "Braised Pork",
+          "aliases": [
+            "Lor Bak",
+            "Tau Yew Bak",
+            "Braised Pork Belly",
+            "Lor Ba",
+            "Braised Belly",
+            "Soy Sauce Pork",
+            "Lu Rou"
+          ],
+          "tier": "common"
+        },
+        {
+          "name": "Luncheon Meat",
+          "aliases": [
+            "Spam",
+            "Fried Luncheon Meat",
+            "Ma Ling"
+          ],
+          "tier": "trap"
+        },
+        {
+          "name": "Tomato Egg",
+          "aliases": [
+            "Tomato Scrambled Egg",
+            "Egg Tomato",
+            "Tomato and Egg",
+            "Scrambled Egg with Tomato",
+            "Tomato Egg Stir Fry"
+          ],
+          "tier": "trap"
+        },
+        {
+          "name": "Cabbage",
+          "aliases": [
+            "Fried Cabbage",
+            "Stir-fried Cabbage",
+            "Cabbage with Dried Shrimp",
+            "Round Cabbage"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "Sambal Kangkong",
+          "aliases": [
+            "Kangkong",
+            "Kangkung Belacan",
+            "Kangkong Belacan",
+            "Sambal Kangkung",
+            "Kang Kong"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "Fried Fish",
+          "aliases": [
+            "Fish Fillet",
+            "Fried Fish Fillet",
+            "Fish",
+            "Battered Fish"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "Steamed Egg",
+          "aliases": [
+            "Steamed Eggs",
+            "Three Egg Steamed Egg",
+            "Chinese Steamed Egg",
+            "Minced Meat Steamed Egg"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "Mapo Tofu",
+          "aliases": [
+            "Ma Po Tofu",
+            "Mapo Doufu"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "Braised Tofu",
+          "aliases": [
+            "Tofu",
+            "Braised Beancurd",
+            "Tau Kwa",
+            "Beancurd",
+            "Fried Tofu",
+            "Egg Tofu",
+            "Japanese Tofu"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "Chap Chye",
+          "aliases": [
+            "Nonya Chap Chye",
+            "Chap Chai",
+            "Mixed Vegetables",
+            "Za Cai"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "Brinjal",
+          "aliases": [
+            "Eggplant",
+            "Fried Brinjal",
+            "Yu Xiang Eggplant",
+            "Sambal Brinjal",
+            "Fish-fragrant Eggplant",
+            "Brinjal with Dried Shrimp"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "Bitter Gourd with Egg",
+          "aliases": [
+            "Bitter Gourd",
+            "Bitter Gourd Egg",
+            "Bittergourd"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "Ngoh Hiang",
+          "aliases": [
+            "Ngo Hiang",
+            "Five Spice Roll",
+            "Ngoh Hiang Roll"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "Fish Cake",
+          "aliases": [
+            "Fishcake",
+            "Fried Fish Cake"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "Chicken Wing",
+          "aliases": [
+            "Chicken Wings",
+            "Fried Chicken Wing",
+            "Fried Chicken Wings",
+            "Fried Chicken"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "Chicken Cutlet",
+          "aliases": [
+            "Fried Chicken Cutlet",
+            "Breaded Chicken Cutlet",
+            "Chicken Chop"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "Long Beans",
+          "aliases": [
+            "Long Bean",
+            "French Beans",
+            "French Bean",
+            "Sambal Long Beans",
+            "Stir-fried Long Beans"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "Potato",
+          "aliases": [
+            "Potatoes",
+            "Curry Potato",
+            "Potato Curry",
+            "Fried Potato",
+            "Shredded Potato"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "Broccoli",
+          "aliases": [
+            "Brocolli",
+            "Broccoli with Mushroom"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "Kai Lan",
+          "aliases": [
+            "Kailan",
+            "Gai Lan",
+            "Kai Lan with Oyster Sauce",
+            "Chinese Kale"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "Bean Sprouts",
+          "aliases": [
+            "Taugeh",
+            "Tau Gay",
+            "Beansprouts",
+            "Salted Fish Beansprouts",
+            "Salted Fish Bean Sprouts"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "Sweet Potato Leaves",
+          "aliases": [
+            "Sweet Potato Leaf",
+            "Potato Leaves"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "Lemon Chicken",
+          "aliases": [
+            "Lemon Chicken Cutlet"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "Sambal Sotong",
+          "aliases": [
+            "Sotong",
+            "Squid",
+            "Sambal Squid"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "Cereal Prawns",
+          "aliases": [
+            "Prawns",
+            "Cereal Prawn",
+            "Prawn",
+            "Butter Prawn"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "Fried Bee Hoon",
+          "aliases": [
+            "Bee Hoon",
+            "Beehoon",
+            "Mee Hoon",
+            "Fried Noodles",
+            "Economic Bee Hoon",
+            "Fried Mee",
+            "Yellow Noodles"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "Braised Egg",
+          "aliases": [
+            "Lor Neng",
+            "Lor Egg",
+            "Hard Boiled Egg",
+            "Braised Eggs",
+            "Soy Sauce Egg"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "Char Siew",
+          "aliases": [
+            "Char Siu",
+            "Barbecued Pork",
+            "BBQ Pork"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "Steamed Fish",
+          "aliases": [
+            "Steam Fish"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "Pork Chop",
+          "aliases": [
+            "Fried Pork Chop",
+            "Hainanese Pork Chop"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "Spinach",
+          "aliases": [
+            "Chinese Spinach",
+            "Bayam",
+            "Three Egg Spinach",
+            "Sam Wong Dan Spinach",
+            "Spinach with Century Egg"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "Black Pepper Chicken",
+          "aliases": [
+            "Black Pepper Pork"
+          ],
+          "tier": "ulu"
+        },
+        {
+          "name": "Sweet and Sour Fish",
+          "aliases": [
+            "Sweet Sour Fish"
+          ],
+          "tier": "ulu"
+        },
+        {
+          "name": "Pork Ribs",
+          "aliases": [
+            "Black Bean Pork Ribs",
+            "Spare Ribs",
+            "Pai Gu",
+            "Sweet and Sour Pork Ribs"
+          ],
+          "tier": "ulu"
+        },
+        {
+          "name": "Prawn Paste Chicken",
+          "aliases": [
+            "Har Cheong Gai",
+            "Ha Cheong Gai",
+            "Shrimp Paste Chicken"
+          ],
+          "tier": "ulu"
+        },
+        {
+          "name": "Steamed Minced Pork",
+          "aliases": [
+            "Minced Pork",
+            "Steamed Pork Patty",
+            "Meat Patty",
+            "Steamed Meat Patty",
+            "Salted Fish Minced Pork"
+          ],
+          "tier": "ulu"
+        },
+        {
+          "name": "Pumpkin",
+          "aliases": [
+            "Stir-fried Pumpkin",
+            "Pumpkin with Dried Shrimp"
+          ],
+          "tier": "ulu"
+        },
+        {
+          "name": "Lotus Root",
+          "aliases": [
+            "Stir-fried Lotus Root",
+            "Lotus Root Soup"
+          ],
+          "tier": "ulu"
+        },
+        {
+          "name": "Lady's Finger",
+          "aliases": [
+            "Okra",
+            "Ladies Finger",
+            "Lady Finger",
+            "Sambal Lady's Finger"
+          ],
+          "tier": "ulu"
+        },
+        {
+          "name": "Sausage",
+          "aliases": [
+            "Hot Dog",
+            "Hotdog",
+            "Sausages",
+            "Chinese Sausage",
+            "Lap Cheong"
+          ],
+          "tier": "ulu"
+        },
+        {
+          "name": "Omelette",
+          "aliases": [
+            "Omelet",
+            "Fu Yong Egg",
+            "Egg Omelette",
+            "Fried Omelette",
+            "Onion Omelette",
+            "Fu Yung Egg"
+          ],
+          "tier": "ulu"
+        },
+        {
+          "name": "Chye Poh Omelette",
+          "aliases": [
+            "Chai Poh Omelette",
+            "Chye Poh Egg",
+            "Chai Poh Egg",
+            "Preserved Radish Omelette",
+            "Cai Pu Egg",
+            "Chai Por Egg",
+            "Chye Por Omelette"
+          ],
+          "tier": "gem"
+        }
+      ]
+    },
+    {
+      "id": "food-noodle-types",
+      "category": "food",
+      "text": "Name a type of noodle you can choose at a local noodle stall",
+      "note": "E.g. what you'd pick at a fishball noodle or bak chor mee stall.",
+      "answers": [
+        {
+          "name": "Mee Pok",
+          "aliases": [
+            "Meepok",
+            "Flat Egg Noodles"
+          ],
+          "tier": "common"
+        },
+        {
+          "name": "Bee Hoon",
+          "aliases": [
+            "Beehoon",
+            "Mee Hoon",
+            "Rice Vermicelli",
+            "Vermicelli",
+            "Bihun",
+            "Thin Bee Hoon"
+          ],
+          "tier": "common"
+        },
+        {
+          "name": "Kway Teow",
+          "aliases": [
+            "Kuey Teow",
+            "Kuay Teow",
+            "Koay Teow",
+            "Flat Rice Noodles",
+            "Kwayteow"
+          ],
+          "tier": "common"
+        },
+        {
+          "name": "Yellow Noodles",
+          "aliases": [
+            "Yellow Mee",
+            "Mee",
+            "Mee Kuning",
+            "Hokkien Noodles",
+            "Yellow Noodle",
+            "Alkaline Noodles",
+            "You Mian"
+          ],
+          "tier": "common"
+        },
+        {
+          "name": "Mee Kia",
+          "aliases": [
+            "Meekia",
+            "Thin Egg Noodles",
+            "Wanton Noodles",
+            "Egg Noodles"
+          ],
+          "tier": "trap"
+        },
+        {
+          "name": "Hor Fun",
+          "aliases": [
+            "Ho Fun",
+            "Horfun",
+            "Sar Hor Fun",
+            "Shahe Fen",
+            "Wide Rice Noodles"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "Mee Sua",
+          "aliases": [
+            "Misua",
+            "Mee Suah",
+            "Mian Xian",
+            "Wheat Vermicelli"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "Ban Mian",
+          "aliases": [
+            "Banmian",
+            "Ban Mee",
+            "Pan Mee",
+            "Handmade Noodles"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "Mee Hoon Kueh",
+          "aliases": [
+            "Mee Hoon Kway",
+            "Mee Hoon Kuih",
+            "Mian Fen Guo"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "Thick Bee Hoon",
+          "aliases": [
+            "Laksa Bee Hoon",
+            "Chor Bee Hoon",
+            "Laksa Noodles",
+            "Thick Vermicelli",
+            "Coarse Bee Hoon"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "Tang Hoon",
+          "aliases": [
+            "Glass Noodles",
+            "Dong Fen",
+            "Tanghoon",
+            "Cellophane Noodles",
+            "Mung Bean Noodles",
+            "Suhun"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "Ee Mee",
+          "aliases": [
+            "Yee Mee",
+            "Yi Mian",
+            "E-fu Noodles",
+            "Yifu Noodles",
+            "Ee-fu Noodles",
+            "Yee Fu Mee"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "Instant Noodles",
+          "aliases": [
+            "Maggi Mee",
+            "Maggi",
+            "Maggi Goreng",
+            "Instant Mee",
+            "Maggie Mee"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "La Mian",
+          "aliases": [
+            "Lamian",
+            "Hand-pulled Noodles",
+            "Pulled Noodles"
+          ],
+          "tier": "ulu"
+        },
+        {
+          "name": "Kway Teow Mee",
+          "aliases": [
+            "Kuey Teow Mee",
+            "Mee Kway Teow",
+            "Mixed Noodles"
+          ],
+          "tier": "ulu"
+        },
+        {
+          "name": "Mee Tai Mak",
+          "aliases": [
+            "Bee Tai Bak",
+            "Mee Tai Bak",
+            "Silver Needle Noodles",
+            "Lao Shu Fen",
+            "Rat Noodles",
+            "Rat Tail Noodles",
+            "Loh Shi Fun",
+            "Bee Tai Mak"
+          ],
+          "tier": "gem"
+        }
+      ]
+    }
+  ]
+}
