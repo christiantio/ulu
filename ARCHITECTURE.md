@@ -14,7 +14,7 @@ go somewhere nobody else thought of.
 | Max | 7 × 100 = 700 |
 | Theme | The score is a journey out of town: Raffles Place → Bishan → Sengkang → Woodlands → Lim Chu Kang → Pulau Ubin → Pulau Tekong → Pedra Branca (700) |
 | Unlimited | 7 random prompts from past dives (never today's), no stats, replay as often as you like. Back-to-back games don't share prompts. While the archive is too small to fill a game, it uses the rest of the bank |
-| Answer animation | After each answer, a ride out of town on the "Ulu Line", whose stations are the tiers in order (Everybody Say → Act Smart → Can Lah → Steady → Damn Ulu → Sibei Ulu). The train passes every station below the answer's tier, slowing at each as if it might stop, and stops at its own. Past Steady it becomes a bumboat, and the gem ends at the Pedra Branca lighthouse. A miss is the train leaving without you. It takes 2.4–5.4 s, the pips, score and route only update when it lands, and Skip (or a tap on the scene) jumps to the reveal. With `prefers-reduced-motion`, it's skipped |
+| Answer animation | After each answer, a ride out of town on the "Ulu Line", whose stations are the tiers in order (Everybody Say → Act Smart → Can Lah → Steady → Damn Ulu → Sibei Ulu). The train passes every station below the answer's tier, slowing at each as if it might stop, and stops at its own. The MRT ends on the shore at Changi Point: for Damn Ulu and Sibei Ulu, the train stops there, you hop into the bumboat waiting at the jetty, and it takes you on to Pulau Ubin or the Pedra Branca lighthouse. A miss is the train leaving without you. It takes 2.4–7.1 s, the pips, score and route only update when it lands, and Skip (or a tap on the scene) jumps to the reveal. With `prefers-reduced-motion`, it's skipped |
 | Reveal | The verdict, the gem, up to 3 other answers per tier, and every accepted answer behind a "Show all N answers" disclosure, grouped by tier from the gem down. The results screen has the same disclosure for each prompt |
 | Sharing | Spoiler-free emoji grid: `Ulu #3 🇸🇬 410/700 / 💎🟢⚪🔵❌🟣🟡 / Reached Lim Chu Kang` |
 
@@ -75,7 +75,7 @@ stay out of the entry chunk:
 
 | What | Where it comes from | When it loads |
 |---|---|---|
-| The app (entry chunk) | `dist/assets/index-<hash>.js` | First load. About 275 kB, 87 kB gzipped |
+| The app (entry chunk) | `dist/assets/index-<hash>.js` | First load. About 277 kB, 88 kB gzipped |
 | Today's prompts | `dist/dives/<date>.json`, the day's 7 full prompts in schedule order | First load, and again when the date rolls over. About 23–35 kB, 6–7 kB gzipped |
 | The bank (every pack plus `schedule.json`) | `dist/assets/bank-<hash>.js`, from `import('./bank')` | Only when Unlimited starts, when a date has no dive file, or when saved progress names prompts the day's file doesn't have. About 230 kB, 49 kB gzipped |
 
@@ -184,15 +184,22 @@ must match exactly, so `Bedk` won't become `Bedok` and abbreviations like `AMK` 
 the result is saved (so a reload mid-ride resumes at the next round, as a reload on the reveal does).
 
 - **One scene, scrolled.** The scenery is inline SVG in scene units (a 480 × 240 viewport), laid out once from a
-  fixed seed: CBD towers, shophouses, HDB blocks with laundry out, kampung trees, the shore, Pulau Ubin and Pedra
-  Branca. The vehicle stays still and two layers scroll under it at different speeds, using `translate3d` on
-  plain `div`s so the browser only moves composited layers. Sizes inside the scene are in `cqw` (container
-  query units), so it scales with the card.
-- **Motion.** `position()` in `game/journey.ts` is a piecewise cubic Hermite curve: from rest, through each
-  passed station at 45% of a leg's average speed (the "will it stop?" moment), and braking to rest at the
-  answer's station, with continuous speed throughout. It's unit tested for monotonicity and for no jumps.
+  fixed seed: CBD towers, shophouses, HDB blocks with laundry out, kampung trees, the Changi Point terminal and
+  jetty, Pulau Ubin and Pedra Branca. The vehicle stays still and two layers scroll under it at different speeds,
+  using `translate3d` on plain `div`s so the browser only moves composited layers. Sizes inside the scene are in
+  `cqw` (container query units), so it scales with the card.
+- **Motion.** `frame()` in `game/journey.ts` gives the camera and the vehicle at any moment. Each vehicle runs a
+  route of cubic Hermite legs: from rest, through each passed station at 45% of a leg's average speed (the "will
+  it stop?" moment), and braking to rest. A ride to an island station is two routes: the train to the terminal,
+  then, after the change, the bumboat from its mooring. While the bumboat pulls away, the view eases from the
+  terminal onto it, so the camera's speed stays continuous throughout. It's unit tested for monotonicity and for
+  no jumps.
+- **The change.** At the terminal, the moving train hands over to one parked in the scene, and the bumboat moored
+  at the jetty hands over to the moving one. Each pair is drawn at the same spot at that moment, and both boats
+  bob in step from the start of the ride, so the swaps don't show. In between, you hop from the train's front
+  door into the bumboat.
 - **Timing.** A `requestAnimationFrame` loop draws the motion straight to the DOM. React only re-renders when a
-  station is passed or the coast is crossed. `setTimeout`s drive the stages (doors closing, travel, arrival,
+  station is passed or the vehicle changes. `setTimeout`s drive the stages (doors closing, travel, arrival,
   done), so the ride ends on time even if frames are throttled, as in a background tab.
 - **Accessibility.** The scene is `aria-hidden`; focus moves to the Skip button, then to the reveal's Next button
   as before, which reads the verdict. Taps and key presses in the first 400 ms are ignored, so a double-tap on

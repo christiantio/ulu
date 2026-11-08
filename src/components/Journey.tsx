@@ -2,42 +2,54 @@ import { memo, useEffect, useId, useRef, useState, type CSSProperties } from 're
 import { mulberry32 } from '../game/daily'
 import {
   ARRIVAL_LINES,
-  COAST,
+  BOAT_X,
   DEPART_MS,
+  FIRST_ISLAND,
   LEAVE_MS,
   SKIP_GRACE_MS,
+  STATION_X,
   STOPS,
+  TERMINAL_X,
+  frame,
   journeyMs,
   leaving,
-  position,
+  reached,
   stopsFor,
   travelMs,
+  type Frame,
 } from '../game/journey'
 import { DESTINATIONS, MISS_EMOJI, TIER_INFO } from '../game/scoring'
 import type { Prompt, RoundResult, Tier } from '../game/types'
 
 /*
- * Scene units. The viewport is 480 × VIEW_H and every layer is drawn in the same units, so the scene scales
- * with the card. The vehicle stays put at VX and the world scrolls under it, which only moves composited layers.
+ * Scene units. The viewport is VIEW_W × VIEW_H and every layer is drawn in the same units, so the scene scales
+ * with the card. The vehicle usually stays put at VX and the world scrolls under it, which only moves composited
+ * layers. Drawing x is the line's x (game/journey.ts) plus VX.
  */
+const VIEW_W = 480
 const VIEW_H = 240
-/** The vehicle's centre, across the viewport */
+/** The vehicle's centre, across the viewport, and its box (local units are viewport units) */
 const VX = 190
-/** Between two stations */
-const GAP = 340
-const NEAR_W = 2560
+const VEHICLE_W = 140
+/** The furthest station. The near layer runs a viewport past it, for the lighthouse */
+const LAST_X = STATION_X[STATION_X.length - 1]
+const NEAR_W = LAST_X + VIEW_W + 30
 /** The far layer moves at this share of the near one */
 const FAR = 0.35
-const FAR_W = 1240
-const LAND_END = VX + COAST * GAP
+const FAR_W = Math.ceil(VIEW_W + LAST_X * FAR + 30)
+/** The end of the line, the bumboat's mooring, and the shore just past the terminal */
+const TERMINAL = VX + TERMINAL_X
+const MOORING = VX + BOAT_X
+const LAND_END = TERMINAL + 80
 /** Ground level for buildings, the viaduct deck, and the sea */
 const GROUND = 200
 const DECK = 172
 const SEA = 192
-/** Above this speed (stations per ms), the speed lines are fully drawn */
-const STREAK_SPEED = 0.0025
+/** Above this speed (units per ms), the speed lines are fully drawn */
+const STREAK_SPEED = 0.85
 
-const stationX = (i: number) => VX + i * GAP
+const stationX = (i: number) => VX + STATION_X[i]
+const widthOf = (w: number) => ({ width: `${(w / VIEW_W) * 100}%` })
 
 type Stage = 'depart' | 'travel' | 'arrive'
 
@@ -53,9 +65,10 @@ export function Journey({ prompt, result, onDone }: Props) {
   const tier = result.tier
   const stops = tier ? stopsFor(tier) : 0
   const [stage, setStage] = useState<Stage>('depart')
-  // Stations reached so far, and whether the train has become a boat. Both change a handful of times a ride
+  // Stations reached so far, and whether you're on the train, changing, or on the bumboat. Both change a handful
+  // of times a ride
   const [passed, setPassed] = useState(0)
-  const [atSea, setAtSea] = useState(false)
+  const [mode, setMode] = useState<Frame['mode']>('train')
   const [pieces] = useState(() => confetti(tier))
   const uid = useId().replace(/[^\w-]/g, '')
 
@@ -86,44 +99,46 @@ export function Journey({ prompt, result, onDone }: Props) {
     const start = performance.now()
     mountedAt.current = start
     skipRef.current?.focus()
-    const travel = tier ? travelMs(stops) : LEAVE_MS
-    let frame = 0
-    let reached = 0
-    let sea = false
-    let last = { pos: 0, at: start }
+    const travel = tier ? travelMs(tier) : LEAVE_MS
+    let request = 0
+    let count = 0
+    let shown: Frame['mode'] = 'train'
+    let last = { x: 0, at: start }
 
-    // Continuous motion goes straight to the DOM; only station passes and the coast go through React
+    // Continuous motion goes straight to the DOM; only station passes and the change of vehicle go through React
     const paint = (now: number) => {
       const t = Math.min(now - start - DEPART_MS, travel)
       if (!tier) {
         if (vehicle.current) vehicle.current.style.transform = `translate3d(${leaving(t) * 260}%, 0, 0)`
         return t < travel
       }
-      const pos = position(t, stops)
-      const x = pos * GAP
+      const f = frame(tier, t)
+      const x = f.camera
       if (near.current) near.current.style.transform = `translate3d(${(-x / NEAR_W) * 100}%, 0, 0)`
       if (far.current) far.current.style.transform = `translate3d(${((-x * FAR) / FAR_W) * 100}%, 0, 0)`
-      const lateness = Math.min(pos / STOPS.length, 1)
+      // While the bumboat pulls away from the jetty, it's ahead of its usual place
+      if (vehicle.current) vehicle.current.style.transform = `translate3d(${((f.vehicle - x) / VEHICLE_W) * 100}%, 0, 0)`
+      const lateness = Math.min(x / LAST_X, 1)
       if (late.current) late.current.style.opacity = String(lateness)
       if (sun.current) sun.current.style.transform = `translate3d(0, ${lateness * 140}%, 0)`
-      const speed = now > last.at ? (pos - last.pos) / (now - last.at) : 0
+      const speed = now > last.at ? (x - last.x) / (now - last.at) : 0
       if (streaks.current) streaks.current.style.opacity = String(Math.min(Math.max(speed / STREAK_SPEED, 0), 1))
-      last = { pos, at: now }
-      const nowReached = Math.min(Math.floor(pos + 0.02), stops)
-      if (nowReached !== reached) {
-        reached = nowReached
-        setPassed(reached)
+      last = { x, at: now }
+      const nowReached = reached(tier, f.vehicle)
+      if (nowReached !== count) {
+        count = nowReached
+        setPassed(count)
       }
-      if (pos >= COAST !== sea) {
-        sea = pos >= COAST
-        setAtSea(sea)
+      if (f.mode !== shown) {
+        shown = f.mode
+        setMode(shown)
       }
       return t < travel
     }
     const loop = (now: number) => {
-      if (paint(now)) frame = requestAnimationFrame(loop)
+      if (paint(now)) request = requestAnimationFrame(loop)
     }
-    frame = requestAnimationFrame(loop)
+    request = requestAnimationFrame(loop)
 
     const timers = [
       window.setTimeout(() => setStage('travel'), DEPART_MS),
@@ -136,7 +151,7 @@ export function Journey({ prompt, result, onDone }: Props) {
       window.setTimeout(finish, journeyMs(tier)),
     ]
     return () => {
-      cancelAnimationFrame(frame)
+      cancelAnimationFrame(request)
       timers.forEach((id) => window.clearTimeout(id))
     }
     // Runs once per ride: the component is keyed by prompt
@@ -154,23 +169,27 @@ export function Journey({ prompt, result, onDone }: Props) {
       ? 'Doors closing…'
       : !tier
         ? 'Wait, wait!'
-        : passedTier
-          ? `Not stopping at ${TIER_INFO[passedTier].label}…`
-          : `Leaving ${DESTINATIONS[0].name}…`
+        : mode === 'change'
+          ? 'End of the line! Change to bumboat…'
+          : mode === 'boat' && lastPassed < FIRST_ISLAND
+            ? 'Bumboat to the islands…'
+            : passedTier
+              ? `Not stopping at ${TIER_INFO[passedTier].label}…`
+              : `Leaving ${DESTINATIONS[0].name}…`
 
   return (
     <section className={`journey journey--${stage} ${tier ? `tier--${tier}` : 'journey--miss'}`}>
       <p className="reveal__prompt">{prompt.text}</p>
 
-      <div className="journey__viewport" onClick={skip} aria-hidden="true">
+      <div className={`journey__viewport journey__viewport--${mode}`} onClick={skip} aria-hidden="true">
         <div className="journey__late" ref={late}>
           <Stars />
         </div>
         <div className="journey__sun" ref={sun} />
-        <div className="journey__layer journey__layer--far" ref={far}>
+        <div className="journey__layer" style={widthOf(FAR_W)} ref={far}>
           <FarScene />
         </div>
-        <div className="journey__layer journey__layer--near" ref={near}>
+        <div className="journey__layer" style={widthOf(NEAR_W)} ref={near}>
           <NearScene uid={uid} here={stops} />
         </div>
         <div className="journey__streaks" ref={streaks}>
@@ -179,13 +198,13 @@ export function Journey({ prompt, result, onDone }: Props) {
           ))}
         </div>
 
-        <div className={`journey__vehicle ${atSea ? 'journey__vehicle--sea' : ''}`} ref={vehicle}>
+        <div className={`journey__vehicle ${mode === 'boat' ? 'journey__vehicle--sea' : ''}`} ref={vehicle}>
           <svg viewBox="0 0 140 70" className="journey__vehicle-body">
             <Train />
-            <Boat />
+            <Boat passenger />
           </svg>
         </div>
-        {atSea && <Splash />}
+        {mode === 'change' && <Hop />}
 
         <div className="journey__hud">
           {result.answer && <span className="journey__ticket">{result.answer}</span>}
@@ -255,12 +274,7 @@ function Crowd({ lines, lonely = false }: { lines: string[]; lonely?: boolean })
         <span key={i} className="journey__person" style={{ '--i': i } as CSSProperties}>
           {/* At alternating heights, so neighbouring bubbles don't overlap */}
           {line && <span className={`journey__bubble ${i % 4 === 3 ? 'journey__bubble--high' : ''}`}>{line}</span>}
-          <svg viewBox="0 0 12 28">
-            <circle cx="6" cy="5" r="4" className={`j-skin-${i % 3}`} />
-            <rect x="1" y="10" width="10" height="13" rx="4" className={`j-shirt-${i % 4}`} />
-            <rect x="2.5" y="21" width="3" height="7" rx="1" className="j-legs" />
-            <rect x="6.5" y="21" width="3" height="7" rx="1" className="j-legs" />
-          </svg>
+          <Person skin={i % 3} shirt={lonely ? 'you' : i % 4} />
         </span>
       ))}
     </div>
@@ -312,12 +326,25 @@ function Sparkles() {
   )
 }
 
-function Splash() {
+/** A commuter, 12 × 28. You wear the brand red */
+function Person({ skin, shirt }: { skin: number; shirt: number | 'you' }) {
   return (
-    <div className="journey__splash">
-      {[-14, -9, -4, 1, 6, 11, 16].map((dx, i) => (
-        <i key={dx} style={{ '--dx': dx, '--dy': -(10 + ((i * 7) % 9)) } as CSSProperties} />
-      ))}
+    <svg viewBox="0 0 12 28">
+      <circle cx="6" cy="5" r="4" className={`j-skin-${skin}`} />
+      <rect x="1" y="10" width="10" height="13" rx="4" className={`j-shirt-${shirt}`} />
+      <rect x="2.5" y="21" width="3" height="7" rx="1" className="j-legs" />
+      <rect x="6.5" y="21" width="3" height="7" rx="1" className="j-legs" />
+    </svg>
+  )
+}
+
+/** At the terminal: you step out of the train's front door and hop down into the bumboat */
+function Hop() {
+  return (
+    <div className="journey__hop">
+      <span className="journey__hop-y">
+        <Person skin={0} shirt="you" />
+      </span>
     </div>
   )
 }
@@ -367,11 +394,17 @@ function Train() {
   )
 }
 
-/** A bumboat: wooden hull with an eye on the bow, and a canopy */
-function Boat() {
+/** A bumboat: wooden hull with an eye on the bow, and a canopy. Once you've boarded, you sit under the canopy */
+function Boat({ passenger = false }: { passenger?: boolean }) {
   return (
     <g className="journey__boat">
       <path className="j-wake" d="M2,60 q6,-4 12,0 q6,4 12,0" />
+      {passenger && (
+        <g>
+          <circle className="j-skin-0" cx="50" cy="41" r="3.4" />
+          <rect className="j-shirt-you" x="45.5" y="45" width="9" height="7" rx="3" />
+        </g>
+      )}
       <rect className="j-boat-post" x="30" y="32" width="2" height="20" />
       <rect className="j-boat-post" x="66" y="32" width="2" height="20" />
       <rect className="j-boat-post" x="100" y="32" width="2" height="20" />
@@ -398,7 +431,7 @@ function Station({ i, here }: { i: number; here: boolean }) {
       {atSea ? (
         <>
           <rect className="j-post" x={x - 2} y="130" width="4" height={SEA - 130 + 6} />
-          {i === 5 && (
+          {i === FIRST_ISLAND && (
             <g>
               <rect className="j-jetty" x={x - 60} y={SEA - 6} width="150" height="4" />
               {[-56, -20, 16, 52, 86].map((dx) => (
@@ -438,10 +471,29 @@ function Station({ i, here }: { i: number; here: boolean }) {
   )
 }
 
-/** The scenery the train rides past, from the CBD to the lighthouse. The same every time: it's seeded */
+/** The end of the MRT line, on the shore at Changi Point */
+function Terminal() {
+  const x = TERMINAL
+  return (
+    <g>
+      <rect className="j-canopy" x={x - 92} y="100" width="184" height="6" rx="2" />
+      <rect className="j-post" x={x - 86} y="106" width="3" height={DECK - 106} />
+      <rect className="j-post" x={x + 83} y="106" width="3" height={DECK - 106} />
+      <g className="journey__sign journey__sign--terminal">
+        <rect className="j-sign" x={x - 84} y="112" width="168" height="25" rx="4" />
+        <text className="j-sign-text" x={x} y="129.2" textAnchor="middle">
+          CHANGI POINT
+        </text>
+      </g>
+    </g>
+  )
+}
+
+/** The scenery the ride passes, from the CBD to the lighthouse. The same every time: it's seeded */
 const NearScene = memo(function NearScene({ uid, here }: { uid: string; here: number }) {
   const s = scene()
-  const lighthouseX = stationX(6) + 190
+  const ubinX = stationX(FIRST_ISLAND)
+  const lighthouseX = stationX(STOPS.length) + 190
   return (
     <svg viewBox={`0 0 ${NEAR_W} ${VIEW_H}`} preserveAspectRatio="xMinYMin meet">
       <defs>
@@ -530,29 +582,29 @@ const NearScene = memo(function NearScene({ uid, here }: { uid: string; here: nu
           <path
             key={y}
             className="j-wave"
-            d={`M${LAND_END + row * 9},${y} ${Array.from({ length: 44 }, () => 'q5,-3 10,0 t10,0').join(' ')}`}
+            d={`M${LAND_END + row * 9},${y} ${Array.from({ length: Math.ceil((NEAR_W - LAND_END) / 20) }, () => 'q5,-3 10,0 t10,0').join(' ')}`}
           />
         ))}
       </g>
 
       {/* Pulau Ubin */}
-      <path className="j-island" d={`M1800,${SEA + 1} C1830,170 1880,158 1960,164 C2010,168 2040,180 2064,${SEA + 1} Z`} />
-      {[
-        [1846, 166, 11],
-        [1872, 158, 14],
-        [1900, 160, 12],
-        [1924, 164, 9],
-        [2010, 170, 10],
-        [2030, 176, 8],
-      ].map(([cx, cy, r], i) => (
-        <circle key={cx} className={`j-leaf-${i % 2}`} cx={cx} cy={cy} r={r} />
-      ))}
-      <g>
-        {[1946, 1956, 1966, 1976].map((x) => (
+      <g transform={`translate(${ubinX} 0)`}>
+        <path className="j-island" d={`M-90,${SEA + 1} C-60,170 -10,158 70,164 C120,168 150,180 174,${SEA + 1} Z`} />
+        {[
+          [-44, 166, 11],
+          [-18, 158, 14],
+          [10, 160, 12],
+          [34, 164, 9],
+          [120, 170, 10],
+          [140, 176, 8],
+        ].map(([cx, cy, r], i) => (
+          <circle key={cx} className={`j-leaf-${i % 2}`} cx={cx} cy={cy} r={r} />
+        ))}
+        {[56, 66, 76, 86].map((x) => (
           <rect key={x} className="j-trunk" x={x} y={170} width="2" height={SEA - 166} />
         ))}
-        <rect className="j-kampung" x={1942} y={156} width="38" height="14" />
-        <polygon className="j-attap" points={`1937,156 1961,142 1985,156`} />
+        <rect className="j-kampung" x={52} y={156} width="38" height="14" />
+        <polygon className="j-attap" points="47,156 71,142 95,156" />
       </g>
 
       {/* Pedra Branca and its lighthouse */}
@@ -577,17 +629,31 @@ const NearScene = memo(function NearScene({ uid, here }: { uid: string; here: nu
         r="30"
       />
 
-      {/* The viaduct, which stops at the shore */}
+      {/* The jetty at Changi Point, where the bumboat waits */}
+      <rect className="j-jetty" x={LAND_END - 20} y={SEA - 6} width={MOORING + 84 - (LAND_END - 20)} height="4" />
+      {Array.from({ length: Math.floor((MOORING + 84 - LAND_END) / 34) + 1 }, (_, i) => (
+        <rect key={i} className="j-jetty" x={LAND_END - 12 + i * 34} y={SEA - 6} width="3" height="16" />
+      ))}
+      <g className="journey__moored" transform={`translate(${MOORING - VEHICLE_W / 2} 132)`}>
+        <Boat />
+      </g>
+
+      {/* The viaduct, which ends at the terminal by the shore */}
       {s.pillars.map((x) => (
         <rect key={x} className="j-pillar" x={x} y={DECK + 8} width="9" height={GROUND - DECK - 8} />
       ))}
-      <rect className="j-deck" x="-10" y={DECK} width={LAND_END + 30} height="8" />
-      <rect className="j-rail" x="-10" y={DECK - 1.5} width={LAND_END + 30} height="1.5" />
-      <rect className="j-buffer" x={LAND_END + 16} y={DECK - 8} width="5" height="8" />
+      <rect className="j-deck" x="-10" y={DECK} width={TERMINAL + 86} height="8" />
+      <rect className="j-rail" x="-10" y={DECK - 1.5} width={TERMINAL + 86} height="1.5" />
+      <rect className="j-buffer" x={TERMINAL + 70} y={DECK - 9} width="6" height="9" />
 
       {Array.from({ length: STOPS.length + 1 }, (_, i) => (
         <Station key={i} i={i} here={i === here} />
       ))}
+      <Terminal />
+      {/* Left at the terminal once you've changed to the bumboat */}
+      <g className="journey__parked" transform={`translate(${TERMINAL - VEHICLE_W / 2} 132)`}>
+        <Train />
+      </g>
     </svg>
   )
 })
@@ -595,7 +661,7 @@ const NearScene = memo(function NearScene({ uid, here }: { uid: string; here: nu
 /** Distant skyline, hills and islands, which drift by slower */
 const FarScene = memo(function FarScene() {
   const s = scene()
-  const coast = VX + COAST * GAP * FAR
+  const coast = VX + (LAND_END - VX) * FAR
   return (
     <svg viewBox={`0 0 ${FAR_W} ${VIEW_H}`} preserveAspectRatio="xMinYMin meet">
       {s.clouds.map((c, i) => (

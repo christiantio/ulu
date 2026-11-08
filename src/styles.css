@@ -874,6 +874,7 @@ h3 {
   --j-canopy: #4b4743;
   --j-post: #6d6964;
   --j-jetty: #8a6440;
+  --j-terminal: #4f5d6b;
   --j-sign-ink: #ffffff;
   --j-train: #f3f5f7;
   --j-glass: #2a3440;
@@ -946,6 +947,7 @@ h3 {
     --j-canopy: #262321;
     --j-post: #4f4b47;
     --j-jetty: #5c432b;
+    --j-terminal: #a7b3bf;
     --j-sign-ink: #141110;
     --j-train: #c9ced3;
     --j-glass: #ffe2a0;
@@ -1005,12 +1007,6 @@ h3 {
   width: 100%;
   height: 100%;
   overflow: visible;
-}
-.journey__layer--far {
-  width: calc(1240 / 480 * 100%);
-}
-.journey__layer--near {
-  width: calc(2560 / 480 * 100%);
 }
 
 /* Scenery fills */
@@ -1084,6 +1080,9 @@ h3 {
 .journey__sign--start {
   --tier: var(--brand);
 }
+.journey__sign--terminal {
+  --tier: var(--j-terminal);
+}
 .j-sign-badge {
   fill: var(--j-sign-ink);
 }
@@ -1101,7 +1100,9 @@ h3 {
   transform-origin: center;
 }
 
-/* The vehicle stays put while the world scrolls; at the shore the train becomes a bumboat */
+/* The vehicle stays put while the world scrolls. At the terminal, the moving train hands over to one parked in
+   the scene, and you hop into the bumboat moored at the jetty; then the moving bumboat takes over from it. The
+   parked and moored ones sit exactly where the moving ones are drawn at that moment, so each swap is seamless */
 .journey__vehicle {
   position: absolute;
   left: calc(120 / 480 * 100%);
@@ -1129,27 +1130,51 @@ h3 {
 .journey__train,
 .journey__boat {
   transform-box: fill-box;
-  transition: opacity 0.12s ease, transform 0.2s ease;
-}
-.journey__boat {
-  opacity: 0;
-  transform: scale(0.6);
   transform-origin: 50% 100%;
 }
-.journey__vehicle--sea .journey__train {
-  opacity: 0;
-}
-.journey__vehicle--sea .journey__boat {
-  opacity: 1;
-  transform: none;
+/* Both boats bob from the moment the ride starts, so they're in step when one takes over from the other */
+.journey__boat {
   animation: j-bob 1.4s ease-in-out infinite alternate;
 }
-.journey--depart .journey__door-light {
+.journey__vehicle .journey__boat,
+.journey__vehicle--sea .journey__train,
+.journey__viewport--change .journey__vehicle,
+.journey__parked,
+.journey__viewport--boat .journey__moored {
+  visibility: hidden;
+}
+.journey__vehicle--sea .journey__boat,
+.journey__viewport--change .journey__parked,
+.journey__viewport--boat .journey__parked {
+  visibility: visible;
+}
+.journey--depart .journey__vehicle .journey__door-light,
+.journey__viewport--change .journey__parked .journey__door-light {
   animation: j-blink 0.24s steps(2, jump-none) infinite;
 }
-.journey--travel .journey__train {
-  transform-origin: 50% 100%;
+.journey--travel .journey__viewport--train .journey__vehicle .journey__train {
   animation: j-rumble 0.16s steps(2, jump-none) infinite;
+}
+
+/* You, stepping out of the front door (x 235, the train's floor at 172) into the bumboat (x 340, its deck at
+   186), where you sit down under the canopy */
+.journey__hop {
+  position: absolute;
+  left: calc((235 - 6) / 480 * 100%);
+  top: calc((172 - 28) / 240 * 100%);
+  width: calc(12 / 480 * 100%);
+  height: calc(28 / 240 * 100%);
+  animation: j-hop-x 0.42s linear 0.12s both;
+}
+.journey__hop-y {
+  display: block;
+  width: 100%;
+  height: 100%;
+  transform-origin: 50% 100%;
+  animation: j-hop-y 0.54s 0.12s both;
+}
+.j-shirt-you {
+  fill: var(--brand);
 }
 .journey--arrive .journey__vehicle-body {
   transform-origin: 50% 100%;
@@ -1174,19 +1199,6 @@ h3 {
   animation-delay: var(--d);
 }
 
-.journey__splash {
-  position: absolute;
-  left: calc(250 / 480 * 100%);
-  top: calc(186 / 240 * 100%);
-}
-.journey__splash i {
-  position: absolute;
-  width: 1.4cqw;
-  height: 1.4cqw;
-  border-radius: 50%;
-  background: var(--j-wave);
-  animation: j-drop 0.6s ease-out both;
-}
 
 /* Heads-up: the answer on a ticket, and the points of the last station passed */
 .journey__hud {
@@ -1480,18 +1492,31 @@ h3 {
     transform: translateX(-30cqw);
   }
 }
-@keyframes j-drop {
+@keyframes j-hop-x {
+  to {
+    transform: translateX(calc(105 / 480 * 100cqw));
+  }
+}
+@keyframes j-hop-y {
   0% {
-    transform: translate(0, 0) scale(0.6);
+    transform: translateY(0);
+    opacity: 0;
+    animation-timing-function: cubic-bezier(0.3, 0.6, 0.6, 1);
+  }
+  8% {
     opacity: 1;
   }
-  45% {
-    transform: translate(calc(var(--dx) * 0.6cqw), calc(var(--dy) * 1cqw)) scale(1);
-    opacity: 1;
+  40% {
+    transform: translateY(-6cqw);
+    animation-timing-function: cubic-bezier(0.4, 0, 0.8, 0.5);
+  }
+  78% {
+    transform: translateY(calc(14 / 480 * 100cqw));
+    animation-timing-function: ease-out;
   }
   100% {
-    transform: translate(calc(var(--dx) * 1cqw), 4cqw) scale(0.4);
-    opacity: 0;
+    transform: translateY(calc(14 / 480 * 100cqw)) scaleY(0.55);
+    opacity: 1;
   }
 }
 @keyframes j-ticket {
