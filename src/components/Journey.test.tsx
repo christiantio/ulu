@@ -3,7 +3,17 @@ import { act, cleanup, fireEvent, render, screen } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest'
 import { ALL_PROMPTS } from '../content/bank'
-import { ARRIVAL_LINES, DEPART_MS, FIRST_LEG_MS, PASS_LEG_MS, SKIP_GRACE_MS, journeyMs, travelMs } from '../game/journey'
+import {
+  ARRIVAL_LINES,
+  CHANGE_MS,
+  DEPART_MS,
+  FIRST_LEG_MS,
+  PASS_LEG_MS,
+  SKIP_GRACE_MS,
+  journeyMs,
+  schedule,
+  travelMs,
+} from '../game/journey'
 import { TIER_INFO } from '../game/scoring'
 import { TIERS, type RoundResult, type Tier } from '../game/types'
 import { Journey } from './Journey'
@@ -25,6 +35,16 @@ function renderJourney(result: RoundResult) {
 }
 
 const advance = (ms: number) => act(() => vi.advanceTimersByTime(ms))
+/** Advances the clock to `ms` after the ride started */
+function clock() {
+  let now = 0
+  return (ms: number) => {
+    advance(ms - now)
+    now = ms
+  }
+}
+const meter = () => document.querySelector('.journey__meter')!.textContent
+const onBoat = () => document.querySelector('.journey__vehicle--sea') !== null
 const caption = () => document.querySelector('.journey__caption')!.textContent
 const skipButton = () => screen.getByRole('button', { name: 'Skip to the result' })
 
@@ -60,44 +80,63 @@ describe('Journey', () => {
     expect(document.activeElement).toBe(skipButton())
   })
 
-  it('passes every station below the answer, then stops at its own and stamps it', () => {
+  it('passes every station below the answer, changes to the bumboat at the end of the line, and stamps its stop', () => {
     const gem = hit('gem')
-    renderJourney(gem)
+    const { train } = schedule('gem')
+    const { scene } = renderJourney(gem)
+    const at = clock()
     expect(caption()).toBe('Doors closing…')
     expect(document.querySelector('.journey__ticket')!.textContent).toBe(gem.answer)
-    expect(document.querySelector('.journey__meter')!.textContent).toBe('+0')
+    expect(meter()).toBe('+0')
 
-    advance(DEPART_MS + FIRST_LEG_MS + 20)
+    at(DEPART_MS + FIRST_LEG_MS + 20)
     expect(caption()).toBe(`Not stopping at ${TIER_INFO.common.label}…`)
-    expect(document.querySelector('.journey__meter')!.textContent).toBe(`+${TIER_INFO.common.points}`)
-    advance(3 * PASS_LEG_MS)
+    expect(meter()).toBe(`+${TIER_INFO.common.points}`)
+    at(DEPART_MS + FIRST_LEG_MS + 3 * PASS_LEG_MS + 20)
     expect(caption()).toBe(`Not stopping at ${TIER_INFO.rare.label}…`)
-    expect(document.querySelector('.journey__meter')!.textContent).toBe(`+${TIER_INFO.rare.points}`)
+    expect(meter()).toBe(`+${TIER_INFO.rare.points}`)
+    expect(onBoat()).toBe(false)
+
+    // The train stops at the end of the line, which isn't a station, and you hop across to the bumboat
+    at(DEPART_MS + train + 20)
+    expect(caption()).toBe('End of the line! Change to bumboat…')
+    expect(scene.classList.contains('journey__viewport--change')).toBe(true)
+    expect(document.querySelector('.journey__hop')).not.toBeNull()
+    expect(meter()).toBe(`+${TIER_INFO.rare.points}`)
     expect(document.querySelector('.journey__stamp')).toBeNull()
-    // Past the shore, it's a bumboat
-    advance(PASS_LEG_MS)
-    expect(document.querySelector('.journey__vehicle--sea')).not.toBeNull()
+    at(DEPART_MS + train + CHANGE_MS + 20)
+    expect(caption()).toBe('Bumboat to the islands…')
+    expect(onBoat()).toBe(true)
+    expect(document.querySelector('.journey__hop')).toBeNull()
 
     // Braking into its own station: the meter has it, but the caption doesn't call it passed
-    advance(DEPART_MS + travelMs(6) - (DEPART_MS + FIRST_LEG_MS + 20 + 4 * PASS_LEG_MS) - 20)
-    expect(document.querySelector('.journey__meter')!.textContent).toBe('+100')
+    at(DEPART_MS + travelMs('gem') - 20)
+    expect(meter()).toBe('+100')
     expect(caption()).toBe(`Not stopping at ${TIER_INFO.ulu.label}…`)
-    advance(20)
+    at(DEPART_MS + travelMs('gem'))
     expect(caption()).toBe(ARRIVAL_LINES.gem)
     expect(document.querySelector('.journey__stamp')!.textContent).toBe(`${TIER_INFO.gem.emoji} ${TIER_INFO.gem.label}+100`)
-    expect(document.querySelector('.journey__meter')!.textContent).toBe('+100')
+    expect(meter()).toBe('+100')
+  })
+
+  it('stays on the train for a station on land', () => {
+    renderJourney(hit('rare'))
+    advance(DEPART_MS + travelMs('rare'))
+    expect(caption()).toBe(ARRIVAL_LINES.rare)
+    expect(onBoat()).toBe(false)
+    expect(document.querySelector('.journey__viewport--train')).not.toBeNull()
   })
 
   it('stops at the first station for a common answer, with the crowd who said it too', () => {
     renderJourney(hit('common'))
-    advance(DEPART_MS + travelMs(1) - 20)
-    expect(document.querySelector('.journey__meter')!.textContent).toBe('+10')
+    advance(DEPART_MS + travelMs('common') - 20)
+    expect(meter()).toBe('+10')
     expect(caption()).toBe('Leaving Raffles Place…')
     advance(20)
     expect(caption()).toBe(ARRIVAL_LINES.common)
     expect(document.querySelector('.journey__stamp')!.textContent).toContain(TIER_INFO.common.label)
     expect(document.querySelectorAll('.journey__person').length).toBeGreaterThan(1)
-    expect(document.querySelector('.journey__vehicle--sea')).toBeNull()
+    expect(onBoat()).toBe(false)
   })
 
   it('leaves without you on a miss', () => {
