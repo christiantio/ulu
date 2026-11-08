@@ -75,7 +75,7 @@ stay out of the entry chunk:
 
 | What | Where it comes from | When it loads |
 |---|---|---|
-| The app (entry chunk) | `dist/assets/index-<hash>.js` | First load. About 277 kB, 88 kB gzipped |
+| The app (entry chunk) | `dist/assets/index-<hash>.js` | First load. About 273 kB, 85 kB gzipped |
 | Today's prompts | `dist/dives/<date>.json`, the day's 7 full prompts in schedule order | First load, and again when the date rolls over. About 23–35 kB, 6–7 kB gzipped |
 | The bank (every pack plus `schedule.json`) | `dist/assets/bank-<hash>.js`, from `import('./bank')` | Only when Unlimited starts, when a date has no dive file, or when saved progress names prompts the day's file doesn't have. About 230 kB, 49 kB gzipped |
 
