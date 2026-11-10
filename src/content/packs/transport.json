@@ -758,6 +758,11 @@
       "category": "transport",
       "text": "Name a station on the Circle Line",
       "note": "Includes the three stations that opened in July 2026 (Keppel, Cantonment, Prince Edward Road) and the unopened Bukit Brown station.",
+      "sources": [
+        "https://www.lta.gov.sg/content/dam/ltagov/getting_around/public_transport/rail_network/pdf/SM_EN_(Ver210726)_CCL6.pdf",
+        "https://www.lta.gov.sg/content/ltagov/en/upcoming_projects/rail_expansion/circle_line_6.html"
+      ],
+      "reviewBy": "2027-05-10",
       "answers": [
         {
           "name": "Dhoby Ghaut",
@@ -1047,6 +1052,15 @@
           ]
         },
         {
+          "name": "Lorong Chuan",
+          "tier": "ulu",
+          "aliases": [
+            "Lorong Chuan MRT",
+            "Lorong Chuan MRT Station",
+            "Lorong Chuan Station"
+          ]
+        },
+        {
           "name": "Bukit Brown",
           "tier": "ulu",
           "aliases": [
@@ -1070,7 +1084,13 @@
       "id": "transport-dtl-stations",
       "category": "transport",
       "text": "Name a station on the Downtown Line",
-      "note": "The blue line, Bukit Panjang to Expo, plus the extension to Xilin and Sungei Bedok (built, due to open in late 2026).",
+      "note": "The blue line, Bukit Panjang to Expo, plus the extension to Xilin and Sungei Bedok (opening on 26 December 2026).",
+      "sources": [
+        "https://www.lta.gov.sg/content/dam/ltagov/getting_around/public_transport/rail_network/pdf/SM_EN_(Ver210726)_CCL6.pdf",
+        "https://www.lta.gov.sg/content/ltagov/en/getting_around/public_transport/rail_network/downtown_line.html",
+        "https://www.lta.gov.sg/content/ltagov/en/newsroom/2026/11/news-releases/tel5-dtl3e-passenger-service-26-dec-2026.html"
+      ],
+      "reviewBy": "2026-12-26",
       "answers": [
         {
           "name": "Bugis",
@@ -1411,7 +1431,13 @@
       "id": "transport-tel-stations",
       "category": "transport",
       "text": "Name a station on the Thomson-East Coast Line",
-      "note": "The brown line. Built-but-unopened stations count (Mount Pleasant, Marina South, Bedok South, Sungei Bedok); Founders' Memorial, still under construction, doesn't.",
+      "note": "The brown line. Built-but-unopened stations count (Mount Pleasant, Marina South, Bedok South, Sungei Bedok); Founders' Memorial, which opens with the memorial itself, doesn't.",
+      "sources": [
+        "https://www.lta.gov.sg/content/ltagov/en/upcoming_projects/rail_expansion/thomson_east_coast_line.html",
+        "https://www.lta.gov.sg/content/dam/ltagov/getting_around/public_transport/rail_network/pdf/SM_EN_(Ver210726)_CCL6.pdf",
+        "https://www.lta.gov.sg/content/ltagov/en/newsroom/2026/11/news-releases/tel5-dtl3e-passenger-service-26-dec-2026.html"
+      ],
+      "reviewBy": "2026-12-26",
       "answers": [
         {
           "name": "Orchard",
@@ -1698,7 +1724,12 @@
       "id": "transport-interchange-stations",
       "category": "transport",
       "text": "Name an MRT interchange station",
-      "note": "Any station where you can change lines, including MRT-LRT links (e.g. Sengkang), the Changi Airport branch (Tanah Merah, Expo) and Sungei Bedok (DTL/TEL, due to open in late 2026).",
+      "note": "Any station where you can change lines, including MRT-LRT links (e.g. Sengkang), the Changi Airport branch (Tanah Merah, Expo) and Sungei Bedok (DTL/TEL, opening on 26 December 2026).",
+      "sources": [
+        "https://www.lta.gov.sg/content/dam/ltagov/getting_around/public_transport/rail_network/pdf/SM_EN_(Ver210726)_CCL6.pdf",
+        "https://www.lta.gov.sg/content/ltagov/en/newsroom/2026/11/news-releases/tel5-dtl3e-passenger-service-26-dec-2026.html"
+      ],
+      "reviewBy": "2026-12-26",
       "answers": [
         {
           "name": "Dhoby Ghaut",
@@ -2411,7 +2442,13 @@
       "id": "transport-bus-interchanges",
       "category": "transport",
       "text": "Name a bus interchange or bus terminal",
-      "note": "Any public bus interchange or terminal operating as of October 2026.",
+      "note": "Any public bus interchange or terminal operating as of 10 November 2026.",
+      "sources": [
+        "https://www.sbstransit.com.sg/interchanges-terminals-and-stations",
+        "https://www.lta.gov.sg/content/ltagov/en/upcoming_projects/road_commuter_facilities/integrated_transport_hub.html",
+        "https://travelguide.simplygo.com.sg/"
+      ],
+      "reviewBy": "2026-11-22",
       "answers": [
         {
           "name": "Toa Payoh",
@@ -2429,7 +2466,9 @@
             "TPY Bus Terminal",
             "TPY Terminal",
             "TPY Bus Int",
-            "TPY Int"
+            "TPY Int",
+            "Toa Payoh Integrated Transport Hub",
+            "Toa Payoh ITH"
           ]
         },
         {
@@ -2448,7 +2487,9 @@
             "AMK Bus Terminal",
             "AMK Terminal",
             "AMK Bus Int",
-            "AMK Int"
+            "AMK Int",
+            "Ang Mo Kio Integrated Transport Hub",
+            "Ang Mo Kio ITH"
           ]
         },
         {
@@ -2460,7 +2501,9 @@
             "Bedok Bus Terminal",
             "Bedok Terminal",
             "Bedok Bus Int",
-            "Bedok Int"
+            "Bedok Int",
+            "Bedok Integrated Transport Hub",
+            "Bedok ITH"
           ]
         },
         {
@@ -2496,7 +2539,9 @@
             "Jurong East Bus Terminal",
             "Jurong East Terminal",
             "Jurong East Bus Int",
-            "Jurong East Int"
+            "Jurong East Int",
+            "Jurong East Interim Bus Interchange",
+            "Jurong East Interim"
           ]
         },
         {
@@ -2508,7 +2553,9 @@
             "Boon Lay Bus Terminal",
             "Boon Lay Terminal",
             "Boon Lay Bus Int",
-            "Boon Lay Int"
+            "Boon Lay Int",
+            "Boon Lay Integrated Transport Hub",
+            "Boon Lay ITH"
           ]
         },
         {
@@ -2520,7 +2567,9 @@
             "Clementi Bus Terminal",
             "Clementi Terminal",
             "Clementi Bus Int",
-            "Clementi Int"
+            "Clementi Int",
+            "Clementi Integrated Transport Hub",
+            "Clementi ITH"
           ]
         },
         {
@@ -2539,7 +2588,9 @@
             "Woodlands Temporary Bus Terminal",
             "Woodlands Temporary Terminal",
             "Woodlands Temporary Bus Int",
-            "Woodlands Temporary Int"
+            "Woodlands Temporary Int",
+            "Woodlands Integrated Transport Hub",
+            "Woodlands ITH"
           ]
         },
         {
@@ -2551,7 +2602,9 @@
             "Yishun Bus Terminal",
             "Yishun Terminal",
             "Yishun Bus Int",
-            "Yishun Int"
+            "Yishun Int",
+            "Yishun Integrated Transport Hub",
+            "Yishun ITH"
           ]
         },
         {
@@ -2575,7 +2628,9 @@
             "Serangoon Bus Terminal",
             "Serangoon Terminal",
             "Serangoon Bus Int",
-            "Serangoon Int"
+            "Serangoon Int",
+            "Serangoon Integrated Transport Hub",
+            "Serangoon ITH"
           ]
         },
         {
@@ -2587,7 +2642,9 @@
             "Pasir Ris Bus Terminal",
             "Pasir Ris Terminal",
             "Pasir Ris Bus Int",
-            "Pasir Ris Int"
+            "Pasir Ris Int",
+            "Pasir Ris Integrated Transport Hub",
+            "Pasir Ris ITH"
           ]
         },
         {
@@ -2599,7 +2656,9 @@
             "Sengkang Bus Terminal",
             "Sengkang Terminal",
             "Sengkang Bus Int",
-            "Sengkang Int"
+            "Sengkang Int",
+            "Sengkang Integrated Transport Hub",
+            "Sengkang ITH"
           ]
         },
         {
@@ -2654,7 +2713,9 @@
             "Bukit Panjang Bus Terminal",
             "Bukit Panjang Terminal",
             "Bukit Panjang Bus Int",
-            "Bukit Panjang Int"
+            "Bukit Panjang Int",
+            "Bukit Panjang Integrated Transport Hub",
+            "Bukit Panjang ITH"
           ]
         },
         {
@@ -2733,7 +2794,9 @@
             "Joo Koon Bus Terminal",
             "Joo Koon Terminal",
             "Joo Koon Bus Int",
-            "Joo Koon Int"
+            "Joo Koon Int",
+            "Joo Koon Integrated Transport Hub",
+            "Joo Koon ITH"
           ]
         },
         {
@@ -2776,7 +2839,9 @@
             "Buangkok Bus Terminal",
             "Buangkok Terminal",
             "Buangkok Bus Int",
-            "Buangkok Int"
+            "Buangkok Int",
+            "Buangkok Integrated Transport Hub",
+            "Buangkok ITH"
           ]
         },
         {
@@ -2788,7 +2853,9 @@
             "Woodleigh Bus Terminal",
             "Woodleigh Terminal",
             "Woodleigh Bus Int",
-            "Woodleigh Int"
+            "Woodleigh Int",
+            "Woodleigh Integrated Transport Hub",
+            "Woodleigh ITH"
           ]
         },
         {
@@ -2800,7 +2867,9 @@
             "Punggol Coast Bus Terminal",
             "Punggol Coast Terminal",
             "Punggol Coast Bus Int",
-            "Punggol Coast Int"
+            "Punggol Coast Int",
+            "Punggol Coast Integrated Transport Hub",
+            "Punggol Coast ITH"
           ]
         },
         {
@@ -2848,7 +2917,11 @@
             "Changi Airport Bus Terminal",
             "Changi Airport Terminal",
             "Changi Airport Bus Int",
-            "Changi Airport Int"
+            "Changi Airport Int",
+            "Changi Airport Terminal 2",
+            "Changi Airport Ter 2",
+            "Changi Airport T2",
+            "Changi Airport PTB2"
           ]
         },
         {
@@ -3050,6 +3123,18 @@
             "Rumah Tinggi Terminal",
             "Rumah Tinggi Bus Int",
             "Rumah Tinggi Int"
+          ]
+        },
+        {
+          "name": "Ghim Moh",
+          "tier": "ulu",
+          "aliases": [
+            "Ghim Moh Bus Interchange",
+            "Ghim Moh Interchange",
+            "Ghim Moh Bus Terminal",
+            "Ghim Moh Terminal",
+            "Ghim Moh Bus Int",
+            "Ghim Moh Int"
           ]
         },
         {
