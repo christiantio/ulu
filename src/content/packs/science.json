@@ -1,0 +1,313 @@
+{
+  "name": "Science",
+  "asOf": "2026-11-10",
+  "prompts": [
+    {
+      "id": "science-first-20-elements",
+      "category": "science",
+      "text": "Name one of the first 20 elements of the periodic table",
+      "note": "Hydrogen (1) to calcium (20). Symbols count too.",
+      "answers": [
+        {
+          "name": "Hydrogen",
+          "aliases": [
+            "H"
+          ],
+          "tier": "common"
+        },
+        {
+          "name": "Helium",
+          "aliases": [
+            "He"
+          ],
+          "tier": "common"
+        },
+        {
+          "name": "Oxygen",
+          "aliases": [
+            "O"
+          ],
+          "tier": "common"
+        },
+        {
+          "name": "Carbon",
+          "aliases": [
+            "C"
+          ],
+          "tier": "common"
+        },
+        {
+          "name": "Calcium",
+          "aliases": [
+            "Ca"
+          ],
+          "tier": "trap"
+        },
+        {
+          "name": "Nitrogen",
+          "aliases": [
+            "N"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "Sodium",
+          "aliases": [
+            "Na",
+            "Natrium"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "Lithium",
+          "aliases": [
+            "Li"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "Neon",
+          "aliases": [
+            "Ne"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "Chlorine",
+          "aliases": [
+            "Cl"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "Magnesium",
+          "aliases": [
+            "Mg"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "Potassium",
+          "aliases": [
+            "K",
+            "Kalium"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "Aluminium",
+          "aliases": [
+            "Al",
+            "Aluminum"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "Fluorine",
+          "aliases": [
+            "F"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "Sulfur",
+          "aliases": [
+            "S",
+            "Sulphur"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "Phosphorus",
+          "aliases": [
+            "P",
+            "Phosphorous"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "Silicon",
+          "aliases": [
+            "Si"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "Argon",
+          "aliases": [
+            "Ar"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "Boron",
+          "aliases": [
+            "B"
+          ],
+          "tier": "ulu"
+        },
+        {
+          "name": "Beryllium",
+          "aliases": [
+            "Be"
+          ],
+          "tier": "gem"
+        }
+      ],
+      "decoys": [
+        {
+          "name": "Scandium",
+          "aliases": [
+            "Sc"
+          ],
+          "why": "So close! It's number 21."
+        },
+        {
+          "name": "Titanium",
+          "aliases": [
+            "Ti"
+          ],
+          "why": "Number 22. Just past the cut."
+        },
+        {
+          "name": "Iron",
+          "aliases": [
+            "Fe"
+          ],
+          "why": "Number 26."
+        },
+        {
+          "name": "Copper",
+          "aliases": [
+            "Cu"
+          ],
+          "why": "Number 29."
+        },
+        {
+          "name": "Zinc",
+          "aliases": [
+            "Zn"
+          ],
+          "why": "Number 30."
+        },
+        {
+          "name": "Silver",
+          "aliases": [
+            "Ag"
+          ],
+          "why": "Number 47."
+        },
+        {
+          "name": "Gold",
+          "aliases": [
+            "Au"
+          ],
+          "why": "Number 79, way down the table."
+        }
+      ]
+    },
+    {
+      "id": "science-planets-and-dwarf-planets",
+      "category": "science",
+      "text": "Name a planet or dwarf planet in our solar system",
+      "note": "The 8 planets, plus the 5 dwarf planets the International Astronomical Union recognises.",
+      "answers": [
+        {
+          "name": "Earth",
+          "tier": "common"
+        },
+        {
+          "name": "Mars",
+          "tier": "common"
+        },
+        {
+          "name": "Jupiter",
+          "tier": "common"
+        },
+        {
+          "name": "Saturn",
+          "tier": "common"
+        },
+        {
+          "name": "Pluto",
+          "tier": "trap"
+        },
+        {
+          "name": "Venus",
+          "tier": "solid"
+        },
+        {
+          "name": "Mercury",
+          "tier": "solid"
+        },
+        {
+          "name": "Neptune",
+          "tier": "solid"
+        },
+        {
+          "name": "Uranus",
+          "tier": "solid"
+        },
+        {
+          "name": "Eris",
+          "tier": "rare"
+        },
+        {
+          "name": "Haumea",
+          "tier": "ulu"
+        },
+        {
+          "name": "Makemake",
+          "tier": "ulu"
+        },
+        {
+          "name": "Ceres",
+          "tier": "gem"
+        }
+      ],
+      "decoys": [
+        {
+          "name": "Sun",
+          "aliases": [
+            "Sol"
+          ],
+          "why": "That's a star."
+        },
+        {
+          "name": "Moon",
+          "aliases": [
+            "Luna"
+          ],
+          "why": "A moon, not a planet. It's in the name."
+        },
+        {
+          "name": "Titan",
+          "why": "Saturn's biggest moon."
+        },
+        {
+          "name": "Europa",
+          "why": "A moon of Jupiter."
+        },
+        {
+          "name": "Ganymede",
+          "why": "A moon of Jupiter, though it's bigger than Mercury!"
+        },
+        {
+          "name": "Charon",
+          "why": "Pluto's moon."
+        },
+        {
+          "name": "Sedna",
+          "why": "Probably a dwarf planet, but not officially recognised."
+        },
+        {
+          "name": "Planet Nine",
+          "aliases": [
+            "Planet X"
+          ],
+          "why": "Still only a theory. Nobody has found it."
+        }
+      ]
+    }
+  ]
+}

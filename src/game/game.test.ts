@@ -1,12 +1,19 @@
 import { describe, expect, it } from 'vitest'
 import { addDays, dailyPrompts, diveNumber, mulberry32, msUntilNextDive, randomPrompts, singaporeDateKey } from './daily'
-import { extendSchedule, promptsForDate, unlimitedPrompts, validateSchedule } from './schedule'
-import { editDistance, matchAnswer } from './match'
-import { normalize } from './normalize'
+import {
+  WORLD_ROUNDS_PER_DIVE,
+  extendSchedule,
+  promptsForDate,
+  unlimitedPrompts,
+  validateSchedule,
+  worldRoundsFor,
+} from './schedule'
+import { checkAnswer, editDistance, matchAnswer, matchProblems } from './match'
+import { looseWords, normalize } from './normalize'
 import { MAX_SCORE, destinationFor } from './scoring'
 import { shareText } from './share'
 import { displayStreak, type Stats } from './storage'
-import { CATEGORIES, type Prompt, type Tier } from './types'
+import { CATEGORIES, SG_CATEGORIES, scopeOf, type Prompt, type Tier } from './types'
 import { validatePacks } from './validate'
 
 function makePrompt(id: string, answers: [string, Tier, string[]?][], category: Prompt['category'] = 'places'): Prompt {
@@ -71,10 +78,193 @@ describe('matchAnswer', () => {
     expect(matchAnswer('   ', towns)).toBeNull()
   })
 
-  it('computes bounded edit distance', () => {
+  it('computes bounded edit distance, counting a swap of neighbours as one typo', () => {
     expect(editDistance('kitten', 'sitting', 5)).toBe(3)
     expect(editDistance('abc', 'abc', 0)).toBe(0)
     expect(editDistance('abcdef', 'a', 2)).toBe(3)
+    expect(editDistance('payho', 'payoh', 2)).toBe(1)
+    expect(editDistance('einstien', 'einstein', 2)).toBe(1)
+    // Each character is only moved once: this is two swaps' worth of edits, not one
+    expect(editDistance('ca', 'abc', 3)).toBe(3)
+  })
+
+  it('forgives swapped letters', () => {
+    expect(matchAnswer('Toa Payho', towns)).toMatchObject({ answer: { name: 'Toa Payoh' }, corrected: true })
+    expect(matchAnswer('Bisahn', towns)?.answer.name).toBe('Bishan')
+  })
+})
+
+describe('loose matching', () => {
+  const stations = {
+    ...makePrompt('stations', [
+      ['Bishan', 'common'],
+      ['Bukit Panjang', 'solid'],
+      ['Mount Faber', 'rare'],
+      ['Sixth Avenue', 'rare'],
+      ['Tanjong Pagar', 'solid'],
+      ['Terminal 2', 'ulu'],
+      ['Saint James', 'gem'],
+    ]),
+    filler: ['MRT', 'station', 'stn'],
+  }
+
+  it('reduces an answer to its meaningful words', () => {
+    expect(looseWords('The Lord of the Rings')).toEqual(['lord', 'ring'])
+    expect(looseWords('World War II')).toEqual(looseWords('world war two'))
+    expect(looseWords('Henry the Eighth')).toEqual(looseWords('Henry VIII'))
+    expect(looseWords('21st Century')).toEqual(['21', 'century'])
+    expect(looseWords('Bt Timah Rd')).toEqual(looseWords('Bukit Timah Road'))
+    expect(looseWords('Bishan MRT Station', ['MRT', 'station'])).toEqual(['bishan'])
+    expect(looseWords('Fish Balls')).toEqual(looseWords('fish ball'))
+    // "a" isn't dropped: in "A Ma" it's part of the word
+    expect(looseWords('A Ma')).toEqual(['a', 'ma'])
+  })
+
+  it("ignores the prompt's filler words", () => {
+    for (const input of ['Bishan MRT', 'bishan mrt station', 'Bishan Stn', 'MRT Bishan'])
+      expect(checkAnswer(input, stations)).toMatchObject({ kind: 'match', answer: { name: 'Bishan' }, corrected: false })
+    // Filler is only ignored where the prompt says so
+    expect(matchAnswer('Bishan MRT', towns)).toBeNull()
+    // Nothing but filler is not an answer
+    expect(checkAnswer('MRT station', stations).kind).toBe('none')
+  })
+
+  it('reads short forms, number spellings and word order', () => {
+    expect(matchAnswer('Bt Panjang', stations)?.answer.name).toBe('Bukit Panjang')
+    expect(matchAnswer('Mt Faber', stations)?.answer.name).toBe('Mount Faber')
+    expect(matchAnswer('6th Ave', stations)?.answer.name).toBe('Sixth Avenue')
+    expect(matchAnswer('Tg Pagar', stations)?.answer.name).toBe('Tanjong Pagar')
+    expect(matchAnswer('Terminal Two', stations)?.answer.name).toBe('Terminal 2')
+    expect(matchAnswer('St James', stations)?.answer.name).toBe('Saint James')
+    expect(matchAnswer('Pagar Tanjong', stations)?.answer.name).toBe('Tanjong Pagar')
+    expect(matchAnswer('Bt Panjnag MRT', stations)).toMatchObject({ answer: { name: 'Bukit Panjang' }, corrected: true })
+  })
+
+  it('never corrects a digit', () => {
+    expect(matchAnswer('Terminal 3', stations)).toBeNull()
+    expect(matchAnswer('Terminal Three', stations)).toBeNull()
+    expect(matchAnswer('Terminl 2', stations)?.answer.name).toBe('Terminal 2')
+  })
+})
+
+describe('partial matching', () => {
+  const leaders = {
+    ...makePrompt('leaders', [
+      ['Lee Kuan Yew', 'common', ['LKY']],
+      ['Lee Hsien Loong', 'common'],
+      ['Goh Chok Tong', 'solid'],
+      ['S. R. Nathan', 'solid'],
+      ['Albert Einstein', 'rare'],
+      ['North Korea', 'rare'],
+      ['South Korea', 'rare'],
+      ['Guinea', 'ulu'],
+      ['Papua New Guinea', 'ulu'],
+      ['Toy Story 2', 'gem'],
+    ]),
+    partial: true,
+  }
+
+  it('accepts part of a name that points to one answer', () => {
+    expect(checkAnswer('Einstein', leaders)).toMatchObject({ kind: 'match', answer: { name: 'Albert Einstein' } })
+    expect(matchAnswer('Kuan Yew', leaders)?.answer.name).toBe('Lee Kuan Yew')
+    expect(matchAnswer('nathan', leaders)?.answer.name).toBe('S. R. Nathan')
+    expect(matchAnswer('Goh', leaders)?.answer.name).toBe('Goh Chok Tong')
+  })
+
+  it('asks for more when it points to several', () => {
+    expect(checkAnswer('Lee', leaders).kind).toBe('ambiguous')
+    expect(checkAnswer('Korea', leaders).kind).toBe('ambiguous')
+  })
+
+  it('prefers a whole answer over part of another', () => {
+    expect(matchAnswer('Guinea', leaders)?.answer.name).toBe('Guinea')
+  })
+
+  it('forgives a typo inside the part', () => {
+    expect(checkAnswer('Einstien', leaders)).toMatchObject({ kind: 'match', answer: { name: 'Albert Einstein' }, corrected: true })
+    expect(matchAnswer('Kuan Yee', leaders)).toBeNull() // 3-letter words must be exact
+  })
+
+  it('needs a real word, in order, next to each other', () => {
+    expect(matchAnswer('2', leaders)).toBeNull()
+    expect(matchAnswer('R', leaders)).toBeNull()
+    expect(matchAnswer('Lee Yew', leaders)).toBeNull()
+    expect(matchAnswer('Yew Kuan', leaders)).toBeNull()
+  })
+
+  it("doesn't let part of a name stand for an answer when it's also part of a decoy", () => {
+    const neighbours = {
+      ...makePrompt('neighbours', [['North Korea', 'common'], ['Mongolia', 'gem']]), // prettier-ignore
+      partial: true,
+      decoys: [{ name: 'South Korea', why: 'North Korea is in the way.' }],
+    }
+    expect(checkAnswer('Korea', neighbours).kind).toBe('ambiguous')
+    expect(checkAnswer('Koera', neighbours).kind).toBe('none')
+    expect(matchAnswer('North', neighbours)?.answer.name).toBe('North Korea')
+    // Part of a decoy alone isn't a verdict; the whole decoy is
+    expect(checkAnswer('South', neighbours).kind).toBe('none')
+    expect(checkAnswer('Suoth', neighbours).kind).toBe('none')
+    expect(checkAnswer('South Korea', neighbours).kind).toBe('decoy')
+  })
+
+  it('is off unless the prompt turns it on', () => {
+    expect(matchAnswer('Payoh', towns)).toBeNull()
+    expect(matchAnswer('Bukit', towns)).toBeNull()
+  })
+})
+
+describe('decoys', () => {
+  const nordic = {
+    ...makePrompt('nordic', [
+      ['Iceland', 'common'],
+      ['Norway', 'common'],
+      ['Sweden', 'common'],
+      ['Denmark', 'solid'],
+      ['Finland', 'gem'],
+    ]),
+    decoys: [
+      { name: 'Ireland', aliases: ['Eire'], why: "Close, but it's not Nordic." },
+      { name: 'Greenland', why: 'Part of the Kingdom of Denmark, not a country of its own.' },
+    ],
+  }
+
+  it('would otherwise be corrected into a right answer', () => {
+    const { decoys, ...unguarded } = nordic
+    expect(decoys).toHaveLength(2)
+    expect(matchAnswer('Ireland', unguarded)?.answer.name).toBe('Iceland')
+  })
+
+  it('are refused, with the reason', () => {
+    expect(checkAnswer('Ireland', nordic)).toEqual({ kind: 'decoy', decoy: nordic.decoys[0] })
+    expect(checkAnswer('eire', nordic)).toMatchObject({ kind: 'decoy', decoy: { name: 'Ireland' } })
+    expect(matchAnswer('Ireland', nordic)).toBeNull()
+  })
+
+  it('win a typo that is closer to them than to any answer', () => {
+    expect(checkAnswer('Irland', nordic)).toMatchObject({ kind: 'decoy', decoy: { name: 'Ireland' } })
+    expect(checkAnswer('Greenlnd', nordic)).toMatchObject({ kind: 'decoy', decoy: { name: 'Greenland' } })
+    // Equally far from an answer and a decoy: no verdict either way
+    expect(checkAnswer('Iteland', nordic).kind).toBe('none')
+    expect(checkAnswer('Icelnad', nordic)).toMatchObject({ kind: 'match', answer: { name: 'Iceland' } })
+  })
+})
+
+describe('matchProblems', () => {
+  it('flags a decoy that matches an answer', () => {
+    const p = { ...makePrompt('p', [['Saint Lucia', 'gem']]), decoys: [{ name: 'St Lucia', why: 'x' }] }
+    expect(matchProblems(p).errors).toHaveLength(1)
+    expect(matchProblems(p).errors[0]).toContain('a decoy matches an answer')
+  })
+
+  it('flags answers that only differ in ways matching ignores', () => {
+    const p = { ...makePrompt('p', [['Rocky II', 'gem'], ['Rocky 2', 'rare'], ['Bishan', 'common'], ['Bishan Station', 'solid']]) } // prettier-ignore
+    expect(matchProblems(p).errors).toHaveLength(1)
+    expect(matchProblems({ ...p, filler: ['station'] }).errors).toHaveLength(2)
+  })
+
+  it('warns about answers a typo apart, once per pair', () => {
+    const p = makePrompt('p', [['Bukit Batok', 'gem', ['Bt Batok']], ['Bukit Bator', 'rare', ['Bt Bator']]]) // prettier-ignore
+    expect(matchProblems(p)).toEqual({ errors: [], warnings: [expect.stringContaining('a typo apart')] })
   })
 })
 
@@ -144,6 +334,44 @@ describe('frozen schedule', () => {
   it('schedules valid days with no early repeats', () => {
     expect(Object.keys(schedule)).toHaveLength(34)
     expect(validateSchedule(schedule, pool, today)).toEqual([])
+  })
+
+  it('gives each new day its world rounds and fills the rest from Singapore', () => {
+    expect(worldRoundsFor(pool)).toBe(WORLD_ROUNDS_PER_DIVE)
+    const byId = new Map(pool.map((p) => [p.id, p]))
+    for (const [date, ids] of Object.entries(schedule)) {
+      if (date <= today) continue
+      const scopes = ids.map((id) => scopeOf(byId.get(id)!.category))
+      expect(scopes.filter((scope) => scope === 'world')).toHaveLength(WORLD_ROUNDS_PER_DIVE)
+    }
+  })
+
+  it('holds back world rounds until there are enough world prompts to rest them', () => {
+    const sg = pool.filter((p) => scopeOf(p.category) === 'sg')
+    const world = pool.filter((p) => scopeOf(p.category) === 'world')
+    expect(worldRoundsFor(sg)).toBe(0)
+    expect(worldRoundsFor([...sg, ...world.slice(0, 6)])).toBe(0)
+    expect(worldRoundsFor([...sg, ...world.slice(0, 7)])).toBe(1)
+    expect(worldRoundsFor([...sg, ...world.slice(0, 13)])).toBe(1)
+    expect(worldRoundsFor([...sg, ...world.slice(0, 14)])).toBe(2)
+
+    const few = [...sg, ...world.slice(0, 8)]
+    const mixed = extendSchedule({}, few, addDays(today, 30), today)
+    expect(validateSchedule(mixed, few, today)).toEqual([])
+    for (const [date, ids] of Object.entries(mixed)) {
+      if (date > today) expect(ids.filter((id) => world.some((p) => p.id === id))).toHaveLength(1)
+    }
+  })
+
+  it('flags a future day with too many world prompts', () => {
+    const day = addDays(today, 20)
+    const isSg = (id: string) => SG_CATEGORIES.some((c) => id.startsWith(`${c}-`))
+    const extra = pool.find((p) => scopeOf(p.category) === 'world' && !schedule[day].includes(p.id))!
+    // Swap one Singapore prompt for a third world one
+    const crowded = { ...schedule, [day]: [...schedule[day].filter(isSg).slice(1), ...schedule[day].filter((id) => !isSg(id)), extra.id] }
+    expect(validateSchedule(crowded, pool, today)).toContain(
+      `${day}: has ${WORLD_ROUNDS_PER_DIVE + 1} world prompts, at most ${WORLD_ROUNDS_PER_DIVE} allowed`,
+    )
   })
 
   it('never changes a scheduled day when prompts are added or reordered', () => {
@@ -295,6 +523,32 @@ describe('validatePacks', () => {
     expect(errors.some((e) => e.includes('id already used'))).toBe(true)
     expect(errors.some((e) => e.includes('exactly 1 gem'))).toBe(true)
     expect(errors.some((e) => e.includes('collides with Bishan'))).toBe(true)
+  })
+
+  it('accepts decoys, filler and partial, and flags the ways they can go wrong', () => {
+    const ok = { ...towns, partial: true, filler: ['town'], decoys: [{ name: 'Johor Bahru', aliases: ['JB'], why: 'Wrong country.' }] }
+    expect(validatePacks(pack([ok]))).toEqual([])
+
+    const bad = {
+      ...towns,
+      filler: ['bukit'],
+      decoys: [
+        { name: 'Bedok', why: 'It is one, actually.' },
+        { name: 'Tengah', why: '' },
+        { name: '新加坡', why: 'Not a town.' },
+      ],
+    }
+    const errors = validatePacks(pack([bad]))
+    expect(errors.some((e) => e.includes('"Bedok" and "Bedok": a decoy matches an answer'))).toBe(true)
+    expect(errors.some((e) => e.includes('Tengah: decoy needs a "why"'))).toBe(true)
+    expect(errors.some((e) => e.includes('"新加坡" normalizes to nothing'))).toBe(true)
+    // "bukit" tells Bukit Batok, Bukit Merah, Bukit Panjang and Bukit Timah apart, so it can't be filler...
+    expect(validatePacks(pack([{ ...towns, filler: ['batok', 'merah'] }])).some((e) => e.includes('look the same'))).toBe(true)
+    // ...and settings of the wrong type are refused rather than ignored
+    const mistyped = { ...towns, filler: 'town' as unknown as string[], partial: 'yes' as unknown as boolean }
+    expect(validatePacks(pack([mistyped]))).toEqual(
+      expect.arrayContaining([expect.stringContaining('"filler" must be a list'), expect.stringContaining('"partial" must be true or false')]),
+    )
   })
 
   it('flags thin prompts and bad categories', () => {

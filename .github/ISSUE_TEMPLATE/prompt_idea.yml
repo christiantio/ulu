@@ -27,6 +27,10 @@ body:
         - culture
         - language
         - nature
+        - world
+        - science
+        - entertainment
+        - wildcard
         - New category (explain below)
     validations:
       required: true

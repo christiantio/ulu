@@ -1,0 +1,273 @@
+{
+  "name": "Wildcard",
+  "asOf": "2026-11-10",
+  "prompts": [
+    {
+      "id": "wildcard-chinese-zodiac",
+      "category": "wildcard",
+      "text": "Name an animal of the Chinese zodiac",
+      "note": "All 12 count.",
+      "answers": [
+        {
+          "name": "Dragon",
+          "tier": "common"
+        },
+        {
+          "name": "Tiger",
+          "tier": "common"
+        },
+        {
+          "name": "Rabbit",
+          "aliases": [
+            "Hare",
+            "Bunny"
+          ],
+          "tier": "common"
+        },
+        {
+          "name": "Rat",
+          "aliases": [
+            "Mouse"
+          ],
+          "tier": "trap"
+        },
+        {
+          "name": "Horse",
+          "tier": "solid"
+        },
+        {
+          "name": "Monkey",
+          "tier": "solid"
+        },
+        {
+          "name": "Snake",
+          "aliases": [
+            "Serpent"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "Dog",
+          "tier": "solid"
+        },
+        {
+          "name": "Pig",
+          "aliases": [
+            "Boar",
+            "Hog"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "Ox",
+          "aliases": [
+            "Cow",
+            "Bull",
+            "Buffalo",
+            "Water Buffalo"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "Rooster",
+          "aliases": [
+            "Chicken",
+            "Cock",
+            "Hen"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "Goat",
+          "aliases": [
+            "Sheep",
+            "Ram",
+            "Lamb"
+          ],
+          "tier": "gem"
+        }
+      ],
+      "decoys": [
+        {
+          "name": "Cat",
+          "why": "Missed the race, as the story goes. Vietnam's zodiac has one, though!"
+        },
+        {
+          "name": "Lion",
+          "why": "Lion dance, yes. Zodiac, no."
+        },
+        {
+          "name": "Panda",
+          "why": "Very Chinese, but not in the zodiac."
+        },
+        {
+          "name": "Phoenix",
+          "why": "Mythical like the Dragon, but not one of the 12."
+        },
+        {
+          "name": "Fish",
+          "why": "Auspicious, but not one of the 12."
+        },
+        {
+          "name": "Merlion",
+          "why": "Wrong mascot!"
+        }
+      ]
+    },
+    {
+      "id": "wildcard-nato-alphabet",
+      "category": "wildcard",
+      "text": "Name a word from the NATO phonetic alphabet",
+      "note": "The 26 code words for letters on the radio, from Alfa to Zulu.",
+      "answers": [
+        {
+          "name": "Alfa",
+          "aliases": [
+            "Alpha"
+          ],
+          "tier": "common"
+        },
+        {
+          "name": "Bravo",
+          "tier": "common"
+        },
+        {
+          "name": "Charlie",
+          "tier": "common"
+        },
+        {
+          "name": "Delta",
+          "tier": "common"
+        },
+        {
+          "name": "Zulu",
+          "tier": "trap"
+        },
+        {
+          "name": "Echo",
+          "tier": "solid"
+        },
+        {
+          "name": "Foxtrot",
+          "tier": "solid"
+        },
+        {
+          "name": "Tango",
+          "tier": "solid"
+        },
+        {
+          "name": "Romeo",
+          "tier": "solid"
+        },
+        {
+          "name": "Oscar",
+          "tier": "solid"
+        },
+        {
+          "name": "Whiskey",
+          "aliases": [
+            "Whisky"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "Golf",
+          "tier": "rare"
+        },
+        {
+          "name": "Hotel",
+          "tier": "rare"
+        },
+        {
+          "name": "India",
+          "tier": "rare"
+        },
+        {
+          "name": "Juliett",
+          "aliases": [
+            "Juliet"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "Kilo",
+          "tier": "rare"
+        },
+        {
+          "name": "Mike",
+          "tier": "rare"
+        },
+        {
+          "name": "Papa",
+          "tier": "rare"
+        },
+        {
+          "name": "Sierra",
+          "tier": "rare"
+        },
+        {
+          "name": "Victor",
+          "tier": "rare"
+        },
+        {
+          "name": "X-ray",
+          "tier": "rare"
+        },
+        {
+          "name": "Yankee",
+          "tier": "rare"
+        },
+        {
+          "name": "Lima",
+          "tier": "ulu"
+        },
+        {
+          "name": "November",
+          "tier": "ulu"
+        },
+        {
+          "name": "Uniform",
+          "tier": "ulu"
+        },
+        {
+          "name": "Quebec",
+          "tier": "gem"
+        }
+      ],
+      "decoys": [
+        {
+          "name": "Zebra",
+          "why": "From the old Able-Baker alphabet. It's Zulu now."
+        },
+        {
+          "name": "Able",
+          "why": "From the old Able-Baker alphabet, replaced in 1956."
+        },
+        {
+          "name": "Baker",
+          "why": "From the old Able-Baker alphabet, replaced in 1956."
+        },
+        {
+          "name": "Roger",
+          "why": "The old word for R, which is why we still say 'Roger that'."
+        },
+        {
+          "name": "Beta",
+          "why": "That's the Greek alphabet."
+        },
+        {
+          "name": "Gamma",
+          "why": "That's the Greek alphabet."
+        },
+        {
+          "name": "Omega",
+          "why": "That's the Greek alphabet."
+        },
+        {
+          "name": "Apple",
+          "why": "That's the kindergarten alphabet!"
+        }
+      ]
+    }
+  ]
+}

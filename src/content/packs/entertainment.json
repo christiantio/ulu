@@ -1,0 +1,332 @@
+{
+  "name": "Entertainment",
+  "asOf": "2026-11-10",
+  "prompts": [
+    {
+      "id": "entertainment-disney-princesses",
+      "category": "entertainment",
+      "text": "Name an official Disney Princess",
+      "note": "As of November 2026: the 13 in Disney's official line-up. Not every Disney heroine made the list!",
+      "answers": [
+        {
+          "name": "Cinderella",
+          "tier": "common"
+        },
+        {
+          "name": "Snow White",
+          "tier": "common"
+        },
+        {
+          "name": "Ariel",
+          "aliases": [
+            "The Little Mermaid"
+          ],
+          "tier": "common"
+        },
+        {
+          "name": "Mulan",
+          "aliases": [
+            "Fa Mulan",
+            "Hua Mulan"
+          ],
+          "tier": "trap"
+        },
+        {
+          "name": "Belle",
+          "aliases": [
+            "Beauty"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "Jasmine",
+          "aliases": [
+            "Princess Jasmine"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "Rapunzel",
+          "tier": "solid"
+        },
+        {
+          "name": "Moana",
+          "tier": "solid"
+        },
+        {
+          "name": "Aurora",
+          "aliases": [
+            "Sleeping Beauty",
+            "Briar Rose"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "Pocahontas",
+          "tier": "rare"
+        },
+        {
+          "name": "Tiana",
+          "tier": "rare"
+        },
+        {
+          "name": "Merida",
+          "tier": "ulu"
+        },
+        {
+          "name": "Raya",
+          "tier": "gem"
+        }
+      ],
+      "decoys": [
+        {
+          "name": "Elsa",
+          "aliases": [
+            "Queen Elsa"
+          ],
+          "why": "Not in the official line-up. Frozen is its own franchise."
+        },
+        {
+          "name": "Anna",
+          "aliases": [
+            "Princess Anna"
+          ],
+          "why": "Not in the official line-up. Frozen is its own franchise."
+        },
+        {
+          "name": "Tinker Bell",
+          "why": "A fairy, not a princess."
+        },
+        {
+          "name": "Alice",
+          "why": "Curious, but never a princess."
+        },
+        {
+          "name": "Nala",
+          "why": "A lioness, and not on the list."
+        },
+        {
+          "name": "Fiona",
+          "aliases": [
+            "Princess Fiona"
+          ],
+          "why": "That's Shrek, and Shrek is DreamWorks!"
+        },
+        {
+          "name": "Leia",
+          "aliases": [
+            "Princess Leia"
+          ],
+          "why": "Disney owns Star Wars now, but Leia isn't in the line-up."
+        }
+      ]
+    },
+    {
+      "id": "entertainment-pixar-films",
+      "category": "entertainment",
+      "text": "Name a Pixar feature film",
+      "note": "As of November 2026: Toy Story (1995) to Toy Story 5 (2026). Every sequel is its own answer.",
+      "answers": [
+        {
+          "name": "Toy Story",
+          "tier": "common"
+        },
+        {
+          "name": "Finding Nemo",
+          "aliases": [
+            "Nemo"
+          ],
+          "tier": "common"
+        },
+        {
+          "name": "Inside Out",
+          "tier": "common"
+        },
+        {
+          "name": "Toy Story 5",
+          "tier": "trap"
+        },
+        {
+          "name": "Toy Story 2",
+          "tier": "solid"
+        },
+        {
+          "name": "Toy Story 3",
+          "tier": "solid"
+        },
+        {
+          "name": "Monsters, Inc.",
+          "aliases": [
+            "Monsters Incorporated"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "The Incredibles",
+          "tier": "solid"
+        },
+        {
+          "name": "Cars",
+          "tier": "solid"
+        },
+        {
+          "name": "Ratatouille",
+          "tier": "solid"
+        },
+        {
+          "name": "WALL-E",
+          "tier": "solid"
+        },
+        {
+          "name": "Up",
+          "tier": "solid"
+        },
+        {
+          "name": "Finding Dory",
+          "aliases": [
+            "Dory"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "Coco",
+          "tier": "solid"
+        },
+        {
+          "name": "Inside Out 2",
+          "tier": "solid"
+        },
+        {
+          "name": "Toy Story 4",
+          "tier": "rare"
+        },
+        {
+          "name": "Cars 2",
+          "tier": "rare"
+        },
+        {
+          "name": "Brave",
+          "tier": "rare"
+        },
+        {
+          "name": "Monsters University",
+          "aliases": [
+            "Monsters Uni"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "Incredibles 2",
+          "tier": "rare"
+        },
+        {
+          "name": "Soul",
+          "tier": "rare"
+        },
+        {
+          "name": "Luca",
+          "tier": "rare"
+        },
+        {
+          "name": "Turning Red",
+          "tier": "rare"
+        },
+        {
+          "name": "Elemental",
+          "tier": "rare"
+        },
+        {
+          "name": "The Good Dinosaur",
+          "tier": "ulu"
+        },
+        {
+          "name": "Cars 3",
+          "tier": "ulu"
+        },
+        {
+          "name": "Onward",
+          "tier": "ulu"
+        },
+        {
+          "name": "Lightyear",
+          "tier": "ulu"
+        },
+        {
+          "name": "Elio",
+          "tier": "ulu"
+        },
+        {
+          "name": "Hoppers",
+          "tier": "ulu"
+        },
+        {
+          "name": "A Bug's Life",
+          "aliases": [
+            "Bug's Life"
+          ],
+          "tier": "gem"
+        }
+      ],
+      "decoys": [
+        {
+          "name": "Shrek",
+          "why": "That's DreamWorks!"
+        },
+        {
+          "name": "Kung Fu Panda",
+          "why": "That's DreamWorks."
+        },
+        {
+          "name": "How to Train Your Dragon",
+          "why": "That's DreamWorks."
+        },
+        {
+          "name": "Madagascar",
+          "why": "That's DreamWorks."
+        },
+        {
+          "name": "Frozen",
+          "why": "Walt Disney Animation, not Pixar."
+        },
+        {
+          "name": "Moana",
+          "why": "Walt Disney Animation, not Pixar."
+        },
+        {
+          "name": "Zootopia",
+          "aliases": [
+            "Zootropolis"
+          ],
+          "why": "Walt Disney Animation, not Pixar."
+        },
+        {
+          "name": "Encanto",
+          "why": "Walt Disney Animation, not Pixar."
+        },
+        {
+          "name": "Tangled",
+          "why": "Walt Disney Animation, not Pixar."
+        },
+        {
+          "name": "Big Hero 6",
+          "why": "Walt Disney Animation, not Pixar."
+        },
+        {
+          "name": "The Lion King",
+          "why": "Walt Disney Animation, and hand-drawn."
+        },
+        {
+          "name": "Despicable Me",
+          "aliases": [
+            "Minions"
+          ],
+          "why": "That's Illumination."
+        },
+        {
+          "name": "Ice Age",
+          "why": "That's Blue Sky Studios."
+        }
+      ]
+    }
+  ]
+}

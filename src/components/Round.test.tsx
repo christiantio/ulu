@@ -20,10 +20,14 @@ function answerOf(p: Prompt, tier: Tier) {
   return answer
 }
 
-function setup() {
+// A world prompt with decoys, and a people prompt where part of a name is enough
+const withDecoys = ALL_PROMPTS.find((p) => p.id === 'world-china-neighbours')!
+const people = ALL_PROMPTS.find((p) => p.id === 'politics-presidents-and-pms')!
+
+function setup(shown: Prompt = prompt) {
   const onResult = vi.fn<(result: RoundResult) => void>()
   const user = userEvent.setup({ advanceTimers: vi.advanceTimersByTime })
-  render(<Round prompt={prompt} deadline={Date.now() + SECONDS_PER_ROUND * 1000} onResult={onResult} />)
+  render(<Round prompt={shown} deadline={Date.now() + SECONDS_PER_ROUND * 1000} onResult={onResult} />)
   const input = () => screen.getByRole('textbox', { name: 'Your answer' })
   return { onResult, user, input }
 }
@@ -96,6 +100,39 @@ describe('Round', () => {
     expect(onResult).toHaveBeenCalledWith(
       expect.objectContaining({ answer: solid.name, tier: 'solid', points: 30, attempts: [JUNK] }),
     )
+  })
+
+  it('says why a known wrong answer does not count, and does not list it as a rejected guess', async () => {
+    const { onResult, user, input } = setup(withDecoys)
+    const decoy = withDecoys.decoys!.find((d) => d.name === 'Thailand')!
+
+    await user.type(input(), 'thailand{Enter}')
+    expect(onResult).not.toHaveBeenCalled()
+    expect(screen.getByRole('status').textContent).toBe(`“thailand” doesn't count. ${decoy.why}`)
+    expect((input() as HTMLInputElement).value).toBe('')
+
+    await user.type(input(), 'Nepal{Enter}')
+    expect(onResult).toHaveBeenCalledWith(expect.objectContaining({ answer: 'Nepal', attempts: [] }))
+  })
+
+  it('asks for more when a guess fits several answers, and keeps it in the box', async () => {
+    const { onResult, user, input } = setup(people)
+
+    await user.type(input(), 'Lee{Enter}')
+    expect(onResult).not.toHaveBeenCalled()
+    expect(screen.getByRole('status').textContent).toContain('“Lee” could be more than one answer')
+    expect((input() as HTMLInputElement).value).toBe('Lee')
+
+    await user.type(input(), ' Kuan Yew{Enter}')
+    expect(onResult).toHaveBeenCalledWith(
+      expect.objectContaining({ input: 'Lee Kuan Yew', answer: 'Lee Kuan Yew', attempts: [] }),
+    )
+  })
+
+  it('accepts the end of a name where the prompt allows it', async () => {
+    const { onResult, user, input } = setup(people)
+    await user.type(input(), 'chok tong{Enter}')
+    expect(onResult).toHaveBeenCalledWith(expect.objectContaining({ input: 'chok tong', answer: 'Goh Chok Tong' }))
   })
 
   it('keeps every rejected guess once, by normalised text, and reports them on timeout', async () => {

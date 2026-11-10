@@ -101,7 +101,8 @@
           ],
           "tier": "gem"
         }
-      ]
+      ],
+      "partial": true
     },
     {
       "id": "politics-deputy-pms",
@@ -191,7 +192,8 @@
           "name": "Toh Chin Chye",
           "tier": "gem"
         }
-      ]
+      ],
+      "partial": true
     },
     {
       "id": "politics-ge2025-parties",
@@ -1316,7 +1318,8 @@
           "name": "David Neo",
           "tier": "gem"
         }
-      ]
+      ],
+      "partial": true
     }
   ]
 }
