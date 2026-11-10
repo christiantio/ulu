@@ -7,6 +7,11 @@
       "category": "history",
       "text": "Name a gazetted National Monument of Singapore",
       "note": "As of October 2026. Buildings gazetted together (e.g. the three river bridges, the Istana and Sri Temasek) each count.",
+      "sources": [
+        "https://roots.gov.sg/nhb/monuments",
+        "https://www.mccy.gov.sg/about-us/news-and-resources/the-site-at-38-oxley-road-to-be-gazetted-as-a-national-monument/"
+      ],
+      "reviewBy": "2027-05-10",
       "answers": [
         {
           "name": "Raffles Hotel",
@@ -117,7 +122,8 @@
           "aliases": [
             "The Arts House",
             "Arts House at the Old Parliament",
-            "Old Parliament House and Annex"
+            "Old Parliament House and Annex",
+            "Former Parliament House"
           ],
           "tier": "solid"
         },
@@ -375,7 +381,9 @@
         {
           "name": "Singapore Conference Hall",
           "aliases": [
-            "Conference Hall"
+            "Conference Hall",
+            "Trade Union House",
+            "Singapore Conference Hall and Trade Union House"
           ],
           "tier": "rare"
         },
