@@ -1,13 +1,14 @@
 // @vitest-environment jsdom
 import { act, cleanup, render, screen, within } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
-import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest'
+import { afterEach, beforeAll, beforeEach, describe, expect, it, vi } from 'vitest'
 import { ALL_PROMPTS, SCHEDULE } from '../content/bank'
-import { SKIP_GRACE_MS, journeyMs } from '../game/journey'
+import { SKIP_GRACE_MS, floorsFor, formatFloor, rideMs, stageFor, upgradeFor } from '../game/elevator'
 import { promptsForDate } from '../game/schedule'
 import { SECONDS_PER_ROUND, TIER_INFO } from '../game/scoring'
 import type { Prompt, RoundResult, Tier } from '../game/types'
 import { stubReducedMotion } from '../test/motion'
+import { loadBackdrops } from './elevator/backdrops'
 import { Game } from './Game'
 
 const NOW = Date.parse('2026-11-10T04:00:00Z')
@@ -39,7 +40,15 @@ const answerBox = () => screen.getByRole('textbox', { name: 'Your answer' })
 const pip = (text: string) => within(screen.getByRole('list', { name: 'Rounds' })).getByText(text)
 const skip = () => screen.getByRole('button', { name: 'Skip to the result' })
 const headerScore = () => document.querySelector('.game__score strong')!.textContent
+const headerFloor = () => document.querySelector('.hud__stat dd')!.textContent
+/** The plate on the picture: its label says the score, the floor and the lift */
+const plate = () => screen.getByRole('img').getAttribute('aria-label')
+const scene = () => document.querySelector('.scene') as HTMLElement
+const goUp = () => screen.getByRole('button', { name: 'Going up' })
 const verdict = (tier: Tier) => screen.queryByText(TIER_INFO[tier].label, { selector: '.verdict__label' })
+
+// Every lift's scenery, up front, so none of it arrives halfway through a test
+beforeAll(() => loadBackdrops())
 
 beforeEach(() => {
   vi.useFakeTimers({ shouldAdvanceTime: false })
@@ -57,14 +66,18 @@ afterEach(() => {
 describe('Game', () => {
   it('waits for a tap before starting the clock', async () => {
     const { onProgress, user } = setup()
-    expect(screen.getByText('Prompt 1 of 7')).toBeDefined()
+    expect(screen.getByText('Question 1 of 7')).toBeDefined()
+    // The lift waits on the ground floor, doors open
+    expect(headerFloor()).toBe('01')
+    expect(plate()).toBe('0 of 700 points, floor 01, HDB Lift')
+    expect(scene().classList.contains('scene--open')).toBe(true)
     expect(screen.queryByRole('timer')).toBeNull()
     expect(pip('Round 1')).toBeDefined()
     expect(pip('Round 2, not played yet')).toBeDefined()
 
     advance(60_000)
     expect(onProgress).not.toHaveBeenCalled()
-    await user.click(screen.getByRole('button', { name: 'Start dive' }))
+    await user.click(goUp())
     expect(screen.getByRole('heading', { level: 2, name: prompts[0].text })).toBeDefined()
     expect(secondsLeft(SECONDS_PER_ROUND)).toBeDefined()
     expect(onProgress).toHaveBeenLastCalledWith([], Date.now())
@@ -75,13 +88,16 @@ describe('Game', () => {
     const { onProgress, onFinish } = setup({ initialResults: [result(prompts[0], 'common')], initialStartedAt: startedAt })
 
     // Straight back into round 2, with 5 of the 25 seconds left
-    expect(screen.queryByText('Prompt 2 of 7')).toBeNull()
+    expect(screen.queryByText('Question 2 of 7')).toBeNull()
     expect(screen.getByRole('heading', { level: 2, name: prompts[1].text })).toBeDefined()
     expect(secondsLeft(5)).toBeDefined()
     expect(pip('Round 1: Everybody Say, 10 points')).toBeDefined()
+    // The lift is where round 1 left it
+    expect(headerFloor()).toBe('02')
+    expect(scene().dataset.floor).toBe('02')
 
     advance(5000)
-    // Saved as soon as time is up, before the ride plays
+    // Saved as soon as time is up, before the lift reacts
     expect(onProgress).toHaveBeenCalledTimes(1)
     expect(onProgress).toHaveBeenCalledWith(
       [
@@ -91,9 +107,12 @@ describe('Game', () => {
       null,
     )
     expect(skip()).toBeDefined()
-    advance(journeyMs(null))
+    advance(rideMs(null))
     expect(screen.getByText('Time up!')).toBeDefined()
     expect(pip('Round 2: Time up, 0 points')).toBeDefined()
+    // A miss leaves the lift where it was
+    expect(headerFloor()).toBe('02')
+    expect(headerScore()).toBe('10')
     expect(onProgress).toHaveBeenCalledTimes(1)
     expect(onFinish).not.toHaveBeenCalled()
   })
@@ -101,17 +120,20 @@ describe('Game', () => {
   it('times a resumed round out at once if its deadline passed while away', () => {
     const { onProgress } = setup({ initialStartedAt: NOW - 60_000 })
     expect(onProgress).toHaveBeenCalledWith([expect.objectContaining({ promptId: prompts[0].id, points: 0 })], null)
-    advance(journeyMs(null))
+    advance(rideMs(null))
     expect(screen.getByText('Time up!')).toBeDefined()
+    expect(headerFloor()).toBe('01')
   })
 
   it('reports progress as each round starts and ends, and the results at the end', async () => {
     const { onProgress, onFinish, onQuit, user } = setup()
     const tiers: Tier[] = ['rare', 'common', 'gem', 'solid', 'trap', 'ulu', 'common']
     const expected: RoundResult[] = []
+    let floor = 1
 
     for (const [i, p] of prompts.entries()) {
-      await user.click(screen.getByRole('button', { name: i === 0 ? 'Start dive' : 'Go' }))
+      // Only the first round waits for a tap: Next starts the others
+      if (i === 0) await user.click(goUp())
       const startedAt = Date.now()
       expect(onProgress).toHaveBeenLastCalledWith(expected, startedAt)
       expect(screen.getByRole('heading', { level: 2, name: p.text })).toBeDefined()
@@ -122,27 +144,38 @@ describe('Game', () => {
       expected.push(result(p, tier))
       expect(onProgress).toHaveBeenLastCalledWith(expected, null)
 
-      // The ride doesn't give the result away: the pip, score and route wait for it to land
+      // The ride doesn't give the result away: the pip, score, floor and lift wait for it to land
       const score = expected.reduce((sum, r) => sum + r.points, 0)
       const before = score - TIER_INFO[tier].points
+      const upgrade = upgradeFor(before, TIER_INFO[tier].points)
       expect(pip(`Round ${i + 1}`)).toBeDefined()
       expect(headerScore()).toBe(String(before))
-      expect(screen.getByRole('img', { name: new RegExp(`^${before} of 700 points, reached `) })).toBeDefined()
+      expect(headerFloor()).toBe(formatFloor(floor))
+      expect(plate()).toBe(`${before} of 700 points, floor ${formatFloor(floor)}, ${stageFor(before).name}`)
       expect(verdict(tier)).toBeNull()
       // Sit through every other ride, and skip the rest
       if (i % 2) {
         advance(SKIP_GRACE_MS)
         await user.click(skip())
       } else {
-        advance(journeyMs(tier))
+        advance(rideMs(tier, upgrade !== null))
       }
 
+      // Landed: the floor goes up by the answer's tier, and the lift by the total
+      floor += floorsFor(tier)
       expect(pip(`Round ${i + 1}: ${TIER_INFO[tier].label}, ${TIER_INFO[tier].points} points`)).toBeDefined()
       expect(headerScore()).toBe(String(score))
-      expect(screen.getByRole('img', { name: new RegExp(`^${score} of 700 points, reached `) })).toBeDefined()
+      expect(headerFloor()).toBe(formatFloor(floor))
+      expect(plate()).toBe(`${score} of 700 points, floor ${formatFloor(floor)}, ${stageFor(score).name}`)
+      expect(scene().dataset.lift).toBe(stageFor(score).id)
+      expect(scene().dataset.floor).toBe(formatFloor(floor))
       expect(verdict(tier)).not.toBeNull()
+      // An upgrade is said in words too, whether or not the ride was watched
+      expect(screen.queryByText('New lift unlocked')?.parentElement?.textContent ?? null).toBe(
+        upgrade ? `New lift unlocked ${upgrade.name}` : null,
+      )
 
-      if (i < prompts.length - 1) await user.click(screen.getByRole('button', { name: /Next prompt/ }))
+      if (i < prompts.length - 1) await user.click(screen.getByRole('button', { name: /Next question/ }))
     }
 
     expect(onProgress).toHaveBeenCalledTimes(prompts.length * 2)
@@ -153,35 +186,71 @@ describe('Game', () => {
     expect(onQuit).not.toHaveBeenCalled()
   })
 
-  it('rides out of town before the reveal, then shows the points gained', async () => {
+  it('rides up before the reveal, then shows the points gained and the new lift', async () => {
     const { user } = setup()
-    await user.click(screen.getByRole('button', { name: 'Start dive' }))
+    await user.click(goUp())
     await user.type(answerBox(), `${answerOf(prompts[0], 'gem').name}{Enter}`)
 
     expect(document.activeElement).toBe(skip())
     expect(screen.getByText(prompts[0].text)).toBeDefined()
     expect(document.querySelector('.game__gain')).toBeNull()
-    advance(journeyMs('gem') - 1)
+    // A gem from nothing is 100 points: six floors up, and into the second lift
+    const whole = rideMs('gem', true)
+    advance(whole - 1)
     expect(verdict('gem')).toBeNull()
     expect(headerScore()).toBe('0')
+    expect(headerFloor()).toBe('01')
 
     advance(1)
     expect(verdict('gem')).not.toBeNull()
     expect(screen.queryByRole('button', { name: /Skip/ })).toBeNull()
     expect(headerScore()).toBe('100')
+    expect(headerFloor()).toBe('07')
+    expect(plate()).toBe('100 of 700 points, floor 07, Upgraded HDB Lift')
     expect(document.querySelector('.game__gain')!.textContent).toBe('+100')
-    expect(document.activeElement).toBe(screen.getByRole('button', { name: /Next prompt/ }))
+    const next = screen.getByRole('button', { name: /Next question/ })
+    expect(document.activeElement).toBe(next)
+    // The verdict that's read with the button says how far the lift went, and that it's a new one
+    const described = document.getElementById(next.getAttribute('aria-describedby')!)!.textContent
+    expect(described).toContain('Up 6 floors, now on floor 07.')
+    expect(described).toContain('New lift unlocked Upgraded HDB Lift')
   })
 
-  it('goes straight to the reveal when the player prefers reduced motion', async () => {
+  it('resumes a saved game in the lift it had reached, on the floor it had reached', () => {
+    // 245 points over four rounds: the third lift, 15 floors up, with one round missed on the way
+    const played = [
+      result(prompts[0], 'rare'),
+      result(prompts[1], 'ulu'),
+      { promptId: prompts[2].id, input: '', attempts: [], answer: null, tier: null, points: 0 },
+      result(prompts[3], 'gem'),
+    ]
+    setup({ initialResults: played })
+    expect(screen.getByText('Question 5 of 7')).toBeDefined()
+    expect(headerScore()).toBe('245')
+    expect(headerFloor()).toBe('16')
+    expect(plate()).toBe('245 of 700 points, floor 16, Condominium Lift')
+    expect(scene().dataset.lift).toBe('condo')
+    expect(scene().classList.contains('scene--open')).toBe(true)
+    expect(pip('Round 3: Time up, 0 points')).toBeDefined()
+    // No ride replays for rounds already played
+    expect(screen.queryByRole('button', { name: /Skip/ })).toBeNull()
+  })
+
+  it('goes straight to the final state when the player prefers reduced motion', async () => {
     stubReducedMotion()
     const { user } = setup()
-    await user.click(screen.getByRole('button', { name: 'Start dive' }))
-    await user.type(answerBox(), `${answerOf(prompts[0], 'common').name}{Enter}`)
+    await user.click(goUp())
+    await user.type(answerBox(), `${answerOf(prompts[0], 'gem').name}{Enter}`)
+    // No ride to sit through or skip: the lift is already there, in words and in the picture
     expect(screen.queryByRole('button', { name: /Skip/ })).toBeNull()
-    expect(verdict('common')).not.toBeNull()
-    expect(pip('Round 1: Everybody Say, 10 points')).toBeDefined()
-    expect(headerScore()).toBe('10')
+    expect(verdict('gem')).not.toBeNull()
+    expect(pip('Round 1: Sibei Ulu, 100 points')).toBeDefined()
+    expect(headerScore()).toBe('100')
+    expect(headerFloor()).toBe('07')
+    expect(scene().dataset.lift).toBe('upgraded')
+    expect(scene().dataset.floor).toBe('07')
+    expect(scene().classList.contains('scene--idle')).toBe(true)
+    expect(screen.getByText('New lift unlocked').parentElement!.textContent).toBe('New lift unlocked Upgraded HDB Lift')
   })
 
   it('quits from the header', async () => {

@@ -1,6 +1,7 @@
 import { useId, type ReactNode } from 'react'
 import { TIER_INFO } from '../game/scoring'
 import { TIERS, type Answer, type Prompt, type Tier } from '../game/types'
+import { TierLamp } from './TierLamp'
 
 const DEEPEST_FIRST = [...TIERS].reverse()
 
@@ -40,7 +41,7 @@ export function AllAnswers({ prompt, yours, context, children }: Props) {
           return (
             <div key={tier} className={`all-answers__group tier--${tier}`}>
               <p className="all-answers__tier" id={labelId}>
-                <span aria-hidden="true">{info.emoji}</span> {info.label}{' '}
+                <TierLamp tier={tier} /> {info.label}{' '}
                 <span className="all-answers__points">
                   · {info.points} <span aria-hidden="true">pts</span>
                   <span className="visually-hidden">points</span>

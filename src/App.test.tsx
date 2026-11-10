@@ -44,7 +44,7 @@ type User = ReturnType<typeof userEvent.setup>
 
 const advance = (ms: number) => act(() => vi.advanceTimersByTime(ms))
 const read = <T,>(key: string): T | null => JSON.parse(localStorage.getItem(key) ?? 'null')
-const statsLine = () => screen.getByText(/ dives · /).textContent
+const statsLine = () => screen.getByText(/ played · /).textContent
 const promptHeading = () => screen.getByRole('heading', { level: 2 }).textContent
 const button = (name: string | RegExp) => screen.getByRole('button', { name })
 const diveUrl = (date: string) => `/dives/${date}.json`
@@ -66,9 +66,13 @@ async function renderApp() {
   return { user, ...view }
 }
 
-/** Start the round shown on the ready screen, check its prompt, and answer it with its first common answer */
+/** The picture on the current screen: which lift it shows, and what its indicator reads */
+const scene = () => document.querySelector('.scene') as HTMLElement
+
+/** Start the round, from the ready screen if it's showing; check its prompt; answer with its first common answer */
 async function playRound(user: User, expected: Prompt) {
-  await user.click(button(/^(Start dive|Go)$/))
+  const ready = screen.queryByRole('button', { name: 'Going up' })
+  if (ready) await user.click(ready)
   expect(promptHeading()).toBe(expected.text)
   await user.type(screen.getByRole('textbox', { name: 'Your answer' }), `${common(expected).name}{Enter}`)
   expect(screen.getByText('Everybody Say', { selector: '.verdict__label' })).toBeDefined()
@@ -77,7 +81,7 @@ async function playRound(user: User, expected: Prompt) {
 async function playDive(user: User, prompts: Prompt[], from = 0) {
   for (let i = from; i < prompts.length; i++) {
     await playRound(user, prompts[i])
-    if (i < prompts.length - 1) await user.click(button(/Next prompt/))
+    if (i < prompts.length - 1) await user.click(button(/Next question/))
   }
 }
 
@@ -85,10 +89,10 @@ async function playDive(user: User, prompts: Prompt[], from = 0) {
 async function timeOutGame(user: User) {
   const seen: string[] = []
   for (let i = 0; i < 7; i++) {
-    await user.click(button(/^(Start dive|Go)$/))
+    if (i === 0) await user.click(button('Going up'))
     seen.push(promptHeading()!)
     advance(SECONDS_PER_ROUND * 1000)
-    await user.click(button(i < 6 ? /Next prompt/ : 'See results'))
+    await user.click(button(i < 6 ? /Next question/ : 'See results'))
   }
   return seen
 }
@@ -109,7 +113,7 @@ beforeEach(() => {
   vi.stubEnv('VITE_REPORT_URL', '')
   fetch = serveDives()
   vi.mocked(loadBank).mockClear()
-  // Rounds go straight to their reveal. The ride out of town after each answer is tested in Game and Journey
+  // Rounds go straight to their reveal. The lift's ride after each answer is tested in Game and ElevatorScene
   stubReducedMotion()
 })
 
@@ -134,9 +138,16 @@ describe('App daily flow', () => {
   it("plays today's dive, saving progress after every round and recording stats exactly once", async () => {
     const { user, unmount } = await renderApp()
     expect(screen.getByText('Ulu #15')).toBeDefined()
-    expect(screen.queryByText(/ dives · /)).toBeNull()
+    expect(screen.queryByText(/ played · /)).toBeNull()
+    // The title screen: the boy waiting in the HDB lift on the ground floor, and what the game is
+    expect(screen.getByRole('heading', { level: 1, name: 'Ulu' })).toBeDefined()
+    expect(screen.getByText('How ulu can you go?')).toBeDefined()
+    expect(screen.getByText('7 Singapore questions. The rarer your answers, the higher you rise.')).toBeDefined()
+    expect(scene().dataset.lift).toBe('hdb')
+    expect(scene().dataset.floor).toBe('01')
+    expect(scene().querySelector('.boy--idle')).not.toBeNull()
 
-    await user.click(button("Start today's dive"))
+    await user.click(button('Start climbing'))
     await playRound(user, today[0])
     expect(read<DailyProgress>('ulu:daily')).toEqual({
       dateKey: TODAY,
@@ -145,15 +156,17 @@ describe('App daily flow', () => {
       startedAt: null,
     })
 
-    // A reload picks the dive back up where it was left
+    // A reload picks the dive back up where it was left, with the lift one floor up
     unmount()
     const again = await renderApp()
-    await again.user.click(button('Continue dive (1/7)'))
-    expect(screen.getByText('Prompt 2 of 7')).toBeDefined()
-    await again.user.click(button('Go'))
+    expect(scene().dataset.floor).toBe('02')
+    expect(screen.getByRole('img', { name: '10 of 700 points, floor 02, HDB Lift' })).toBeDefined()
+    await again.user.click(button('Continue climbing (1/7)'))
+    expect(screen.getByText('Question 2 of 7')).toBeDefined()
+    await again.user.click(button('Going up'))
     expect(read<DailyProgress>('ulu:daily')).toMatchObject({ results: [hit(today[0])], startedAt: Date.now() })
     await again.user.type(screen.getByRole('textbox', { name: 'Your answer' }), `${common(today[1]).name}{Enter}`)
-    await again.user.click(button(/Next prompt/))
+    await again.user.click(button(/Next question/))
     await playDive(again.user, today, 2)
     expect(read<DailyProgress>('ulu:daily')?.results).toEqual(today.map(hit))
 
@@ -163,11 +176,11 @@ describe('App daily flow', () => {
 
     await again.user.click(button('See results'))
     expect(screen.getByText('Ulu #15')).toBeDefined()
-    expect(screen.getByRole('img', { name: '70 of 700 points, reached Raffles Place' })).toBeDefined()
+    expect(screen.getByRole('img', { name: '70 of 700 points, floor 08, HDB Lift' })).toBeDefined()
     await again.user.click(button('Home'))
     expect(screen.getByText('Done for today:', { exact: false }).textContent).toBe('Done for today: 70 pts')
-    expect(statsLine()).toBe('1 dives · 1 day streak · best 70')
-    expect(screen.queryByRole('button', { name: /Start today's dive|Continue dive/ })).toBeNull()
+    expect(statsLine()).toBe('1 played · 1 day streak · best 70')
+    expect(screen.queryByRole('button', { name: /Start climbing|Continue climbing/ })).toBeNull()
 
     await again.user.click(button("See today's results"))
     for (const p of today) expect(screen.getByText(p.text)).toBeDefined()
@@ -175,7 +188,7 @@ describe('App daily flow', () => {
     again.unmount()
     await renderApp()
     expect(screen.getByText('Done for today:', { exact: false }).textContent).toBe('Done for today: 70 pts')
-    expect(statsLine()).toBe('1 dives · 1 day streak · best 70')
+    expect(statsLine()).toBe('1 played · 1 day streak · best 70')
     expect(statsWrites()).toBe(1)
 
     // Each visit fetched only today's dive, and never the bank
@@ -185,17 +198,17 @@ describe('App daily flow', () => {
 
   it('resumes a round in progress with its original deadline after a reload', async () => {
     const { user, unmount } = await renderApp()
-    await user.click(button("Start today's dive"))
-    await user.click(button('Start dive'))
+    await user.click(button('Start climbing'))
+    await user.click(button('Going up'))
     expect(read<DailyProgress>('ulu:daily')).toMatchObject({ results: [], startedAt: NOON })
     advance(10_000)
 
     unmount()
     const again = await renderApp()
     // No round finished yet, but round 1 is underway, so it's a dive to continue and the clock carries on
-    await again.user.click(button('Continue dive (0/7)'))
+    await again.user.click(button('Continue climbing (0/7)'))
     // Straight back into the same prompt, without a ready screen and without a fresh clock
-    expect(screen.queryByRole('button', { name: 'Start dive' })).toBeNull()
+    expect(screen.queryByRole('button', { name: 'Going up' })).toBeNull()
     expect(promptHeading()).toBe(today[0].text)
     expect(within(screen.getByRole('timer')).getByText(`${SECONDS_PER_ROUND - 10} seconds left`)).toBeDefined()
 
@@ -210,7 +223,7 @@ describe('App daily flow', () => {
   it('times out a round whose deadline passed while the app was closed', async () => {
     saveProgress({ results: [hit(today[0]), hit(today[1])], startedAt: NOON - 60_000 })
     const { user } = await renderApp()
-    await user.click(button('Continue dive (2/7)'))
+    await user.click(button('Continue climbing (2/7)'))
     expect(screen.getByText('Time up!')).toBeDefined()
     expect(screen.getByText('Round 3: Time up, 0 points')).toBeDefined()
     expect(read<DailyProgress>('ulu:daily')?.results).toHaveLength(3)
@@ -218,7 +231,7 @@ describe('App daily flow', () => {
 
   it('records a finished daily even when the player leaves from the last reveal without seeing results', async () => {
     const { user, unmount } = await renderApp()
-    await user.click(button("Start today's dive"))
+    await user.click(button('Start climbing'))
     await playDive(user, today)
 
     // Still on the last reveal: nothing on the home screen has had a chance to record it
@@ -227,11 +240,11 @@ describe('App daily flow', () => {
 
     await user.click(button('Back to home'))
     expect(screen.getByText('Done for today:', { exact: false }).textContent).toBe('Done for today: 70 pts')
-    expect(statsLine()).toBe('1 dives · 1 day streak · best 70')
+    expect(statsLine()).toBe('1 played · 1 day streak · best 70')
 
     unmount()
     await renderApp()
-    expect(statsLine()).toBe('1 dives · 1 day streak · best 70')
+    expect(statsLine()).toBe('1 played · 1 day streak · best 70')
     expect(statsWrites()).toBe(1)
   })
 
@@ -247,9 +260,9 @@ describe('App daily flow', () => {
       JSON.stringify({ dateKey: TODAY, promptIds: SCHEDULE[TODAY], results: old, startedAt: null }),
     )
     const { user } = await renderApp()
-    await user.click(button('Continue dive (2/7)'))
-    expect(screen.getByText('Prompt 3 of 7')).toBeDefined()
-    await user.click(button('Go'))
+    await user.click(button('Continue climbing (2/7)'))
+    expect(screen.getByText('Question 3 of 7')).toBeDefined()
+    await user.click(button('Going up'))
     expect(promptHeading()).toBe(today[2].text)
     await user.type(screen.getByRole('textbox', { name: 'Your answer' }), 'zzqqxxjj{Enter}')
     await user.type(screen.getByRole('textbox', { name: 'Your answer' }), `${common(today[2]).name}{Enter}`)
@@ -260,10 +273,10 @@ describe('App daily flow', () => {
     ])
     expect(screen.getByRole('list', { name: 'Not on our list' }).textContent).toBe('“zzqqxxjj”')
 
-    await user.click(button(/Next prompt/))
+    await user.click(button(/Next question/))
     await playDive(user, today, 3)
     await user.click(button('See results'))
-    expect(screen.getByRole('img', { name: '70 of 700 points, reached Raffles Place' })).toBeDefined()
+    expect(screen.getByRole('img', { name: '70 of 700 points, floor 08, HDB Lift' })).toBeDefined()
     const link = screen.getByRole('link', { name: /^Should this count\?/ })
     expect(new URL(link.getAttribute('href')!).searchParams.get('dive')).toBe(TODAY)
   })
@@ -274,8 +287,8 @@ describe('App daily flow', () => {
     saveProgress({ promptIds: other.map((p) => p.id), results: [hit(other[0])] })
     const { user } = await renderApp()
     expect(loadBank).toHaveBeenCalledTimes(1)
-    await user.click(button('Continue dive (1/7)'))
-    await user.click(button('Go'))
+    await user.click(button('Continue climbing (1/7)'))
+    await user.click(button('Going up'))
     expect(promptHeading()).toBe(other[1].text)
   })
 
@@ -283,7 +296,7 @@ describe('App daily flow', () => {
     saveProgress({ results: today.map(hit) })
     await renderApp()
     expect(screen.getByText('Done for today:', { exact: false }).textContent).toBe('Done for today: 70 pts')
-    expect(statsLine()).toBe('1 dives · 1 day streak · best 70')
+    expect(statsLine()).toBe('1 played · 1 day streak · best 70')
     expect(read<Stats>('ulu:stats')).toMatchObject({ played: 1, lastPlayed: TODAY })
   })
 
@@ -310,14 +323,14 @@ describe("loading today's dive (#18)", () => {
 
   it('says it is loading, then offers the dive', async () => {
     render(<App />)
-    expect(screen.getByRole('status').textContent).toBe("Loading today's dive…")
+    expect(screen.getByRole('status').textContent).toBe("Loading today's questions…")
     expect(card().getAttribute('aria-busy')).toBe('true')
-    expect(screen.queryByRole('button', { name: "Start today's dive" })).toBeNull()
+    expect(screen.queryByRole('button', { name: 'Start climbing' })).toBeNull()
 
     await settle()
     expect(screen.queryByRole('status')).toBeNull()
     expect(card().getAttribute('aria-busy')).toBe('false')
-    expect(button("Start today's dive")).toBeDefined()
+    expect(button('Start climbing')).toBeDefined()
     expect(fetched(fetch)).toEqual([diveUrl(TODAY)])
   })
 
@@ -325,7 +338,7 @@ describe("loading today's dive (#18)", () => {
     saveProgress({ results: today.map(hit) })
     render(<App />)
     expect(screen.getByText('Done for today:', { exact: false }).textContent).toBe('Done for today: 70 pts')
-    expect(screen.getByRole('status').textContent).toBe("Loading today's dive…")
+    expect(screen.getByRole('status').textContent).toBe("Loading today's questions…")
     expect(screen.queryByRole('button', { name: "See today's results" })).toBeNull()
   })
 
@@ -333,8 +346,8 @@ describe("loading today's dive (#18)", () => {
     let offline = true
     fetch = serveDives({ offline: () => offline })
     const { user } = await renderApp()
-    expect(screen.getByRole('alert').textContent).toBe("Couldn't load today's dive. Check your connection and try again.")
-    expect(screen.queryByRole('button', { name: "Start today's dive" })).toBeNull()
+    expect(screen.getByRole('alert').textContent).toBe("Couldn't load today's questions. Check your connection and try again.")
+    expect(screen.queryByRole('button', { name: 'Start climbing' })).toBeNull()
     expect(loadBank).not.toHaveBeenCalled()
 
     // Still offline: it fails again
@@ -345,11 +358,11 @@ describe("loading today's dive (#18)", () => {
     offline = false
     // A synchronous click, so the loading state is checked before the request answers
     fireEvent.click(button('Retry'))
-    expect(screen.getByRole('status').textContent).toBe("Loading today's dive…")
+    expect(screen.getByRole('status').textContent).toBe("Loading today's questions…")
     await settle()
     expect(screen.queryByRole('alert')).toBeNull()
     expect(fetched(fetch)).toEqual([diveUrl(TODAY), diveUrl(TODAY), diveUrl(TODAY)])
-    await user.click(button("Start today's dive"))
+    await user.click(button('Start climbing'))
     await playRound(user, today[0])
   })
 
@@ -372,7 +385,7 @@ describe("loading today's dive (#18)", () => {
     expect(loadBank).toHaveBeenCalledTimes(1)
 
     const seeded = dailyPrompts(ALL_PROMPTS, unscheduled)
-    await user.click(button("Start today's dive"))
+    await user.click(button('Start climbing'))
     await playRound(user, seeded[0])
     expect(read<DailyProgress>('ulu:daily')).toMatchObject({ dateKey: unscheduled, promptIds: seeded.map((p) => p.id) })
   })
@@ -380,7 +393,7 @@ describe("loading today's dive (#18)", () => {
   it("uses the bank's schedule when a scheduled day's file is missing, or the host sends index.html instead", async () => {
     fetch = serveDives({ missing: [TODAY] })
     const first = await renderApp()
-    await first.user.click(button("Start today's dive"))
+    await first.user.click(button('Start climbing'))
     await playRound(first.user, today[0])
     first.unmount()
 
@@ -391,7 +404,7 @@ describe("loading today's dive (#18)", () => {
     )
     localStorage.removeItem('ulu:daily')
     const second = await renderApp()
-    await second.user.click(button("Start today's dive"))
+    await second.user.click(button('Start climbing'))
     await playRound(second.user, today[0])
   })
 })
@@ -411,12 +424,12 @@ describe('midnight rollover (#7)', () => {
     advance(1_000)
     expect(screen.getByText('Ulu #16')).toBeDefined()
     expect(screen.queryByText('Done for today:', { exact: false })).toBeNull()
-    expect(screen.getByRole('status').textContent).toBe("Loading today's dive…")
+    expect(screen.getByRole('status').textContent).toBe("Loading today's questions…")
     await settle()
     expect(fetched(fetch)).toEqual([diveUrl(TODAY), diveUrl(TOMORROW)])
-    expect(button("Start today's dive")).toBeDefined()
+    expect(button('Start climbing')).toBeDefined()
     // Yesterday's dive keeps the streak alive
-    expect(statsLine()).toBe('1 dives · 1 day streak · best 70')
+    expect(statsLine()).toBe('1 played · 1 day streak · best 70')
   })
 
   it.each([
@@ -454,15 +467,15 @@ describe('midnight rollover (#7)', () => {
     act(() => window.dispatchEvent(new Event('focus')))
     await settle()
     expect(screen.getByText('Ulu #16')).toBeDefined()
-    expect(button("Start today's dive")).toBeDefined()
+    expect(button('Start climbing')).toBeDefined()
 
     answer()
     await settle()
     // Answered in the wrong order, and the new day's prompts still stand
     expect(fetched(serve)).toEqual([diveUrl(TOMORROW), diveUrl(TODAY)])
-    expect(button("Start today's dive")).toBeDefined()
+    expect(button('Start climbing')).toBeDefined()
     const user = userEvent.setup({ advanceTimers: vi.advanceTimersByTime })
-    await user.click(button("Start today's dive"))
+    await user.click(button('Start climbing'))
     await playRound(user, tomorrow[0])
   })
 
@@ -470,10 +483,10 @@ describe('midnight rollover (#7)', () => {
     expect(new Set([...today, ...tomorrow].map((p) => p.text)).size).toBe(14)
     vi.setSystemTime(Date.parse('2026-11-10T15:58:00Z'))
     const { user } = await renderApp()
-    await user.click(button("Start today's dive"))
+    await user.click(button('Start climbing'))
     for (let i = 0; i < 3; i++) {
       await playRound(user, today[i])
-      if (i < 2) await user.click(button(/Next prompt/))
+      if (i < 2) await user.click(button(/Next question/))
     }
 
     // Midnight passes while reading the third reveal (no round running). The home screen fetches the new day in
@@ -482,7 +495,7 @@ describe('midnight rollover (#7)', () => {
     expect(new Date().toISOString()).toBe('2026-11-10T16:01:00.000Z')
     await settle()
     expect(fetched(fetch)).toEqual([diveUrl(TODAY), diveUrl(TOMORROW)])
-    await user.click(button(/Next prompt/))
+    await user.click(button(/Next question/))
     await playDive(user, today, 3)
 
     expect(read<Stats>('ulu:stats')).toMatchObject({ played: 1, lastPlayed: TODAY, totalScore: 70 })
@@ -495,17 +508,17 @@ describe('midnight rollover (#7)', () => {
     expect(screen.getAllByText(/^Show all \d+ answers/).map((s) => s.textContent)).toEqual(
       today.map((p) => `Show all ${p.answers.length} answers for ${p.text}`),
     )
-    expect(screen.getByText("Today's dive is ready")).toBeDefined()
-    expect(screen.queryByText(/Next dive in/)).toBeNull()
+    expect(screen.getByText("Today's climb is ready")).toBeDefined()
+    expect(screen.queryByText(/Next climb in/)).toBeNull()
 
     await user.click(button('Home'))
     expect(screen.getByText('Ulu #16')).toBeDefined()
-    expect(button("Start today's dive")).toBeDefined()
-    expect(statsLine()).toBe('1 dives · 1 day streak · best 70')
+    expect(button('Start climbing')).toBeDefined()
+    expect(statsLine()).toBe('1 played · 1 day streak · best 70')
 
     // And tomorrow's dive is the new day's prompts
-    await user.click(button("Start today's dive"))
-    await user.click(button('Start dive'))
+    await user.click(button('Start climbing'))
+    await user.click(button('Going up'))
     expect(promptHeading()).toBe(tomorrow[0].text)
     expect(fetched(fetch)).toEqual([diveUrl(TODAY), diveUrl(TOMORROW)])
     expect(loadBank).not.toHaveBeenCalled()
@@ -558,12 +571,12 @@ describe('Unlimited (#6)', () => {
     expect(screen.getByRole('status').textContent).toBe('Loading Unlimited…')
     expect(screen.getByRole('main').getAttribute('aria-busy')).toBe('true')
     await settle()
-    expect(button('Start dive')).toBeDefined()
+    expect(button('Going up')).toBeDefined()
 
     // Kept for the next game, from home or from the results screen
     await user.click(button('Back to home'))
     await user.click(button(/Unlimited/))
-    expect(button('Start dive')).toBeDefined()
+    expect(button('Going up')).toBeDefined()
     expect(loadBank).toHaveBeenCalledTimes(1)
     expect(fetched(fetch)).toEqual([diveUrl(TODAY)])
   })
@@ -574,17 +587,17 @@ describe('Unlimited (#6)', () => {
     await user.click(button(/Unlimited/))
     await settle()
     expect(screen.getByRole('alert').textContent).toBe("Couldn't load Unlimited. Check your connection and try again.")
-    expect(screen.queryByRole('button', { name: 'Start dive' })).toBeNull()
+    expect(screen.queryByRole('button', { name: 'Going up' })).toBeNull()
 
     // Leave while it's loading: the game doesn't start behind the home screen
     fireEvent.click(button('Retry'))
     expect(screen.getByRole('status').textContent).toBe('Loading Unlimited…')
     await user.click(button('Home'))
     await settle()
-    expect(button("Start today's dive")).toBeDefined()
+    expect(button('Start climbing')).toBeDefined()
 
     await user.click(button(/Unlimited/))
-    expect(button('Start dive')).toBeDefined()
+    expect(button('Going up')).toBeDefined()
   })
 })
 
@@ -602,13 +615,13 @@ describe('streak display (#8)', () => {
   it('shows a 0 day streak once a whole day passed without a dive', async () => {
     saveStats(stats)
     await renderApp()
-    expect(statsLine()).toBe('5 dives · 0 day streak · best 300')
+    expect(statsLine()).toBe('5 played · 0 day streak · best 300')
   })
 
   it('keeps the streak while yesterday was played and today is not yet', async () => {
     saveStats({ ...stats, lastPlayed: '2026-11-09' })
     await renderApp()
-    expect(statsLine()).toBe('5 dives · 5 day streak · best 300')
+    expect(statsLine()).toBe('5 played · 5 day streak · best 300')
   })
 })
 
@@ -632,7 +645,7 @@ describe('analytics (#16)', () => {
 
   it('counts a finished daily once, with only its score band', async () => {
     const { user, unmount } = await renderApp()
-    await user.click(button("Start today's dive"))
+    await user.click(button('Start climbing'))
     await playDive(user, today)
     expect(events('dive_started')).toHaveLength(1)
     expect(events('dive_completed')).toEqual([['dive_completed', { props: { score: '0-99' } }]])
@@ -658,7 +671,7 @@ describe('analytics (#16)', () => {
       throw new Error('blocked')
     })
     const { user } = await renderApp()
-    await user.click(button("Start today's dive"))
+    await user.click(button('Start climbing'))
     await playDive(user, today)
     await user.click(button('See results'))
     expect(screen.getByText('Ulu #15')).toBeDefined()

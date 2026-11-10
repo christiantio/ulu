@@ -4,6 +4,7 @@ import userEvent from '@testing-library/user-event'
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest'
 import { ALL_PROMPTS } from '../content/bank'
 import { mulberry32, shuffle } from '../game/daily'
+import { STAGES } from '../game/elevator'
 import { buildReportUrl } from '../game/report'
 import { TIER_INFO } from '../game/scoring'
 import { TIERS, type Prompt, type RoundResult, type Tier } from '../game/types'
@@ -24,9 +25,9 @@ const hit = (tier: Tier): RoundResult => {
 }
 const miss: RoundResult = { promptId: prompt.id, input: '', attempts: [], answer: null, tier: null, points: 0 }
 
-function renderReveal(result: RoundResult, reportDate?: string) {
+function renderReveal(result: RoundResult, reportDate?: string, extra: Partial<Parameters<typeof Reveal>[0]> = {}) {
   const onNext = vi.fn()
-  render(<Reveal prompt={prompt} result={result} isLast={false} reportDate={reportDate} onNext={onNext} />)
+  render(<Reveal prompt={prompt} result={result} isLast={false} reportDate={reportDate} onNext={onNext} {...extra} />)
   const details = document.querySelector('details.all-answers') as HTMLDetailsElement
   return { onNext, details }
 }
@@ -68,6 +69,37 @@ describe('Reveal', () => {
     }
   })
 
+  it('says how rare the answer was, what it scored and how far the lift went', () => {
+    renderReveal(hit('rare'), undefined, { floor: 9 })
+    const verdict = document.querySelector('.verdict')!
+    expect(verdict.classList.contains('tier--rare')).toBe(true)
+    expect(verdict.querySelector('.verdict__label')!.textContent).toBe('Steady')
+    expect(verdict.querySelector('.verdict__floors')!.textContent).toBe('▲4')
+    expect(verdict.querySelector('.verdict__points')!.textContent).toBe('+60 points')
+    expect(verdict.querySelector('.verdict__blurb')!.textContent).toBe(`${TIER_INFO.rare.blurb} Up 4 floors, now on floor 09.`)
+    // Read out with the Next button
+    const next = screen.getByRole('button', { name: /Next question/ })
+    expect(document.getElementById(next.getAttribute('aria-describedby')!)!.contains(verdict)).toBe(true)
+    expect(document.querySelector('.upgrade')).toBeNull()
+  })
+
+  it('says the lift stayed put after a miss', () => {
+    renderReveal(miss, undefined, { floor: 3 })
+    const verdict = document.querySelector('.verdict')!
+    expect(verdict.classList.contains('verdict--miss')).toBe(true)
+    expect(verdict.querySelector('.verdict__label')!.textContent).toBe('Time up!')
+    expect(verdict.querySelector('.verdict__floors')!.textContent).toBe('–')
+    expect(verdict.querySelector('.verdict__blurb')!.textContent).toBe('The lift stays where it is. No floors gained, now on floor 03.')
+    expect(verdict.querySelector('.verdict__points')!.textContent).toBe('+0 points')
+  })
+
+  it('announces a new lift with the verdict when the answer unlocked one', () => {
+    renderReveal(hit('gem'), undefined, { floor: 7, upgrade: STAGES[1] })
+    expect(document.querySelector('.upgrade')!.textContent).toBe('New lift unlocked Upgraded HDB Lift')
+    const next = screen.getByRole('button', { name: /Next question/ })
+    expect(document.getElementById(next.getAttribute('aria-describedby')!)!.textContent).toContain('New lift unlocked Upgraded HDB Lift')
+  })
+
   it('shows every accepted answer behind a closed disclosure, grouped by tier, deepest first', async () => {
     const user = userEvent.setup()
     const { details } = renderReveal(hit('rare'))
@@ -77,10 +109,12 @@ describe('Reveal', () => {
 
     const groups = [...details.querySelectorAll('.all-answers__group')]
     expect(groups.map((g) => g.className.match(/tier--(\w+)/)![1])).toEqual(['gem', 'ulu', 'rare', 'solid', 'trap', 'common'])
-    // Read as e.g. "Sibei Ulu · 100 points", with the emoji hidden from screen readers
+    // Read as e.g. "Sibei Ulu · 100 points": the tier's lamp is decoration, hidden from screen readers
     const label = groups[0].querySelector('.all-answers__tier')!
-    expect(label.querySelector('[aria-hidden="true"]')!.textContent).toBe(TIER_INFO.gem.emoji)
+    expect(label.querySelector('.lamp--gem')!.getAttribute('aria-hidden')).toBe('true')
     expect(label.textContent).toContain(`${TIER_INFO.gem.label} · 100`)
+    // No emoji standing in for artwork
+    expect(document.querySelector('.reveal')!.textContent).not.toMatch(/[⚪🟡🟢🔵🟣💎❌]/u)
     // Each tier's list is named by its label, without the emoji or the visual "pts"
     expect(within(groups[0] as HTMLElement).getByRole('list', { name: 'Sibei Ulu · 100 points' })).toBeDefined()
 

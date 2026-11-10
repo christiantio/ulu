@@ -1,15 +1,18 @@
 import { useState } from 'react'
 import { track } from '../analytics'
-import { MAX_SCORE, MISS_EMOJI, TIER_INFO, destinationFor } from '../game/scoring'
-import { shareText, totalScore } from '../game/share'
+import { floorsFor, formatFloor, liftAfter, type StageId } from '../game/elevator'
+import { MAX_SCORE, TIER_INFO } from '../game/scoring'
+import { shareText } from '../game/share'
 import { singaporeDateKey } from '../game/daily'
 import { UNLIMITED_DATE } from '../game/report'
 import { displayStreak, type Stats } from '../game/storage'
 import type { Prompt, RoundResult } from '../game/types'
 import { AllAnswers } from './AllAnswers'
 import { Countdown } from './Countdown'
+import { ElevatorProgress } from './ElevatorProgress'
+import { ElevatorScene } from './elevator/ElevatorScene'
 import { ProblemLinks, RejectedGuesses } from './Report'
-import { RouteLine } from './RouteLine'
+import { TierLamp } from './TierLamp'
 
 interface Props {
   title: string
@@ -24,11 +27,23 @@ interface Props {
   onUnlimited: () => void
 }
 
+/** What the results call each lift. Nothing here is a consolation prize: the first lift is home */
+const HEADLINES: Record<StageId, string> = {
+  hdb: 'Heartland hero',
+  upgraded: 'Moving on up',
+  condo: 'Condo life',
+  cbd: 'High flyer',
+  marina: 'Room with a view',
+  penthouse: 'Top of the world',
+}
+/** From the Marina Bay lift up, the results get confetti */
+const CELEBRATE_FROM = 500
+
 export function Results({ title, results, prompts, stats, isDaily, dateKey, onHome, onUnlimited }: Props) {
   const [copied, setCopied] = useState(false)
   const byId = new Map(prompts.map((p) => [p.id, p]))
-  const score = totalScore(results)
-  const destination = destinationFor(score)
+  const { score, floor, stage, climbed } = liftAfter(results)
+  const perfect = score >= MAX_SCORE
   const reportDate = isDaily && dateKey ? dateKey : UNLIMITED_DATE
 
   const share = async () => {
@@ -49,91 +64,117 @@ export function Results({ title, results, prompts, stats, isDaily, dateKey, onHo
   }
 
   return (
-    <main className="results">
-      <p className="results__title">{title}</p>
-      <div className="results__score">
-        <span className="results__number">{score}</span>
-        <span className="muted">/ {MAX_SCORE}</span>
+    <main className={`results ${perfect ? 'results--perfect' : ''}`}>
+      <div className="results__lift">
+        <ElevatorScene score={score} floor={floor} climbed={climbed} size="finale" celebrate={score >= CELEBRATE_FROM} />
       </div>
-      <p className="results__destination">
-        You reached <strong>{destination.name}</strong>
-      </p>
-      <p className="muted">{destination.blurb}</p>
 
-      <RouteLine score={score} />
+      <div className="results__panel">
+        <div className="results__summary">
+          <p className="results__title">{title}</p>
+          <h1 className="results__headline">{perfect ? 'Perfect climb' : HEADLINES[stage.id]}</h1>
+          <div className="results__score">
+            <span className="results__number">{score}</span>
+            <span className="results__max">/ {MAX_SCORE}</span>
+          </div>
+          <p className="results__reached">
+            Floor <strong>{formatFloor(floor)}</strong> · <strong>{stage.name}</strong>
+          </p>
+          <p className="results__blurb">
+            {perfect ? 'All the way up. The doors open, and he blows another bubble.' : stage.blurb}
+          </p>
 
-      <ol className="breakdown">
-        {results.map((r) => {
-          const prompt = byId.get(r.promptId)
-          const gem = prompt?.answers.find((a) => a.tier === 'gem')
-          return (
-            <li key={r.promptId} className={`breakdown__row ${r.tier ? `tier--${r.tier}` : 'verdict--miss'}`}>
-              <span className="breakdown__emoji" aria-hidden="true">
-                {r.tier ? TIER_INFO[r.tier].emoji : MISS_EMOJI}
-              </span>
-              <span className="breakdown__body">
-                <span className="breakdown__prompt">{prompt?.text ?? r.promptId}</span>
-                <span className="breakdown__answer">
-                  {r.answer ?? <em>No answer</em>}
-                  {gem && r.tier !== 'gem' && (
-                    <span className="muted">
-                      <span aria-hidden="true"> · 💎</span>
-                      <span className="visually-hidden">. The gem:</span> {gem.name}
-                    </span>
-                  )}
+          <ol className="results__lamps" aria-label="Your seven answers">
+            {results.map((r, i) => (
+              <li key={r.promptId} className={`results__lamp ${r.tier ? `tier--${r.tier}` : 'verdict--miss'}`}>
+                <TierLamp tier={r.tier} />
+                <span className="results__climb" aria-hidden="true">
+                  {r.tier ? `▲${floorsFor(r.tier)}` : '–'}
                 </span>
-              </span>
-              <span className="breakdown__points">
-                <span className="visually-hidden">{r.tier ? TIER_INFO[r.tier].label : 'Time up'}, </span>
-                {r.points}
-                <span className="visually-hidden"> points</span>
-              </span>
-              {prompt && (
-                <div className="breakdown__more">
-                  <RejectedGuesses
-                    guesses={r.attempts}
-                    date={reportDate}
-                    promptId={prompt.id}
-                    context={`for ${prompt.text}`}
-                    compact
-                  />
-                  <AllAnswers prompt={prompt} yours={r.answer} context={prompt.text}>
-                    <ProblemLinks date={reportDate} promptId={prompt.id} context={`for ${prompt.text}`} />
-                  </AllAnswers>
-                </div>
-              )}
-            </li>
-          )
-        })}
-      </ol>
-
-      <button className="btn btn--primary btn--block btn--big" onClick={share}>
-        {copied ? 'Copied! Go paste in the group chat' : 'Share result'}
-      </button>
-
-      {isDaily && stats && (
-        <div className="stats">
-          <Stat label="Played" value={stats.played} />
-          <Stat label="Streak" value={displayStreak(stats, singaporeDateKey())} />
-          <Stat label="Best" value={stats.bestScore} />
-          <Stat label="Gems" value={stats.gems} />
+                <span className="visually-hidden">
+                  Question {i + 1}: {r.tier ? TIER_INFO[r.tier].label : 'Time up'}
+                </span>
+              </li>
+            ))}
+          </ol>
         </div>
-      )}
 
-      {isDaily && (
-        <p className="muted center">
-          {/* Finished past midnight: the next dive is already out, so don't count down to tomorrow's */}
-          {dateKey && dateKey !== singaporeDateKey() ? "Today's dive is ready" : <>Next dive in <Countdown /></>}
-        </p>
-      )}
+        <button className="btn btn--primary btn--block btn--big" onClick={share}>
+          {copied ? 'Copied! Go paste in the group chat' : 'Share result'}
+        </button>
 
-      <div className="results__actions">
-        <button className="btn btn--ghost" onClick={onHome}>
-          Home
-        </button>
-        <button className="btn btn--secondary" onClick={onUnlimited}>
-          {isDaily ? 'Play unlimited' : 'Play again'}
-        </button>
+        <ElevatorProgress score={score} floor={floor} />
+
+        <ol className="breakdown card">
+          {results.map((r) => {
+            const prompt = byId.get(r.promptId)
+            const gem = prompt?.answers.find((a) => a.tier === 'gem')
+            return (
+              <li key={r.promptId} className={`breakdown__row ${r.tier ? `tier--${r.tier}` : 'verdict--miss'}`}>
+                <span className="breakdown__lamp">
+                  <TierLamp tier={r.tier} />
+                </span>
+                <span className="breakdown__body">
+                  <span className="breakdown__prompt">{prompt?.text ?? r.promptId}</span>
+                  <span className="breakdown__answer">
+                    {r.answer ?? <em>No answer</em>}
+                    {gem && r.tier !== 'gem' && (
+                      <span className="muted">
+                        <span aria-hidden="true"> · </span>
+                        <TierLamp tier="gem" />
+                        <span className="visually-hidden">. The gem:</span> {gem.name}
+                      </span>
+                    )}
+                  </span>
+                </span>
+                <span className="breakdown__points">
+                  <span className="visually-hidden">{r.tier ? TIER_INFO[r.tier].label : 'Time up'}, </span>
+                  {r.points}
+                  <span className="visually-hidden"> points</span>
+                </span>
+                {prompt && (
+                  <div className="breakdown__more">
+                    <RejectedGuesses
+                      guesses={r.attempts}
+                      date={reportDate}
+                      promptId={prompt.id}
+                      context={`for ${prompt.text}`}
+                      compact
+                    />
+                    <AllAnswers prompt={prompt} yours={r.answer} context={prompt.text}>
+                      <ProblemLinks date={reportDate} promptId={prompt.id} context={`for ${prompt.text}`} />
+                    </AllAnswers>
+                  </div>
+                )}
+              </li>
+            )
+          })}
+        </ol>
+
+        {isDaily && stats && (
+          <div className="stats">
+            <Stat label="Played" value={stats.played} />
+            <Stat label="Streak" value={displayStreak(stats, singaporeDateKey())} />
+            <Stat label="Best" value={stats.bestScore} />
+            <Stat label="Gems" value={stats.gems} />
+          </div>
+        )}
+
+        {isDaily && (
+          <p className="muted center">
+            {/* Finished past midnight: the next game is already out, so don't count down to tomorrow's */}
+            {dateKey && dateKey !== singaporeDateKey() ? "Today's climb is ready" : <>Next climb in <Countdown /></>}
+          </p>
+        )}
+
+        <div className="results__actions">
+          <button className="btn btn--secondary" onClick={onHome}>
+            Home
+          </button>
+          <button className="btn btn--secondary" onClick={onUnlimited}>
+            {isDaily ? 'Play unlimited' : 'Play again'}
+          </button>
+        </div>
       </div>
     </main>
   )

@@ -14,7 +14,7 @@ export function PrivacyNote() {
         {config ? (
           <p>
             We count visits and a few anonymous events with {PROVIDER_NAMES[config.provider]}, which sets no cookies:
-            starting and finishing the daily dive (with the score in bands of 100 points), starting Unlimited,
+            starting and finishing the daily game (with the score in bands of 100 points), starting Unlimited,
             tapping Share and opening How to play.
           </p>
         ) : (
