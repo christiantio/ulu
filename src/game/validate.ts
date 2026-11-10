@@ -1,3 +1,4 @@
+import { addDays } from './daily'
 import { normalize } from './normalize'
 import { CATEGORIES, TIERS, type Pack, type Tier } from './types'
 
@@ -5,6 +6,18 @@ export const MIN_ANSWERS = 12
 /** Players need several easy ways in, otherwise the prompt is just frustrating */
 export const MIN_EASY_ANSWERS = 3
 const EASY_TIERS: Tier[] = ['common', 'trap', 'solid']
+
+/** A real calendar date written YYYY-MM-DD: 2026-02-30 is not one */
+function isIsoDate(value: unknown): value is string {
+  if (typeof value !== 'string' || !/^\d{4}-\d{2}-\d{2}$/.test(value)) return false
+  const time = Date.parse(`${value}T00:00:00Z`)
+  return !Number.isNaN(time) && new Date(time).toISOString().slice(0, 10) === value
+}
+
+function isHttpUrl(value: unknown): boolean {
+  if (typeof value !== 'string' || !/^https?:\/\/\S+$/.test(value)) return false
+  return URL.canParse(value)
+}
 
 /**
  * Check packs against the content rules. Returns a list of human-readable
@@ -35,6 +48,17 @@ export function validatePacks(packs: Record<string, Pack>): string[] {
       if (!CATEGORIES.includes(prompt.category))
         errors.push(`${where}: unknown category "${prompt.category}"`)
       if (!prompt.text?.trim()) errors.push(`${where}: missing text`)
+
+      if (prompt.sources !== undefined) {
+        if (!Array.isArray(prompt.sources) || prompt.sources.length === 0)
+          errors.push(`${where}: "sources" must be a list of at least one URL`)
+        else
+          for (const source of prompt.sources)
+            if (!isHttpUrl(source)) errors.push(`${where}: source "${source}" must be an absolute http(s) URL`)
+      }
+      if (prompt.reviewBy !== undefined && !isIsoDate(prompt.reviewBy))
+        errors.push(`${where}: "reviewBy" must be a real date (YYYY-MM-DD), found "${prompt.reviewBy}"`)
+
       if (!Array.isArray(prompt.answers)) {
         errors.push(`${where}: missing answers`)
         continue
@@ -73,4 +97,56 @@ export function validatePacks(packs: Record<string, Pack>): string[] {
   }
 
   return errors
+}
+
+/** A prompt whose answer list needs checking against its sources, now or soon */
+export interface ReviewDue {
+  file: string
+  promptId: string
+  reviewBy: string
+  /** The review date is before today */
+  overdue: boolean
+  sources: string[]
+}
+
+/**
+ * Prompts whose review date is on or before `today`, or within `withinDays` days after it, earliest first.
+ * `today` is a Singapore date key. A malformed review date is left to validatePacks
+ */
+export function reviewsDue(packs: Record<string, Pack>, today: string, withinDays = 0): ReviewDue[] {
+  const until = addDays(today, withinDays)
+  const due: ReviewDue[] = []
+  for (const [file, pack] of Object.entries(packs)) {
+    for (const prompt of pack.prompts ?? []) {
+      if (!isIsoDate(prompt.reviewBy) || prompt.reviewBy > until) continue
+      due.push({
+        file,
+        promptId: prompt.id,
+        reviewBy: prompt.reviewBy,
+        overdue: prompt.reviewBy < today,
+        sources: Array.isArray(prompt.sources) ? prompt.sources : [],
+      })
+    }
+  }
+  return due.sort((a, b) => a.reviewBy.localeCompare(b.reviewBy) || a.promptId.localeCompare(b.promptId))
+}
+
+/**
+ * Things about the packs that need attention but aren't wrong: a review date that has arrived, and a note that
+ * says "as of" on a prompt with no review date. Unlike validatePacks, the answer depends on today's date, so
+ * these never fail a build
+ */
+export function reviewWarnings(packs: Record<string, Pack>, today: string): string[] {
+  const warnings = reviewsDue(packs, today).map(({ file, promptId, reviewBy, overdue }) =>
+    overdue
+      ? `${file} › ${promptId}: was due for review on ${reviewBy}`
+      : `${file} › ${promptId}: is due for review today (${reviewBy})`,
+  )
+  for (const [file, pack] of Object.entries(packs)) {
+    for (const prompt of pack.prompts ?? []) {
+      if (prompt.reviewBy === undefined && /\bas of\b/i.test(prompt.note ?? ''))
+        warnings.push(`${file} › ${prompt.id}: the note says "as of" but the prompt has no reviewBy date`)
+    }
+  }
+  return warnings
 }

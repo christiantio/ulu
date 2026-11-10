@@ -29,6 +29,13 @@ export interface Prompt {
   text: string
   /** Optional rule clarification shown under the prompt */
   note?: string
+  /**
+   * The pages the answer list was checked against, as absolute http(s) URLs, with the page that lists the whole
+   * set first. For sets that can change; never shown to players
+   */
+  sources?: string[]
+  /** The Singapore date (YYYY-MM-DD) the answer list next needs checking against its sources */
+  reviewBy?: string
   /** Every accepted answer; exactly one has tier "gem" */
   answers: Answer[]
 }

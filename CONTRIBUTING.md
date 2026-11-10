@@ -20,7 +20,8 @@ are listed in `.env.example`. Copy it to `.env.local` if you need one locally.
 |---|---|
 | `npm run dev` | Local dev server |
 | `npm test` | Unit and component tests, plus content and schedule validation |
-| `npm run validate` | Content and schedule validation only, with a readable list of problems |
+| `npm run validate` | Content and schedule validation only, with a readable list of problems and of prompts due a fact review |
+| `npm run review:due` | List the prompts that are overdue for a fact review or fall due in the next 31 days (see [Fact reviews](#fact-reviews)) |
 | `npm run lint` | ESLint |
 | `npm run build` | Type-check (`tsc -b`) and build to `dist/`, including one `dives/<date>.json` per scheduled day |
 | `npm run check:bundle` | After a build: check the entry JS against its size budget, check it has no question data, and check every day's dive file is there |
@@ -51,7 +52,8 @@ from `.tool-versions` and runs, in order:
 1. `npm ci`
 2. `npm run lint`
 3. `npm test`
-4. `npm run validate` (also part of `npm test`, but run on its own for a readable list of content problems)
+4. `npm run validate` (also part of `npm test`, but run on its own for a readable list of content problems). Its
+   warnings about fact reviews don't fail the run (see [Fact reviews](#fact-reviews))
 5. `npm run build` (which includes `tsc -b`)
 6. `npm run check:bundle`
 
@@ -77,8 +79,8 @@ to reach 14 days past today, so CI can go red on a PR that didn't touch content.
 2. **Write the prompts** by hand, or start with `npm run draft` and check every answer. Drafts land in
    `content/drafts/`. Copy the prompt into `src/content/packs/<category>.json`, and leave the draft file out
    of the PR.
-3. **Follow the guide**: [docs/writing-prompts.md](docs/writing-prompts.md) covers tiers, aliases, the gem
-   and the note.
+3. **Follow the guide**: [docs/writing-prompts.md](docs/writing-prompts.md) covers tiers, aliases, the gem,
+   the note, and the `sources` and `reviewBy` date a changeable set needs.
 4. **Validate**: `npm run validate` and `npm test`.
 5. **One category per PR.** Keep a batch of prompts to one pack, and title the PR `content(<category>): …`,
    e.g. `content(food): add zi char and kueh fillings prompts`.
@@ -115,6 +117,43 @@ have already played.
   commit the result.
 
 The design behind this is in [ARCHITECTURE.md](ARCHITECTURE.md#daily-selection).
+
+## Fact reviews
+
+Some prompts are about sets that change: Cabinet ministers, MRT stations, bus interchanges, national monuments.
+Each of these records the `sources` its answers were checked against and a `reviewBy` date for the next check.
+[docs/writing-prompts.md](docs/writing-prompts.md#sources-and-review-dates) says how to choose both.
+
+**Warnings.** `npm run validate` prints a warning, marked `⚠`, in two cases:
+
+```
+⚠ transport.json › transport-dtl-stations: was due for review on 2026-12-26
+⚠ politics.json › politics-ministries: the note says "as of" but the prompt has no reviewBy date
+
+✓ 67 prompts in 8 pack(s) are valid, with 2 warning(s)
+```
+
+- The first means the prompt's `reviewBy` date is today or has passed.
+- The second means a note has an as-of date but nobody has said when to check it again.
+
+Warnings don't fail `npm run validate`, `npm test` or CI, so they never block a PR. In GitHub Actions they also
+appear as annotations on the run. If you see one for a prompt you aren't working on, leave it: the reminder
+issue below is where it gets picked up.
+
+**The monthly reminder.** On the 1st of each month, the
+[review reminder workflow](.github/workflows/review-reminder.yml) lists every prompt that is overdue or falls
+due in the next 31 days, with its sources, in an issue labelled `review-due`. If last month's issue is still
+open, it updates that issue instead of opening another. If nothing is due, it does nothing. Run
+`npm run review:due` to see the same list locally, or start the workflow by hand from the Actions tab.
+
+**Doing a review.** Follow
+[When a review is due](docs/writing-prompts.md#when-a-review-is-due): check the answers and the note against
+the sources, fix what changed, set the next `reviewBy`, and open a content PR that says what you checked.
+Close the reminder issue when every prompt on it is done. Closing it is how the team knows the month's reviews
+are finished, and the next run opens a fresh one.
+
+> **TODO (team):** decide who picks up the reminder issue each month, along with the triage in
+> [Answer reports from players](#answer-reports-from-players).
 
 ## Reporting problems
 

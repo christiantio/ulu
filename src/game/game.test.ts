@@ -7,7 +7,7 @@ import { MAX_SCORE, destinationFor } from './scoring'
 import { shareText } from './share'
 import { displayStreak, type Stats } from './storage'
 import { CATEGORIES, type Prompt, type Tier } from './types'
-import { validatePacks } from './validate'
+import { reviewWarnings, reviewsDue, validatePacks } from './validate'
 
 function makePrompt(id: string, answers: [string, Tier, string[]?][], category: Prompt['category'] = 'places'): Prompt {
   return { id, category, text: id, answers: answers.map(([name, tier, aliases]) => ({ name, tier, aliases })) }
@@ -302,5 +302,138 @@ describe('validatePacks', () => {
     const errors = validatePacks(pack([{ ...thin, category: 'sports' as Prompt['category'] }]))
     expect(errors.some((e) => e.includes('min 12'))).toBe(true)
     expect(errors.some((e) => e.includes('unknown category'))).toBe(true)
+  })
+
+  it('accepts sources and a review date, and a prompt with neither', () => {
+    const sourced = {
+      ...towns,
+      sources: ['https://www.hdb.gov.sg/towns', 'http://example.org/list'],
+      reviewBy: '2026-12-26',
+    }
+    expect(validatePacks(pack([sourced]))).toEqual([])
+    expect(validatePacks(pack([towns]))).toEqual([])
+  })
+
+  it('flags sources that are empty, not a list or not absolute http(s) URLs', () => {
+    const withSources = (id: string, sources: unknown) => ({ ...towns, id, sources: sources as string[] })
+    const errors = validatePacks(
+      pack([
+        withSources('empty', []),
+        withSources('text', ['https://www.lta.gov.sg/', 'LTA website']),
+        withSources('relative', ['/rail-network']),
+        withSources('scheme', ['ftp://example.org/list']),
+        withSources('string', 'https://www.lta.gov.sg/'),
+      ]),
+    )
+    expect(errors).toHaveLength(5)
+    expect(errors.some((e) => e.includes('empty') && e.includes('at least one URL'))).toBe(true)
+    expect(errors.some((e) => e.includes('text') && e.includes('"LTA website"'))).toBe(true)
+    expect(errors.some((e) => e.includes('relative') && e.includes('"/rail-network"'))).toBe(true)
+    expect(errors.some((e) => e.includes('scheme') && e.includes('"ftp://example.org/list"'))).toBe(true)
+    expect(errors.some((e) => e.includes('string') && e.includes('at least one URL'))).toBe(true)
+  })
+
+  it('flags a review date that is not a real YYYY-MM-DD date', () => {
+    const withDate = (id: string, reviewBy: string) => ({ ...towns, id, reviewBy })
+    const errors = validatePacks(
+      pack([withDate('ok', '2026-12-26'), withDate('words', '26 Dec 2026'), withDate('no-such-day', '2026-02-30')]),
+    )
+    expect(errors).toHaveLength(2)
+    expect(errors.some((e) => e.includes('words') && e.includes('"26 Dec 2026"'))).toBe(true)
+    expect(errors.some((e) => e.includes('no-such-day') && e.includes('"2026-02-30"'))).toBe(true)
+  })
+})
+
+describe('reviewWarnings', () => {
+  const pack = (prompts: Prompt[]) => ({ 'test.json': { name: 'Test', asOf: '2026-10-27', prompts } })
+  const prompt = (id: string, extra: Partial<Prompt>): Prompt => ({ ...towns, id, ...extra })
+
+  it('warns once the review date has passed, naming the prompt and the date', () => {
+    const warnings = reviewWarnings(pack([prompt('dtl', { reviewBy: '2026-12-26' })]), '2026-12-27')
+    expect(warnings).toEqual(['test.json › dtl: was due for review on 2026-12-26'])
+  })
+
+  it('warns on the review date itself', () => {
+    const warnings = reviewWarnings(pack([prompt('dtl', { reviewBy: '2026-12-26' })]), '2026-12-26')
+    expect(warnings).toEqual(['test.json › dtl: is due for review today (2026-12-26)'])
+  })
+
+  it('says nothing while the review date is in the future', () => {
+    expect(reviewWarnings(pack([prompt('dtl', { reviewBy: '2026-12-26' })]), '2026-11-10')).toEqual([])
+  })
+
+  it('warns about an as-of note with no review date, in any letter case', () => {
+    const warnings = reviewWarnings(
+      pack([
+        prompt('ministries', { note: 'As of October 2026. MTI was renamed.' }),
+        prompt('buses', { note: 'Any interchange operating as of October 2026.' }),
+      ]),
+      '2026-11-10',
+    )
+    expect(warnings).toEqual([
+      'test.json › ministries: the note says "as of" but the prompt has no reviewBy date',
+      'test.json › buses: the note says "as of" but the prompt has no reviewBy date',
+    ])
+  })
+
+  it('says nothing about an as-of note that has a future review date', () => {
+    const dated = prompt('ministries', { note: 'As of October 2026.', reviewBy: '2027-03-15' })
+    expect(reviewWarnings(pack([dated]), '2026-11-10')).toEqual([])
+  })
+
+  it('says nothing about a prompt with no note and no review date, or a note without "as of"', () => {
+    const plain = [prompt('plain', {}), prompt('scoped', { note: 'Palms count. Basil is not a tree.' })]
+    expect(reviewWarnings(pack(plain), '2026-11-10')).toEqual([])
+  })
+
+  it('leaves a malformed review date to validatePacks', () => {
+    expect(reviewWarnings(pack([prompt('words', { reviewBy: '26 Dec 2026' })]), '2027-01-01')).toEqual([])
+  })
+})
+
+describe('reviewsDue', () => {
+  const pack = (prompts: Prompt[]) => ({ 'test.json': { name: 'Test', asOf: '2026-10-27', prompts } })
+  const prompt = (id: string, reviewBy?: string, sources?: string[]): Prompt => ({ ...towns, id, reviewBy, sources })
+
+  it('lists overdue prompts and those due within the window, earliest first, with their sources', () => {
+    const due = reviewsDue(
+      pack([
+        prompt('dtl', '2026-12-26', ['https://www.lta.gov.sg/dtl']),
+        prompt('buses', '2026-11-22', ['https://www.sbstransit.com.sg/', 'https://www.lta.gov.sg/ith']),
+        prompt('ministries', '2027-03-15'),
+        prompt('kueh'),
+      ]),
+      '2026-12-01',
+      31,
+    )
+    expect(due).toEqual([
+      {
+        file: 'test.json',
+        promptId: 'buses',
+        reviewBy: '2026-11-22',
+        overdue: true,
+        sources: ['https://www.sbstransit.com.sg/', 'https://www.lta.gov.sg/ith'],
+      },
+      {
+        file: 'test.json',
+        promptId: 'dtl',
+        reviewBy: '2026-12-26',
+        overdue: false,
+        sources: ['https://www.lta.gov.sg/dtl'],
+      },
+    ])
+  })
+
+  it('is empty when nothing is overdue or due within the window', () => {
+    expect(reviewsDue(pack([prompt('ministries', '2027-03-15'), prompt('kueh')]), '2026-12-01', 31)).toEqual([])
+  })
+
+  it('includes the last day of the window and leaves out the day after', () => {
+    const edge = pack([prompt('last-day', '2027-01-01'), prompt('day-after', '2027-01-02')])
+    expect(reviewsDue(edge, '2026-12-01', 31).map((d) => d.promptId)).toEqual(['last-day'])
+  })
+
+  it('counts a review date of today as due but not overdue', () => {
+    expect(reviewsDue(pack([prompt('dtl', '2026-12-26')]), '2026-12-26')).toMatchObject([{ overdue: false }])
   })
 })

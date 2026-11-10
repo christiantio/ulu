@@ -1,0 +1,48 @@
+name: Review reminder
+
+# Once a month, list the prompts whose facts are due a re-check (their reviewBy date has passed, or falls in the
+# next 31 days) in an issue. See CONTRIBUTING.md, "Fact reviews"
+on:
+  schedule:
+    # 09:00 in Singapore on the 1st
+    - cron: '0 1 1 * *'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  issues: write
+
+concurrency:
+  group: review-reminder
+  cancel-in-progress: false
+
+jobs:
+  remind:
+    name: Open or update the reminder issue
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-node@v7
+        with:
+          node-version-file: .tool-versions
+          cache: npm
+      - run: npm ci
+      # Prints nothing when no prompt is due, which leaves the file empty
+      - name: List the prompts due for review
+        run: npx tsx scripts/review-due.ts > review-due.md
+      - name: Open or update the issue
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          if [ ! -s review-due.md ]; then
+            echo "No prompt is due for review. Nothing to do."
+            exit 0
+          fi
+          gh label create review-due --description "Prompts whose facts are due a re-check" --color FBCA04 --force
+          # One reminder at a time: an open one from an earlier month gets the current list instead of a second issue
+          existing=$(gh issue list --label review-due --state open --limit 1 --json number --jq '.[0].number // empty')
+          if [ -n "$existing" ]; then
+            gh issue edit "$existing" --body-file review-due.md
+          else
+            gh issue create --title "Prompts due for fact review" --label review-due --body-file review-due.md
+          fi

@@ -1,8 +1,8 @@
 # Writing prompts
 
 How to write a prompt for Ulu, and how to review one. It covers the questions that come up every time: which
-tier, which aliases, which gem, and what goes in the note. All examples are real prompts from
-`src/content/packs/`.
+tier, which aliases, which gem, what goes in the note, and how to record where the answers came from. All
+examples are real prompts from `src/content/packs/`.
 
 For setup, branches and the PR flow, see [CONTRIBUTING.md](../CONTRIBUTING.md).
 
@@ -34,6 +34,9 @@ For setup, branches and the PR flow, see [CONTRIBUTING.md](../CONTRIBUTING.md).
 - **`text`**: what the player sees. Almost all of them start with "Name a …" and ask for one thing.
 - **`note`**: optional. A short line shown under the prompt that sets the rules (see [The note](#the-note)).
 - **`answers`**: every accepted answer, each with a `name`, a `tier` and optional `aliases`.
+- **`sources`** and **`reviewBy`**: optional, and for sets that can change. The pages the answer list was checked
+  against, and the date it next needs checking (see [Sources and review dates](#sources-and-review-dates)).
+  Players never see them.
 
 The `name` is what players see on the reveal screen, so use the official or most recognised spelling
 ("HarbourFront", "one-north", "S. R. Nathan"). Every other spelling goes in `aliases`.
@@ -53,11 +56,20 @@ These come from `src/game/validate.ts`. A prompt that breaks any of them fails C
 | Every tier is a known tier | |
 | No name or alias normalises to nothing | e.g. an alias written only in Chinese characters (see [Aliases](#aliases)) |
 | No two answers share a normalised name or alias | Otherwise one input would match two answers |
+| `sources`, if present, is a list of at least one absolute `http` or `https` URL | A source has to be a page someone can open |
+| `reviewBy`, if present, is a real date written `YYYY-MM-DD` | The reminders compare it with today's date |
 
 Each pack also needs a `name` and an `asOf` date (`YYYY-MM-DD`, when its facts were last checked) and at least
 one prompt.
 
 To check a draft on its own, without the schedule: `npm run validate -- content/drafts/<id>.json`.
+
+It also prints **warnings** (`⚠`), which never fail CI:
+
+| Warning | What to do |
+|---|---|
+| A prompt's `reviewBy` date is today or has passed | Re-check the prompt (see [When a review is due](#when-a-review-is-due)) |
+| A note says "as of" but the prompt has no `reviewBy` | Add `sources` and a `reviewBy` date |
 
 ## What makes a good prompt
 
@@ -260,6 +272,70 @@ An example in the note is a free answer for anyone who reads it, so prefer easy 
 naming the gem. Sometimes it can't be helped: the gem in `transport-nsl-stations` is Marina South Pier, which
 is also the end of the line the note describes.
 
+## Sources and review dates
+
+Some sets change: office holders, ministries and statutory boards, stations that open or close, gazetted
+monuments, operating bus interchanges. A prompt on one of these records where its answers came from and when
+to look again:
+
+```json
+{
+  "id": "transport-dtl-stations",
+  "category": "transport",
+  "text": "Name a station on the Downtown Line",
+  "note": "The blue line, Bukit Panjang to Expo, plus the extension to Xilin and Sungei Bedok (opening on 26 December 2026).",
+  "sources": [
+    "https://www.lta.gov.sg/content/dam/ltagov/getting_around/public_transport/rail_network/pdf/SM_EN_(Ver210726)_CCL6.pdf",
+    "https://www.lta.gov.sg/content/ltagov/en/getting_around/public_transport/rail_network/downtown_line.html",
+    "https://www.lta.gov.sg/content/ltagov/en/newsroom/2026/11/news-releases/tel5-dtl3e-passenger-service-26-dec-2026.html"
+  ],
+  "reviewBy": "2026-12-26",
+  "answers": []
+}
+```
+
+(Shortened; the real prompt lists every station. The first source is LTA's system map, the one page that
+shows the whole line. The last is the release that gave the opening date, which is why `reviewBy` is that day.)
+
+**`sources`** is the list of pages you checked the answers against, as full `https://…` URLs.
+
+- Open every page before you list it. A source nobody opened is worth nothing.
+- Put the page that lists the whole set first, then the pages for recent changes (a press release, say).
+  One to three is usually enough.
+- Prefer the official page: the agency's own list over a news report, a news report over Wikipedia. Some sets
+  have no official list (every Deputy Prime Minister, every bus terminal). Then use the best page there is,
+  and more than one if no single page covers the set.
+- Prefer a page that will still be there next year: a landing page over a dated PDF with a version in its
+  file name.
+
+**`reviewBy`** is the Singapore date the answers next need checking, written `YYYY-MM-DD`.
+
+- If a change to the set has been announced, use its date: a station's opening day, the day a merger takes
+  effect.
+- Otherwise use six months from the day you checked. Use less for a set that changes without notice, such as
+  the Cabinet.
+- A set pinned to a past event ("the GE2025 electoral map") can't change, so it needs neither field.
+
+Set both whenever the note has an as-of date, and whenever the note describes something still to come ("due to
+open in late 2026", "don't count yet"). `npm run validate` warns about the first case. The second is yours to
+catch.
+
+### When a review is due
+
+From the `reviewBy` date on, `npm run validate` warns about the prompt, and the monthly reminder issue lists it
+(see [CONTRIBUTING.md](../CONTRIBUTING.md#fact-reviews)). To clear it:
+
+1. Open each source and compare the answer list with it in both directions: every answer is still true, and
+   nothing true is missing. Check the note as well.
+2. Fix what changed. Update the note's as-of date and any wording that is now in the past ("due to open"
+   becomes "opened"). Replace a source that has moved.
+3. Set the next `reviewBy`.
+4. Open a content PR, and say in it what you checked and against which source. That applies even when nothing
+   changed and the PR only moves the date.
+
+Don't move `reviewBy` forward without doing the check. The warning is the only thing standing between a stale
+list and a player who gets zero for a right answer.
+
 ## Reviewer checklist
 
 Every new prompt needs a second person to review it, someone other than the writer. Go through this list for
@@ -270,6 +346,8 @@ each prompt in a content PR, and say in the review that you did.
 - [ ] The text is clear and asks for one thing. It's answerable in 25 seconds.
 - [ ] The scope is settled. Any answer two players could argue about is covered by the text or the note.
 - [ ] A time-sensitive set has an as-of date (or an event date) in the note.
+- [ ] A set that can change has `sources` and a `reviewBy` date. You opened the sources.
+- [ ] If the PR changes `reviewBy`, it says what was checked and against which source.
 - [ ] The note is short and in the house tone. If it names the gem, that's on purpose.
 
 **The answers**

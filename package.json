@@ -9,6 +9,7 @@
     "lint": "eslint .",
     "preview": "vite preview",
     "validate": "tsx scripts/validate-content.ts",
+    "review:due": "tsx scripts/review-due.ts",
     "check:bundle": "tsx scripts/check-bundle.ts",
     "test": "vitest run",
     "draft": "tsx scripts/draft-prompt.ts",

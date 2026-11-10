@@ -45,7 +45,7 @@ src/
     storage.ts       localStorage progress + stats (fails safe)
     share.ts         share text
     report.ts        answer report links (VITE_REPORT_URL or the GitHub issue form)
-    validate.ts      content rules, shared by tests and scripts
+    validate.ts      content rules and fact-review warnings, shared by tests and scripts
   content/
     packs/*.json     the question bank, one pack per category
     schedule.json    which prompts run on which day
@@ -60,6 +60,8 @@ src/
   test/motion.ts     test helper: a matchMedia stub for prefers-reduced-motion
 scripts/
   validate-content.ts   npm run validate
+  review-due.ts         npm run review:due  (prompts whose facts are due a re-check)
+  read-packs.ts         reads pack files from disk for the two scripts above
   schedule.ts           npm run schedule  (extend the daily schedule)
   draft-prompt.ts       npm run draft  (Claude-assisted drafting, offline)
   site-meta.ts          Vite plugin: absolute link-preview tags from VITE_SITE_URL
@@ -127,6 +129,8 @@ Questions are **curated data, not generated at runtime**. A prompt is a JSON obj
   "category": "transport",
   "text": "Name a station on the Circle Line",
   "note": "As of October 2026",
+  "sources": ["https://www.lta.gov.sg/content/ltagov/en/upcoming_projects/rail_expansion/circle_line_6.html"],
+  "reviewBy": "2027-05-10",
   "answers": [
     { "name": "Dhoby Ghaut", "tier": "common" },
     { "name": "HarbourFront", "aliases": ["Harbour Front"], "tier": "common" },
@@ -143,15 +147,38 @@ Pipeline:
    `content/drafts/` along with notes for the reviewer. Nothing it produces goes live automatically.
 2. **Review.** A human checks every answer for correctness, completeness (unrecognised = 0 points, so gaps
    are frustrating), tier calibration and the gem choice. Time-sensitive sets (new MRT stations, office holders)
-   get a `note` with an as-of date.
+   get a `note` with an as-of date, the `sources` the answers were checked against, and a `reviewBy` date for
+   the next check.
 3. **Validate.** `npm run validate` (also run in `npm test`) enforces: unique kebab-case ids, known
    category, ≥ 12 answers, ≥ 3 easy (common/trap/solid) answers, exactly one gem, and that no two answers share
-   a normalised name or alias, which would make matching ambiguous.
+   a normalised name or alias, which would make matching ambiguous. It also checks that `sources` are URLs
+   and `reviewBy` is a real date.
 4. **Ship.** Move the prompt into `src/content/packs/<category>.json`. At build time it goes into the dive files
    of the days it's scheduled on and into the lazily loaded bank (see [Loading content](#loading-content)).
 
 Prompts favour **closed, verifiable sets** (stations on a line, Presidents, HDB towns) because they can be
 complete. Open sets (hawker dishes, Singlish words) carry long answer lists with spelling variants.
+
+### Keeping facts current
+
+A closed set is only complete until it changes: a station opens, a ministry is renamed, a monument is gazetted.
+A prompt on such a set carries two optional fields, `sources` (the pages its answers were checked against) and
+`reviewBy` (the Singapore date it next needs checking). They ship with the prompt in the dive files and the
+bank, but the app doesn't read them and players never see them.
+
+- **Warnings, not failures.** From the `reviewBy` date on, `npm run validate` prints a warning for the prompt.
+  It prints another for a note that says "as of" on a prompt with no `reviewBy`. Warnings come from
+  `reviewWarnings()` in `game/validate.ts`, which takes today's date. `validatePacks()` doesn't, so the content
+  rules stay the same on every day. A warning never fails `npm test` or CI: a red build on a PR that didn't
+  touch content teaches people to ignore red builds. In GitHub Actions the warnings also show as annotations on
+  the run.
+- **A monthly reminder.** `.github/workflows/review-reminder.yml` runs `scripts/review-due.ts` on the 1st of
+  each month. If any prompt is overdue or falls due in the next 31 days, it opens an issue labelled
+  `review-due` listing each one with its sources. If last month's issue is still open, it updates that one
+  instead of opening a second. The window is 31 days so that it always reaches the next run.
+- **What it doesn't do.** Nothing checks that a source URL still loads, and nothing notices a changeable set
+  that has neither an as-of note nor a `reviewBy`. Both are down to the writer and the reviewer (see
+  [docs/writing-prompts.md](docs/writing-prompts.md#sources-and-review-dates)).
 
 ### How rarity is decided (now and later)
 

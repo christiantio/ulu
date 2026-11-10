@@ -89,7 +89,7 @@ when the build has it. The choice of provider is in [ARCHITECTURE.md](ARCHITECTU
 ## Add questions
 
 Prompts live in `src/content/packs/<category>.json`. Read [docs/writing-prompts.md](docs/writing-prompts.md)
-first: it covers tiers, aliases, the gem, notes and the reviewer checklist. Write a prompt by hand, or draft
+first: it covers tiers, aliases, the gem, notes, sources and review dates, and the reviewer checklist. Write a prompt by hand, or draft
 one with Claude and then review it:
 
 ```bash
