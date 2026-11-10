@@ -25,7 +25,8 @@ are listed in `.env.example`. Copy it to `.env.local` if you need one locally.
 | `npm run build` | Type-check (`tsc -b`) and build to `dist/`, including one `dives/<date>.json` per scheduled day |
 | `npm run check:bundle` | After a build: check the entry JS against its size budget, check it has no question data, and check every day's dive file is there |
 | `npm run schedule` | Extend the daily schedule (see [The daily schedule](#the-daily-schedule)) |
-| `npm run draft -- --category <category> "Name a …"` | Draft a prompt with Claude (needs `ANTHROPIC_API_KEY` or an `ant auth login` profile) |
+| `npm run ideas -- --scope <sg\|world>` | Ask Claude for prompt ideas to choose from (needs `ANTHROPIC_API_KEY` or an `ant auth login` profile) |
+| `npm run draft -- --category <category> "Name a …"` | Draft a prompt with Claude: answers, a fact-check, and suggested tiers (same credentials). Add `--prompts` to print what it would send, with no API call |
 
 ## Branches and pull requests
 
@@ -74,9 +75,10 @@ to reach 14 days past today, so CI can go red on a PR that didn't touch content.
 ## Content PRs
 
 1. **Branch**: `content/<something>`, e.g. `content/food-zi-char`.
-2. **Write the prompts** by hand, or start with `npm run draft` and check every answer. Drafts land in
-   `content/drafts/`. Copy the prompt into `src/content/packs/<category>.json`, and leave the draft file out
-   of the PR.
+2. **Write the prompts** by hand, or start with `npm run draft` and check every answer
+   ([docs/question-pipeline.md](docs/question-pipeline.md) explains what it does and what it leaves to you).
+   Drafts land in `content/drafts/`, which is git-ignored. Copy the prompt, without its `review` block, into
+   `src/content/packs/<category>.json`.
 3. **Follow the guide**: [docs/writing-prompts.md](docs/writing-prompts.md) covers tiers, aliases, the gem
    and the note.
 4. **Validate**: `npm run validate` and `npm test`.
@@ -89,7 +91,8 @@ to reach 14 days past today, so CI can go red on a PR that didn't touch content.
 
 Categories are fixed in code. A new one needs:
 
-- an entry in `CATEGORIES` in `src/game/types.ts`;
+- an entry in `SG_CATEGORIES` or `WORLD_CATEGORIES` in `src/game/types.ts`. Which list decides whether its
+  prompts count as Singapore or world rounds when a day is scheduled;
 - a new pack, `src/content/packs/<category>.json`, with a `name`, an `asOf` date and at least one prompt;
 - a new option in the category dropdown in `.github/ISSUE_TEMPLATE/prompt_idea.yml`.
 

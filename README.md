@@ -88,16 +88,22 @@ when the build has it. The choice of provider is in [ARCHITECTURE.md](ARCHITECTU
 
 ## Add questions
 
-Prompts live in `src/content/packs/<category>.json`. Read [docs/writing-prompts.md](docs/writing-prompts.md)
-first: it covers tiers, aliases, the gem, notes and the reviewer checklist. Write a prompt by hand, or draft
-one with Claude and then review it:
+Prompts live in `src/content/packs/<category>.json`: eight Singapore categories, and four world ones
+(`world`, `science`, `entertainment`, `wildcard`) for general-knowledge rounds. Read
+[docs/writing-prompts.md](docs/writing-prompts.md) first: it covers tiers, aliases, decoys, the gem, notes and
+the reviewer checklist. Write a prompt by hand, or have Claude propose ideas and draft one for you to review:
+
+```bash
+ANTHROPIC_API_KEY=... npm run ideas -- --scope world
+```
 
 ```bash
 ANTHROPIC_API_KEY=... npm run draft -- --category food "Name a kueh"
 ```
 
-Drafts land in `content/drafts/`. Check every answer and tier, then move the prompt into a pack and run
-`npm run validate`.
+A draft comes with a fact-check and suggested tiers, and lands in `content/drafts/`. Check every answer and
+tier, then move the prompt into a pack and run `npm run validate`. The game itself never calls the API; see
+[docs/question-pipeline.md](docs/question-pipeline.md).
 
 ## Daily schedule
 

@@ -4,7 +4,8 @@ How to write a prompt for Ulu, and how to review one. It covers the questions th
 tier, which aliases, which gem, and what goes in the note. All examples are real prompts from
 `src/content/packs/`.
 
-For setup, branches and the PR flow, see [CONTRIBUTING.md](../CONTRIBUTING.md).
+For setup, branches and the PR flow, see [CONTRIBUTING.md](../CONTRIBUTING.md). To have Claude draft a prompt
+for you to review, see [question-pipeline.md](question-pipeline.md).
 
 ## Anatomy of a prompt
 
@@ -34,6 +35,12 @@ For setup, branches and the PR flow, see [CONTRIBUTING.md](../CONTRIBUTING.md).
 - **`text`**: what the player sees. Almost all of them start with "Name a …" and ask for one thing.
 - **`note`**: optional. A short line shown under the prompt that sets the rules (see [The note](#the-note)).
 - **`answers`**: every accepted answer, each with a `name`, a `tier` and optional `aliases`.
+- **`decoys`**: optional. Wrong answers we expect people to type, each with a `name`, optional `aliases` and a
+  `why` shown to the player (see [Decoys](#decoys)).
+- **`filler`**: optional. Words players add or leave out that don't change the answer, e.g.
+  `["MRT", "station"]` (see [What matching already does](#what-matching-already-does)).
+- **`partial`**: optional. `true` lets the first or last part of a name stand for the answer, for sets of
+  people and multi-word places (see [Part of a name](#part-of-a-name)).
 
 The `name` is what players see on the reveal screen, so use the official or most recognised spelling
 ("HarbourFront", "one-north", "S. R. Nathan"). Every other spelling goes in `aliases`.
@@ -53,6 +60,8 @@ These come from `src/game/validate.ts`. A prompt that breaks any of them fails C
 | Every tier is a known tier | |
 | No name or alias normalises to nothing | e.g. an alias written only in Chinese characters (see [Aliases](#aliases)) |
 | No two answers share a normalised name or alias | Otherwise one input would match two answers |
+| No two answers are the same once filler, word order and number spellings are ignored | Same reason, for the looser stage of matching: "Rocky II" and "Rocky 2" can't be two answers |
+| Every decoy has a `name` and a `why`, and doesn't match any answer | A decoy that matched an answer would refuse a right answer |
 
 Each pack also needs a `name` and an `asOf` date (`YYYY-MM-DD`, when its facts were last checked) and at least
 one prompt.
@@ -68,8 +77,34 @@ To check a draft on its own, without the schedule: `npm run validate -- content/
 - **The scope is clear.** If two players could argue about whether an answer counts, the text or the note should
   settle it. "Name a bridge in Singapore" has the note "The Causeway is a causeway, not a bridge!"
 - **It's checkable.** Every answer has to be correct. If you can't verify it, leave it out.
-- **It's ours.** Most of the fun is in the local deep cuts. A prompt where the best answers are the same anywhere
-  in the world doesn't belong here.
+- **It's in the right place.** A Singapore prompt is ours: most of the fun is in the local deep cuts, and a set
+  whose best answers are the same anywhere in the world doesn't belong in a Singapore category. That set might
+  be a world prompt instead (next section).
+
+### World prompts
+
+A dive is mostly Singapore prompts, with up to two world prompts for a change of pace (see
+[ARCHITECTURE.md](../ARCHITECTURE.md#daily-selection)). World prompts live in four categories: `world`
+(countries, cities, landmarks), `science` (nature, space, the body), `entertainment` (films, series, music,
+books) and `wildcard` (words, symbols, everyday things, anything with a catch). The players are still
+Singaporean, and that decides what counts as well known. A world prompt has to clear a higher bar than "it has
+a list":
+
+- **Broad, not fan knowledge.** If you'd need to follow the subject to name more than two answers, it's too
+  niche. No league sport (teams, players and seasons in the NBA, NFL, NBL or a football league), no deep lore
+  of one game or anime, nothing that's a pub quiz for another country. Sport is fine at the level everyone
+  shares: "Name an Olympic sport", not "Name an NBA team".
+- **Four answers everyone has.** Most of the table should be able to name at least four without thinking.
+- **A twist where there is one.** The best world prompts have a condition that makes an obvious answer wrong.
+  "Name a country the equator passes through" works because Equatorial Guinea isn't one, and Singapore just
+  misses. That wrong answer becomes a [decoy](#decoys).
+- **Settled.** No rankings that move ("the ten richest people"), and no sets people argue about unless one
+  sentence in the note ends the argument. `science-planets-and-dwarf-planets` says "the 5 dwarf planets the
+  International Astronomical Union recognises".
+- **Light.** No disasters, crimes, or disputes over territory, religion or politics.
+- **A Singapore angle is a bonus**, when it comes naturally: Singapore as an answer or as the decoy.
+
+Tiers still mean what they mean everywhere else: how likely a typical Singapore resident is to type the answer.
 
 ### Closed and open sets
 
@@ -84,7 +119,8 @@ and `language-singapore-acronyms` has 132. Use the note to draw the line ("Main 
 desserts don't count here."), and expect correction reports for missing answers.
 
 Prompts drafted with `npm run draft` follow the same rules, but the draft is only a starting point. Check
-every answer yourself.
+every answer yourself. The draft comes with a fact-checker's report and an estimate of how often each answer
+would be picked ([question-pipeline.md](question-pipeline.md)).
 
 ## Tiers
 
@@ -156,7 +192,10 @@ with variants it would accept anyway.
 
 ### What matching already does
 
-`normalize()` in `src/game/normalize.ts` turns every name, alias and input into a comparison key. It:
+`checkAnswer()` in `src/game/match.ts` works out what a player meant in four stages, from strictest to most
+forgiving. The first stage that has an opinion decides.
+
+**1. Exact.** `normalize()` turns every name, alias and input into a key, and the keys must be equal. It:
 
 - ignores case, so `bedok` matches Bedok;
 - strips accents and punctuation and removes all spaces, so `charkwayteow` and `char-kway-teow` match
@@ -164,16 +203,52 @@ with variants it would accept anyway.
 - turns `&` into "and", so `fish & chips` matches Fish and Chips;
 - drops a leading "the", so `the chicken rice` matches Chicken Rice.
 
-Then `matchAnswer()` in `src/game/match.ts` tries an exact match on every name and alias first. If nothing
-matches, it forgives small typos:
+**2. Loose.** The same words, compared more generously (`looseWords()`):
+
+- "the", "of" and "and" are dropped anywhere, and so are the prompt's **`filler`** words. With
+  `"filler": ["MRT", "station"]`, `Bishan MRT`, `Bishan Station` and `MRT Bishan` all match Bishan;
+- numbers are numbers however they're written: `Toy Story Two`, `Toy Story II` and `Toy Story 2`;
+  `Henry the Eighth` and `Henry VIII`. (Not a lone "I", "V" or "X", which are usually letters, as in Holland V.)
+- common short forms are read: `Bt Timah` for Bukit Timah, `Mt Faber`, `St James`, `Tg Pagar`, `Kg Glam`,
+  `Upp Thomson`, `Jln Besar`, `Lor Chuan`, and `Rd`, `Ave`, `Dr` for Road, Avenue, Drive;
+- a plural "s" doesn't matter: `fish balls` matches Fish Ball;
+- word order doesn't matter: `kopi siew dai peng` matches Kopi Peng Siew Dai.
+
+**3. Part of a name**, only in prompts with `"partial": true` (see [Part of a name](#part-of-a-name)).
+
+**4. Typos.**
 
 - **1 typo** for keys of 5–9 characters (`Tampiness` → Tampines), **2** for 10 or more
   (`char kway teoh` → Char Kway Teow). Keys are measured without spaces.
+- A typo is a wrong, missing or extra character, or **two neighbouring characters swapped**:
+  `Toa Payho` matches Toa Payoh.
 - **Under 5 characters, the match must be exact.** `Bedk` doesn't become Bedok, `ckts` doesn't become CKT, and
   `lahh` doesn't become lah.
-- **A swap counts as two typos.** `Toa Payho` doesn't match Toa Payoh (8 characters, so only 1 allowed).
-- The correction is accepted only if **one answer is uniquely closest**. If two answers are equally close,
-  nothing matches.
+- **Digits are never corrected.** `Toy Story 6` isn't a typo for Toy Story 5, and `12 Storeys` has to be typed
+  with its 12.
+- The correction is accepted only if **one answer is strictly closest**. If two answers are equally close,
+  nothing matches: `Tampines Eest` could be East or West.
+- **Decoys compete.** A guess that is closer to a decoy than to any answer is refused as that decoy, so
+  `Ireland` is never "corrected" to Iceland.
+
+A guess gets one of four verdicts: a match; **ambiguous**, when it fits more than one answer equally (the
+player is asked to type a bit more, and the guess stays in the box); a **decoy**, shown with its reason; or
+not recognised.
+
+### Part of a name
+
+With `"partial": true`, the first or last words of an answer's **name** are enough when they point to exactly
+one answer: `Kuan Yew` or `Lee Kuan` for Lee Kuan Yew, `Einstein` for Albert Einstein, `Einstien` too. When
+they point to several, the verdict is ambiguous: `Lee` in `politics-presidents-and-pms`, or `Korea` where both
+Koreas are answers.
+
+- Only the name counts, not aliases, and only its two ends, not the middle. So keep titles out of names:
+  "Shenton Thomas", with "Sir Shenton Thomas" as an alias.
+- The part needs a real word of three letters or more. A bare number or an initial isn't enough.
+- **Turn it on for sets of people and of multi-word places.** Six people prompts have it, e.g.
+  `politics-presidents-and-pms` and `history-wwii-people`.
+- **Leave it off for words, phrases and titles**, where part of an expression is a different expression:
+  "lau" is not "wah lau", and "Story" is not a Pixar film.
 
 ### What you still need to add
 
@@ -181,21 +256,21 @@ matches, it forgives small typos:
   Orh Luak and Orh Jian for Oyster Omelette. Different spellings of the same dish are usually more than 1–2
   edits apart, so list them.
 - **Other names for the same thing**: Chai Tow Kway for Carrot Cake, Cai Png for Economic Rice, Musang King for
-  Mao Shan Wang, Syonan for Syonan-to.
-- **Abbreviations Singaporeans actually use**: AMK, TPY, CCK, CKT, BKT, LKY, MOE, MINDEF. They're short, so
-  they only ever match exactly. That's what we want, but it means every one has to be listed.
-- **Common shortenings**: Bt Timah for Bukit Timah, Holland V for Holland Village, MacRitchie for MacRitchie
-  Reservoir. Matching doesn't know these; `Bt Timah` only works because it's an alias.
-- **Suffixes people add**: matching doesn't strip words like "MRT", "Station", "Town" or "Reservoir". That's
-  why `transport-ccl-stations` lists "Bishan MRT", "Bishan MRT Station" and "Bishan Station", and
-  `places-hdb-towns` lists "Tampines Town" and "Tampines New Town".
-- **The short name for people**: a surname on its own doesn't match. `Nathan` doesn't match S. R. Nathan,
-  which is why Benjamin Sheares has the alias "Sheares" and Tharman Shanmugaratnam has "Tharman". Add the name
-  people actually use, if it's unambiguous.
+  Mao Shan Wang, Syonan for Syonan-to, Burma for Myanmar.
+- **Abbreviations Singaporeans actually use**: AMK, TPY, CCK, CKT, BKT, LKY, MOE, MINDEF, DRC. They're short,
+  so they only ever match exactly. That's what we want, but it means every one has to be listed.
+- **Shortenings matching doesn't know**: Holland V for Holland Village, MacRitchie for MacRitchie Reservoir.
+  (For a word that every answer in the prompt can carry, like "Reservoir" or "MRT", use `filler` instead of an
+  alias on each answer.)
+- **The short name for people**, in a prompt without `partial`: a surname on its own doesn't match there. In a
+  prompt with `partial`, still add the names that aren't part of the display name: "Harry Lee", "LKY".
 - **Old names, when something is renamed**: `politics-ministries` keeps "MTI" and "Ministry of Trade and
   Industry" as aliases of the Ministry of Energy, Trade and Industry.
 - **Short spelling variants**: under 5 characters there's no typo tolerance, so `language-singlish-particles`
   lists "la" for lah and "loh" for lor.
+
+Older prompts list variants that matching now handles on its own ("Bishan MRT Station", both orders of a kopi
+order). They're harmless. Don't add new ones.
 
 ### Rules
 
@@ -205,12 +280,44 @@ matches, it forgives small typos:
   to neither. In `nature-reservoirs`, bare "Seletar" goes to Upper Seletar Reservoir and "Peirce" to Lower
   Peirce Reservoir. Validation fails if two answers share a normalised key.
 - **Don't alias a different valid answer.** If it's its own thing, it's its own answer with its own tier.
-- **Watch near-identical names.** Validation only catches exact clashes. When two answers' names or aliases
-  are only a typo or two apart, a typo that's equally close to both matches neither. That fails safe (no
-  match rather than a wrong one), but it means players lose typo help there, so don't add aliases that
-  crowd another answer.
-- **Order-dependent phrases need both orders.** `food-kopitiam-drinks` lists both "kopi peng siew dai" and
-  "kopi siew dai peng", because word order changes the key.
+- **Watch near-identical names.** When two answers' names or aliases are only a typo or two apart, a typo
+  that's equally close to both matches neither. That fails safe (no match rather than a wrong one), but it
+  means players lose typo help there, so don't add aliases that crowd another answer. `npm run draft` lists
+  these pairs in its review notes.
+- **Choose `filler` words that never tell two answers apart.** If "Bedok" and "Bedok Reservoir" are both
+  answers, "reservoir" can't be filler. Validation fails if filler makes two answers the same.
+
+## Decoys
+
+A decoy is a wrong answer we expect people to type. When a player types one, the round says why it doesn't
+count and lets them try again:
+
+```json
+"decoys": [
+  { "name": "Equatorial Guinea", "why": "Despite the name! Its mainland is north of the equator and its island of Annobón is south." },
+  { "name": "Singapore", "why": "So close! We're about 1° north of it." }
+]
+```
+
+They do two jobs. They stop typo correction from paying out for a wrong answer: without a decoy, "Ireland"
+is one typo from Iceland and would score as it. And they're where a prompt's twist lands: the moment a player
+finds out that Shrek isn't Pixar or that Elsa isn't an official Disney Princess is part of the fun.
+
+What to list:
+
+- **Any wrong answer a typo or two from a right one.** This is the one that matters for correctness.
+- **The near miss that makes the twist**: Equatorial Guinea for the equator, Scandium (number 21) for the
+  first 20 elements.
+- **The neighbouring set**: DreamWorks and Disney Animation films in `entertainment-pixar-films`, moons in
+  `science-planets-and-dwarf-planets`, the old Able-Baker words in `wildcard-nato-alphabet`.
+- **The one that used to be right**, when a set has changed.
+
+Five to ten is plenty. A decoy isn't needed for every wrong answer, only the ones people will really type.
+
+The `why` is one short sentence in the same voice as the note. It must be **true** (it's a fact we're stating
+to the player, so check it like an answer), and it shouldn't hand over a right answer unless that's the
+natural way to say it. Decoys take aliases like answers do. A decoy never appears in the player's list of
+rejected guesses, since "Should this count?" has already been answered.
 
 ## The gem
 
@@ -272,6 +379,10 @@ each prompt in a content PR, and say in the review that you did.
 - [ ] A time-sensitive set has an as-of date (or an event date) in the note.
 - [ ] The note is short and in the house tone. If it names the gem, that's on purpose.
 
+**World prompts**
+- [ ] It's broad: no league sport, no fan lore, no other country's pub quiz. Four answers the whole table has.
+- [ ] Nothing in it is a ranking that moves or a membership people argue about, or the note settles it.
+
 **The answers**
 - [ ] Every answer is correct. You checked anything you weren't sure of against a source.
 - [ ] A closed set is complete: the count matches the official list.
@@ -286,12 +397,24 @@ each prompt in a content PR, and say in the review that you did.
 **Aliases**
 - [ ] Local spellings, other names and the abbreviations people use are listed.
 - [ ] "MRT", "Station", "Town" and similar suffixes are covered where people would type them.
-- [ ] People can be matched by the short name everyone uses, if it's unambiguous.
+- [ ] People can be matched by the short name everyone uses, if it's unambiguous. A set of people has
+      `"partial": true`, and no display name starts with a title.
+- [ ] `filler` words, if any, never tell two answers apart.
 - [ ] No alias is really a different answer, and no bare word is given to the wrong answer.
 - [ ] No non-Latin script.
 
+**Decoys**
+- [ ] Every decoy is definitely wrong, and its `why` is true.
+- [ ] Any wrong answer a typo or two from a right one is a decoy.
+- [ ] No `why` gives away the gem.
+
 **The gem**
 - [ ] Definitely valid, gettable in 25 seconds, and fun on the reveal.
+
+**A prompt drafted with `npm run draft`**
+- [ ] You read the review block: every "Added", "Removed", "Disputed" and "Not verified" line.
+- [ ] You checked a closed set against the source yourself, not only against the checker's count.
+- [ ] You chose the tiers and the gem. The panel's numbers are a starting point.
 
 **The PR**
 - [ ] `npm run validate` and `npm test` pass.
