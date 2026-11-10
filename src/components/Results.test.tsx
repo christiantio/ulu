@@ -1,12 +1,13 @@
 // @vitest-environment jsdom
 import { act, cleanup, fireEvent, render, screen, within } from '@testing-library/react'
-import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest'
+import { afterEach, beforeAll, beforeEach, describe, expect, it, vi } from 'vitest'
 import { ALL_PROMPTS, SCHEDULE } from '../content/bank'
 import { buildReportUrl } from '../game/report'
 import { promptsForDate } from '../game/schedule'
 import { TIER_INFO } from '../game/scoring'
 import type { Stats } from '../game/storage'
 import type { RoundResult } from '../game/types'
+import { loadBackdrops } from './elevator/backdrops'
 import { Results } from './Results'
 
 // 12:00 in Singapore on 10 Nov 2026
@@ -56,6 +57,9 @@ function stubNavigator(key: 'share' | 'clipboard', value: unknown) {
 }
 let stubbed: string[] = []
 
+// Every lift's scenery, up front, so none of it arrives halfway through a test
+beforeAll(() => loadBackdrops())
+
 beforeEach(() => {
   vi.useFakeTimers({ shouldAdvanceTime: false })
   vi.setSystemTime(NOW)
@@ -75,9 +79,13 @@ afterEach(() => {
 const row = (i: number) => screen.getByText(prompts[i].text).closest('li')!
 
 describe('Results', () => {
-  it('shows the score, destination and each prompt with its gem', () => {
+  it('shows the score, the floor and lift reached, and each prompt with its gem', () => {
     renderResults('2026-11-10')
-    expect(screen.getByRole('img', { name: '60 of 700 points, reached Raffles Place' })).toBeDefined()
+    // Six common answers and a miss: 60 points, six floors up, still in the first lift
+    expect(screen.getByRole('img', { name: '60 of 700 points, floor 07, HDB Lift' })).toBeDefined()
+    expect(document.querySelector('.results__number')!.textContent).toBe('60')
+    expect(document.querySelector('.results__reached')!.textContent).toBe('Floor 07 · HDB Lift')
+    expect(screen.getByRole('heading', { level: 1 }).textContent).toBe('Heartland hero')
     for (const p of prompts) expect(screen.getByText(p.text)).toBeDefined()
     // Read out as e.g. "No answer . The gem: X ... Time up, 0 points"
     const missed = screen.getByText(prompts[0].text).closest('li')!.textContent
@@ -88,6 +96,54 @@ describe('Results', () => {
     const hit = screen.getByText(prompts[1].text).closest('li')!.textContent
     expect(hit).toContain(results[1].answer)
     expect(points(1).textContent).toBe('Everybody Say, 10 points')
+  })
+
+  it('shows the final lift with the boy in it, and a lamp for each of the seven answers', () => {
+    renderResults('2026-11-10')
+    const scene = document.querySelector('.scene') as HTMLElement
+    expect(scene.dataset.lift).toBe('hdb')
+    expect(scene.dataset.floor).toBe('07')
+    expect(scene.classList.contains('scene--open')).toBe(true)
+    expect(scene.querySelector('.boy')).not.toBeNull()
+    // A modest score is no reason for confetti, or for anything gloomy
+    expect(document.querySelector('.confetti')).toBeNull()
+
+    const lamps = within(screen.getByRole('list', { name: 'Your seven answers' })).getAllByRole('listitem')
+    expect(lamps.map((li) => li.textContent)).toEqual([
+      '–Question 1: Time up',
+      ...prompts.slice(1).map((_, i) => `▲1Question ${i + 2}: Everybody Say`),
+    ])
+    expect(lamps[0].querySelector('.lamp--miss')).not.toBeNull()
+    expect(lamps[1].querySelector('.lamp--common')).not.toBeNull()
+  })
+
+  it('lists the lifts reached in the directory, and keeps the ones still locked a secret', () => {
+    renderResults('2026-11-10')
+    const rows = [...document.querySelectorAll('.directory__row')].map((row) => row.textContent)
+    expect(rows).toEqual(['? ? ?600 pts', '? ? ?500 pts', '? ? ?350 pts', '? ? ?200 pts', '? ? ?100 pts', 'HDB LiftFloor 07'])
+  })
+
+  it('celebrates a perfect game at the top of the penthouse', () => {
+    const perfect: RoundResult[] = prompts.map((p) => {
+      const gem = p.answers.find((a) => a.tier === 'gem')!
+      return { promptId: p.id, input: gem.name, attempts: [], answer: gem.name, tier: 'gem', points: TIER_INFO.gem.points }
+    })
+    render(<Results title="Ulu #15" results={perfect} prompts={prompts} isDaily dateKey="2026-11-10" onHome={() => {}} onUnlimited={() => {}} />)
+    expect(screen.getByRole('heading', { level: 1 }).textContent).toBe('Perfect climb')
+    expect(screen.getByRole('img', { name: '700 of 700 points, floor 43, Sky Penthouse' })).toBeDefined()
+    const scene = document.querySelector('.scene') as HTMLElement
+    expect(scene.dataset.lift).toBe('penthouse')
+    expect(scene.dataset.floor).toBe('PH')
+    expect(document.querySelector('.confetti--fall')).not.toBeNull()
+    // Every lift is named once it has been ridden
+    expect([...document.querySelectorAll('.directory__name')].map((n) => n.textContent)).toEqual([
+      'Sky Penthouse',
+      'Marina Bay Luxury Lift',
+      'CBD Office Tower',
+      'Condominium Lift',
+      'Upgraded HDB Lift',
+      'HDB Lift',
+    ])
   })
 
   it('gives each prompt its own closed disclosure with every answer, deepest tier first', () => {
@@ -174,24 +230,24 @@ describe('Results', () => {
     )
   })
 
-  it("counts down to the next dive when the dive is today's", () => {
+  it("counts down to the next game when the game is today's", () => {
     renderResults('2026-11-10')
-    expect(screen.getByText(/Next dive in/).textContent).toBe('Next dive in 12:00:00')
+    expect(screen.getByText(/Next climb in/).textContent).toBe('Next climb in 12:00:00')
     act(() => vi.advanceTimersByTime(1000))
-    expect(screen.getByText(/Next dive in/).textContent).toBe('Next dive in 11:59:59')
-    expect(screen.queryByText("Today's dive is ready")).toBeNull()
+    expect(screen.getByText(/Next climb in/).textContent).toBe('Next climb in 11:59:59')
+    expect(screen.queryByText("Today's climb is ready")).toBeNull()
   })
 
-  it("says today's dive is ready instead of counting down for a dive finished past midnight", () => {
+  it("says today's game is ready instead of counting down for one finished past midnight", () => {
     renderResults('2026-11-09')
-    expect(screen.getByText("Today's dive is ready")).toBeDefined()
-    expect(screen.queryByText(/Next dive in/)).toBeNull()
+    expect(screen.getByText("Today's climb is ready")).toBeDefined()
+    expect(screen.queryByText(/Next climb in/)).toBeNull()
   })
 
   it('shows no stats or countdown for Unlimited', () => {
     renderResults(null)
     expect(screen.queryByText('Streak')).toBeNull()
-    expect(screen.queryByText(/Next dive in|Today's dive is ready/)).toBeNull()
+    expect(screen.queryByText(/Next climb in|Today's climb is ready/)).toBeNull()
     expect(screen.getByRole('button', { name: 'Play again' })).toBeDefined()
   })
 
@@ -202,8 +258,9 @@ describe('Results', () => {
 
     await act(async () => fireEvent.click(screen.getByRole('button', { name: 'Share result' })))
     expect(writeText).toHaveBeenCalledTimes(1)
-    // Spoiler-free: just the score, the grid and the destination, none of the answer lists
-    expect(writeText.mock.calls[0]).toEqual([`Ulu #15 🇸🇬 60/700\n❌⚪⚪⚪⚪⚪⚪\nReached Raffles Place\n${window.location.origin}`])
+    // Spoiler-free: just the score, the grid, and the floor and lift reached, none of the answer lists
+    expect(writeText.mock.calls[0]).toEqual([`Ulu #15 🇸🇬 60/700\n❌⚪⚪⚪⚪⚪⚪\nFloor 7 · HDB Lift\n${window.location.origin}`])
+    expect(writeText.mock.calls[0][0]).not.toMatch(/MRT|train|Raffles|station/i)
     expect(writeText.mock.calls[0][0]).not.toContain('Show all')
     expect(screen.getByRole('button', { name: 'Copied! Go paste in the group chat' })).toBeDefined()
 

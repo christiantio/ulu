@@ -12,7 +12,7 @@ go somewhere nobody else thought of.
 | Per prompt | 25 seconds, one free-text answer. Unrecognised input can be retried while the clock runs; the first valid answer locks in |
 | Scoring | Each accepted answer has a rarity tier (below). Timeout = 0 |
 | Max | 7 × 100 = 700 |
-| Theme | The score is a journey out of town: Raffles Place → Bishan → Sengkang → Woodlands → Lim Chu Kang → Pulau Ubin → Pulau Tekong → Pedra Branca (700) |
+| Theme | Answers climb floors while the cumulative score unlocks lifts, from the HDB lift to the sky penthouse |
 | Unlimited | 7 random prompts from past dives (never today's), no stats, replay as often as you like. Back-to-back games don't share prompts. While the archive is too small to fill a game, it uses the rest of the bank |
 | Answer animation | After each answer, a ride out of town on the "Ulu Line", whose stations are the tiers in order (Everybody Say → Act Smart → Can Lah → Steady → Damn Ulu → Sibei Ulu). The train passes every station below the answer's tier, slowing at each as if it might stop, and stops at its own. The MRT ends on the shore at Changi Point: for Damn Ulu and Sibei Ulu, the train stops there, you hop into the bumboat waiting at the jetty, and it takes you on to Pulau Ubin or the Pedra Branca lighthouse. A miss is the train leaving without you. It takes 2.4–7.1 s, the pips, score and route only update when it lands, and Skip (or a tap on the scene) jumps to the reveal. With `prefers-reduced-motion`, it's skipped |
 | Reveal | The verdict, the gem, up to 3 other answers per tier, and every accepted answer behind a "Show all N answers" disclosure, grouped by tier from the gem down. The results screen has the same disclosure for each prompt |
@@ -39,7 +39,7 @@ src/
     normalize.ts     answer → comparison key
     match.ts         exact + typo-tolerant matching
     scoring.ts       tier points, labels, destinations
-    journey.ts       the answer animation's timing: its stations, the ride's motion curve, captions
+    elevator.ts      floors, lift upgrades and the answer animation's timing and motion
     daily.ts         Singapore date, seeded daily selection, unlimited shuffle
     schedule.ts      frozen daily schedule: lookup, append-only extension, checks, unlimited pool
     storage.ts       localStorage progress + stats (fails safe)
@@ -52,8 +52,8 @@ src/
     index.ts         loadDive(date): fetches dives/<date>.json, falls back to the bank
     bank.ts          every pack plus the schedule, a lazily loaded chunk (see "Loading content" below)
     bank-loader.ts   loadBank(): the dynamic import of bank.ts
-  components/        Game, Round, Journey, Reveal, Results, AllAnswers, Report, HowToPlay, RouteLine,
-                     Countdown, PrivacyNote
+  components/        Game, Round, Reveal, Results, AllAnswers, Report, HowToPlay, ElevatorProgress,
+                     Countdown, PrivacyNote, elevator/ElevatorScene
   analytics.ts       optional cookie-less analytics: track(), score bands, script loader
   App.tsx            screen routing (home / daily / unlimited / results), loading today's dive
   test/dives.ts      test helper: a fetch stub that serves the dive files
@@ -180,35 +180,18 @@ must match exactly, so `Bedk` won't become `Bedok` and abbreviations like `AMK` 
 
 ## The answer animation
 
-`components/Journey.tsx` plays between a round and its reveal. `Game` gives it its own phase, `journey`, after
-the result is saved (so a reload mid-ride resumes at the next round, as a reload on the reveal does).
+`components/elevator/ElevatorScene.tsx` plays between a round and its reveal. `Game` gives it its own phase,
+`ride`, after the result is saved (so a reload mid-ride resumes at the next round, as a reload on the reveal does).
 
-- **One scene, scrolled.** The scenery is inline SVG in scene units (a 480 × 240 viewport), laid out once from a
-  fixed seed: CBD towers, shophouses, HDB blocks with laundry out, kampung trees, the Changi Point terminal and
-  jetty, Pulau Ubin and Pedra Branca. The vehicle stays still and two layers scroll under it at different speeds,
-  using `translate3d` on plain `div`s so the browser only moves composited layers. Sizes inside the scene are in
-  `cqw` (container query units), so it scales with the card.
-- **Motion.** `frame()` in `game/journey.ts` gives the camera and the vehicle at any moment. Each vehicle runs a
-  route of cubic Hermite legs: from rest, through each passed station at 45% of a leg's average speed (the "will
-  it stop?" moment), and braking to rest. A ride to an island station is two routes: the train to the terminal,
-  then, after the change, the bumboat from its mooring. While the bumboat pulls away, the view eases from the
-  terminal onto it, so the camera's speed stays continuous throughout. It's unit tested for monotonicity and for
-  no jumps.
-- **The change.** At the terminal, the moving train hands over to one parked in the scene, and the bumboat moored
-  at the jetty hands over to the moving one. Each pair is drawn at the same spot at that moment, and both boats
-  bob in step from the start of the ride, so the swaps don't show. In between, you hop from the train's front
-  door into the bumboat.
-- **Timing.** A `requestAnimationFrame` loop draws the motion straight to the DOM. React only re-renders when a
-  station is passed or the vehicle changes. `setTimeout`s drive the stages (doors closing, travel, arrival,
-  done), so the ride ends on time even if frames are throttled, as in a background tab.
-- **Accessibility.** The scene is `aria-hidden`; focus moves to the Skip button, then to the reveal's Next button
-  as before, which reads the verdict. Taps and key presses in the first 400 ms are ignored, so a double-tap on
-  Go or a held Enter doesn't skip it. With `prefers-reduced-motion: reduce`, `Game` goes straight to the reveal.
-- **Colours.** The scene has its own `--j-*` tokens. Light mode rides from day into sunset, and dark mode from
-  dusk into night, with lit windows and stars.
-- **Tests.** jsdom has no `matchMedia`, which the app reads as no preference, so component tests play the ride
-  on Vitest's fake clock (which also fakes `requestAnimationFrame` and `performance.now`). `App.test.tsx` turns
-  on reduced motion with `test/motion.ts`, since it tests storage and flow rather than the ride.
+- **Scene and motion.** The lift closes its doors, climbs the answer's floors, and opens on the result. Scenery
+  scrolls below it; reaching a score threshold upgrades the lift before the doors open. `game/elevator.ts`
+  defines floors, upgrades, timing and motion. The same scene appears at rest on the home and results screens.
+- **Timing.** A `requestAnimationFrame` loop paints continuous motion directly to the DOM, while React updates
+  the floor indicator and ride stages. Timers settle the ride even when frames are throttled in a background tab.
+- **Accessibility.** The picture is hidden from screen readers, and focus moves to Skip during a ride. A short
+  grace period prevents accidental skips. With reduced motion, `Game` goes straight to the reveal.
+- **Tests.** Elevator motion and component tests cover ride timing, skipping, upgrades and cleanup. App tests
+  use reduced motion through `test/motion.ts` to focus on storage and flow.
 
 ## Daily selection
 

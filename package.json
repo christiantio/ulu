@@ -12,7 +12,8 @@
     "check:bundle": "tsx scripts/check-bundle.ts",
     "test": "vitest run",
     "draft": "tsx scripts/draft-prompt.ts",
-    "schedule": "tsx scripts/schedule.ts"
+    "schedule": "tsx scripts/schedule.ts",
+    "art": "tsx --tsconfig tsconfig.node.json scripts/art.tsx"
   },
   "dependencies": {
     "react": "^19.1.0",

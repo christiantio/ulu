@@ -3,7 +3,6 @@ import { addDays, dailyPrompts, diveNumber, mulberry32, msUntilNextDive, randomP
 import { extendSchedule, promptsForDate, unlimitedPrompts, validateSchedule } from './schedule'
 import { editDistance, matchAnswer } from './match'
 import { normalize } from './normalize'
-import { MAX_SCORE, destinationFor } from './scoring'
 import { shareText } from './share'
 import { displayStreak, type Stats } from './storage'
 import { CATEGORIES, type Prompt, type Tier } from './types'
@@ -227,13 +226,6 @@ describe('frozen schedule', () => {
 })
 
 describe('scoring and sharing', () => {
-  it('maps scores to destinations', () => {
-    expect(destinationFor(0).name).toBe('Raffles Place')
-    expect(destinationFor(99).name).toBe('Raffles Place')
-    expect(destinationFor(450).name).toBe('Lim Chu Kang')
-    expect(destinationFor(MAX_SCORE).name).toBe('Pedra Branca')
-  })
-
   it('builds a spoiler-free share string', () => {
     const text = shareText(
       [
@@ -244,7 +236,8 @@ describe('scoring and sharing', () => {
       'Ulu #3',
       'https://ulu.sg',
     )
-    expect(text).toBe('Ulu #3 🇸🇬 110/700\n💎❌⚪\nReached Bishan\nhttps://ulu.sg')
+    // The floor and the lift it reached: 6 floors for the gem and 1 for the common answer, from floor 1
+    expect(text).toBe('Ulu #3 🇸🇬 110/700\n💎❌⚪\nFloor 8 · Upgraded HDB Lift\nhttps://ulu.sg')
     expect(text).not.toContain('Timah')
     // Nor the rejected guesses
     expect(text).not.toMatch(/Holland|Sentosa/)

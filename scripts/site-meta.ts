@@ -1,8 +1,8 @@
 import type { Plugin } from 'vite'
 
-/** Link-preview (Open Graph) image in public/, rendered from design/og-image.svg */
+/** Link-preview (Open Graph) image in public/, rendered from design/og-image.svg, which `npm run art` draws */
 export const OG_IMAGE = { path: '/og-image.png', width: 1200, height: 630 }
-const OG_IMAGE_ALT = 'Ulu: How ulu can you go? A route line from Raffles Place to Pedra Branca.'
+const OG_IMAGE_ALT = 'Ulu: How ulu can you go? A boy blowing bubblegum in an HDB lift, waiting on floor 01.'
 
 /**
  * The site's origin from VITE_SITE_URL, e.g. https://ulu.sg, without a trailing slash. Unset or blank gives null
