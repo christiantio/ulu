@@ -7,6 +7,12 @@
       "category": "politics",
       "text": "Name a President or Prime Minister of Singapore",
       "note": "As of October 2026. Elected or appointed Presidents (not acting Presidents) and Prime Ministers.",
+      "sources": [
+        "https://www.istana.gov.sg/The-President/Former-Presidents",
+        "https://en.wikipedia.org/wiki/Prime_Minister_of_Singapore",
+        "https://www.pmo.gov.sg/about-us/the-cabinet/"
+      ],
+      "reviewBy": "2027-05-10",
       "answers": [
         {
           "name": "Lee Kuan Yew",
@@ -108,6 +114,11 @@
       "category": "politics",
       "text": "Name someone who has served as Deputy Prime Minister of Singapore",
       "note": "As of October 2026, including First and Second Deputy PMs.",
+      "sources": [
+        "https://en.wikipedia.org/wiki/Deputy_Prime_Minister_of_Singapore",
+        "https://www.pmo.gov.sg/about-us/the-cabinet/"
+      ],
+      "reviewBy": "2027-05-10",
       "answers": [
         {
           "name": "Heng Swee Keat",
@@ -594,6 +605,11 @@
       "category": "politics",
       "text": "Name a Singapore government ministry",
       "note": "As of October 2026. MTI became the Ministry of Energy, Trade and Industry on 1 Oct 2026.",
+      "sources": [
+        "https://www.sgdi.gov.sg/ministries",
+        "https://www.pmo.gov.sg/newsroom/changes-to-cabinet-and-other-appointments-and-the-renaming-of-the-ministry-of-trade-and-industry-jul-2026/"
+      ],
+      "reviewBy": "2027-03-15",
       "answers": [
         {
           "name": "Ministry of Education",
@@ -732,7 +748,12 @@
       "id": "politics-statutory-boards",
       "category": "politics",
       "text": "Name a Singapore statutory board",
-      "note": "As of October 2026. Polytechnics and ITE count; universities do not. SkillsFuture Singapore and Workforce Singapore merged into SWDA in July 2026.",
+      "note": "As of October 2026. Polytechnics and ITE count; universities do not. SkillsFuture Singapore and Workforce Singapore merged into the Skills and Workforce Development Agency (SWDA) on 1 July 2026.",
+      "sources": [
+        "https://www.sgdi.gov.sg/statutory-boards",
+        "https://www.swda.gov.sg/home/about-us"
+      ],
+      "reviewBy": "2027-03-15",
       "answers": [
         {
           "name": "Housing and Development Board",
@@ -1153,6 +1174,13 @@
           "tier": "ulu"
         },
         {
+          "name": "Board of Architects",
+          "aliases": [
+            "BOA"
+          ],
+          "tier": "ulu"
+        },
+        {
           "name": "Singapore Dental Council",
           "tier": "ulu"
         },
@@ -1165,12 +1193,16 @@
         },
         {
           "name": "Singapore Pharmacy Council",
+          "aliases": [
+            "SPC"
+          ],
           "tier": "ulu"
         },
         {
           "name": "TCM Practitioners Board",
           "aliases": [
-            "TCMPB"
+            "TCMPB",
+            "Traditional Chinese Medicine Practitioners Board"
           ],
           "tier": "ulu"
         },
@@ -1196,6 +1228,11 @@
       "category": "politics",
       "text": "Name a current Cabinet minister",
       "note": "As of October 2026 (after the July 2026 reshuffle). Full ministers, plus acting ministers.",
+      "sources": [
+        "https://www.pmo.gov.sg/about-us/the-cabinet/",
+        "https://www.pmo.gov.sg/newsroom/changes-to-cabinet-and-other-appointments-and-the-renaming-of-the-ministry-of-trade-and-industry-jul-2026/"
+      ],
+      "reviewBy": "2027-01-15",
       "answers": [
         {
           "name": "Lawrence Wong",
@@ -1281,7 +1318,8 @@
         {
           "name": "Indranee Rajah",
           "aliases": [
-            "Indranee"
+            "Indranee",
+            "Indranee Thurai Rajah"
           ],
           "tier": "rare"
         },
