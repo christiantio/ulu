@@ -9,6 +9,9 @@ lerna-debug.log*
 
 node_modules
 dist
+# Output of npm run ideas and npm run draft: working files for review, never shipped
+content/ideas
+content/drafts
 dist-ssr
 *.local
 
