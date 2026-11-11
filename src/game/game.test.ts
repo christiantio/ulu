@@ -10,7 +10,6 @@ import {
 } from './schedule'
 import { checkAnswer, editDistance, matchAnswer, matchProblems } from './match'
 import { looseWords, normalize } from './normalize'
-import { MAX_SCORE, destinationFor } from './scoring'
 import { shareText } from './share'
 import { displayStreak, type Stats } from './storage'
 import { CATEGORIES, SG_CATEGORIES, scopeOf, type Prompt, type Tier } from './types'
