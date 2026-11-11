@@ -212,6 +212,19 @@ describe('Round', () => {
     expect(warning()).toBe('5 seconds left')
   })
 
+  it('turns the timer amber for the last ten seconds and red for the last five', () => {
+    setup()
+    const bar = () => document.querySelector('.timer__bar')!.className
+    const clock = () => screen.getByRole('timer').className
+    expect(bar()).toContain('timer__bar--steady')
+    advance((SECONDS_PER_ROUND - 10) * 1000)
+    expect(bar()).toContain('timer__bar--low')
+    expect(clock()).toContain('round__clock--low')
+    advance(5000)
+    expect(bar()).toContain('timer__bar--urgent')
+    expect(clock()).toContain('round__clock--urgent')
+  })
+
   it('never reports twice: a locked-in answer is not followed by a timeout', async () => {
     const { onResult, user, input } = setup()
     await user.type(input(), `${answerOf(prompt, 'gem').name}{Enter}`)

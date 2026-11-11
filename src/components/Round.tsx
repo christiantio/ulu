@@ -105,19 +105,21 @@ export function Round({ prompt, deadline, onResult }: Props) {
   const seconds = Math.ceil(remaining / 1000)
   const fraction = remaining / (SECONDS_PER_ROUND * 1000)
   const warning = TIME_WARNINGS.filter((t) => seconds <= t && startSeconds > t).at(-1)
+  // The lights go amber for the last ten seconds and red for the last five
+  const pace = seconds <= 5 ? 'urgent' : seconds <= 10 ? 'low' : 'steady'
 
   return (
     <section className="round card">
       <div className="round__time">
         {/* A strip of lift lights that go out as the time runs down */}
         <div className="timer" aria-hidden>
-          <div
-            className={`timer__bar ${seconds <= 5 ? 'timer__bar--urgent' : ''}`}
-            style={{ transform: `scaleX(${fraction})` }}
-          />
+          <div className={`timer__bar timer__bar--${pace}`} style={{ transform: `scaleX(${fraction})` }} />
         </div>
-        <div className={`round__clock ${seconds <= 5 ? 'round__clock--urgent' : ''}`} role="timer" aria-live="off">
-          <span aria-hidden="true">{String(seconds).padStart(2, '0')}</span>
+        <div className={`round__clock round__clock--${pace}`} role="timer" aria-live="off">
+          {/* Keyed by the second once it's urgent, so each of the last five ticks */}
+          <span key={pace === 'urgent' ? seconds : pace} className="round__digits" aria-hidden="true">
+            {String(seconds).padStart(2, '0')}
+          </span>
           <span className="visually-hidden">{seconds} seconds left</span>
         </div>
       </div>

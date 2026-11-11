@@ -54,7 +54,7 @@ src/
     bank.ts          every pack plus the schedule, a lazily loaded chunk (see "Loading content" below)
     bank-loader.ts   loadBank(): the dynamic import of bank.ts
   components/        Game, Round, Reveal, Results, AllAnswers, Report, HowToPlay, ElevatorProgress,
-                     Countdown, PrivacyNote, elevator/ElevatorScene
+                     Countdown, CountUp, PrivacyNote, elevator/ElevatorScene
   analytics.ts       optional cookie-less analytics: track(), score bands, script loader
   viewport.ts        the visible height of the page, for fitting a question above a phone's keyboard
   App.tsx            screen routing (home / daily / unlimited / results), loading today's dive
@@ -234,6 +234,24 @@ hundred keys at most, and each prompt's keys are computed once.
   grace period prevents accidental skips. With reduced motion, `Game` goes straight to the reveal.
 - **Tests.** Elevator motion and component tests cover ride timing, skipping, upgrades and cleanup. App tests
   use reduced motion through `test/motion.ts` to focus on storage and flow.
+
+### Motion in the interface
+
+Outside the lift, motion is plain CSS in `styles.css`, and each piece says one thing:
+
+- **Arriving.** A screen fades in, and the things on it step up into place one after another: the question card,
+  the parts of a reveal, the results summary. The delays are short (60 ms apart), and nothing waits on them: the
+  answer box and the Next button have focus from the first frame.
+- **The clock.** The timer's lights are teal, amber for the last ten seconds and red and flashing for the last
+  five, when each second also lands with a tick on the clock. A refused answer shakes the box and flushes it red.
+- **The score.** When a ride lands, the header's score counts up to its new total (`CountUp`), a tag with the
+  points earned drops out of the score window, and that round's button on the counter lights up. The results
+  count the final score up from zero while the seven lamps come on in the order they were won.
+- **`CountUp`.** The element's text is always the real value, so screen readers and tests never see a number in
+  between. While it counts, the running number is in a `data-count` attribute and the stylesheet draws it over
+  the real one.
+- **Reduced motion.** With `prefers-reduced-motion`, every animation and delay is cut to nothing and `CountUp`
+  doesn't count, as well as the ride being skipped.
 
 ## Layout: phones and wide screens
 

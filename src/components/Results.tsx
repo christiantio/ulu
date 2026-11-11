@@ -9,6 +9,7 @@ import { displayStreak, type Stats } from '../game/storage'
 import type { Prompt, RoundResult } from '../game/types'
 import { AllAnswers } from './AllAnswers'
 import { Countdown } from './Countdown'
+import { CountUp } from './CountUp'
 import { ElevatorProgress } from './ElevatorProgress'
 import { ElevatorScene } from './elevator/ElevatorScene'
 import { ProblemLinks, RejectedGuesses } from './Report'
@@ -74,7 +75,9 @@ export function Results({ title, results, prompts, stats, isDaily, dateKey, onHo
           <p className="results__title">{title}</p>
           <h1 className="results__headline">{perfect ? 'Perfect climb' : HEADLINES[stage.id]}</h1>
           <div className="results__score">
-            <span className="results__number">{score}</span>
+            <span className="results__number">
+              <CountUp value={score} from={0} ms={900} />
+            </span>
             <span className="results__max">/ {MAX_SCORE}</span>
           </div>
           <p className="results__reached">

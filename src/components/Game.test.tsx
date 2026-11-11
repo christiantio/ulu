@@ -208,6 +208,9 @@ describe('Game', () => {
     expect(headerFloor()).toBe('07')
     expect(plate()).toBe('100 of 700 points, floor 07, Upgraded HDB Lift')
     expect(document.querySelector('.game__gain')!.textContent).toBe('+100')
+    // The round's button on the counter is the one that lights up
+    expect(document.querySelectorAll('.pip--fresh')).toHaveLength(1)
+    expect(document.querySelector('.pip--fresh')!.textContent).toContain('Round 1: Sibei Ulu, 100 points')
     const next = screen.getByRole('button', { name: /Next question/ })
     expect(document.activeElement).toBe(next)
     // The verdict that's read with the button says how far the lift went, and that it's a new one
