@@ -5,6 +5,7 @@ import { UNLIMITED_DATE } from '../game/report'
 import { TIER_INFO } from '../game/scoring'
 import { TIERS, type Prompt, type RoundResult, type Tier } from '../game/types'
 import { AllAnswers } from './AllAnswers'
+import { KeyHint } from './KeyHint'
 import { ProblemLinks, RejectedGuesses } from './Report'
 import { TierLamp } from './TierLamp'
 
@@ -107,6 +108,7 @@ export function Reveal({ prompt, result, isLast, reportDate = UNLIMITED_DATE, fl
       {/* Focus lands here, so the verdict is read with it */}
       <button ref={nextRef} className="btn btn--primary btn--block btn--big" onClick={onNext} aria-describedby={verdictId}>
         {isLast ? 'See results' : 'Next question →'}
+        <KeyHint>Enter</KeyHint>
       </button>
 
       <div className="samples card">

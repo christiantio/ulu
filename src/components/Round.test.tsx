@@ -194,6 +194,41 @@ describe('Round', () => {
     })
   })
 
+  it('counts a valid answer left in the box when time runs out, as if it had been entered', async () => {
+    const { onResult, user, input } = setup()
+    const rare = answerOf(prompt, 'rare')
+    await user.type(input(), `${JUNK}{Enter}`)
+    await user.type(input(), `  ${rare.name.toUpperCase()} `)
+    advance(SECONDS_PER_ROUND * 1000 - 200)
+    expect(onResult).not.toHaveBeenCalled()
+    advance(300)
+    expect(onResult).toHaveBeenCalledTimes(1)
+    expect(onResult).toHaveBeenCalledWith({
+      promptId: prompt.id,
+      input: rare.name.toUpperCase(),
+      attempts: [JUNK],
+      answer: rare.name,
+      tier: 'rare',
+      points: TIER_INFO.rare.points,
+    })
+  })
+
+  it('does not count a known wrong answer or an ambiguous one left in the box at the buzzer', async () => {
+    const decoy = withDecoys.decoys![0]
+    const first = setup(withDecoys)
+    await first.user.type(first.input(), decoy.name)
+    advance(SECONDS_PER_ROUND * 1000)
+    expect(first.onResult).toHaveBeenCalledWith(
+      expect.objectContaining({ input: decoy.name, answer: null, tier: null, points: 0 }),
+    )
+    cleanup()
+
+    const second = setup(people)
+    await second.user.type(second.input(), 'Lee')
+    advance(SECONDS_PER_ROUND * 1000)
+    expect(second.onResult).toHaveBeenCalledWith(expect.objectContaining({ input: 'Lee', answer: null, points: 0 }))
+  })
+
   it('reports an empty input on timeout after a rejected answer was cleared', async () => {
     const { onResult, user, input } = setup()
     await user.type(input(), `${JUNK}{Enter}`)

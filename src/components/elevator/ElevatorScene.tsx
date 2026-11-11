@@ -35,6 +35,7 @@ import {
 } from '../../game/elevator'
 import { MAX_SCORE, TIER_INFO } from '../../game/scoring'
 import type { RoundResult, Tier } from '../../game/types'
+import { KeyHint } from '../KeyHint'
 import { Ambient } from './Ambient'
 import { BoyMascot, type BoyMood } from './BoyMascot'
 import { backdropFor, loadBackdrops, onBackdrops, type LayerArt } from './backdrops'
@@ -183,6 +184,18 @@ export function ElevatorScene({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [ride])
 
+  // Escape skips too, wherever the focus has got to
+  useEffect(() => {
+    if (!ride) return
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') skip()
+    }
+    window.addEventListener('keydown', onKey)
+    return () => window.removeEventListener('keydown', onKey)
+    // skip() only reads refs, so the one from the ride's first render does
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [ride])
+
   const arrived = step === 'arrived'
   // The new lift is there from the moment it starts to sweep in
   const incoming = upgrade && (step === 'upgrading' || arrived) ? upgrade : null
@@ -258,6 +271,7 @@ export function ElevatorScene({
           </p>
           <button ref={skipRef} type="button" className="btn btn--ghost btn--small" onClick={skip} aria-label="Skip to the result">
             Skip ›
+            <KeyHint>Esc</KeyHint>
           </button>
         </div>
       )}

@@ -59,7 +59,8 @@ export function HowToPlay({ onClose }: { onClose: () => void }) {
           </li>
           <li>
             Type <strong>one answer</strong> per question within <strong>{SECONDS_PER_ROUND} seconds</strong>. If
-            we don't recognise it, you can try again while the clock runs.
+            we don't recognise it, you can try again while the clock runs. Whatever is in the box when time runs
+            out still counts.
           </li>
           <li>
             The first valid answer locks in. <strong>The more ulu it is, the more points</strong>, and the more
