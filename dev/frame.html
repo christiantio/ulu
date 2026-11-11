@@ -1,0 +1,55 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <!-- site-meta -->
+    <style>
+      html, body { margin: 0; background: #444; }
+      iframe { border: 0; display: block; }
+    </style>
+  </head>
+  <body>
+    <iframe id="f"></iframe>
+    <script type="module">
+      // Throwaway harness: loads the app in an iframe of a given size, with given localStorage, and drives it.
+      // ?w=390&h=844&src=/&ls={"ulu:seen-help":"true"}&act=click:Start climbing|click:Going up|answer:gem|wait:1200
+      const q = new URLSearchParams(location.search)
+      const f = document.getElementById('f')
+      f.width = q.get('w') ?? 390
+      f.height = q.get('h') ?? 844
+      localStorage.clear()
+      localStorage.setItem('ulu:seen-help', 'true')
+      for (const [k, v] of Object.entries(JSON.parse(q.get('ls') ?? '{}'))) localStorage.setItem(k, typeof v === 'string' ? v : JSON.stringify(v))
+      const wait = (ms) => new Promise((r) => setTimeout(r, ms))
+      const date = new Intl.DateTimeFormat('en-CA', { timeZone: 'Asia/Singapore', year: 'numeric', month: '2-digit', day: '2-digit' }).format(new Date())
+      const dive = await fetch(`/dives/${date}.json`).then((r) => r.json())
+      f.src = q.get('src') ?? '/'
+      await new Promise((r) => (f.onload = r))
+      await wait(600)
+      const doc = () => f.contentDocument
+      const byText = (t) => [...doc().querySelectorAll('button, summary, a')].find((b) => b.textContent.trim().toLowerCase().includes(t.toLowerCase()))
+      const type = (text) => {
+        const input = doc().querySelector('.round__input')
+        Object.getOwnPropertyDescriptor(f.contentWindow.HTMLInputElement.prototype, 'value').set.call(input, text)
+        input.dispatchEvent(new f.contentWindow.Event('input', { bubbles: true }))
+      }
+      for (const step of (q.get('act') ?? '').split('|').filter(Boolean)) {
+        const [verb, ...rest] = step.split(':')
+        const arg = rest.join(':')
+        if (verb === 'wait') await wait(Number(arg))
+        else if (verb === 'click') { const b = byText(arg); if (!b) console.error('no button', arg); else b.click(); await wait(60) }
+        else if (verb === 'type') { type(arg); await wait(60) }
+        else if (verb === 'submit') { doc().querySelector('.round__form').requestSubmit(); await wait(60) }
+        else if (verb === 'answer') {
+          const text = doc().querySelector('.round__prompt').textContent
+          const prompt = dive.prompts.find((p) => p.text === text)
+          const answer = prompt.answers.find((a) => a.tier === arg) ?? prompt.answers.find((a) => a.tier === 'common')
+          type(answer.name); await wait(60)
+          doc().querySelector('.round__form').requestSubmit(); await wait(60)
+        }
+        else if (verb === 'scroll') { f.contentWindow.scrollTo(0, Number(arg)); await wait(60) }
+      }
+      document.title = 'done'
+    </script>
+  </body>
+</html>

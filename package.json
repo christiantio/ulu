@@ -13,7 +13,8 @@
     "test": "vitest run",
     "ideas": "tsx scripts/ideas.ts",
     "draft": "tsx scripts/draft-prompt.ts",
-    "schedule": "tsx scripts/schedule.ts"
+    "schedule": "tsx scripts/schedule.ts",
+    "art": "tsx --tsconfig tsconfig.node.json scripts/art.tsx"
   },
   "dependencies": {
     "react": "^19.1.0",

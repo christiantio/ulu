@@ -1,0 +1,1126 @@
+/*
+ * The lift scene (ElevatorScene.tsx). Decorative and aria-hidden.
+ *
+ * Scene units are --u CSS pixels. Everything hangs off the car's floor, which sits --sill above the bottom of the
+ * picture, in the middle: layers give their box in scene units (--x, --w, --h, --b) and are placed from there.
+ * Moving parts only ever change transform, opacity or clip-path.
+ */
+.lift {
+  position: relative;
+}
+.scene {
+  --u: 2px;
+  --sill: calc(var(--u) * 22);
+  position: relative;
+  height: clamp(240px, 44dvh, 420px);
+  margin-inline: -16px;
+  overflow: hidden;
+  isolation: isolate;
+  container-type: size;
+  background: var(--ink-deep);
+  border-block: 4px solid var(--ink-deep);
+  transition: height 0.28s ease;
+}
+.lift--play .scene {
+  --sill: calc(var(--u) * 14);
+  height: clamp(230px, 38dvh, 340px);
+}
+/* Typing, or reading the result: a shorter strip, so the question and the keyboard (or the verdict) fit under it */
+.game--playing .scene,
+.game--reveal .scene {
+  --sill: calc(var(--u) * 5);
+  height: clamp(150px, 25dvh, 240px);
+}
+.lift--finale .scene {
+  height: clamp(240px, 40dvh, 380px);
+}
+@media (max-height: 859px) and (max-width: 899px) {
+  .game--playing .scene,
+  .game--reveal .scene {
+    --u: 1.5px;
+  }
+}
+@media (min-width: 900px) {
+  .scene,
+  .lift--play .scene,
+  .game--playing .scene,
+  .game--reveal .scene,
+  .lift--finale .scene {
+    --sill: calc(var(--u) * 22);
+    height: min(660px, calc(100dvh - 110px));
+    min-height: 300px;
+    margin-inline: 0;
+    border: 4px solid var(--ink-deep);
+    box-shadow:
+      0 0 0 2px var(--ink-line),
+      8px 8px 0 rgb(0 0 0 / 0.35);
+  }
+}
+@media (min-width: 900px) and (min-height: 640px) {
+  .scene,
+  .lift--play .scene,
+  .game--playing .scene,
+  .game--reveal .scene,
+  .lift--finale .scene {
+    --u: 3px;
+  }
+}
+
+.stage,
+.stage-front,
+.ambient {
+  position: absolute;
+  inset: 0;
+}
+.stage-front,
+.ambient {
+  pointer-events: none;
+}
+.ambient {
+  overflow: hidden;
+}
+
+/* Skies: bands of colour measured up from the car's floor, so the horizon stays with the scenery */
+.stage {
+  --at: var(--sill);
+  --rail: #7f8f8a;
+  --rail-hi: #aebcb6;
+  --cable: #4f5b5c;
+}
+.stage--hdb {
+  background: linear-gradient(
+    to top,
+    #f6e2b6 0 calc(var(--at) + var(--u) * 40),
+    #f0e4bd 0 calc(var(--at) + var(--u) * 80),
+    #e2e6c5 0 calc(var(--at) + var(--u) * 122),
+    #d1e6cf 0 calc(var(--at) + var(--u) * 168),
+    #c0e3d6 0 calc(var(--at) + var(--u) * 220),
+    #afdddb 0
+  );
+}
+.stage--upgraded {
+  --rail: #aab6bd;
+  --rail-hi: #dfe6e9;
+  --cable: #5d6a72;
+  background: linear-gradient(
+    to top,
+    #e6f6ee 0 calc(var(--at) + var(--u) * 36),
+    #cdeef2 0 calc(var(--at) + var(--u) * 76),
+    #addff3 0 calc(var(--at) + var(--u) * 120),
+    #8ed1f1 0 calc(var(--at) + var(--u) * 170),
+    #72c4ef 0 calc(var(--at) + var(--u) * 226),
+    #5cb7eb 0
+  );
+}
+.stage--condo {
+  --rail: #6b5138;
+  --rail-hi: #b08d5f;
+  --cable: #3a2c20;
+  background: linear-gradient(
+    to top,
+    #f9b982 0 calc(var(--at) + var(--u) * 30),
+    #f9cc92 0 calc(var(--at) + var(--u) * 62),
+    #f4dda7 0 calc(var(--at) + var(--u) * 98),
+    #d3ddbf 0 calc(var(--at) + var(--u) * 138),
+    #a9d0cf 0 calc(var(--at) + var(--u) * 184),
+    #84bfd0 0 calc(var(--at) + var(--u) * 236),
+    #66abca 0
+  );
+}
+.stage--cbd {
+  --rail: #dfe7ee;
+  --rail-hi: #ffffff;
+  --cable: #39424e;
+  background: linear-gradient(
+    to top,
+    #d6ecf8 0 calc(var(--at) + var(--u) * 40),
+    #b7dcf3 0 calc(var(--at) + var(--u) * 84),
+    #97c9ed 0 calc(var(--at) + var(--u) * 132),
+    #78b4e5 0 calc(var(--at) + var(--u) * 184),
+    #5d9dd9 0 calc(var(--at) + var(--u) * 240),
+    #4988ca 0
+  );
+}
+.stage--marina {
+  --rail: #c9a24f;
+  --rail-hi: #efd48f;
+  --cable: #5a4320;
+  background: linear-gradient(
+    to top,
+    #f4b57a 0 calc(var(--at) + var(--u) * 44),
+    #e58f6f 0 calc(var(--at) + var(--u) * 60),
+    #b86b8a 0 calc(var(--at) + var(--u) * 80),
+    #7d5797 0 calc(var(--at) + var(--u) * 106),
+    #4c4187 0 calc(var(--at) + var(--u) * 140),
+    #2d3170 0 calc(var(--at) + var(--u) * 186),
+    #1b2054 0 calc(var(--at) + var(--u) * 244),
+    #131741 0
+  );
+}
+.stage--penthouse {
+  --rail: #e7c77a;
+  --rail-hi: #fff3cf;
+  --cable: #a8842f;
+  background: linear-gradient(
+    to top,
+    #ffd08a 0 calc(var(--at) + var(--u) * 104),
+    #ffb07f 0 calc(var(--at) + var(--u) * 118),
+    #ef8a84 0 calc(var(--at) + var(--u) * 136),
+    #c2699a 0 calc(var(--at) + var(--u) * 160),
+    #8c509b 0 calc(var(--at) + var(--u) * 192),
+    #58418d 0 calc(var(--at) + var(--u) * 232),
+    #363075 0 calc(var(--at) + var(--u) * 284),
+    #1f1c52 0
+  );
+}
+
+.scene__layer {
+  position: absolute;
+  left: 50%;
+  bottom: calc(var(--sill) - var(--u) * var(--b));
+  width: calc(var(--u) * var(--w));
+  height: calc(var(--u) * var(--h));
+  margin-left: calc(var(--u) * var(--x));
+  will-change: transform;
+  pointer-events: none;
+}
+.scene__layer svg,
+.door svg,
+.scene__boy svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+/* The rails the car runs on, and the cables it hangs from */
+.scene__rail {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: calc(50% - var(--u) * 47);
+  width: calc(var(--u) * 2);
+  background: var(--rail);
+  box-shadow: inset calc(var(--u) * 1) 0 var(--rail-hi);
+}
+.scene__rail--r {
+  left: calc(50% + var(--u) * 45);
+}
+.scene__cables {
+  position: absolute;
+  top: calc(var(--u) * -8);
+  bottom: calc(var(--sill) + var(--u) * 99);
+  left: calc(50% - var(--u) * 5);
+  width: calc(var(--u) * 10);
+  border-inline: calc(var(--u) * 1) solid var(--cable);
+}
+
+/* The boy, standing on the car's floor */
+.scene__boy {
+  position: absolute;
+  left: calc(50% - var(--u) * 14);
+  bottom: calc(var(--sill) + var(--u) * 1);
+  width: calc(var(--u) * 28);
+  height: calc(var(--u) * 45);
+}
+
+/* The doors slide into the frame either side. The right-hand one is the left one, mirrored */
+.scene__doors {
+  position: absolute;
+  left: calc(50% - var(--u) * 32);
+  bottom: var(--sill);
+  width: calc(var(--u) * 64);
+  height: calc(var(--u) * 76);
+  overflow: hidden;
+}
+.door {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 50%;
+  height: 100%;
+  transition: transform var(--doors-ms) cubic-bezier(0.5, 0, 0.2, 1);
+  will-change: transform;
+}
+.door--r {
+  left: 50%;
+}
+.door--r svg {
+  transform: scaleX(-1);
+}
+.scene--open .door--l {
+  transform: translateX(-100%);
+}
+.scene--open .door--r {
+  transform: translateX(100%);
+}
+/* Shutting: the doors meet with a thunk and spring back a hair */
+.scene--closing .door--l {
+  animation: door-shut-l var(--doors-ms) cubic-bezier(0.55, 0, 0.6, 1) both;
+}
+.scene--closing .door--r {
+  animation: door-shut-r var(--doors-ms) cubic-bezier(0.55, 0, 0.6, 1) both;
+}
+/* A miss: they start to close, think better of it, and open again */
+.scene--stuck .door--l {
+  animation: door-balk-l 760ms ease-in-out both;
+}
+.scene--stuck .door--r {
+  animation: door-balk-r 760ms ease-in-out both;
+}
+
+/* Weight: the car dips as it pulls away, overshoots its floor a touch and settles, and shudders on a miss */
+.scene--rising .scene__car {
+  animation: car-launch 440ms cubic-bezier(0.3, 0, 0.3, 1);
+}
+.scene--landed .scene__car,
+.scene--upgrading .scene__car,
+.scene--arrived .scene__car {
+  animation: car-land 340ms cubic-bezier(0.2, 0.7, 0.3, 1);
+}
+.scene--stuck .scene__car {
+  animation: car-shudder 300ms steps(6) 260ms;
+}
+
+/* Speed lines, drawn as fast as the lift is going */
+.scene__streaks {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  pointer-events: none;
+}
+.scene__streaks i {
+  position: absolute;
+  left: var(--x);
+  top: -30%;
+  width: calc(var(--u) * 1);
+  height: 26%;
+  background: rgb(255 255 255 / 0.5);
+  animation: streak 0.3s linear infinite;
+  animation-delay: var(--d);
+}
+
+/* A new lift: it wipes in from the floor up, behind a line of light, while the doors are still shut */
+.stage--incoming,
+.stage-front--incoming {
+  animation: wipe-in 780ms cubic-bezier(0.6, 0, 0.3, 1) both;
+}
+.scene__sweep {
+  position: absolute;
+  inset: auto 0 0;
+  height: calc(var(--u) * 3);
+  background: #fff7d6;
+  box-shadow:
+    0 0 0 calc(var(--u) * 1) var(--amber),
+    0 calc(var(--u) * 4) 0 rgb(255 247 214 / 0.4),
+    0 calc(var(--u) * 9) 0 rgb(255 247 214 / 0.18);
+  animation: sweep-up 780ms cubic-bezier(0.6, 0, 0.3, 1) both;
+  pointer-events: none;
+}
+.newlift {
+  position: absolute;
+  top: 7%;
+  left: 50%;
+  display: grid;
+  justify-items: center;
+  padding: 5px 14px 7px;
+  background: var(--amber);
+  border: 3px solid var(--ink-deep);
+  box-shadow: var(--drop);
+  color: var(--ink);
+  font-family: var(--font-display);
+  white-space: nowrap;
+  transform: translateX(-50%);
+  animation: plaque-in 0.36s cubic-bezier(0.2, 1.5, 0.4, 1) 0.62s both;
+  pointer-events: none;
+}
+.newlift__label {
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+.newlift__name {
+  font-size: 1.15rem;
+  font-weight: 700;
+  line-height: 1.1;
+}
+
+/* When the doors open: the rarity, the floors and the points */
+.stamp {
+  position: absolute;
+  top: 7%;
+  left: 50%;
+  display: grid;
+  grid-template-columns: auto auto;
+  align-items: center;
+  column-gap: 14px;
+  padding: 6px 12px 8px;
+  background: var(--ink-deep);
+  border: 3px solid var(--tier);
+  box-shadow: var(--drop);
+  color: var(--cream);
+  font-family: var(--font-display);
+  white-space: nowrap;
+  transform: translateX(-50%);
+  animation: plaque-in 0.34s cubic-bezier(0.2, 1.5, 0.4, 1) 0.12s both;
+  pointer-events: none;
+}
+/* Under the new lift's plaque, when there is one */
+.newlift + .stamp,
+.newlift ~ .stamp {
+  top: calc(7% + 58px);
+}
+.stamp--miss {
+  --tier: var(--miss);
+}
+.stamp__label {
+  font-size: 1.15rem;
+  font-weight: 700;
+  line-height: 1.1;
+  color: var(--tier);
+}
+.stamp__floors {
+  grid-column: 1;
+  font-size: 0.8rem;
+  font-weight: 500;
+  line-height: 1.1;
+}
+.stamp__points {
+  grid-column: 2;
+  grid-row: 1 / span 2;
+  font-size: 1.7rem;
+  font-weight: 700;
+  line-height: 1;
+  color: var(--tier);
+}
+.scene__flash {
+  position: absolute;
+  inset: 0;
+  background: #fff7d6;
+  animation: flash 0.5s ease-out both;
+  pointer-events: none;
+}
+
+.confetti {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+.confetti i {
+  position: absolute;
+  left: 50%;
+  top: 20%;
+  width: calc(var(--u) * 3);
+  height: calc(var(--u) * 3);
+  background: var(--c);
+  animation: confetti-burst var(--dur) cubic-bezier(0.2, 0.6, 0.4, 1) var(--delay) both;
+}
+.confetti--fall i {
+  left: var(--x);
+  top: calc(var(--u) * -4);
+  animation: confetti-fall var(--dur) linear var(--delay) infinite;
+}
+
+/* The lift's own bar under the picture during a ride: what's happening, and the way past it */
+.lift__bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  /* Room for two lines of caption, so the page doesn't jump when a long one arrives */
+  min-height: 58px;
+  padding-top: 8px;
+}
+.lift__caption {
+  font-family: var(--font-display);
+  font-size: 1.05rem;
+  font-weight: 500;
+  line-height: 1.2;
+  color: var(--cream);
+  animation: caption-in 0.2s ease both;
+}
+/* The plate steps aside for the ride: the picture has its own things to say */
+.plate {
+  transition: opacity 0.2s ease;
+}
+.lift--riding .plate {
+  opacity: 0;
+}
+.lift__bar .btn {
+  flex: none;
+  color: var(--muted);
+}
+
+/* Things in the sky */
+.ambient__cloud {
+  position: absolute;
+  left: 0;
+  top: calc(5% + var(--i) * 12%);
+  width: calc(var(--u) * var(--w));
+  height: calc(var(--u) * var(--h));
+  opacity: 0.94;
+  animation: drift calc(80s + var(--i) * 26s) linear infinite;
+  animation-delay: calc(var(--i) * -37s - 12s);
+}
+.ambient--cbd .ambient__cloud {
+  top: calc(8% + var(--i) * 17%);
+  animation-duration: calc(46s + var(--i) * 13s);
+}
+.ambient--marina .ambient__cloud {
+  opacity: 0.7;
+}
+.ambient--penthouse .ambient__cloud {
+  top: calc(30% + var(--i) * 16%);
+  opacity: 0.8;
+  animation-duration: calc(30s + var(--i) * 9s);
+}
+.ambient__bird {
+  position: absolute;
+  left: 0;
+  top: calc(13% + var(--i) * 8%);
+  width: calc(var(--u) * 5);
+  height: calc(var(--u) * 3);
+  animation: drift calc(30s + var(--i) * 11s) linear infinite;
+  animation-delay: calc(var(--i) * -13s - 5s);
+}
+.ambient__wing--up {
+  animation: chew-a 0.46s step-end infinite;
+}
+.ambient__wing--down {
+  opacity: 0;
+  animation: chew-b 0.46s step-end infinite;
+}
+.ambient__plane {
+  position: absolute;
+  left: 0;
+  top: 7%;
+  width: calc(var(--u) * 13);
+  height: calc(var(--u) * 5);
+  animation: drift 52s linear infinite;
+  animation-delay: -9s;
+}
+.ambient__star {
+  position: absolute;
+  width: var(--u);
+  height: var(--u);
+  background: #fff;
+  animation: twinkle 2.6s step-end infinite;
+  animation-delay: calc(var(--i) * -0.7s);
+}
+
+/*
+ * The boy. His parts are groups in one sprite (BoyMascot.tsx), and a mood is a set of step animations on them:
+ * frames that swap, never tween, like the sprite sheet they would have been.
+ */
+.boy {
+  overflow: visible;
+}
+.boy__lids,
+.boy__sweat,
+.boy__bubble,
+.boy__pop,
+.boy__chew--b {
+  opacity: 0;
+}
+.boy__bubble {
+  transform-box: fill-box;
+  transform-origin: center;
+}
+.boy__chew--a {
+  animation: chew-a 0.56s step-end infinite;
+}
+.boy__chew--b {
+  animation: chew-b 0.56s step-end infinite;
+}
+
+/* Waiting: a blink now and then, and every nine seconds a bubble. He lets one down, and pops the next */
+.boy--idle .boy__lids {
+  animation: blink 5.2s step-end infinite;
+}
+.boy--idle .boy__bubble--1 {
+  animation: gum-1 18s step-end infinite;
+}
+.boy--idle .boy__bubble--2 {
+  animation: gum-2 18s step-end infinite;
+}
+.boy--idle .boy__bubble--3 {
+  animation: gum-3 18s step-end infinite;
+}
+.boy--idle .boy__bubble--4 {
+  animation:
+    gum-4 18s step-end infinite,
+    wobble 0.6s step-end infinite;
+}
+.boy--idle .boy__pop {
+  animation: gum-pop 18s step-end infinite;
+}
+
+/* Riding: a bob, with the bubble wobbling in front of him */
+.boy--ride .boy__figure {
+  animation: bob 0.28s step-end infinite;
+}
+.boy--ride .boy__bubble--3 {
+  opacity: 1;
+  animation: wobble 0.28s step-end infinite;
+}
+
+/* A new lift: he looks left, looks right, and goes back to chewing */
+.boy--look .boy__pupils {
+  animation: look-around var(--upgrade-ms) step-end both;
+}
+
+/* The lift didn't move: the bubble sags, and so does he */
+.boy--miss .boy__figure {
+  animation: slump var(--miss-ms) step-end both;
+}
+.boy--miss .boy__lids {
+  animation: sigh var(--miss-ms) step-end both;
+}
+.boy--miss .boy__sweat {
+  animation: sweat var(--miss-ms) step-end both;
+}
+.boy--miss .boy__bubble--2 {
+  animation: sag-2 var(--miss-ms) step-end both;
+}
+.boy--miss .boy__bubble--1 {
+  animation: sag-1 var(--miss-ms) step-end both;
+}
+
+/* Arrivals. The obvious answers get a slow blink and a sideways look */
+.boy--low .boy__lids {
+  animation: slow-blink 1s step-end both;
+}
+.boy--low .boy__pupils {
+  animation: side-eye 1s step-end both;
+}
+/* A decent one: a nod, and a puff of gum */
+.boy--mid .boy__figure {
+  animation: nod 0.8s step-end both;
+}
+.boy--mid .boy__bubble--2 {
+  animation: puff 0.9s step-end both;
+}
+/* A deep cut: a hop, and a big bubble */
+.boy--high .boy__figure,
+.boy--gem .boy__figure {
+  animation: hop 0.6s step-end both;
+}
+.boy--high .boy__bubble--3 {
+  animation: grow-3 1.1s step-end both;
+}
+.boy--high .boy__bubble--4 {
+  animation:
+    grow-4 1.1s step-end both,
+    wobble 0.4s step-end infinite;
+}
+/* The gem: the same, and it pops */
+.boy--gem .boy__bubble--3 {
+  animation: grow-3 0.9s step-end both;
+}
+.boy--gem .boy__bubble--4 {
+  animation: burst-4 0.9s step-end both;
+}
+.boy--gem .boy__pop {
+  animation: burst-pop 0.9s step-end both;
+}
+
+/* The very top: he takes his time over one more bubble, and keeps it */
+.boy--calm .boy__bubble--1 {
+  animation: calm-1 1.3s step-end both;
+}
+.boy--calm .boy__bubble--2 {
+  animation: calm-2 1.3s step-end both;
+}
+.boy--calm .boy__bubble--3 {
+  animation: calm-3 1.3s step-end both;
+}
+.boy--calm .boy__bubble--4 {
+  animation:
+    calm-4 1.3s step-end both,
+    wobble 0.7s step-end infinite;
+}
+
+@keyframes door-shut-l {
+  0% {
+    transform: translateX(-100%);
+  }
+  78% {
+    transform: translateX(0);
+  }
+  88% {
+    transform: translateX(-3%);
+  }
+  100% {
+    transform: translateX(0);
+  }
+}
+@keyframes door-shut-r {
+  0% {
+    transform: translateX(100%);
+  }
+  78% {
+    transform: translateX(0);
+  }
+  88% {
+    transform: translateX(3%);
+  }
+  100% {
+    transform: translateX(0);
+  }
+}
+@keyframes door-balk-l {
+  0%,
+  100% {
+    transform: translateX(-100%);
+  }
+  38%,
+  52% {
+    transform: translateX(-52%);
+  }
+}
+@keyframes door-balk-r {
+  0%,
+  100% {
+    transform: translateX(100%);
+  }
+  38%,
+  52% {
+    transform: translateX(52%);
+  }
+}
+@keyframes car-launch {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  35% {
+    transform: translateY(calc(var(--u) * 2));
+  }
+}
+@keyframes car-land {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  30% {
+    transform: translateY(calc(var(--u) * -2.5));
+  }
+  64% {
+    transform: translateY(calc(var(--u) * 1));
+  }
+}
+@keyframes car-shudder {
+  0%,
+  100% {
+    transform: translateX(0);
+  }
+  33% {
+    transform: translateX(calc(var(--u) * -1));
+  }
+  66% {
+    transform: translateX(calc(var(--u) * 1));
+  }
+}
+@keyframes streak {
+  from {
+    transform: translateY(0);
+  }
+  to {
+    transform: translateY(170cqh);
+  }
+}
+@keyframes wipe-in {
+  from {
+    clip-path: inset(100% 0 0 0);
+  }
+  to {
+    clip-path: inset(0 0 0 0);
+  }
+}
+@keyframes sweep-up {
+  0% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+  92% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(-100cqh);
+    opacity: 0;
+  }
+}
+@keyframes plaque-in {
+  from {
+    opacity: 0;
+    transform: translateX(-50%) translateY(-10px) scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0) scale(1);
+  }
+}
+@keyframes flash {
+  from {
+    opacity: 0.7;
+  }
+  to {
+    opacity: 0;
+  }
+}
+@keyframes confetti-burst {
+  0% {
+    transform: translate(0, 0);
+    opacity: 1;
+  }
+  45% {
+    transform: translate(calc(var(--dx) * 1cqw), calc(var(--dy) * 1cqw));
+    opacity: 1;
+  }
+  100% {
+    transform: translate(calc(var(--dx) * 1.2cqw), calc((var(--dy) + var(--fall)) * 1cqw));
+    opacity: 0;
+  }
+}
+@keyframes confetti-fall {
+  from {
+    transform: translateY(0);
+  }
+  to {
+    transform: translateY(calc(100cqh + var(--u) * 8));
+  }
+}
+@keyframes caption-in {
+  from {
+    opacity: 0;
+    transform: translateY(3px);
+  }
+}
+@keyframes drift {
+  from {
+    transform: translateX(-100%);
+  }
+  to {
+    transform: translateX(100cqw);
+  }
+}
+@keyframes twinkle {
+  0% {
+    opacity: 1;
+  }
+  70% {
+    opacity: 0.35;
+  }
+  85% {
+    opacity: 1;
+  }
+}
+
+/* With step-end, each keyframe's value holds until the next keyframe */
+@keyframes chew-a {
+  0% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0;
+  }
+}
+@keyframes chew-b {
+  0% {
+    opacity: 0;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+@keyframes blink {
+  0%,
+  48.5%,
+  94%,
+  98% {
+    opacity: 0;
+  }
+  46%,
+  92%,
+  96% {
+    opacity: 1;
+  }
+}
+/* The bubble over 18 s: blown and let down in the first half, blown and popped in the second */
+@keyframes gum-1 {
+  0%,
+  11%,
+  38.5%,
+  61% {
+    opacity: 0;
+  }
+  8%,
+  36.5%,
+  58% {
+    opacity: 1;
+  }
+}
+@keyframes gum-2 {
+  0%,
+  15%,
+  36.5%,
+  65% {
+    opacity: 0;
+  }
+  11%,
+  34%,
+  61% {
+    opacity: 1;
+  }
+}
+@keyframes gum-3 {
+  0%,
+  20%,
+  34%,
+  70% {
+    opacity: 0;
+  }
+  15%,
+  31%,
+  65% {
+    opacity: 1;
+  }
+}
+@keyframes gum-4 {
+  0%,
+  31%,
+  78% {
+    opacity: 0;
+  }
+  20%,
+  70% {
+    opacity: 1;
+  }
+}
+@keyframes gum-pop {
+  0%,
+  79.5% {
+    opacity: 0;
+  }
+  78% {
+    opacity: 1;
+  }
+}
+@keyframes wobble {
+  0% {
+    transform: scale(1.05, 0.95);
+  }
+  50% {
+    transform: scale(0.96, 1.04);
+  }
+}
+@keyframes bob {
+  0% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(1px);
+  }
+}
+@keyframes look-around {
+  0%,
+  74% {
+    transform: translateX(0);
+  }
+  18% {
+    transform: translateX(-1px);
+  }
+  46% {
+    transform: translateX(1px);
+  }
+}
+@keyframes slump {
+  0%,
+  82% {
+    transform: translateY(0);
+  }
+  30% {
+    transform: translateY(1px);
+  }
+}
+@keyframes sigh {
+  0%,
+  78% {
+    opacity: 0;
+  }
+  32% {
+    opacity: 1;
+  }
+}
+@keyframes sweat {
+  0% {
+    opacity: 0;
+  }
+  22% {
+    opacity: 1;
+  }
+}
+@keyframes sag-2 {
+  0% {
+    opacity: 1;
+  }
+  22% {
+    opacity: 0;
+  }
+}
+@keyframes sag-1 {
+  0%,
+  44% {
+    opacity: 0;
+  }
+  22% {
+    opacity: 1;
+  }
+}
+@keyframes slow-blink {
+  0%,
+  52% {
+    opacity: 0;
+  }
+  16% {
+    opacity: 1;
+  }
+}
+@keyframes side-eye {
+  0% {
+    transform: translateX(0);
+  }
+  56% {
+    transform: translateX(1px);
+  }
+}
+@keyframes nod {
+  0%,
+  28%,
+  56% {
+    transform: translateY(0);
+  }
+  14%,
+  42% {
+    transform: translateY(1px);
+  }
+}
+@keyframes puff {
+  0%,
+  70% {
+    opacity: 0;
+  }
+  25% {
+    opacity: 1;
+  }
+}
+@keyframes hop {
+  0%,
+  56% {
+    transform: translateY(0);
+  }
+  10%,
+  34% {
+    transform: translateY(-3px);
+  }
+  20% {
+    transform: translateY(-5px);
+  }
+  46% {
+    transform: translateY(1px);
+  }
+}
+@keyframes grow-3 {
+  0%,
+  42% {
+    opacity: 0;
+  }
+  18% {
+    opacity: 1;
+  }
+}
+@keyframes grow-4 {
+  0% {
+    opacity: 0;
+  }
+  42% {
+    opacity: 1;
+  }
+}
+@keyframes burst-4 {
+  0%,
+  78% {
+    opacity: 0;
+  }
+  42% {
+    opacity: 1;
+  }
+}
+@keyframes burst-pop {
+  0%,
+  92% {
+    opacity: 0;
+  }
+  78% {
+    opacity: 1;
+  }
+}
+
+@keyframes calm-1 {
+  0%,
+  30% {
+    opacity: 0;
+  }
+  12% {
+    opacity: 1;
+  }
+}
+@keyframes calm-2 {
+  0%,
+  52% {
+    opacity: 0;
+  }
+  30% {
+    opacity: 1;
+  }
+}
+@keyframes calm-3 {
+  0%,
+  76% {
+    opacity: 0;
+  }
+  52% {
+    opacity: 1;
+  }
+}
+@keyframes calm-4 {
+  0% {
+    opacity: 0;
+  }
+  76% {
+    opacity: 1;
+  }
+}
+
+/* Less motion: nothing drifts or bobs, the clouds are parked in view, and he holds a bubble */
+@media (prefers-reduced-motion: reduce) {
+  .scene *,
+  .lift__caption {
+    animation: none !important;
+    transition: none !important;
+  }
+  .ambient__cloud {
+    transform: translateX(calc(8cqw + var(--i) * 27cqw));
+  }
+  .ambient__bird,
+  .ambient__plane {
+    transform: translateX(calc(30cqw + var(--i) * 22cqw));
+  }
+  .boy__bubble--3 {
+    opacity: 1;
+  }
+  .confetti {
+    display: none;
+  }
+}

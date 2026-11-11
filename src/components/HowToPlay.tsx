@@ -1,6 +1,8 @@
 import { useEffect, useRef, useState, type KeyboardEvent, type MouseEvent } from 'react'
-import { DESTINATIONS, ROUNDS_PER_DIVE, SECONDS_PER_ROUND, TIER_INFO } from '../game/scoring'
+import { FLOORS, STAGES } from '../game/elevator'
+import { MAX_SCORE, ROUNDS_PER_DIVE, SECONDS_PER_ROUND, TIER_INFO } from '../game/scoring'
 import { TIERS } from '../game/types'
+import { TierLamp } from './TierLamp'
 
 /**
  * A native modal <dialog>: showModal() traps focus and makes the rest of the page inert. Focus goes back to
@@ -49,19 +51,19 @@ export function HowToPlay({ onClose }: { onClose: () => void }) {
       }}
       onClick={onBackdropClick}
     >
-      <div className="modal__card">
+      <div className="modal__card card">
         <h2 id="howto-title">How to play</h2>
         <ol className="howto__steps">
           <li>
-            Every day there are <strong>{ROUNDS_PER_DIVE} prompts</strong>, the same for everyone in Singapore.
+            Every day there are <strong>{ROUNDS_PER_DIVE} questions</strong>, the same for everyone in Singapore.
           </li>
           <li>
-            Type <strong>one answer</strong> per prompt within <strong>{SECONDS_PER_ROUND} seconds</strong>. If
+            Type <strong>one answer</strong> per question within <strong>{SECONDS_PER_ROUND} seconds</strong>. If
             we don't recognise it, you can try again while the clock runs.
           </li>
           <li>
-            The first valid answer locks in. <strong>The more ulu it is, the more points.</strong> Run out of time
-            and you score nothing.
+            The first valid answer locks in. <strong>The more ulu it is, the more points</strong>, and the more
+            floors the lift goes up. Run out of time and it stays where it is.
           </li>
         </ol>
 
@@ -69,11 +71,17 @@ export function HowToPlay({ onClose }: { onClose: () => void }) {
         <ul className="tier-list">
           {TIERS.map((tier) => (
             <li key={tier} className={`tier-list__row tier--${tier}`}>
-              <span className="tier-list__emoji" aria-hidden="true">
-                {TIER_INFO[tier].emoji}
+              <span className="tier-list__lamp">
+                <TierLamp tier={tier} />
               </span>
               <span className="tier-list__label">{TIER_INFO[tier].label}</span>
               <span className="tier-list__blurb">{TIER_INFO[tier].blurb}</span>
+              <span className="tier-list__floors">
+                <span aria-hidden="true">▲{FLOORS[tier]}</span>
+                <span className="visually-hidden">
+                  {FLOORS[tier]} {FLOORS[tier] === 1 ? 'floor' : 'floors'},
+                </span>
+              </span>
               <span className="tier-list__points">
                 {TIER_INFO[tier].points}
                 <span className="visually-hidden"> points</span>
@@ -82,10 +90,11 @@ export function HowToPlay({ onClose }: { onClose: () => void }) {
           ))}
         </ul>
 
-        <h3>How far can you go?</h3>
+        <h3>How high can you go?</h3>
         <p className="muted">
-          Your score takes you out of town, from {DESTINATIONS[0].name} all the way to{' '}
-          {DESTINATIONS[DESTINATIONS.length - 1].name} for a perfect 700. New dive every midnight, Singapore time.
+          You start in an ordinary HDB lift. As your score climbs, the lift gets an upgrade: there are{' '}
+          {STAGES.length - 1} to unlock, the last at {STAGES[STAGES.length - 1].min} points. A perfect {MAX_SCORE} goes
+          all the way to the top. New questions every midnight, Singapore time.
         </p>
 
         <button ref={buttonRef} className="btn btn--primary btn--block" onClick={onClose}>

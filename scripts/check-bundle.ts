@@ -37,7 +37,7 @@ if (entrySize.raw > ENTRY_BUDGET.raw)
 if (entrySize.gzip > ENTRY_BUDGET.gzip)
   errors.push(`entry JS is ${kB(entrySize.gzip)} gzipped, over the ${kB(ENTRY_BUDGET.gzip)} budget`)
 
-// Question data in the entry. Strings that the app's own code also uses (a gem that's also a route destination,
+// Question data in the entry. Strings that the app's own code also uses (a gem that's also the name of a lift,
 // say) can't tell anything, so they're skipped and listed
 const { prompts, schedule } = readContent(join(root, 'src', 'content'))
 const appSource = sourceFiles(join(root, 'src'))

@@ -22,7 +22,7 @@ type Feedback =
   /** A known wrong answer, and why */
   | { kind: 'decoy'; guess: string; why: string }
 
-/** One prompt: the timer, the input box and retrying unrecognised answers */
+/** One question: the timer, the input box and retrying unrecognised answers */
 export function Round({ prompt, deadline, onResult }: Props) {
   const [input, setInput] = useState('')
   const [remaining, setRemaining] = useState(() => Math.max(0, deadline - Date.now()))
@@ -107,16 +107,19 @@ export function Round({ prompt, deadline, onResult }: Props) {
   const warning = TIME_WARNINGS.filter((t) => seconds <= t && startSeconds > t).at(-1)
 
   return (
-    <section className="round">
-      <div className="timer" aria-hidden>
-        <div
-          className={`timer__bar ${seconds <= 5 ? 'timer__bar--urgent' : ''}`}
-          style={{ transform: `scaleX(${fraction})` }}
-        />
-      </div>
-      <div className="round__clock" role="timer" aria-live="off">
-        <span aria-hidden="true">{seconds}s</span>
-        <span className="visually-hidden">{seconds} seconds left</span>
+    <section className="round card">
+      <div className="round__time">
+        {/* A strip of lift lights that go out as the time runs down */}
+        <div className="timer" aria-hidden>
+          <div
+            className={`timer__bar ${seconds <= 5 ? 'timer__bar--urgent' : ''}`}
+            style={{ transform: `scaleX(${fraction})` }}
+          />
+        </div>
+        <div className={`round__clock ${seconds <= 5 ? 'round__clock--urgent' : ''}`} role="timer" aria-live="off">
+          <span aria-hidden="true">{String(seconds).padStart(2, '0')}</span>
+          <span className="visually-hidden">{seconds} seconds left</span>
+        </div>
       </div>
       {/* Present (empty) from mount so screen readers pick up the change at each threshold */}
       <p className="visually-hidden" aria-live="polite" aria-atomic="true">
@@ -163,7 +166,7 @@ export function Round({ prompt, deadline, onResult }: Props) {
             {feedback.kind === 'decoy' && `doesn't count. ${feedback.why}`}
           </span>
         ) : (
-          'First valid answer locks in. Go ulu or go home.'
+          'First valid answer locks in. The rarer it is, the higher you go.'
         )}
       </p>
     </section>
