@@ -11,6 +11,7 @@
     "validate": "tsx scripts/validate-content.ts",
     "check:bundle": "tsx scripts/check-bundle.ts",
     "test": "vitest run",
+    "ideas": "tsx scripts/ideas.ts",
     "draft": "tsx scripts/draft-prompt.ts",
     "schedule": "tsx scripts/schedule.ts",
     "art": "tsx --tsconfig tsconfig.node.json scripts/art.tsx"

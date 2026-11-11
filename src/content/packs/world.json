@@ -1,0 +1,248 @@
+{
+  "name": "World",
+  "asOf": "2026-11-10",
+  "prompts": [
+    {
+      "id": "world-equator-countries",
+      "category": "world",
+      "text": "Name a country the equator passes through",
+      "note": "All 13 count, including two it only crosses at sea. Singapore doesn't: we're about 1° north.",
+      "answers": [
+        {
+          "name": "Indonesia",
+          "tier": "common"
+        },
+        {
+          "name": "Brazil",
+          "tier": "common"
+        },
+        {
+          "name": "Kenya",
+          "tier": "common"
+        },
+        {
+          "name": "Ecuador",
+          "tier": "trap"
+        },
+        {
+          "name": "Colombia",
+          "tier": "solid"
+        },
+        {
+          "name": "Uganda",
+          "tier": "solid"
+        },
+        {
+          "name": "Somalia",
+          "tier": "solid"
+        },
+        {
+          "name": "Democratic Republic of the Congo",
+          "aliases": [
+            "DR Congo",
+            "DRC",
+            "Democratic Republic of Congo",
+            "Congo-Kinshasa",
+            "Congo Kinshasa",
+            "Zaire"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "Republic of the Congo",
+          "aliases": [
+            "Congo",
+            "Republic of Congo",
+            "Congo-Brazzaville",
+            "Congo Brazzaville",
+            "Congo Republic"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "Gabon",
+          "tier": "rare"
+        },
+        {
+          "name": "Kiribati",
+          "tier": "ulu"
+        },
+        {
+          "name": "São Tomé and Príncipe",
+          "aliases": [
+            "Sao Tome",
+            "Sao Tome & Principe"
+          ],
+          "tier": "ulu"
+        },
+        {
+          "name": "Maldives",
+          "aliases": [
+            "The Maldives",
+            "Maldive Islands"
+          ],
+          "tier": "gem"
+        }
+      ],
+      "decoys": [
+        {
+          "name": "Singapore",
+          "why": "So close! We're about 1° north of it."
+        },
+        {
+          "name": "Malaysia",
+          "why": "All of Malaysia is north of the equator."
+        },
+        {
+          "name": "Equatorial Guinea",
+          "why": "Despite the name! Its mainland is north of the equator and its island of Annobón is south."
+        },
+        {
+          "name": "Peru",
+          "why": "Just misses. Peru's northern tip stops a few kilometres short."
+        },
+        {
+          "name": "Papua New Guinea",
+          "aliases": [
+            "PNG"
+          ],
+          "why": "Its islands all lie south of the equator."
+        },
+        {
+          "name": "Tanzania",
+          "why": "Entirely south of it. Kenya and Uganda are the ones you want."
+        }
+      ]
+    },
+    {
+      "id": "world-china-neighbours",
+      "category": "world",
+      "text": "Name a country that shares a land border with China",
+      "note": "All 14 count. Land borders only.",
+      "answers": [
+        {
+          "name": "Russia",
+          "tier": "common"
+        },
+        {
+          "name": "India",
+          "tier": "common"
+        },
+        {
+          "name": "Vietnam",
+          "aliases": [
+            "Viet Nam"
+          ],
+          "tier": "common"
+        },
+        {
+          "name": "Mongolia",
+          "tier": "common"
+        },
+        {
+          "name": "North Korea",
+          "aliases": [
+            "DPRK",
+            "Democratic People's Republic of Korea"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "Myanmar",
+          "aliases": [
+            "Burma"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "Laos",
+          "aliases": [
+            "Lao PDR",
+            "Lao"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "Nepal",
+          "tier": "solid"
+        },
+        {
+          "name": "Pakistan",
+          "tier": "solid"
+        },
+        {
+          "name": "Kazakhstan",
+          "tier": "rare"
+        },
+        {
+          "name": "Bhutan",
+          "tier": "rare"
+        },
+        {
+          "name": "Kyrgyzstan",
+          "aliases": [
+            "Kyrgyz Republic",
+            "Kirghizstan",
+            "Kirghizia"
+          ],
+          "tier": "ulu"
+        },
+        {
+          "name": "Tajikistan",
+          "tier": "ulu"
+        },
+        {
+          "name": "Afghanistan",
+          "tier": "gem"
+        }
+      ],
+      "decoys": [
+        {
+          "name": "Korea",
+          "why": "Which Korea? Only one of them touches China."
+        },
+        {
+          "name": "South Korea",
+          "aliases": [
+            "Republic of Korea"
+          ],
+          "why": "North Korea is in the way."
+        },
+        {
+          "name": "Japan",
+          "why": "No land border: there's a sea in between."
+        },
+        {
+          "name": "Thailand",
+          "why": "Close, but Laos and Myanmar sit in between."
+        },
+        {
+          "name": "Cambodia",
+          "why": "Vietnam and Laos sit in between."
+        },
+        {
+          "name": "Bangladesh",
+          "why": "India sits in between."
+        },
+        {
+          "name": "Uzbekistan",
+          "why": "Kyrgyzstan and Tajikistan sit in between."
+        },
+        {
+          "name": "Hong Kong",
+          "aliases": [
+            "HK"
+          ],
+          "why": "A Special Administrative Region of China, not a separate country."
+        },
+        {
+          "name": "Macau",
+          "aliases": [
+            "Macao"
+          ],
+          "why": "A Special Administrative Region of China, not a separate country."
+        }
+      ]
+    }
+  ]
+}

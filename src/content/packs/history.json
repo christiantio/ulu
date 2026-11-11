@@ -1003,7 +1003,8 @@
           "name": "Stanley Warren",
           "tier": "gem"
         }
-      ]
+      ],
+      "partial": true
     },
     {
       "id": "history-early-figures",
@@ -1192,7 +1193,8 @@
           ],
           "tier": "gem"
         }
-      ]
+      ],
+      "partial": true
     },
     {
       "id": "history-lost-attractions",
@@ -1924,7 +1926,8 @@
           ],
           "tier": "gem"
         }
-      ]
+      ],
+      "partial": true
     }
   ]
 }

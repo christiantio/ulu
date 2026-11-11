@@ -1,5 +1,5 @@
 import { useEffect, useId, useRef, useState, type FormEvent } from 'react'
-import { matchAnswer } from '../game/match'
+import { checkAnswer } from '../game/match'
 import { normalize } from '../game/normalize'
 import { SECONDS_PER_ROUND, TIER_INFO } from '../game/scoring'
 import type { Prompt, RoundResult } from '../game/types'
@@ -14,11 +14,19 @@ interface Props {
 /** Seconds remaining at which the time left is announced to screen readers */
 const TIME_WARNINGS = [10, 5]
 
+/** Why the last guess didn't lock in */
+type Feedback =
+  | { kind: 'unknown'; guess: string }
+  /** It fits more than one answer */
+  | { kind: 'ambiguous'; guess: string }
+  /** A known wrong answer, and why */
+  | { kind: 'decoy'; guess: string; why: string }
+
 /** One question: the timer, the input box and retrying unrecognised answers */
 export function Round({ prompt, deadline, onResult }: Props) {
   const [input, setInput] = useState('')
   const [remaining, setRemaining] = useState(() => Math.max(0, deadline - Date.now()))
-  const [rejected, setRejected] = useState<string | null>(null)
+  const [feedback, setFeedback] = useState<Feedback | null>(null)
   const [shake, setShake] = useState(0)
   // Only warn for thresholds still ahead when the round mounted, so a resumed round with 7s left doesn't say "10"
   const [startSeconds] = useState(() => Math.ceil(Math.max(0, deadline - Date.now()) / 1000))
@@ -63,19 +71,27 @@ export function Round({ prompt, deadline, onResult }: Props) {
     e.preventDefault()
     const guess = input.trim()
     if (!guess || done.current) return
-    const match = matchAnswer(guess, prompt)
-    if (!match) {
-      // One entry per distinct guess: "Bedok" and "bedok!" count once. Text that normalises to nothing (e.g. only
-      // Chinese characters) is compared as typed
-      const key = (text: string) => normalize(text) || text.toLowerCase()
-      if (!attempts.current.some((a) => key(a) === key(guess))) attempts.current = [...attempts.current, guess]
-      setRejected(guess)
+    const verdict = checkAnswer(guess, prompt)
+    if (verdict.kind !== 'match') {
+      if (verdict.kind === 'none') {
+        // One entry per distinct guess: "Bedok" and "bedok!" count once. Text that normalises to nothing (e.g.
+        // only Chinese characters) is compared as typed. Only unrecognised guesses are kept: these are the ones a
+        // player can report as missing. A decoy has already been judged, and an ambiguous guess wasn't refused
+        const key = (text: string) => normalize(text) || text.toLowerCase()
+        if (!attempts.current.some((a) => key(a) === key(guess))) attempts.current = [...attempts.current, guess]
+        setFeedback({ kind: 'unknown', guess })
+      } else if (verdict.kind === 'decoy') {
+        setFeedback({ kind: 'decoy', guess, why: verdict.decoy.why })
+      } else {
+        setFeedback({ kind: 'ambiguous', guess })
+      }
       setShake((n) => n + 1)
-      setInput('')
+      // An ambiguous guess stays in the box, so the player can add to it
+      if (verdict.kind !== 'ambiguous') setInput('')
       inputRef.current?.focus()
       return
     }
-    const { answer } = match
+    const { answer } = verdict
     finish({
       promptId: prompt.id,
       input: guess,
@@ -141,10 +157,13 @@ export function Round({ prompt, deadline, onResult }: Props) {
         </button>
       </form>
       <p className="round__feedback" role="status">
-        {rejected ? (
+        {feedback ? (
           // Keyed so the same rejected answer twice is still announced again
           <span key={shake}>
-            <strong>“{rejected}”</strong> not on our list leh. Try another one!
+            <strong>“{feedback.guess}”</strong>{' '}
+            {feedback.kind === 'unknown' && 'not on our list leh. Try another one!'}
+            {feedback.kind === 'ambiguous' && 'could be more than one answer. Which one? Type a bit more.'}
+            {feedback.kind === 'decoy' && `doesn't count. ${feedback.why}`}
           </span>
         ) : (
           'First valid answer locks in. The rarer it is, the higher you go.'

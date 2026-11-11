@@ -9,8 +9,9 @@ go somewhere nobody else thought of.
 | | |
 |---|---|
 | Daily dive | 7 prompts, same for everyone, resets at midnight **Singapore time** |
-| Per prompt | 25 seconds, one free-text answer. Unrecognised input can be retried while the clock runs; the first valid answer locks in |
-| Scoring | Each accepted answer has a rarity tier (below). Timeout = 0 |
+| Mix | Mostly Singapore prompts, with up to 2 world prompts (general knowledge) a day once the bank has enough of them. See [Daily selection](#daily-selection) |
+| Per prompt | 25 seconds, one free-text answer. Unrecognised input can be retried while the clock runs; the first valid answer locks in. A known wrong answer (a decoy) is refused with its reason, and a guess that fits several answers asks for more |
+| Scoring | Each accepted answer has a rarity tier (below), and the dive's score is the sum. Timeout = 0. Nothing ever scores below zero |
 | Max | 7 × 100 = 700 |
 | Theme | Answers climb floors while the cumulative score unlocks lifts, from the HDB lift to the sky penthouse |
 | Unlimited | 7 random prompts from past dives (never today's), no stats, replay as often as you like. Back-to-back games don't share prompts. While the archive is too small to fill a game, it uses the rest of the bank |
@@ -35,9 +36,9 @@ A static single-page app: **Vite + React + TypeScript**, no backend. It can be h
 ```
 src/
   game/              pure logic, no React; unit tested
-    types.ts         Prompt / Answer / Tier / Category schema
-    normalize.ts     answer → comparison key
-    match.ts         exact + typo-tolerant matching
+    types.ts         Prompt / Answer / Decoy / Tier / Category schema, and each category's scope (sg or world)
+    normalize.ts     answer → comparison key, and its loose form (filler, numbers, short forms)
+    match.ts         what a guess means: exact, loose, part of a name, typo; decoys and ambiguous guesses
     scoring.ts       tier points, labels, destinations
     elevator.ts      floors, lift upgrades and the answer animation's timing and motion
     daily.ts         Singapore date, seeded daily selection, unlimited shuffle
@@ -61,7 +62,10 @@ src/
 scripts/
   validate-content.ts   npm run validate
   schedule.ts           npm run schedule  (extend the daily schedule)
-  draft-prompt.ts       npm run draft  (Claude-assisted drafting, offline)
+  ideas.ts              npm run ideas  (Claude proposes prompts to write, offline)
+  draft-prompt.ts       npm run draft  (Claude drafts one prompt for review, offline)
+  generate/             the pipeline behind both: brief.ts (every prompt sent to Claude), schemas.ts,
+                        llm.ts (the API calls), tiers.ts (estimates → tiers), pipeline.ts (the stages)
   site-meta.ts          Vite plugin: absolute link-preview tags from VITE_SITE_URL
   dives.ts              Vite plugin: one dives/<date>.json per scheduled day, built and served in dev
   check-bundle.ts       npm run check:bundle  (entry size budget, no question data in the entry)
@@ -75,9 +79,9 @@ stay out of the entry chunk:
 
 | What | Where it comes from | When it loads |
 |---|---|---|
-| The app (entry chunk) | `dist/assets/index-<hash>.js` | First load. About 273 kB, 85 kB gzipped |
+| The app (entry chunk) | `dist/assets/index-<hash>.js` | First load. About 276 kB, 87 kB gzipped |
 | Today's prompts | `dist/dives/<date>.json`, the day's 7 full prompts in schedule order | First load, and again when the date rolls over. About 23–35 kB, 6–7 kB gzipped |
-| The bank (every pack plus `schedule.json`) | `dist/assets/bank-<hash>.js`, from `import('./bank')` | Only when Unlimited starts, when a date has no dive file, or when saved progress names prompts the day's file doesn't have. About 230 kB, 49 kB gzipped |
+| The bank (every pack plus `schedule.json`) | `dist/assets/bank-<hash>.js`, from `import('./bank')` | Only when Unlimited starts, when a date has no dive file, or when saved progress names prompts the day's file doesn't have. About 227 kB, 53 kB gzipped |
 
 - **The dive files.** `scripts/dives.ts` is a Vite plugin. At build time it emits `dives/<date>.json` for every
   date in the schedule. In dev, middleware serves the same files from the current packs, so edits show up
@@ -138,15 +142,19 @@ Questions are **curated data, not generated at runtime**. A prompt is a JSON obj
 
 Pipeline:
 
-1. **Draft.** Write by hand, or run `npm run draft -- --category food "Name a kueh"`. The draft script asks
-   Claude (`claude-opus-5-5`, structured output) for a full answer list with tiers and aliases, and writes it to
-   `content/drafts/` along with notes for the reviewer. Nothing it produces goes live automatically.
+1. **Draft.** Write by hand, or run `npm run draft -- --category food "Name a kueh"` (and `npm run ideas` for
+   what to write about). The draft script runs four separate Claude calls (`claude-opus-5-5`, structured
+   output): one compiles the answers, aliases and decoys, one fact-checks that list with web search, and three
+   estimate what different groups of players would type, which plain code turns into tiers. The draft and the
+   evidence behind it go to `content/drafts/`. Nothing it produces goes live automatically, and the game never
+   calls the API. The design is in [docs/question-pipeline.md](docs/question-pipeline.md).
 2. **Review.** A human checks every answer for correctness, completeness (unrecognised = 0 points, so gaps
    are frustrating), tier calibration and the gem choice. Time-sensitive sets (new MRT stations, office holders)
    get a `note` with an as-of date.
 3. **Validate.** `npm run validate` (also run in `npm test`) enforces: unique kebab-case ids, known
-   category, ≥ 12 answers, ≥ 3 easy (common/trap/solid) answers, exactly one gem, and that no two answers share
-   a normalised name or alias, which would make matching ambiguous.
+   category, ≥ 12 answers, ≥ 3 easy (common/trap/solid) answers, exactly one gem, that no two answers share
+   a normalised name or alias (or differ only in ways matching ignores), which would make matching ambiguous,
+   and that every decoy has a reason and doesn't match an answer.
 4. **Ship.** Move the prompt into `src/content/packs/<category>.json`. At build time it goes into the dive files
    of the days it's scheduled on and into the lazily loaded bank (see [Loading content](#loading-content)).
 
@@ -156,7 +164,10 @@ complete. Open sets (hawker dishes, Singlish words) carry long answer lists with
 ### How rarity is decided (now and later)
 
 - **Now: editorial.** Tiers reflect how likely a typical Singapore resident is to think of an answer, judged by
-  the writer and reviewer with LLM help. The gem is chosen for rarity *and* fun.
+  the writer and reviewer. `npm run draft` gives them a starting point: three simulated panels of players
+  (students and NSFs, working adults, over-45s) each estimate how many of 1,000 would lock in each answer, and
+  the weighted shares are cut into tiers with the same thresholds proposed for real data below. That is a
+  model's guess at people, so the reviewer has the last word. The gem is chosen for rarity *and* fun.
 - **Later: data-driven.** Once there is a backend, log every accepted answer per prompt (anonymous counts only)
   and recompute tiers from real frequency, e.g. top 10% of answers by share = `common`, under 1% = `ulu`.
   Editorial tiers then become the cold-start prior, and `trap` can be detected automatically as "listed
@@ -172,11 +183,41 @@ complete. Open sets (hawker dishes, Singlish words) carry long answer lists with
 
 ## Answer matching
 
-`normalize()` lower-cases, strips accents, punctuation, spaces and a leading "the", and turns `&` into
-"and", so `Char Kway Teow`, `char-kway-teow` and `charkwayteow` are equal. `matchAnswer()` tries exact
-matches on names and aliases first. If none match, it allows 1 typo for 5–9 character keys and 2 for longer
-ones, and accepts the correction only when a **single** answer is closest. Short inputs (under 5 characters)
-must match exactly, so `Bedk` won't become `Bedok` and abbreviations like `AMK` stay precise.
+`checkAnswer()` in `game/match.ts` decides what a typed guess means. It runs four stages, strictest first, and
+the first with an opinion decides:
+
+| Stage | Accepts | Example |
+|---|---|---|
+| 1. Exact | The `normalize()` keys are equal: case, accents, punctuation, spacing and a leading "the" are ignored, and `&` is "and" | `char-kway-teow`, `charkwayteow` |
+| 2. Loose | The same words once "the", "of", "and" and the prompt's `filler` words are dropped, numbers are written as digits, common short forms are unified and a plural "s" is removed, in any order | `Bishan MRT station`, `Toy Story Two`, `Bt Timah`, `kopi siew dai peng` |
+| 3. Partial | In prompts with `partial: true`, the first or last words of exactly one answer's name | `Kuan Yew`, `Einstein` |
+| 4. Typo | 1 typo for keys of 5–9 characters, 2 for longer ones, where a typo is a wrong, missing, extra or swapped-with-its-neighbour character, and one answer is strictly closest | `Tampiness`, `Toa Payho`, `Einstien` |
+
+It returns one of four verdicts: `match`; `ambiguous`, when the guess fits several answers equally ("Lee",
+"Korea"), so the round asks the player to type more; `decoy`, a known wrong answer with its reason; or `none`.
+
+The rules that keep it from accepting wrong answers:
+
+- **Short keys are exact.** Under 5 characters there is no typo tolerance, so `Bedk` won't become `Bedok` and
+  abbreviations like `AMK` stay precise.
+- **Ties refuse.** A typo equally close to two answers (`Tampines Eest`) matches neither.
+- **Digits are never corrected.** `Toy Story 6` is not a typo for `Toy Story 5`.
+- **Decoys compete with answers.** Each prompt can list wrong answers people will type. A guess that is a
+  decoy, or closer to one than to any answer, is refused, so `Ireland` is never corrected to `Iceland`.
+- **Loose rules are symmetric.** Every loose rule is applied to the input and to the stored answers alike, so
+  none favours one answer. Validation fails if two answers become the same under them, or if a decoy matches
+  an answer.
+- **Partial is opt-in and narrow.** Only an answer's display name counts, only its first or last words, and
+  only with a real word of 3+ letters. An earlier, wider version accepted "Sir" and "bin" as people.
+
+Checked against the bank: all 8,100 names and aliases match their own answer, and on 111,000 single-typo
+variants of them the previous matcher (Levenshtein, no swaps, no digit rule) corrected 89,436 to the right
+answer and 37 to a different one, against 94,481 and 9 now. The 9 are inputs where the test replaced a digit
+with a letter. The previous matcher also made 204 corrections that this one refuses: 174 that
+changed or dropped a digit, and 30 that were all to the wrong answer (`ewst coast` → East Coast Park).
+
+Matching runs in the browser on every guess, with no network call and no model. A guess is compared with a few
+hundred keys at most, and each prompt's keys are computed once.
 
 ## The answer animation
 
@@ -200,14 +241,17 @@ must match exactly, so `Bedk` won't become `Bedok` and abbreviations like `AMK` 
   file only grows, so adding, editing or reordering prompts never changes a day that's already scheduled.
 - `npm run schedule -- --days 30` appends days until the schedule reaches 30 days past today (30 is the default). Each new day takes
   the least recently used prompt from each of 7 different categories, so a prompt rests as long as the bank
-  allows before it comes back. With ~8–10 prompts per category that's about 8 days. **Growing the bank is the
+  allows before it comes back. Up to `WORLD_ROUNDS_PER_DIVE` (2) of the 7 come from the world categories and
+  the rest from the Singapore ones. A day only gets as many world prompts as the world bank can rest for
+  `MIN_REPEAT_GAP` days: none with fewer than 7 world prompts, one a day from 7, two from 14. Days already in
+  the schedule don't change, so world prompts first appear on the days the next `npm run schedule` adds. With ~8–10 prompts per category that's about 8 days. **Growing the bank is the
   main lever for longevity.** New prompts only appear on days scheduled after they were added, which is why
   the schedule runs a month ahead and not further.
 - `npm test` and `npm run validate` check the schedule. For every day: each scheduled id still exists (so a
   prompt can't be deleted or renamed once it's scheduled), it has 7 different prompts, and there are no gaps.
   For days after today, which are the only ones that can still change: no prompt repeats within 7 days
-  (`MIN_REPEAT_GAP`, raise it as the bank grows; past days still count as history), and each day uses 7
-  categories. The schedule must also reach at least 14 days past today. When that last check fails, run
+  (`MIN_REPEAT_GAP`, raise it as the bank grows; past days still count as history), each day uses 7
+  categories, and no day has more than 2 world prompts. The schedule must also reach at least 14 days past today. When that last check fails, run
   `npm run schedule` and commit the result. `npm run schedule` runs the same checks and leaves the file alone if
   they fail.
 - CI also runs daily on a cron, because the 14-day check depends on the date: a quiet repo still goes red two

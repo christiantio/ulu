@@ -1,3 +1,4 @@
+import { matchProblems } from './match'
 import { normalize } from './normalize'
 import { CATEGORIES, TIERS, type Pack, type Tier } from './types'
 
@@ -69,6 +70,29 @@ export function validatePacks(packs: Record<string, Pack>): string[] {
           owners.set(key, answer.name)
         }
       }
+
+      const fillerOk =
+        prompt.filler === undefined ||
+        (Array.isArray(prompt.filler) && prompt.filler.every((f) => typeof f === 'string' && normalize(f)))
+      if (!fillerOk) errors.push(`${where}: "filler" must be a list of words`)
+      if (prompt.partial !== undefined && typeof prompt.partial !== 'boolean')
+        errors.push(`${where}: "partial" must be true or false`)
+
+      const decoys = prompt.decoys ?? []
+      if (!Array.isArray(decoys)) {
+        errors.push(`${where}: "decoys" must be a list`)
+        continue
+      }
+      for (const decoy of decoys) {
+        if (!decoy.name?.trim()) errors.push(`${where}: decoy with empty name`)
+        if (!decoy.why?.trim()) errors.push(`${where} › ${decoy.name}: decoy needs a "why" to show the player`)
+        for (const label of [decoy.name, ...(decoy.aliases ?? [])]) {
+          if (!normalize(label ?? '')) errors.push(`${where} › ${decoy.name}: "${label}" normalizes to nothing`)
+        }
+      }
+      // Answers that only differ in ways matching ignores, and decoys that would match an answer
+      if (fillerOk && prompt.answers.every((a) => a.name?.trim()) && decoys.every((d) => d.name?.trim()))
+        errors.push(...matchProblems(prompt).errors.map((e) => `${where}: ${e}`))
     }
   }
 
