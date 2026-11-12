@@ -10,7 +10,7 @@ go somewhere nobody else thought of.
 |---|---|
 | Daily dive | 7 prompts, same for everyone, resets at midnight **Singapore time** |
 | Mix | Mostly Singapore prompts, with up to 2 world prompts (general knowledge) a day once the bank has enough of them. See [Daily selection](#daily-selection) |
-| Per prompt | 25 seconds, one free-text answer. Unrecognised input can be retried while the clock runs; the first valid answer locks in. When time runs out, whatever is in the answer box is judged as if it had been entered, so an answer typed in time isn't lost to a late press of Go. A known wrong answer (a decoy) is refused with its reason, and a guess that fits several answers asks for more |
+| Per prompt | 25 seconds, one free-text answer, and the lift's doors close as the time runs down. Unrecognised input can be retried while the clock runs; the first valid answer locks in. When time runs out, whatever is in the answer box is judged as if it had been entered, so an answer typed in time isn't lost to a late press of Go. A known wrong answer (a decoy) is refused with its reason, and a guess that fits several answers asks for more |
 | Scoring | Each accepted answer has a rarity tier (below), and the dive's score is the sum. Timeout = 0. Nothing ever scores below zero |
 | Max | 7 × 100 = 700 |
 | Theme | Answers climb floors while the cumulative score unlocks lifts, from the HDB lift to the sky penthouse |
@@ -81,7 +81,7 @@ stay out of the entry chunk:
 
 | What | Where it comes from | When it loads |
 |---|---|---|
-| The app (entry chunk) | `dist/assets/index-<hash>.js` | First load. About 294 kB, 94 kB gzipped |
+| The app (entry chunk) | `dist/assets/index-<hash>.js` | First load. About 296 kB, 95 kB gzipped |
 | Today's prompts | `dist/dives/<date>.json`, the day's 7 full prompts in schedule order | First load, and again when the date rolls over. About 23–35 kB, 6–7 kB gzipped |
 | The bank (every pack plus `schedule.json`) | `dist/assets/bank-<hash>.js`, from `import('./bank')` | Only when Unlimited starts, when a date has no dive file, or when saved progress names prompts the day's file doesn't have. About 227 kB, 53 kB gzipped |
 
@@ -229,6 +229,26 @@ hundred keys at most, and each prompt's keys are computed once.
 - **Scene and motion.** The lift closes its doors, climbs the answer's floors, and opens on the result. Scenery
   scrolls below it; reaching a score threshold upgrades the lift before the doors open. `game/elevator.ts`
   defines floors, upgrades, timing and motion. The same scene appears at rest on the home and results screens.
+- **It's the whole window.** The scene isn't a picture on the page: it's fixed to the window and fills it, and
+  every screen is laid over it (see [Layout](#layout-the-lifts-world-and-what-lies-over-it)). A ride moves
+  everything on screen, and a new lift sweeps in across the whole window.
+- **The world takes part in a question.** The lift isn't only the reward for an answer:
+  - *The doors are the clock.* `Round` reports the share of the time left on every tick, and `Game` writes it
+    to `--clock` on the game's element. The doors' position is that number, so they close as the time runs
+    down and an answer has to get in before they shut. A ride shuts them from wherever the clock left them. A
+    miss is the clock running out: the doors are shut, the lift shudders and stays put, and they open again on
+    the same floor.
+  - *The last five seconds.* `Game` also sets `data-pace` (`steady`, `low`, `urgent`). While it's `urgent`,
+    the edge of the window flashes red.
+  - *A refused guess.* `Round` calls `onRefuse`, `Game` counts the refusals and passes the count to the scene
+    as `jolt`, and the car shakes and the boy breaks a sweat. The scene takes one of two class names in turn
+    (`scene--jolt-a`, `scene--jolt-b`) with identical animations, so each refusal plays it again.
+
+  The clock changes ten times a second, so it goes straight to the DOM as a custom property and an attribute:
+  React doesn't re-render for it.
+- **Wide windows.** The scenery is drawn 400 scene units wide. Each scenery layer also carries a mirror image
+  of itself on either side (an SVG `<use>` of the same drawing, flipped), so on a window wider than that the
+  neighbourhood carries on to the edges. The wings are only displayed above 600px wide.
 - **Timing.** A `requestAnimationFrame` loop paints continuous motion directly to the DOM, while React updates
   the floor indicator and ride stages. Timers settle the ride even when frames are throttled in a background tab.
 - **Accessibility.** The picture is hidden from screen readers, and focus moves to Skip during a ride. Escape
@@ -240,11 +260,12 @@ hundred keys at most, and each prompt's keys are computed once.
 
 Outside the lift, motion is plain CSS in `styles.css`, and each piece says one thing:
 
-- **Arriving.** A screen fades in, and the things on it step up into place one after another: the question card,
-  the parts of a reveal, the results summary. The delays are short (60 ms apart), and nothing waits on them: the
-  answer box and the Next button have focus from the first frame.
+- **Arriving.** A screen fades in, the sign drops into place over the lift, and the controls and the cards step
+  up after it. The delays are short, and nothing waits on them: the answer box and the Next button have focus
+  from the first frame.
 - **The clock.** The timer's lights are teal, amber for the last ten seconds and red and flashing for the last
-  five, when each second also lands with a tick on the clock. A refused answer shakes the box and flushes it red.
+  five, when each second also lands with a tick on the clock. A refused answer shakes the box and flushes it red,
+  and the sign says why. The lift shows all of this too: see [The answer animation](#the-answer-animation).
 - **The score.** When a ride lands, the header's score counts up to its new total (`CountUp`), a tag with the
   points earned drops out of the score window, and that round's button on the counter lights up. The results
   count the final score up from zero while the seven lamps come on in the order they were won.
@@ -252,35 +273,63 @@ Outside the lift, motion is plain CSS in `styles.css`, and each piece says one t
   between. While it counts, the running number is in a `data-count` attribute and the stylesheet draws it over
   the real one.
 - **Reduced motion.** With `prefers-reduced-motion`, every animation and delay is cut to nothing and `CountUp`
-  doesn't count, as well as the ride being skipped.
+  doesn't count, as well as the ride being skipped. The doors don't close with the clock and the window's edge
+  doesn't flash: the clock on the sign says the same thing without moving.
 
-## Layout: phones and wide screens
+## Layout: the lift's world, and what lies over it
 
-One stylesheet (`src/styles.css`, with the lift's own in `components/elevator/elevator.css`) lays the same three
-blocks out for whatever window it gets: the status panel, the lift, and the panel under it.
+The lift scene is the page's background and the game's playing field at once. It's fixed to the window, with
+the lift standing `--foot` above the bottom of it. Each screen is a **stack** laid over that, as tall as the
+window (`.stack` in `src/styles.css`; the scene's own styles are in `components/elevator/elevator.css`):
+
+| Part | Class | What it's for |
+|---|---|---|
+| Status | `.game__top`, `.home__brand` | Along the top: the way back, the floor and the score, the seven round buttons and the lift's plate. On home, the title |
+| Sky | `.stack__sky` | Takes whatever room is left over |
+| The sign | `.board` | A dark board hung on two rods just over the lift: the question and its clock, the verdict and the gem, the final score |
+| The lift | `.stack__gap` | Nothing: it's the room the lift itself stands in, one lift high |
+| Controls | `.dock` | At the lift's foot: Going up, the answer box, Next question, Share result. During a ride the scene's own bar (the caption and Skip) is here instead |
+| Cards | `.extras` | Everything long: the other answers, the lift directory, the breakdown. Below the window on a phone, where `--peek` shows the top of the first card; beside the lift on a wide screen |
+
+A screen's components can come in any order in the markup. `order` places them, so `Round` and `Reveal` each
+return a sign, their controls and (for the reveal) their cards, and stay in reading order for a screen reader.
+When the window is too short for all of it, the sky goes first, then the gap, so the sign comes down over the
+top of the lift. Only what can be read or pressed takes taps: anywhere else, a tap reaches the scene, which is
+how tapping the picture skips a ride.
+
+Two custom properties tie the layout to the scene, both on `:root`: `--u`, the size of one pixel of the art,
+and `--foot`, the room the controls take. The sign hangs one lift (118 units) above the controls because both
+are measured in `--u`.
 
 | Window | Layout |
 |---|---|
-| A phone, upright (under 900px wide) | One column, 560px at most: status, lift, panel. The lift is a strip while a question or a reveal is up, and taller for the ride |
-| 900px wide or more | Two columns: the lift on the left, as tall as the window allows and sticky, with everything else beside it. The page's top padding centres the lift in the window |
-| 1600 × 950 or more | The same, a size up: 18px type, a wider page and bigger pixels in the lift |
-| A phone on its side (600px wide or more, 520px tall or less) | The two columns again, with the padding and the type cut down, and the ride's caption laid over the foot of the lift |
+| A phone, upright | The stack as above, 560px wide at most. The cards are below the window, and scroll up over the lift |
+| 600px wide and 620px tall, or more | The same, with bigger pixels: `--u` goes from 2px to 3, then 4, 5 and 6 as the window gets taller |
+| 900px wide or more | The status spreads along the top of the window |
+| 1000px wide or more | Home puts the title to the left of the lift and the way in to its right, level with it |
+| 1200px wide or more | The cards stand to the right of the lift and scroll on their own, so nothing is below the window. A sign with cards beside it narrows to keep clear of them |
+| A phone on its side (600px wide or more, 520px tall or less) | No room to stack things over the lift: it stands a quarter of the way across, with the stack in the right half |
 
 - **Typing on a phone.** The on-screen keyboard covers the bottom of the page without resizing it, so `100dvh`
   still measures the whole screen. `viewport.ts` keeps the height that's really visible (from the
   `visualViewport` API) in `--visible-height` on `<html>`, and adds the class `keyboard-open` while a keyboard
-  is up. A question's layout is that tall: the status panel and the question card keep their height, and the lift
-  gets what's left, from its usual strip down to nothing. With the keyboard up, the round counter steps aside
-  too. The clock, the question and the answer box are always above the keyboard. Without the API, the layout
-  falls back to `100dvh`, which is how it behaved before.
-- **A short strip.** As the strip gets shorter, the car sinks out of the bottom of it, so what's left shows the
-  boy's face. Under 50px it's hidden.
+  is up. The scene and the stack are both that tall, so the lift stands on top of the keyboard. With the
+  keyboard up, the round counter and the plate step aside, the sign tightens, and the answer box becomes a bar
+  across the top of the keyboard. The clock, the question and the answer box are always above the keyboard.
+  Without the API, the layout falls back to `100dvh`.
+- **A short window.** As the visible window gets shorter, the car sinks behind the answer bar, so the strip
+  left between the sign and the bar shows the boy's face and the doors closing on it, not the roof of the car.
+- **A short phone.** `--u` is 1.5px instead of 2px where the screen is under about 640px tall. It's worked out
+  from `100svh`, the height with the browser's bars showing, which doesn't change as they slide away: the
+  scenery never changes size mid-game.
+- **Words on the scenery.** Text that isn't on a sign, a plate or a card (`.float`, the status labels, the
+  ride's caption) has a hard outline, so it reads on any of the six skies.
 - **Keyboard and touch extras.** Where there's a mouse or trackpad, the buttons that move the game on show the
   key that presses them (`KeyHint`: Enter for Going up and Next question, Esc for Skip). They already had the
   focus; the hint says so. On phones that can vibrate, `haptics.ts` gives a short buzz when an answer locks in,
   is refused, or time runs out. Neither changes what a screen reader hears.
 - **Touch.** Hover styles only apply where there's a pointer to hover with. Buttons don't wait for a double-tap,
-  pull-to-refresh is off (a reload mid-question costs seconds the clock doesn't give back), and the page's
+  pull-to-refresh is off (a reload mid-question costs seconds the clock doesn't give back), and the stack's
   padding keeps clear of a notch (`viewport-fit=cover` with `env(safe-area-inset-*)`).
 
 ## Daily selection

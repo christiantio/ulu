@@ -483,14 +483,19 @@ export function landings(b: Brush, stage: StageId, base: number) {
   }
 }
 
+/** How far below the car's floor the pavement is drawn: enough to reach the bottom of the window under the buttons */
+export const GROUND_DEPTH = 200
+
 /** The pavement under the first lift, with the void deck's cat asleep on it. Drawn from y = 4, below the sill */
 export function pavement(b: Brush) {
   const rand = mulberry32(12)
   b('#cdc1a2', -200, 4, 400, 2)
-  b('#bcb092', -200, 6, 400, 44)
-  for (let x = -200; x < 200; x += 16) b('#a99d7f', x, 6, 1, 44)
-  for (const y of [18, 32]) b('#a99d7f', -200, y, 400, 1)
+  b('#bcb092', -200, 6, 400, GROUND_DEPTH - 6)
+  for (let x = -200; x < 200; x += 16) b('#a99d7f', x, 6, 1, GROUND_DEPTH - 6)
+  for (let y = 18; y < GROUND_DEPTH; y += 14) b('#a99d7f', -200, y, 400, 1)
   for (let i = 0; i < 40; i++) b('#c9be9f', -200 + Math.floor(rand() * 396), 7 + Math.floor(rand() * 36), 2, 1)
+  // The same flecks, thinner, the rest of the way down
+  for (let i = 0; i < 90; i++) b('#c9be9f', -200 + Math.floor(rand() * 396), 52 + Math.floor(rand() * (GROUND_DEPTH - 56)), 2, 1)
   // The lift pit, and a strip of tactile paving up to the door
   b('#6f736d', -46, 4, 92, 4)
   b('#f2c230', -30, 8, 60, 3)

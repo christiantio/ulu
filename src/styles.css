@@ -1,6 +1,7 @@
 /*
- * Ulu's interface: a navy shell around the lift, with the things you read and type on cream cards.
- * The lift scene itself is in components/elevator/elevator.css.
+ * Ulu's interface. The lift's world fills the window (components/elevator/elevator.css), and everything you read
+ * and press is laid over it: a sign hung over the lift, the controls at its foot, the status along the top, and
+ * cream cards for the long lists. See "The stack" below for how they're placed.
  *
  * One theme, on purpose: the time of day belongs to the lift you've reached, not to the device's colour scheme.
  */
@@ -43,9 +44,59 @@
   --font-body: 'DM Sans', system-ui, -apple-system, 'Segoe UI', sans-serif;
   /* Hard-edged, like everything else: no blur */
   --drop: 4px 4px 0 rgb(0 0 0 / 0.35);
-  /* The page's top padding, clear of a notch. The round's layout needs it to work out how much room it has */
-  --pad-top: max(12px, env(safe-area-inset-top));
+  /* A hard outline, for words that sit straight on the scenery: readable on any sky */
+  --outline:
+    2px 0 0 var(--ink-deep), -2px 0 0 var(--ink-deep), 0 2px 0 var(--ink-deep), 0 -2px 0 var(--ink-deep),
+    2px 2px 0 var(--ink-deep), -2px 2px 0 var(--ink-deep), 2px -2px 0 var(--ink-deep), -2px -2px 0 var(--ink-deep),
+    0 4px 0 rgb(0 0 0 / 0.3);
+  /* What the signs and plates are made of */
+  --plate: rgb(11 16 24 / 0.93);
+
+  /*
+   * The scene's unit: one pixel of its art, in CSS pixels. It's set here, not on the scene, because the layout
+   * over the scene is measured in it too: the sign hangs one lift's height above the controls
+   */
+  --u: 2px;
+  /* Where the lift stands across the window */
+  --cx: 50%;
+  /* The room the controls take at the foot of the window: the lift stands just above it */
+  --foot: 88px;
+  /* How much of the cards below the stack shows at the bottom of the window, as a hint that they're there */
+  --peek: 0px;
+  /* The stack's padding, clear of a notch */
+  --pad-top: max(10px, env(safe-area-inset-top));
+  --pad-left: max(12px, env(safe-area-inset-left));
+  --pad-right: max(12px, env(safe-area-inset-right));
+  --pad-bottom: max(14px, env(safe-area-inset-bottom));
   color-scheme: dark;
+}
+/* A short phone gets a smaller lift. Worked out from the height with the browser's bars showing, which doesn't
+   change as they slide away, so the scenery never changes size mid-game */
+@supports (width: round(down, 1px, 1px)) {
+  :root {
+    --u: clamp(1.5px, round(down, 100svh / 320, 0.5px), 2px);
+  }
+}
+/* A bigger window gets bigger pixels, as far as its height has room for the lift between the sign and the controls */
+@media (min-width: 600px) and (min-height: 620px) {
+  :root {
+    --u: 3px;
+  }
+}
+@media (min-width: 1000px) and (min-height: 900px) {
+  :root {
+    --u: 4px;
+  }
+}
+@media (min-width: 1400px) and (min-height: 1180px) {
+  :root {
+    --u: 5px;
+  }
+}
+@media (min-width: 1800px) and (min-height: 1480px) {
+  :root {
+    --u: 6px;
+  }
 }
 
 /* On cream. Tier colours are darkened to 4.5:1 or more on --paper; muted text is 5.9:1 */
@@ -95,10 +146,6 @@ body {
 }
 
 #root {
-  max-width: 560px;
-  margin: 0 auto;
-  padding: var(--pad-top) max(16px, env(safe-area-inset-right)) max(40px, env(safe-area-inset-bottom))
-    max(16px, env(safe-area-inset-left));
   min-height: 100dvh;
 }
 
@@ -163,42 +210,159 @@ p {
   visibility: visible;
 }
 
-/* Arriving: a screen fades in, and the things on it step up into place one after another */
+/* Arriving: a screen fades in, the sign drops into place over the lift, and the rest steps up after it */
 .home,
 .game,
 .results,
 .waiting {
   animation: fade-in 0.22s ease backwards;
 }
+.board {
+  animation: board-drop 0.34s cubic-bezier(0.2, 1.2, 0.4, 1) backwards;
+}
 .home__brand,
 .home__panel,
-.ready,
-.round,
-.riding,
-.reveal > *,
-.results__summary > *,
-.results__panel > :not(.results__summary) {
+.dock,
+.extras {
   animation: rise-in 0.32s cubic-bezier(0.2, 0.8, 0.3, 1) backwards;
 }
 .home__panel,
-.reveal > :nth-child(2),
+.dock {
+  animation-delay: 60ms;
+}
+.extras {
+  animation-delay: 200ms;
+}
+.results__summary > * {
+  animation: rise-in 0.32s cubic-bezier(0.2, 0.8, 0.3, 1) backwards;
+}
 .results__summary > :nth-child(2) {
   animation-delay: 60ms;
 }
-.reveal > :nth-child(3),
 .results__summary > :nth-child(3) {
   animation-delay: 120ms;
 }
-.reveal > :nth-child(4),
 .results__summary > :nth-child(4) {
   animation-delay: 180ms;
 }
-.reveal > :nth-child(n + 5),
 .results__summary > :nth-child(n + 5) {
   animation-delay: 240ms;
 }
-.results__panel > :not(.results__summary) {
-  animation-delay: 320ms;
+
+/* Words straight on the scenery */
+.float {
+  color: var(--cream);
+  font-weight: 600;
+  text-shadow: var(--outline);
+}
+
+/*
+ * The stack: how a screen is laid over the lift's world.
+ *
+ * The world is fixed to the window, with the lift standing --foot above the bottom of it. The stack is a column
+ * as tall as the window, laid over that: whatever belongs along the top, then the sky, then a sign (.board) hung
+ * just over the lift, the room the lift itself stands in (.stack__gap), and the controls at its foot (.dock).
+ * Cards that don't fit that picture (.extras) start below the window on a phone, where --peek shows the top of
+ * them, and stand beside the lift on a wide screen.
+ *
+ * When the window is too short for all of it, the sky goes first and then the gap, so the sign comes down over
+ * the top of the lift. A screen's components can be in any order in the markup: `order` places them
+ */
+.stack {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  min-height: calc(var(--visible-height, 100dvh) - var(--peek));
+  padding: var(--pad-top) var(--pad-right) 0 var(--pad-left);
+  /* The stack lies over the scene. What isn't something to read or press lets a tap through to it */
+  pointer-events: none;
+}
+.stack__sky {
+  order: 1;
+  flex: 1 1 0;
+  min-height: 0;
+}
+.stack__gap {
+  order: 3;
+  /* Takes the room there is before the sky gets any, up to the height of the lift */
+  flex: 1000 1 0;
+  min-height: 0;
+  max-height: calc(var(--u) * 118);
+}
+.board,
+.dock,
+.extras {
+  position: relative;
+  z-index: 1;
+  width: min(100%, 560px);
+  align-self: center;
+  pointer-events: auto;
+}
+
+/* The sign over the lift: a dark board on two rods that run up out of the window */
+.board {
+  order: 2;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 12px 14px 14px;
+  background: var(--plate);
+  border: 2px solid var(--ink-line);
+  box-shadow:
+    0 0 0 2px var(--ink-deep),
+    6px 6px 0 rgb(0 0 0 / 0.3);
+}
+.board::before,
+.board::after {
+  content: '';
+  position: absolute;
+  bottom: calc(100% + 4px);
+  left: 14%;
+  width: 4px;
+  height: 100vh;
+  background: var(--ink-deep);
+  box-shadow: inset 1px 0 0 var(--ink-line);
+  pointer-events: none;
+}
+.board::after {
+  left: auto;
+  right: 14%;
+}
+.board__label {
+  font-family: var(--font-display);
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--amber);
+}
+.board__note {
+  color: var(--muted);
+  font-size: 0.9rem;
+}
+
+/* The controls at the lift's foot */
+.dock {
+  order: 4;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  min-height: var(--foot);
+  padding-bottom: var(--pad-bottom);
+}
+
+/* The cards beyond the stack */
+.extras {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  width: min(100% - 24px, 560px);
+  margin-inline: auto;
+  padding-bottom: max(40px, env(safe-area-inset-bottom));
 }
 
 .card {
@@ -246,7 +410,8 @@ p {
       inset 0 2px 0 rgb(255 255 255 / 0.4),
       0 5px 0 var(--ink-deep);
   }
-  .btn--ghost:hover:not(:disabled) {
+  .btn--ghost:hover:not(:disabled),
+  .btn--chip:hover:not(:disabled) {
     background: var(--ink-raised);
     filter: none;
   }
@@ -285,6 +450,21 @@ p {
 .btn--ghost:active:not(:disabled) {
   transform: translateY(1px);
   box-shadow: none;
+}
+/* On the scenery: a small dark plate */
+.btn--chip {
+  background: var(--plate);
+  border-color: var(--ink-deep);
+  box-shadow: 0 3px 0 rgb(0 0 0 / 0.3);
+  color: var(--cream);
+  font-family: var(--font-body);
+  font-weight: 600;
+  letter-spacing: 0;
+  white-space: nowrap;
+}
+.btn--chip:active:not(:disabled) {
+  transform: translateY(2px);
+  box-shadow: 0 1px 0 rgb(0 0 0 / 0.3);
 }
 .btn--block {
   display: block;
@@ -363,30 +543,36 @@ p {
   box-shadow: none;
 }
 
-/* Home: the title screen. The lift is the hero; on a wide screen it stands beside the title and the buttons */
+/* Home: the title over the sky, the lift waiting under it, and the way in at its foot */
 .home {
-  display: grid;
-  grid-template-areas: 'brand' 'lift' 'panel';
-  gap: 12px;
+  --foot: 300px;
 }
 .home__brand {
-  grid-area: brand;
+  order: 0;
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 4px;
   padding-top: 6px;
+  pointer-events: auto;
 }
-.home__lift {
-  grid-area: lift;
-  min-width: 0;
+.home__brand .plate {
+  margin-top: 6px;
+  width: min(100%, 300px);
 }
 .home__panel {
-  grid-area: panel;
+  order: 4;
+  position: relative;
+  z-index: 1;
   display: flex;
   flex-direction: column;
-  gap: 14px;
-  min-width: 0;
+  justify-content: flex-end;
+  gap: 10px;
+  width: min(100%, 560px);
+  min-height: var(--foot);
+  align-self: center;
+  padding-bottom: var(--pad-bottom);
+  pointer-events: auto;
 }
 .wordmark {
   line-height: 0;
@@ -395,6 +581,7 @@ p {
   display: block;
   width: min(62vw, 250px);
   height: auto;
+  filter: drop-shadow(0 4px 0 rgb(0 0 0 / 0.25));
 }
 .tagline {
   font-family: var(--font-display);
@@ -404,24 +591,33 @@ p {
   text-align: center;
 }
 .home__copy {
+  padding: 6px 10px 7px;
+  background: var(--plate);
+  border: 2px solid var(--ink-deep);
+  border-top: 0;
+  margin-top: -10px;
+  color: var(--muted);
+  font-size: 0.95rem;
+  line-height: 1.35;
   text-align: center;
-  font-size: 1.05rem;
   text-wrap: balance;
 }
 .home__card {
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  gap: 10px;
 }
+/* The day's plate: which game this is */
 .home__dive {
   display: flex;
   justify-content: space-between;
   align-items: baseline;
+  padding: 5px 10px 6px;
+  background: var(--plate);
+  border: 2px solid var(--ink-deep);
   font-family: var(--font-display);
   font-size: 1.05rem;
   font-weight: 600;
-  padding-bottom: 8px;
-  border-bottom: 2px dashed var(--ink-line);
 }
 .home__dive .muted {
   font-family: var(--font-body);
@@ -438,7 +634,7 @@ p {
   color: var(--amber);
 }
 .home__status {
-  padding: 8px 0;
+  padding: 4px 0;
 }
 .home__links {
   display: grid;
@@ -452,11 +648,27 @@ p {
   display: flex;
   flex-direction: column;
   gap: 16px;
-  padding-top: 30vh;
+  max-width: 560px;
+  margin: 0 auto;
+  padding: 30vh 16px 0;
+}
+/* A short window: the line about the game makes way for the lift */
+@media (max-height: 600px) {
+  .home {
+    --foot: 250px;
+  }
+  .home__copy {
+    display: none;
+  }
 }
 
-/* Privacy footer on the home screen */
+/* Privacy footer on the home screen: a plate, which opens to say more */
 .privacy {
+  align-self: center;
+  max-width: 100%;
+  padding: 3px 10px 4px;
+  background: var(--plate);
+  border: 2px solid var(--ink-deep);
   font-size: 0.8rem;
   color: var(--muted);
   text-align: center;
@@ -482,67 +694,73 @@ p {
   text-align: left;
 }
 
-/* Game: the status panel, the lift, and whatever the round needs under it */
+/* Game: the status along the top of the window, then the sign, the lift and the controls */
 .game {
-  display: grid;
-  grid-template-areas: 'top' 'lift' 'panel';
-  gap: 10px;
+  --peek: 44px;
+}
+/* A question has nothing below the stack, and with a keyboard up it needs all the room there is */
+.game--playing {
+  --peek: 0px;
+}
+/* During a ride the lift's own bar is where the controls would be */
+.game--ride .stack {
+  padding-bottom: var(--foot);
 }
 .game__top {
-  grid-area: top;
+  order: 0;
+  position: relative;
+  z-index: 2;
   display: flex;
   flex-direction: column;
-  gap: 8px;
-  min-width: 0;
-}
-.game__lift {
-  grid-area: lift;
-  min-width: 0;
-}
-.game__panel {
-  grid-area: panel;
-  min-width: 0;
+  gap: 6px;
+  width: min(100%, 560px);
+  align-self: center;
+  pointer-events: auto;
 }
 /*
- * A question on a phone fits the page that's visible, which with the keyboard up is not much. The status panel
- * and the question card keep their height and the lift gets what's left, up to its usual strip and down to
- * nothing, so the clock and the answer box never end up under the keyboard. --visible-height comes from
- * viewport.ts. See elevator.css for what the lift does with a short strip
+ * A question on a phone fits the part of the window that's visible, which with the keyboard up is not much:
+ * --visible-height comes from viewport.ts. The round counter and the lift's plate step aside, the answer box
+ * becomes a bar across the top of the keyboard, and the lift sinks behind it so that what shows between the sign
+ * and the bar is the boy's face and the doors closing on it (see .game--playing .scene in elevator.css)
  */
-@media (max-width: 599px), (max-width: 899px) and (min-height: 521px) {
-  .game--playing {
-    height: calc(var(--visible-height, 100dvh) - var(--pad-top) - 8px);
-    grid-template-rows: auto minmax(0, clamp(150px, 25dvh, 240px)) auto;
-    align-content: start;
-    /* Takes back most of the page's bottom padding, so a round that fits doesn't also scroll */
-    margin-bottom: -32px;
-  }
-  .game--playing .game__lift {
-    container: strip / size;
-  }
-  /* With the keyboard up, the round counter and the spare line under the answer box give their room to the lift */
-  .keyboard-open .game--playing .pips {
-    position: absolute;
-    width: 1px;
-    height: 1px;
-    overflow: hidden;
-    clip-path: inset(50%);
-  }
-  .keyboard-open .game--playing .round__feedback {
-    min-height: 1.45em;
-  }
+.keyboard-open .game--playing {
+  --foot: 62px;
+  --pad-bottom: 8px;
+}
+.keyboard-open .game--playing .pips,
+.keyboard-open .game--playing .plate {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+}
+.keyboard-open .game--playing .dock {
+  width: auto;
+  align-self: stretch;
+  margin-inline: calc(var(--pad-left) * -1) calc(var(--pad-right) * -1);
+  padding: 8px var(--pad-right) var(--pad-bottom) var(--pad-left);
+  background: var(--ink-deep);
+  box-shadow: 0 -2px 0 var(--ink-line);
+}
+.keyboard-open .game--playing .round__board {
+  gap: 6px;
+  padding: 8px 12px 10px;
+}
+.keyboard-open .game--playing .round__prompt {
+  font-size: 1.25rem;
+}
+.keyboard-open .game--playing .round__feedback {
+  min-height: 1.45em;
+  padding-top: 6px;
 }
 
-/* The lift's status panel: where you are and what you've scored, in indicator windows */
+/* The lift's status: where you are and what you've scored, in indicator windows */
 .hud {
   display: flex;
   justify-content: space-between;
   align-items: center;
   gap: 8px;
-}
-.hud .btn {
-  margin-left: -8px;
-  white-space: nowrap;
 }
 .hud__stats {
   display: flex;
@@ -561,7 +779,8 @@ p {
   font-weight: 600;
   letter-spacing: 0.08em;
   text-transform: uppercase;
-  color: var(--muted);
+  color: var(--cream);
+  text-shadow: var(--outline);
 }
 .hud__stat dd {
   margin: 0;
@@ -569,6 +788,7 @@ p {
   padding: 1px 7px 3px;
   background: var(--ink-deep);
   border: 2px solid var(--ink-line);
+  box-shadow: 0 3px 0 rgb(0 0 0 / 0.3);
   color: var(--amber);
   font-family: var(--font-display);
   font-size: 1.25rem;
@@ -617,7 +837,8 @@ p {
   display: grid;
   place-items: center;
   background: var(--ink-raised);
-  border: 2px solid var(--ink-line);
+  border: 2px solid var(--ink-deep);
+  box-shadow: 0 3px 0 rgb(0 0 0 / 0.3);
   color: var(--muted);
   font-family: var(--font-display);
   font-size: 0.85rem;
@@ -630,11 +851,11 @@ p {
 }
 .pip--done {
   background: var(--lamp);
-  border-color: var(--ink-deep);
   color: var(--ink);
   box-shadow:
     inset -2px -2px 0 rgb(0 0 0 / 0.2),
-    inset 2px 2px 0 rgb(255 255 255 / 0.45);
+    inset 2px 2px 0 rgb(255 255 255 / 0.45),
+    0 3px 0 rgb(0 0 0 / 0.3);
 }
 .pip--common {
   --lamp: var(--lamp-common);
@@ -657,51 +878,56 @@ p {
 .pip--miss {
   --lamp: #3b2f3d;
   color: #ff958a;
-  box-shadow: none;
+  box-shadow: 0 3px 0 rgb(0 0 0 / 0.3);
 }
 /* The button the lift has just lit */
 .pip--fresh {
   animation: pip-lit 0.5s cubic-bezier(0.2, 1.4, 0.4, 1) backwards;
 }
 
+/* The sign before a question, and while the lift is on its way */
 .ready {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
+  gap: 4px;
   text-align: center;
 }
-.ready__round {
+.ready__brief {
   font-family: var(--font-display);
-  font-size: 1.5rem;
+  font-size: 1.45rem;
   font-weight: 700;
+  line-height: 1.15;
+  text-wrap: balance;
 }
 .ready__arrow {
   display: inline-block;
   animation: nudge-up 0.9s steps(2) infinite;
 }
 .riding {
-  display: flex;
-  flex-direction: column;
-  gap: 4px;
+  gap: 2px;
+  padding-block: 8px 10px;
+}
+.riding__prompt {
+  overflow: hidden;
+  color: var(--muted);
+  font-size: 0.9rem;
+  font-weight: 600;
+  white-space: nowrap;
+  text-overflow: ellipsis;
 }
 .riding__answer {
   font-weight: 700;
-  font-size: 1.1rem;
+  font-size: 1.15rem;
+  overflow-wrap: anywhere;
 }
-.riding__answer .muted {
-  font-family: var(--font-display);
-  font-size: 0.8rem;
-  font-weight: 600;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
+.riding__answer .board__label {
   margin-right: 6px;
 }
 
-/* Round */
+/* Round: the question on the sign, and the answer box at the lift's foot */
 .round {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
+  display: contents;
+}
+.round__board {
+  gap: 8px;
 }
 .round__time {
   display: flex;
@@ -713,7 +939,7 @@ p {
   position: relative;
   flex: 1;
   height: 14px;
-  background: #cbb992;
+  background: #2a3a55;
   border: 2px solid var(--ink-deep);
   overflow: hidden;
 }
@@ -744,7 +970,7 @@ p {
   min-width: 2.5em;
   padding: 0 6px 2px;
   background: var(--ink-deep);
-  border: 2px solid var(--ink-deep);
+  border: 2px solid var(--ink-line);
   color: var(--amber);
   font-family: var(--font-display);
   font-size: 1.35rem;
@@ -774,9 +1000,12 @@ p {
   color: var(--muted);
   font-size: 0.9rem;
 }
-.round__form {
+.round__entry {
   display: flex;
   gap: 8px;
+}
+.round__entry .btn {
+  padding-inline: 16px;
 }
 .round__input {
   flex: 1;
@@ -789,22 +1018,30 @@ p {
   border: 2px solid var(--ink-deep);
   background: #fffaf0;
   color: var(--ink);
-  box-shadow: inset 0 3px 0 rgb(23 33 47 / 0.1);
+  box-shadow:
+    inset 0 3px 0 rgb(23 33 47 / 0.1),
+    0 4px 0 var(--ink-deep);
 }
 .round__input::placeholder {
   color: #6a6456;
   font-weight: 500;
   opacity: 1;
 }
-/* The input's focus indicator is a second, bubblegum-dark ring around its ink border (6.5:1 on the card) */
+/* The input's focus indicator is a second, bubblegum ring around its ink border, which shows on any scenery */
 .round__input:focus {
-  outline: 3px solid #b4234c;
+  outline: 3px solid var(--pink);
   outline-offset: 1px;
 }
+/* The foot of the sign: what the lift made of the last guess */
 .round__feedback {
   min-height: 2.9em;
+  padding-top: 8px;
+  border-top: 2px dashed var(--ink-line);
   color: var(--muted);
   font-size: 0.9rem;
+}
+.round__feedback--refused {
+  color: var(--cream);
 }
 .round__feedback strong {
   color: var(--miss);
@@ -815,20 +1052,15 @@ p {
     refuse 0.7s ease-out;
 }
 
-/* Reveal */
+/* Reveal: the verdict on the sign, the way on at the lift's foot, and the other answers beyond */
 .reveal {
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
+  display: contents;
 }
 .reveal__prompt {
-  font-weight: 800;
-  font-size: 1.2rem;
+  font-weight: 700;
+  font-size: 1.05rem;
   line-height: 1.25;
   text-wrap: balance;
-}
-.reveal > .reveal__prompt {
-  color: var(--cream);
 }
 .reveal__verdict {
   display: flex;
@@ -844,7 +1076,6 @@ p {
   background: var(--paper);
   border: 2px solid var(--ink-deep);
   border-left: 8px solid var(--lamp);
-  box-shadow: var(--drop);
   animation: pop 0.3s ease;
 }
 /* How far the lift went, on an indicator window */
@@ -887,7 +1118,6 @@ p {
   padding: 8px 12px;
   background: var(--amber);
   border: 2px solid var(--ink-deep);
-  box-shadow: var(--drop);
   font-size: 1.05rem;
 }
 .upgrade__label {
@@ -904,10 +1134,9 @@ p {
   justify-content: space-between;
   align-items: baseline;
   gap: 12px;
-  padding: 10px 12px;
+  padding: 8px 12px;
   background: var(--paper);
   border: 2px solid var(--ink-deep);
-  box-shadow: var(--drop);
 }
 .gem__label {
   font-family: var(--font-display);
@@ -1051,23 +1280,21 @@ p {
   font-size: 0.85rem;
 }
 
-/* The plate in the corner of the picture: which lift this is, and how far to the next */
+/* The lift's plate, under the round counter: which lift this is, and how far to the next */
 .plate {
-  position: absolute;
-  top: 8px;
-  left: 8px;
   display: grid;
-  gap: 3px;
-  min-width: 132px;
-  padding: 5px 8px 6px;
-  background: rgb(11 16 24 / 0.86);
+  grid-template-columns: auto minmax(30px, 1fr) auto;
+  align-items: center;
+  gap: 8px;
+  padding: 3px 8px 4px;
+  background: var(--plate);
   border: 2px solid var(--ink-deep);
   color: var(--cream);
-  pointer-events: none;
+  transition: opacity 0.2s ease;
 }
 .plate__name {
   font-family: var(--font-display);
-  font-size: 0.85rem;
+  font-size: 0.82rem;
   font-weight: 600;
   line-height: 1.1;
 }
@@ -1084,7 +1311,7 @@ p {
   transition: transform 0.6s ease;
 }
 .plate__next {
-  font-size: 0.68rem;
+  font-size: 0.7rem;
   line-height: 1.1;
   color: var(--muted);
 }
@@ -1151,28 +1378,14 @@ p {
   color: var(--amber);
 }
 
-/* Results */
+/* Results: the score on the sign, the lift where it ended up, and the breakdown on the cards beyond */
 .results {
-  display: grid;
-  grid-template-areas: 'lift' 'panel';
-  gap: 14px;
-}
-.results__lift {
-  grid-area: lift;
-  min-width: 0;
-}
-.results__panel {
-  grid-area: panel;
-  display: flex;
-  flex-direction: column;
-  gap: 14px;
-  min-width: 0;
+  --peek: 44px;
 }
 .results__summary {
-  display: flex;
-  flex-direction: column;
   align-items: center;
-  gap: 4px;
+  gap: 2px;
+  padding-top: 10px;
   text-align: center;
 }
 .results__title {
@@ -1194,7 +1407,7 @@ p {
   font-family: var(--font-display);
 }
 .results__number {
-  font-size: 4.6rem;
+  font-size: 4rem;
   font-weight: 700;
   line-height: 0.95;
   color: var(--pink);
@@ -1205,10 +1418,12 @@ p {
   color: var(--muted);
 }
 .results__reached {
-  font-size: 1.15rem;
+  font-size: 1.1rem;
 }
 .results__blurb {
   color: var(--muted);
+  font-size: 0.92rem;
+  line-height: 1.35;
   text-wrap: balance;
 }
 .results--perfect .results__headline {
@@ -1221,7 +1436,7 @@ p {
   display: grid;
   grid-template-columns: repeat(7, 38px);
   gap: 6px;
-  margin: 10px 0 0;
+  margin: 8px 0 0;
   padding: 0;
 }
 .results__lamp {
@@ -1472,140 +1687,193 @@ p {
 }
 
 /*
- * Wide screens, and phones on their side: the lift stands on the left, as tall as the window allows, with
- * everything else beside it. The page's top padding centres the lift in the window, and doesn't depend on what's
- * beside it, so nothing shifts when a long list of answers arrives
+ * A wide screen: the status spreads along the top of the window, and the cards stand beside the lift instead of
+ * under the stack, so nothing needs scrolling to
  */
-@media (min-width: 900px), (min-width: 600px) and (max-height: 520px) {
+@media (min-width: 900px) and (min-height: 521px) {
   :root {
-    --scene-h: max(300px, min(720px, calc(100dvh - 150px)));
-    --pad-top: max(28px, calc((100dvh - var(--scene-h)) / 2 - 24px));
+    --foot: 96px;
+    --pad-top: 16px;
+    --pad-left: 24px;
+    --pad-right: 24px;
+    --pad-bottom: 20px;
   }
-  #root {
-    max-width: 1180px;
-    padding: var(--pad-top) 32px 48px;
-  }
-  .home,
-  .game,
-  .results {
-    grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr);
-    grid-template-rows: auto 1fr;
-    column-gap: 44px;
-    align-items: start;
-  }
-  .home {
-    grid-template-areas: 'lift .' 'lift brand' 'lift panel' 'lift .';
-    grid-template-rows: 1fr auto auto 1fr;
-    row-gap: 0;
-  }
-  .home__panel {
-    padding-top: 22px;
-  }
-  .game {
-    grid-template-areas: 'lift top' 'lift panel';
-    row-gap: 18px;
-  }
-  .results {
-    grid-template-areas: 'lift panel';
-    grid-template-rows: auto;
-  }
-  .home__lift,
-  .game__lift,
-  .results__lift {
-    position: sticky;
-    top: var(--pad-top);
-  }
-  .home__brand {
-    align-items: flex-start;
-    padding-top: 28px;
-    gap: 10px;
-  }
-  .logo {
-    width: 300px;
-  }
-  .tagline,
-  .home__copy {
-    text-align: left;
-  }
-  .tagline {
-    font-size: 2rem;
-  }
-  .home__copy {
-    font-size: 1.15rem;
+  .board {
+    width: min(100%, 600px);
+    padding: 16px 18px 18px;
   }
   .game__top {
-    gap: 12px;
-    padding-top: 4px;
+    display: grid;
+    grid-template-columns: 1fr minmax(0, 420px) 1fr;
+    grid-template-areas: 'back pips stats' '. plate .';
+    align-items: center;
+    column-gap: 16px;
+    width: 100%;
+  }
+  .hud {
+    display: contents;
+  }
+  .hud .btn {
+    grid-area: back;
+    justify-self: start;
+  }
+  .hud__stats {
+    grid-area: stats;
+    justify-self: end;
+  }
+  .pips {
+    grid-area: pips;
+  }
+  .game__top .plate {
+    grid-area: plate;
   }
   .pip {
     height: 30px;
     font-size: 1rem;
   }
-  .round,
-  .ready,
-  .riding {
-    padding: 20px;
-    gap: 14px;
+  .logo {
+    width: 300px;
   }
-  .round__prompt {
+  .tagline {
     font-size: 2rem;
   }
+  .round__prompt {
+    font-size: 1.9rem;
+  }
+  .ready__brief {
+    font-size: 1.7rem;
+  }
+}
+/* Home on a wide screen: the title stands to one side of the lift and the way in to the other, level with it */
+@media (min-width: 1000px) and (min-height: 521px) {
+  .home {
+    --foot: 8vh;
+  }
+  .home__stack {
+    display: grid;
+    grid-template-columns: 1fr calc(var(--u) * 116) 1fr;
+    column-gap: 20px;
+    align-items: center;
+    /* Centres what's either side on the middle of the lift, not of the window */
+    padding-top: max(16px, calc(100dvh - 2 * (var(--foot) + var(--u) * 64)));
+  }
+  .home__stack .stack__sky {
+    display: none;
+  }
+  .home__brand {
+    grid-column: 1;
+    justify-self: end;
+    align-items: flex-start;
+    gap: 10px;
+    width: min(100%, 380px);
+    padding: 0;
+  }
+  .home__panel {
+    grid-column: 3;
+    justify-self: start;
+    width: min(100%, 400px);
+    min-height: 0;
+    padding: 0;
+  }
+  .tagline {
+    text-align: left;
+  }
+}
+@media (min-width: 1200px) and (min-height: 521px) {
+  :root {
+    /* The cards' column: whatever is left beside the lift's rails, up to a card's width */
+    --side: min(360px, calc(50vw - var(--u) * 52 - 48px));
+  }
+  .game,
+  .results {
+    --peek: 0px;
+  }
+  /* The sign that has cards beside it keeps clear of them */
+  .reveal__board,
   .results__summary {
-    padding-top: 12px;
+    width: min(600px, calc(100vw - var(--side) * 2 - 96px));
+  }
+  .extras {
+    top: 76px;
+    left: auto;
+    right: 24px;
+    width: var(--side);
+    max-height: calc(100dvh - 100px);
+    margin: 0;
+    /* Room for the cards' shadows inside the scrolling box */
+    padding: 0 6px 8px 0;
+    overflow-y: auto;
+    scrollbar-width: thin;
+    scrollbar-color: var(--ink-line) transparent;
+  }
+  .results .extras {
+    top: 24px;
+    max-height: calc(100dvh - 48px);
   }
 }
 
-/* A big monitor: everything a size up, so the game isn't a small island in the top half of the screen */
+/* A big monitor: bigger type to go with the bigger lift */
 @media (min-width: 1600px) and (min-height: 950px) {
-  :root {
-    --scene-h: min(880px, calc(100dvh - 170px));
-  }
   html,
   body {
     font-size: 18px;
-  }
-  #root {
-    max-width: 1400px;
-  }
-  .home,
-  .game,
-  .results {
-    column-gap: 60px;
   }
   .logo {
     width: 360px;
   }
 }
 
-/* A phone on its side: the same two columns, with the padding and the type cut down to fit a short window */
+/*
+ * A phone on its side: there's no room to stack things over the lift, so it stands on the left of the window
+ * with the sign, the controls and the cards beside it
+ */
 @media (min-width: 600px) and (max-height: 520px) {
   :root {
-    --scene-h: max(200px, calc(100dvh - 24px));
-    --pad-top: max(12px, env(safe-area-inset-top));
+    --u: 1.5px;
+    --cx: 25%;
+    --foot: 0px;
+    --pad-top: max(8px, env(safe-area-inset-top));
   }
-  #root {
-    max-width: 1000px;
-    padding: var(--pad-top) max(16px, env(safe-area-inset-right)) 12px max(16px, env(safe-area-inset-left));
-  }
-  .home,
   .game,
-  .results {
-    grid-template-columns: minmax(0, 1fr) minmax(0, 1.2fr);
-    column-gap: 20px;
+  .results,
+  .home {
+    --foot: 0px;
+    --peek: 0px;
   }
-  .game {
-    row-gap: 10px;
+  .stack {
+    padding-left: calc(50% + 4px);
+  }
+  .stack__gap {
+    flex: 0 0 8px;
+  }
+  .stack__sky {
+    flex: 0 0 8px;
+  }
+  .board,
+  .dock,
+  .game__top,
+  .home__panel {
+    width: 100%;
+    align-self: stretch;
+  }
+  .board::before,
+  .board::after {
+    display: none;
+  }
+  .dock,
+  .home__panel {
+    min-height: 0;
+    padding-bottom: 10px;
+  }
+  .extras {
+    left: calc(50% + 4px);
+    right: var(--pad-right);
+    width: auto;
+    margin: 0;
   }
   .home__brand {
     padding-top: 0;
     gap: 2px;
-  }
-  .home__panel {
-    padding-top: 8px;
-    gap: 10px;
-  }
-  .home__card {
-    gap: 8px;
   }
   .logo {
     width: 150px;
@@ -1613,41 +1881,21 @@ p {
   .tagline {
     font-size: 1.25rem;
   }
-  .home__copy {
-    font-size: 0.95rem;
-  }
   .btn--big {
     padding: 10px 16px 13px;
     font-size: 1.1rem;
   }
-  .game__top {
-    gap: 8px;
-    padding-top: 0;
-  }
   .pip {
     height: 22px;
-    font-size: 0.85rem;
-  }
-  .round,
-  .ready,
-  .riding {
-    padding: 12px;
-    gap: 8px;
   }
   .round__prompt {
     font-size: 1.3rem;
   }
-  .ready__round {
-    font-size: 1.25rem;
-  }
   .round__feedback {
     min-height: 1.5em;
   }
-  .results__summary {
-    padding-top: 0;
-  }
   .results__number {
-    font-size: 3.2rem;
+    font-size: 3rem;
   }
 }
 
@@ -1712,6 +1960,13 @@ p {
   from {
     opacity: 0;
     transform: translateY(10px);
+  }
+}
+/* The sign coming down on its rods, with a little give at the bottom */
+@keyframes board-drop {
+  from {
+    opacity: 0;
+    transform: translateY(-22px);
   }
 }
 @keyframes pip-lit {

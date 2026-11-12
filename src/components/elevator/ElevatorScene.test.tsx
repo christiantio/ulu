@@ -118,6 +118,37 @@ describe('ElevatorScene at rest', () => {
     expect(new Set(sprites).size).toBe(1)
   })
 
+  it('jolts the car for each refused guess, under a name that changes so the animation plays again', () => {
+    const jolt = () => scene().className.match(/scene--jolt-\w/)?.[0] ?? null
+    const { rerender } = render(<ElevatorScene score={0} floor={1} climbed={0} />)
+    expect(jolt()).toBeNull()
+    rerender(<ElevatorScene score={0} floor={1} climbed={0} jolt={1} />)
+    expect(jolt()).toBe('scene--jolt-a')
+    rerender(<ElevatorScene score={0} floor={1} climbed={0} jolt={2} />)
+    expect(jolt()).toBe('scene--jolt-b')
+    rerender(<ElevatorScene score={0} floor={1} climbed={0} jolt={3} />)
+    expect(jolt()).toBe('scene--jolt-a')
+  })
+
+  it('carries a mirror image of the scenery on either side, for a window wider than it is drawn', () => {
+    render(<ElevatorScene score={0} floor={1} climbed={0} />)
+    // The far view, the near view and the pavement: each has a wing to its left and its right
+    const winged = [...document.querySelectorAll('.stage > .scene__layer')].filter((layer) => layer.querySelector('.scene__wing'))
+    expect(winged).toHaveLength(3)
+    for (const layer of winged) {
+      const art = layer.querySelector('svg > g[id]')!
+      const wings = [...layer.querySelectorAll('.scene__wing use')]
+      expect(wings).toHaveLength(2)
+      // The same drawing, reused and flipped
+      for (const wing of wings) {
+        expect(wing.getAttribute('href')).toBe(`#${art.id}`)
+        expect(wing.getAttribute('transform')).toContain('scale(-1 1)')
+      }
+    }
+    // The car and its rails aren't scenery: there's one lift
+    expect(document.querySelectorAll('.scene__car .scene__wing')).toHaveLength(0)
+  })
+
   it('lays its children over the picture, outside the hidden part', () => {
     render(
       <ElevatorScene score={0} floor={1} climbed={0}>

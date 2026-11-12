@@ -132,6 +132,11 @@ export default function App() {
     else if (helpWasOpen.current && document.activeElement === document.body) helpButton.current?.focus()
   }, [showHelp])
 
+  // Every screen starts at the top, where its sign is: the last one may have been scrolled down to its cards
+  useEffect(() => {
+    if (window.scrollY > 0) window.scrollTo({ top: 0 })
+  }, [screen.kind])
+
   const openHelp = () => {
     setShowHelp(true)
     track('howto_opened')
@@ -207,97 +212,97 @@ export default function App() {
     <>
       {screen.kind === 'home' && (
         <main className="home">
-          <div className="home__brand">
-            <h1 className="wordmark">
-              <Logo />
-              <span className="visually-hidden">Ulu</span>
-            </h1>
-            <p className="tagline">How ulu can you go?</p>
-          </div>
+          <ElevatorScene score={lift.score} floor={lift.floor} climbed={lift.climbed} size="hero" />
 
-          <div className="home__lift">
-            <ElevatorScene score={lift.score} floor={lift.floor} climbed={lift.climbed} size="hero">
+          <div className="stack home__stack">
+            <div className="home__brand">
+              <h1 className="wordmark">
+                <Logo />
+                <span className="visually-hidden">Ulu</span>
+              </h1>
+              <p className="tagline float">How ulu can you go?</p>
               {played.length > 0 && <ElevatorProgress score={lift.score} floor={lift.floor} compact />}
-            </ElevatorScene>
-          </div>
+            </div>
 
-          <div className="home__panel">
-            <p className="home__copy">7 Singapore questions. The rarer your answers, the higher you rise.</p>
+            <div className="stack__sky" />
 
-            <div className="home__card" aria-busy={today.status === 'loading'}>
-              <div className="home__dive">
-                <span>{diveTitle(dateKey)}</span>
-                <span className="muted">
-                  {new Date(`${dateKey}T00:00:00`).toLocaleDateString('en-SG', {
-                    weekday: 'short',
-                    day: 'numeric',
-                    month: 'short',
-                  })}
-                </span>
-              </div>
-              {dailyDone && (
-                <p className="home__done">
-                  Done for today: <strong>{totalScore(played)}</strong> pts
-                </p>
-              )}
-              {today.status === 'loading' && (
-                <p className="home__status muted center" role="status">
-                  Loading today's questions…
-                </p>
-              )}
-              {today.status === 'error' && (
-                <>
-                  <p className="home__status center" role="alert">
-                    Couldn't load today's questions. Check your connection and try again.
+            <div className="home__panel">
+              <div className="home__card" aria-busy={today.status === 'loading'}>
+                <div className="home__dive">
+                  <span>{diveTitle(dateKey)}</span>
+                  <span className="muted">
+                    {new Date(`${dateKey}T00:00:00`).toLocaleDateString('en-SG', {
+                      weekday: 'short',
+                      day: 'numeric',
+                      month: 'short',
+                    })}
+                  </span>
+                </div>
+                <p className="home__copy">7 Singapore questions. The rarer your answers, the higher you rise.</p>
+                {dailyDone && (
+                  <p className="home__done float">
+                    Done for today: <strong>{totalScore(played)}</strong> pts
                   </p>
-                  <button className="btn btn--primary btn--block" onClick={today.retry}>
-                    Retry
-                  </button>
-                </>
-              )}
-              {today.status === 'ready' &&
-                (today.prompts.length === 0 ? (
-                  <p className="home__status">No prompts loaded yet. Add packs under src/content/packs.</p>
-                ) : dailyDone ? (
-                  <button
-                    className="btn btn--primary btn--block btn--big"
-                    onClick={() => setScreen({ kind: 'results', results: played, prompts: today.prompts, dateKey })}
-                  >
-                    See today's results
-                  </button>
-                ) : (
-                  <button
-                    className="btn btn--primary btn--block btn--big btn--cta"
-                    onClick={() => setScreen({ kind: 'daily', dateKey, prompts: today.prompts })}
-                  >
-                    {played.length || saved?.startedAt
-                      ? `Continue climbing (${played.length}/${ROUNDS_PER_DIVE})`
-                      : 'Start climbing'}
-                  </button>
-                ))}
-              {dailyDone && (
-                <p className="muted small center">
-                  Next climb in <Countdown />
+                )}
+                {today.status === 'loading' && (
+                  <p className="home__status float center" role="status">
+                    Loading today's questions…
+                  </p>
+                )}
+                {today.status === 'error' && (
+                  <>
+                    <p className="home__status float center" role="alert">
+                      Couldn't load today's questions. Check your connection and try again.
+                    </p>
+                    <button className="btn btn--primary btn--block" onClick={today.retry}>
+                      Retry
+                    </button>
+                  </>
+                )}
+                {today.status === 'ready' &&
+                  (today.prompts.length === 0 ? (
+                    <p className="home__status float">No prompts loaded yet. Add packs under src/content/packs.</p>
+                  ) : dailyDone ? (
+                    <button
+                      className="btn btn--primary btn--block btn--big"
+                      onClick={() => setScreen({ kind: 'results', results: played, prompts: today.prompts, dateKey })}
+                    >
+                      See today's results
+                    </button>
+                  ) : (
+                    <button
+                      className="btn btn--primary btn--block btn--big btn--cta"
+                      onClick={() => setScreen({ kind: 'daily', dateKey, prompts: today.prompts })}
+                    >
+                      {played.length || saved?.startedAt
+                        ? `Continue climbing (${played.length}/${ROUNDS_PER_DIVE})`
+                        : 'Start climbing'}
+                    </button>
+                  ))}
+                {dailyDone && (
+                  <p className="float small center">
+                    Next climb in <Countdown />
+                  </p>
+                )}
+              </div>
+
+              <div className="home__links">
+                <button className="btn btn--secondary" onClick={startUnlimited}>
+                  <span aria-hidden="true">∞</span> Unlimited
+                </button>
+                <button ref={helpButton} className="btn btn--secondary" onClick={openHelp}>
+                  How to play
+                </button>
+              </div>
+
+              {stats.played > 0 && (
+                <p className="home__stats float small center">
+                  {stats.played} played · {displayStreak(stats, dateKey)} day streak · best {stats.bestScore}
                 </p>
               )}
+
+              <PrivacyNote />
             </div>
-
-            <div className="home__links">
-              <button className="btn btn--secondary" onClick={startUnlimited}>
-                <span aria-hidden="true">∞</span> Unlimited
-              </button>
-              <button ref={helpButton} className="btn btn--secondary" onClick={openHelp}>
-                How to play
-              </button>
-            </div>
-
-            {stats.played > 0 && (
-              <p className="home__stats muted small center">
-                {stats.played} played · {displayStreak(stats, dateKey)} day streak · best {stats.bestScore}
-              </p>
-            )}
-
-            <PrivacyNote />
           </div>
         </main>
       )}

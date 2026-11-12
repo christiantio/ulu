@@ -4,7 +4,7 @@ import { MAX_SCORE } from '../game/scoring'
 interface Props {
   score: number
   floor: number
-  /** A small plate for the corner of the picture, instead of the whole directory */
+  /** A small plate for the status along the top of the window, instead of the whole directory */
   compact?: boolean
 }
 

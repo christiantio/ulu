@@ -46,6 +46,9 @@ const plate = () => screen.getByRole('img').getAttribute('aria-label')
 const scene = () => document.querySelector('.scene') as HTMLElement
 const goUp = () => screen.getByRole('button', { name: 'Going up' })
 const verdict = (tier: Tier) => screen.queryByText(TIER_INFO[tier].label, { selector: '.verdict__label' })
+/** What the game tells the lift's world about the clock: how far open the doors are, and how urgent it is */
+const game = () => screen.getByRole('main')
+const doors = () => game().style.getPropertyValue('--clock')
 
 // Every lift's scenery, up front, so none of it arrives halfway through a test
 beforeAll(() => loadBackdrops())
@@ -254,6 +257,88 @@ describe('Game', () => {
     expect(scene().dataset.floor).toBe('07')
     expect(scene().classList.contains('scene--idle')).toBe(true)
     expect(screen.getByText('New lift unlocked').parentElement!.textContent).toBe('New lift unlocked Upgraded HDB Lift')
+  })
+
+  it('closes the lift doors with the clock, and leaves them where an answer stopped it', async () => {
+    const { user } = setup()
+    // Before the clock starts there's nothing to show
+    expect(doors()).toBe('')
+    await user.click(goUp())
+    expect(doors()).toBe('1.000')
+    expect(game().dataset.pace).toBe('steady')
+
+    advance(10_000)
+    expect(doors()).toBe('0.600')
+    advance(10_000)
+    expect(doors()).toBe('0.200')
+    expect(game().dataset.pace).toBe('urgent')
+
+    // Locked in with five seconds left: the alarm stops, and the ride shuts the doors from where they were
+    await user.type(answerBox(), `${answerOf(prompts[0], 'common').name}{Enter}`)
+    expect(doors()).toBe('0.200')
+    expect(game().dataset.pace).toBeUndefined()
+
+    // The next question opens them again
+    advance(rideMs('common'))
+    await user.click(screen.getByRole('button', { name: /Next question/ }))
+    expect(doors()).toBe('1.000')
+    expect(game().dataset.pace).toBe('steady')
+  })
+
+  it('shuts the doors when the clock runs out', async () => {
+    const { user } = setup()
+    await user.click(goUp())
+    advance(SECONDS_PER_ROUND * 1000)
+    expect(doors()).toBe('0')
+    expect(game().dataset.pace).toBeUndefined()
+    expect(scene().classList.contains('scene--stuck')).toBe(true)
+    expect(screen.getByText('The doors have closed', { exact: false })).toBeDefined()
+  })
+
+  it('jolts the lift at every guess it refuses, and not once the question is over', async () => {
+    const { user } = setup()
+    const jolt = () => scene().className.match(/scene--jolt-\w/)?.[0] ?? null
+    await user.click(goUp())
+    expect(jolt()).toBeNull()
+
+    await user.type(answerBox(), 'zzqqxxjj{Enter}')
+    expect(jolt()).toBe('scene--jolt-a')
+    // A different name each time, so the same animation plays again
+    await user.type(answerBox(), 'zzqqxxjjkk{Enter}')
+    expect(jolt()).toBe('scene--jolt-b')
+
+    await user.type(answerBox(), `${answerOf(prompts[0], 'common').name}{Enter}`)
+    expect(jolt()).toBeNull()
+    advance(rideMs('common'))
+    expect(jolt()).toBeNull()
+  })
+
+  it('lays the same three things over the lift in every phase: the status, a sign and the controls', async () => {
+    const { user } = setup()
+    const laidOut = () => ({
+      status: document.querySelectorAll('.game__stack > .game__top').length,
+      signs: document.querySelectorAll('.game__stack .board').length,
+      docks: document.querySelectorAll('.game__stack .dock').length,
+    })
+    // The scene is the game's world, not one of the things in the stack
+    expect(scene().closest('.game__stack')).toBeNull()
+    expect(laidOut()).toEqual({ status: 1, signs: 1, docks: 1 })
+    expect(goUp().closest('.dock')).not.toBeNull()
+
+    await user.click(goUp())
+    expect(laidOut()).toEqual({ status: 1, signs: 1, docks: 1 })
+
+    // During the ride the lift's own bar, with Skip on it, stands in for the controls
+    await user.type(answerBox(), `${answerOf(prompts[0], 'common').name}{Enter}`)
+    expect(laidOut()).toEqual({ status: 1, signs: 1, docks: 0 })
+    expect(skip().closest('.lift__bar')).not.toBeNull()
+
+    advance(rideMs('common'))
+    expect(laidOut()).toEqual({ status: 1, signs: 1, docks: 1 })
+    expect(screen.getByRole('button', { name: /Next question/ }).closest('.dock')).not.toBeNull()
+    expect(verdict('common')!.closest('.board')).not.toBeNull()
+    // What else was possible is on the cards beyond the stack
+    expect(document.querySelector('.game__stack .extras .samples')).not.toBeNull()
   })
 
   it('quits from the header', async () => {
