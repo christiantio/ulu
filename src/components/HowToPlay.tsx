@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState, type KeyboardEvent, type MouseEvent } from 'react'
-import { FLOORS, STAGES } from '../game/elevator'
+import { FLOORS, POINTS_PER_FLOOR, STAGES, TOP_FLOOR } from '../game/elevator'
 import { MAX_SCORE, ROUNDS_PER_DIVE, SECONDS_PER_ROUND, TIER_INFO } from '../game/scoring'
 import { TIERS } from '../game/types'
 import { TierLamp } from './TierLamp'
@@ -58,13 +58,14 @@ export function HowToPlay({ onClose }: { onClose: () => void }) {
             Every day there are <strong>{ROUNDS_PER_DIVE} questions</strong>, the same for everyone in Singapore.
           </li>
           <li>
-            Type <strong>one answer</strong> per question within <strong>{SECONDS_PER_ROUND} seconds</strong>. If
-            we don't recognise it, you can try again while the clock runs. Whatever is in the box when time runs
-            out still counts.
+            Type <strong>one answer</strong> per question within <strong>{SECONDS_PER_ROUND} seconds</strong>,
+            before the lift doors close. If we don't recognise it, you can try again while the clock runs.
+            Whatever is in the box when time runs out still counts.
           </li>
           <li>
             The first valid answer locks in. <strong>The more ulu it is, the more points</strong>, and the more
-            floors the lift goes up. Run out of time and it stays where it is.
+            floors the lift goes up. Every {POINTS_PER_FLOOR} points takes you up one floor, starting at 00.
+            Run out of time and it stays where it is. There is no penalty for trying again.
           </li>
         </ol>
 
@@ -95,7 +96,7 @@ export function HowToPlay({ onClose }: { onClose: () => void }) {
         <p className="muted">
           You start in an ordinary HDB lift. As your score climbs, the lift gets an upgrade: there are{' '}
           {STAGES.length - 1} to unlock, the last at {STAGES[STAGES.length - 1].min} points. A perfect {MAX_SCORE} goes
-          all the way to the top. New questions every midnight, Singapore time.
+          all the way to floor {TOP_FLOOR}. New questions every midnight, Singapore time.
         </p>
 
         <button ref={buttonRef} className="btn btn--primary btn--block" onClick={onClose}>

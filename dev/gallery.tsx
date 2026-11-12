@@ -3,7 +3,7 @@ import { createRoot } from 'react-dom/client'
 import '../src/styles.css'
 import '../src/components/elevator/elevator.css'
 import { ElevatorScene } from '../src/components/elevator/ElevatorScene'
-import { STAGES } from '../src/game/elevator'
+import { STAGES, floorForScore } from '../src/game/elevator'
 import { TIER_INFO } from '../src/game/scoring'
 import type { RoundResult, Tier } from '../src/game/types'
 
@@ -17,11 +17,15 @@ const ride: RoundResult | null = tier
   : null
 const h = q.get('h')
 
+// The scene is fixed to the window. Here each one is fixed to a box of its own instead: a transformed element is
+// what its fixed descendants are placed in
 createRoot(document.getElementById('root')!).render(
   <div className={q.get('playing') ? 'game--playing' : ''} style={{ display: 'grid', gap: 12 }}>
-    {h && <style>{`.scene{height:${h}px !important}`}</style>}
+    <style>{`.lift{height:100% !important}`}</style>
     {STAGES.filter((s) => !only || s.id === only).map((s) => (
-      <ElevatorScene key={s.id} score={num('score', s.min)} floor={num('floor', s.min === 0 ? 1 : Math.round(s.min * 0.065) + 1)} climbed={num('climbed', 0)} size={size} ride={ride} celebrate={!!q.get('celebrate')} />
+      <div key={s.id} style={{ position: 'relative', height: Number(h ?? 640), transform: 'translateZ(0)', overflow: 'hidden' }}>
+        <ElevatorScene score={num('score', s.min)} floor={num('floor', floorForScore(num('score', s.min)))} climbed={num('climbed', 0)} size={size} ride={ride} celebrate={!!q.get('celebrate')} jolt={num('jolt', 0)} />
+      </div>
     ))}
   </div>,
 )

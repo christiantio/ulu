@@ -18,7 +18,7 @@ describe('backdrops', () => {
   })
 
   it("shows the first lift's scenery without waiting for anything", () => {
-    render(<ElevatorScene score={0} floor={1} climbed={0} size="hero" />)
+    render(<ElevatorScene score={0} floor={0} climbed={0} size="hero" />)
     // Far, mid, landings, the pavement of the ground floor, and the car
     expect(layers()).toBe(5)
   })

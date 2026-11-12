@@ -144,7 +144,7 @@ describe('App daily flow', () => {
     expect(screen.getByText('How ulu can you go?')).toBeDefined()
     expect(screen.getByText('7 Singapore questions. The rarer your answers, the higher you rise.')).toBeDefined()
     expect(scene().dataset.lift).toBe('hdb')
-    expect(scene().dataset.floor).toBe('01')
+    expect(scene().dataset.floor).toBe('00')
     expect(scene().querySelector('.boy--idle')).not.toBeNull()
 
     await user.click(button('Start climbing'))
@@ -156,7 +156,7 @@ describe('App daily flow', () => {
       startedAt: null,
     })
 
-    // A reload picks the dive back up where it was left, with the lift one floor up
+    // A reload picks the dive back up where it was left, with the lift two floors up
     unmount()
     const again = await renderApp()
     expect(scene().dataset.floor).toBe('02')
@@ -176,7 +176,7 @@ describe('App daily flow', () => {
 
     await again.user.click(button('See results'))
     expect(screen.getByText('Ulu #15')).toBeDefined()
-    expect(screen.getByRole('img', { name: '70 of 700 points, floor 08, HDB Lift' })).toBeDefined()
+    expect(screen.getByRole('img', { name: '70 of 700 points, floor 14, HDB Lift' })).toBeDefined()
     await again.user.click(button('Home'))
     expect(screen.getByText('Done for today:', { exact: false }).textContent).toBe('Done for today: 70 pts')
     expect(statsLine()).toBe('1 played · 1 day streak · best 70')
@@ -276,7 +276,7 @@ describe('App daily flow', () => {
     await user.click(button(/Next question/))
     await playDive(user, today, 3)
     await user.click(button('See results'))
-    expect(screen.getByRole('img', { name: '70 of 700 points, floor 08, HDB Lift' })).toBeDefined()
+    expect(screen.getByRole('img', { name: '70 of 700 points, floor 14, HDB Lift' })).toBeDefined()
     const link = screen.getByRole('link', { name: /^Should this count\?/ })
     expect(new URL(link.getAttribute('href')!).searchParams.get('dive')).toBe(TODAY)
   })

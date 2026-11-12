@@ -66,12 +66,13 @@ export function Results({ title, results, prompts, stats, isDaily, dateKey, onHo
 
   return (
     <main className={`results ${perfect ? 'results--perfect' : ''}`}>
-      <div className="results__lift">
-        <ElevatorScene score={score} floor={floor} climbed={climbed} size="finale" celebrate={score >= CELEBRATE_FROM} />
-      </div>
+      <ElevatorScene score={score} floor={floor} climbed={climbed} size="finale" celebrate={score >= CELEBRATE_FROM} />
 
-      <div className="results__panel">
-        <div className="results__summary">
+      <div className="stack results__stack">
+        <div className="stack__sky" />
+        <div className="stack__gap" />
+
+        <div className="results__summary board">
           <p className="results__title">{title}</p>
           <h1 className="results__headline">{perfect ? 'Perfect climb' : HEADLINES[stage.id]}</h1>
           <div className="results__score">
@@ -102,81 +103,85 @@ export function Results({ title, results, prompts, stats, isDaily, dateKey, onHo
           </ol>
         </div>
 
-        <button className="btn btn--primary btn--block btn--big" onClick={share}>
-          {copied ? 'Copied! Go paste in the group chat' : 'Share result'}
-        </button>
+        <div className="dock">
+          <button className="btn btn--primary btn--block btn--big" onClick={share}>
+            {copied ? 'Copied! Go paste in the group chat' : 'Share result'}
+          </button>
+        </div>
 
-        <ElevatorProgress score={score} floor={floor} />
+        <div className="results__more extras">
+          <ElevatorProgress score={score} floor={floor} />
 
-        <ol className="breakdown card">
-          {results.map((r) => {
-            const prompt = byId.get(r.promptId)
-            const gem = prompt?.answers.find((a) => a.tier === 'gem')
-            return (
-              <li key={r.promptId} className={`breakdown__row ${r.tier ? `tier--${r.tier}` : 'verdict--miss'}`}>
-                <span className="breakdown__lamp">
-                  <TierLamp tier={r.tier} />
-                </span>
-                <span className="breakdown__body">
-                  <span className="breakdown__prompt">{prompt?.text ?? r.promptId}</span>
-                  <span className="breakdown__answer">
-                    {r.answer ?? <em>No answer</em>}
-                    {gem && r.tier !== 'gem' && (
-                      <span className="muted">
-                        <span aria-hidden="true"> · </span>
-                        <TierLamp tier="gem" />
-                        <span className="visually-hidden">. The gem:</span> {gem.name}
-                      </span>
-                    )}
+          <ol className="breakdown card">
+            {results.map((r) => {
+              const prompt = byId.get(r.promptId)
+              const gem = prompt?.answers.find((a) => a.tier === 'gem')
+              return (
+                <li key={r.promptId} className={`breakdown__row ${r.tier ? `tier--${r.tier}` : 'verdict--miss'}`}>
+                  <span className="breakdown__lamp">
+                    <TierLamp tier={r.tier} />
                   </span>
-                </span>
-                <span className="breakdown__points">
-                  <span className="visually-hidden">{r.tier ? TIER_INFO[r.tier].label : 'Time up'}, </span>
-                  {r.points}
-                  <span className="visually-hidden"> points</span>
-                </span>
-                {prompt && (
-                  <div className="breakdown__more">
-                    <RejectedGuesses
-                      guesses={r.attempts}
-                      date={reportDate}
-                      promptId={prompt.id}
-                      context={`for ${prompt.text}`}
-                      compact
-                    />
-                    <AllAnswers prompt={prompt} yours={r.answer} context={prompt.text}>
-                      <ProblemLinks date={reportDate} promptId={prompt.id} context={`for ${prompt.text}`} />
-                    </AllAnswers>
-                  </div>
-                )}
-              </li>
-            )
-          })}
-        </ol>
+                  <span className="breakdown__body">
+                    <span className="breakdown__prompt">{prompt?.text ?? r.promptId}</span>
+                    <span className="breakdown__answer">
+                      {r.answer ?? <em>No answer</em>}
+                      {gem && r.tier !== 'gem' && (
+                        <span className="muted">
+                          <span aria-hidden="true"> · </span>
+                          <TierLamp tier="gem" />
+                          <span className="visually-hidden">. The gem:</span> {gem.name}
+                        </span>
+                      )}
+                    </span>
+                  </span>
+                  <span className="breakdown__points">
+                    <span className="visually-hidden">{r.tier ? TIER_INFO[r.tier].label : 'Time up'}, </span>
+                    {r.points}
+                    <span className="visually-hidden"> points</span>
+                  </span>
+                  {prompt && (
+                    <div className="breakdown__more">
+                      <RejectedGuesses
+                        guesses={r.attempts}
+                        date={reportDate}
+                        promptId={prompt.id}
+                        context={`for ${prompt.text}`}
+                        compact
+                      />
+                      <AllAnswers prompt={prompt} yours={r.answer} context={prompt.text}>
+                        <ProblemLinks date={reportDate} promptId={prompt.id} context={`for ${prompt.text}`} />
+                      </AllAnswers>
+                    </div>
+                  )}
+                </li>
+              )
+            })}
+          </ol>
 
-        {isDaily && stats && (
-          <div className="stats">
-            <Stat label="Played" value={stats.played} />
-            <Stat label="Streak" value={displayStreak(stats, singaporeDateKey())} />
-            <Stat label="Best" value={stats.bestScore} />
-            <Stat label="Gems" value={stats.gems} />
+          {isDaily && stats && (
+            <div className="stats">
+              <Stat label="Played" value={stats.played} />
+              <Stat label="Streak" value={displayStreak(stats, singaporeDateKey())} />
+              <Stat label="Best" value={stats.bestScore} />
+              <Stat label="Gems" value={stats.gems} />
+            </div>
+          )}
+
+          {isDaily && (
+            <p className="results__next float center">
+              {/* Finished past midnight: the next game is already out, so don't count down to tomorrow's */}
+              {dateKey && dateKey !== singaporeDateKey() ? "Today's climb is ready" : <>Next climb in <Countdown /></>}
+            </p>
+          )}
+
+          <div className="results__actions">
+            <button className="btn btn--secondary" onClick={onHome}>
+              Home
+            </button>
+            <button className="btn btn--secondary" onClick={onUnlimited}>
+              {isDaily ? 'Play unlimited' : 'Play again'}
+            </button>
           </div>
-        )}
-
-        {isDaily && (
-          <p className="muted center">
-            {/* Finished past midnight: the next game is already out, so don't count down to tomorrow's */}
-            {dateKey && dateKey !== singaporeDateKey() ? "Today's climb is ready" : <>Next climb in <Countdown /></>}
-          </p>
-        )}
-
-        <div className="results__actions">
-          <button className="btn btn--secondary" onClick={onHome}>
-            Home
-          </button>
-          <button className="btn btn--secondary" onClick={onUnlimited}>
-            {isDaily ? 'Play unlimited' : 'Play again'}
-          </button>
         </div>
       </div>
     </main>

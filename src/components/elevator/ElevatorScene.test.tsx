@@ -77,9 +77,9 @@ afterEach(() => {
 
 describe('ElevatorScene at rest', () => {
   it('waits on the ground floor of the HDB lift with its doors open, hidden from screen readers', () => {
-    render(<ElevatorScene score={0} floor={1} climbed={0} size="hero" />)
+    render(<ElevatorScene score={0} floor={0} climbed={0} size="hero" />)
     expect(lift()).toBe('hdb')
-    expect(indicator()).toBe('01')
+    expect(indicator()).toBe('00')
     expect(doorsOpen()).toBe(true)
     expect(step('idle')).toBe(true)
     expect(scene().getAttribute('aria-hidden')).toBe('true')
@@ -101,9 +101,9 @@ describe('ElevatorScene at rest', () => {
     }
   })
 
-  it('reads PH at the top of a perfect game', () => {
-    render(<ElevatorScene score={700} floor={43} climbed={6} size="finale" celebrate />)
-    expect(indicator()).toBe('PH')
+  it('reads 140 at the top of a perfect game', () => {
+    render(<ElevatorScene score={700} floor={140} climbed={20} size="finale" celebrate />)
+    expect(indicator()).toBe('140')
     expect(lift()).toBe('penthouse')
     expect(document.querySelector('.confetti--fall')).not.toBeNull()
   })
@@ -118,9 +118,40 @@ describe('ElevatorScene at rest', () => {
     expect(new Set(sprites).size).toBe(1)
   })
 
+  it('jolts the car for each refused guess, under a name that changes so the animation plays again', () => {
+    const jolt = () => scene().className.match(/scene--jolt-\w/)?.[0] ?? null
+    const { rerender } = render(<ElevatorScene score={0} floor={0} climbed={0} />)
+    expect(jolt()).toBeNull()
+    rerender(<ElevatorScene score={0} floor={0} climbed={0} jolt={1} />)
+    expect(jolt()).toBe('scene--jolt-a')
+    rerender(<ElevatorScene score={0} floor={0} climbed={0} jolt={2} />)
+    expect(jolt()).toBe('scene--jolt-b')
+    rerender(<ElevatorScene score={0} floor={0} climbed={0} jolt={3} />)
+    expect(jolt()).toBe('scene--jolt-a')
+  })
+
+  it('carries a mirror image of the scenery on either side, for a window wider than it is drawn', () => {
+    render(<ElevatorScene score={0} floor={0} climbed={0} />)
+    // The far view, the near view and the pavement: each has a wing to its left and its right
+    const winged = [...document.querySelectorAll('.stage > .scene__layer')].filter((layer) => layer.querySelector('.scene__wing'))
+    expect(winged).toHaveLength(3)
+    for (const layer of winged) {
+      const art = layer.querySelector('svg > g[id]')!
+      const wings = [...layer.querySelectorAll('.scene__wing use')]
+      expect(wings).toHaveLength(2)
+      // The same drawing, reused and flipped
+      for (const wing of wings) {
+        expect(wing.getAttribute('href')).toBe(`#${art.id}`)
+        expect(wing.getAttribute('transform')).toContain('scale(-1 1)')
+      }
+    }
+    // The car and its rails aren't scenery: there's one lift
+    expect(document.querySelectorAll('.scene__car .scene__wing')).toHaveLength(0)
+  })
+
   it('lays its children over the picture, outside the hidden part', () => {
     render(
-      <ElevatorScene score={0} floor={1} climbed={0}>
+      <ElevatorScene score={0} floor={0} climbed={0}>
         <p>HDB Lift</p>
       </ElevatorScene>,
     )
@@ -143,7 +174,7 @@ describe('ElevatorScene ride', () => {
   }
 
   it('closes the doors, climbs the floors of the answer one at a time, then opens on the result', () => {
-    const from = after('common', 'common') // floor 3
+    const from = after('common', 'common') // floor 4
     renderRide(hit('rare'), from)
     const at = clock()
     const landed = DOORS_MS + TRAVEL_MS.rare
@@ -152,7 +183,7 @@ describe('ElevatorScene ride', () => {
     expect(step('closing')).toBe(true)
     expect(doorsOpen()).toBe(false)
     expect(caption()).toBe('Doors closing…')
-    expect(indicator()).toBe('03')
+    expect(indicator()).toBe('04')
     expect(stamp()).toBeNull()
 
     at(DOORS_MS)
@@ -168,18 +199,18 @@ describe('ElevatorScene ride', () => {
       expect(doorsOpen()).toBe(false)
       expect(stamp()).toBeNull()
     }
-    expect([...seen]).toEqual(['03', '04', '05', '06', '07'])
+    expect([...seen]).toEqual(Array.from({ length: 13 }, (_, i) => String(i + 4).padStart(2, '0')))
 
     at(landed)
     expect(step('landed')).toBe(true)
-    expect(indicator()).toBe('07')
+    expect(indicator()).toBe('16')
     expect(stamp()).toBeNull()
 
     // Settled: the doors open on the rarity, the floors and the points
     at(landed + SETTLE_MS)
     expect(step('arrived')).toBe(true)
     expect(doorsOpen()).toBe(true)
-    expect(stamp()).toBe('Steady▲ 4 floors+60')
+    expect(stamp()).toBe('Steady▲ 12 floors+60')
     expect(caption()).toBe(ARRIVAL_LINES.rare)
     expect(mood()).toContain('boy--mid')
     // Same lift: 60 points from 20 is still under 100
@@ -187,22 +218,22 @@ describe('ElevatorScene ride', () => {
     expect(document.querySelector('.newlift')).toBeNull()
   })
 
-  it('travels one floor for a common answer and six for the gem', () => {
+  it('travels two floors for a common answer and twenty for the gem', () => {
     renderRide(hit('common'))
     advance(rideMs('common') - 1)
     expect(indicator()).toBe('02')
-    expect(stamp()).toBe('Everybody Say▲ 1 floor+10')
+    expect(stamp()).toBe('Everybody Say▲ 2 floors+10')
     cleanup()
 
     renderRide(hit('gem'), after('common'))
     advance(DOORS_MS + TRAVEL_MS.gem)
-    expect(indicator()).toBe('08')
+    expect(indicator()).toBe('22')
   })
 
   it('sweeps in the new lift when the answer crosses a threshold, before the doors open', () => {
-    // 85 points, then a common answer for 10 more: still the HDB lift, on floor 7
+    // 85 points, then a common answer for 10 more: still the HDB lift, on floor 19
     const from = after('ulu', 'common')
-    expect(from).toMatchObject({ score: 95, floor: 7 })
+    expect(from).toMatchObject({ score: 95, floor: 19 })
     renderRide(hit('common'), from)
     const at = clock()
     const landed = DOORS_MS + TRAVEL_MS.common
@@ -227,9 +258,9 @@ describe('ElevatorScene ride', () => {
     at(landed + SETTLE_MS + UPGRADE_MS)
     expect(step('arrived')).toBe(true)
     expect(doorsOpen()).toBe(true)
-    expect(stamp()).toBe('Everybody Say▲ 1 floor+10')
+    expect(stamp()).toBe('Everybody Say▲ 2 floors+10')
     expect(document.querySelector('.newlift')).not.toBeNull()
-    expect(indicator()).toBe('08')
+    expect(indicator()).toBe('21')
   })
 
   it('takes the upgrade into account in how long the ride lasts', () => {
@@ -240,28 +271,28 @@ describe('ElevatorScene ride', () => {
     expect(onRideDone).toHaveBeenCalledTimes(1)
   })
 
-  it('reads PH when the last gem makes it a perfect game', () => {
+  it('reads 140 when the last gem makes it a perfect game', () => {
     const from = after('gem', 'gem', 'gem', 'gem', 'gem', 'gem')
     renderRide(hit('gem'), from)
     advance(DOORS_MS + TRAVEL_MS.gem)
-    expect(indicator()).toBe('43')
+    expect(indicator()).toBe('140')
     advance(SETTLE_MS)
-    expect(indicator()).toBe('PH')
+    expect(indicator()).toBe('140')
     // The joke stays understated: no hop, no pop. He blows another bubble
     expect(mood()).toContain('boy--calm')
-    expect(stamp()).toBe('Sibei Ulu▲ 6 floors+100')
+    expect(stamp()).toBe('Sibei Ulu▲ 20 floors+100')
   })
 
   it('stays on its floor for a miss: no travel, no closed doors, and a short sigh', () => {
     const from = after('solid')
     const { onRideDone } = renderRide(miss, from)
     expect(step('stuck')).toBe(true)
-    expect(indicator()).toBe('04')
+    expect(indicator()).toBe('06')
     expect(stamp()).toBe('Time up!Staying put+0')
     expect(caption()).toBe(ARRIVAL_LINES.miss)
     expect(mood()).toContain('boy--miss')
     advance(MISS_MS - 1)
-    expect(indicator()).toBe('04')
+    expect(indicator()).toBe('06')
     expect(lift()).toBe('hdb')
     expect(document.querySelector('.stage--incoming')).toBeNull()
     expect(onRideDone).not.toHaveBeenCalled()
@@ -296,6 +327,9 @@ describe('ElevatorScene ride', () => {
     fireEvent.keyDown(window, { key: 'Escape' })
     expect(onRideDone).not.toHaveBeenCalled()
     advance(SKIP_GRACE_MS)
+    fireEvent.keyDown(window, { key: 'Escape', repeat: true })
+    expect(fireEvent.keyDown(skipButton(), { key: 'Enter', repeat: true })).toBe(false)
+    expect(onRideDone).not.toHaveBeenCalled()
     fireEvent.keyDown(window, { key: 'Enter' })
     expect(onRideDone).not.toHaveBeenCalled()
     fireEvent.keyDown(window, { key: 'Escape' })
@@ -314,11 +348,11 @@ describe('ElevatorScene ride', () => {
     advance(DOORS_MS + 200)
     expect(doorsOpen()).toBe(false)
 
-    // The game moves on with the answer counted: a new lift, six floors up
+    // The game moves on with the answer counted: a new lift, twenty floors up
     const to = liftAfter([hit('ulu'), hit('common'), ride])
     rerender(<ElevatorScene score={to.score} floor={to.floor} climbed={to.climbed} ride={null} />)
     expect(lift()).toBe('upgraded')
-    expect(indicator()).toBe('13')
+    expect(indicator()).toBe('39')
     expect(doorsOpen()).toBe(true)
     expect(step('idle')).toBe(true)
     expect(document.querySelectorAll('.stage')).toHaveLength(1)
@@ -327,7 +361,7 @@ describe('ElevatorScene ride', () => {
 
     // And the abandoned ride's timers do nothing more
     advance(10_000)
-    expect(indicator()).toBe('13')
+    expect(indicator()).toBe('39')
     expect(step('idle')).toBe(true)
   })
 

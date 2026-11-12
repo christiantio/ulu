@@ -1,12 +1,12 @@
 // @vitest-environment jsdom
-import { act, cleanup, render, screen, within } from '@testing-library/react'
+import { act, cleanup, fireEvent, render, screen, within } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest'
 import { ALL_PROMPTS } from '../content/bank'
 import { matchAnswer } from '../game/match'
 import { SECONDS_PER_ROUND, TIER_INFO } from '../game/scoring'
 import type { Prompt, RoundResult, Tier } from '../game/types'
-import { Round } from './Round'
+import { Round, type Pace } from './Round'
 
 const NOW = Date.parse('2026-11-10T04:00:00Z')
 const JUNK = 'zzqqxxjj'
@@ -26,10 +26,20 @@ const people = ALL_PROMPTS.find((p) => p.id === 'politics-presidents-and-pms')!
 
 function setup(shown: Prompt = prompt) {
   const onResult = vi.fn<(result: RoundResult) => void>()
+  const onClock = vi.fn<(left: number, pace: Pace) => void>()
+  const onRefuse = vi.fn()
   const user = userEvent.setup({ advanceTimers: vi.advanceTimersByTime })
-  render(<Round prompt={shown} deadline={Date.now() + SECONDS_PER_ROUND * 1000} onResult={onResult} />)
+  render(
+    <Round
+      prompt={shown}
+      deadline={Date.now() + SECONDS_PER_ROUND * 1000}
+      onResult={onResult}
+      onClock={onClock}
+      onRefuse={onRefuse}
+    />,
+  )
   const input = () => screen.getByRole('textbox', { name: 'Your answer' })
-  return { onResult, user, input }
+  return { onResult, onClock, onRefuse, user, input }
 }
 
 const advance = (ms: number) => act(() => vi.advanceTimersByTime(ms))
@@ -48,6 +58,16 @@ afterEach(() => {
 })
 
 describe('Round', () => {
+  it('does not submit on a held Enter or while confirming a composed character', async () => {
+    const { user, input, onResult } = setup()
+    await user.type(input(), answerOf(prompt, 'common').name)
+    expect(fireEvent.keyDown(input(), { key: 'Enter', repeat: true })).toBe(false)
+    expect(fireEvent.keyDown(input(), { key: 'Enter', isComposing: true })).toBe(false)
+    expect(onResult).not.toHaveBeenCalled()
+    await user.keyboard('{Enter}')
+    expect(onResult).toHaveBeenCalledTimes(1)
+  })
+
   it('runs on the faked clock', () => {
     expect(Date.now()).toBe(NOW)
   })
@@ -258,6 +278,37 @@ describe('Round', () => {
     advance(5000)
     expect(bar()).toContain('timer__bar--urgent')
     expect(clock()).toContain('round__clock--urgent')
+  })
+
+  it('reports the share of the time left on every tick, and how urgent it is', () => {
+    const { onClock } = setup()
+    expect(onClock).toHaveBeenLastCalledWith(1, 'steady')
+    advance(5000)
+    expect(onClock).toHaveBeenLastCalledWith(0.8, 'steady')
+    advance((SECONDS_PER_ROUND - 15) * 1000)
+    expect(onClock).toHaveBeenLastCalledWith(0.4, 'low')
+    advance(5000)
+    expect(onClock).toHaveBeenLastCalledWith(0.2, 'urgent')
+    advance(5000)
+    expect(onClock).toHaveBeenLastCalledWith(0, 'urgent')
+  })
+
+  it('reports every refused guess, whatever the reason, and not an accepted one', async () => {
+    const { onRefuse, user, input } = setup(withDecoys)
+    await user.type(input(), `${JUNK}{Enter}`)
+    expect(onRefuse).toHaveBeenCalledTimes(1)
+    await user.type(input(), `${withDecoys.decoys![0].name}{Enter}`)
+    expect(onRefuse).toHaveBeenCalledTimes(2)
+    await user.type(input(), `${answerOf(withDecoys, 'common').name}{Enter}`)
+    expect(onRefuse).toHaveBeenCalledTimes(2)
+  })
+
+  it('puts the question on the sign and the answer box in the dock under it', () => {
+    setup()
+    const sign = document.querySelector('.round__board')!
+    expect(within(sign as HTMLElement).getByRole('heading', { level: 2, name: prompt.text })).toBeDefined()
+    expect(within(sign as HTMLElement).getByRole('status')).toBeDefined()
+    expect(screen.getByRole('textbox', { name: 'Your answer' }).closest('.dock')).not.toBeNull()
   })
 
   it('never reports twice: a locked-in answer is not followed by a timeout', async () => {

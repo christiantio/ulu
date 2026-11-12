@@ -464,8 +464,8 @@ describe('scoring and sharing', () => {
       'Ulu #3',
       'https://ulu.sg',
     )
-    // The floor and the lift it reached: 6 floors for the gem and 1 for the common answer, from floor 1
-    expect(text).toBe('Ulu #3 🇸🇬 110/700\n💎❌⚪\nFloor 8 · Upgraded HDB Lift\nhttps://ulu.sg')
+    // The floor and the lift it reached: 20 floors for the gem and 2 for the common answer, from floor 0
+    expect(text).toBe('Ulu #3 🇸🇬 110/700\n💎❌⚪\nFloor 22 · Upgraded HDB Lift\nhttps://ulu.sg')
     expect(text).not.toContain('Timah')
     // Nor the rejected guesses
     expect(text).not.toMatch(/Holland|Sentosa/)

@@ -1,123 +1,46 @@
 /*
  * The lift scene (ElevatorScene.tsx). Decorative and aria-hidden.
  *
- * Scene units are --u CSS pixels. Everything hangs off the car's floor, which sits --sill above the bottom of the
- * picture, in the middle: layers give their box in scene units (--x, --w, --h, --b) and are placed from there.
- * Moving parts only ever change transform, opacity or clip-path.
+ * It's the world the game is played in: fixed to the window and filling it, with every screen laid over it (see
+ * "The stack" in styles.css). Scene units are --u CSS pixels. Everything hangs off the car's floor, which sits
+ * --sill above the bottom of the window and --cx across it: layers give their box in scene units (--x, --w, --h,
+ * --b) and are placed from there. Moving parts only ever change transform, opacity or clip-path.
  */
 .lift {
-  position: relative;
+  position: fixed;
+  z-index: 0;
+  top: 0;
+  left: 0;
+  right: 0;
+  /* What's visible of the window: with a keyboard up, the lift stands on top of the keyboard */
+  height: var(--visible-height, 100dvh);
 }
 .scene {
-  --u: 2px;
-  --sill: calc(var(--u) * 22);
-  position: relative;
-  height: clamp(240px, 44dvh, 420px);
-  margin-inline: -16px;
+  /* The lift stands on the controls at the foot of the window, with a strip of ground showing between */
+  --sill: calc(var(--foot, 0px) + var(--peek, 0px) + var(--u) * 14);
+  position: absolute;
+  inset: 0;
   overflow: hidden;
   isolation: isolate;
   container-type: size;
   background: var(--ink-deep);
-  border-block: 4px solid var(--ink-deep);
-  transition: height 0.28s ease;
-}
-.lift--play .scene {
-  --sill: calc(var(--u) * 14);
-  height: clamp(230px, 38dvh, 340px);
-}
-/* Typing, or reading the result: a shorter strip, so the question and the keyboard (or the verdict) fit under it */
-.game--playing .scene,
-.game--reveal .scene {
-  --sill: calc(var(--u) * 5);
-  height: clamp(150px, 25dvh, 240px);
-}
-.lift--finale .scene {
-  height: clamp(240px, 40dvh, 380px);
-}
-@media (max-height: 859px) and (max-width: 899px) {
-  .game--playing .scene,
-  .game--reveal .scene {
-    --u: 1.5px;
-  }
 }
 /*
- * A question on a phone: the lift fills the strip the round's layout leaves it (see .game--playing in styles.css),
- * which is short once the keyboard is up. As the strip gets shorter the car sinks out of the bottom of it, so
- * what's left always shows the boy's face rather than his slippers. Under about 50px there's nothing worth showing
+ * A question with a keyboard up leaves a short window. As it gets shorter the car sinks behind the answer bar, so
+ * that the strip left between the sign and the bar shows the boy's face and the doors, not the top of the car
  */
-@media (max-width: 599px), (max-width: 899px) and (min-height: 521px) {
-  .game--playing .lift {
-    height: 100%;
-  }
-  .game--playing .scene {
-    --sill: clamp(calc(var(--u) * -20), calc(var(--u) * 5 + (100cqh - 150px) * 0.4), calc(var(--u) * 5));
-    height: 100%;
-    transition: none;
-  }
-  @container strip (max-height: 110px) {
-    .plate {
-      opacity: 0;
-    }
-  }
-  @container strip (max-height: 50px) {
-    .lift {
-      visibility: hidden;
-    }
-  }
+.game--playing .scene {
+  --sill: clamp(
+    calc(var(--foot) - var(--u) * 22),
+    calc(var(--foot) + var(--u) * 14 - (520px - 100cqh) * 0.62),
+    calc(var(--foot) + var(--u) * 14)
+  );
 }
-@media (min-width: 900px), (min-width: 600px) and (max-height: 520px) {
-  .scene,
-  .lift--play .scene,
-  .game--playing .scene,
-  .game--reveal .scene,
-  .lift--finale .scene {
-    --sill: calc(var(--u) * 22);
-    height: var(--scene-h);
-    margin-inline: 0;
-    border: 4px solid var(--ink-deep);
-    box-shadow:
-      0 0 0 2px var(--ink-line),
-      8px 8px 0 rgb(0 0 0 / 0.35);
-  }
-}
-@media (min-width: 900px) and (min-height: 640px) {
-  .scene,
-  .lift--play .scene,
-  .game--playing .scene,
-  .game--reveal .scene,
-  .lift--finale .scene {
-    --u: 3px;
-  }
-}
-@media (min-width: 1600px) and (min-height: 950px) {
-  .scene,
-  .lift--play .scene,
-  .game--playing .scene,
-  .game--reveal .scene,
-  .lift--finale .scene {
-    --u: 4px;
-  }
-}
-/* A phone on its side: a small lift in a short window, with the ride's caption laid over the foot of the picture */
+/* A phone on its side: the lift stands at the bottom of the window, beside everything else */
 @media (min-width: 600px) and (max-height: 520px) {
   .scene,
-  .lift--play .scene,
-  .game--playing .scene,
-  .game--reveal .scene,
-  .lift--finale .scene {
-    --u: 1.5px;
-    --sill: calc(var(--u) * 14);
-    box-shadow: 0 0 0 2px var(--ink-line);
-  }
-  .lift__bar {
-    position: absolute;
-    inset: auto 4px 4px;
-    min-height: 0;
-    padding: 2px 4px 2px 10px;
-    background: rgb(11 16 24 / 0.86);
-  }
-  .lift__caption {
-    font-size: 0.9rem;
+  .game--playing .scene {
+    --sill: calc(var(--u) * 12);
   }
 }
 
@@ -231,7 +154,7 @@
 
 .scene__layer {
   position: absolute;
-  left: 50%;
+  left: var(--cx, 50%);
   bottom: calc(var(--sill) - var(--u) * var(--b));
   width: calc(var(--u) * var(--w));
   height: calc(var(--u) * var(--h));
@@ -246,25 +169,42 @@
   width: 100%;
   height: 100%;
 }
+/* A layer's mirror images, either side of it. Only a window wider than the scenery is drawn can see them */
+.scene__layer .scene__wing {
+  position: absolute;
+  top: 0;
+  display: none;
+}
+.scene__wing--l {
+  right: 100%;
+}
+.scene__wing--r {
+  left: 100%;
+}
+@media (min-width: 601px) {
+  .scene__layer .scene__wing {
+    display: block;
+  }
+}
 
 /* The rails the car runs on, and the cables it hangs from */
 .scene__rail {
   position: absolute;
   top: 0;
   bottom: 0;
-  left: calc(50% - var(--u) * 47);
+  left: calc(var(--cx, 50%) - var(--u) * 47);
   width: calc(var(--u) * 2);
   background: var(--rail);
   box-shadow: inset calc(var(--u) * 1) 0 var(--rail-hi);
 }
 .scene__rail--r {
-  left: calc(50% + var(--u) * 45);
+  left: calc(var(--cx, 50%) + var(--u) * 45);
 }
 .scene__cables {
   position: absolute;
   top: calc(var(--u) * -8);
   bottom: calc(var(--sill) + var(--u) * 99);
-  left: calc(50% - var(--u) * 5);
+  left: calc(var(--cx, 50%) - var(--u) * 5);
   width: calc(var(--u) * 10);
   border-inline: calc(var(--u) * 1) solid var(--cable);
 }
@@ -272,7 +212,7 @@
 /* The boy, standing on the car's floor */
 .scene__boy {
   position: absolute;
-  left: calc(50% - var(--u) * 14);
+  left: calc(var(--cx, 50%) - var(--u) * 14);
   bottom: calc(var(--sill) + var(--u) * 1);
   width: calc(var(--u) * 28);
   height: calc(var(--u) * 45);
@@ -281,7 +221,7 @@
 /* The doors slide into the frame either side. The right-hand one is the left one, mirrored */
 .scene__doors {
   position: absolute;
-  left: calc(50% - var(--u) * 32);
+  left: calc(var(--cx, 50%) - var(--u) * 32);
   bottom: var(--sill);
   width: calc(var(--u) * 64);
   height: calc(var(--u) * 76);
@@ -308,6 +248,22 @@
 .scene--open .door--r {
   transform: translateX(100%);
 }
+/*
+ * A question: the doors are the clock. They close as the time runs down (--clock goes from 1 to 0 on the game,
+ * set by Game.tsx), and an answer has to get in before they shut. Not with reduced motion: the clock on the sign
+ * says the same thing without moving
+ */
+@media (prefers-reduced-motion: no-preference) {
+  .game--playing .scene--open .door {
+    transition: transform 0.12s linear;
+  }
+  .game--playing .scene--open .door--l {
+    transform: translateX(calc(-100% * var(--clock, 1)));
+  }
+  .game--playing .scene--open .door--r {
+    transform: translateX(calc(100% * var(--clock, 1)));
+  }
+}
 /* Shutting: the doors meet with a thunk and spring back a hair */
 .scene--closing .door--l {
   animation: door-shut-l var(--doors-ms) cubic-bezier(0.55, 0, 0.6, 1) both;
@@ -315,15 +271,16 @@
 .scene--closing .door--r {
   animation: door-shut-r var(--doors-ms) cubic-bezier(0.55, 0, 0.6, 1) both;
 }
-/* A miss: they start to close, think better of it, and open again */
+/* A miss: the clock has shut them. The lift doesn't move, and they open again on the same floor */
 .scene--stuck .door--l {
-  animation: door-balk-l 760ms ease-in-out both;
+  animation: door-balk-l 1100ms ease-in-out both;
 }
 .scene--stuck .door--r {
-  animation: door-balk-r 760ms ease-in-out both;
+  animation: door-balk-r 1100ms ease-in-out both;
 }
 
-/* Weight: the car dips as it pulls away, overshoots its floor a touch and settles, and shudders on a miss */
+/* Weight: the car dips as it pulls away, overshoots its floor a touch and settles, and shudders on a miss or at a
+   guess it won't take */
 .scene--rising .scene__car {
   animation: car-launch 440ms cubic-bezier(0.3, 0, 0.3, 1);
 }
@@ -334,6 +291,35 @@
 }
 .scene--stuck .scene__car {
   animation: car-shudder 300ms steps(6) 260ms;
+}
+.scene--jolt-a .scene__car {
+  animation: car-jolt-a 320ms steps(6);
+}
+.scene--jolt-b .scene__car {
+  animation: car-jolt-b 320ms steps(6);
+}
+/* He breaks a sweat, too */
+.scene--jolt-a .boy__sweat {
+  animation: flinch-a 900ms step-end;
+}
+.scene--jolt-b .boy__sweat {
+  animation: flinch-b 900ms step-end;
+}
+
+/* The last five seconds: the edge of the window flashes red, like a lift's alarm */
+.scene__alarm {
+  position: absolute;
+  inset: 0;
+  z-index: 5;
+  opacity: 0;
+  box-shadow:
+    inset 0 0 0 calc(var(--u) * 3) #e2574c,
+    inset 0 0 0 calc(var(--u) * 5) rgb(226 87 76 / 0.35);
+  background: rgb(226 87 76 / 0.1);
+  pointer-events: none;
+}
+[data-pace='urgent'] .scene__alarm {
+  animation: alarm 1s steps(2, jump-none) infinite;
 }
 
 /* Speed lines, drawn as fast as the lift is going */
@@ -352,6 +338,16 @@
   background: rgb(255 255 255 / 0.5);
   animation: streak 0.3s linear infinite;
   animation-delay: var(--d);
+}
+
+/* Where the plaques go: over the sign that's over the lift */
+.scene {
+  --plaque: calc(var(--sill) + var(--u) * 106 + 84px);
+}
+@media (min-width: 600px) and (max-height: 520px) {
+  .scene {
+    --plaque: calc(var(--sill) + var(--u) * 104);
+  }
 }
 
 /* A new lift: it wipes in from the floor up, behind a line of light, while the doors are still shut */
@@ -373,8 +369,8 @@
 }
 .newlift {
   position: absolute;
-  top: 7%;
-  left: 50%;
+  bottom: var(--plaque);
+  left: var(--cx, 50%);
   display: grid;
   justify-items: center;
   padding: 5px 14px 7px;
@@ -403,8 +399,8 @@
 /* When the doors open: the rarity, the floors and the points */
 .stamp {
   position: absolute;
-  top: 7%;
-  left: 50%;
+  bottom: var(--plaque);
+  left: var(--cx, 50%);
   display: grid;
   grid-template-columns: auto auto;
   align-items: center;
@@ -420,10 +416,9 @@
   animation: plaque-in 0.34s cubic-bezier(0.2, 1.5, 0.4, 1) 0.12s both;
   pointer-events: none;
 }
-/* Under the new lift's plaque, when there is one */
-.newlift + .stamp,
+/* Over the new lift's plaque, when there is one */
 .newlift ~ .stamp {
-  top: calc(7% + 58px);
+  bottom: calc(var(--plaque) + 62px);
 }
 .stamp--miss {
   --tier: var(--miss);
@@ -464,8 +459,8 @@
 }
 .confetti i {
   position: absolute;
-  left: 50%;
-  top: 20%;
+  left: var(--cx, 50%);
+  bottom: calc(var(--sill) + var(--u) * 100);
   width: calc(var(--u) * 3);
   height: calc(var(--u) * 3);
   background: var(--c);
@@ -474,37 +469,53 @@
 .confetti--fall i {
   left: var(--x);
   top: calc(var(--u) * -4);
+  bottom: auto;
   animation: confetti-fall var(--dur) linear var(--delay) infinite;
 }
 
-/* The lift's own bar under the picture during a ride: what's happening, and the way past it */
+/* The lift's own bar at the foot of the window during a ride: what's happening, and the way past it */
 .lift__bar {
+  position: absolute;
+  z-index: 1;
+  left: 0;
+  right: 0;
+  bottom: var(--peek, 0px);
   display: flex;
-  align-items: center;
+  align-items: flex-end;
   justify-content: space-between;
   gap: 12px;
-  /* Room for two lines of caption, so the page doesn't jump when a long one arrives */
-  min-height: 58px;
-  padding-top: 8px;
+  width: min(100% - 24px, 560px);
+  min-height: var(--foot, 0px);
+  margin-inline: auto;
+  padding-bottom: var(--pad-bottom, 14px);
+  pointer-events: none;
 }
 .lift__caption {
+  padding-bottom: 6px;
   font-family: var(--font-display);
-  font-size: 1.05rem;
-  font-weight: 500;
+  font-size: 1.1rem;
+  font-weight: 600;
   line-height: 1.2;
   color: var(--cream);
+  text-shadow: var(--outline);
   animation: caption-in 0.2s ease both;
-}
-/* The plate steps aside for the ride: the picture has its own things to say */
-.plate {
-  transition: opacity 0.2s ease;
-}
-.lift--riding .plate {
-  opacity: 0;
 }
 .lift__bar .btn {
   flex: none;
-  color: var(--muted);
+  pointer-events: auto;
+}
+/* The plate steps aside for the ride: the picture has its own things to say */
+.game--ride .plate {
+  opacity: 0;
+}
+@media (min-width: 600px) and (max-height: 520px) {
+  .lift__bar {
+    left: 50%;
+    right: 12px;
+    bottom: 10px;
+    width: auto;
+    margin: 0;
+  }
 }
 
 /* Things in the sky */
@@ -698,7 +709,7 @@
 
 @keyframes door-shut-l {
   0% {
-    transform: translateX(-100%);
+    transform: translateX(calc(-100% * var(--clock, 1)));
   }
   78% {
     transform: translateX(0);
@@ -712,7 +723,7 @@
 }
 @keyframes door-shut-r {
   0% {
-    transform: translateX(100%);
+    transform: translateX(calc(100% * var(--clock, 1)));
   }
   78% {
     transform: translateX(0);
@@ -726,22 +737,20 @@
 }
 @keyframes door-balk-l {
   0%,
+  58% {
+    transform: translateX(0);
+  }
   100% {
     transform: translateX(-100%);
-  }
-  38%,
-  52% {
-    transform: translateX(-52%);
   }
 }
 @keyframes door-balk-r {
   0%,
+  58% {
+    transform: translateX(0);
+  }
   100% {
     transform: translateX(100%);
-  }
-  38%,
-  52% {
-    transform: translateX(52%);
   }
 }
 @keyframes car-launch {
@@ -775,6 +784,54 @@
   }
   66% {
     transform: translateX(calc(var(--u) * 1));
+  }
+}
+@keyframes car-jolt-a {
+  0%,
+  100% {
+    transform: translateX(0);
+  }
+  33% {
+    transform: translateX(calc(var(--u) * -1.5));
+  }
+  66% {
+    transform: translateX(calc(var(--u) * 1.5));
+  }
+}
+@keyframes car-jolt-b {
+  0%,
+  100% {
+    transform: translateX(0);
+  }
+  33% {
+    transform: translateX(calc(var(--u) * -1.5));
+  }
+  66% {
+    transform: translateX(calc(var(--u) * 1.5));
+  }
+}
+@keyframes flinch-a {
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+@keyframes flinch-b {
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+@keyframes alarm {
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
   }
 }
 @keyframes streak {

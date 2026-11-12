@@ -25,7 +25,10 @@ interface Props {
   onNext: () => void
 }
 
-/** After a round: how the player did, how far the lift went, the gem, and what else was possible */
+/**
+ * After a round. The sign over the lift has how the player did, how far the lift went and the gem; the way on is
+ * at the lift's foot; and what else was possible is on the cards beyond that
+ */
 export function Reveal({ prompt, result, isLast, reportDate = UNLIMITED_DATE, floor, upgrade = null, onNext }: Props) {
   const nextRef = useRef<HTMLButtonElement>(null)
   const verdictId = useId()
@@ -51,80 +54,91 @@ export function Reveal({ prompt, result, isLast, reportDate = UNLIMITED_DATE, fl
   const floors = floorsFor(result.tier)
 
   return (
-    <section className="reveal">
-      <p className="reveal__prompt">{prompt.text}</p>
+    <div className="reveal">
+      <section className="reveal__board board">
+        <p className="reveal__prompt">{prompt.text}</p>
 
-      {/* Read out with the Next button, which describes itself by this */}
-      <div id={verdictId} className="reveal__verdict">
-        <div className={`verdict ${result.tier ? `tier--${result.tier}` : 'verdict--miss'}`}>
-          <div className="verdict__floors" aria-hidden="true">
-            {floors ? `▲${floors}` : '–'}
-          </div>
-          <div>
-            <div className="verdict__label">{info?.label ?? 'Time up!'}</div>
-            <div className="verdict__answer">
-              {result.answer ? (
-                <>
-                  {result.answer}
-                  {corrected && <span className="muted"> (you typed “{result.input}”)</span>}
-                </>
-              ) : (
-                'No valid answer'
-              )}
+        {/* Read out with the Next button, which describes itself by this */}
+        <div id={verdictId} className="reveal__verdict">
+          <div className={`verdict ${result.tier ? `tier--${result.tier}` : 'verdict--miss'}`}>
+            <div className="verdict__floors" aria-hidden="true">
+              {floors ? `▲${floors}` : '–'}
             </div>
-            <div className="verdict__blurb">
-              {info ? info.blurb : 'The lift stays where it is.'}
-              <span className="visually-hidden">
-                {' '}
-                {floors ? `Up ${floorsLabel(floors)}` : 'No floors gained'}
-                {floor !== undefined && `, now on floor ${formatFloor(floor)}`}.
-              </span>
+            <div>
+              <div className="verdict__label">{info?.label ?? 'Time up!'}</div>
+              <div className="verdict__answer">
+                {result.answer ? (
+                  <>
+                    {result.answer}
+                    {corrected && <span className="muted"> (you typed “{result.input}”)</span>}
+                  </>
+                ) : (
+                  'No valid answer'
+                )}
+              </div>
+              <div className="verdict__blurb">
+                {info ? info.blurb : 'The lift stays where it is.'}
+                <span className="visually-hidden">
+                  {' '}
+                  {floors ? `Up ${floorsLabel(floors)}` : 'No floors gained'}
+                  {floor !== undefined && `, now on floor ${formatFloor(floor)}`}.
+                </span>
+              </div>
+            </div>
+            <div className="verdict__points">
+              +{result.points}
+              <span className="visually-hidden"> points</span>
             </div>
           </div>
-          <div className="verdict__points">
-            +{result.points}
-            <span className="visually-hidden"> points</span>
-          </div>
+
+          {upgrade && (
+            <p className="upgrade">
+              <span className="upgrade__label">New lift unlocked</span> <strong>{upgrade.name}</strong>
+            </p>
+          )}
         </div>
 
-        {upgrade && (
-          <p className="upgrade">
-            <span className="upgrade__label">New lift unlocked</span> <strong>{upgrade.name}</strong>
-          </p>
-        )}
-      </div>
-
-      <RejectedGuesses guesses={result.attempts} date={reportDate} promptId={prompt.id} />
-
-      {gem && result.tier !== 'gem' && (
-        <div className="gem">
-          <span className="gem__label">
-            <TierLamp tier="gem" /> The gem
-          </span>
-          <span className="gem__name">{gem.name}</span>
-        </div>
-      )}
-
-      {/* Focus lands here, so the verdict is read with it */}
-      <button ref={nextRef} className="btn btn--primary btn--block btn--big" onClick={onNext} aria-describedby={verdictId}>
-        {isLast ? 'See results' : 'Next question →'}
-        <KeyHint>Enter</KeyHint>
-      </button>
-
-      <div className="samples card">
-        <h3>Other answers</h3>
-        {[...samples].map(([tier, names]) => (
-          <div key={tier} className={`samples__row tier--${tier}`}>
-            <span className="samples__tier">
-              <TierLamp tier={tier} /> {TIER_INFO[tier].label}
+        {gem && result.tier !== 'gem' && (
+          <div className="gem">
+            <span className="gem__label">
+              <TierLamp tier="gem" /> The gem
             </span>
-            <span className="samples__names">{names.join(', ')}</span>
+            <span className="gem__name">{gem.name}</span>
           </div>
-        ))}
-        <AllAnswers prompt={prompt} yours={result.answer}>
-          <ProblemLinks date={reportDate} promptId={prompt.id} />
-        </AllAnswers>
+        )}
+      </section>
+
+      <div className="dock">
+        {/* Focus lands here, so the verdict is read with it */}
+        <button ref={nextRef} className="btn btn--primary btn--block btn--big" onClick={onNext}
+          onKeyDown={(e) => { if (e.repeat) e.preventDefault() }} aria-describedby={verdictId}>
+          {isLast ? 'See results' : 'Next question →'}
+          <KeyHint>Enter</KeyHint>
+        </button>
       </div>
-    </section>
+
+      <div className="reveal__more extras">
+        {result.attempts.length > 0 && (
+          <div className="card">
+            <RejectedGuesses guesses={result.attempts} date={reportDate} promptId={prompt.id} />
+          </div>
+        )}
+
+        <div className="samples card">
+          <h3>Other answers</h3>
+          {[...samples].map(([tier, names]) => (
+            <div key={tier} className={`samples__row tier--${tier}`}>
+              <span className="samples__tier">
+                <TierLamp tier={tier} /> {TIER_INFO[tier].label}
+              </span>
+              <span className="samples__names">{names.join(', ')}</span>
+            </div>
+          ))}
+          <AllAnswers prompt={prompt} yours={result.answer}>
+            <ProblemLinks date={reportDate} promptId={prompt.id} />
+          </AllAnswers>
+        </div>
+      </div>
+    </div>
   )
 }

@@ -1,5 +1,5 @@
 // @vitest-environment jsdom
-import { act, cleanup, render, screen, within } from '@testing-library/react'
+import { act, cleanup, fireEvent, render, screen, within } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import { afterEach, beforeAll, beforeEach, describe, expect, it, vi } from 'vitest'
 import { ALL_PROMPTS, SCHEDULE } from '../content/bank'
@@ -46,6 +46,9 @@ const plate = () => screen.getByRole('img').getAttribute('aria-label')
 const scene = () => document.querySelector('.scene') as HTMLElement
 const goUp = () => screen.getByRole('button', { name: 'Going up' })
 const verdict = (tier: Tier) => screen.queryByText(TIER_INFO[tier].label, { selector: '.verdict__label' })
+/** What the game tells the lift's world about the clock: how far open the doors are, and how urgent it is */
+const game = () => screen.getByRole('main')
+const doors = () => game().style.getPropertyValue('--clock')
 
 // Every lift's scenery, up front, so none of it arrives halfway through a test
 beforeAll(() => loadBackdrops())
@@ -64,12 +67,21 @@ afterEach(() => {
 })
 
 describe('Game', () => {
+  it('requires a fresh key press to start the clock', async () => {
+    const { onProgress, user } = setup()
+    expect(fireEvent.keyDown(goUp(), { key: 'Enter', repeat: true })).toBe(false)
+    expect(onProgress).not.toHaveBeenCalled()
+    await user.keyboard('{Enter}')
+    expect(onProgress).toHaveBeenCalledTimes(1)
+    expect(screen.getByRole('timer')).toBeDefined()
+  })
+
   it('waits for a tap before starting the clock', async () => {
     const { onProgress, user } = setup()
     expect(screen.getByText('Question 1 of 7')).toBeDefined()
     // The lift waits on the ground floor, doors open
-    expect(headerFloor()).toBe('01')
-    expect(plate()).toBe('0 of 700 points, floor 01, HDB Lift')
+    expect(headerFloor()).toBe('00')
+    expect(plate()).toBe('0 of 700 points, floor 00, HDB Lift')
     expect(scene().classList.contains('scene--open')).toBe(true)
     expect(screen.queryByRole('timer')).toBeNull()
     expect(pip('Round 1')).toBeDefined()
@@ -122,14 +134,14 @@ describe('Game', () => {
     expect(onProgress).toHaveBeenCalledWith([expect.objectContaining({ promptId: prompts[0].id, points: 0 })], null)
     advance(rideMs(null))
     expect(screen.getByText('Time up!')).toBeDefined()
-    expect(headerFloor()).toBe('01')
+    expect(headerFloor()).toBe('00')
   })
 
   it('reports progress as each round starts and ends, and the results at the end', async () => {
     const { onProgress, onFinish, onQuit, user } = setup()
     const tiers: Tier[] = ['rare', 'common', 'gem', 'solid', 'trap', 'ulu', 'common']
     const expected: RoundResult[] = []
-    let floor = 1
+    let floor = 0
 
     for (const [i, p] of prompts.entries()) {
       // Only the first round waits for a tap: Next starts the others
@@ -194,19 +206,19 @@ describe('Game', () => {
     expect(document.activeElement).toBe(skip())
     expect(screen.getByText(prompts[0].text)).toBeDefined()
     expect(document.querySelector('.game__gain')).toBeNull()
-    // A gem from nothing is 100 points: six floors up, and into the second lift
+    // A gem from nothing is 100 points: twenty floors up, and into the second lift
     const whole = rideMs('gem', true)
     advance(whole - 1)
     expect(verdict('gem')).toBeNull()
     expect(headerScore()).toBe('0')
-    expect(headerFloor()).toBe('01')
+    expect(headerFloor()).toBe('00')
 
     advance(1)
     expect(verdict('gem')).not.toBeNull()
     expect(screen.queryByRole('button', { name: /Skip/ })).toBeNull()
     expect(headerScore()).toBe('100')
-    expect(headerFloor()).toBe('07')
-    expect(plate()).toBe('100 of 700 points, floor 07, Upgraded HDB Lift')
+    expect(headerFloor()).toBe('20')
+    expect(plate()).toBe('100 of 700 points, floor 20, Upgraded HDB Lift')
     expect(document.querySelector('.game__gain')!.textContent).toBe('+100')
     // The round's button on the counter is the one that lights up
     expect(document.querySelectorAll('.pip--fresh')).toHaveLength(1)
@@ -215,12 +227,12 @@ describe('Game', () => {
     expect(document.activeElement).toBe(next)
     // The verdict that's read with the button says how far the lift went, and that it's a new one
     const described = document.getElementById(next.getAttribute('aria-describedby')!)!.textContent
-    expect(described).toContain('Up 6 floors, now on floor 07.')
+    expect(described).toContain('Up 20 floors, now on floor 20.')
     expect(described).toContain('New lift unlocked Upgraded HDB Lift')
   })
 
   it('resumes a saved game in the lift it had reached, on the floor it had reached', () => {
-    // 245 points over four rounds: the third lift, 15 floors up, with one round missed on the way
+    // 245 points over four rounds: the third lift, 49 floors up, with one round missed on the way
     const played = [
       result(prompts[0], 'rare'),
       result(prompts[1], 'ulu'),
@@ -230,8 +242,8 @@ describe('Game', () => {
     setup({ initialResults: played })
     expect(screen.getByText('Question 5 of 7')).toBeDefined()
     expect(headerScore()).toBe('245')
-    expect(headerFloor()).toBe('16')
-    expect(plate()).toBe('245 of 700 points, floor 16, Condominium Lift')
+    expect(headerFloor()).toBe('49')
+    expect(plate()).toBe('245 of 700 points, floor 49, Condominium Lift')
     expect(scene().dataset.lift).toBe('condo')
     expect(scene().classList.contains('scene--open')).toBe(true)
     expect(pip('Round 3: Time up, 0 points')).toBeDefined()
@@ -249,11 +261,93 @@ describe('Game', () => {
     expect(verdict('gem')).not.toBeNull()
     expect(pip('Round 1: Sibei Ulu, 100 points')).toBeDefined()
     expect(headerScore()).toBe('100')
-    expect(headerFloor()).toBe('07')
+    expect(headerFloor()).toBe('20')
     expect(scene().dataset.lift).toBe('upgraded')
-    expect(scene().dataset.floor).toBe('07')
+    expect(scene().dataset.floor).toBe('20')
     expect(scene().classList.contains('scene--idle')).toBe(true)
     expect(screen.getByText('New lift unlocked').parentElement!.textContent).toBe('New lift unlocked Upgraded HDB Lift')
+  })
+
+  it('closes the lift doors with the clock, and leaves them where an answer stopped it', async () => {
+    const { user } = setup()
+    // Before the clock starts there's nothing to show
+    expect(doors()).toBe('')
+    await user.click(goUp())
+    expect(doors()).toBe('1.000')
+    expect(game().dataset.pace).toBe('steady')
+
+    advance(10_000)
+    expect(doors()).toBe('0.600')
+    advance(10_000)
+    expect(doors()).toBe('0.200')
+    expect(game().dataset.pace).toBe('urgent')
+
+    // Locked in with five seconds left: the alarm stops, and the ride shuts the doors from where they were
+    await user.type(answerBox(), `${answerOf(prompts[0], 'common').name}{Enter}`)
+    expect(doors()).toBe('0.200')
+    expect(game().dataset.pace).toBeUndefined()
+
+    // The next question opens them again
+    advance(rideMs('common'))
+    await user.click(screen.getByRole('button', { name: /Next question/ }))
+    expect(doors()).toBe('1.000')
+    expect(game().dataset.pace).toBe('steady')
+  })
+
+  it('shuts the doors when the clock runs out', async () => {
+    const { user } = setup()
+    await user.click(goUp())
+    advance(SECONDS_PER_ROUND * 1000)
+    expect(doors()).toBe('0')
+    expect(game().dataset.pace).toBeUndefined()
+    expect(scene().classList.contains('scene--stuck')).toBe(true)
+    expect(screen.getByText('The doors have closed', { exact: false })).toBeDefined()
+  })
+
+  it('jolts the lift at every guess it refuses, and not once the question is over', async () => {
+    const { user } = setup()
+    const jolt = () => scene().className.match(/scene--jolt-\w/)?.[0] ?? null
+    await user.click(goUp())
+    expect(jolt()).toBeNull()
+
+    await user.type(answerBox(), 'zzqqxxjj{Enter}')
+    expect(jolt()).toBe('scene--jolt-a')
+    // A different name each time, so the same animation plays again
+    await user.type(answerBox(), 'zzqqxxjjkk{Enter}')
+    expect(jolt()).toBe('scene--jolt-b')
+
+    await user.type(answerBox(), `${answerOf(prompts[0], 'common').name}{Enter}`)
+    expect(jolt()).toBeNull()
+    advance(rideMs('common'))
+    expect(jolt()).toBeNull()
+  })
+
+  it('lays the same three things over the lift in every phase: the status, a sign and the controls', async () => {
+    const { user } = setup()
+    const laidOut = () => ({
+      status: document.querySelectorAll('.game__stack > .game__top').length,
+      signs: document.querySelectorAll('.game__stack .board').length,
+      docks: document.querySelectorAll('.game__stack .dock').length,
+    })
+    // The scene is the game's world, not one of the things in the stack
+    expect(scene().closest('.game__stack')).toBeNull()
+    expect(laidOut()).toEqual({ status: 1, signs: 1, docks: 1 })
+    expect(goUp().closest('.dock')).not.toBeNull()
+
+    await user.click(goUp())
+    expect(laidOut()).toEqual({ status: 1, signs: 1, docks: 1 })
+
+    // During the ride the lift's own bar, with Skip on it, stands in for the controls
+    await user.type(answerBox(), `${answerOf(prompts[0], 'common').name}{Enter}`)
+    expect(laidOut()).toEqual({ status: 1, signs: 1, docks: 0 })
+    expect(skip().closest('.lift__bar')).not.toBeNull()
+
+    advance(rideMs('common'))
+    expect(laidOut()).toEqual({ status: 1, signs: 1, docks: 1 })
+    expect(screen.getByRole('button', { name: /Next question/ }).closest('.dock')).not.toBeNull()
+    expect(verdict('common')!.closest('.board')).not.toBeNull()
+    // What else was possible is on the cards beyond the stack
+    expect(document.querySelector('.game__stack .extras .samples')).not.toBeNull()
   })
 
   it('quits from the header', async () => {

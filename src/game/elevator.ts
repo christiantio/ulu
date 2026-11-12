@@ -1,32 +1,39 @@
-import { ROUNDS_PER_DIVE } from './scoring'
+import { MAX_SCORE, TIER_INFO } from './scoring'
 import type { RoundResult, Tier } from './types'
 
 /**
  * The lift: how far an answer takes it, which lift the score has unlocked, and the timing of the ride after each
  * answer (components/elevator/ElevatorScene.tsx).
  *
- * Two things move separately. An answer's tier decides how many floors the lift climbs, and the cumulative score
- * decides which lift you're riding. The floor is only for show: the score is still out of 700.
+ * Points and height are the same progress: every five points climb one floor. Saved scores, the indicator,
+ * scenery and lift upgrades all use this conversion; the score remains out of 700.
  */
 
 /** Floors the lift climbs for an answer of each tier. A miss doesn't move it */
-export const FLOORS: Record<Tier, number> = { common: 1, trap: 2, solid: 3, rare: 4, ulu: 5, gem: 6 }
+export const POINTS_PER_FLOOR = 5
+export const FLOORS: Record<Tier, number> = Object.fromEntries(
+  Object.entries(TIER_INFO).map(([tier, info]) => [tier, info.points / POINTS_PER_FLOOR]),
+) as Record<Tier, number>
 
 export function floorsFor(tier: Tier | null): number {
   return tier ? FLOORS[tier] : 0
 }
 
 /** Every game starts here */
-export const GROUND_FLOOR = 1
+export const GROUND_FLOOR = 0
 /** Seven gems from the ground floor */
-export const TOP_FLOOR = GROUND_FLOOR + ROUNDS_PER_DIVE * FLOORS.gem
+export const TOP_FLOOR = floorForScore(MAX_SCORE)
 
-/** The floor reached after these rounds */
-export function floorAfter(results: readonly Pick<RoundResult, 'tier'>[]): number {
-  return results.reduce((floor, r) => floor + floorsFor(r.tier), GROUND_FLOOR)
+export function floorForScore(score: number): number {
+  return GROUND_FLOOR + score / POINTS_PER_FLOOR
 }
 
-/** Floors as the lift's indicator shows them: two digits */
+/** The floor reached after these rounds */
+export function floorAfter(results: readonly Pick<RoundResult, 'points'>[]): number {
+  return floorForScore(results.reduce((score, r) => score + r.points, 0))
+}
+
+/** Floors as the lift's indicator shows them: at least two digits */
 export function formatFloor(floor: number): string {
   return String(floor).padStart(2, '0')
 }
@@ -88,7 +95,7 @@ export function liftAfter(results: readonly Pick<RoundResult, 'tier' | 'points'>
   let entered = GROUND_FLOOR
   for (const r of results) {
     score += r.points
-    floor += floorsFor(r.tier)
+    floor = floorForScore(score)
     const now = stageFor(score)
     if (now !== stage) {
       stage = now
@@ -105,16 +112,16 @@ export function liftAfter(results: readonly Pick<RoundResult, 'tier' | 'points'>
 
 /** The doors sliding shut, before the lift moves */
 export const DOORS_MS = 380
-/** From pulling away to stopping, by tier: about 300 ms a floor once it's moving */
+/** Express rides cover more floors without making rare answers a long wait */
 export const TRAVEL_MS: Record<Tier, number> = { common: 700, trap: 900, solid: 1100, rare: 1300, ulu: 1500, gem: 1700 }
 /** The car settling on its floor before anything else happens */
 export const SETTLE_MS = 140
 /** A new lift sweeping in, behind closed doors */
-export const UPGRADE_MS = 1200
+export const UPGRADE_MS = 800
 /** The doors opening on the rarity and the points, and a moment to read them */
-export const ARRIVE_MS: Record<Tier, number> = { common: 1050, trap: 1050, solid: 1050, rare: 1100, ulu: 1200, gem: 1400 }
+export const ARRIVE_MS: Record<Tier, number> = { common: 650, trap: 650, solid: 650, rare: 750, ulu: 850, gem: 1000 }
 /** A miss: the doors twitch, the lift stays put, and that's all */
-export const MISS_MS = 1400
+export const MISS_MS = 900
 /** Skips this soon after the answer are ignored, so a double-tap on Go or a held Enter doesn't skip the ride */
 export const SKIP_GRACE_MS = 400
 
@@ -157,12 +164,12 @@ export function scrollOffset({ rate, period }: Scroll, floors: number): number {
 
 /** What the caption says when the doors open */
 export const ARRIVAL_LINES: Record<Tier | 'miss', string> = {
-  common: 'One floor up. Everybody presses this button.',
-  trap: 'Two floors. Act smart, but the whole lift had the same idea.',
-  solid: 'Three floors up. Can lah.',
-  rare: 'Four floors. Steady, not many get off here.',
-  ulu: 'Five floors! Damn ulu. The lift is nearly empty.',
-  gem: 'Six floors, non-stop. Sibei ulu!',
+  common: 'Everybody presses this button. Still going up!',
+  trap: 'Act smart, but the whole lift had the same idea.',
+  solid: 'A solid climb. Can lah.',
+  rare: 'Express lift! Not many get off here.',
+  ulu: 'Damn ulu. The lift is nearly empty.',
+  gem: 'Straight up, non-stop. Sibei ulu!',
   miss: 'Aiyo. The lift stays put.',
 }
 

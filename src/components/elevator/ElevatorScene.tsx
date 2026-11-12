@@ -2,6 +2,7 @@ import {
   memo,
   useCallback,
   useEffect,
+  useId,
   useImperativeHandle,
   useLayoutEffect,
   useMemo,
@@ -39,18 +40,21 @@ import { KeyHint } from '../KeyHint'
 import { Ambient } from './Ambient'
 import { BoyMascot, type BoyMood } from './BoyMascot'
 import { backdropFor, loadBackdrops, onBackdrops, type LayerArt } from './backdrops'
-import { CAR, DOOR, LANDINGS_ABOVE, PITCH, carBack, carFront, door, landings, pavement } from './car'
+import { CAR, DOOR, GROUND_DEPTH, LANDINGS_ABOVE, PITCH, carBack, carFront, door, landings, pavement } from './car'
 import { paint } from './paint'
 
 /*
- * The lift, the boy in it and the view outside: the picture every screen is built around.
+ * The lift, the boy in it and the view outside. This is the world every screen is played in: it fills the window,
+ * and the things you read and press are laid over it (see "The stack" in styles.css).
  *
  * At rest it shows where the game stands. Given a `ride`, it plays that answer out: the doors close, the lift
  * climbs the answer's floors with the scenery sinking past, and the doors open on the result. If the answer
- * unlocks a new lift, that lift sweeps in before the doors open.
+ * unlocks a new lift, that lift sweeps in before the doors open. During a question the game drives it from
+ * outside: the doors close with the clock (--clock on the game), the frame flashes for the last seconds
+ * (data-pace), and a refused guess jolts the car (`jolt`).
  *
- * Everything is in scene units of --u CSS pixels, anchored on the car's floor at the bottom centre, so a bigger
- * box shows more sky and more neighbourhood, not a bigger boy.
+ * Everything is in scene units of --u CSS pixels, anchored on the car's floor, which stands --sill above the
+ * bottom of the window, so a bigger window shows more sky and more neighbourhood, not a bigger boy.
  */
 
 /** Above this speed (floors per ms), the speed lines are fully drawn */
@@ -69,10 +73,12 @@ interface Props {
   ride?: RoundResult | null
   /** Called once, when the ride is over or the player skips it */
   onRideDone?: () => void
-  /** How the picture is framed: the home screen's hero, the strip above a question, or the results */
+  /** Which screen it's the world of: the home screen, a game, or the results */
   size?: 'hero' | 'play' | 'finale'
   /** Confetti for a score worth celebrating */
   celebrate?: boolean
+  /** Counts the guesses the lift has refused. Each new one jolts the car */
+  jolt?: number
   /** Laid over the picture, and read by screen readers: the picture itself is hidden from them */
   children?: ReactNode
 }
@@ -85,6 +91,7 @@ export function ElevatorScene({
   onRideDone,
   size = 'play',
   celebrate = false,
+  jolt = 0,
   children,
 }: Props) {
   const tier = ride?.tier ?? null
@@ -188,7 +195,7 @@ export function ElevatorScene({
   useEffect(() => {
     if (!ride) return
     const onKey = (e: KeyboardEvent) => {
-      if (e.key === 'Escape') skip()
+      if (e.key === 'Escape' && !e.repeat) skip()
     }
     window.addEventListener('keydown', onKey)
     return () => window.removeEventListener('keydown', onKey)
@@ -202,11 +209,7 @@ export function ElevatorScene({
   const open = step === 'idle' || arrived
   const moving = step === 'closing' || step === 'rising'
   const perfectAfter = (ride ? score + ride.points : score) >= MAX_SCORE
-  // The top of a perfect game isn't a number
-  const reading = (after: boolean) => {
-    if (after || arrived) return perfectAfter ? 'PH' : formatFloor(floor + floors)
-    return score >= MAX_SCORE ? 'PH' : formatFloor(lit)
-  }
+  const reading = (after: boolean) => formatFloor(after || arrived ? floor + floors : lit)
 
   const mood: BoyMood =
     step === 'stuck'
@@ -235,7 +238,8 @@ export function ElevatorScene({
   return (
     <div className={`lift lift--${size} ${ride ? 'lift--riding' : ''}`}>
       <div
-        className={`scene scene--${step} ${open ? 'scene--open' : ''}`}
+        // Two names for the same jolt, taken in turn, so that each refusal starts the animation again
+        className={`scene scene--${step} ${open ? 'scene--open' : ''} ${jolt && !ride ? `scene--jolt-${jolt % 2 ? 'a' : 'b'}` : ''}`}
         style={{ '--doors-ms': `${DOORS_MS}ms`, '--miss-ms': `${MISS_MS}ms`, '--upgrade-ms': `${UPGRADE_MS}ms` } as CSSProperties}
         onClick={ride ? skip : undefined}
         aria-hidden="true"
@@ -259,7 +263,8 @@ export function ElevatorScene({
         {step === 'upgrading' && <div className="scene__sweep" />}
         {incoming && <NewLift stage={incoming} />}
         {(arrived || step === 'stuck') && ride && <Arrival result={ride} />}
-        {celebrate && !ride && <Confetti count={44} loop />}
+        {celebrate && !ride && <Confetti count={64} loop />}
+        <div className="scene__alarm" />
       </div>
 
       {children}
@@ -269,7 +274,8 @@ export function ElevatorScene({
           <p key={caption} className="lift__caption" aria-hidden="true">
             {caption}
           </p>
-          <button ref={skipRef} type="button" className="btn btn--ghost btn--small" onClick={skip} aria-label="Skip to the result">
+          <button ref={skipRef} type="button" className="btn btn--chip btn--small" onClick={skip}
+            onKeyDown={(e) => { if (e.repeat) e.preventDefault() }} aria-label="Skip to the result">
             Skip ›
             <KeyHint>Esc</KeyHint>
           </button>
@@ -279,13 +285,20 @@ export function ElevatorScene({
   )
 }
 
-/** One layer of the picture: a box of pixel art in scene units, placed from the car's floor */
+/**
+ * One layer of the picture: a box of pixel art in scene units, placed from the car's floor.
+ *
+ * The scenery is drawn 400 units wide, and a wide window can show more than that. A layer with `wings` carries a
+ * mirror image of itself on either side, so the neighbourhood carries on to the edge of the window instead of
+ * stopping. The wings are the same drawing, reused, and are only displayed where a window can be that wide
+ */
 function Layer({
   x = -200,
   w = 400,
   top,
   bottom,
   className = '',
+  wings = false,
   ref,
   children,
 }: {
@@ -294,18 +307,27 @@ function Layer({
   top: number
   bottom: number
   className?: string
+  wings?: boolean
   ref?: Ref<HTMLDivElement>
   children: ReactNode
 }) {
+  const id = useId()
+  const box = `${x} ${top} ${w} ${bottom - top}`
   return (
     <div
       ref={ref}
       className={`scene__layer ${className}`}
       style={{ '--x': x, '--w': w, '--h': bottom - top, '--b': bottom } as CSSProperties}
     >
-      <svg viewBox={`${x} ${top} ${w} ${bottom - top}`} shapeRendering="crispEdges" focusable="false">
-        {children}
+      <svg viewBox={box} shapeRendering="crispEdges" focusable="false">
+        {wings ? <g id={id}>{children}</g> : children}
       </svg>
+      {wings &&
+        (['l', 'r'] as const).map((side) => (
+          <svg key={side} className={`scene__wing scene__wing--${side}`} viewBox={box} shapeRendering="crispEdges" focusable="false">
+            <use href={`#${id}`} transform={`translate(${2 * x + w} 0) scale(-1 1)`} />
+          </svg>
+        ))}
     </div>
   )
 }
@@ -369,13 +391,13 @@ const StageBack = memo(function StageBack({ stage, floor, climbed, incoming = fa
   return (
     <div className={`stage stage--${stage} ${incoming ? 'stage--incoming' : ''}`}>
       {backdrop && (
-        <Layer ref={far} {...box(backdrop.far)}>
+        <Layer ref={far} {...box(backdrop.far)} wings>
           {backdrop.far.art}
         </Layer>
       )}
       <Ambient stage={stage} />
       {backdrop && (
-        <Layer ref={mid} {...box(backdrop.mid)}>
+        <Layer ref={mid} {...box(backdrop.mid)} wings>
           {backdrop.mid.art}
         </Layer>
       )}
@@ -385,7 +407,7 @@ const StageBack = memo(function StageBack({ stage, floor, climbed, incoming = fa
         {plates}
       </Layer>
       {stage === 'hdb' && floor === GROUND_FLOOR && (
-        <Layer ref={ground} top={4} bottom={50}>
+        <Layer ref={ground} top={4} bottom={GROUND_DEPTH} wings>
           {PAVEMENT}
         </Layer>
       )}
@@ -438,7 +460,7 @@ function NewLift({ stage }: { stage: Stage }) {
   )
 }
 
-const CONFETTI: Partial<Record<Tier, number>> = { solid: 12, rare: 20, ulu: 32, gem: 46 }
+const CONFETTI: Partial<Record<Tier, number>> = { solid: 16, rare: 28, ulu: 44, gem: 64 }
 
 /** When the doors open: how rare the answer was and what it earned, with a flourish to match */
 function Arrival({ result }: { result: RoundResult }) {
