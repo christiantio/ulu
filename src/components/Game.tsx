@@ -2,6 +2,7 @@ import { useEffect, useMemo, useState } from 'react'
 import { formatFloor, liftAfter, prefersReducedMotion, upgradeFor } from '../game/elevator'
 import { SECONDS_PER_ROUND, TIER_INFO } from '../game/scoring'
 import type { Prompt, RoundResult } from '../game/types'
+import { CountUp } from './CountUp'
 import { ElevatorProgress } from './ElevatorProgress'
 import { loadBackdrops } from './elevator/backdrops'
 import { ElevatorScene } from './elevator/ElevatorScene'
@@ -101,9 +102,8 @@ export function Game({
                     +{gained}
                   </span>
                 )}
-                {/* Keyed by the score, so the bump replays each time it goes up */}
-                <strong key={lift.score} className={phase.kind === 'reveal' ? 'game__points--bump' : undefined}>
-                  {lift.score}
+                <strong>
+                  <CountUp value={lift.score} />
                 </strong>
               </dd>
             </div>
@@ -114,13 +114,15 @@ export function Game({
           {prompts.map((p, i) => {
             const r = shown[i]
             const current = i === index
+            // The one the lift has just lit
+            const fresh = current && phase.kind === 'reveal'
             const label = r
               ? `Round ${i + 1}: ${r.tier ? TIER_INFO[r.tier].label : 'Time up'}, ${r.points} points`
               : `Round ${i + 1}${current ? '' : ', not played yet'}`
             return (
               <li
                 key={p.id}
-                className={`pip ${current ? 'pip--current' : ''} ${r ? `pip--done pip--${r.tier ?? 'miss'}` : ''}`}
+                className={`pip ${current ? 'pip--current' : ''} ${r ? `pip--done pip--${r.tier ?? 'miss'}` : ''} ${fresh ? 'pip--fresh' : ''}`}
                 aria-current={current ? 'step' : undefined}
               >
                 <span aria-hidden="true">{r && !r.tier ? '×' : i + 1}</span>
@@ -151,7 +153,10 @@ export function Game({
             </p>
             <p className="muted">You have {SECONDS_PER_ROUND} seconds. The clock starts when you press the button.</p>
             <button className="btn btn--primary btn--block btn--big" onClick={start} autoFocus>
-              Going up <span aria-hidden="true">▲</span>
+              Going up{' '}
+              <span className="ready__arrow" aria-hidden="true">
+                ▲
+              </span>
             </button>
           </section>
         )}
