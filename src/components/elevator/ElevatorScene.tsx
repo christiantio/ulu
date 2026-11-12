@@ -195,7 +195,7 @@ export function ElevatorScene({
   useEffect(() => {
     if (!ride) return
     const onKey = (e: KeyboardEvent) => {
-      if (e.key === 'Escape') skip()
+      if (e.key === 'Escape' && !e.repeat) skip()
     }
     window.addEventListener('keydown', onKey)
     return () => window.removeEventListener('keydown', onKey)
@@ -209,11 +209,7 @@ export function ElevatorScene({
   const open = step === 'idle' || arrived
   const moving = step === 'closing' || step === 'rising'
   const perfectAfter = (ride ? score + ride.points : score) >= MAX_SCORE
-  // The top of a perfect game isn't a number
-  const reading = (after: boolean) => {
-    if (after || arrived) return perfectAfter ? 'PH' : formatFloor(floor + floors)
-    return score >= MAX_SCORE ? 'PH' : formatFloor(lit)
-  }
+  const reading = (after: boolean) => formatFloor(after || arrived ? floor + floors : lit)
 
   const mood: BoyMood =
     step === 'stuck'
@@ -278,7 +274,8 @@ export function ElevatorScene({
           <p key={caption} className="lift__caption" aria-hidden="true">
             {caption}
           </p>
-          <button ref={skipRef} type="button" className="btn btn--chip btn--small" onClick={skip} aria-label="Skip to the result">
+          <button ref={skipRef} type="button" className="btn btn--chip btn--small" onClick={skip}
+            onKeyDown={(e) => { if (e.repeat) e.preventDefault() }} aria-label="Skip to the result">
             Skip ›
             <KeyHint>Esc</KeyHint>
           </button>

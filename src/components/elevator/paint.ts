@@ -130,9 +130,9 @@ const DIGITS: Record<string, string> = {
   9: 'abcdfg', P: 'abefg', H: 'bcefg', '-': 'g', ' ': '',
 }
 
-/** Two seven-segment characters with the first one's top-left corner at (x, y): lit segments over unlit ghosts */
+/** Seven-segment characters with the first one's top-left corner at (x, y): lit segments over unlit ghosts */
 export function sevenSegment(b: Brush, text: string, x: number, y: number, lit: string, ghost: string) {
-  ;[...text.padStart(2, ' ').slice(-2)].forEach((ch, i) => {
+  ;[...text.padStart(2, ' ')].forEach((ch, i) => {
     const on = DIGITS[ch] ?? ''
     SEGMENTS.forEach(([sx, sy, w, h], s) => {
       b(on.includes('abcdefg'[s]) ? lit : ghost, x + i * 10 + sx, y + sy, w, h)

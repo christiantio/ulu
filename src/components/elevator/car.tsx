@@ -1,5 +1,5 @@
 import { mulberry32 } from '../../game/daily'
-import { TOP_FLOOR, formatFloor, type StageId } from '../../game/elevator'
+import { FLOORS, TOP_FLOOR, formatFloor, type StageId } from '../../game/elevator'
 import { blob, label, line, ring, sevenSegment, taper, type Brush } from './paint'
 
 /*
@@ -367,9 +367,9 @@ export function carFront(b: Brush, stage: StageId, text: string, moving: boolean
   }
 
   // Floor indicator
-  b(k.trim, -15, -93, 30, 16)
-  b(k.screen, -14, -92, 28, 14)
-  sevenSegment(b, text, -9, -91, k.lit, k.ghost)
+  b(k.trim, -18, -93, 36, 16)
+  b(k.screen, -17, -92, 34, 14)
+  sevenSegment(b, text, -(text.length * 10 - 2) / 2, -91, k.lit, k.ghost)
   // Going up
   b(k.trim, -32, -91, 11, 12)
   b(k.screen, -31, -90, 9, 10)
@@ -450,8 +450,8 @@ export function door(b: Brush, stage: StageId) {
   }
 }
 
-/** How many floors of landings are drawn above the one the lift is on: enough to fill the view after six floors */
-export const LANDINGS_ABOVE = 9
+/** Enough landings to fill the view even at the end of the longest express ride */
+export const LANDINGS_ABOVE = FLOORS.gem + 3
 
 /**
  * The landings the car passes on its rails: a stub of floor either side, a sign with the floor's number, and a call
@@ -474,7 +474,9 @@ export function landings(b: Brush, stage: StageId, base: number) {
     b(k.rail, -57, y - 9, 2, 9)
     b(k.trim, -67, y - 25, 22, 16)
     b(k.sign, -66, y - 24, 20, 14)
-    label(b, k.signInk, formatFloor(floor), -63, y - 22, 2)
+    const text = formatFloor(floor)
+    const scale = text.length > 2 ? 1 : 2
+    label(b, k.signInk, text, -56 - (text.length * 4 - 1) * scale / 2, y - (scale === 1 ? 20 : 22), scale)
     b(k.rail, 52, y - 15, 5, 15)
     b(k.railHi, 52, y - 15, 1, 15)
     b(k.screen, 53, y - 13, 3, 5)

@@ -1,5 +1,5 @@
 // @vitest-environment jsdom
-import { cleanup, render, screen, within } from '@testing-library/react'
+import { cleanup, fireEvent, render, screen, within } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest'
 import { ALL_PROMPTS } from '../content/bank'
@@ -44,6 +44,15 @@ afterEach(() => {
 })
 
 describe('Reveal', () => {
+  it('keeps a held Enter from rushing past the result', async () => {
+    const { onNext } = renderReveal(hit('common'))
+    const next = screen.getByRole('button', { name: 'Next question →' })
+    expect(fireEvent.keyDown(next, { key: 'Enter', repeat: true })).toBe(false)
+    expect(onNext).not.toHaveBeenCalled()
+    await userEvent.setup().keyboard('{Enter}')
+    expect(onNext).toHaveBeenCalledTimes(1)
+  })
+
   it('runs on a prompt with every tier', () => {
     expect(prompt).toBeDefined()
   })
@@ -70,13 +79,13 @@ describe('Reveal', () => {
   })
 
   it('says how rare the answer was, what it scored and how far the lift went', () => {
-    renderReveal(hit('rare'), undefined, { floor: 9 })
+    renderReveal(hit('rare'), undefined, { floor: 16 })
     const verdict = document.querySelector('.verdict')!
     expect(verdict.classList.contains('tier--rare')).toBe(true)
     expect(verdict.querySelector('.verdict__label')!.textContent).toBe('Steady')
-    expect(verdict.querySelector('.verdict__floors')!.textContent).toBe('▲4')
+    expect(verdict.querySelector('.verdict__floors')!.textContent).toBe('▲12')
     expect(verdict.querySelector('.verdict__points')!.textContent).toBe('+60 points')
-    expect(verdict.querySelector('.verdict__blurb')!.textContent).toBe(`${TIER_INFO.rare.blurb} Up 4 floors, now on floor 09.`)
+    expect(verdict.querySelector('.verdict__blurb')!.textContent).toBe(`${TIER_INFO.rare.blurb} Up 12 floors, now on floor 16.`)
     // Read out with the Next button
     const next = screen.getByRole('button', { name: /Next question/ })
     expect(document.getElementById(next.getAttribute('aria-describedby')!)!.contains(verdict)).toBe(true)
@@ -94,7 +103,7 @@ describe('Reveal', () => {
   })
 
   it('announces a new lift with the verdict when the answer unlocked one', () => {
-    renderReveal(hit('gem'), undefined, { floor: 7, upgrade: STAGES[1] })
+    renderReveal(hit('gem'), undefined, { floor: 20, upgrade: STAGES[1] })
     expect(document.querySelector('.upgrade')!.textContent).toBe('New lift unlocked Upgraded HDB Lift')
     const next = screen.getByRole('button', { name: /Next question/ })
     expect(document.getElementById(next.getAttribute('aria-describedby')!)!.textContent).toContain('New lift unlocked Upgraded HDB Lift')

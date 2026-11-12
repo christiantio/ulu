@@ -229,6 +229,11 @@ hundred keys at most, and each prompt's keys are computed once.
 - **Scene and motion.** The lift closes its doors, climbs the answer's floors, and opens on the result. Scenery
   scrolls below it; reaching a score threshold upgrades the lift before the doors open. `game/elevator.ts`
   defines floors, upgrades, timing and motion. The same scene appears at rest on the home and results screens.
+- **One progression scale.** Every five points climb one floor, starting at 00 and reaching 140 for a perfect
+  700. Floors are derived from saved points, so equal scores always reach the same height. Upgrade thresholds
+  stay at 100/200/350/500/600 points (floors 20/40/70/100/120). The plate shows points remaining and the target
+  floor, with a final progress bar from 600 to 700. Rarity still controls ride duration, so express climbs stay
+  short; the indicator and landing signs support three digits.
 - **It's the whole window.** The scene isn't a picture on the page: it's fixed to the window and fills it, and
   every screen is laid over it (see [Layout](#layout-the-lifts-world-and-what-lies-over-it)). A ride moves
   everything on screen, and a new lift sweeps in across the whole window.

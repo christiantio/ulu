@@ -187,7 +187,8 @@ export function Game({
               <p className="board__note">You have {SECONDS_PER_ROUND} seconds. The clock starts when you press the button.</p>
             </section>
             <div className="dock">
-              <button className="btn btn--primary btn--block btn--big" onClick={start} autoFocus>
+              <button className="btn btn--primary btn--block btn--big" onClick={start}
+                onKeyDown={(e) => { if (e.repeat) e.preventDefault() }} autoFocus>
                 Going up{' '}
                 <span className="ready__arrow" aria-hidden="true">
                   ▲

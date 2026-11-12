@@ -1,4 +1,5 @@
-import { STAGES, formatFloor, nextStage, stageFor, stageIndex } from '../game/elevator'
+import { useId } from 'react'
+import { POINTS_PER_FLOOR, STAGES, floorForScore, formatFloor, nextStage, stageFor, stageIndex } from '../game/elevator'
 import { MAX_SCORE } from '../game/scoring'
 
 interface Props {
@@ -16,26 +17,34 @@ interface Props {
 export function ElevatorProgress({ score, floor, compact = false }: Props) {
   const stage = stageFor(score)
   const next = nextStage(score)
+  const goalId = useId()
+  const target = next?.min ?? MAX_SCORE
+  const remaining = Math.max(0, target - score)
+  const goal = remaining === 0 ? 'Top floor reached!' : `${remaining} pts to ${next ? 'next lift' : 'a perfect climb'}`
   // role="img" makes the label count and hides the decorative parts
   const label = `${score} of ${MAX_SCORE} points, floor ${formatFloor(floor)}, ${stage.name}`
 
   if (compact) {
-    const span = next ? (score - stage.min) / (next.min - stage.min) : 1
+    const span = Math.min(1, Math.max(0, (score - stage.min) / (target - stage.min)))
     return (
-      <div className="plate" role="img" aria-label={label}>
+      <div className="plate" role="img" aria-label={label} aria-describedby={goalId}>
         <span className="plate__name">{stage.name}</span>
         <span className="plate__bar">
           <span className="plate__fill" style={{ transform: `scaleX(${span})` }} />
         </span>
-        <span className="plate__next">{next ? `Next lift at ${next.min}` : score >= MAX_SCORE ? 'Top floor' : 'Top lift'}</span>
+        <span className="plate__next" id={goalId}>
+          <strong>{goal}</strong>
+          <span>Floor {formatFloor(floorForScore(target))} · {POINTS_PER_FLOOR} pts = 1 floor</span>
+        </span>
       </div>
     )
   }
 
   const reached = stageIndex(score)
   return (
-    <div className="directory" role="img" aria-label={label}>
+    <div className="directory" role="img" aria-label={label} aria-describedby={goalId}>
       <p className="directory__title">Lift directory</p>
+      <p className="directory__goal" id={goalId}>{goal}</p>
       <ol className="directory__list">
         {STAGES.map((s, i) => (
           <li
@@ -44,7 +53,7 @@ export function ElevatorProgress({ score, floor, compact = false }: Props) {
           >
             <span className="directory__lamp" />
             <span className="directory__name">{i <= reached ? s.name : '? ? ?'}</span>
-            <span className="directory__min">{i === reached ? `Floor ${formatFloor(floor)}` : `${s.min} pts`}</span>
+            <span className="directory__min">{i === reached ? `Floor ${formatFloor(floor)}` : `${s.min} pts · Floor ${formatFloor(floorForScore(s.min))}`}</span>
           </li>
         )).reverse()}
       </ol>

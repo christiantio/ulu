@@ -5,6 +5,8 @@ import {
   DOORS_MS,
   FLOORS,
   GROUND_FLOOR,
+  POINTS_PER_FLOOR,
+  floorForScore,
   MISS_MS,
   SETTLE_MS,
   SKIP_GRACE_MS,
@@ -34,8 +36,24 @@ const game = (...tiers: (Tier | null)[]) => tiers.map(hit)
 const steps = (xs: number[]) => xs.slice(1).map((x, i) => x - xs[i])
 
 describe('floors: how far an answer takes the lift', () => {
-  it('climbs one more floor for each tier, and none for a miss', () => {
-    expect(TIERS.map(floorsFor)).toEqual([1, 2, 3, 4, 5, 6])
+  it('gives equal scores the same height, regardless of answer mix or order', () => {
+    const totals = new Map<number, number>()
+    const visit = (played: ReturnType<typeof game>) => {
+      const lift = liftAfter(played)
+      expect(lift.floor).toBe(lift.score / POINTS_PER_FLOOR)
+      expect(floorAfter(played)).toBe(lift.floor)
+      expect(floorForScore(lift.score)).toBe(lift.floor)
+      if (totals.has(lift.score)) expect(lift.floor).toBe(totals.get(lift.score))
+      totals.set(lift.score, lift.floor)
+      if (played.length < 4) for (const tier of [...TIERS, null]) visit([...played, hit(tier)])
+    }
+    visit([])
+    expect(liftAfter(game('trap', 'trap')).floor).toBe(liftAfter(game('solid')).floor)
+    expect(liftAfter(game('gem')).floor).toBeGreaterThan(liftAfter(game(...Array<Tier>(6).fill('trap'))).floor)
+  })
+
+  it('climbs one floor for every five points, and none for a miss', () => {
+    expect(TIERS.map(floorsFor)).toEqual([2, 3, 6, 12, 17, 20])
     expect(floorsFor(null)).toBe(0)
   })
 
@@ -44,12 +62,12 @@ describe('floors: how far an answer takes the lift', () => {
     expect(MAX_SCORE).toBe(700)
   })
 
-  it('starts on floor 1 and adds up every round', () => {
+  it('starts on floor 0 and adds up every round', () => {
     expect(floorAfter([])).toBe(GROUND_FLOOR)
-    expect(GROUND_FLOOR).toBe(1)
+    expect(GROUND_FLOOR).toBe(0)
     expect(floorAfter(game('common'))).toBe(2)
-    expect(floorAfter(game('gem'))).toBe(7)
-    expect(floorAfter(game('rare', null, 'trap', 'ulu'))).toBe(1 + 4 + 0 + 2 + 5)
+    expect(floorAfter(game('gem'))).toBe(20)
+    expect(floorAfter(game('rare', null, 'trap', 'ulu'))).toBe(12 + 0 + 3 + 17)
   })
 
   it('stays put on a miss', () => {
@@ -57,14 +75,14 @@ describe('floors: how far an answer takes the lift', () => {
     expect(floorAfter(game('solid', null))).toBe(floorAfter(game('solid')))
   })
 
-  it('tops out at floor 43, seven gems up', () => {
-    expect(TOP_FLOOR).toBe(43)
+  it('tops out at floor 140, seven gems up', () => {
+    expect(TOP_FLOOR).toBe(140)
     expect(floorAfter(game(...Array<Tier>(ROUNDS_PER_DIVE).fill('gem')))).toBe(TOP_FLOOR)
   })
 
-  it('shows floors as two digits, and counts them in words', () => {
+  it('shows floors as at least two digits, and counts them in words', () => {
     expect(formatFloor(1)).toBe('01')
-    expect(formatFloor(43)).toBe('43')
+    expect(formatFloor(140)).toBe('140')
     expect(floorsLabel(1)).toBe('1 floor')
     expect(floorsLabel(6)).toBe('6 floors')
   })
@@ -119,27 +137,27 @@ describe('stages: which lift the score has unlocked', () => {
 
 describe('liftAfter: where a game stands', () => {
   it('is the ground floor of the first lift before any answer', () => {
-    expect(liftAfter([])).toEqual({ score: 0, floor: 1, stage: STAGES[0], climbed: 0 })
+    expect(liftAfter([])).toEqual({ score: 0, floor: 0, stage: STAGES[0], climbed: 0 })
   })
 
-  it('moves the lift by the answer and picks the lift by the total, separately', () => {
-    // Six floors and a new lift from one gem
-    expect(liftAfter(game('gem'))).toMatchObject({ score: 100, floor: 7, stage: { id: 'upgraded' } })
-    // Twelve floors on trap answers, and still the first lift
+  it('uses the same score for height and lift upgrades', () => {
+    // Twenty floors and a new lift from one gem
+    expect(liftAfter(game('gem'))).toMatchObject({ score: 100, floor: 20, stage: { id: 'upgraded' } })
+    // Eighteen floors on trap answers, and still the first lift
     expect(liftAfter(game('trap', 'trap', 'trap', 'trap', 'trap', 'trap'))).toMatchObject({
       score: 90,
-      floor: 13,
+      floor: 18,
       stage: { id: 'hdb' },
     })
     // A miss changes neither
-    expect(liftAfter(game('gem', null))).toMatchObject({ score: 100, floor: 7, stage: { id: 'upgraded' } })
+    expect(liftAfter(game('gem', null))).toMatchObject({ score: 100, floor: 20, stage: { id: 'upgraded' } })
   })
 
   it('counts the floors climbed since the current lift was unlocked', () => {
-    expect(liftAfter(game('common', 'solid')).climbed).toBe(4)
+    expect(liftAfter(game('common', 'solid')).climbed).toBe(8)
     // The gem unlocks the second lift, which starts its own count
     expect(liftAfter(game('common', 'gem')).climbed).toBe(0)
-    expect(liftAfter(game('common', 'gem', 'solid', null)).climbed).toBe(3)
+    expect(liftAfter(game('common', 'gem', 'solid', null)).climbed).toBe(6)
     expect(liftAfter(game('gem', 'gem')).climbed).toBe(0)
   })
 
@@ -157,7 +175,7 @@ describe('liftAfter: where a game stands', () => {
     // Stored and loaded again, as daily progress is
     const resumed = liftAfter(JSON.parse(JSON.stringify(played)))
     expect(resumed).toEqual(whole)
-    expect(whole).toMatchObject({ score: 245, floor: 16, stage: { id: 'condo' } })
+    expect(whole).toMatchObject({ score: 245, floor: 49, stage: { id: 'condo' } })
   })
 })
 
@@ -198,10 +216,10 @@ describe('the ride', () => {
 
       const speed = steps(frames)
       expect(Math.min(...speed)).toBeGreaterThanOrEqual(0)
-      // At rest at both ends, and never faster than a floor every 120 ms in between
+      // At rest at both ends, and never faster than one floor per 40 ms, even on an express ride in between
       expect(speed[0]).toBeLessThan(0.0005)
       expect(speed.at(-1)).toBeLessThan(0.0005)
-      expect(Math.max(...speed)).toBeLessThan(1 / 120)
+      expect(Math.max(...speed)).toBeLessThan(1 / 40)
     })
   }
 

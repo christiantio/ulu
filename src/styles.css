@@ -1315,6 +1315,20 @@ p {
   line-height: 1.1;
   color: var(--muted);
 }
+.plate__next strong,
+.plate__next > span {
+  display: block;
+}
+.plate__next strong {
+  color: var(--cream);
+  font-weight: 500;
+  margin-bottom: 3px;
+}
+.directory__goal {
+  color: var(--amber);
+  font-size: 0.8rem;
+  margin-bottom: 8px;
+}
 
 /* The lift directory: a board listing every lift, lit up as far as you've got */
 .directory {

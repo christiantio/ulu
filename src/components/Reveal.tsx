@@ -110,7 +110,8 @@ export function Reveal({ prompt, result, isLast, reportDate = UNLIMITED_DATE, fl
 
       <div className="dock">
         {/* Focus lands here, so the verdict is read with it */}
-        <button ref={nextRef} className="btn btn--primary btn--block btn--big" onClick={onNext} aria-describedby={verdictId}>
+        <button ref={nextRef} className="btn btn--primary btn--block btn--big" onClick={onNext}
+          onKeyDown={(e) => { if (e.repeat) e.preventDefault() }} aria-describedby={verdictId}>
           {isLast ? 'See results' : 'Next question →'}
           <KeyHint>Enter</KeyHint>
         </button>

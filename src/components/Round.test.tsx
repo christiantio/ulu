@@ -1,5 +1,5 @@
 // @vitest-environment jsdom
-import { act, cleanup, render, screen, within } from '@testing-library/react'
+import { act, cleanup, fireEvent, render, screen, within } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest'
 import { ALL_PROMPTS } from '../content/bank'
@@ -58,6 +58,16 @@ afterEach(() => {
 })
 
 describe('Round', () => {
+  it('does not submit on a held Enter or while confirming a composed character', async () => {
+    const { user, input, onResult } = setup()
+    await user.type(input(), answerOf(prompt, 'common').name)
+    expect(fireEvent.keyDown(input(), { key: 'Enter', repeat: true })).toBe(false)
+    expect(fireEvent.keyDown(input(), { key: 'Enter', isComposing: true })).toBe(false)
+    expect(onResult).not.toHaveBeenCalled()
+    await user.keyboard('{Enter}')
+    expect(onResult).toHaveBeenCalledTimes(1)
+  })
+
   it('runs on the faked clock', () => {
     expect(Date.now()).toBe(NOW)
   })

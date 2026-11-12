@@ -167,7 +167,7 @@ export function Round({ prompt, deadline, onResult, onClock, onRefuse }: Props) 
             // Keyed so the same rejected answer twice is still announced again
             <span key={shake}>
               <strong>“{feedback.guess}”</strong>{' '}
-              {feedback.kind === 'unknown' && 'not on our list leh. Try another one!'}
+              {feedback.kind === 'unknown' && 'not on our list leh. Try another one — no points lost!'}
               {feedback.kind === 'ambiguous' && 'could be more than one answer. Which one? Type a bit more.'}
               {feedback.kind === 'decoy' && `doesn't count. ${feedback.why}`}
             </span>
@@ -185,6 +185,10 @@ export function Round({ prompt, deadline, onResult, onClock, onRefuse }: Props) 
             className={`round__input ${shake ? 'shake' : ''}`}
             value={input}
             onChange={(e) => setInput(e.target.value)}
+            onKeyDown={(e) => {
+              // Choosing a composed character or holding Enter must not lock an answer in.
+              if (e.key === 'Enter' && (e.nativeEvent.isComposing || e.repeat)) e.preventDefault()
+            }}
             placeholder="Type your answer…"
             autoFocus
             autoComplete="off"
