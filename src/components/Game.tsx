@@ -4,6 +4,7 @@ import { SECONDS_PER_ROUND, TIER_INFO } from '../game/scoring'
 import type { Prompt, RoundResult } from '../game/types'
 import { CountUp } from './CountUp'
 import { ElevatorProgress } from './ElevatorProgress'
+import { KeyHint } from './KeyHint'
 import { loadBackdrops } from './elevator/backdrops'
 import { ElevatorScene } from './elevator/ElevatorScene'
 import { Reveal } from './Reveal'
@@ -157,6 +158,7 @@ export function Game({
               <span className="ready__arrow" aria-hidden="true">
                 ▲
               </span>
+              <KeyHint>Enter</KeyHint>
             </button>
           </section>
         )}

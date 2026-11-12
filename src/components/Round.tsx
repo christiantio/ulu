@@ -1,8 +1,9 @@
 import { useEffect, useId, useRef, useState, type FormEvent } from 'react'
+import { buzz } from '../haptics'
 import { checkAnswer } from '../game/match'
 import { normalize } from '../game/normalize'
 import { SECONDS_PER_ROUND, TIER_INFO } from '../game/scoring'
-import type { Prompt, RoundResult } from '../game/types'
+import type { Answer, Prompt, RoundResult } from '../game/types'
 
 interface Props {
   prompt: Prompt
@@ -43,22 +44,34 @@ export function Round({ prompt, deadline, onResult }: Props) {
   const finish = (result: RoundResult) => {
     if (done.current) return
     done.current = true
+    buzz(result.tier ? 'lock' : 'timeUp')
     onResult(result)
   }
+
+  const lockIn = (guess: string, answer: Answer) =>
+    finish({
+      promptId: prompt.id,
+      input: guess,
+      attempts: attempts.current,
+      answer: answer.name,
+      tier: answer.tier,
+      points: TIER_INFO[answer.tier].points,
+    })
 
   useEffect(() => {
     const tick = () => {
       const left = Math.max(0, deadline - Date.now())
       setRemaining(left)
       if (left === 0) {
-        finish({
-          promptId: prompt.id,
-          input: lastInput.current.trim(),
-          attempts: attempts.current,
-          answer: null,
-          tier: null,
-          points: 0,
-        })
+        // The buzzer. An answer that was typed in time counts, even if Go wasn't pressed in time: whatever is in
+        // the box is judged as if it had been entered. Anything else in there is a miss, as before
+        const typed = lastInput.current.trim()
+        const verdict = typed !== '' && !done.current ? checkAnswer(typed, prompt) : null
+        if (verdict?.kind === 'match') {
+          lockIn(typed, verdict.answer)
+        } else {
+          finish({ promptId: prompt.id, input: typed, attempts: attempts.current, answer: null, tier: null, points: 0 })
+        }
       }
     }
     tick()
@@ -86,20 +99,13 @@ export function Round({ prompt, deadline, onResult }: Props) {
         setFeedback({ kind: 'ambiguous', guess })
       }
       setShake((n) => n + 1)
+      buzz('refuse')
       // An ambiguous guess stays in the box, so the player can add to it
       if (verdict.kind !== 'ambiguous') setInput('')
       inputRef.current?.focus()
       return
     }
-    const { answer } = verdict
-    finish({
-      promptId: prompt.id,
-      input: guess,
-      attempts: attempts.current,
-      answer: answer.name,
-      tier: answer.tier,
-      points: TIER_INFO[answer.tier].points,
-    })
+    lockIn(guess, verdict.answer)
   }
 
   const seconds = Math.ceil(remaining / 1000)

@@ -291,6 +291,22 @@ describe('ElevatorScene ride', () => {
     expect(second.onRideDone).toHaveBeenCalledTimes(1)
   })
 
+  it('skips on Escape, after the same grace period, and stops listening when the ride is over', () => {
+    const { onRideDone, rerender } = renderRide(hit('ulu'))
+    fireEvent.keyDown(window, { key: 'Escape' })
+    expect(onRideDone).not.toHaveBeenCalled()
+    advance(SKIP_GRACE_MS)
+    fireEvent.keyDown(window, { key: 'Enter' })
+    expect(onRideDone).not.toHaveBeenCalled()
+    fireEvent.keyDown(window, { key: 'Escape' })
+    expect(onRideDone).toHaveBeenCalledTimes(1)
+
+    const landed = after('ulu')
+    rerender(<ElevatorScene score={landed.score} floor={landed.floor} climbed={landed.climbed} onRideDone={onRideDone} />)
+    fireEvent.keyDown(window, { key: 'Escape' })
+    expect(onRideDone).toHaveBeenCalledTimes(1)
+  })
+
   it('shows the finished state as soon as the ride is over or skipped, whatever it was doing', () => {
     const from = after('ulu', 'common')
     const ride = hit('gem')

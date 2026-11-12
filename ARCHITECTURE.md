@@ -10,7 +10,7 @@ go somewhere nobody else thought of.
 |---|---|
 | Daily dive | 7 prompts, same for everyone, resets at midnight **Singapore time** |
 | Mix | Mostly Singapore prompts, with up to 2 world prompts (general knowledge) a day once the bank has enough of them. See [Daily selection](#daily-selection) |
-| Per prompt | 25 seconds, one free-text answer. Unrecognised input can be retried while the clock runs; the first valid answer locks in. A known wrong answer (a decoy) is refused with its reason, and a guess that fits several answers asks for more |
+| Per prompt | 25 seconds, one free-text answer. Unrecognised input can be retried while the clock runs; the first valid answer locks in. When time runs out, whatever is in the answer box is judged as if it had been entered, so an answer typed in time isn't lost to a late press of Go. A known wrong answer (a decoy) is refused with its reason, and a guess that fits several answers asks for more |
 | Scoring | Each accepted answer has a rarity tier (below), and the dive's score is the sum. Timeout = 0. Nothing ever scores below zero |
 | Max | 7 × 100 = 700 |
 | Theme | Answers climb floors while the cumulative score unlocks lifts, from the HDB lift to the sky penthouse |
@@ -54,9 +54,10 @@ src/
     bank.ts          every pack plus the schedule, a lazily loaded chunk (see "Loading content" below)
     bank-loader.ts   loadBank(): the dynamic import of bank.ts
   components/        Game, Round, Reveal, Results, AllAnswers, Report, HowToPlay, ElevatorProgress,
-                     Countdown, CountUp, PrivacyNote, elevator/ElevatorScene
+                     Countdown, CountUp, KeyHint, PrivacyNote, elevator/ElevatorScene
   analytics.ts       optional cookie-less analytics: track(), score bands, script loader
   viewport.ts        the visible height of the page, for fitting a question above a phone's keyboard
+  haptics.ts         a short buzz on phones that can: answer locked in, answer refused, time up
   App.tsx            screen routing (home / daily / unlimited / results), loading today's dive
   test/dives.ts      test helper: a fetch stub that serves the dive files
   test/motion.ts     test helper: a matchMedia stub for prefers-reduced-motion
@@ -80,7 +81,7 @@ stay out of the entry chunk:
 
 | What | Where it comes from | When it loads |
 |---|---|---|
-| The app (entry chunk) | `dist/assets/index-<hash>.js` | First load. About 276 kB, 87 kB gzipped |
+| The app (entry chunk) | `dist/assets/index-<hash>.js` | First load. About 294 kB, 94 kB gzipped |
 | Today's prompts | `dist/dives/<date>.json`, the day's 7 full prompts in schedule order | First load, and again when the date rolls over. About 23–35 kB, 6–7 kB gzipped |
 | The bank (every pack plus `schedule.json`) | `dist/assets/bank-<hash>.js`, from `import('./bank')` | Only when Unlimited starts, when a date has no dive file, or when saved progress names prompts the day's file doesn't have. About 227 kB, 53 kB gzipped |
 
@@ -230,8 +231,8 @@ hundred keys at most, and each prompt's keys are computed once.
   defines floors, upgrades, timing and motion. The same scene appears at rest on the home and results screens.
 - **Timing.** A `requestAnimationFrame` loop paints continuous motion directly to the DOM, while React updates
   the floor indicator and ride stages. Timers settle the ride even when frames are throttled in a background tab.
-- **Accessibility.** The picture is hidden from screen readers, and focus moves to Skip during a ride. A short
-  grace period prevents accidental skips. With reduced motion, `Game` goes straight to the reveal.
+- **Accessibility.** The picture is hidden from screen readers, and focus moves to Skip during a ride. Escape
+  skips too, wherever the focus is. A short grace period prevents accidental skips. With reduced motion, `Game` goes straight to the reveal.
 - **Tests.** Elevator motion and component tests cover ride timing, skipping, upgrades and cleanup. App tests
   use reduced motion through `test/motion.ts` to focus on storage and flow.
 
@@ -274,6 +275,10 @@ blocks out for whatever window it gets: the status panel, the lift, and the pane
   falls back to `100dvh`, which is how it behaved before.
 - **A short strip.** As the strip gets shorter, the car sinks out of the bottom of it, so what's left shows the
   boy's face. Under 50px it's hidden.
+- **Keyboard and touch extras.** Where there's a mouse or trackpad, the buttons that move the game on show the
+  key that presses them (`KeyHint`: Enter for Going up and Next question, Esc for Skip). They already had the
+  focus; the hint says so. On phones that can vibrate, `haptics.ts` gives a short buzz when an answer locks in,
+  is refused, or time runs out. Neither changes what a screen reader hears.
 - **Touch.** Hover styles only apply where there's a pointer to hover with. Buttons don't wait for a double-tap,
   pull-to-refresh is off (a reload mid-question costs seconds the clock doesn't give back), and the page's
   padding keeps clear of a notch (`viewport-fit=cover` with `env(safe-area-inset-*)`).
