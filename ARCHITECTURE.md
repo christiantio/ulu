@@ -56,6 +56,7 @@ src/
   components/        Game, Round, Reveal, Results, AllAnswers, Report, HowToPlay, ElevatorProgress,
                      Countdown, PrivacyNote, elevator/ElevatorScene
   analytics.ts       optional cookie-less analytics: track(), score bands, script loader
+  viewport.ts        the visible height of the page, for fitting a question above a phone's keyboard
   App.tsx            screen routing (home / daily / unlimited / results), loading today's dive
   test/dives.ts      test helper: a fetch stub that serves the dive files
   test/motion.ts     test helper: a matchMedia stub for prefers-reduced-motion
@@ -233,6 +234,31 @@ hundred keys at most, and each prompt's keys are computed once.
   grace period prevents accidental skips. With reduced motion, `Game` goes straight to the reveal.
 - **Tests.** Elevator motion and component tests cover ride timing, skipping, upgrades and cleanup. App tests
   use reduced motion through `test/motion.ts` to focus on storage and flow.
+
+## Layout: phones and wide screens
+
+One stylesheet (`src/styles.css`, with the lift's own in `components/elevator/elevator.css`) lays the same three
+blocks out for whatever window it gets: the status panel, the lift, and the panel under it.
+
+| Window | Layout |
+|---|---|
+| A phone, upright (under 900px wide) | One column, 560px at most: status, lift, panel. The lift is a strip while a question or a reveal is up, and taller for the ride |
+| 900px wide or more | Two columns: the lift on the left, as tall as the window allows and sticky, with everything else beside it. The page's top padding centres the lift in the window |
+| 1600 × 950 or more | The same, a size up: 18px type, a wider page and bigger pixels in the lift |
+| A phone on its side (600px wide or more, 520px tall or less) | The two columns again, with the padding and the type cut down, and the ride's caption laid over the foot of the lift |
+
+- **Typing on a phone.** The on-screen keyboard covers the bottom of the page without resizing it, so `100dvh`
+  still measures the whole screen. `viewport.ts` keeps the height that's really visible (from the
+  `visualViewport` API) in `--visible-height` on `<html>`, and adds the class `keyboard-open` while a keyboard
+  is up. A question's layout is that tall: the status panel and the question card keep their height, and the lift
+  gets what's left, from its usual strip down to nothing. With the keyboard up, the round counter steps aside
+  too. The clock, the question and the answer box are always above the keyboard. Without the API, the layout
+  falls back to `100dvh`, which is how it behaved before.
+- **A short strip.** As the strip gets shorter, the car sinks out of the bottom of it, so what's left shows the
+  boy's face. Under 50px it's hidden.
+- **Touch.** Hover styles only apply where there's a pointer to hover with. Buttons don't wait for a double-tap,
+  pull-to-refresh is off (a reload mid-question costs seconds the clock doesn't give back), and the page's
+  padding keeps clear of a notch (`viewport-fit=cover` with `env(safe-area-inset-*)`).
 
 ## Daily selection
 
