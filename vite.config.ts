@@ -11,6 +11,9 @@ export default defineConfig(({ mode }) => {
   return {
     plugins: [react(), siteMeta(env.VITE_SITE_URL), dives()],
     test: {
+      // The tests that play a whole game through take over 3 s on CI's shared runners, and a slow runner has
+      // pushed one past the 5 s default
+      testTimeout: 15_000,
       // prototypes/ are throwaway spikes with their own config, kept out of the main test run. Their READMEs
       // say how to run their tests
       exclude: [...configDefaults.exclude, 'prototypes/**'],
