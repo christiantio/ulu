@@ -206,11 +206,11 @@ describe('ElevatorScene ride', () => {
     expect(indicator()).toBe('16')
     expect(stamp()).toBeNull()
 
-    // Settled: the doors open on the rarity, the floors and the points
+    // Settled: the doors open on the rarity and the points. The indicator has already said how far it went
     at(landed + SETTLE_MS)
     expect(step('arrived')).toBe(true)
     expect(doorsOpen()).toBe(true)
-    expect(stamp()).toBe('Steady▲ 12 floors+60')
+    expect(stamp()).toBe('Steady+60')
     expect(caption()).toBe(ARRIVAL_LINES.rare)
     expect(mood()).toContain('boy--mid')
     // Same lift: 60 points from 20 is still under 100
@@ -222,7 +222,7 @@ describe('ElevatorScene ride', () => {
     renderRide(hit('common'))
     advance(rideMs('common') - 1)
     expect(indicator()).toBe('02')
-    expect(stamp()).toBe('Everybody Say▲ 2 floors+10')
+    expect(stamp()).toBe('Everybody Say+10')
     cleanup()
 
     renderRide(hit('gem'), after('common'))
@@ -258,7 +258,7 @@ describe('ElevatorScene ride', () => {
     at(landed + SETTLE_MS + UPGRADE_MS)
     expect(step('arrived')).toBe(true)
     expect(doorsOpen()).toBe(true)
-    expect(stamp()).toBe('Everybody Say▲ 2 floors+10')
+    expect(stamp()).toBe('Everybody Say+10')
     expect(document.querySelector('.newlift')).not.toBeNull()
     expect(indicator()).toBe('21')
   })
@@ -280,7 +280,7 @@ describe('ElevatorScene ride', () => {
     expect(indicator()).toBe('140')
     // The joke stays understated: no hop, no pop. He blows another bubble
     expect(mood()).toContain('boy--calm')
-    expect(stamp()).toBe('Sibei Ulu▲ 20 floors+100')
+    expect(stamp()).toBe('Sibei Ulu+100')
   })
 
   it('stays on its floor for a miss: no travel, no closed doors, and a short sigh', () => {
@@ -288,7 +288,7 @@ describe('ElevatorScene ride', () => {
     const { onRideDone } = renderRide(miss, from)
     expect(step('stuck')).toBe(true)
     expect(indicator()).toBe('06')
-    expect(stamp()).toBe('Time up!Staying put+0')
+    expect(stamp()).toBe('Time up!+0')
     expect(caption()).toBe(ARRIVAL_LINES.miss)
     expect(mood()).toContain('boy--miss')
     advance(MISS_MS - 1)

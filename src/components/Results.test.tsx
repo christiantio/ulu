@@ -2,6 +2,7 @@
 import { act, cleanup, fireEvent, render, screen, within } from '@testing-library/react'
 import { afterEach, beforeAll, beforeEach, describe, expect, it, vi } from 'vitest'
 import { ALL_PROMPTS, SCHEDULE } from '../content/bank'
+import { STAGES } from '../game/elevator'
 import { buildReportUrl } from '../game/report'
 import { promptsForDate } from '../game/schedule'
 import { TIER_INFO } from '../game/scoring'
@@ -79,12 +80,11 @@ afterEach(() => {
 const row = (i: number) => screen.getByText(prompts[i].text).closest('li')!
 
 describe('Results', () => {
-  it('shows the score, the floor and lift reached, and each prompt with its gem', () => {
+  it('shows the score, the lift reached, and each prompt with its gem', () => {
     renderResults('2026-11-10')
-    // Six common answers and a miss: 60 points, twelve floors up, still in the first lift
-    expect(screen.getByRole('img', { name: '60 of 700 points, floor 12, HDB Lift' })).toBeDefined()
+    // Six common answers and a miss: 60 points, still in the first lift
     expect(document.querySelector('.results__number')!.textContent).toBe('60')
-    expect(document.querySelector('.results__reached')!.textContent).toBe('Floor 12 · HDB Lift')
+    expect(document.querySelector('.results__reached')!.textContent).toBe(`HDB Lift. ${STAGES[0].blurb}`)
     expect(screen.getByRole('heading', { level: 1 }).textContent).toBe('Heartland hero')
     for (const p of prompts) expect(screen.getByText(p.text)).toBeDefined()
     // Read out as e.g. "No answer . The gem: X ... Time up, 0 points"
@@ -110,17 +110,11 @@ describe('Results', () => {
 
     const lamps = within(screen.getByRole('list', { name: 'Your seven answers' })).getAllByRole('listitem')
     expect(lamps.map((li) => li.textContent)).toEqual([
-      '–Question 1: Time up',
-      ...prompts.slice(1).map((_, i) => `▲2Question ${i + 2}: Everybody Say`),
+      'Question 1: Time up',
+      ...prompts.slice(1).map((_, i) => `Question ${i + 2}: Everybody Say`),
     ])
     expect(lamps[0].querySelector('.lamp--miss')).not.toBeNull()
     expect(lamps[1].querySelector('.lamp--common')).not.toBeNull()
-  })
-
-  it('lists the lifts reached in the directory, and keeps the ones still locked a secret', () => {
-    renderResults('2026-11-10')
-    const rows = [...document.querySelectorAll('.directory__row')].map((row) => row.textContent)
-    expect(rows).toEqual(['? ? ?600 pts · Floor 120', '? ? ?500 pts · Floor 100', '? ? ?350 pts · Floor 70', '? ? ?200 pts · Floor 40', '? ? ?100 pts · Floor 20', 'HDB LiftFloor 12'])
   })
 
   it('celebrates a perfect game at the top of the penthouse', () => {
@@ -130,32 +124,47 @@ describe('Results', () => {
     })
     render(<Results title="Ulu #15" results={perfect} prompts={prompts} isDaily dateKey="2026-11-10" onHome={() => {}} onUnlimited={() => {}} />)
     expect(screen.getByRole('heading', { level: 1 }).textContent).toBe('Perfect climb')
-    expect(screen.getByRole('img', { name: '700 of 700 points, floor 140, Sky Penthouse' })).toBeDefined()
+    expect(document.querySelector('.results__reached')!.textContent).toBe(
+      'Sky Penthouse. All the way up. The doors open, and he blows another bubble.',
+    )
     const scene = document.querySelector('.scene') as HTMLElement
     expect(scene.dataset.lift).toBe('penthouse')
     expect(scene.dataset.floor).toBe('140')
     expect(document.querySelector('.confetti--fall')).not.toBeNull()
-    // Every lift is named once it has been ridden
-    expect([...document.querySelectorAll('.directory__name')].map((n) => n.textContent)).toEqual([
-      'Sky Penthouse',
-      'Marina Bay Luxury Lift',
-      'CBD Office Tower',
-      'Condominium Lift',
-      'Upgraded HDB Lift',
-      'HDB Lift',
-    ])
   })
 
-  it('gives each prompt its own closed disclosure with every answer, deepest tier first', () => {
+  it('keeps the way home at the top and the next game beside Share, so neither needs scrolling to', () => {
+    const onHome = vi.fn()
+    const onUnlimited = vi.fn()
+    render(
+      <Results title="Ulu #15" results={results} prompts={prompts} stats={stats} isDaily dateKey="2026-11-10" onHome={onHome} onUnlimited={onUnlimited} />,
+    )
+    const home = screen.getByRole('button', { name: 'Home' })
+    expect(home.closest('.results__top')).not.toBeNull()
+    const unlimited = screen.getByRole('button', { name: 'Unlimited' })
+    expect(unlimited.closest('.dock')).toBe(screen.getByRole('button', { name: 'Share result' }).closest('.dock'))
+    // Nothing else to press below the cards
+    expect(document.querySelector('.extras button')).toBeNull()
+
+    fireEvent.click(home)
+    expect(onHome).toHaveBeenCalledTimes(1)
+    fireEvent.click(unlimited)
+    expect(onUnlimited).toHaveBeenCalledTimes(1)
+  })
+
+  it('folds each question into one closed row, which opens to every answer, deepest tier first', async () => {
     renderResults('2026-11-10')
-    const rows = screen.getAllByRole('listitem').filter((li) => li.classList.contains('breakdown__row'))
+    const rows = within(screen.getByRole('list', { name: 'Your answers' })).getAllByRole('listitem').filter((li) =>
+      li.classList.contains('breakdown__row'),
+    )
     expect(rows).toHaveLength(prompts.length)
     for (const [i, row] of rows.entries()) {
-      const details = row.querySelector('details.all-answers') as HTMLDetailsElement
+      const details = row.querySelector('details') as HTMLDetailsElement
       expect(details.open).toBe(false)
-      // Told apart by the prompt for screen readers
-      expect(details.querySelector('summary')!.textContent).toBe(
-        `Show all ${prompts[i].answers.length} answers for ${prompts[i].text}`,
+      // The row says the question, the answer and what it scored
+      const summary = details.querySelector('summary')!
+      expect(summary.textContent).toBe(
+        `${prompts[i].text}${results[i].answer ?? 'No answer'}${results[i].tier ? 'Everybody Say' : 'Time up'}, ${results[i].points} points`,
       )
       expect(details.querySelectorAll('.all-answers__names li')).toHaveLength(prompts[i].answers.length)
       const tiers = [...details.querySelectorAll('.all-answers__group')].map((g) => g.className.match(/tier--(\w+)/)![1])
@@ -165,6 +174,8 @@ describe('Results', () => {
       const marked = [...details.querySelectorAll('.all-answers__yours')].map((li) => li.firstChild!.textContent)
       expect(marked).toEqual(results[i].answer ? [results[i].answer] : [])
     }
+    fireEvent.click(rows[0].querySelector('summary')!)
+    expect((rows[0].querySelector('details') as HTMLDetailsElement).open).toBe(true)
   })
 
   it("shows each prompt's rejected guesses with a link to report them as a missing answer", () => {
@@ -258,8 +269,8 @@ describe('Results', () => {
 
     await act(async () => fireEvent.click(screen.getByRole('button', { name: 'Share result' })))
     expect(writeText).toHaveBeenCalledTimes(1)
-    // Spoiler-free: just the score, the grid, and the floor and lift reached, none of the answer lists
-    expect(writeText.mock.calls[0]).toEqual([`Ulu #15 🇸🇬 60/700\n❌⚪⚪⚪⚪⚪⚪\nFloor 12 · HDB Lift\n${window.location.origin}`])
+    // Spoiler-free: just the score, the grid, and the lift reached, none of the answer lists
+    expect(writeText.mock.calls[0]).toEqual([`Ulu #15 🇸🇬 60/700\n❌⚪⚪⚪⚪⚪⚪\nHDB Lift\n${window.location.origin}`])
     expect(writeText.mock.calls[0][0]).not.toMatch(/MRT|train|Raffles|station/i)
     expect(writeText.mock.calls[0][0]).not.toContain('Show all')
     expect(screen.getByRole('button', { name: 'Copied! Go paste in the group chat' })).toBeDefined()

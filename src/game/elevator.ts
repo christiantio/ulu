@@ -38,10 +38,6 @@ export function formatFloor(floor: number): string {
   return String(floor).padStart(2, '0')
 }
 
-export function floorsLabel(floors: number): string {
-  return floors === 1 ? '1 floor' : `${floors} floors`
-}
-
 /**
  * The lifts, in the order the score unlocks them. They're stops on a daydream, not floors of one building: the
  * same boy, in grander and grander lifts

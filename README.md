@@ -5,10 +5,10 @@
 **How ulu can you go?** A daily Singapore trivia game where the most obscure valid answer scores the most.
 It's inspired by [Krillion](https://krillion.io).
 
-Every day you get 7 Singapore prompts ("Name a station on the Circle Line", "Name a kueh", …) with 25 seconds
-each. "Toa Payoh" gets you 10 points; the hand-picked gem gets you 100. Every answer is a ride out of town: the
-more ulu it is, the further the train goes, past the CBD and the heartland and out by bumboat to the
-lighthouse. Your score takes you from Raffles Place out to Pedra Branca.
+Every day you get 7 Singapore prompts ("Name a station on the Circle Line", "Name a kueh", …), with 25 seconds
+each before the lift doors close. "Toa Payoh" gets you 10 points; the hand-picked gem gets you 100. Every answer
+is a ride up: the more ulu it is, the higher the lift climbs, and your score upgrades it from an HDB lift to a
+sky penthouse.
 
 ## Run it
 

@@ -16,7 +16,6 @@ import {
   UPGRADE_MS,
   floorAfter,
   floorsFor,
-  floorsLabel,
   formatFloor,
   indicatorFloor,
   liftAfter,
@@ -80,11 +79,9 @@ describe('floors: how far an answer takes the lift', () => {
     expect(floorAfter(game(...Array<Tier>(ROUNDS_PER_DIVE).fill('gem')))).toBe(TOP_FLOOR)
   })
 
-  it('shows floors as at least two digits, and counts them in words', () => {
+  it('shows floors as at least two digits', () => {
     expect(formatFloor(1)).toBe('01')
     expect(formatFloor(140)).toBe('140')
-    expect(floorsLabel(1)).toBe('1 floor')
-    expect(floorsLabel(6)).toBe('6 floors')
   })
 })
 

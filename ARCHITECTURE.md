@@ -15,9 +15,9 @@ go somewhere nobody else thought of.
 | Max | 7 × 100 = 700 |
 | Theme | Answers climb floors while the cumulative score unlocks lifts, from the HDB lift to the sky penthouse |
 | Unlimited | 7 random prompts from past dives (never today's), no stats, replay as often as you like. Back-to-back games don't share prompts. While the archive is too small to fill a game, it uses the rest of the bank |
-| Answer animation | After each answer, a ride out of town on the "Ulu Line", whose stations are the tiers in order (Everybody Say → Act Smart → Can Lah → Steady → Damn Ulu → Sibei Ulu). The train passes every station below the answer's tier, slowing at each as if it might stop, and stops at its own. The MRT ends on the shore at Changi Point: for Damn Ulu and Sibei Ulu, the train stops there, you hop into the bumboat waiting at the jetty, and it takes you on to Pulau Ubin or the Pedra Branca lighthouse. A miss is the train leaving without you. It takes 2.4–7.1 s, the pips, score and route only update when it lands, and Skip (or a tap on the scene) jumps to the reveal. With `prefers-reduced-motion`, it's skipped |
-| Reveal | The verdict, the gem, up to 3 other answers per tier, and every accepted answer behind a "Show all N answers" disclosure, grouped by tier from the gem down. The results screen has the same disclosure for each prompt |
-| Sharing | Spoiler-free emoji grid: `Ulu #3 🇸🇬 410/700 / 💎🟢⚪🔵❌🟣🟡 / Reached Lim Chu Kang` |
+| Answer animation | After each answer, the lift shuts its doors, rides up the answer's floors with the scenery sinking past, and opens on the rarity and the points. An answer that crosses a score threshold sweeps in a grander lift first. A miss is the doors shutting on the clock, and the lift staying put. The round's lamp, the score and the lift only change when it lands, and Skip (or Escape, or a tap on the scene) jumps to the reveal. With `prefers-reduced-motion`, it's skipped. See [The answer animation](#the-answer-animation) |
+| Reveal | The verdict (the rarity, the answer and the points) and the gem, then one card: any guesses that weren't on the list, up to 3 other answers per tier, and every accepted answer behind a "Show all N answers" disclosure, grouped by tier from the gem down. On the results screen each prompt is a row that opens to the same list |
+| Sharing | Spoiler-free emoji grid and the lift reached: `Ulu #3 🇸🇬 410/700 / 💎🟢⚪🔵❌🟣🟡 / CBD Office Tower` |
 
 | Tier | Label | Points | Meaning |
 |---|---|---|---|
@@ -229,11 +229,13 @@ hundred keys at most, and each prompt's keys are computed once.
 - **Scene and motion.** The lift closes its doors, climbs the answer's floors, and opens on the result. Scenery
   scrolls below it; reaching a score threshold upgrades the lift before the doors open. `game/elevator.ts`
   defines floors, upgrades, timing and motion. The same scene appears at rest on the home and results screens.
-- **One progression scale.** Every five points climb one floor, starting at 00 and reaching 140 for a perfect
-  700. Floors are derived from saved points, so equal scores always reach the same height. Upgrade thresholds
-  stay at 100/200/350/500/600 points (floors 20/40/70/100/120). The plate shows points remaining and the target
-  floor, with a final progress bar from 600 to 700. Rarity still controls ride duration, so express climbs stay
-  short; the indicator and landing signs support three digits.
+- **One progression scale, one number.** Every five points climb one floor, starting at 00 and reaching 140 for
+  a perfect 700. Floors are derived from saved points, so equal scores always reach the same height. Upgrade
+  thresholds stay at 100/200/350/500/600 points (floors 20/40/70/100/120). Points are the only number the
+  interface writes down: the floor is the lift's to show, on its indicator and the signs on the shaft. The meter
+  along the bottom of the score's window fills towards the next lift, and from 600 to 700 towards a perfect
+  climb. Rarity still controls ride duration, so express climbs stay short; the indicator and landing signs
+  support three digits.
 - **It's the whole window.** The scene isn't a picture on the page: it's fixed to the window and fills it, and
   every screen is laid over it (see [Layout](#layout-the-lifts-world-and-what-lies-over-it)). A ride moves
   everything on screen, and a new lift sweeps in across the whole window.
@@ -268,12 +270,13 @@ Outside the lift, motion is plain CSS in `styles.css`, and each piece says one t
 - **Arriving.** A screen fades in, the sign drops into place over the lift, and the controls and the cards step
   up after it. The delays are short, and nothing waits on them: the answer box and the Next button have focus
   from the first frame.
-- **The clock.** The timer's lights are teal, amber for the last ten seconds and red and flashing for the last
-  five, when each second also lands with a tick on the clock. A refused answer shakes the box and flushes it red,
-  and the sign says why. The lift shows all of this too: see [The answer animation](#the-answer-animation).
-- **The score.** When a ride lands, the header's score counts up to its new total (`CountUp`), a tag with the
-  points earned drops out of the score window, and that round's button on the counter lights up. The results
-  count the final score up from zero while the seven lamps come on in the order they were won.
+- **The clock.** The clock in the sign's corner is teal, amber for the last ten seconds and red for the last
+  five, when each second also lands with a tick. A refused answer shakes the box and flushes it red, and a bubble
+  over the box says why. The lift shows all of this too: see [The answer animation](#the-answer-animation).
+- **The score.** When a ride lands, the score in the status row counts up to its new total (`CountUp`), a tag
+  with the points earned drops out of the score window, the meter along its bottom moves on, and that round's lamp
+  lights up. The results count the final score up from zero while the seven lamps come on in the order they
+  were won.
 - **`CountUp`.** The element's text is always the real value, so screen readers and tests never see a number in
   between. While it counts, the running number is in a `data-count` attribute and the stylesheet draws it over
   the real one.
@@ -289,12 +292,12 @@ window (`.stack` in `src/styles.css`; the scene's own styles are in `components/
 
 | Part | Class | What it's for |
 |---|---|---|
-| Status | `.game__top`, `.home__brand` | Along the top: the way back, the floor and the score, the seven round buttons and the lift's plate. On home, the title |
+| Status | `.game__top`, `.results__top`, `.home__brand` | Along the top, in one row: the way back, a lamp for each round, and the score with the meter for the next lift. On the results, the way home. On home, the title |
 | Sky | `.stack__sky` | Takes whatever room is left over |
 | The sign | `.board` | A dark board hung on two rods just over the lift: the question and its clock, the verdict and the gem, the final score |
 | The lift | `.stack__gap` | Nothing: it's the room the lift itself stands in, one lift high |
-| Controls | `.dock` | At the lift's foot: Going up, the answer box, Next question, Share result. During a ride the scene's own bar (the caption and Skip) is here instead |
-| Cards | `.extras` | Everything long: the other answers, the lift directory, the breakdown. Below the window on a phone, where `--peek` shows the top of the first card; beside the lift on a wide screen |
+| Controls | `.dock` | At the lift's foot: Going up, the answer box (with the bubble that says why a guess was refused), Next question, Share result with Unlimited beside it. During a ride the scene's own bar (the caption and Skip) is here instead |
+| Cards | `.extras` | Everything long: the other answers and the guesses that weren't on the list, and the results' row for each question, the stats and the countdown. Below the window on a phone, where `--peek` shows the top of the first card; beside the lift on a wide screen |
 
 A screen's components can come in any order in the markup. `order` places them, so `Round` and `Reveal` each
 return a sign, their controls and (for the reveal) their cards, and stay in reading order for a screen reader.
@@ -319,16 +322,17 @@ are measured in `--u`.
   still measures the whole screen. `viewport.ts` keeps the height that's really visible (from the
   `visualViewport` API) in `--visible-height` on `<html>`, and adds the class `keyboard-open` while a keyboard
   is up. The scene and the stack are both that tall, so the lift stands on top of the keyboard. With the
-  keyboard up, the round counter and the plate step aside, the sign tightens, and the answer box becomes a bar
-  across the top of the keyboard. The clock, the question and the answer box are always above the keyboard.
-  Without the API, the layout falls back to `100dvh`.
+  keyboard up, the round lamps step aside, the sign tightens, and the answer box becomes a bar across the top of
+  the keyboard. The clock, the question and the answer box are always above the keyboard. There's no room for
+  the bubble over the box without hiding the boy's face, so a refused guess is explained along the bottom of the
+  sign instead, as it is on a phone on its side. Without the API, the layout falls back to `100dvh`.
 - **A short window.** As the visible window gets shorter, the car sinks behind the answer bar, so the strip
   left between the sign and the bar shows the boy's face and the doors closing on it, not the roof of the car.
 - **A short phone.** `--u` is 1.5px instead of 2px where the screen is under about 640px tall. It's worked out
   from `100svh`, the height with the browser's bars showing, which doesn't change as they slide away: the
   scenery never changes size mid-game.
-- **Words on the scenery.** Text that isn't on a sign, a plate or a card (`.float`, the status labels, the
-  ride's caption) has a hard outline, so it reads on any of the six skies.
+- **Words on the scenery.** Text that isn't on a sign, a plate or a card (`.float`, the ride's caption) has a
+  hard outline, so it reads on any of the six skies.
 - **Keyboard and touch extras.** Where there's a mouse or trackpad, the buttons that move the game on show the
   key that presses them (`KeyHint`: Enter for Going up and Next question, Esc for Skip). They already had the
   focus; the hint says so. On phones that can vibrate, `haptics.ts` gives a short buzz when an answer locks in,
@@ -336,6 +340,30 @@ are measured in `--u`.
 - **Touch.** Hover styles only apply where there's a pointer to hover with. Buttons don't wait for a double-tap,
   pull-to-refresh is off (a reload mid-question costs seconds the clock doesn't give back), and the stack's
   padding keeps clear of a notch (`viewport-fit=cover` with `env(safe-area-inset-*)`).
+
+### Saying it once
+
+The lift's world is busy on purpose, so the interface over it says each thing once, in the one place it
+belongs. Before adding something to a screen, check where it's already said.
+
+- **The score is points.** The floor is the lift's to show. The meter in the score's window shows the way to
+  the next lift, whose name is a surprise until it's unlocked.
+- **The time left** is the clock in the sign's corner, and the doors.
+- **The rules are in How to play**, which opens on the first visit. A question doesn't repeat how a round works,
+  the answer card doesn't repeat what a rarity means, and the line about the game on the home screen is only for
+  someone who hasn't played or started a game yet.
+- **A finished day** has its score on the day's plate on the home screen, where the date was. Its stats are on
+  its results, so the home screen's stats line steps aside until the next day.
+- **What's needed now goes where the player is looking.** Why a guess was refused is said over the answer box.
+  Everything to press on the results (Share, the next game, the way home) is on the first screen, and the long
+  lists open where they are asked for: each question's row, and "Show all N answers".
+
+### Type
+
+Seven sizes, as custom properties on `:root` in `styles.css`, from `--fs-xs` (12px) to `--fs-3xl` (64px). Every
+font size is one of them, or a `clamp()` between two of them. The pixel face (Pixelify Sans) is for 16px and up:
+buttons, headings and numbers. Anything smaller is DM Sans, and the small labels in capitals (the headings on the
+cards, the labels on signs and plaques) all share one style at 12px.
 
 ## Daily selection
 

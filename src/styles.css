@@ -42,6 +42,18 @@
 
   --font-display: 'Pixelify Sans', ui-monospace, 'Courier New', monospace;
   --font-body: 'DM Sans', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  /*
+   * Type sizes: every size in the interface is one of these steps, or slides between two of them. The pixel face is
+   * for 16px and up (buttons, headings and numbers), where its blocky letters stay easy to read. Small labels and
+   * fine print are in DM Sans
+   */
+  --fs-xs: 0.75rem; /* 12px: fine print, key hints, badges */
+  --fs-sm: 0.875rem; /* 14px: notes, secondary lines, small labels */
+  --fs-md: 1rem; /* 16px: body text, answers, buttons */
+  --fs-lg: 1.25rem; /* 20px: the answer box, big buttons, indicator digits, a verdict's rarity */
+  --fs-xl: 1.75rem; /* 28px: questions, headlines, big numbers */
+  --fs-2xl: 2.5rem; /* 40px: the final score on a short screen */
+  --fs-3xl: 4rem; /* 64px: the final score */
   /* Hard-edged, like everything else: no blur */
   --drop: 4px 4px 0 rgb(0 0 0 / 0.35);
   /* A hard outline, for words that sit straight on the scenery: readable on any sky */
@@ -168,10 +180,11 @@ h3 {
   line-height: 1.15;
   margin: 0;
 }
+/* A small label in capitals: section headings on the cards, and the labels on signs and plaques */
 h3 {
-  font-family: var(--font-display);
-  font-size: 0.85rem;
-  font-weight: 600;
+  font-family: var(--font-body);
+  font-size: var(--fs-xs);
+  font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.08em;
   color: var(--muted);
@@ -185,7 +198,7 @@ p {
   color: var(--muted);
 }
 .small {
-  font-size: 0.85rem;
+  font-size: var(--fs-sm);
 }
 .center {
   text-align: center;
@@ -329,16 +342,12 @@ p {
   right: 14%;
 }
 .board__label {
-  font-family: var(--font-display);
-  font-size: 0.8rem;
-  font-weight: 600;
+  font-family: var(--font-body);
+  font-size: var(--fs-xs);
+  font-weight: 700;
   letter-spacing: 0.1em;
   text-transform: uppercase;
   color: var(--amber);
-}
-.board__note {
-  color: var(--muted);
-  font-size: 0.9rem;
 }
 
 /* The controls at the lift's foot */
@@ -375,7 +384,7 @@ p {
 /* Buttons: chunky and pressable. The primary one is bubblegum */
 .btn {
   font-family: var(--font-display);
-  font-size: 1.05rem;
+  font-size: var(--fs-md);
   font-weight: 600;
   letter-spacing: 0.02em;
   line-height: 1.2;
@@ -424,7 +433,10 @@ p {
     0 1px 0 var(--ink-deep);
 }
 .btn:disabled {
-  opacity: 0.5;
+  /* Solid, so it doesn't let the scenery through: just quieter than a button that's ready */
+  background: #c9bba2;
+  color: rgb(23 33 47 / 0.5);
+  box-shadow: 0 4px 0 var(--ink-deep);
   cursor: default;
 }
 .btn:focus-visible {
@@ -472,16 +484,16 @@ p {
 }
 .btn--big {
   padding: 15px 20px 18px;
-  font-size: 1.2rem;
+  font-size: var(--fs-lg);
 }
 .btn--small {
   padding: 6px 10px;
-  font-size: 0.9rem;
+  font-size: var(--fs-sm);
 }
 .btn--cta {
   text-transform: uppercase;
   letter-spacing: 0.06em;
-  font-size: 1.3rem;
+  font-size: var(--fs-lg);
 }
 /* The key that presses a button (KeyHint.tsx). Hidden unless there's a keyboard and a pointer to go with it */
 .key-hint {
@@ -495,7 +507,7 @@ p {
     border: 2px solid currentColor;
     border-radius: 2px;
     font-family: var(--font-body);
-    font-size: 0.7rem;
+    font-size: var(--fs-xs);
     font-weight: 700;
     letter-spacing: 0.04em;
     line-height: 1.2;
@@ -542,6 +554,11 @@ p {
     linear-gradient(-45deg, transparent 42%, #ff958a 42% 58%, transparent 58%), #3b2f3d;
   box-shadow: none;
 }
+/* Not lit yet: a question still to come */
+.lamp--off {
+  background: #2a3a55;
+  box-shadow: inset 2px 2px 0 rgb(0 0 0 / 0.25);
+}
 
 /* Home: the title over the sky, the lift waiting under it, and the way in at its foot */
 .home {
@@ -555,10 +572,6 @@ p {
   gap: 4px;
   padding-top: 6px;
   pointer-events: auto;
-}
-.home__brand .plate {
-  margin-top: 6px;
-  width: min(100%, 300px);
 }
 .home__panel {
   order: 4;
@@ -585,7 +598,7 @@ p {
 }
 .tagline {
   font-family: var(--font-display);
-  font-size: clamp(1.3rem, 5.6vw, 1.7rem);
+  font-size: clamp(var(--fs-lg), 5.6vw, var(--fs-xl));
   font-weight: 600;
   color: var(--amber);
   text-align: center;
@@ -597,7 +610,7 @@ p {
   border-top: 0;
   margin-top: -10px;
   color: var(--muted);
-  font-size: 0.95rem;
+  font-size: var(--fs-sm);
   line-height: 1.35;
   text-align: center;
   text-wrap: balance;
@@ -616,21 +629,17 @@ p {
   background: var(--plate);
   border: 2px solid var(--ink-deep);
   font-family: var(--font-display);
-  font-size: 1.05rem;
+  font-size: var(--fs-md);
   font-weight: 600;
 }
 .home__dive .muted {
   font-family: var(--font-body);
-  font-size: 0.9rem;
+  font-size: var(--fs-sm);
   font-weight: 500;
 }
-.home__done {
-  text-align: center;
-  font-size: 1.1rem;
-}
-.home__done strong {
+/* A finished day's score, where the date was */
+.home__score {
   font-family: var(--font-display);
-  font-size: 1.4rem;
   color: var(--amber);
 }
 .home__status {
@@ -669,7 +678,7 @@ p {
   padding: 3px 10px 4px;
   background: var(--plate);
   border: 2px solid var(--ink-deep);
-  font-size: 0.8rem;
+  font-size: var(--fs-xs);
   color: var(--muted);
   text-align: center;
 }
@@ -706,29 +715,30 @@ p {
 .game--ride .stack {
   padding-bottom: var(--foot);
 }
+/* The status: one row along the top, with the way back, a lamp for each round and the score */
 .game__top {
   order: 0;
   position: relative;
   z-index: 2;
-  display: flex;
-  flex-direction: column;
-  gap: 6px;
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+  gap: 10px;
   width: min(100%, 560px);
   align-self: center;
   pointer-events: auto;
 }
 /*
  * A question on a phone fits the part of the window that's visible, which with the keyboard up is not much:
- * --visible-height comes from viewport.ts. The round counter and the lift's plate step aside, the answer box
- * becomes a bar across the top of the keyboard, and the lift sinks behind it so that what shows between the sign
- * and the bar is the boy's face and the doors closing on it (see .game--playing .scene in elevator.css)
+ * --visible-height comes from viewport.ts. The round lamps step aside, the answer box becomes a bar across the
+ * top of the keyboard, and the lift sinks behind it so that what shows between the sign and the bar is the boy's
+ * face and the doors closing on it (see .game--playing .scene in elevator.css)
  */
 .keyboard-open .game--playing {
   --foot: 62px;
   --pad-bottom: 8px;
 }
-.keyboard-open .game--playing .pips,
-.keyboard-open .game--playing .plate {
+.keyboard-open .game--playing .pips {
   position: absolute;
   width: 1px;
   height: 1px;
@@ -748,63 +758,49 @@ p {
   padding: 8px 12px 10px;
 }
 .keyboard-open .game--playing .round__prompt {
-  font-size: 1.25rem;
-}
-.keyboard-open .game--playing .round__feedback {
-  min-height: 1.45em;
-  padding-top: 6px;
+  font-size: var(--fs-lg);
 }
 
-/* The lift's status: where you are and what you've scored, in indicator windows */
-.hud {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  gap: 8px;
-}
-.hud__stats {
-  display: flex;
-  gap: 8px;
-  margin: 0;
-}
-.hud__stat {
+/* The score, in an indicator window, with the meter for the next lift along its bottom edge. It keeps to its own
+   column when the lamps step aside for a keyboard */
+.hud__score {
+  grid-column: 3;
+  justify-self: end;
   position: relative;
-  display: flex;
-  align-items: center;
-  gap: 6px;
-}
-.hud__stat dt {
-  font-family: var(--font-display);
-  font-size: 0.72rem;
-  font-weight: 600;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  color: var(--cream);
-  text-shadow: var(--outline);
-}
-.hud__stat dd {
-  margin: 0;
-  min-width: 2.6em;
-  padding: 1px 7px 3px;
+  min-width: 3.3em;
+  padding: 1px 7px 5px;
   background: var(--ink-deep);
   border: 2px solid var(--ink-line);
   box-shadow: 0 3px 0 rgb(0 0 0 / 0.3);
   color: var(--amber);
   font-family: var(--font-display);
-  font-size: 1.25rem;
+  font-size: var(--fs-lg);
   font-weight: 600;
   font-variant-numeric: tabular-nums;
   line-height: 1.2;
   text-align: right;
 }
-.game__score dd {
-  min-width: 3.3em;
+.meter {
+  position: absolute;
+  left: 2px;
+  right: 2px;
+  bottom: 2px;
+  height: 3px;
+  background: #33476a;
+  overflow: hidden;
+}
+.meter__fill {
+  display: block;
+  height: 100%;
+  background: var(--amber);
+  transform-origin: left;
+  transition: transform 0.6s ease;
 }
 /* The score swells while it counts up */
 .game__score .count[data-count] {
   animation: bump 0.5s ease;
 }
-/* What the answer earned: a tag that drops out of the score window, over the round counter, and fades */
+/* What the answer earned: a tag that drops out of the score window and fades */
 .game__gain {
   position: absolute;
   z-index: 1;
@@ -815,7 +811,7 @@ p {
   border: 2px solid var(--pink);
   color: var(--pink);
   font-family: var(--font-display);
-  font-size: 1.05rem;
+  font-size: var(--fs-md);
   font-weight: 700;
   line-height: 1.25;
   white-space: nowrap;
@@ -823,64 +819,32 @@ p {
   animation: gain 1.5s ease-out both;
 }
 
-/* Seven lift buttons, one per question, lit in the colour of the answer */
+/* Seven lamps, one per question, lit in the colour of the answer. The question being played has a ring round it */
 .pips {
+  grid-column: 2;
+  justify-self: center;
+  display: flex;
+  gap: 4px;
   list-style: none;
   padding: 0;
   margin: 0;
-  display: grid;
-  grid-template-columns: repeat(7, 1fr);
-  gap: 6px;
 }
 .pip {
-  height: 24px;
   display: grid;
   place-items: center;
-  background: var(--ink-raised);
-  border: 2px solid var(--ink-deep);
-  box-shadow: 0 3px 0 rgb(0 0 0 / 0.3);
-  color: var(--muted);
-  font-family: var(--font-display);
-  font-size: 0.85rem;
-  font-weight: 600;
-  line-height: 1;
+  width: 22px;
+  height: 22px;
+  border: 2px solid transparent;
+}
+.pip .lamp {
+  width: 14px;
+  height: 14px;
 }
 .pip--current {
   border-color: var(--amber);
-  color: var(--amber);
+  background: rgb(11 16 24 / 0.6);
 }
-.pip--done {
-  background: var(--lamp);
-  color: var(--ink);
-  box-shadow:
-    inset -2px -2px 0 rgb(0 0 0 / 0.2),
-    inset 2px 2px 0 rgb(255 255 255 / 0.45),
-    0 3px 0 rgb(0 0 0 / 0.3);
-}
-.pip--common {
-  --lamp: var(--lamp-common);
-}
-.pip--trap {
-  --lamp: var(--lamp-trap);
-}
-.pip--solid {
-  --lamp: var(--lamp-solid);
-}
-.pip--rare {
-  --lamp: var(--lamp-rare);
-}
-.pip--ulu {
-  --lamp: var(--lamp-ulu);
-}
-.pip--gem {
-  --lamp: var(--lamp-gem);
-}
-.pip--miss {
-  --lamp: #3b2f3d;
-  color: #ff958a;
-  box-shadow: 0 3px 0 rgb(0 0 0 / 0.3);
-}
-/* The button the lift has just lit */
+/* The lamp the lift has just lit */
 .pip--fresh {
   animation: pip-lit 0.5s cubic-bezier(0.2, 1.4, 0.4, 1) backwards;
 }
@@ -892,7 +856,7 @@ p {
 }
 .ready__brief {
   font-family: var(--font-display);
-  font-size: 1.45rem;
+  font-size: clamp(var(--fs-lg), 6vw, var(--fs-xl));
   font-weight: 700;
   line-height: 1.15;
   text-wrap: balance;
@@ -908,14 +872,14 @@ p {
 .riding__prompt {
   overflow: hidden;
   color: var(--muted);
-  font-size: 0.9rem;
+  font-size: var(--fs-sm);
   font-weight: 600;
   white-space: nowrap;
   text-overflow: ellipsis;
 }
 .riding__answer {
   font-weight: 700;
-  font-size: 1.15rem;
+  font-size: var(--fs-lg);
   overflow-wrap: anywhere;
 }
 .riding__answer .board__label {
@@ -929,58 +893,32 @@ p {
 .round__board {
   gap: 8px;
 }
-.round__time {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-}
-/* A strip of 25 lights, one a second */
-.timer {
-  position: relative;
-  flex: 1;
-  height: 14px;
-  background: #2a3a55;
-  border: 2px solid var(--ink-deep);
-  overflow: hidden;
-}
-.timer::after {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: repeating-linear-gradient(90deg, transparent 0 calc(4% - 2px), var(--ink-deep) calc(4% - 2px) 4%);
-}
-.timer__bar {
-  height: 100%;
-  background: var(--teal);
-  box-shadow: inset 0 3px 0 rgb(255 255 255 / 0.35);
-  transform-origin: left;
-  transition:
-    transform 0.1s linear,
-    background-color 0.3s ease;
-}
-/* Amber for the last ten seconds, red and flashing for the last five */
-.timer__bar--low {
-  background: #e8a33a;
-}
-.timer__bar--urgent {
-  background: #e2574c;
-  animation: pulse 0.5s steps(2) infinite;
+/* The question, wrapped round the clock in the sign's corner */
+.round__head {
+  display: flow-root;
 }
 .round__clock {
+  float: right;
+  margin: 2px 0 4px 12px;
   min-width: 2.5em;
   padding: 0 6px 2px;
   background: var(--ink-deep);
   border: 2px solid var(--ink-line);
-  color: var(--amber);
+  color: var(--teal);
   font-family: var(--font-display);
-  font-size: 1.35rem;
+  font-size: var(--fs-lg);
   font-weight: 600;
   font-variant-numeric: tabular-nums;
   line-height: 1.2;
   text-align: center;
 }
+/* Teal, then amber for the last ten seconds, and red and ticking for the last five */
+.round__clock--low {
+  color: var(--amber);
+}
 .round__clock--urgent {
   color: #ff6b5e;
+  border-color: #ff6b5e;
 }
 .round__digits {
   display: inline-block;
@@ -990,7 +928,7 @@ p {
   animation: tick 0.3s ease-out;
 }
 .round__prompt {
-  font-size: clamp(1.35rem, 5.8vw, 1.85rem);
+  font-size: clamp(var(--fs-lg), 5.6vw, var(--fs-xl));
   font-weight: 800;
   letter-spacing: -0.01em;
   text-wrap: balance;
@@ -998,9 +936,10 @@ p {
 .round__note {
   margin-top: -4px;
   color: var(--muted);
-  font-size: 0.9rem;
+  font-size: var(--fs-sm);
 }
 .round__entry {
+  position: relative;
   display: flex;
   gap: 8px;
 }
@@ -1011,7 +950,7 @@ p {
   flex: 1;
   min-width: 0;
   font: inherit;
-  font-size: 1.15rem;
+  font-size: var(--fs-lg);
   font-weight: 600;
   padding: 11px 12px;
   border-radius: 2px;
@@ -1032,19 +971,65 @@ p {
   outline: 3px solid var(--pink);
   outline-offset: 1px;
 }
-/* The foot of the sign: what the lift made of the last guess */
+/*
+ * What the lift made of the last guess: a bubble over the answer box, where the player is looking. It's laid over
+ * the foot of the lift rather than pushing anything out of the way, and it's empty until a guess is refused
+ */
 .round__feedback {
-  min-height: 2.9em;
-  padding-top: 8px;
-  border-top: 2px dashed var(--ink-line);
-  color: var(--muted);
-  font-size: 0.9rem;
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: calc(100% + 12px);
+  display: flex;
+  justify-content: center;
+  pointer-events: none;
 }
-.round__feedback--refused {
+.round__feedback > span {
+  position: relative;
+  max-width: 100%;
+  padding: 6px 12px 8px;
+  background: var(--plate);
+  border: 2px solid var(--ink-deep);
+  box-shadow: 0 0 0 2px var(--miss), 4px 4px 0 rgb(0 0 0 / 0.3);
   color: var(--cream);
+  font-size: var(--fs-sm);
+  line-height: 1.35;
+  text-align: center;
+  text-wrap: balance;
+  animation: pop 0.2s ease;
 }
-.round__feedback strong {
+/* Its tail, pointing down at the box */
+.round__feedback > span::after {
+  content: '';
+  position: absolute;
+  top: calc(100% + 2px);
+  left: calc(50% - 6px);
+  border: 6px solid transparent;
+  border-top-color: var(--miss);
+}
+.round__feedback strong,
+.round__said strong {
   color: var(--miss);
+}
+/* The sign's copy of the bubble, for a phone with its keyboard up or on its side (below) */
+.round__said {
+  display: none;
+  padding-top: 6px;
+  border-top: 2px dashed var(--ink-line);
+  font-size: var(--fs-sm);
+  line-height: 1.35;
+}
+.keyboard-open .game--playing .round__said:not(:empty) {
+  display: block;
+}
+/* Out of sight, but still read out */
+.keyboard-open .game--playing .round__feedback > span {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
 }
 .shake {
   animation:
@@ -1058,7 +1043,7 @@ p {
 }
 .reveal__prompt {
   font-weight: 700;
-  font-size: 1.05rem;
+  font-size: var(--fs-md);
   line-height: 1.25;
   text-wrap: balance;
 }
@@ -1069,7 +1054,7 @@ p {
 }
 .verdict {
   display: grid;
-  grid-template-columns: auto 1fr auto;
+  grid-template-columns: 1fr auto;
   align-items: center;
   gap: 12px;
   padding: 12px;
@@ -1078,25 +1063,10 @@ p {
   border-left: 8px solid var(--lamp);
   animation: pop 0.3s ease;
 }
-/* How far the lift went, on an indicator window */
-.verdict__floors {
-  min-width: 2.4em;
-  padding: 4px 6px 6px;
-  background: var(--ink-deep);
-  color: var(--lamp);
-  font-family: var(--font-display);
-  font-size: 1.5rem;
-  font-weight: 700;
-  line-height: 1;
-  text-align: center;
-}
-.verdict--miss .verdict__floors {
-  color: #ff958a;
-}
 .verdict__label {
   font-family: var(--font-display);
   font-weight: 700;
-  font-size: 1.35rem;
+  font-size: var(--fs-lg);
   line-height: 1.1;
   color: var(--tier);
 }
@@ -1104,26 +1074,22 @@ p {
   font-weight: 700;
   overflow-wrap: anywhere;
 }
-.verdict__blurb {
-  font-size: 0.85rem;
-  color: var(--muted);
-}
 .verdict__points {
   font-family: var(--font-display);
   font-weight: 700;
-  font-size: 1.7rem;
+  font-size: var(--fs-xl);
   color: var(--tier);
 }
 .upgrade {
   padding: 8px 12px;
   background: var(--amber);
   border: 2px solid var(--ink-deep);
-  font-size: 1.05rem;
+  font-size: var(--fs-md);
 }
 .upgrade__label {
-  font-family: var(--font-display);
-  font-size: 0.8rem;
-  font-weight: 600;
+  font-family: var(--font-body);
+  font-size: var(--fs-xs);
+  font-weight: 700;
   letter-spacing: 0.08em;
   text-transform: uppercase;
   margin-right: 6px;
@@ -1155,13 +1121,19 @@ p {
 .samples h3 {
   margin-top: 0;
 }
+/* The guesses that weren't on the list, over the other answers on the same card */
+.samples .attempts {
+  padding-bottom: 10px;
+  margin-bottom: 12px;
+  border-bottom: 1px solid var(--line);
+}
 .samples__row {
   display: grid;
   grid-template-columns: 8.6rem 1fr;
   gap: 8px;
   padding: 6px 0;
   border-bottom: 1px solid var(--line);
-  font-size: 0.92rem;
+  font-size: var(--fs-sm);
 }
 .samples__tier {
   font-weight: 700;
@@ -1176,7 +1148,7 @@ p {
 /* Every accepted answer, behind a native disclosure. Always on a card */
 .all-answers {
   margin-top: 8px;
-  font-size: 0.92rem;
+  font-size: var(--fs-sm);
 }
 .all-answers summary {
   cursor: pointer;
@@ -1197,7 +1169,7 @@ p {
 }
 .all-answers__tier {
   font-weight: 700;
-  font-size: 0.85rem;
+  font-size: var(--fs-sm);
   color: var(--tier);
 }
 .all-answers__points {
@@ -1220,7 +1192,7 @@ p {
   padding: 0 6px 1px;
   background: var(--ink);
   color: var(--amber);
-  font-size: 0.72rem;
+  font-size: var(--fs-xs);
   font-weight: 600;
   white-space: nowrap;
 }
@@ -1238,7 +1210,7 @@ p {
   outline-offset: 2px;
 }
 .attempts {
-  font-size: 0.9rem;
+  font-size: var(--fs-sm);
 }
 .attempts__label {
   color: var(--muted);
@@ -1254,7 +1226,7 @@ p {
   overflow-wrap: anywhere;
 }
 .attempts--compact {
-  font-size: 0.85rem;
+  font-size: var(--fs-sm);
   margin-bottom: 4px;
 }
 .attempts--compact .attempts__label,
@@ -1277,69 +1249,26 @@ p {
 .report-problems {
   margin: 8px 0 0;
   color: var(--muted);
-  font-size: 0.85rem;
+  font-size: var(--fs-sm);
 }
 
-/* The lift's plate, under the round counter: which lift this is, and how far to the next */
-.plate {
-  display: grid;
-  grid-template-columns: auto minmax(30px, 1fr) auto;
-  align-items: center;
-  gap: 8px;
-  padding: 3px 8px 4px;
-  background: var(--plate);
-  border: 2px solid var(--ink-deep);
-  color: var(--cream);
-  transition: opacity 0.2s ease;
-}
-.plate__name {
-  font-family: var(--font-display);
-  font-size: 0.82rem;
-  font-weight: 600;
-  line-height: 1.1;
-}
-.plate__bar {
-  height: 5px;
-  background: #33476a;
-  overflow: hidden;
-}
-.plate__fill {
-  display: block;
-  height: 100%;
-  background: var(--amber);
-  transform-origin: left;
-  transition: transform 0.6s ease;
-}
-.plate__next {
-  font-size: 0.7rem;
-  line-height: 1.1;
-  color: var(--muted);
-}
-.plate__next strong,
-.plate__next > span {
-  display: block;
-}
-.plate__next strong {
-  color: var(--cream);
-  font-weight: 500;
-  margin-bottom: 3px;
-}
-.directory__goal {
-  color: var(--amber);
-  font-size: 0.8rem;
-  margin-bottom: 8px;
-}
-
-/* The lift directory: a board listing every lift, lit up as far as you've got */
+/*
+ * The lift directory, in How to play: a dark board on the cream card, listing every lift and lit up as far as the
+ * best score has got. Its words go back to the colours they have on the navy shell
+ */
 .directory {
+  --text: var(--cream);
+  --muted: #a9b6c4;
+  margin-top: 10px;
+  padding: 10px 12px 6px;
   background: var(--ink-deep);
   border: 2px solid var(--ink-line);
-  padding: 10px 12px 6px;
+  color: var(--text);
 }
 .directory__title {
-  font-family: var(--font-display);
-  font-size: 0.8rem;
-  font-weight: 600;
+  font-family: var(--font-body);
+  font-size: var(--fs-xs);
+  font-weight: 700;
   letter-spacing: 0.12em;
   text-transform: uppercase;
   color: var(--muted);
@@ -1371,24 +1300,25 @@ p {
   background: #24324a;
 }
 .directory__min {
-  font-size: 0.9rem;
+  font-size: var(--fs-md);
   font-variant-numeric: tabular-nums;
   color: var(--muted);
 }
 .directory__row--locked {
   color: #7b8aa0;
 }
-.directory__row--passed .directory__lamp {
+.directory__row--reached .directory__lamp {
   background: var(--teal);
 }
-.directory__row--here {
+/* The furthest the player has got */
+.directory__row--best {
   color: var(--amber);
 }
-.directory__row--here .directory__lamp {
+.directory__row--best .directory__lamp {
   background: var(--amber);
   box-shadow: 0 0 0 2px rgb(248 199 107 / 0.3);
 }
-.directory__row--here .directory__min {
+.directory__row--best .directory__min {
   color: var(--amber);
 }
 
@@ -1409,7 +1339,7 @@ p {
 }
 .results__headline {
   font-family: var(--font-display);
-  font-size: clamp(1.6rem, 7vw, 2.1rem);
+  font-size: var(--fs-xl);
   font-weight: 700;
   color: var(--amber);
 }
@@ -1421,24 +1351,25 @@ p {
   font-family: var(--font-display);
 }
 .results__number {
-  font-size: 4rem;
+  font-size: var(--fs-3xl);
   font-weight: 700;
   line-height: 0.95;
   color: var(--pink);
   text-shadow: 4px 4px 0 var(--ink-deep);
 }
 .results__max {
-  font-size: 1.3rem;
+  font-size: var(--fs-lg);
   color: var(--muted);
 }
 .results__reached {
-  font-size: 1.1rem;
-}
-.results__blurb {
   color: var(--muted);
-  font-size: 0.92rem;
+  font-size: var(--fs-sm);
   line-height: 1.35;
   text-wrap: balance;
+}
+.results__reached strong {
+  color: var(--text);
+  font-size: var(--fs-md);
 }
 .results--perfect .results__headline {
   animation:
@@ -1448,17 +1379,15 @@ p {
 .results__lamps {
   list-style: none;
   display: grid;
-  grid-template-columns: repeat(7, 38px);
+  grid-template-columns: repeat(7, 34px);
   gap: 6px;
   margin: 8px 0 0;
   padding: 0;
 }
 .results__lamp {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 5px;
-  padding: 7px 0 4px;
+  display: grid;
+  place-items: center;
+  height: 34px;
   background: var(--ink-deep);
   border: 2px solid var(--ink-line);
 }
@@ -1489,17 +1418,24 @@ p {
 .results__lamp:nth-child(7) {
   --n: 6;
 }
-.results__climb {
-  font-family: var(--font-display);
-  font-size: 0.85rem;
-  font-weight: 600;
-  line-height: 1;
-  color: var(--tier);
+/* The way home, at the top where the game had its way back */
+.results__top {
+  order: 0;
+  position: relative;
+  z-index: 2;
+  display: flex;
+  width: min(100%, 560px);
+  align-self: center;
+  pointer-events: auto;
 }
-.results__actions {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
+/* Share, and the next game beside it */
+.results__dock {
+  flex-direction: row;
+  align-items: flex-end;
   gap: 10px;
+}
+.results__share {
+  flex: 1;
 }
 
 .breakdown {
@@ -1509,18 +1445,48 @@ p {
   text-align: left;
 }
 .breakdown__row {
-  display: grid;
-  grid-template-columns: auto 1fr auto;
-  gap: 10px;
-  align-items: center;
-  padding: 10px 12px;
   border-bottom: 1px solid var(--line);
 }
 .breakdown__row:last-child {
   border-bottom: none;
 }
+/* A question in one row: the lamp, the question and the answer, the points, and a chevron for the rest */
+.breakdown__summary {
+  display: grid;
+  grid-template-columns: auto 1fr auto auto;
+  gap: 10px;
+  align-items: center;
+  padding: 10px 12px;
+  cursor: pointer;
+  list-style: none;
+}
+.breakdown__summary::-webkit-details-marker {
+  display: none;
+}
+.breakdown__summary::after {
+  content: '';
+  width: 7px;
+  height: 7px;
+  margin-right: 2px;
+  border-right: 2px solid var(--muted);
+  border-bottom: 2px solid var(--muted);
+  transform: rotate(-45deg);
+  transition: transform 0.15s ease;
+}
+.breakdown__details[open] > .breakdown__summary::after {
+  transform: rotate(45deg);
+}
+.breakdown__summary:focus-visible {
+  outline: 3px solid var(--focus);
+  outline-offset: -3px;
+}
+@media (hover: hover) {
+  .breakdown__summary:hover {
+    background: rgb(23 33 47 / 0.05);
+  }
+}
 .breakdown__lamp {
-  font-size: 1.15rem;
+  font-size: var(--fs-lg);
 }
 .breakdown__body {
   display: flex;
@@ -1528,33 +1494,39 @@ p {
   min-width: 0;
 }
 .breakdown__prompt {
-  font-size: 0.8rem;
+  font-size: var(--fs-sm);
   color: var(--muted);
 }
 .breakdown__answer {
   font-weight: 700;
   overflow-wrap: anywhere;
 }
-.breakdown__answer .muted {
-  font-weight: 500;
-}
-.breakdown__answer .lamp {
-  font-size: 0.8em;
-}
 .breakdown__points {
   font-family: var(--font-display);
-  font-size: 1.2rem;
+  font-size: var(--fs-lg);
   font-weight: 700;
   color: var(--tier);
 }
+/* An open row: the gem, the guesses that weren't on the list, every answer and the report links, lined up with the
+   question past the lamp */
 .breakdown__more {
-  grid-column: 2 / -1;
-  min-width: 0;
-  margin-top: -6px;
+  display: grid;
+  gap: 8px;
+  padding: 0 12px 12px 41px;
+  font-size: var(--fs-sm);
 }
-.breakdown__more .all-answers {
-  margin-top: 0;
-  font-size: 0.85rem;
+.breakdown__gem {
+  color: var(--muted);
+}
+.breakdown__gem .lamp {
+  margin-right: 4px;
+}
+.breakdown__gem strong {
+  color: var(--text);
+}
+.breakdown__more .attempts,
+.breakdown__more .report-problems {
+  margin: 0;
 }
 
 .stats {
@@ -1570,19 +1542,19 @@ p {
 }
 .stat__value {
   font-family: var(--font-display);
-  font-size: 1.6rem;
+  font-size: var(--fs-xl);
   font-weight: 700;
   line-height: 1.2;
   color: var(--amber);
 }
 .stat__label {
-  font-size: 0.75rem;
+  font-size: var(--fs-xs);
   color: var(--muted);
 }
 .countdown {
-  font-family: var(--font-display);
+  font-family: var(--font-body);
   font-variant-numeric: tabular-nums;
-  font-weight: 600;
+  font-weight: 700;
   color: var(--text);
 }
 
@@ -1610,7 +1582,7 @@ p {
 }
 .modal__card h2 {
   font-family: var(--font-display);
-  font-size: 1.7rem;
+  font-size: var(--fs-xl);
   font-weight: 700;
 }
 .modal__card .btn {
@@ -1629,10 +1601,10 @@ p {
 }
 .tier-list__row {
   display: grid;
-  grid-template-columns: 1.3rem 1fr auto auto;
+  grid-template-columns: 1.3rem 1fr auto;
   grid-template-areas:
-    'lamp label floors points'
-    'lamp blurb floors points';
+    'lamp label points'
+    'lamp blurb points';
   column-gap: 8px;
   padding: 6px 0;
   border-bottom: 1px solid var(--line);
@@ -1648,24 +1620,15 @@ p {
 }
 .tier-list__blurb {
   grid-area: blurb;
-  font-size: 0.85rem;
+  font-size: var(--fs-sm);
   color: var(--muted);
-}
-.tier-list__floors {
-  grid-area: floors;
-  align-self: center;
-  padding: 1px 5px 3px;
-  background: var(--ink-deep);
-  color: var(--amber);
-  font-family: var(--font-display);
-  font-weight: 600;
 }
 .tier-list__points {
   grid-area: points;
   align-self: center;
   min-width: 2.1em;
   font-family: var(--font-display);
-  font-size: 1.15rem;
+  font-size: var(--fs-lg);
   font-weight: 700;
   text-align: right;
 }
@@ -1717,45 +1680,41 @@ p {
     padding: 16px 18px 18px;
   }
   .game__top {
-    display: grid;
-    grid-template-columns: 1fr minmax(0, 420px) 1fr;
-    grid-template-areas: 'back pips stats' '. plate .';
-    align-items: center;
+    grid-template-columns: 1fr auto 1fr;
     column-gap: 16px;
     width: 100%;
   }
-  .hud {
-    display: contents;
+  .results__top {
+    width: 100%;
   }
-  .hud .btn {
-    grid-area: back;
+  .hud__back {
     justify-self: start;
   }
-  .hud__stats {
-    grid-area: stats;
+  .hud__score {
     justify-self: end;
   }
   .pips {
-    grid-area: pips;
-  }
-  .game__top .plate {
-    grid-area: plate;
+    gap: 6px;
   }
   .pip {
-    height: 30px;
-    font-size: 1rem;
+    width: 28px;
+    height: 28px;
+  }
+  .pip .lamp {
+    width: 18px;
+    height: 18px;
   }
   .logo {
     width: 300px;
   }
   .tagline {
-    font-size: 2rem;
+    font-size: var(--fs-xl);
   }
   .round__prompt {
-    font-size: 1.9rem;
+    font-size: var(--fs-xl);
   }
   .ready__brief {
-    font-size: 1.7rem;
+    font-size: var(--fs-xl);
   }
 }
 /* Home on a wide screen: the title stands to one side of the lift and the way in to the other, level with it */
@@ -1866,6 +1825,7 @@ p {
   .board,
   .dock,
   .game__top,
+  .results__top,
   .home__panel {
     width: 100%;
     align-self: stretch;
@@ -1893,34 +1853,31 @@ p {
     width: 150px;
   }
   .tagline {
-    font-size: 1.25rem;
+    font-size: var(--fs-lg);
   }
   .btn--big {
     padding: 10px 16px 13px;
-    font-size: 1.1rem;
-  }
-  .pip {
-    height: 22px;
+    font-size: var(--fs-lg);
   }
   .round__prompt {
-    font-size: 1.3rem;
+    font-size: var(--fs-lg);
   }
-  .round__feedback {
-    min-height: 1.5em;
+  .round__said:not(:empty) {
+    display: block;
+  }
+  .round__feedback > span {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip-path: inset(50%);
+    white-space: nowrap;
   }
   .results__number {
-    font-size: 3rem;
+    font-size: var(--fs-2xl);
   }
 }
 
-@keyframes pulse {
-  from {
-    opacity: 1;
-  }
-  to {
-    opacity: 0.55;
-  }
-}
 @keyframes shake {
   20%,
   60% {

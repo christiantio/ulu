@@ -78,14 +78,16 @@ describe('Reveal', () => {
     }
   })
 
-  it('says how rare the answer was, what it scored and how far the lift went', () => {
-    renderReveal(hit('rare'), undefined, { floor: 16 })
+  it('says how rare the answer was and what it scored, in points only', () => {
+    renderReveal(hit('rare'))
     const verdict = document.querySelector('.verdict')!
     expect(verdict.classList.contains('tier--rare')).toBe(true)
     expect(verdict.querySelector('.verdict__label')!.textContent).toBe('Steady')
-    expect(verdict.querySelector('.verdict__floors')!.textContent).toBe('▲12')
+    expect(verdict.querySelector('.verdict__answer')!.textContent).toBe(answerOf(prompt, 'rare').name)
     expect(verdict.querySelector('.verdict__points')!.textContent).toBe('+60 points')
-    expect(verdict.querySelector('.verdict__blurb')!.textContent).toBe(`${TIER_INFO.rare.blurb} Up 12 floors, now on floor 16.`)
+    // Nothing else: how far the lift went is the lift's to show, and How to play has what each tier means
+    expect(verdict.textContent).not.toMatch(/floor|▲/i)
+    expect(verdict.textContent).not.toContain(TIER_INFO.rare.blurb)
     // Read out with the Next button
     const next = screen.getByRole('button', { name: /Next question/ })
     expect(document.getElementById(next.getAttribute('aria-describedby')!)!.contains(verdict)).toBe(true)
@@ -93,17 +95,16 @@ describe('Reveal', () => {
   })
 
   it('says the lift stayed put after a miss', () => {
-    renderReveal(miss, undefined, { floor: 3 })
+    renderReveal(miss)
     const verdict = document.querySelector('.verdict')!
     expect(verdict.classList.contains('verdict--miss')).toBe(true)
     expect(verdict.querySelector('.verdict__label')!.textContent).toBe('Time up!')
-    expect(verdict.querySelector('.verdict__floors')!.textContent).toBe('–')
-    expect(verdict.querySelector('.verdict__blurb')!.textContent).toBe('The lift stays where it is. No floors gained, now on floor 03.')
+    expect(verdict.querySelector('.verdict__answer')!.textContent).toBe('No valid answer')
     expect(verdict.querySelector('.verdict__points')!.textContent).toBe('+0 points')
   })
 
   it('announces a new lift with the verdict when the answer unlocked one', () => {
-    renderReveal(hit('gem'), undefined, { floor: 20, upgrade: STAGES[1] })
+    renderReveal(hit('gem'), undefined, { upgrade: STAGES[1] })
     expect(document.querySelector('.upgrade')!.textContent).toBe('New lift unlocked Upgraded HDB Lift')
     const next = screen.getByRole('button', { name: /Next question/ })
     expect(document.getElementById(next.getAttribute('aria-describedby')!)!.textContent).toContain('New lift unlocked Upgraded HDB Lift')
@@ -162,6 +163,9 @@ describe('Reveal', () => {
     const guesses = ['zzqq', 'Pulau Hantu & co']
     renderReveal({ ...miss, attempts: guesses }, '2026-11-10')
     const list = screen.getByRole('list', { name: 'Not on our list' })
+    // On the same card as the other answers, above them
+    expect(list.closest('.card')).toBe(document.querySelector('.samples'))
+    expect(document.querySelectorAll('.reveal .card')).toHaveLength(1)
     expect(within(list).getAllByRole('listitem').map((li) => li.textContent)).toEqual(['“zzqq”', '“Pulau Hantu & co”'])
 
     const link = screen.getByRole('link', { name: /^Should this count\?/ })

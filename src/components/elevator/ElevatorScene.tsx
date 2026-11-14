@@ -23,7 +23,6 @@ import {
   TRAVEL_MS,
   UPGRADE_MS,
   floorsFor,
-  floorsLabel,
   formatFloor,
   indicatorFloor,
   rideMs,
@@ -462,7 +461,10 @@ function NewLift({ stage }: { stage: Stage }) {
 
 const CONFETTI: Partial<Record<Tier, number>> = { solid: 16, rare: 28, ulu: 44, gem: 64 }
 
-/** When the doors open: how rare the answer was and what it earned, with a flourish to match */
+/**
+ * When the doors open: how rare the answer was and what it earned, with a flourish to match. The floors it climbed
+ * are the indicator's to show
+ */
 function Arrival({ result }: { result: RoundResult }) {
   const { tier, points } = result
   return (
@@ -471,7 +473,6 @@ function Arrival({ result }: { result: RoundResult }) {
       {tier && CONFETTI[tier] && <Confetti count={CONFETTI[tier]} />}
       <div className={`stamp ${tier ? `tier--${tier}` : 'stamp--miss'}`}>
         <span className="stamp__label">{tier ? TIER_INFO[tier].label : 'Time up!'}</span>
-        <span className="stamp__floors">{tier ? `▲ ${floorsLabel(floorsFor(tier))}` : 'Staying put'}</span>
         <span className="stamp__points">+{points}</span>
       </div>
     </>

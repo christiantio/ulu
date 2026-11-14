@@ -1,10 +1,11 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
-import { formatFloor, liftAfter, prefersReducedMotion, upgradeFor } from '../game/elevator'
+import { liftAfter, prefersReducedMotion, upgradeFor } from '../game/elevator'
 import { SECONDS_PER_ROUND, TIER_INFO } from '../game/scoring'
 import type { Prompt, RoundResult } from '../game/types'
 import { CountUp } from './CountUp'
-import { ElevatorProgress } from './ElevatorProgress'
+import { LiftMeter } from './ElevatorProgress'
 import { KeyHint } from './KeyHint'
+import { TierLamp } from './TierLamp'
 import { loadBackdrops } from './elevator/backdrops'
 import { ElevatorScene } from './elevator/ElevatorScene'
 import { Reveal } from './Reveal'
@@ -122,31 +123,11 @@ export function Game({
       />
 
       <div className="stack game__stack">
-        <div className="game__top">
-          <header className="hud">
-            <button className="btn btn--chip btn--small" onClick={onQuit} aria-label="Back to home">
-              ← {title}
-            </button>
-            <dl className="hud__stats">
-              <div className="hud__stat">
-                <dt>Floor</dt>
-                <dd>{formatFloor(lift.floor)}</dd>
-              </div>
-              <div className="hud__stat game__score">
-                <dt>Score</dt>
-                <dd>
-                  {gained > 0 && (
-                    <span key={index} className="game__gain" aria-hidden="true">
-                      +{gained}
-                    </span>
-                  )}
-                  <strong>
-                    <CountUp value={lift.score} />
-                  </strong>
-                </dd>
-              </div>
-            </dl>
-          </header>
+        {/* One row: the way back, a lamp for each round, and the score. The floor is the lift's to show */}
+        <header className="game__top hud">
+          <button className="btn btn--chip btn--small hud__back" onClick={onQuit} aria-label="Back to home">
+            ← {title}
+          </button>
 
           <ol className="pips" aria-label="Rounds">
             {prompts.map((p, i) => {
@@ -160,18 +141,29 @@ export function Game({
               return (
                 <li
                   key={p.id}
-                  className={`pip ${current ? 'pip--current' : ''} ${r ? `pip--done pip--${r.tier ?? 'miss'}` : ''} ${fresh ? 'pip--fresh' : ''}`}
+                  className={`pip ${current ? 'pip--current' : ''} ${fresh ? 'pip--fresh' : ''}`}
                   aria-current={current ? 'step' : undefined}
                 >
-                  <span aria-hidden="true">{r && !r.tier ? '×' : i + 1}</span>
+                  {r ? <TierLamp tier={r.tier} /> : <span className="lamp lamp--off" aria-hidden="true" />}
                   <span className="visually-hidden">{label}</span>
                 </li>
               )
             })}
           </ol>
 
-          <ElevatorProgress score={lift.score} floor={lift.floor} compact />
-        </div>
+          <p className="hud__score game__score">
+            <span className="visually-hidden">Score </span>
+            {gained > 0 && (
+              <span key={index} className="game__gain" aria-hidden="true">
+                +{gained}
+              </span>
+            )}
+            <strong>
+              <CountUp value={lift.score} />
+            </strong>
+            <LiftMeter score={lift.score} />
+          </p>
+        </header>
 
         {/* The sky over the sign, and the room the lift stands in between the sign and the controls */}
         <div className="stack__sky" />
@@ -183,8 +175,8 @@ export function Game({
               <p className="board__label">
                 Question {index + 1} of {prompts.length}
               </p>
-              <p className="ready__brief">Answer before the doors close.</p>
-              <p className="board__note">You have {SECONDS_PER_ROUND} seconds. The clock starts when you press the button.</p>
+              {/* The clock waits for the button */}
+              <p className="ready__brief">{SECONDS_PER_ROUND} seconds before the doors close.</p>
             </section>
             <div className="dock">
               <button className="btn btn--primary btn--block btn--big" onClick={start}
@@ -227,7 +219,6 @@ export function Game({
             result={last}
             isLast={results.length >= prompts.length}
             reportDate={reportDate}
-            floor={lift.floor}
             upgrade={upgrade}
             onNext={handleNext}
           />
