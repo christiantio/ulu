@@ -1,5 +1,5 @@
 import { useId } from 'react'
-import { STAGES, floorForScore, formatFloor, nextStage, stageFor, stageIndex } from '../game/elevator'
+import { STAGES, nextStage, stageFor, stageIndex } from '../game/elevator'
 import { MAX_SCORE } from '../game/scoring'
 
 /** How far the score has got towards the next lift, or towards a perfect climb once there are none left */
@@ -33,13 +33,13 @@ export function LiftMeter({ score }: { score: number }) {
  * The lift directory: every lift reached so far, and how many points the locked ones need. Lifts still to come
  * stay unnamed, so each one is a surprise
  */
-export function LiftDirectory({ score, floor }: { score: number; floor: number }) {
+export function LiftDirectory({ score }: { score: number }) {
   const goalId = useId()
   const { stage, next, remaining } = goalFor(score)
   const reached = stageIndex(score)
-  const goal = remaining === 0 ? 'Top floor reached!' : `${remaining} pts to ${next ? 'next lift' : 'a perfect climb'}`
+  const goal = remaining === 0 ? 'All the way up!' : `${remaining} pts to ${next ? 'next lift' : 'a perfect climb'}`
   // role="img" makes the label count and hides the decorative parts
-  const label = `${score} of ${MAX_SCORE} points, floor ${formatFloor(floor)}, ${stage.name}`
+  const label = `${score} of ${MAX_SCORE} points, ${stage.name}`
   return (
     <div className="directory" role="img" aria-label={label} aria-describedby={goalId}>
       <p className="directory__title">Lift directory</p>
@@ -52,7 +52,7 @@ export function LiftDirectory({ score, floor }: { score: number; floor: number }
           >
             <span className="directory__lamp" />
             <span className="directory__name">{i <= reached ? s.name : '? ? ?'}</span>
-            <span className="directory__min">{i === reached ? `Floor ${formatFloor(floor)}` : `${s.min} pts · Floor ${formatFloor(floorForScore(s.min))}`}</span>
+            <span className="directory__min">{s.min} pts</span>
           </li>
         )).reverse()}
       </ol>

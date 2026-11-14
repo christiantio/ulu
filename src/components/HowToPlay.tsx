@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState, type KeyboardEvent, type MouseEvent } from 'react'
-import { FLOORS, POINTS_PER_FLOOR, STAGES, TOP_FLOOR } from '../game/elevator'
+import { STAGES } from '../game/elevator'
 import { MAX_SCORE, ROUNDS_PER_DIVE, SECONDS_PER_ROUND, TIER_INFO } from '../game/scoring'
 import { TIERS } from '../game/types'
 import { TierLamp } from './TierLamp'
@@ -63,9 +63,8 @@ export function HowToPlay({ onClose }: { onClose: () => void }) {
             Whatever is in the box when time runs out still counts.
           </li>
           <li>
-            The first valid answer locks in. <strong>The more ulu it is, the more points</strong>, and the more
-            floors the lift goes up. Every {POINTS_PER_FLOOR} points takes you up one floor, starting at 00.
-            Run out of time and it stays where it is. There is no penalty for trying again.
+            The first valid answer locks in. <strong>The more ulu it is, the more points</strong>, and the higher
+            the lift goes. Run out of time and it stays where it is. There is no penalty for trying again.
           </li>
         </ol>
 
@@ -78,12 +77,6 @@ export function HowToPlay({ onClose }: { onClose: () => void }) {
               </span>
               <span className="tier-list__label">{TIER_INFO[tier].label}</span>
               <span className="tier-list__blurb">{TIER_INFO[tier].blurb}</span>
-              <span className="tier-list__floors">
-                <span aria-hidden="true">▲{FLOORS[tier]}</span>
-                <span className="visually-hidden">
-                  {FLOORS[tier]} {FLOORS[tier] === 1 ? 'floor' : 'floors'},
-                </span>
-              </span>
               <span className="tier-list__points">
                 {TIER_INFO[tier].points}
                 <span className="visually-hidden"> points</span>
@@ -96,7 +89,7 @@ export function HowToPlay({ onClose }: { onClose: () => void }) {
         <p className="muted">
           You start in an ordinary HDB lift. As your score climbs, the lift gets an upgrade: there are{' '}
           {STAGES.length - 1} to unlock, the last at {STAGES[STAGES.length - 1].min} points. A perfect {MAX_SCORE} goes
-          all the way to floor {TOP_FLOOR}. New questions every midnight, Singapore time.
+          all the way to the top. New questions every midnight, Singapore time.
         </p>
 
         <button ref={buttonRef} className="btn btn--primary btn--block" onClick={onClose}>

@@ -219,7 +219,6 @@ export function Game({
             result={last}
             isLast={results.length >= prompts.length}
             reportDate={reportDate}
-            floor={lift.floor}
             upgrade={upgrade}
             onNext={handleNext}
           />

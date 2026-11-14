@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { track } from '../analytics'
-import { floorsFor, formatFloor, liftAfter, type StageId } from '../game/elevator'
+import { liftAfter, type StageId } from '../game/elevator'
 import { MAX_SCORE, TIER_INFO } from '../game/scoring'
 import { shareText } from '../game/share'
 import { singaporeDateKey } from '../game/daily'
@@ -82,7 +82,7 @@ export function Results({ title, results, prompts, stats, isDaily, dateKey, onHo
             <span className="results__max">/ {MAX_SCORE}</span>
           </div>
           <p className="results__reached">
-            Floor <strong>{formatFloor(floor)}</strong> · <strong>{stage.name}</strong>
+            <strong>{stage.name}</strong>
           </p>
           <p className="results__blurb">
             {perfect ? 'All the way up. The doors open, and he blows another bubble.' : stage.blurb}
@@ -92,9 +92,6 @@ export function Results({ title, results, prompts, stats, isDaily, dateKey, onHo
             {results.map((r, i) => (
               <li key={r.promptId} className={`results__lamp ${r.tier ? `tier--${r.tier}` : 'verdict--miss'}`}>
                 <TierLamp tier={r.tier} />
-                <span className="results__climb" aria-hidden="true">
-                  {r.tier ? `▲${floorsFor(r.tier)}` : '–'}
-                </span>
                 <span className="visually-hidden">
                   Question {i + 1}: {r.tier ? TIER_INFO[r.tier].label : 'Time up'}
                 </span>
@@ -110,7 +107,7 @@ export function Results({ title, results, prompts, stats, isDaily, dateKey, onHo
         </div>
 
         <div className="results__more extras">
-          <LiftDirectory score={score} floor={floor} />
+          <LiftDirectory score={score} />
 
           <ol className="breakdown card">
             {results.map((r) => {

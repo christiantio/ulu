@@ -222,9 +222,9 @@ describe('Game', () => {
     expect(document.querySelector('.pip--fresh')!.textContent).toContain('Round 1: Sibei Ulu, 100 points')
     const next = screen.getByRole('button', { name: /Next question/ })
     expect(document.activeElement).toBe(next)
-    // The verdict that's read with the button says how far the lift went, and that it's a new one
+    // The verdict that's read with the button says what the answer was worth, and that the lift is a new one
     const described = document.getElementById(next.getAttribute('aria-describedby')!)!.textContent
-    expect(described).toContain('Up 20 floors, now on floor 20.')
+    expect(described).toContain('+100 points')
     expect(described).toContain('New lift unlocked Upgraded HDB Lift')
   })
 

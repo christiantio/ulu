@@ -1025,7 +1025,7 @@ p {
 }
 .verdict {
   display: grid;
-  grid-template-columns: auto 1fr auto;
+  grid-template-columns: 1fr auto;
   align-items: center;
   gap: 12px;
   padding: 12px;
@@ -1033,21 +1033,6 @@ p {
   border: 2px solid var(--ink-deep);
   border-left: 8px solid var(--lamp);
   animation: pop 0.3s ease;
-}
-/* How far the lift went, on an indicator window */
-.verdict__floors {
-  min-width: 2.4em;
-  padding: 4px 6px 6px;
-  background: var(--ink-deep);
-  color: var(--lamp);
-  font-family: var(--font-display);
-  font-size: 1.5rem;
-  font-weight: 700;
-  line-height: 1;
-  text-align: center;
-}
-.verdict--miss .verdict__floors {
-  color: #ff958a;
 }
 .verdict__label {
   font-family: var(--font-display);
@@ -1360,17 +1345,15 @@ p {
 .results__lamps {
   list-style: none;
   display: grid;
-  grid-template-columns: repeat(7, 38px);
+  grid-template-columns: repeat(7, 34px);
   gap: 6px;
   margin: 8px 0 0;
   padding: 0;
 }
 .results__lamp {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 5px;
-  padding: 7px 0 4px;
+  display: grid;
+  place-items: center;
+  height: 34px;
   background: var(--ink-deep);
   border: 2px solid var(--ink-line);
 }
@@ -1400,13 +1383,6 @@ p {
 }
 .results__lamp:nth-child(7) {
   --n: 6;
-}
-.results__climb {
-  font-family: var(--font-display);
-  font-size: 0.85rem;
-  font-weight: 600;
-  line-height: 1;
-  color: var(--tier);
 }
 .results__actions {
   display: grid;
@@ -1541,10 +1517,10 @@ p {
 }
 .tier-list__row {
   display: grid;
-  grid-template-columns: 1.3rem 1fr auto auto;
+  grid-template-columns: 1.3rem 1fr auto;
   grid-template-areas:
-    'lamp label floors points'
-    'lamp blurb floors points';
+    'lamp label points'
+    'lamp blurb points';
   column-gap: 8px;
   padding: 6px 0;
   border-bottom: 1px solid var(--line);
@@ -1562,15 +1538,6 @@ p {
   grid-area: blurb;
   font-size: 0.85rem;
   color: var(--muted);
-}
-.tier-list__floors {
-  grid-area: floors;
-  align-self: center;
-  padding: 1px 5px 3px;
-  background: var(--ink-deep);
-  color: var(--amber);
-  font-family: var(--font-display);
-  font-weight: 600;
 }
 .tier-list__points {
   grid-area: points;

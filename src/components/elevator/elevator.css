@@ -396,14 +396,13 @@
   line-height: 1.1;
 }
 
-/* When the doors open: the rarity, the floors and the points */
+/* When the doors open: the rarity and the points */
 .stamp {
   position: absolute;
   bottom: var(--plaque);
   left: var(--cx, 50%);
-  display: grid;
-  grid-template-columns: auto auto;
-  align-items: center;
+  display: flex;
+  align-items: baseline;
   column-gap: 14px;
   padding: 6px 12px 8px;
   background: var(--ink-deep);
@@ -429,15 +428,7 @@
   line-height: 1.1;
   color: var(--tier);
 }
-.stamp__floors {
-  grid-column: 1;
-  font-size: 0.8rem;
-  font-weight: 500;
-  line-height: 1.1;
-}
 .stamp__points {
-  grid-column: 2;
-  grid-row: 1 / span 2;
   font-size: 1.7rem;
   font-weight: 700;
   line-height: 1;

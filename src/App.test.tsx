@@ -175,7 +175,7 @@ describe('App daily flow', () => {
 
     await again.user.click(button('See results'))
     expect(screen.getByText('Ulu #15')).toBeDefined()
-    expect(screen.getByRole('img', { name: '70 of 700 points, floor 14, HDB Lift' })).toBeDefined()
+    expect(screen.getByRole('img', { name: '70 of 700 points, HDB Lift' })).toBeDefined()
     await again.user.click(button('Home'))
     expect(screen.getByText('Done for today:', { exact: false }).textContent).toBe('Done for today: 70 pts')
     expect(statsLine()).toBe('1 played · 1 day streak · best 70')
@@ -275,7 +275,7 @@ describe('App daily flow', () => {
     await user.click(button(/Next question/))
     await playDive(user, today, 3)
     await user.click(button('See results'))
-    expect(screen.getByRole('img', { name: '70 of 700 points, floor 14, HDB Lift' })).toBeDefined()
+    expect(screen.getByRole('img', { name: '70 of 700 points, HDB Lift' })).toBeDefined()
     const link = screen.getByRole('link', { name: /^Should this count\?/ })
     expect(new URL(link.getAttribute('href')!).searchParams.get('dive')).toBe(TODAY)
   })

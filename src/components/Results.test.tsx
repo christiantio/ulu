@@ -79,12 +79,12 @@ afterEach(() => {
 const row = (i: number) => screen.getByText(prompts[i].text).closest('li')!
 
 describe('Results', () => {
-  it('shows the score, the floor and lift reached, and each prompt with its gem', () => {
+  it('shows the score, the lift reached, and each prompt with its gem', () => {
     renderResults('2026-11-10')
-    // Six common answers and a miss: 60 points, twelve floors up, still in the first lift
-    expect(screen.getByRole('img', { name: '60 of 700 points, floor 12, HDB Lift' })).toBeDefined()
+    // Six common answers and a miss: 60 points, still in the first lift
+    expect(screen.getByRole('img', { name: '60 of 700 points, HDB Lift' })).toBeDefined()
     expect(document.querySelector('.results__number')!.textContent).toBe('60')
-    expect(document.querySelector('.results__reached')!.textContent).toBe('Floor 12 · HDB Lift')
+    expect(document.querySelector('.results__reached')!.textContent).toBe('HDB Lift')
     expect(screen.getByRole('heading', { level: 1 }).textContent).toBe('Heartland hero')
     for (const p of prompts) expect(screen.getByText(p.text)).toBeDefined()
     // Read out as e.g. "No answer . The gem: X ... Time up, 0 points"
@@ -110,8 +110,8 @@ describe('Results', () => {
 
     const lamps = within(screen.getByRole('list', { name: 'Your seven answers' })).getAllByRole('listitem')
     expect(lamps.map((li) => li.textContent)).toEqual([
-      '–Question 1: Time up',
-      ...prompts.slice(1).map((_, i) => `▲2Question ${i + 2}: Everybody Say`),
+      'Question 1: Time up',
+      ...prompts.slice(1).map((_, i) => `Question ${i + 2}: Everybody Say`),
     ])
     expect(lamps[0].querySelector('.lamp--miss')).not.toBeNull()
     expect(lamps[1].querySelector('.lamp--common')).not.toBeNull()
@@ -120,7 +120,7 @@ describe('Results', () => {
   it('lists the lifts reached in the directory, and keeps the ones still locked a secret', () => {
     renderResults('2026-11-10')
     const rows = [...document.querySelectorAll('.directory__row')].map((row) => row.textContent)
-    expect(rows).toEqual(['? ? ?600 pts · Floor 120', '? ? ?500 pts · Floor 100', '? ? ?350 pts · Floor 70', '? ? ?200 pts · Floor 40', '? ? ?100 pts · Floor 20', 'HDB LiftFloor 12'])
+    expect(rows).toEqual(['? ? ?600 pts', '? ? ?500 pts', '? ? ?350 pts', '? ? ?200 pts', '? ? ?100 pts', 'HDB Lift0 pts'])
   })
 
   it('celebrates a perfect game at the top of the penthouse', () => {
@@ -130,7 +130,7 @@ describe('Results', () => {
     })
     render(<Results title="Ulu #15" results={perfect} prompts={prompts} isDaily dateKey="2026-11-10" onHome={() => {}} onUnlimited={() => {}} />)
     expect(screen.getByRole('heading', { level: 1 }).textContent).toBe('Perfect climb')
-    expect(screen.getByRole('img', { name: '700 of 700 points, floor 140, Sky Penthouse' })).toBeDefined()
+    expect(screen.getByRole('img', { name: '700 of 700 points, Sky Penthouse' })).toBeDefined()
     const scene = document.querySelector('.scene') as HTMLElement
     expect(scene.dataset.lift).toBe('penthouse')
     expect(scene.dataset.floor).toBe('140')
@@ -258,8 +258,8 @@ describe('Results', () => {
 
     await act(async () => fireEvent.click(screen.getByRole('button', { name: 'Share result' })))
     expect(writeText).toHaveBeenCalledTimes(1)
-    // Spoiler-free: just the score, the grid, and the floor and lift reached, none of the answer lists
-    expect(writeText.mock.calls[0]).toEqual([`Ulu #15 🇸🇬 60/700\n❌⚪⚪⚪⚪⚪⚪\nFloor 12 · HDB Lift\n${window.location.origin}`])
+    // Spoiler-free: just the score, the grid, and the lift reached, none of the answer lists
+    expect(writeText.mock.calls[0]).toEqual([`Ulu #15 🇸🇬 60/700\n❌⚪⚪⚪⚪⚪⚪\nHDB Lift\n${window.location.origin}`])
     expect(writeText.mock.calls[0][0]).not.toMatch(/MRT|train|Raffles|station/i)
     expect(writeText.mock.calls[0][0]).not.toContain('Show all')
     expect(screen.getByRole('button', { name: 'Copied! Go paste in the group chat' })).toBeDefined()
