@@ -160,7 +160,6 @@ describe('App daily flow', () => {
     unmount()
     const again = await renderApp()
     expect(scene().dataset.floor).toBe('02')
-    expect(screen.getByRole('img', { name: '10 of 700 points, floor 02, HDB Lift' })).toBeDefined()
     await again.user.click(button('Continue climbing (1/7)'))
     expect(screen.getByText('Question 2 of 7')).toBeDefined()
     await again.user.click(button('Going up'))

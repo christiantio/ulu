@@ -504,10 +504,6 @@
   flex: none;
   pointer-events: auto;
 }
-/* The plate steps aside for the ride: the picture has its own things to say */
-.game--ride .plate {
-  opacity: 0;
-}
 @media (min-width: 600px) and (max-height: 520px) {
   .lift__bar {
     left: 50%;

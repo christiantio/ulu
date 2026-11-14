@@ -1,7 +1,6 @@
 import { useEffect, useRef, useState } from 'react'
 import { scoreBucket, track } from './analytics'
 import { Countdown } from './components/Countdown'
-import { ElevatorProgress } from './components/ElevatorProgress'
 import { ElevatorScene } from './components/elevator/ElevatorScene'
 import { Game } from './components/Game'
 import { HowToPlay } from './components/HowToPlay'
@@ -221,7 +220,6 @@ export default function App() {
                 <span className="visually-hidden">Ulu</span>
               </h1>
               <p className="tagline float">How ulu can you go?</p>
-              {played.length > 0 && <ElevatorProgress score={lift.score} floor={lift.floor} compact />}
             </div>
 
             <div className="stack__sky" />

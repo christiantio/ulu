@@ -40,9 +40,9 @@ const answerBox = () => screen.getByRole('textbox', { name: 'Your answer' })
 const pip = (text: string) => within(screen.getByRole('list', { name: 'Rounds' })).getByText(text)
 const skip = () => screen.getByRole('button', { name: 'Skip to the result' })
 const headerScore = () => document.querySelector('.game__score strong')!.textContent
-const headerFloor = () => document.querySelector('.hud__stat dd')!.textContent
-/** The plate on the picture: its label says the score, the floor and the lift */
-const plate = () => screen.getByRole('img').getAttribute('aria-label')
+/** The meter in the score's window: its label says which lift this is and how far it is to the next */
+const meter = () => screen.getByRole('img').getAttribute('aria-label')
+/** The picture: which lift it shows, and the floor its indicator reads */
 const scene = () => document.querySelector('.scene') as HTMLElement
 const goUp = () => screen.getByRole('button', { name: 'Going up' })
 const verdict = (tier: Tier) => screen.queryByText(TIER_INFO[tier].label, { selector: '.verdict__label' })
@@ -80,8 +80,8 @@ describe('Game', () => {
     const { onProgress, user } = setup()
     expect(screen.getByText('Question 1 of 7')).toBeDefined()
     // The lift waits on the ground floor, doors open
-    expect(headerFloor()).toBe('00')
-    expect(plate()).toBe('0 of 700 points, floor 00, HDB Lift')
+    expect(scene().dataset.floor).toBe('00')
+    expect(meter()).toBe('HDB Lift, 100 points to the next lift')
     expect(scene().classList.contains('scene--open')).toBe(true)
     expect(screen.queryByRole('timer')).toBeNull()
     expect(pip('Round 1')).toBeDefined()
@@ -105,7 +105,6 @@ describe('Game', () => {
     expect(secondsLeft(5)).toBeDefined()
     expect(pip('Round 1: Everybody Say, 10 points')).toBeDefined()
     // The lift is where round 1 left it
-    expect(headerFloor()).toBe('02')
     expect(scene().dataset.floor).toBe('02')
 
     advance(5000)
@@ -123,7 +122,7 @@ describe('Game', () => {
     expect(screen.getByText('Time up!')).toBeDefined()
     expect(pip('Round 2: Time up, 0 points')).toBeDefined()
     // A miss leaves the lift where it was
-    expect(headerFloor()).toBe('02')
+    expect(scene().dataset.floor).toBe('02')
     expect(headerScore()).toBe('10')
     expect(onProgress).toHaveBeenCalledTimes(1)
     expect(onFinish).not.toHaveBeenCalled()
@@ -134,7 +133,7 @@ describe('Game', () => {
     expect(onProgress).toHaveBeenCalledWith([expect.objectContaining({ promptId: prompts[0].id, points: 0 })], null)
     advance(rideMs(null))
     expect(screen.getByText('Time up!')).toBeDefined()
-    expect(headerFloor()).toBe('00')
+    expect(scene().dataset.floor).toBe('00')
   })
 
   it('reports progress as each round starts and ends, and the results at the end', async () => {
@@ -156,14 +155,14 @@ describe('Game', () => {
       expected.push(result(p, tier))
       expect(onProgress).toHaveBeenLastCalledWith(expected, null)
 
-      // The ride doesn't give the result away: the pip, score, floor and lift wait for it to land
+      // The ride doesn't give the result away: the pip, score, meter and lift wait for it to land
       const score = expected.reduce((sum, r) => sum + r.points, 0)
       const before = score - TIER_INFO[tier].points
       const upgrade = upgradeFor(before, TIER_INFO[tier].points)
       expect(pip(`Round ${i + 1}`)).toBeDefined()
       expect(headerScore()).toBe(String(before))
-      expect(headerFloor()).toBe(formatFloor(floor))
-      expect(plate()).toBe(`${before} of 700 points, floor ${formatFloor(floor)}, ${stageFor(before).name}`)
+      expect(scene().dataset.floor).toBe(formatFloor(floor))
+      expect(meter()).toMatch(new RegExp(`^${stageFor(before).name}, `))
       expect(verdict(tier)).toBeNull()
       // Sit through every other ride, and skip the rest
       if (i % 2) {
@@ -177,8 +176,7 @@ describe('Game', () => {
       floor += floorsFor(tier)
       expect(pip(`Round ${i + 1}: ${TIER_INFO[tier].label}, ${TIER_INFO[tier].points} points`)).toBeDefined()
       expect(headerScore()).toBe(String(score))
-      expect(headerFloor()).toBe(formatFloor(floor))
-      expect(plate()).toBe(`${score} of 700 points, floor ${formatFloor(floor)}, ${stageFor(score).name}`)
+      expect(meter()).toMatch(new RegExp(`^${stageFor(score).name}, `))
       expect(scene().dataset.lift).toBe(stageFor(score).id)
       expect(scene().dataset.floor).toBe(formatFloor(floor))
       expect(verdict(tier)).not.toBeNull()
@@ -211,14 +209,13 @@ describe('Game', () => {
     advance(whole - 1)
     expect(verdict('gem')).toBeNull()
     expect(headerScore()).toBe('0')
-    expect(headerFloor()).toBe('00')
 
     advance(1)
     expect(verdict('gem')).not.toBeNull()
     expect(screen.queryByRole('button', { name: /Skip/ })).toBeNull()
     expect(headerScore()).toBe('100')
-    expect(headerFloor()).toBe('20')
-    expect(plate()).toBe('100 of 700 points, floor 20, Upgraded HDB Lift')
+    expect(scene().dataset.floor).toBe('20')
+    expect(meter()).toBe('Upgraded HDB Lift, 100 points to the next lift')
     expect(document.querySelector('.game__gain')!.textContent).toBe('+100')
     // The round's button on the counter is the one that lights up
     expect(document.querySelectorAll('.pip--fresh')).toHaveLength(1)
@@ -242,8 +239,8 @@ describe('Game', () => {
     setup({ initialResults: played })
     expect(screen.getByText('Question 5 of 7')).toBeDefined()
     expect(headerScore()).toBe('245')
-    expect(headerFloor()).toBe('49')
-    expect(plate()).toBe('245 of 700 points, floor 49, Condominium Lift')
+    expect(scene().dataset.floor).toBe('49')
+    expect(meter()).toBe('Condominium Lift, 105 points to the next lift')
     expect(scene().dataset.lift).toBe('condo')
     expect(scene().classList.contains('scene--open')).toBe(true)
     expect(pip('Round 3: Time up, 0 points')).toBeDefined()
@@ -261,7 +258,6 @@ describe('Game', () => {
     expect(verdict('gem')).not.toBeNull()
     expect(pip('Round 1: Sibei Ulu, 100 points')).toBeDefined()
     expect(headerScore()).toBe('100')
-    expect(headerFloor()).toBe('20')
     expect(scene().dataset.lift).toBe('upgraded')
     expect(scene().dataset.floor).toBe('20')
     expect(scene().classList.contains('scene--idle')).toBe(true)

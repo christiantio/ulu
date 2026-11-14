@@ -542,6 +542,11 @@ p {
     linear-gradient(-45deg, transparent 42%, #ff958a 42% 58%, transparent 58%), #3b2f3d;
   box-shadow: none;
 }
+/* Not lit yet: a question still to come */
+.lamp--off {
+  background: #2a3a55;
+  box-shadow: inset 2px 2px 0 rgb(0 0 0 / 0.25);
+}
 
 /* Home: the title over the sky, the lift waiting under it, and the way in at its foot */
 .home {
@@ -555,10 +560,6 @@ p {
   gap: 4px;
   padding-top: 6px;
   pointer-events: auto;
-}
-.home__brand .plate {
-  margin-top: 6px;
-  width: min(100%, 300px);
 }
 .home__panel {
   order: 4;
@@ -706,29 +707,30 @@ p {
 .game--ride .stack {
   padding-bottom: var(--foot);
 }
+/* The status: one row along the top, with the way back, a lamp for each round and the score */
 .game__top {
   order: 0;
   position: relative;
   z-index: 2;
-  display: flex;
-  flex-direction: column;
-  gap: 6px;
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+  gap: 10px;
   width: min(100%, 560px);
   align-self: center;
   pointer-events: auto;
 }
 /*
  * A question on a phone fits the part of the window that's visible, which with the keyboard up is not much:
- * --visible-height comes from viewport.ts. The round counter and the lift's plate step aside, the answer box
- * becomes a bar across the top of the keyboard, and the lift sinks behind it so that what shows between the sign
- * and the bar is the boy's face and the doors closing on it (see .game--playing .scene in elevator.css)
+ * --visible-height comes from viewport.ts. The round lamps step aside, the answer box becomes a bar across the
+ * top of the keyboard, and the lift sinks behind it so that what shows between the sign and the bar is the boy's
+ * face and the doors closing on it (see .game--playing .scene in elevator.css)
  */
 .keyboard-open .game--playing {
   --foot: 62px;
   --pad-bottom: 8px;
 }
-.keyboard-open .game--playing .pips,
-.keyboard-open .game--playing .plate {
+.keyboard-open .game--playing .pips {
   position: absolute;
   width: 1px;
   height: 1px;
@@ -755,37 +757,11 @@ p {
   padding-top: 6px;
 }
 
-/* The lift's status: where you are and what you've scored, in indicator windows */
-.hud {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  gap: 8px;
-}
-.hud__stats {
-  display: flex;
-  gap: 8px;
-  margin: 0;
-}
-.hud__stat {
+/* The score, in an indicator window, with the meter for the next lift along its bottom edge */
+.hud__score {
   position: relative;
-  display: flex;
-  align-items: center;
-  gap: 6px;
-}
-.hud__stat dt {
-  font-family: var(--font-display);
-  font-size: 0.72rem;
-  font-weight: 600;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  color: var(--cream);
-  text-shadow: var(--outline);
-}
-.hud__stat dd {
-  margin: 0;
-  min-width: 2.6em;
-  padding: 1px 7px 3px;
+  min-width: 3.3em;
+  padding: 1px 7px 5px;
   background: var(--ink-deep);
   border: 2px solid var(--ink-line);
   box-shadow: 0 3px 0 rgb(0 0 0 / 0.3);
@@ -797,14 +773,27 @@ p {
   line-height: 1.2;
   text-align: right;
 }
-.game__score dd {
-  min-width: 3.3em;
+.meter {
+  position: absolute;
+  left: 2px;
+  right: 2px;
+  bottom: 2px;
+  height: 3px;
+  background: #33476a;
+  overflow: hidden;
+}
+.meter__fill {
+  display: block;
+  height: 100%;
+  background: var(--amber);
+  transform-origin: left;
+  transition: transform 0.6s ease;
 }
 /* The score swells while it counts up */
 .game__score .count[data-count] {
   animation: bump 0.5s ease;
 }
-/* What the answer earned: a tag that drops out of the score window, over the round counter, and fades */
+/* What the answer earned: a tag that drops out of the score window and fades */
 .game__gain {
   position: absolute;
   z-index: 1;
@@ -823,64 +812,31 @@ p {
   animation: gain 1.5s ease-out both;
 }
 
-/* Seven lift buttons, one per question, lit in the colour of the answer */
+/* Seven lamps, one per question, lit in the colour of the answer. The question being played has a ring round it */
 .pips {
+  justify-self: center;
+  display: flex;
+  gap: 4px;
   list-style: none;
   padding: 0;
   margin: 0;
-  display: grid;
-  grid-template-columns: repeat(7, 1fr);
-  gap: 6px;
 }
 .pip {
-  height: 24px;
   display: grid;
   place-items: center;
-  background: var(--ink-raised);
-  border: 2px solid var(--ink-deep);
-  box-shadow: 0 3px 0 rgb(0 0 0 / 0.3);
-  color: var(--muted);
-  font-family: var(--font-display);
-  font-size: 0.85rem;
-  font-weight: 600;
-  line-height: 1;
+  width: 22px;
+  height: 22px;
+  border: 2px solid transparent;
+}
+.pip .lamp {
+  width: 14px;
+  height: 14px;
 }
 .pip--current {
   border-color: var(--amber);
-  color: var(--amber);
+  background: rgb(11 16 24 / 0.6);
 }
-.pip--done {
-  background: var(--lamp);
-  color: var(--ink);
-  box-shadow:
-    inset -2px -2px 0 rgb(0 0 0 / 0.2),
-    inset 2px 2px 0 rgb(255 255 255 / 0.45),
-    0 3px 0 rgb(0 0 0 / 0.3);
-}
-.pip--common {
-  --lamp: var(--lamp-common);
-}
-.pip--trap {
-  --lamp: var(--lamp-trap);
-}
-.pip--solid {
-  --lamp: var(--lamp-solid);
-}
-.pip--rare {
-  --lamp: var(--lamp-rare);
-}
-.pip--ulu {
-  --lamp: var(--lamp-ulu);
-}
-.pip--gem {
-  --lamp: var(--lamp-gem);
-}
-.pip--miss {
-  --lamp: #3b2f3d;
-  color: #ff958a;
-  box-shadow: 0 3px 0 rgb(0 0 0 / 0.3);
-}
-/* The button the lift has just lit */
+/* The lamp the lift has just lit */
 .pip--fresh {
   animation: pip-lit 0.5s cubic-bezier(0.2, 1.4, 0.4, 1) backwards;
 }
@@ -1280,50 +1236,6 @@ p {
   font-size: 0.85rem;
 }
 
-/* The lift's plate, under the round counter: which lift this is, and how far to the next */
-.plate {
-  display: grid;
-  grid-template-columns: auto minmax(30px, 1fr) auto;
-  align-items: center;
-  gap: 8px;
-  padding: 3px 8px 4px;
-  background: var(--plate);
-  border: 2px solid var(--ink-deep);
-  color: var(--cream);
-  transition: opacity 0.2s ease;
-}
-.plate__name {
-  font-family: var(--font-display);
-  font-size: 0.82rem;
-  font-weight: 600;
-  line-height: 1.1;
-}
-.plate__bar {
-  height: 5px;
-  background: #33476a;
-  overflow: hidden;
-}
-.plate__fill {
-  display: block;
-  height: 100%;
-  background: var(--amber);
-  transform-origin: left;
-  transition: transform 0.6s ease;
-}
-.plate__next {
-  font-size: 0.7rem;
-  line-height: 1.1;
-  color: var(--muted);
-}
-.plate__next strong,
-.plate__next > span {
-  display: block;
-}
-.plate__next strong {
-  color: var(--cream);
-  font-weight: 500;
-  margin-bottom: 3px;
-}
 .directory__goal {
   color: var(--amber);
   font-size: 0.8rem;
@@ -1717,33 +1629,26 @@ p {
     padding: 16px 18px 18px;
   }
   .game__top {
-    display: grid;
-    grid-template-columns: 1fr minmax(0, 420px) 1fr;
-    grid-template-areas: 'back pips stats' '. plate .';
-    align-items: center;
+    grid-template-columns: 1fr auto 1fr;
     column-gap: 16px;
     width: 100%;
   }
-  .hud {
-    display: contents;
-  }
-  .hud .btn {
-    grid-area: back;
+  .hud__back {
     justify-self: start;
   }
-  .hud__stats {
-    grid-area: stats;
+  .hud__score {
     justify-self: end;
   }
   .pips {
-    grid-area: pips;
-  }
-  .game__top .plate {
-    grid-area: plate;
+    gap: 6px;
   }
   .pip {
-    height: 30px;
-    font-size: 1rem;
+    width: 28px;
+    height: 28px;
+  }
+  .pip .lamp {
+    width: 18px;
+    height: 18px;
   }
   .logo {
     width: 300px;
@@ -1898,9 +1803,6 @@ p {
   .btn--big {
     padding: 10px 16px 13px;
     font-size: 1.1rem;
-  }
-  .pip {
-    height: 22px;
   }
   .round__prompt {
     font-size: 1.3rem;

@@ -10,7 +10,7 @@ import type { Prompt, RoundResult } from '../game/types'
 import { AllAnswers } from './AllAnswers'
 import { Countdown } from './Countdown'
 import { CountUp } from './CountUp'
-import { ElevatorProgress } from './ElevatorProgress'
+import { LiftDirectory } from './ElevatorProgress'
 import { ElevatorScene } from './elevator/ElevatorScene'
 import { ProblemLinks, RejectedGuesses } from './Report'
 import { TierLamp } from './TierLamp'
@@ -110,7 +110,7 @@ export function Results({ title, results, prompts, stats, isDaily, dateKey, onHo
         </div>
 
         <div className="results__more extras">
-          <ElevatorProgress score={score} floor={floor} />
+          <LiftDirectory score={score} floor={floor} />
 
           <ol className="breakdown card">
             {results.map((r) => {
