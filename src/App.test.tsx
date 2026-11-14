@@ -45,6 +45,10 @@ type User = ReturnType<typeof userEvent.setup>
 const advance = (ms: number) => act(() => vi.advanceTimersByTime(ms))
 const read = <T,>(key: string): T | null => JSON.parse(localStorage.getItem(key) ?? 'null')
 const statsLine = () => screen.getByText(/ played · /).textContent
+/** A finished day's score, on the day's plate where the date was */
+const todayScore = () => document.querySelector('.home__score strong')?.textContent ?? null
+/** Once today's game is done, the stats are left to its results */
+const noStatsLine = () => expect(screen.queryByText(/ played · /)).toBeNull()
 const promptHeading = () => screen.getByRole('heading', { level: 2 }).textContent
 const button = (name: string | RegExp) => screen.getByRole('button', { name })
 const diveUrl = (date: string) => `/dives/${date}.json`
@@ -177,8 +181,10 @@ describe('App daily flow', () => {
     expect(screen.getByText('Ulu #15')).toBeDefined()
     expect(document.querySelector('.results__number')!.textContent).toBe('70')
     await again.user.click(button('Home'))
-    expect(screen.getByText('Done for today:', { exact: false }).textContent).toBe('Done for today: 70 pts')
-    expect(statsLine()).toBe('1 played · 1 day streak · best 70')
+    expect(todayScore()).toBe('70')
+    noStatsLine()
+    // Only someone who hasn't played yet is told what the game is
+    expect(screen.queryByText(/^7 Singapore questions/)).toBeNull()
     expect(screen.queryByRole('button', { name: /Start climbing|Continue climbing/ })).toBeNull()
 
     await again.user.click(button("See today's results"))
@@ -186,8 +192,8 @@ describe('App daily flow', () => {
     await again.user.click(button('Home'))
     again.unmount()
     await renderApp()
-    expect(screen.getByText('Done for today:', { exact: false }).textContent).toBe('Done for today: 70 pts')
-    expect(statsLine()).toBe('1 played · 1 day streak · best 70')
+    expect(todayScore()).toBe('70')
+    noStatsLine()
     expect(statsWrites()).toBe(1)
 
     // Each visit fetched only today's dive, and never the bank
@@ -238,12 +244,13 @@ describe('App daily flow', () => {
     expect(read<Stats>('ulu:stats')).toMatchObject({ played: 1, lastPlayed: TODAY, totalScore: 70 })
 
     await user.click(button('Back to home'))
-    expect(screen.getByText('Done for today:', { exact: false }).textContent).toBe('Done for today: 70 pts')
-    expect(statsLine()).toBe('1 played · 1 day streak · best 70')
+    expect(todayScore()).toBe('70')
+    noStatsLine()
 
     unmount()
     await renderApp()
-    expect(statsLine()).toBe('1 played · 1 day streak · best 70')
+    expect(todayScore()).toBe('70')
+    expect(read<Stats>('ulu:stats')).toMatchObject({ played: 1, currentStreak: 1, bestScore: 70 })
     expect(statsWrites()).toBe(1)
   })
 
@@ -294,9 +301,8 @@ describe('App daily flow', () => {
   it('records a finished dive that was saved without reaching the stats', async () => {
     saveProgress({ results: today.map(hit) })
     await renderApp()
-    expect(screen.getByText('Done for today:', { exact: false }).textContent).toBe('Done for today: 70 pts')
-    expect(statsLine()).toBe('1 played · 1 day streak · best 70')
-    expect(read<Stats>('ulu:stats')).toMatchObject({ played: 1, lastPlayed: TODAY })
+    expect(todayScore()).toBe('70')
+    expect(read<Stats>('ulu:stats')).toMatchObject({ played: 1, lastPlayed: TODAY, currentStreak: 1, bestScore: 70 })
   })
 
   it('opens How to play on the first visit only', async () => {
@@ -336,7 +342,7 @@ describe("loading today's dive (#18)", () => {
   it('shows the score of a finished dive while it loads', () => {
     saveProgress({ results: today.map(hit) })
     render(<App />)
-    expect(screen.getByText('Done for today:', { exact: false }).textContent).toBe('Done for today: 70 pts')
+    expect(todayScore()).toBe('70')
     expect(screen.getByRole('status').textContent).toBe("Loading today's questions…")
     expect(screen.queryByRole('button', { name: "See today's results" })).toBeNull()
   })
@@ -415,14 +421,14 @@ describe('midnight rollover (#7)', () => {
     saveStats({ played: 1, totalScore: 70, bestScore: 70, currentStreak: 1, maxStreak: 1, lastPlayed: TODAY })
     await renderApp()
     expect(screen.getByText('Ulu #15')).toBeDefined()
-    expect(screen.getByText('Done for today:', { exact: false })).toBeDefined()
+    expect(todayScore()).toBe('70')
     expect(fetched(fetch)).toEqual([diveUrl(TODAY)])
 
     advance(60_000) // 00:00:00, just before the timer is due
     expect(screen.getByText('Ulu #15')).toBeDefined()
     advance(1_000)
     expect(screen.getByText('Ulu #16')).toBeDefined()
-    expect(screen.queryByText('Done for today:', { exact: false })).toBeNull()
+    expect(todayScore()).toBeNull()
     expect(screen.getByRole('status').textContent).toBe("Loading today's questions…")
     await settle()
     expect(fetched(fetch)).toEqual([diveUrl(TODAY), diveUrl(TOMORROW)])

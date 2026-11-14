@@ -624,13 +624,9 @@ p {
   font-size: 0.9rem;
   font-weight: 500;
 }
-.home__done {
-  text-align: center;
-  font-size: 1.1rem;
-}
-.home__done strong {
+/* A finished day's score, where the date was */
+.home__score {
   font-family: var(--font-display);
-  font-size: 1.4rem;
   color: var(--amber);
 }
 .home__status {

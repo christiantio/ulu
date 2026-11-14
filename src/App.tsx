@@ -121,6 +121,8 @@ export default function App() {
   const saved = loadDaily(dateKey)
   const played = saved?.results ?? []
   const dailyDone = played.length >= ROUNDS_PER_DIVE
+  // Nothing finished or started yet: the only player who needs telling what the game is
+  const newcomer = stats.played === 0 && !saved
   // The home screen's lift is wherever today's game has got to: the ground floor, until the first answer
   const lift = liftAfter(played)
 
@@ -226,21 +228,26 @@ export default function App() {
 
             <div className="home__panel">
               <div className="home__card" aria-busy={today.status === 'loading'}>
+                {/* Which game this is, and once it's played, its score in place of the date */}
                 <div className="home__dive">
                   <span>{diveTitle(dateKey)}</span>
-                  <span className="muted">
-                    {new Date(`${dateKey}T00:00:00`).toLocaleDateString('en-SG', {
-                      weekday: 'short',
-                      day: 'numeric',
-                      month: 'short',
-                    })}
-                  </span>
+                  {dailyDone ? (
+                    <span className="home__score">
+                      <span className="visually-hidden">Today's score: </span>
+                      <strong>{totalScore(played)}</strong> pts
+                    </span>
+                  ) : (
+                    <span className="muted">
+                      {new Date(`${dateKey}T00:00:00`).toLocaleDateString('en-SG', {
+                        weekday: 'short',
+                        day: 'numeric',
+                        month: 'short',
+                      })}
+                    </span>
+                  )}
                 </div>
-                <p className="home__copy">7 Singapore questions. The rarer your answers, the higher you rise.</p>
-                {dailyDone && (
-                  <p className="home__done float">
-                    Done for today: <strong>{totalScore(played)}</strong> pts
-                  </p>
+                {newcomer && (
+                  <p className="home__copy">7 Singapore questions. The rarer your answers, the higher you rise.</p>
                 )}
                 {today.status === 'loading' && (
                   <p className="home__status float center" role="status">
@@ -293,7 +300,8 @@ export default function App() {
                 </button>
               </div>
 
-              {stats.played > 0 && (
+              {/* Once today's game is done, its results have these */}
+              {stats.played > 0 && !dailyDone && (
                 <p className="home__stats float small center">
                   {stats.played} played · {displayStreak(stats, dateKey)} day streak · best {stats.bestScore}
                 </p>
