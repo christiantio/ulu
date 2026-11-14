@@ -24,8 +24,9 @@ interface Props {
 }
 
 /**
- * After a round. The sign over the lift has how the player did and the gem (how far the lift went is the lift's to
- * show); the way on is at the lift's foot; and what else was possible is on the cards beyond that
+ * After a round. The sign over the lift has the verdict, which is the rarity, the answer and the points, and the gem
+ * (how far the lift went is the lift's to show). The way on is at the lift's foot, and one card beyond it has the
+ * guesses that weren't on the list and what else was possible
  */
 export function Reveal({ prompt, result, isLast, reportDate = UNLIMITED_DATE, upgrade = null, onNext }: Props) {
   const nextRef = useRef<HTMLButtonElement>(null)
@@ -69,7 +70,6 @@ export function Reveal({ prompt, result, isLast, reportDate = UNLIMITED_DATE, up
                   'No valid answer'
                 )}
               </div>
-              <div className="verdict__blurb">{info ? info.blurb : 'The lift stays where it is.'}</div>
             </div>
             <div className="verdict__points">
               +{result.points}
@@ -104,13 +104,8 @@ export function Reveal({ prompt, result, isLast, reportDate = UNLIMITED_DATE, up
       </div>
 
       <div className="reveal__more extras">
-        {result.attempts.length > 0 && (
-          <div className="card">
-            <RejectedGuesses guesses={result.attempts} date={reportDate} promptId={prompt.id} />
-          </div>
-        )}
-
         <div className="samples card">
+          <RejectedGuesses guesses={result.attempts} date={reportDate} promptId={prompt.id} compact />
           <h3>Other answers</h3>
           {[...samples].map(([tier, names]) => (
             <div key={tier} className={`samples__row tier--${tier}`}>

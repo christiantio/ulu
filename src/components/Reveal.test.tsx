@@ -83,10 +83,11 @@ describe('Reveal', () => {
     const verdict = document.querySelector('.verdict')!
     expect(verdict.classList.contains('tier--rare')).toBe(true)
     expect(verdict.querySelector('.verdict__label')!.textContent).toBe('Steady')
+    expect(verdict.querySelector('.verdict__answer')!.textContent).toBe(answerOf(prompt, 'rare').name)
     expect(verdict.querySelector('.verdict__points')!.textContent).toBe('+60 points')
-    expect(verdict.querySelector('.verdict__blurb')!.textContent).toBe(TIER_INFO.rare.blurb)
-    // How far the lift went is the lift's to show
+    // Nothing else: how far the lift went is the lift's to show, and How to play has what each tier means
     expect(verdict.textContent).not.toMatch(/floor|▲/i)
+    expect(verdict.textContent).not.toContain(TIER_INFO.rare.blurb)
     // Read out with the Next button
     const next = screen.getByRole('button', { name: /Next question/ })
     expect(document.getElementById(next.getAttribute('aria-describedby')!)!.contains(verdict)).toBe(true)
@@ -98,7 +99,7 @@ describe('Reveal', () => {
     const verdict = document.querySelector('.verdict')!
     expect(verdict.classList.contains('verdict--miss')).toBe(true)
     expect(verdict.querySelector('.verdict__label')!.textContent).toBe('Time up!')
-    expect(verdict.querySelector('.verdict__blurb')!.textContent).toBe('The lift stays where it is.')
+    expect(verdict.querySelector('.verdict__answer')!.textContent).toBe('No valid answer')
     expect(verdict.querySelector('.verdict__points')!.textContent).toBe('+0 points')
   })
 
@@ -162,6 +163,9 @@ describe('Reveal', () => {
     const guesses = ['zzqq', 'Pulau Hantu & co']
     renderReveal({ ...miss, attempts: guesses }, '2026-11-10')
     const list = screen.getByRole('list', { name: 'Not on our list' })
+    // On the same card as the other answers, above them
+    expect(list.closest('.card')).toBe(document.querySelector('.samples'))
+    expect(document.querySelectorAll('.reveal .card')).toHaveLength(1)
     expect(within(list).getAllByRole('listitem').map((li) => li.textContent)).toEqual(['“zzqq”', '“Pulau Hantu & co”'])
 
     const link = screen.getByRole('link', { name: /^Should this count\?/ })

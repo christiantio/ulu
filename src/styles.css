@@ -1065,10 +1065,6 @@ p {
   font-weight: 700;
   overflow-wrap: anywhere;
 }
-.verdict__blurb {
-  font-size: 0.85rem;
-  color: var(--muted);
-}
 .verdict__points {
   font-family: var(--font-display);
   font-weight: 700;
@@ -1115,6 +1111,12 @@ p {
 
 .samples h3 {
   margin-top: 0;
+}
+/* The guesses that weren't on the list, over the other answers on the same card */
+.samples .attempts {
+  padding-bottom: 10px;
+  margin-bottom: 12px;
+  border-bottom: 1px solid var(--line);
 }
 .samples__row {
   display: grid;
