@@ -384,14 +384,16 @@
   animation: plaque-in 0.36s cubic-bezier(0.2, 1.5, 0.4, 1) 0.62s both;
   pointer-events: none;
 }
+/* A small label, so in DM Sans */
 .newlift__label {
-  font-size: 0.72rem;
-  font-weight: 600;
+  font-family: var(--font-body);
+  font-size: var(--fs-xs);
+  font-weight: 700;
   letter-spacing: 0.1em;
   text-transform: uppercase;
 }
 .newlift__name {
-  font-size: 1.15rem;
+  font-size: var(--fs-lg);
   font-weight: 700;
   line-height: 1.1;
 }
@@ -423,13 +425,13 @@
   --tier: var(--miss);
 }
 .stamp__label {
-  font-size: 1.15rem;
+  font-size: var(--fs-lg);
   font-weight: 700;
   line-height: 1.1;
   color: var(--tier);
 }
 .stamp__points {
-  font-size: 1.7rem;
+  font-size: var(--fs-xl);
   font-weight: 700;
   line-height: 1;
   color: var(--tier);
@@ -484,7 +486,7 @@
 .lift__caption {
   padding-bottom: 6px;
   font-family: var(--font-display);
-  font-size: 1.1rem;
+  font-size: var(--fs-lg);
   font-weight: 600;
   line-height: 1.2;
   color: var(--cream);

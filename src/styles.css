@@ -42,6 +42,18 @@
 
   --font-display: 'Pixelify Sans', ui-monospace, 'Courier New', monospace;
   --font-body: 'DM Sans', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  /*
+   * Type sizes: every size in the interface is one of these steps, or slides between two of them. The pixel face is
+   * for 16px and up (buttons, headings and numbers), where its blocky letters stay easy to read. Small labels and
+   * fine print are in DM Sans
+   */
+  --fs-xs: 0.75rem; /* 12px: fine print, key hints, badges */
+  --fs-sm: 0.875rem; /* 14px: notes, secondary lines, small labels */
+  --fs-md: 1rem; /* 16px: body text, answers, buttons */
+  --fs-lg: 1.25rem; /* 20px: the answer box, big buttons, indicator digits, a verdict's rarity */
+  --fs-xl: 1.75rem; /* 28px: questions, headlines, big numbers */
+  --fs-2xl: 2.5rem; /* 40px: the final score on a short screen */
+  --fs-3xl: 4rem; /* 64px: the final score */
   /* Hard-edged, like everything else: no blur */
   --drop: 4px 4px 0 rgb(0 0 0 / 0.35);
   /* A hard outline, for words that sit straight on the scenery: readable on any sky */
@@ -168,10 +180,11 @@ h3 {
   line-height: 1.15;
   margin: 0;
 }
+/* A small label in capitals: section headings on the cards, and the labels on signs and plaques */
 h3 {
-  font-family: var(--font-display);
-  font-size: 0.85rem;
-  font-weight: 600;
+  font-family: var(--font-body);
+  font-size: var(--fs-xs);
+  font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.08em;
   color: var(--muted);
@@ -185,7 +198,7 @@ p {
   color: var(--muted);
 }
 .small {
-  font-size: 0.85rem;
+  font-size: var(--fs-sm);
 }
 .center {
   text-align: center;
@@ -329,9 +342,9 @@ p {
   right: 14%;
 }
 .board__label {
-  font-family: var(--font-display);
-  font-size: 0.8rem;
-  font-weight: 600;
+  font-family: var(--font-body);
+  font-size: var(--fs-xs);
+  font-weight: 700;
   letter-spacing: 0.1em;
   text-transform: uppercase;
   color: var(--amber);
@@ -371,7 +384,7 @@ p {
 /* Buttons: chunky and pressable. The primary one is bubblegum */
 .btn {
   font-family: var(--font-display);
-  font-size: 1.05rem;
+  font-size: var(--fs-md);
   font-weight: 600;
   letter-spacing: 0.02em;
   line-height: 1.2;
@@ -471,16 +484,16 @@ p {
 }
 .btn--big {
   padding: 15px 20px 18px;
-  font-size: 1.2rem;
+  font-size: var(--fs-lg);
 }
 .btn--small {
   padding: 6px 10px;
-  font-size: 0.9rem;
+  font-size: var(--fs-sm);
 }
 .btn--cta {
   text-transform: uppercase;
   letter-spacing: 0.06em;
-  font-size: 1.3rem;
+  font-size: var(--fs-lg);
 }
 /* The key that presses a button (KeyHint.tsx). Hidden unless there's a keyboard and a pointer to go with it */
 .key-hint {
@@ -494,7 +507,7 @@ p {
     border: 2px solid currentColor;
     border-radius: 2px;
     font-family: var(--font-body);
-    font-size: 0.7rem;
+    font-size: var(--fs-xs);
     font-weight: 700;
     letter-spacing: 0.04em;
     line-height: 1.2;
@@ -585,7 +598,7 @@ p {
 }
 .tagline {
   font-family: var(--font-display);
-  font-size: clamp(1.3rem, 5.6vw, 1.7rem);
+  font-size: clamp(var(--fs-lg), 5.6vw, var(--fs-xl));
   font-weight: 600;
   color: var(--amber);
   text-align: center;
@@ -597,7 +610,7 @@ p {
   border-top: 0;
   margin-top: -10px;
   color: var(--muted);
-  font-size: 0.95rem;
+  font-size: var(--fs-sm);
   line-height: 1.35;
   text-align: center;
   text-wrap: balance;
@@ -616,12 +629,12 @@ p {
   background: var(--plate);
   border: 2px solid var(--ink-deep);
   font-family: var(--font-display);
-  font-size: 1.05rem;
+  font-size: var(--fs-md);
   font-weight: 600;
 }
 .home__dive .muted {
   font-family: var(--font-body);
-  font-size: 0.9rem;
+  font-size: var(--fs-sm);
   font-weight: 500;
 }
 /* A finished day's score, where the date was */
@@ -665,7 +678,7 @@ p {
   padding: 3px 10px 4px;
   background: var(--plate);
   border: 2px solid var(--ink-deep);
-  font-size: 0.8rem;
+  font-size: var(--fs-xs);
   color: var(--muted);
   text-align: center;
 }
@@ -745,7 +758,7 @@ p {
   padding: 8px 12px 10px;
 }
 .keyboard-open .game--playing .round__prompt {
-  font-size: 1.25rem;
+  font-size: var(--fs-lg);
 }
 
 /* The score, in an indicator window, with the meter for the next lift along its bottom edge. It keeps to its own
@@ -761,7 +774,7 @@ p {
   box-shadow: 0 3px 0 rgb(0 0 0 / 0.3);
   color: var(--amber);
   font-family: var(--font-display);
-  font-size: 1.25rem;
+  font-size: var(--fs-lg);
   font-weight: 600;
   font-variant-numeric: tabular-nums;
   line-height: 1.2;
@@ -798,7 +811,7 @@ p {
   border: 2px solid var(--pink);
   color: var(--pink);
   font-family: var(--font-display);
-  font-size: 1.05rem;
+  font-size: var(--fs-md);
   font-weight: 700;
   line-height: 1.25;
   white-space: nowrap;
@@ -843,7 +856,7 @@ p {
 }
 .ready__brief {
   font-family: var(--font-display);
-  font-size: 1.45rem;
+  font-size: clamp(var(--fs-lg), 6vw, var(--fs-xl));
   font-weight: 700;
   line-height: 1.15;
   text-wrap: balance;
@@ -859,14 +872,14 @@ p {
 .riding__prompt {
   overflow: hidden;
   color: var(--muted);
-  font-size: 0.9rem;
+  font-size: var(--fs-sm);
   font-weight: 600;
   white-space: nowrap;
   text-overflow: ellipsis;
 }
 .riding__answer {
   font-weight: 700;
-  font-size: 1.15rem;
+  font-size: var(--fs-lg);
   overflow-wrap: anywhere;
 }
 .riding__answer .board__label {
@@ -893,7 +906,7 @@ p {
   border: 2px solid var(--ink-line);
   color: var(--teal);
   font-family: var(--font-display);
-  font-size: 1.35rem;
+  font-size: var(--fs-lg);
   font-weight: 600;
   font-variant-numeric: tabular-nums;
   line-height: 1.2;
@@ -915,7 +928,7 @@ p {
   animation: tick 0.3s ease-out;
 }
 .round__prompt {
-  font-size: clamp(1.35rem, 5.8vw, 1.85rem);
+  font-size: clamp(var(--fs-lg), 5.6vw, var(--fs-xl));
   font-weight: 800;
   letter-spacing: -0.01em;
   text-wrap: balance;
@@ -923,7 +936,7 @@ p {
 .round__note {
   margin-top: -4px;
   color: var(--muted);
-  font-size: 0.9rem;
+  font-size: var(--fs-sm);
 }
 .round__entry {
   position: relative;
@@ -937,7 +950,7 @@ p {
   flex: 1;
   min-width: 0;
   font: inherit;
-  font-size: 1.15rem;
+  font-size: var(--fs-lg);
   font-weight: 600;
   padding: 11px 12px;
   border-radius: 2px;
@@ -979,7 +992,7 @@ p {
   border: 2px solid var(--ink-deep);
   box-shadow: 0 0 0 2px var(--miss), 4px 4px 0 rgb(0 0 0 / 0.3);
   color: var(--cream);
-  font-size: 0.9rem;
+  font-size: var(--fs-sm);
   line-height: 1.35;
   text-align: center;
   text-wrap: balance;
@@ -1003,7 +1016,7 @@ p {
   display: none;
   padding-top: 6px;
   border-top: 2px dashed var(--ink-line);
-  font-size: 0.9rem;
+  font-size: var(--fs-sm);
   line-height: 1.35;
 }
 .keyboard-open .game--playing .round__said:not(:empty) {
@@ -1030,7 +1043,7 @@ p {
 }
 .reveal__prompt {
   font-weight: 700;
-  font-size: 1.05rem;
+  font-size: var(--fs-md);
   line-height: 1.25;
   text-wrap: balance;
 }
@@ -1053,7 +1066,7 @@ p {
 .verdict__label {
   font-family: var(--font-display);
   font-weight: 700;
-  font-size: 1.35rem;
+  font-size: var(--fs-lg);
   line-height: 1.1;
   color: var(--tier);
 }
@@ -1064,19 +1077,19 @@ p {
 .verdict__points {
   font-family: var(--font-display);
   font-weight: 700;
-  font-size: 1.7rem;
+  font-size: var(--fs-xl);
   color: var(--tier);
 }
 .upgrade {
   padding: 8px 12px;
   background: var(--amber);
   border: 2px solid var(--ink-deep);
-  font-size: 1.05rem;
+  font-size: var(--fs-md);
 }
 .upgrade__label {
-  font-family: var(--font-display);
-  font-size: 0.8rem;
-  font-weight: 600;
+  font-family: var(--font-body);
+  font-size: var(--fs-xs);
+  font-weight: 700;
   letter-spacing: 0.08em;
   text-transform: uppercase;
   margin-right: 6px;
@@ -1120,7 +1133,7 @@ p {
   gap: 8px;
   padding: 6px 0;
   border-bottom: 1px solid var(--line);
-  font-size: 0.92rem;
+  font-size: var(--fs-sm);
 }
 .samples__tier {
   font-weight: 700;
@@ -1135,7 +1148,7 @@ p {
 /* Every accepted answer, behind a native disclosure. Always on a card */
 .all-answers {
   margin-top: 8px;
-  font-size: 0.92rem;
+  font-size: var(--fs-sm);
 }
 .all-answers summary {
   cursor: pointer;
@@ -1156,7 +1169,7 @@ p {
 }
 .all-answers__tier {
   font-weight: 700;
-  font-size: 0.85rem;
+  font-size: var(--fs-sm);
   color: var(--tier);
 }
 .all-answers__points {
@@ -1179,7 +1192,7 @@ p {
   padding: 0 6px 1px;
   background: var(--ink);
   color: var(--amber);
-  font-size: 0.72rem;
+  font-size: var(--fs-xs);
   font-weight: 600;
   white-space: nowrap;
 }
@@ -1197,7 +1210,7 @@ p {
   outline-offset: 2px;
 }
 .attempts {
-  font-size: 0.9rem;
+  font-size: var(--fs-sm);
 }
 .attempts__label {
   color: var(--muted);
@@ -1213,7 +1226,7 @@ p {
   overflow-wrap: anywhere;
 }
 .attempts--compact {
-  font-size: 0.85rem;
+  font-size: var(--fs-sm);
   margin-bottom: 4px;
 }
 .attempts--compact .attempts__label,
@@ -1236,7 +1249,7 @@ p {
 .report-problems {
   margin: 8px 0 0;
   color: var(--muted);
-  font-size: 0.85rem;
+  font-size: var(--fs-sm);
 }
 
 /*
@@ -1253,9 +1266,9 @@ p {
   color: var(--text);
 }
 .directory__title {
-  font-family: var(--font-display);
-  font-size: 0.8rem;
-  font-weight: 600;
+  font-family: var(--font-body);
+  font-size: var(--fs-xs);
+  font-weight: 700;
   letter-spacing: 0.12em;
   text-transform: uppercase;
   color: var(--muted);
@@ -1287,7 +1300,7 @@ p {
   background: #24324a;
 }
 .directory__min {
-  font-size: 0.9rem;
+  font-size: var(--fs-md);
   font-variant-numeric: tabular-nums;
   color: var(--muted);
 }
@@ -1326,7 +1339,7 @@ p {
 }
 .results__headline {
   font-family: var(--font-display);
-  font-size: clamp(1.6rem, 7vw, 2.1rem);
+  font-size: var(--fs-xl);
   font-weight: 700;
   color: var(--amber);
 }
@@ -1338,25 +1351,25 @@ p {
   font-family: var(--font-display);
 }
 .results__number {
-  font-size: 4rem;
+  font-size: var(--fs-3xl);
   font-weight: 700;
   line-height: 0.95;
   color: var(--pink);
   text-shadow: 4px 4px 0 var(--ink-deep);
 }
 .results__max {
-  font-size: 1.3rem;
+  font-size: var(--fs-lg);
   color: var(--muted);
 }
 .results__reached {
   color: var(--muted);
-  font-size: 0.92rem;
+  font-size: var(--fs-sm);
   line-height: 1.35;
   text-wrap: balance;
 }
 .results__reached strong {
   color: var(--text);
-  font-size: 1.05rem;
+  font-size: var(--fs-md);
 }
 .results--perfect .results__headline {
   animation:
@@ -1473,7 +1486,7 @@ p {
   }
 }
 .breakdown__lamp {
-  font-size: 1.15rem;
+  font-size: var(--fs-lg);
 }
 .breakdown__body {
   display: flex;
@@ -1481,7 +1494,7 @@ p {
   min-width: 0;
 }
 .breakdown__prompt {
-  font-size: 0.8rem;
+  font-size: var(--fs-sm);
   color: var(--muted);
 }
 .breakdown__answer {
@@ -1490,7 +1503,7 @@ p {
 }
 .breakdown__points {
   font-family: var(--font-display);
-  font-size: 1.2rem;
+  font-size: var(--fs-lg);
   font-weight: 700;
   color: var(--tier);
 }
@@ -1500,7 +1513,7 @@ p {
   display: grid;
   gap: 8px;
   padding: 0 12px 12px 41px;
-  font-size: 0.85rem;
+  font-size: var(--fs-sm);
 }
 .breakdown__gem {
   color: var(--muted);
@@ -1529,19 +1542,19 @@ p {
 }
 .stat__value {
   font-family: var(--font-display);
-  font-size: 1.6rem;
+  font-size: var(--fs-xl);
   font-weight: 700;
   line-height: 1.2;
   color: var(--amber);
 }
 .stat__label {
-  font-size: 0.75rem;
+  font-size: var(--fs-xs);
   color: var(--muted);
 }
 .countdown {
-  font-family: var(--font-display);
+  font-family: var(--font-body);
   font-variant-numeric: tabular-nums;
-  font-weight: 600;
+  font-weight: 700;
   color: var(--text);
 }
 
@@ -1569,7 +1582,7 @@ p {
 }
 .modal__card h2 {
   font-family: var(--font-display);
-  font-size: 1.7rem;
+  font-size: var(--fs-xl);
   font-weight: 700;
 }
 .modal__card .btn {
@@ -1607,7 +1620,7 @@ p {
 }
 .tier-list__blurb {
   grid-area: blurb;
-  font-size: 0.85rem;
+  font-size: var(--fs-sm);
   color: var(--muted);
 }
 .tier-list__points {
@@ -1615,7 +1628,7 @@ p {
   align-self: center;
   min-width: 2.1em;
   font-family: var(--font-display);
-  font-size: 1.15rem;
+  font-size: var(--fs-lg);
   font-weight: 700;
   text-align: right;
 }
@@ -1695,13 +1708,13 @@ p {
     width: 300px;
   }
   .tagline {
-    font-size: 2rem;
+    font-size: var(--fs-xl);
   }
   .round__prompt {
-    font-size: 1.9rem;
+    font-size: var(--fs-xl);
   }
   .ready__brief {
-    font-size: 1.7rem;
+    font-size: var(--fs-xl);
   }
 }
 /* Home on a wide screen: the title stands to one side of the lift and the way in to the other, level with it */
@@ -1840,14 +1853,14 @@ p {
     width: 150px;
   }
   .tagline {
-    font-size: 1.25rem;
+    font-size: var(--fs-lg);
   }
   .btn--big {
     padding: 10px 16px 13px;
-    font-size: 1.1rem;
+    font-size: var(--fs-lg);
   }
   .round__prompt {
-    font-size: 1.3rem;
+    font-size: var(--fs-lg);
   }
   .round__said:not(:empty) {
     display: block;
@@ -1861,7 +1874,7 @@ p {
     white-space: nowrap;
   }
   .results__number {
-    font-size: 3rem;
+    font-size: var(--fs-2xl);
   }
 }
 
