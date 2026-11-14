@@ -267,16 +267,13 @@ describe('Round', () => {
     expect(warning()).toBe('5 seconds left')
   })
 
-  it('turns the timer amber for the last ten seconds and red for the last five', () => {
+  it('turns the clock amber for the last ten seconds and red for the last five', () => {
     setup()
-    const bar = () => document.querySelector('.timer__bar')!.className
     const clock = () => screen.getByRole('timer').className
-    expect(bar()).toContain('timer__bar--steady')
+    expect(clock()).toContain('round__clock--steady')
     advance((SECONDS_PER_ROUND - 10) * 1000)
-    expect(bar()).toContain('timer__bar--low')
     expect(clock()).toContain('round__clock--low')
     advance(5000)
-    expect(bar()).toContain('timer__bar--urgent')
     expect(clock()).toContain('round__clock--urgent')
   })
 
@@ -303,12 +300,16 @@ describe('Round', () => {
     expect(onRefuse).toHaveBeenCalledTimes(2)
   })
 
-  it('puts the question on the sign and the answer box in the dock under it', () => {
+  it('puts the question and its clock on the sign, and the answer box in the dock under it', () => {
     setup()
-    const sign = document.querySelector('.round__board')!
-    expect(within(sign as HTMLElement).getByRole('heading', { level: 2, name: prompt.text })).toBeDefined()
-    expect(within(sign as HTMLElement).getByRole('status')).toBeDefined()
-    expect(screen.getByRole('textbox', { name: 'Your answer' }).closest('.dock')).not.toBeNull()
+    const sign = document.querySelector('.round__board') as HTMLElement
+    expect(within(sign).getByRole('heading', { level: 2, name: prompt.text })).toBeDefined()
+    expect(within(sign).getByRole('timer')).toBeDefined()
+    const dock = screen.getByRole('textbox', { name: 'Your answer' }).closest('.dock') as HTMLElement
+    expect(dock).not.toBeNull()
+    // What the lift made of a guess is said by the box, not up on the sign
+    expect(within(sign).queryByRole('status')).toBeNull()
+    expect(within(dock).getByRole('status').textContent).toBe('')
   })
 
   it('never reports twice: a locked-in answer is not followed by a timeout', async () => {

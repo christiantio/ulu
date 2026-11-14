@@ -33,8 +33,8 @@ type Feedback =
   | { kind: 'decoy'; guess: string; why: string }
 
 /**
- * One question. The sign over the lift carries the clock, the question and what the lift made of the last guess;
- * the answer box sits at the lift's foot
+ * One question. The sign over the lift carries the question and its clock; the answer box sits at the lift's foot,
+ * with what the lift made of the last guess just over it, where the player is looking
  */
 export function Round({ prompt, deadline, onResult, onClock, onRefuse }: Props) {
   const [input, setInput] = useState('')
@@ -126,19 +126,25 @@ export function Round({ prompt, deadline, onResult, onClock, onRefuse }: Props) 
   }
 
   const seconds = Math.ceil(remaining / 1000)
-  const fraction = remaining / (SECONDS_PER_ROUND * 1000)
   const warning = TIME_WARNINGS.filter((t) => seconds <= t && startSeconds > t).at(-1)
-  // The lights go amber for the last ten seconds and red for the last five
+  // The clock goes amber for the last ten seconds and red for the last five
   const pace = paceFor(seconds)
+
+  // What the lift made of the last guess. Keyed so the same rejected answer twice is still announced again
+  const said = feedback && (
+    <span key={shake}>
+      <strong>“{feedback.guess}”</strong>{' '}
+      {feedback.kind === 'unknown' && 'not on our list leh. Try another one — no points lost!'}
+      {feedback.kind === 'ambiguous' && 'could be more than one answer. Which one? Type a bit more.'}
+      {feedback.kind === 'decoy' && `doesn't count. ${feedback.why}`}
+    </span>
+  )
 
   return (
     <div className="round">
       <section className="round__board board">
-        <div className="round__time">
-          {/* A strip of lift lights that go out as the time runs down */}
-          <div className="timer" aria-hidden>
-            <div className={`timer__bar timer__bar--${pace}`} style={{ transform: `scaleX(${fraction})` }} />
-          </div>
+        <div className="round__head">
+          {/* In the sign's corner, with the question wrapped round it. The doors close with it too */}
           <div className={`round__clock round__clock--${pace}`} role="timer" aria-live="off">
             {/* Keyed by the second once it's urgent, so each of the last five ticks */}
             <span key={pace === 'urgent' ? seconds : pace} className="round__digits" aria-hidden="true">
@@ -146,39 +152,32 @@ export function Round({ prompt, deadline, onResult, onClock, onRefuse }: Props) 
             </span>
             <span className="visually-hidden">{seconds} seconds left</span>
           </div>
+          <h2 className="round__prompt" id={promptId}>
+            {prompt.text}
+          </h2>
         </div>
         {/* Present (empty) from mount so screen readers pick up the change at each threshold */}
         <p className="visually-hidden" aria-live="polite" aria-atomic="true">
           {warning ? `${warning} seconds left` : ''}
         </p>
-
-        <h2 className="round__prompt" id={promptId}>
-          {prompt.text}
-        </h2>
         {prompt.note && (
           <p className="round__note" id={noteId}>
             {prompt.note}
           </p>
         )}
-
-        {/* What the lift made of the last guess. Until there is one, how the round works */}
-        <p className={`round__feedback ${feedback ? 'round__feedback--refused' : ''}`} role="status">
-          {feedback ? (
-            // Keyed so the same rejected answer twice is still announced again
-            <span key={shake}>
-              <strong>“{feedback.guess}”</strong>{' '}
-              {feedback.kind === 'unknown' && 'not on our list leh. Try another one — no points lost!'}
-              {feedback.kind === 'ambiguous' && 'could be more than one answer. Which one? Type a bit more.'}
-              {feedback.kind === 'decoy' && `doesn't count. ${feedback.why}`}
-            </span>
-          ) : (
-            'First valid answer locks in. The rarer it is, the higher you go.'
-          )}
+        {/* The same words again, shown here only where the sign sits right over the answer box, with no room for a
+            bubble between them: a phone with its keyboard up, or on its side. Screen readers hear the bubble's */}
+        <p className="round__said" aria-hidden="true">
+          {said}
         </p>
       </section>
 
       <form className="round__form dock" onSubmit={submit}>
         <div className="round__entry">
+          {/* What the lift made of the last guess, in a bubble over the box it was typed in. Empty until then */}
+          <p className="round__feedback" role="status">
+            {said}
+          </p>
           <input
             ref={inputRef}
             key={shake}

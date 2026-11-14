@@ -336,10 +336,6 @@ p {
   text-transform: uppercase;
   color: var(--amber);
 }
-.board__note {
-  color: var(--muted);
-  font-size: 0.9rem;
-}
 
 /* The controls at the lift's foot */
 .dock {
@@ -424,7 +420,10 @@ p {
     0 1px 0 var(--ink-deep);
 }
 .btn:disabled {
-  opacity: 0.5;
+  /* Solid, so it doesn't let the scenery through: just quieter than a button that's ready */
+  background: #c9bba2;
+  color: rgb(23 33 47 / 0.5);
+  box-shadow: 0 4px 0 var(--ink-deep);
   cursor: default;
 }
 .btn:focus-visible {
@@ -752,13 +751,12 @@ p {
 .keyboard-open .game--playing .round__prompt {
   font-size: 1.25rem;
 }
-.keyboard-open .game--playing .round__feedback {
-  min-height: 1.45em;
-  padding-top: 6px;
-}
 
-/* The score, in an indicator window, with the meter for the next lift along its bottom edge */
+/* The score, in an indicator window, with the meter for the next lift along its bottom edge. It keeps to its own
+   column when the lamps step aside for a keyboard */
 .hud__score {
+  grid-column: 3;
+  justify-self: end;
   position: relative;
   min-width: 3.3em;
   padding: 1px 7px 5px;
@@ -814,6 +812,7 @@ p {
 
 /* Seven lamps, one per question, lit in the colour of the answer. The question being played has a ring round it */
 .pips {
+  grid-column: 2;
   justify-self: center;
   display: flex;
   gap: 4px;
@@ -885,49 +884,18 @@ p {
 .round__board {
   gap: 8px;
 }
-.round__time {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-}
-/* A strip of 25 lights, one a second */
-.timer {
-  position: relative;
-  flex: 1;
-  height: 14px;
-  background: #2a3a55;
-  border: 2px solid var(--ink-deep);
-  overflow: hidden;
-}
-.timer::after {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: repeating-linear-gradient(90deg, transparent 0 calc(4% - 2px), var(--ink-deep) calc(4% - 2px) 4%);
-}
-.timer__bar {
-  height: 100%;
-  background: var(--teal);
-  box-shadow: inset 0 3px 0 rgb(255 255 255 / 0.35);
-  transform-origin: left;
-  transition:
-    transform 0.1s linear,
-    background-color 0.3s ease;
-}
-/* Amber for the last ten seconds, red and flashing for the last five */
-.timer__bar--low {
-  background: #e8a33a;
-}
-.timer__bar--urgent {
-  background: #e2574c;
-  animation: pulse 0.5s steps(2) infinite;
+/* The question, wrapped round the clock in the sign's corner */
+.round__head {
+  display: flow-root;
 }
 .round__clock {
+  float: right;
+  margin: 2px 0 4px 12px;
   min-width: 2.5em;
   padding: 0 6px 2px;
   background: var(--ink-deep);
   border: 2px solid var(--ink-line);
-  color: var(--amber);
+  color: var(--teal);
   font-family: var(--font-display);
   font-size: 1.35rem;
   font-weight: 600;
@@ -935,8 +903,13 @@ p {
   line-height: 1.2;
   text-align: center;
 }
+/* Teal, then amber for the last ten seconds, and red and ticking for the last five */
+.round__clock--low {
+  color: var(--amber);
+}
 .round__clock--urgent {
   color: #ff6b5e;
+  border-color: #ff6b5e;
 }
 .round__digits {
   display: inline-block;
@@ -957,6 +930,7 @@ p {
   font-size: 0.9rem;
 }
 .round__entry {
+  position: relative;
   display: flex;
   gap: 8px;
 }
@@ -988,19 +962,65 @@ p {
   outline: 3px solid var(--pink);
   outline-offset: 1px;
 }
-/* The foot of the sign: what the lift made of the last guess */
+/*
+ * What the lift made of the last guess: a bubble over the answer box, where the player is looking. It's laid over
+ * the foot of the lift rather than pushing anything out of the way, and it's empty until a guess is refused
+ */
 .round__feedback {
-  min-height: 2.9em;
-  padding-top: 8px;
-  border-top: 2px dashed var(--ink-line);
-  color: var(--muted);
-  font-size: 0.9rem;
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: calc(100% + 12px);
+  display: flex;
+  justify-content: center;
+  pointer-events: none;
 }
-.round__feedback--refused {
+.round__feedback > span {
+  position: relative;
+  max-width: 100%;
+  padding: 6px 12px 8px;
+  background: var(--plate);
+  border: 2px solid var(--ink-deep);
+  box-shadow: 0 0 0 2px var(--miss), 4px 4px 0 rgb(0 0 0 / 0.3);
   color: var(--cream);
+  font-size: 0.9rem;
+  line-height: 1.35;
+  text-align: center;
+  text-wrap: balance;
+  animation: pop 0.2s ease;
 }
-.round__feedback strong {
+/* Its tail, pointing down at the box */
+.round__feedback > span::after {
+  content: '';
+  position: absolute;
+  top: calc(100% + 2px);
+  left: calc(50% - 6px);
+  border: 6px solid transparent;
+  border-top-color: var(--miss);
+}
+.round__feedback strong,
+.round__said strong {
   color: var(--miss);
+}
+/* The sign's copy of the bubble, for a phone with its keyboard up or on its side (below) */
+.round__said {
+  display: none;
+  padding-top: 6px;
+  border-top: 2px dashed var(--ink-line);
+  font-size: 0.9rem;
+  line-height: 1.35;
+}
+.keyboard-open .game--playing .round__said:not(:empty) {
+  display: block;
+}
+/* Out of sight, but still read out */
+.keyboard-open .game--playing .round__feedback > span {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
 }
 .shake {
   animation:
@@ -1774,22 +1794,22 @@ p {
   .round__prompt {
     font-size: 1.3rem;
   }
-  .round__feedback {
-    min-height: 1.5em;
+  .round__said:not(:empty) {
+    display: block;
+  }
+  .round__feedback > span {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip-path: inset(50%);
+    white-space: nowrap;
   }
   .results__number {
     font-size: 3rem;
   }
 }
 
-@keyframes pulse {
-  from {
-    opacity: 1;
-  }
-  to {
-    opacity: 0.55;
-  }
-}
 @keyframes shake {
   20%,
   60% {

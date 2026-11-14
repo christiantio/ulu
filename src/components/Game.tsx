@@ -175,8 +175,8 @@ export function Game({
               <p className="board__label">
                 Question {index + 1} of {prompts.length}
               </p>
-              <p className="ready__brief">Answer before the doors close.</p>
-              <p className="board__note">You have {SECONDS_PER_ROUND} seconds. The clock starts when you press the button.</p>
+              {/* The clock waits for the button */}
+              <p className="ready__brief">{SECONDS_PER_ROUND} seconds before the doors close.</p>
             </section>
             <div className="dock">
               <button className="btn btn--primary btn--block btn--big" onClick={start}
