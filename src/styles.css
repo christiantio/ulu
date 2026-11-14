@@ -1243,17 +1243,18 @@ p {
   font-size: 0.85rem;
 }
 
-.directory__goal {
-  color: var(--amber);
-  font-size: 0.8rem;
-  margin-bottom: 8px;
-}
-
-/* The lift directory: a board listing every lift, lit up as far as you've got */
+/*
+ * The lift directory, in How to play: a dark board on the cream card, listing every lift and lit up as far as the
+ * best score has got. Its words go back to the colours they have on the navy shell
+ */
 .directory {
+  --text: var(--cream);
+  --muted: #a9b6c4;
+  margin-top: 10px;
+  padding: 10px 12px 6px;
   background: var(--ink-deep);
   border: 2px solid var(--ink-line);
-  padding: 10px 12px 6px;
+  color: var(--text);
 }
 .directory__title {
   font-family: var(--font-display);
@@ -1297,17 +1298,18 @@ p {
 .directory__row--locked {
   color: #7b8aa0;
 }
-.directory__row--passed .directory__lamp {
+.directory__row--reached .directory__lamp {
   background: var(--teal);
 }
-.directory__row--here {
+/* The furthest the player has got */
+.directory__row--best {
   color: var(--amber);
 }
-.directory__row--here .directory__lamp {
+.directory__row--best .directory__lamp {
   background: var(--amber);
   box-shadow: 0 0 0 2px rgb(248 199 107 / 0.3);
 }
-.directory__row--here .directory__min {
+.directory__row--best .directory__min {
   color: var(--amber);
 }
 
@@ -1351,13 +1353,14 @@ p {
   color: var(--muted);
 }
 .results__reached {
-  font-size: 1.1rem;
-}
-.results__blurb {
   color: var(--muted);
   font-size: 0.92rem;
   line-height: 1.35;
   text-wrap: balance;
+}
+.results__reached strong {
+  color: var(--text);
+  font-size: 1.05rem;
 }
 .results--perfect .results__headline {
   animation:
@@ -1406,10 +1409,24 @@ p {
 .results__lamp:nth-child(7) {
   --n: 6;
 }
-.results__actions {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
+/* The way home, at the top where the game had its way back */
+.results__top {
+  order: 0;
+  position: relative;
+  z-index: 2;
+  display: flex;
+  width: min(100%, 560px);
+  align-self: center;
+  pointer-events: auto;
+}
+/* Share, and the next game beside it */
+.results__dock {
+  flex-direction: row;
+  align-items: flex-end;
   gap: 10px;
+}
+.results__share {
+  flex: 1;
 }
 
 .breakdown {
@@ -1419,15 +1436,45 @@ p {
   text-align: left;
 }
 .breakdown__row {
-  display: grid;
-  grid-template-columns: auto 1fr auto;
-  gap: 10px;
-  align-items: center;
-  padding: 10px 12px;
   border-bottom: 1px solid var(--line);
 }
 .breakdown__row:last-child {
   border-bottom: none;
+}
+/* A question in one row: the lamp, the question and the answer, the points, and a chevron for the rest */
+.breakdown__summary {
+  display: grid;
+  grid-template-columns: auto 1fr auto auto;
+  gap: 10px;
+  align-items: center;
+  padding: 10px 12px;
+  cursor: pointer;
+  list-style: none;
+}
+.breakdown__summary::-webkit-details-marker {
+  display: none;
+}
+.breakdown__summary::after {
+  content: '';
+  width: 7px;
+  height: 7px;
+  margin-right: 2px;
+  border-right: 2px solid var(--muted);
+  border-bottom: 2px solid var(--muted);
+  transform: rotate(-45deg);
+  transition: transform 0.15s ease;
+}
+.breakdown__details[open] > .breakdown__summary::after {
+  transform: rotate(45deg);
+}
+.breakdown__summary:focus-visible {
+  outline: 3px solid var(--focus);
+  outline-offset: -3px;
+}
+@media (hover: hover) {
+  .breakdown__summary:hover {
+    background: rgb(23 33 47 / 0.05);
+  }
 }
 .breakdown__lamp {
   font-size: 1.15rem;
@@ -1445,26 +1492,32 @@ p {
   font-weight: 700;
   overflow-wrap: anywhere;
 }
-.breakdown__answer .muted {
-  font-weight: 500;
-}
-.breakdown__answer .lamp {
-  font-size: 0.8em;
-}
 .breakdown__points {
   font-family: var(--font-display);
   font-size: 1.2rem;
   font-weight: 700;
   color: var(--tier);
 }
+/* An open row: the gem, the guesses that weren't on the list, every answer and the report links, lined up with the
+   question past the lamp */
 .breakdown__more {
-  grid-column: 2 / -1;
-  min-width: 0;
-  margin-top: -6px;
-}
-.breakdown__more .all-answers {
-  margin-top: 0;
+  display: grid;
+  gap: 8px;
+  padding: 0 12px 12px 41px;
   font-size: 0.85rem;
+}
+.breakdown__gem {
+  color: var(--muted);
+}
+.breakdown__gem .lamp {
+  margin-right: 4px;
+}
+.breakdown__gem strong {
+  color: var(--text);
+}
+.breakdown__more .attempts,
+.breakdown__more .report-problems {
+  margin: 0;
 }
 
 .stats {
@@ -1622,6 +1675,9 @@ p {
     column-gap: 16px;
     width: 100%;
   }
+  .results__top {
+    width: 100%;
+  }
   .hud__back {
     justify-self: start;
   }
@@ -1760,6 +1816,7 @@ p {
   .board,
   .dock,
   .game__top,
+  .results__top,
   .home__panel {
     width: 100%;
     align-self: stretch;

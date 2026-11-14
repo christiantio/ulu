@@ -360,7 +360,7 @@ export default function App() {
         />
       )}
 
-      {showHelp && <HowToPlay onClose={closeHelp} />}
+      {showHelp && <HowToPlay best={stats.bestScore} onClose={closeHelp} />}
     </>
   )
 }

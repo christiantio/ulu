@@ -175,7 +175,7 @@ describe('App daily flow', () => {
 
     await again.user.click(button('See results'))
     expect(screen.getByText('Ulu #15')).toBeDefined()
-    expect(screen.getByRole('img', { name: '70 of 700 points, HDB Lift' })).toBeDefined()
+    expect(document.querySelector('.results__number')!.textContent).toBe('70')
     await again.user.click(button('Home'))
     expect(screen.getByText('Done for today:', { exact: false }).textContent).toBe('Done for today: 70 pts')
     expect(statsLine()).toBe('1 played · 1 day streak · best 70')
@@ -275,7 +275,7 @@ describe('App daily flow', () => {
     await user.click(button(/Next question/))
     await playDive(user, today, 3)
     await user.click(button('See results'))
-    expect(screen.getByRole('img', { name: '70 of 700 points, HDB Lift' })).toBeDefined()
+    expect(document.querySelector('.results__number')!.textContent).toBe('70')
     const link = screen.getByRole('link', { name: /^Should this count\?/ })
     expect(new URL(link.getAttribute('href')!).searchParams.get('dive')).toBe(TODAY)
   })
@@ -504,8 +504,9 @@ describe('midnight rollover (#7)', () => {
     expect(screen.getByText('Ulu #15')).toBeDefined()
     for (const p of today) expect(screen.getByText(p.text)).toBeDefined()
     // The results screen's answer lists come from yesterday's file too
-    expect(screen.getAllByText(/^Show all \d+ answers/).map((s) => s.textContent)).toEqual(
-      today.map((p) => `Show all ${p.answers.length} answers for ${p.text}`),
+    const rows = [...document.querySelectorAll('.breakdown__row')]
+    expect(rows.map((row) => row.querySelectorAll('.all-answers__names li').length)).toEqual(
+      today.map((p) => p.answers.length),
     )
     expect(screen.getByText("Today's climb is ready")).toBeDefined()
     expect(screen.queryByText(/Next climb in/)).toBeNull()

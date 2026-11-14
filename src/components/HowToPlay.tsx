@@ -1,14 +1,22 @@
 import { useEffect, useRef, useState, type KeyboardEvent, type MouseEvent } from 'react'
-import { STAGES } from '../game/elevator'
 import { MAX_SCORE, ROUNDS_PER_DIVE, SECONDS_PER_ROUND, TIER_INFO } from '../game/scoring'
 import { TIERS } from '../game/types'
+import { LiftDirectory } from './ElevatorProgress'
 import { TierLamp } from './TierLamp'
 
+interface Props {
+  /** The player's best score, which decides how many of the lifts are named */
+  best?: number
+  onClose: () => void
+}
+
 /**
+ * The one place the rules are spelled out, so the game itself doesn't have to keep saying them.
+ *
  * A native modal <dialog>: showModal() traps focus and makes the rest of the page inert. Focus goes back to
  * whatever opened it when it closes.
  */
-export function HowToPlay({ onClose }: { onClose: () => void }) {
+export function HowToPlay({ best = 0, onClose }: Props) {
   const dialogRef = useRef<HTMLDialogElement>(null)
   const buttonRef = useRef<HTMLButtonElement>(null)
   // Captured during the first render, before the dialog takes focus
@@ -55,16 +63,15 @@ export function HowToPlay({ onClose }: { onClose: () => void }) {
         <h2 id="howto-title">How to play</h2>
         <ol className="howto__steps">
           <li>
-            Every day there are <strong>{ROUNDS_PER_DIVE} questions</strong>, the same for everyone in Singapore.
+            <strong>{ROUNDS_PER_DIVE} questions</strong> every midnight, Singapore time, the same for everyone.
           </li>
           <li>
-            Type <strong>one answer</strong> per question within <strong>{SECONDS_PER_ROUND} seconds</strong>,
-            before the lift doors close. If we don't recognise it, you can try again while the clock runs.
-            Whatever is in the box when time runs out still counts.
+            Type <strong>one answer</strong> before the lift doors close, in <strong>{SECONDS_PER_ROUND} seconds</strong>.
+            Not on our list? Try another: there's no penalty. Whatever is in the box when time runs out still counts.
           </li>
           <li>
-            The first valid answer locks in. <strong>The more ulu it is, the more points</strong>, and the higher
-            the lift goes. Run out of time and it stays where it is. There is no penalty for trying again.
+            The first valid answer locks in. <strong>The more ulu it is, the more points</strong>, and the higher the
+            lift goes.
           </li>
         </ol>
 
@@ -87,10 +94,10 @@ export function HowToPlay({ onClose }: { onClose: () => void }) {
 
         <h3>How high can you go?</h3>
         <p className="muted">
-          You start in an ordinary HDB lift. As your score climbs, the lift gets an upgrade: there are{' '}
-          {STAGES.length - 1} to unlock, the last at {STAGES[STAGES.length - 1].min} points. A perfect {MAX_SCORE} goes
-          all the way to the top. New questions every midnight, Singapore time.
+          Your score upgrades the lift on the way up, and a perfect {MAX_SCORE} goes all the way. Each lift is named
+          here once you've reached it.
         </p>
+        <LiftDirectory best={best} />
 
         <button ref={buttonRef} className="btn btn--primary btn--block" onClick={onClose}>
           Can, let's go
