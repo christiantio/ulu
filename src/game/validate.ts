@@ -1,5 +1,6 @@
 import { matchProblems } from './match'
 import { normalize } from './normalize'
+import { ruleProblem, ruleShapeProblems } from './rule'
 import { CATEGORIES, TIERS, type Pack, type Tier } from './types'
 
 export const MIN_ANSWERS = 12
@@ -77,6 +78,23 @@ export function validatePacks(packs: Record<string, Pack>): string[] {
       if (!fillerOk) errors.push(`${where}: "filler" must be a list of words`)
       if (prompt.partial !== undefined && typeof prompt.partial !== 'boolean')
         errors.push(`${where}: "partial" must be true or false`)
+      if (prompt.qualifiers !== undefined && typeof prompt.qualifiers !== 'boolean')
+        errors.push(`${where}: "qualifiers" must be true or false`)
+
+      // The rule is checked on what's typed before any matching, so a name, alias or decoy that breaks it can
+      // never be reached. That's always a mistake: a wrong answer in the list, or a rule that's too strict
+      if (prompt.rule !== undefined) {
+        const shape = ruleShapeProblems(prompt.rule)
+        errors.push(...shape.map((p) => `${where}: ${p}`))
+        if (!shape.length) {
+          for (const owner of [...prompt.answers, ...(Array.isArray(prompt.decoys) ? prompt.decoys : [])]) {
+            for (const label of [owner.name, ...(owner.aliases ?? [])]) {
+              const problem = label?.trim() ? ruleProblem(label, prompt.rule) : null
+              if (problem) errors.push(`${where} › ${owner.name}: "${label}" ${problem}, so the rule refuses it`)
+            }
+          }
+        }
+      }
 
       const decoys = prompt.decoys ?? []
       if (!Array.isArray(decoys)) {

@@ -4,12 +4,14 @@ import {
   WORLD_ROUNDS_PER_DIVE,
   extendSchedule,
   promptsForDate,
+  replanSchedule,
   unlimitedPrompts,
   validateSchedule,
   worldRoundsFor,
 } from './schedule'
 import { checkAnswer, editDistance, matchAnswer, matchProblems } from './match'
 import { looseWords, normalize } from './normalize'
+import { ruleProblem } from './rule'
 import { shareText } from './share'
 import { displayStreak, type Stats } from './storage'
 import { CATEGORIES, SG_CATEGORIES, scopeOf, type Prompt, type Tier } from './types'
@@ -248,6 +250,133 @@ describe('decoys', () => {
   })
 })
 
+describe('plurals', () => {
+  const things = makePrompt('things', [
+    ['Cherry', 'common'],
+    ['Box', 'common'],
+    ['Wolf', 'common'],
+    ['Knife', 'solid'],
+    ['Mouse', 'solid'],
+    ['Fireman', 'solid'],
+    ['Movie', 'rare'],
+    ['Bus', 'rare'],
+    ['Mango', 'rare'],
+    ['Peach', 'ulu'],
+    ['French Fries', 'ulu'],
+    ['Kiwi', 'ulu'],
+    ['Emu', 'ulu'],
+    ['Horse', 'gem'],
+  ])
+
+  it('reads a plural as the singular it could be', () => {
+    const plurals = {
+      cherries: 'Cherry',
+      boxes: 'Box',
+      wolves: 'Wolf',
+      knives: 'Knife',
+      mice: 'Mouse',
+      firemen: 'Fireman',
+      movies: 'Movie',
+      buses: 'Bus',
+      mangoes: 'Mango',
+      peaches: 'Peach',
+      horses: 'Horse',
+      kiwis: 'Kiwi',
+      emus: 'Emu',
+      'french fry': 'French Fries',
+      'mango fruits': null,
+    }
+    for (const [input, name] of Object.entries(plurals)) expect(matchAnswer(input, things)?.answer.name ?? null).toBe(name)
+  })
+
+  it('never makes a plural up, or lets one beat a closer match', () => {
+    // "Wolfe" isn't a plural, and short words still have no typo tolerance
+    expect(matchAnswer('wolfe', things)).toBeNull()
+    expect(matchAnswer('boxe', things)).toBeNull()
+    const both = makePrompt('both', [['Glass', 'common'], ['Glasses', 'gem']])
+    expect(matchAnswer('glass', both)?.answer.name).toBe('Glass')
+    expect(matchAnswer('glasses', both)?.answer.name).toBe('Glasses')
+    expect(matchProblems(both).warnings).toEqual([expect.stringContaining('singular and plural')])
+  })
+})
+
+describe('qualifiers', () => {
+  const dishes = {
+    ...makePrompt('dishes', [
+      ['Durian', 'common', ['D24']],
+      ['Dragon Fruit', 'common'],
+      ['Chicken Rice', 'common'],
+      ['Turtle', 'solid'],
+      ['Sea Turtle', 'rare'],
+      ['Cake', 'solid'],
+      ['Toy Story 2', 'gem'],
+    ]),
+    qualifiers: true,
+    decoys: [{ name: 'Carrot Cake', why: "Here, that's fried radish cake!" }],
+  }
+
+  it('accepts an answer with words in front of it, and says what it was taken as', () => {
+    expect(checkAnswer('D24 durian', dishes)).toMatchObject({ kind: 'match', answer: { name: 'Durian' }, corrected: true })
+    expect(matchAnswer('red dragon fruits', dishes)?.answer.name).toBe('Dragon Fruit')
+    expect(matchAnswer('Hainanese chicken rice', dishes)?.answer.name).toBe('Chicken Rice')
+    expect(matchAnswer('my favourite is d24', dishes)?.answer.name).toBe('Durian')
+  })
+
+  it('lets the longest name at the end decide, decoys included', () => {
+    expect(matchAnswer('green sea turtle', dishes)?.answer.name).toBe('Sea Turtle')
+    expect(matchAnswer('chocolate cake', dishes)?.answer.name).toBe('Cake')
+    expect(checkAnswer('black carrot cake', dishes)).toMatchObject({ kind: 'decoy', decoy: { name: 'Carrot Cake' } })
+  })
+
+  it('needs a whole name with a real word at the end', () => {
+    expect(matchAnswer('durian fruit', dishes)).toBeNull()
+    expect(matchAnswer('dragon', dishes)).toBeNull()
+    expect(matchAnswer('toy story 2 2', dishes)).toBeNull()
+  })
+
+  it('is off unless the prompt turns it on', () => {
+    const { qualifiers, ...strict } = dishes
+    expect(qualifiers).toBe(true)
+    expect(matchAnswer('D24 durian', strict)).toBeNull()
+  })
+})
+
+describe('spelling rules', () => {
+  const bAnimals = {
+    ...makePrompt('b-animals', [
+      ['Bear', 'common'],
+      ['Bee', 'common'],
+      ['Butterfly', 'common'],
+      ['Buffalo', 'solid'],
+      ['Binturong', 'gem'],
+    ]),
+    rule: { startsWith: 'b' },
+  }
+
+  it('refuses a guess that breaks the rule before matching, with the reason', () => {
+    expect(checkAnswer('lion', bAnimals)).toEqual({ kind: 'rule', problem: "doesn't start with B" })
+    // Close to an answer, but the rule comes first: a typo in the first letter is a different letter
+    expect(checkAnswer('Vear', bAnimals)).toEqual({ kind: 'rule', problem: "doesn't start with B" })
+    expect(matchAnswer('The Bear', bAnimals)?.answer.name).toBe('Bear')
+    expect(matchAnswer('butterflies', bAnimals)?.answer.name).toBe('Butterfly')
+    // Keeping the rule isn't enough: it has to be on the list
+    expect(checkAnswer('Bulldozer', bAnimals).kind).toBe('none')
+  })
+
+  it('says what each kind of rule wants', () => {
+    expect(ruleProblem('Kenya', { endsWith: 'ia' })).toBe("doesn't end in 'ia'")
+    expect(ruleProblem('Malaysia', { endsWith: 'ia' })).toBeNull()
+    expect(ruleProblem('Hawaii', { contains: 'ulu' })).toBe("has no 'ulu' in it")
+    expect(ruleProblem('Honolulu', { contains: 'ulu' })).toBeNull()
+    expect(ruleProblem('Peru', { lacks: 'ae' })).toBe('has an E in it')
+    expect(ruleProblem('Chad', { lacks: 'e' })).toBeNull()
+    expect(ruleProblem('Brunei', { lacks: 'b' })).toBe('has a B in it')
+    expect(ruleProblem('Lift', { palindrome: true })).toBe("doesn't read the same backwards")
+    expect(ruleProblem('Ulu', { palindrome: true })).toBeNull()
+    expect(ruleProblem('Taco cat!', { palindrome: true })).toBeNull()
+  })
+})
+
 describe('matchProblems', () => {
   it('flags a decoy that matches an answer', () => {
     const p = { ...makePrompt('p', [['Saint Lucia', 'gem']]), decoys: [{ name: 'St Lucia', why: 'x' }] }
@@ -382,6 +511,17 @@ describe('frozen schedule', () => {
     }
     expect(Object.keys(extended)).toHaveLength(64)
     expect(validateSchedule(extended, grown, today)).toEqual([])
+  })
+
+  it('plans the days from a date on again, keeping every day before it, and never today', () => {
+    const from = addDays(today, 10)
+    const grown = [...pool, ...Array.from({ length: 5 }, (_, i) => makePrompt(`everyday-new-${i}`, [], 'everyday'))]
+    const replanned = replanSchedule(schedule, grown, from, addDays(today, 30), today)
+    for (const [date, ids] of Object.entries(schedule)) if (date < from) expect(replanned[date]).toEqual(ids)
+    // The new prompts have never been played, so they're the most rested and come straight in
+    expect(replanned[from]).toContain('everyday-new-0')
+    expect(validateSchedule(replanned, grown, today)).toEqual([])
+    expect(() => replanSchedule(schedule, grown, today, addDays(today, 30), today)).toThrow('Only days after today')
   })
 
   it('keeps excluded prompts out of a random set', () => {
@@ -541,6 +681,41 @@ describe('validatePacks', () => {
     const mistyped = { ...towns, filler: 'town' as unknown as string[], partial: 'yes' as unknown as boolean }
     expect(validatePacks(pack([mistyped]))).toEqual(
       expect.arrayContaining([expect.stringContaining('"filler" must be a list'), expect.stringContaining('"partial" must be true or false')]),
+    )
+  })
+
+  it('accepts a spelling rule and qualifiers, and flags the ways they can go wrong', () => {
+    const tAnimals = makePrompt('t-animals', [
+      ['Tiger', 'common', ['The Tiger']],
+      ['Turtle', 'common'],
+      ['Toucan', 'common'],
+      ['Tapir', 'solid'],
+      ['Tarsier', 'gem'],
+      ...Array.from({ length: 7 }, (_, i) => [`Tetra ${i + 1}`, 'ulu'] as [string, Tier]),
+    ])
+    const ok = { ...tAnimals, rule: { startsWith: 't' }, qualifiers: true, decoys: [{ name: 'T-Rex', why: 'Extinct!' }] }
+    expect(validatePacks(pack([ok]))).toEqual([])
+
+    const broken = {
+      ...tAnimals,
+      answers: [...tAnimals.answers, { name: 'Lion', aliases: ['Tiger Lion'], tier: 'rare' as Tier }],
+      decoys: [{ name: 'Hippo', why: 'Starts with H.' }],
+      rule: { startsWith: 't' },
+    }
+    const errors = validatePacks(pack([broken]))
+    expect(errors).toContainEqual(`test.json › t-animals › Lion: "Lion" doesn't start with T, so the rule refuses it`)
+    expect(errors).toContainEqual(`test.json › t-animals › Hippo: "Hippo" doesn't start with T, so the rule refuses it`)
+    // An alias that keeps the rule is fine
+    expect(errors.some((e) => e.includes('"Tiger Lion"'))).toBe(false)
+
+    const malformed = { ...tAnimals, id: 'malformed', rule: { startWith: 't' } as unknown as Prompt['rule'], qualifiers: 'yes' as unknown as boolean }
+    const empty = { ...tAnimals, id: 'empty', rule: { palindrome: false } }
+    expect(validatePacks(pack([malformed, empty]))).toEqual(
+      expect.arrayContaining([
+        expect.stringContaining('"rule" has an unknown setting "startWith"'),
+        expect.stringContaining('"qualifiers" must be true or false'),
+        expect.stringContaining('empty: "rule" sets nothing'),
+      ]),
     )
   })
 

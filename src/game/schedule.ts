@@ -15,10 +15,12 @@ export const MIN_DAYS_AHEAD = 14
 export const MIN_REPEAT_GAP = 7
 
 /**
- * How many of a dive's rounds are world prompts rather than Singapore ones. Ulu is a Singapore game first, so
- * the world rounds are the change of pace, not the main course
+ * How many of a dive's rounds are world prompts rather than Singapore ones. Most of a dive is open prompts that
+ * anyone can play, with big answer spaces (things that come in pairs, say), and the other two rounds are
+ * Singapore's own deep cuts. Fewer world rounds are played while the world bank is too small to rest them
+ * (worldRoundsFor), and the Singapore bank fills the gap
  */
-export const WORLD_ROUNDS_PER_DIVE = 2
+export const WORLD_ROUNDS_PER_DIVE = 5
 
 /**
  * World rounds a newly scheduled day gets with this bank: WORLD_ROUNDS_PER_DIVE, or fewer while there aren't
@@ -88,6 +90,24 @@ export function extendSchedule(schedule: Schedule, prompts: readonly Prompt[], u
     for (const id of out[dateKey]) lastUsed.set(id, day)
   }
   return out
+}
+
+/**
+ * Plan again every day from `from` on, with the bank as it is now, and keep every day before it. For a change to
+ * the mix or the bank that should reach players before the days already scheduled run out. Only days after
+ * today can change, since today's dive may already be underway: run it just before the change is deployed, from
+ * the first day the deploy will serve, so that the schedule still records what players got
+ */
+export function replanSchedule(
+  schedule: Schedule,
+  prompts: readonly Prompt[],
+  from: string,
+  until: string,
+  today: string,
+): Schedule {
+  if (from <= today) throw new Error(`Only days after today (${today}) can be planned again, not ${from}`)
+  const kept = Object.fromEntries(Object.entries(schedule).filter(([date]) => date < from))
+  return extendSchedule(kept, prompts, until, today)
 }
 
 function leastRecentlyUsed(

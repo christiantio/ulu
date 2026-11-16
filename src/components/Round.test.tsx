@@ -135,6 +135,29 @@ describe('Round', () => {
     expect(onResult).toHaveBeenCalledWith(expect.objectContaining({ answer: 'Nepal', attempts: [] }))
   })
 
+  it('says why a guess breaks the spelling rule, and does not list it as a rejected guess', async () => {
+    const bAnimals: Prompt = {
+      id: 'wordplay-b-animals',
+      category: 'wordplay',
+      text: 'Name an animal that starts with B',
+      rule: { startsWith: 'b' },
+      answers: [
+        { name: 'Bear', tier: 'common' },
+        { name: 'Binturong', tier: 'gem' },
+      ],
+    }
+    const { onResult, onRefuse, user, input } = setup(bAnimals)
+
+    await user.type(input(), 'lion{Enter}')
+    expect(onResult).not.toHaveBeenCalled()
+    expect(onRefuse).toHaveBeenCalledTimes(1)
+    expect(screen.getByRole('status').textContent).toBe("“lion” doesn't start with B. Try another one!")
+    expect((input() as HTMLInputElement).value).toBe('')
+
+    await user.type(input(), 'binturong{Enter}')
+    expect(onResult).toHaveBeenCalledWith(expect.objectContaining({ answer: 'Binturong', tier: 'gem', attempts: [] }))
+  })
+
   it('asks for more when a guess fits several answers, and keeps it in the box', async () => {
     const { onResult, user, input } = setup(people)
 

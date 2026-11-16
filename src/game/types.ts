@@ -13,8 +13,12 @@ export const SG_CATEGORIES = [
   'nature',
 ] as const
 
-/** World categories: general knowledge anyone in Singapore could have a go at */
-export const WORLD_CATEGORIES = ['world', 'science', 'entertainment', 'wildcard'] as const
+/**
+ * World categories: prompts anyone could have a go at, wherever they live. `everyday` is things and situations
+ * from daily life (things that come in pairs), and `wordplay` is words, letters and phrases (words that go
+ * before "ball")
+ */
+export const WORLD_CATEGORIES = ['world', 'science', 'entertainment', 'wildcard', 'everyday', 'wordplay'] as const
 
 export const CATEGORIES = [...SG_CATEGORIES, ...WORLD_CATEGORIES] as const
 export type Category = (typeof CATEGORIES)[number]
@@ -68,6 +72,32 @@ export interface Prompt {
    * part of an expression is a different expression
    */
   partial?: boolean
+  /**
+   * Accept extra words in front of an answer: "D24 durian" is Durian, "red dragon fruit" is Dragon Fruit,
+   * "Hainanese chicken rice" is Chicken Rice. Turn it on for things that come in kinds (food, animals, objects),
+   * and leave it off for names, titles and places, where "Upper Bukit Timah" isn't Bukit Timah
+   */
+  qualifiers?: boolean
+  /** A spelling rule every answer keeps, checked on what the player types before anything else */
+  rule?: SpellingRule
+}
+
+/**
+ * A rule about how an answer is spelt, for prompts about animals starting with B, say. Letters only:
+ * case, accents, spaces and punctuation don't count, and neither does a leading "the". A guess that breaks the
+ * rule is refused with the reason, so the player knows it wasn't a gap in the list
+ */
+export interface SpellingRule {
+  /** Every answer starts with these letters, e.g. "b" */
+  startsWith?: string
+  /** Every answer ends with these letters, e.g. "ia" */
+  endsWith?: string
+  /** Every answer has these letters in it, in this order, e.g. "ulu" */
+  contains?: string
+  /** No answer has any of these letters in it, e.g. "a" */
+  lacks?: string
+  /** Every answer reads the same backwards ("level", "Ulu") */
+  palindrome?: boolean
 }
 
 export interface Pack {

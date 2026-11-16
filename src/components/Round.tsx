@@ -31,6 +31,8 @@ type Feedback =
   | { kind: 'ambiguous'; guess: string }
   /** A known wrong answer, and why */
   | { kind: 'decoy'; guess: string; why: string }
+  /** It breaks the prompt's spelling rule, e.g. "doesn't start with B" */
+  | { kind: 'rule'; guess: string; problem: string }
 
 /**
  * One question. The sign over the lift carries the question and its clock; the answer box sits at the lift's foot,
@@ -111,6 +113,8 @@ export function Round({ prompt, deadline, onResult, onClock, onRefuse }: Props) 
         setFeedback({ kind: 'unknown', guess })
       } else if (verdict.kind === 'decoy') {
         setFeedback({ kind: 'decoy', guess, why: verdict.decoy.why })
+      } else if (verdict.kind === 'rule') {
+        setFeedback({ kind: 'rule', guess, problem: verdict.problem })
       } else {
         setFeedback({ kind: 'ambiguous', guess })
       }
@@ -137,6 +141,7 @@ export function Round({ prompt, deadline, onResult, onClock, onRefuse }: Props) 
       {feedback.kind === 'unknown' && 'not on our list leh. Try another one — no points lost!'}
       {feedback.kind === 'ambiguous' && 'could be more than one answer. Which one? Type a bit more.'}
       {feedback.kind === 'decoy' && `doesn't count. ${feedback.why}`}
+      {feedback.kind === 'rule' && `${feedback.problem}. Try another one!`}
     </span>
   )
 

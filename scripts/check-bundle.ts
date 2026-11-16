@@ -13,8 +13,11 @@ import { singaporeDateKey } from '../src/game/daily'
 import type { DiveFile } from '../src/game/types'
 import { diveFileName, readContent } from './dives'
 
-/** Raise these deliberately, in the PR that needs it, and say why */
-export const ENTRY_BUDGET = { raw: 300_000, gzip: 95_000 }
+/**
+ * Raise these deliberately, in the PR that needs it, and say why. 95 → 96 kB gzipped: reading plurals, words in
+ * front of an answer and spelling rules (src/game/normalize.ts, match.ts, rule.ts) added 0.8 kB to the entry
+ */
+export const ENTRY_BUDGET = { raw: 300_000, gzip: 96_000 }
 
 const root = join(import.meta.dirname, '..')
 const dist = process.argv[2] ?? join(root, 'dist')
