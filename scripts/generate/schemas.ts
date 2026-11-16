@@ -38,6 +38,18 @@ export const ListSchema = z.object({
   decoys: z.array(z.object({ name: z.string(), aliases: z.array(z.string()), why: z.string() })),
   filler: z.array(z.string()).describe('Words to ignore in every answer of this prompt; [] if none'),
   partial: z.boolean().describe('true for sets of people or multi-word place names'),
+  qualifiers: z
+    .boolean()
+    .describe('true for things that come in kinds (food, animals, objects), so "D24 durian" counts as Durian'),
+  rule: z
+    .object({
+      startsWith: z.string().describe('Letters every answer starts with, or ""'),
+      endsWith: z.string().describe('Letters every answer ends with, or ""'),
+      contains: z.string().describe('Letters every answer contains, in order, or ""'),
+      lacks: z.string().describe('Letters no answer may contain, or ""'),
+      palindrome: z.boolean().describe('Every answer reads the same backwards'),
+    })
+    .describe('The spelling rule in prompts like "Name an animal that starts with B"; all "" and false for any other prompt'),
   gemCandidates: z.array(z.object({ name: z.string(), reason: z.string() })),
   timeSensitive: z.boolean(),
   reviewerNotes: z.string().describe('Sources to check against, dated facts, scope calls'),

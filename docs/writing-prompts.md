@@ -41,6 +41,10 @@ for you to review, see [question-pipeline.md](question-pipeline.md).
   `["MRT", "station"]` (see [What matching already does](#what-matching-already-does)).
 - **`partial`**: optional. `true` lets the first or last part of a name stand for the answer, for sets of
   people and multi-word places (see [Part of a name](#part-of-a-name)).
+- **`qualifiers`**: optional. `true` lets extra words in front of an answer still match it ("D24 durian" is
+  Durian), for things that come in kinds (see [Words in front](#words-in-front)).
+- **`rule`**: optional. A spelling rule every answer keeps, such as `{ "startsWith": "b" }`, checked on what the
+  player types (see [Spelling rules](#spelling-rules)).
 
 The `name` is what players see on the reveal screen, so use the official or most recognised spelling
 ("HarbourFront", "one-north", "S. R. Nathan"). Every other spelling goes in `aliases`.
@@ -62,6 +66,9 @@ These come from `src/game/validate.ts`. A prompt that breaks any of them fails C
 | No two answers share a normalised name or alias | Otherwise one input would match two answers |
 | No two answers are the same once filler, word order and number spellings are ignored | Same reason, for the looser stage of matching: "Rocky II" and "Rocky 2" can't be two answers |
 | Every decoy has a `name` and a `why`, and doesn't match any answer | A decoy that matched an answer would refuse a right answer |
+| `partial` and `qualifiers` are `true` or `false` | A setting of the wrong type would be ignored without anyone noticing |
+| A `rule` only uses `startsWith`, `endsWith`, `contains`, `lacks` and `palindrome`, and sets at least one | |
+| Every name, alias and decoy keeps the `rule` | The rule is checked before matching, so one that breaks it could never be reached |
 
 Each pack also needs a `name` and an `asOf` date (`YYYY-MM-DD`, when its facts were last checked) and at least
 one prompt.
@@ -70,9 +77,12 @@ To check a draft on its own, without the schedule: `npm run validate -- content/
 
 ## What makes a good prompt
 
-- **Anyone in Singapore can get on the board.** A good prompt has a few answers almost everyone knows and a long
-  tail that rewards people who really know the topic. "Name a station on the Circle Line" works because
-  everyone knows Dhoby Ghaut and only some people know Mountbatten.
+- **Anyone can get on the board.** A good prompt has a few answers almost everyone knows and a long tail that
+  rewards people who think harder. "Name something that comes in pairs" works because everyone has socks and
+  chopsticks, and only some people think of the mandarin oranges you give at Chinese New Year.
+- **The answer space is big.** Rarity needs room. A small closed set is over in a few guesses ("Name a planet":
+  everyone types the same five), while a big space lets players reason their way somewhere nobody else went.
+  Aim for at least 40 answers, and well over 100 where the space allows. Gaps in a big list hurt, so be generous.
 - **It's answerable in 25 seconds.** Think of answers you'd type, not ones you'd look up.
 - **The scope is clear.** If two players could argue about whether an answer counts, the text or the note should
   settle it. "Name a bridge in Singapore" has the note "The Causeway is a causeway, not a bridge!"
@@ -83,12 +93,24 @@ To check a draft on its own, without the schedule: `npm run validate -- content/
 
 ### World prompts
 
-A dive is mostly Singapore prompts, with up to two world prompts for a change of pace (see
-[ARCHITECTURE.md](../ARCHITECTURE.md#daily-selection)). World prompts live in four categories: `world`
-(countries, cities, landmarks), `science` (nature, space, the body), `entertainment` (films, series, music,
-books) and `wildcard` (words, symbols, everyday things, anything with a catch). The players are still
-Singaporean, and that decides what counts as well known. A world prompt has to clear a higher bar than "it has
-a list":
+A dive is mostly world prompts: five of its seven rounds, with the other two from the Singapore categories (see
+[ARCHITECTURE.md](../ARCHITECTURE.md#daily-selection)). World prompts live in six categories: `world`
+(countries, cities, places), `science` (nature, space, the body), `entertainment` (films, series, music, games,
+cartoons), `wildcard` (anything with a catch), `everyday` (things and situations from daily life) and `wordplay`
+(words, letters and phrases). The players are still mostly Singaporean, and that decides what counts as well
+known. Singapore is the lens, not the limit: the best world prompts have local deep cuts among their answers,
+like fishball and sotong ball in "Name a word that goes before 'ball'".
+
+The shapes that make big answer spaces, and that a plain "Name a [category]" game doesn't have:
+
+| Shape | Example | Why it works |
+|---|---|---|
+| A property with a clear test | "Name something sticky", "Name something with a hole in the middle" | Players reason their way to answers instead of recalling a list, so everyone has a way in and the deep end is creative |
+| A crossover | "Name a colour that's also the name of something else", "Name an animal that can fly but isn't a bird" | The obvious answers are knocked out, which is where decoys and gems come from |
+| A phrase | "Name a word that goes before 'ball'", "Name a word that comes after 'water'" | Huge spaces from everyday language, with Singapore English in the long tail |
+| A spelling rule | "Name an animal that starts with B", "Name a word that reads the same backwards" | The game checks the rule itself and says when a guess breaks it (see [Spelling rules](#spelling-rules)) |
+
+A world prompt has to clear a higher bar than "it has a list":
 
 - **Broad, not fan knowledge.** If you'd need to follow the subject to name more than two answers, it's too
   niche. No league sport (teams, players and seasons in the NBA, NFL, NBL or a football league), no deep lore
@@ -109,14 +131,17 @@ Tiers still mean what they mean everywhere else: how likely a typical Singapore 
 ### Closed and open sets
 
 **Closed sets** have a definite, complete list: stations on a line, the 17 reservoirs, the 55 planning areas,
-the 15 SMCs at GE2025, Presidents and Prime Ministers. Prefer these. They can be complete, so no valid answer
-ever scores 0, and reviewers can check them against an official list. **List every member.** If the set is
-"all 17", the prompt has 17 answers.
+the 15 SMCs at GE2025, Presidents and Prime Ministers. They can be complete, so no valid answer ever scores 0,
+and reviewers can check them against an official list. **List every member.** If the set is "all 17", the
+prompt has 17 answers. Their weakness is size: a set of 13 is over in a few guesses, and everyone types the
+same five. Keep them for sets that are big (the 54 countries that drive on the left) or have a great twist (the
+countries on the equator).
 
-**Open sets** have no single official list: hawker dishes, Singlish words, Singapore brands, kueh. They're
-fun, but an unrecognised answer scores 0, so gaps feel unfair. Be generous: `food-hawker-dishes` has 74 answers
-and `language-singapore-acronyms` has 132. Use the note to draw the line ("Main dishes and snacks. Drinks and
-desserts don't count here."), and expect correction reports for missing answers.
+**Open sets** have no single official list: hawker dishes, Singlish words, things that come in pairs. They're
+where the game is at its best, with room for every player to find their own answer, but an unrecognised answer
+scores 0, so gaps feel unfair. Be generous: `food-hawker-dishes` has 74 answers, `world-southeast-asian-islands`
+has 126 and `entertainment-cartoon-animals` has 143. Use the note to draw the line ("Mostly black and white, all
+over or in big patches."), and expect correction reports for missing answers.
 
 Prompts drafted with `npm run draft` follow the same rules, but the draft is only a starting point. Check
 every answer yourself. The draft comes with a fact-checker's report and an estimate of how often each answer
@@ -192,8 +217,9 @@ with variants it would accept anyway.
 
 ### What matching already does
 
-`checkAnswer()` in `src/game/match.ts` works out what a player meant in four stages, from strictest to most
-forgiving. The first stage that has an opinion decides.
+`checkAnswer()` in `src/game/match.ts` works out what a player meant in five stages, from strictest to most
+forgiving. The first stage that has an opinion decides. Before any of them, a prompt with a
+[spelling rule](#spelling-rules) refuses a guess that breaks it.
 
 **1. Exact.** `normalize()` turns every name, alias and input into a key, and the keys must be equal. It:
 
@@ -211,12 +237,16 @@ forgiving. The first stage that has an opinion decides.
   `Henry the Eighth` and `Henry VIII`. (Not a lone "I", "V" or "X", which are usually letters, as in Holland V.)
 - common short forms are read: `Bt Timah` for Bukit Timah, `Mt Faber`, `St James`, `Tg Pagar`, `Kg Glam`,
   `Upp Thomson`, `Jln Besar`, `Lor Chuan`, and `Rd`, `Ave`, `Dr` for Road, Avenue, Drive;
-- a plural "s" doesn't matter: `fish balls` matches Fish Ball;
+- a plural doesn't matter: `fish balls` matches Fish Ball, and so do the plurals that aren't just an "s":
+  `cherries`, `boxes`, `wolves`, `knives`, `kiwis`, `mice`, `geese`, `firemen`. They work both ways, so an
+  answer listed as "French Fries" also takes `french fry`;
 - word order doesn't matter: `kopi siew dai peng` matches Kopi Peng Siew Dai.
 
 **3. Part of a name**, only in prompts with `"partial": true` (see [Part of a name](#part-of-a-name)).
 
-**4. Typos.**
+**4. Words in front**, only in prompts with `"qualifiers": true` (see [Words in front](#words-in-front)).
+
+**5. Typos.**
 
 - **1 typo** for keys of 5–9 characters (`Tampiness` → Tampines), **2** for 10 or more
   (`char kway teoh` → Char Kway Teow). Keys are measured without spaces.
@@ -249,6 +279,42 @@ Koreas are answers.
   `politics-presidents-and-pms` and `history-wwii-people`.
 - **Leave it off for words, phrases and titles**, where part of an expression is a different expression:
   "lau" is not "wah lau", and "Story" is not a Pixar film.
+- **Watch for names like "Gary the Snail".** The last word of such a name is a plain animal, so with `partial`
+  on, "snail" would score as Gary. Use the short name ("Gary") and list the long one as an alias, or leave
+  `partial` off and list the short names people type, as `entertainment-cartoon-animals` does.
+
+### Words in front
+
+With `"qualifiers": true`, extra words in front of a whole name or alias don't stop it matching: `D24 durian`
+is Durian, `red dragon fruit` is Dragon Fruit, `Hainanese chicken rice` is Chicken Rice, `green sea turtle` is
+Sea Turtle (the longest name at the end wins, so it isn't Turtle). The reveal shows what the guess was taken as.
+
+- A decoy at the end refuses the guess: with Carrot Cake a decoy, `fried carrot cake` is refused even if Cake
+  is an answer.
+- Only words *in front* count. `papaya fruit` needs `"filler": ["fruit"]` instead.
+- **Turn it on for things that come in kinds**: food, animals, objects, instruments, bones.
+- **Leave it off for names, titles and places** ("Upper Bukit Timah" isn't Bukit Timah), and **for phrase
+  prompts whose answers have one-word aliases**: in "Name a word that comes after 'chicken'", the alias "Rice"
+  would let `fried rice` score as chicken rice.
+
+### Spelling rules
+
+A prompt like "Name an animal that starts with B" can say so in a `rule`, and the game checks it on what the
+player types before anything else. A guess that breaks it is refused with the reason ("“lion” doesn't start
+with B"), so the player knows it wasn't a gap in the list. The settings, any of which can be combined:
+
+| Setting | Example | The guess must |
+|---|---|---|
+| `"startsWith": "b"` | `wordplay-animals-starting-with-b` | start with these letters |
+| `"endsWith": "ia"` | `world-countries-ending-in-ia` | end with these letters |
+| `"contains": "ulu"` | | have these letters in it, in this order |
+| `"lacks": "a"` | | have none of these letters |
+| `"palindrome": true` | `wordplay-palindromes` | read the same backwards |
+
+Only letters and digits count, as in matching: case, accents, spaces, punctuation and a leading "the" don't.
+Validation checks that every name, alias and decoy keeps the rule, since one that breaks it could never be
+reached. An alias that breaks it ("Doner kebab" in a K prompt) is better left out: the player who types it is
+told why it doesn't count.
 
 ### What you still need to add
 
@@ -382,6 +448,12 @@ each prompt in a content PR, and say in the review that you did.
 **World prompts**
 - [ ] It's broad: no league sport, no fan lore, no other country's pub quiz. Four answers the whole table has.
 - [ ] Nothing in it is a ranking that moves or a membership people argue about, or the note settles it.
+- [ ] The answer space is big (40 or more answers), or the set is closed and has a twist worth playing for.
+
+**Settings**
+- [ ] `qualifiers` is on for things that come in kinds, and off for names, titles, places and phrase prompts
+      with one-word aliases.
+- [ ] A spelling rule is in `rule`, not only in the text, so the game can say when a guess breaks it.
 
 **The answers**
 - [ ] Every answer is correct. You checked anything you weren't sure of against a source.

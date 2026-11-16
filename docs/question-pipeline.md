@@ -30,7 +30,7 @@ players until someone has checked it.
 | Stage | Its one job | Prompt in `brief.ts` | Reply |
 |---|---|---|---|
 | **ideas** | Propose prompts worth writing, and rate honestly how many players could answer each | `IDEAS` | Ideas with sample answers, a twist, risks and a source. Under 80/100 "could answer" is dropped |
-| **list** | Compile every right answer, with aliases, decoys, a scope note and gem candidates. No ranking | `LIST` | The answer list, plus anything it wasn't sure of, kept out of the list for a person to check |
+| **list** | Compile every right answer, with aliases, decoys, a scope note, the matching settings (`filler`, `partial`, `qualifiers`, a spelling `rule`) and gem candidates. No ranking | `LIST` | The answer list, plus anything it wasn't sure of, kept out of the list for a person to check |
 | **check** | Assume the list has mistakes and find them: wrong members, missing members, stale facts, false decoy reasons | `CHECK`, then `CHECK_SUMMARY` | A report in prose with sources, then the same findings as data. Wrong answers are removed, missing ones added, disputed ones kept and flagged |
 | **panel** | Predict what 1,000 players would actually type, for three groups of players | `PANEL`, once per group in `PANELS` | Picks per answer, which answers are "clever" picks, gem candidates |
 | **tiers** | Turn the picks into tiers | none: `tiers.ts` | One tier per answer, and a reason wherever a rule overrode the numbers |
@@ -98,6 +98,6 @@ and in particular:
 ## Changing the prompts
 
 Every prompt is a plain string in `scripts/generate/brief.ts`. The editorial rules for world prompts (broad
-subjects, no fan knowledge, a twist where there is one) live in `WORLD_SCOPE` there, and the Singapore ones in
+subjects, big answer spaces, no fan knowledge, a twist where there is one) live in `WORLD_SCOPE` there, and the Singapore ones in
 `SG_SCOPE`. If drafts keep coming back with the same problem, fix it in the brief so every later draft
 benefits, and say what you changed in the PR.

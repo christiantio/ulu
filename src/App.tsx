@@ -247,7 +247,7 @@ export default function App() {
                   )}
                 </div>
                 {newcomer && (
-                  <p className="home__copy">7 Singapore questions. The rarer your answers, the higher you rise.</p>
+                  <p className="home__copy">7 questions, made in Singapore. The rarer your answers, the higher you rise.</p>
                 )}
                 {today.status === 'loading' && (
                   <p className="home__status float center" role="status">

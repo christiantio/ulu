@@ -1,16 +1,20 @@
 # Ulu architecture
 
-Ulu is a Singapore-flavoured take on [Krillion](https://krillion.io): a daily word-recall game where the
-**rarest valid answer wins**. "Ulu" is Singlish for remote or out-of-the-way, which is the point of the game:
+Ulu is a daily word-recall game from Singapore where the **rarest valid answer wins**, a format it shares with
+[Krillion](https://krillion.io). "Ulu" is Singlish for remote or out-of-the-way, which is the point of the game:
 go somewhere nobody else thought of.
+
+What makes it Ulu rather than a copy: most prompts carry a twist (a property to reason about, a crossover, a
+phrase, a spelling rule the game checks), known wrong answers are refused with the reason, and Singapore is the
+lens on everything, with two rounds a day of local deep cuts and local gems hiding in the world prompts.
 
 ## Game design
 
 | | |
 |---|---|
 | Daily dive | 7 prompts, same for everyone, resets at midnight **Singapore time** |
-| Mix | Mostly Singapore prompts, with up to 2 world prompts (general knowledge) a day once the bank has enough of them. See [Daily selection](#daily-selection) |
-| Per prompt | 25 seconds, one free-text answer, and the lift's doors close as the time runs down. Unrecognised input can be retried while the clock runs; the first valid answer locks in. When time runs out, whatever is in the answer box is judged as if it had been entered, so an answer typed in time isn't lost to a late press of Go. A known wrong answer (a decoy) is refused with its reason, and a guess that fits several answers asks for more |
+| Mix | 5 world prompts (open ones anyone can play, in six categories) and 2 Singapore prompts a day, once the world bank is big enough to rest them. See [Daily selection](#daily-selection) |
+| Per prompt | 25 seconds, one free-text answer, and the lift's doors close as the time runs down. Unrecognised input can be retried while the clock runs; the first valid answer locks in. When time runs out, whatever is in the answer box is judged as if it had been entered, so an answer typed in time isn't lost to a late press of Go. A known wrong answer (a decoy) is refused with its reason, a guess that breaks the prompt's spelling rule is refused with the rule, and a guess that fits several answers asks for more |
 | Scoring | Each accepted answer has a rarity tier (below), and the dive's score is the sum. Timeout = 0. Nothing ever scores below zero |
 | Max | 7 × 100 = 700 |
 | Theme | Answers climb floors while the cumulative score unlocks lifts, from the HDB lift to the sky penthouse |
@@ -37,8 +41,9 @@ A static single-page app: **Vite + React + TypeScript**, no backend. It can be h
 src/
   game/              pure logic, no React; unit tested
     types.ts         Prompt / Answer / Decoy / Tier / Category schema, and each category's scope (sg or world)
-    normalize.ts     answer → comparison key, and its loose form (filler, numbers, short forms)
-    match.ts         what a guess means: exact, loose, part of a name, typo; decoys and ambiguous guesses
+    normalize.ts     answer → comparison key, and its loose forms (filler, numbers, short forms, plurals)
+    rule.ts          spelling rules (starts with, ends with, contains, lacks, palindrome) and why a guess breaks one
+    match.ts         what a guess means: rule, exact, loose, part of a name, words in front, typo; decoys and ambiguous guesses
     scoring.ts       tier points, labels, destinations
     elevator.ts      floors, lift upgrades and the answer animation's timing and motion
     daily.ts         Singapore date, seeded daily selection, unlimited shuffle
@@ -81,7 +86,7 @@ stay out of the entry chunk:
 
 | What | Where it comes from | When it loads |
 |---|---|---|
-| The app (entry chunk) | `dist/assets/index-<hash>.js` | First load. About 296 kB, 95 kB gzipped |
+| The app (entry chunk) | `dist/assets/index-<hash>.js` | First load. About 297 kB, 95 kB gzipped |
 | Today's prompts | `dist/dives/<date>.json`, the day's 7 full prompts in schedule order | First load, and again when the date rolls over. About 23–35 kB, 6–7 kB gzipped |
 | The bank (every pack plus `schedule.json`) | `dist/assets/bank-<hash>.js`, from `import('./bank')` | Only when Unlimited starts, when a date has no dive file, or when saved progress names prompts the day's file doesn't have. About 227 kB, 53 kB gzipped |
 
@@ -108,7 +113,7 @@ stay out of the entry chunk:
   excluded using both the saved progress and the bank's schedule, so the exclusion holds even when today's
   file didn't load.
 - **The size check.** `npm run check:bundle` runs after `npm run build`, locally and in CI. It fails if the
-  entry JS (the module script plus anything `index.html` preloads) is over budget: 300 kB raw, 95 kB gzipped,
+  entry JS (the module script plus anything `index.html` preloads) is over budget: 300 kB raw, 96 kB gzipped,
   set in `ENTRY_BUDGET`. It also fails if any prompt id, prompt text or gem name appears in the entry. Strings
   the app's own source also uses (for example "ulu") can't tell anything, so they're skipped and listed. Last,
   every scheduled date must have its dive file, matching the schedule. Before this change the entry was
@@ -156,12 +161,16 @@ Pipeline:
 3. **Validate.** `npm run validate` (also run in `npm test`) enforces: unique kebab-case ids, known
    category, ≥ 12 answers, ≥ 3 easy (common/trap/solid) answers, exactly one gem, that no two answers share
    a normalised name or alias (or differ only in ways matching ignores), which would make matching ambiguous,
-   and that every decoy has a reason and doesn't match an answer.
+   that every decoy has a reason and doesn't match an answer, and that every name, alias and decoy keeps the
+   prompt's spelling `rule`.
 4. **Ship.** Move the prompt into `src/content/packs/<category>.json`. At build time it goes into the dive files
    of the days it's scheduled on and into the lazily loaded bank (see [Loading content](#loading-content)).
 
-Prompts favour **closed, verifiable sets** (stations on a line, Presidents, HDB towns) because they can be
-complete. Open sets (hawker dishes, Singlish words) carry long answer lists with spelling variants.
+Prompts favour **big answer spaces**: a property, a crossover, a phrase or a spelling rule ("Name something
+sticky", "Name a word that goes before 'ball'") rather than a short official list, because rarity needs room
+and a big space has a way in for everyone. Such open sets carry long answer lists (40 to 140 answers) and lean
+on matching to forgive plurals and extra words. Closed, verifiable sets (stations on a line, Presidents) can be
+complete, so they stay for the Singapore rounds and for world sets with a twist.
 
 ### How rarity is decided (now and later)
 
@@ -185,18 +194,21 @@ complete. Open sets (hawker dishes, Singlish words) carry long answer lists with
 
 ## Answer matching
 
-`checkAnswer()` in `game/match.ts` decides what a typed guess means. It runs four stages, strictest first, and
-the first with an opinion decides:
+`checkAnswer()` in `game/match.ts` decides what a typed guess means. A prompt with a spelling `rule` checks it
+first (`game/rule.ts`), then five stages run, strictest first, and the first with an opinion decides:
 
 | Stage | Accepts | Example |
 |---|---|---|
+| 0. Rule | In prompts with a `rule`, refuses a guess that breaks it, with the reason, before any matching | `lion` for "starts with B": "doesn't start with B" |
 | 1. Exact | The `normalize()` keys are equal: case, accents, punctuation, spacing and a leading "the" are ignored, and `&` is "and" | `char-kway-teow`, `charkwayteow` |
-| 2. Loose | The same words once "the", "of", "and" and the prompt's `filler` words are dropped, numbers are written as digits, common short forms are unified and a plural "s" is removed, in any order | `Bishan MRT station`, `Toy Story Two`, `Bt Timah`, `kopi siew dai peng` |
+| 2. Loose | The same words once "the", "of", "and" and the prompt's `filler` words are dropped, numbers are written as digits, common short forms are unified and a plural "s" is removed, in any order. Failing that, the same with other plurals read as singulars on both sides (`looseReadings()`) | `Bishan MRT station`, `Toy Story Two`, `Bt Timah`, `kopi siew dai peng`, `cherries`, `wolves`, `mice` |
 | 3. Partial | In prompts with `partial: true`, the first or last words of exactly one answer's name | `Kuan Yew`, `Einstein` |
-| 4. Typo | 1 typo for keys of 5–9 characters, 2 for longer ones, where a typo is a wrong, missing, extra or swapped-with-its-neighbour character, and one answer is strictly closest | `Tampiness`, `Toa Payho`, `Einstien` |
+| 4. Qualifiers | In prompts with `qualifiers: true`, a whole name or alias at the end of the guess after other words; the longest one decides, decoys included | `D24 durian`, `red dragon fruit`, `green sea turtle` |
+| 5. Typo | 1 typo for keys of 5–9 characters, 2 for longer ones, where a typo is a wrong, missing, extra or swapped-with-its-neighbour character, and one answer is strictly closest | `Tampiness`, `Toa Payho`, `Einstien` |
 
-It returns one of four verdicts: `match`; `ambiguous`, when the guess fits several answers equally ("Lee",
-"Korea"), so the round asks the player to type more; `decoy`, a known wrong answer with its reason; or `none`.
+It returns one of five verdicts: `match`; `ambiguous`, when the guess fits several answers equally ("Lee",
+"Korea"), so the round asks the player to type more; `decoy`, a known wrong answer with its reason; `rule`, a
+guess that breaks the spelling rule, with the reason; or `none`.
 
 The rules that keep it from accepting wrong answers:
 
@@ -211,8 +223,18 @@ The rules that keep it from accepting wrong answers:
   an answer.
 - **Partial is opt-in and narrow.** Only an answer's display name counts, only its first or last words, and
   only with a real word of 3+ letters. An earlier, wider version accepted "Sir" and "bin" as people.
+- **Plurals only add readings.** The singulars a plural could be ("leaves" → "leaf", "leave", "leafe") are
+  tried only after the plain loose comparison fails, and only against real names and aliases, so a wrong guess
+  at a singular is harmless. Validation warns when two answers read as each other's plural.
+- **Qualifiers are opt-in.** Words in front change what a name means for places and titles ("Upper Bukit Timah"),
+  so only prompts about things that come in kinds turn them on.
 
-Checked against the bank: all 8,100 names and aliases match their own answer, and on 111,000 single-typo
+Checked against the bank in November 2026: all 11,866 names and aliases match their own answer. Against the
+matcher before plurals were read, on 414,000 variants of the names in prompts without a rule or qualifiers
+(typos, plurals, extra words), 558 guesses that were refused now match, 16 now get a decoy's reason, and one
+match changed: `Mannies` is now Manny rather than a typo for Minnie. No guess that matched before is refused.
+
+When the typo rules came in, all 8,100 names and aliases then in the bank matched their own answer, and on 111,000 single-typo
 variants of them the previous matcher (Levenshtein, no swaps, no digit rule) corrected 89,436 to the right
 answer and 37 to a different one, against 94,481 and 9 now. The 9 are inputs where the test replaced a digit
 with a letter. The previous matcher also made 204 corrections that this one refuses: 174 that
@@ -372,12 +394,17 @@ cards, the labels on signs and plaques) all share one style at 12px.
   file only grows, so adding, editing or reordering prompts never changes a day that's already scheduled.
 - `npm run schedule -- --days 30` appends days until the schedule reaches 30 days past today (30 is the default). Each new day takes
   the least recently used prompt from each of 7 different categories, so a prompt rests as long as the bank
-  allows before it comes back. Up to `WORLD_ROUNDS_PER_DIVE` (2) of the 7 come from the world categories and
+  allows before it comes back. Up to `WORLD_ROUNDS_PER_DIVE` (5) of the 7 come from the world categories and
   the rest from the Singapore ones. A day only gets as many world prompts as the world bank can rest for
-  `MIN_REPEAT_GAP` days: none with fewer than 7 world prompts, one a day from 7, two from 14. Days already in
-  the schedule don't change, so world prompts first appear on the days the next `npm run schedule` adds. With ~8–10 prompts per category that's about 8 days. **Growing the bank is the
-  main lever for longevity.** New prompts only appear on days scheduled after they were added, which is why
-  the schedule runs a month ahead and not further.
+  `MIN_REPEAT_GAP` days: one a day for every 7 world prompts, so five from 35. Days already in the schedule
+  don't change, so a new mix first appears on the days the next `npm run schedule` adds. With 42 world prompts
+  and five a day, a world prompt comes back after about 8 days. **Growing the bank is the main lever for
+  longevity.** New prompts only appear on days scheduled after they were added, which is why the schedule runs a
+  month ahead and not further.
+- `npm run schedule -- --replan-from <date>` plans every day from that date on again with the current bank and
+  mix, for a change that should reach players before the scheduled days run out. It refuses today or earlier,
+  since today's dive may be underway. Run it just before deploying, from the first day the deploy will serve,
+  so the schedule keeps recording what players actually got.
 - `npm test` and `npm run validate` check the schedule. For every day: each scheduled id still exists (so a
   prompt can't be deleted or renamed once it's scheduled), it has 7 different prompts, and there are no gaps.
   For days after today, which are the only ones that can still change: no prompt repeats within 7 days

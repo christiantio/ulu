@@ -146,7 +146,7 @@ describe('App daily flow', () => {
     // The title screen: the boy waiting in the HDB lift on the ground floor, and what the game is
     expect(screen.getByRole('heading', { level: 1, name: 'Ulu' })).toBeDefined()
     expect(screen.getByText('How ulu can you go?')).toBeDefined()
-    expect(screen.getByText('7 Singapore questions. The rarer your answers, the higher you rise.')).toBeDefined()
+    expect(screen.getByText('7 questions, made in Singapore. The rarer your answers, the higher you rise.')).toBeDefined()
     expect(scene().dataset.lift).toBe('hdb')
     expect(scene().dataset.floor).toBe('00')
     expect(scene().querySelector('.boy--idle')).not.toBeNull()
@@ -184,7 +184,7 @@ describe('App daily flow', () => {
     expect(todayScore()).toBe('70')
     noStatsLine()
     // Only someone who hasn't played yet is told what the game is
-    expect(screen.queryByText(/^7 Singapore questions/)).toBeNull()
+    expect(screen.queryByText(/^7 questions, made in Singapore/)).toBeNull()
     expect(screen.queryByRole('button', { name: /Start climbing|Continue climbing/ })).toBeNull()
 
     await again.user.click(button("See today's results"))

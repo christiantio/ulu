@@ -14,7 +14,8 @@
 import type { Scope } from '../../src/game/types'
 
 /** What the game is and who plays it. Every stage starts with this */
-const GAME = `Ulu is a daily trivia game made in Singapore, for people who live in Singapore.
+const GAME = `Ulu is a daily trivia game made in Singapore. Most of its players live in Singapore, and most of its
+prompts are ones anyone could play; two rounds a day are Singapore's own deep cuts.
 
 How a round works: the player sees one prompt, such as "Name a station on the Circle Line", and has 25 seconds
 to type one answer on their phone. They never see a list of options. Every valid answer scores, and the rarer
@@ -32,15 +33,33 @@ each with a one-line reason shown when they do.`
 
 const SG_SCOPE = `This prompt is a Singapore prompt. The fun is in the local deep cuts, so the set should be something
 that belongs to Singapore: its places, food, transport, history, language, politics, culture or nature. A set
-whose best answers would be the same anywhere in the world belongs in the world categories instead.`
+whose best answers would be the same anywhere in the world belongs in the world categories instead.
 
-const WORLD_SCOPE = `This prompt is a world prompt: general knowledge that isn't about Singapore. The audience is still
-Singaporean, which decides what counts as well known.
+Only two rounds a day are Singapore prompts, so each should earn its place. Prefer life as it's lived here
+("Name something you'd find at a void deck") over a fixed official list ("Name a GRC"): it has more answers,
+more ways in, and more room for a clever one.`
+
+const WORLD_SCOPE = `This prompt is a world prompt: one anyone could play, wherever they live. Five of a day's seven
+rounds are world prompts. The audience is still mostly Singaporean, which decides what counts as well known, and
+Singapore is the lens rather than the limit: the best world prompts have local deep cuts among their answers.
+
+The world categories: world (countries, cities, places), science (nature, space, the body), entertainment (films,
+series, music, games, cartoons), wildcard (anything with a catch), everyday (things and situations from daily
+life: "Name something sticky") and wordplay (words, letters and phrases: "Name a word that goes before 'ball'").
 
 What we want:
 - Broad subjects most people have met: countries and cities, the natural world, the human body, space, food and
   drink, blockbuster films and series, chart-topping music, famous books, language and words, everyday things,
   and the big moments of history.
+- A big answer space. A prompt whose answers anyone can reason their way to ("Name something that comes in
+  pairs") beats one that tests whether you know a list ("Name a planet"). The best shapes:
+  - a property with a clear test: "Name something sticky", "Name something with a hole in the middle"
+  - a crossover of two sets: "Name a colour that's also the name of something else"
+  - a phrase: "Name a word that goes before 'ball'", "Name a word that comes after 'water'"
+  - a spelling rule the game can check: "Name an animal that starts with B", "Name a word that reads the same
+    backwards"
+- A local gem where one comes naturally: fishball and sotong ball for "ball", kangkong (water spinach) for
+  "water", mandarin oranges for "pairs", teh tarik for "goes up and down".
 - A way in for everyone. At least four answers should be ones most of our players could name without thinking.
 - A long tail. The curious player should be able to go somewhere the table didn't.
 - A twist where there is one: a condition that makes an obvious answer wrong, or that sends people hunting in an
@@ -68,17 +87,26 @@ capital letters, accents, punctuation, spacing, a leading "the", the words "of" 
 "Saint", "Mt" and "Mount", "Bt" and "Bukit"). It forgives one typo in a word of five to nine letters and two in
 anything longer, unless the typo could equally be a different answer.
 
+It reads plurals as singulars too ("cherries", "boxes", "wolves", "mice"), so never list a plural as an alias.
+
 So an alias is only for what that can't reach: a different name for the same thing ("Burma" for Myanmar), a
 local or alternative romanisation ("Char Kuey Teow"), an abbreviation people really use ("DRC", "LKY"), an old
 name, or a short form the rules above don't know. Aliases must be in Latin letters. Anything shorter than five
 letters has to be typed exactly, so short answers need their short variants listed.
 
-Two settings change matching for a whole prompt:
+These settings change matching for a whole prompt:
 - "filler": words players add or drop that don't change the answer, such as ["MRT", "station"] for a prompt
   about stations. List them once here instead of adding "Bishan MRT" and "Bishan Station" as aliases.
 - "partial": set it to true for a set of people or of multi-word place names, so that the first or last part
   of a name is enough when it points to exactly one answer ("Einstein", "Kuan Yew"). Leave it false for words,
-  phrases and titles, where part of an expression is a different expression.`
+  phrases and titles, where part of an expression is a different expression.
+- "qualifiers": set it to true for things that come in kinds (food, animals, objects), so that words in front of
+  an answer don't stop it matching ("D24 durian" is Durian, "Hainanese chicken rice" is Chicken Rice). Leave it
+  false for names, titles and places ("Upper Bukit Timah" isn't Bukit Timah), and for phrase prompts whose
+  answers have one-word aliases ("fried rice" must not count as "chicken rice").
+- "rule": for a prompt with a spelling rule ("starts with B", "ends in 'ia'", "reads the same backwards"), the
+  rule itself. The game checks it on what the player types and tells them when a guess breaks it, so every
+  name, alias and decoy must keep the rule too.`
 
 export const IDEAS = (scope: Scope) => `${GAME}
 
@@ -90,10 +118,12 @@ ones worth developing, and a later step compiles the answers.
 A prompt asks for one thing and almost always starts with "Name a ...". What makes one good:
 - It can be answered in 25 seconds by typing a word or two. Think of answers people know, not answers people
   would look up.
-- It has between about 12 and 60 right answers. Fewer than 12 and there is no room for rarity. Much more than
-  60 and we can't list them all, which means right answers score nothing.
-- The answers can be checked. Prefer a closed set with an authoritative list (the countries on the equator, the
-  planets) over an open one (types of cheese). For an open set, say where you'd draw the line.
+- It has a big answer space: at least 40 right answers, and ideally well over 100. A small closed set (the
+  planets, the Chinese zodiac) is over in a few guesses: everyone types the same five, so rarity means little.
+  Big spaces are where players get to be clever, and where the deep cuts live.
+- The edge is clear. An open set is welcome as long as one sentence decides what counts ("Mostly black and
+  white, all over or in big patches"). Say where you'd draw the line. A closed set is still fine when it's big
+  (the countries that drive on the left) or has a great twist (the countries on the equator).
 - Rarity is interesting: a few answers everybody gives, then a slope down to answers that make people feel
   clever. A set where every answer is equally well known is flat and no fun.
 

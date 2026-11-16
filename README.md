@@ -2,13 +2,15 @@
 
 [![CI](https://github.com/christiantio/ulu/actions/workflows/ci.yml/badge.svg)](https://github.com/christiantio/ulu/actions/workflows/ci.yml)
 
-**How ulu can you go?** A daily Singapore trivia game where the most obscure valid answer scores the most.
-It's inspired by [Krillion](https://krillion.io).
+**How ulu can you go?** A daily trivia game from Singapore where the most obscure valid answer scores the most.
+It shares that idea with [Krillion](https://krillion.io), and puts a twist in its prompts.
 
-Every day you get 7 Singapore prompts ("Name a station on the Circle Line", "Name a kueh", …), with 25 seconds
-each before the lift doors close. "Toa Payoh" gets you 10 points; the hand-picked gem gets you 100. Every answer
-is a ride up: the more ulu it is, the higher the lift climbs, and your score upgrades it from an HDB lift to a
-sky penthouse.
+Every day you get 7 prompts, with 25 seconds each before the lift doors close. Five are open prompts anyone can
+play ("Name something that comes in pairs", "Name a word that goes before 'ball'", "Name an animal that starts
+with B"), and two are Singapore's own deep cuts ("Name a station on the Circle Line"). "Socks" gets you 10
+points; the hand-picked gem (mandarin oranges, given in pairs at Chinese New Year) gets you 100. Every answer is
+a ride up: the more ulu it is, the higher the lift climbs, and your score upgrades it from an HDB lift to a sky
+penthouse.
 
 ## Run it
 
@@ -88,10 +90,10 @@ when the build has it. The choice of provider is in [ARCHITECTURE.md](ARCHITECTU
 
 ## Add questions
 
-Prompts live in `src/content/packs/<category>.json`: eight Singapore categories, and four world ones
-(`world`, `science`, `entertainment`, `wildcard`) for general-knowledge rounds. Read
-[docs/writing-prompts.md](docs/writing-prompts.md) first: it covers tiers, aliases, decoys, the gem, notes and
-the reviewer checklist. Write a prompt by hand, or have Claude propose ideas and draft one for you to review:
+Prompts live in `src/content/packs/<category>.json`: six world categories (`world`, `science`,
+`entertainment`, `wildcard`, `everyday`, `wordplay`) for the five open rounds, and eight Singapore ones for the
+two local rounds. Read [docs/writing-prompts.md](docs/writing-prompts.md) first: it covers the prompt shapes
+that make big answer spaces, tiers, aliases, decoys, the gem, notes, spelling rules and the reviewer checklist. Write a prompt by hand, or have Claude propose ideas and draft one for you to review:
 
 ```bash
 ANTHROPIC_API_KEY=... npm run ideas -- --scope world
@@ -114,8 +116,14 @@ running out (they need two weeks of runway):
 npm run schedule   # schedule up to 30 days past today; existing days never change
 ```
 
-New prompts only appear on days scheduled after they're added. Once a prompt is scheduled, don't delete or
-rename it.
+New prompts only appear on days scheduled after they're added. To bring a change in sooner, plan the days that
+haven't happened yet again, from the first day your deploy will serve:
+
+```bash
+npm run schedule -- --replan-from 2026-12-01
+```
+
+Once a prompt is scheduled, don't delete or rename it.
 
 See [ARCHITECTURE.md](ARCHITECTURE.md) for the design, the content pipeline, how rarity works and the roadmap.
 

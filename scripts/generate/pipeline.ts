@@ -6,7 +6,16 @@
  */
 import { matchProblems } from '../../src/game/match'
 import { normalize } from '../../src/game/normalize'
-import { scopeOf, type Answer, type Category, type Decoy, type Pack, type Prompt, type Scope } from '../../src/game/types'
+import {
+  scopeOf,
+  type Answer,
+  type Category,
+  type Decoy,
+  type Pack,
+  type Prompt,
+  type Scope,
+  type SpellingRule,
+} from '../../src/game/types'
 import { validatePacks } from '../../src/game/validate'
 import { CHECK, CHECK_SUMMARY, IDEAS, LIST, PANEL, PANELS } from './brief'
 import type { Llm } from './llm'
@@ -174,6 +183,8 @@ export async function draftPrompt(llm: Llm, { category, idea, today, search, onS
     ...(decoys.length ? { decoys } : {}),
     ...(list.filler.length ? { filler: list.filler } : {}),
     ...(list.partial ? { partial: true } : {}),
+    ...(list.qualifiers ? { qualifiers: true } : {}),
+    ...(ruleOf(list.rule) ? { rule: ruleOf(list.rule) } : {}),
   }
 
   onStage?.('lint: validating the draft')
@@ -208,6 +219,12 @@ export async function draftPrompt(llm: Llm, { category, idea, today, search, onS
       writerNotes: written.reviewerNotes,
     },
   }
+}
+
+/** The writer's spelling rule with only the settings it uses, or undefined when it sets none */
+export function ruleOf(rule: AnswerList['rule']): SpellingRule | undefined {
+  const set = Object.entries(rule).filter(([, value]) => value)
+  return set.length ? (Object.fromEntries(set) as SpellingRule) : undefined
 }
 
 export function asPack(prompt: Prompt, today: string): Pack {

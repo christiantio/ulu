@@ -64,7 +64,7 @@ The first load should only download the app and today's prompts (see
 [ARCHITECTURE.md](ARCHITECTURE.md#loading-content)). `npm run check:bundle` reads `dist/` and prints the
 sizes. It fails if:
 
-- the entry JS is over its budget, 300 kB raw or 95 kB gzipped (`ENTRY_BUDGET` in `scripts/check-bundle.ts`);
+- the entry JS is over its budget, 300 kB raw or 96 kB gzipped (`ENTRY_BUDGET` in `scripts/check-bundle.ts`);
 - any prompt id, prompt text or gem name is in the entry JS. That usually means something imported
   `src/content/bank.ts` or `schedule.json` directly. Go through `loadBank()` instead;
 - a scheduled day has no `dives/<date>.json`, or the file doesn't match the schedule.

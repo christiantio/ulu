@@ -4,7 +4,7 @@ import { checkAnswer } from '../../src/game/match'
 import { validatePacks } from '../../src/game/validate'
 import { CHECK, IDEAS, LIST, PANEL, PANELS } from './brief'
 import type { Llm, Request } from './llm'
-import { applyCheck, asPack, describeList, draftPrompt, proposeIdeas, summarise } from './pipeline'
+import { applyCheck, asPack, describeList, draftPrompt, proposeIdeas, ruleOf, summarise } from './pipeline'
 import { CheckSchema, IdeasSchema, ListSchema, PanelSchema, type AnswerList, type Check, type Idea, type Panel } from './schemas'
 import { MAX_COMMON, assignTiers, type PanelResult } from './tiers'
 
@@ -114,6 +114,8 @@ const list: AnswerList = {
   ],
   filler: [],
   partial: false,
+  qualifiers: false,
+  rule: { startsWith: '', endsWith: '', contains: '', lacks: '', palindrome: false },
   gemCandidates: [{ name: 'Iceland', reason: 'x' }],
   timeSensitive: false,
   reviewerNotes: 'Check against the Nordic Council members.',
@@ -231,6 +233,14 @@ describe('draftPrompt', () => {
     // Settings left at their defaults aren't written out
     expect(draft.prompt).not.toHaveProperty('partial')
     expect(draft.prompt).not.toHaveProperty('filler')
+    expect(draft.prompt).not.toHaveProperty('qualifiers')
+    expect(draft.prompt).not.toHaveProperty('rule')
+  })
+
+  it("keeps the writer's spelling rule, with only the settings it uses", () => {
+    expect(ruleOf({ startsWith: 'b', endsWith: '', contains: '', lacks: '', palindrome: false })).toEqual({ startsWith: 'b' })
+    expect(ruleOf({ startsWith: '', endsWith: '', contains: '', lacks: '', palindrome: true })).toEqual({ palindrome: true })
+    expect(ruleOf(list.rule)).toBeUndefined()
   })
 
   it('tells the reviewer what was changed and what to look at', async () => {
