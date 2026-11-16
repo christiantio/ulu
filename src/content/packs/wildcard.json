@@ -1,6 +1,6 @@
 {
   "name": "Wildcard",
-  "asOf": "2026-11-10",
+  "asOf": "2026-11-16",
   "prompts": [
     {
       "id": "wildcard-chinese-zodiac",
@@ -266,6 +266,2045 @@
         {
           "name": "Apple",
           "why": "That's the kindergarten alphabet!"
+        }
+      ]
+    },
+    {
+      "id": "wildcard-one-name-famous",
+      "category": "wildcard",
+      "text": "Name a famous person known by just one name",
+      "note": "Stage names and nicknames count, as long as it's one word: 'Adele', 'Pelé'.",
+      "answers": [
+        {
+          "name": "Beyoncé",
+          "aliases": [
+            "Beyonce"
+          ],
+          "tier": "common"
+        },
+        {
+          "name": "Madonna",
+          "tier": "common"
+        },
+        {
+          "name": "Rihanna",
+          "tier": "common"
+        },
+        {
+          "name": "Adele",
+          "tier": "common"
+        },
+        {
+          "name": "Confucius",
+          "tier": "trap"
+        },
+        {
+          "name": "Shakira",
+          "tier": "solid"
+        },
+        {
+          "name": "Drake",
+          "tier": "solid"
+        },
+        {
+          "name": "Eminem",
+          "tier": "solid"
+        },
+        {
+          "name": "Cher",
+          "tier": "solid"
+        },
+        {
+          "name": "Prince",
+          "tier": "solid"
+        },
+        {
+          "name": "Pelé",
+          "aliases": [
+            "Pele"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "Rain",
+          "tier": "solid"
+        },
+        {
+          "name": "Psy",
+          "tier": "solid"
+        },
+        {
+          "name": "Lisa",
+          "tier": "solid"
+        },
+        {
+          "name": "Rosé",
+          "aliases": [
+            "Rose"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "Jennie",
+          "tier": "solid"
+        },
+        {
+          "name": "Jisoo",
+          "tier": "solid"
+        },
+        {
+          "name": "IU",
+          "tier": "solid"
+        },
+        {
+          "name": "Zendaya",
+          "tier": "solid"
+        },
+        {
+          "name": "Lizzo",
+          "tier": "solid"
+        },
+        {
+          "name": "Sia",
+          "tier": "solid"
+        },
+        {
+          "name": "Bono",
+          "tier": "solid"
+        },
+        {
+          "name": "Sting",
+          "tier": "solid"
+        },
+        {
+          "name": "Pink",
+          "aliases": [
+            "P!nk"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "Usher",
+          "tier": "solid"
+        },
+        {
+          "name": "Elvis",
+          "tier": "solid"
+        },
+        {
+          "name": "Oprah",
+          "tier": "solid"
+        },
+        {
+          "name": "Banksy",
+          "tier": "solid"
+        },
+        {
+          "name": "Plato",
+          "tier": "solid"
+        },
+        {
+          "name": "Socrates",
+          "tier": "solid"
+        },
+        {
+          "name": "Aristotle",
+          "tier": "solid"
+        },
+        {
+          "name": "Cleopatra",
+          "tier": "solid"
+        },
+        {
+          "name": "Napoleon",
+          "tier": "solid"
+        },
+        {
+          "name": "Michelangelo",
+          "tier": "solid"
+        },
+        {
+          "name": "Ronaldo",
+          "tier": "solid"
+        },
+        {
+          "name": "Neymar",
+          "tier": "solid"
+        },
+        {
+          "name": "Ronaldinho",
+          "tier": "solid"
+        },
+        {
+          "name": "Jungkook",
+          "tier": "rare"
+        },
+        {
+          "name": "Jimin",
+          "tier": "rare"
+        },
+        {
+          "name": "V",
+          "tier": "rare"
+        },
+        {
+          "name": "G-Dragon",
+          "tier": "rare"
+        },
+        {
+          "name": "Leonardo",
+          "tier": "rare"
+        },
+        {
+          "name": "Raphael",
+          "tier": "rare"
+        },
+        {
+          "name": "Rembrandt",
+          "tier": "rare"
+        },
+        {
+          "name": "Galileo",
+          "tier": "rare"
+        },
+        {
+          "name": "Tutankhamun",
+          "aliases": [
+            "King Tut"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "Jokowi",
+          "tier": "rare"
+        },
+        {
+          "name": "Kaká",
+          "aliases": [
+            "Kaka"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "Rivaldo",
+          "tier": "rare"
+        },
+        {
+          "name": "Akon",
+          "tier": "rare"
+        },
+        {
+          "name": "Pitbull",
+          "tier": "rare"
+        },
+        {
+          "name": "Shaggy",
+          "tier": "rare"
+        },
+        {
+          "name": "Coolio",
+          "tier": "rare"
+        },
+        {
+          "name": "Nelly",
+          "tier": "rare"
+        },
+        {
+          "name": "Ne-Yo",
+          "aliases": [
+            "Neyo"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "T-Pain",
+          "tier": "rare"
+        },
+        {
+          "name": "Ciara",
+          "tier": "rare"
+        },
+        {
+          "name": "Aaliyah",
+          "tier": "rare"
+        },
+        {
+          "name": "Brandy",
+          "tier": "rare"
+        },
+        {
+          "name": "Fergie",
+          "tier": "rare"
+        },
+        {
+          "name": "Kesha",
+          "tier": "rare"
+        },
+        {
+          "name": "Halsey",
+          "tier": "rare"
+        },
+        {
+          "name": "Lorde",
+          "tier": "rare"
+        },
+        {
+          "name": "SZA",
+          "tier": "rare"
+        },
+        {
+          "name": "Hozier",
+          "tier": "rare"
+        },
+        {
+          "name": "Avicii",
+          "tier": "rare"
+        },
+        {
+          "name": "Tiësto",
+          "aliases": [
+            "Tiesto"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "Skrillex",
+          "tier": "rare"
+        },
+        {
+          "name": "Marshmello",
+          "tier": "rare"
+        },
+        {
+          "name": "Seal",
+          "tier": "rare"
+        },
+        {
+          "name": "Enya",
+          "tier": "rare"
+        },
+        {
+          "name": "Dido",
+          "tier": "rare"
+        },
+        {
+          "name": "Björk",
+          "aliases": [
+            "Bjork"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "Xiaxue",
+          "tier": "ulu"
+        },
+        {
+          "name": "Sukarno",
+          "tier": "ulu"
+        },
+        {
+          "name": "Suharto",
+          "tier": "ulu"
+        },
+        {
+          "name": "Suga",
+          "tier": "ulu"
+        },
+        {
+          "name": "RM",
+          "tier": "ulu"
+        },
+        {
+          "name": "Jin",
+          "tier": "ulu"
+        },
+        {
+          "name": "J-Hope",
+          "tier": "ulu"
+        },
+        {
+          "name": "Zico",
+          "tier": "ulu"
+        },
+        {
+          "name": "Romário",
+          "aliases": [
+            "Romario"
+          ],
+          "tier": "ulu"
+        },
+        {
+          "name": "Hulk",
+          "tier": "ulu"
+        },
+        {
+          "name": "Zedd",
+          "tier": "ulu"
+        },
+        {
+          "name": "Moby",
+          "tier": "ulu"
+        },
+        {
+          "name": "Sade",
+          "tier": "ulu"
+        },
+        {
+          "name": "Yanni",
+          "tier": "ulu"
+        },
+        {
+          "name": "Kitaro",
+          "tier": "ulu"
+        },
+        {
+          "name": "Vangelis",
+          "tier": "ulu"
+        },
+        {
+          "name": "Liberace",
+          "tier": "ulu"
+        },
+        {
+          "name": "Twiggy",
+          "tier": "ulu"
+        },
+        {
+          "name": "Ludacris",
+          "tier": "ulu"
+        },
+        {
+          "name": "Rosalía",
+          "aliases": [
+            "Rosalia"
+          ],
+          "tier": "ulu"
+        },
+        {
+          "name": "Anitta",
+          "tier": "ulu"
+        },
+        {
+          "name": "Tems",
+          "tier": "ulu"
+        },
+        {
+          "name": "Rema",
+          "tier": "ulu"
+        },
+        {
+          "name": "Homer",
+          "tier": "ulu"
+        },
+        {
+          "name": "Virgil",
+          "tier": "ulu"
+        },
+        {
+          "name": "Dante",
+          "tier": "ulu"
+        },
+        {
+          "name": "Voltaire",
+          "tier": "ulu"
+        },
+        {
+          "name": "Nostradamus",
+          "tier": "ulu"
+        },
+        {
+          "name": "Nefertiti",
+          "tier": "ulu"
+        },
+        {
+          "name": "Spartacus",
+          "tier": "ulu"
+        },
+        {
+          "name": "Attila",
+          "tier": "ulu"
+        },
+        {
+          "name": "Charlemagne",
+          "tier": "ulu"
+        },
+        {
+          "name": "Pocahontas",
+          "tier": "ulu"
+        },
+        {
+          "name": "Kumar",
+          "tier": "gem"
+        }
+      ],
+      "decoys": [
+        {
+          "name": "Lady Gaga",
+          "why": "That's two words!"
+        },
+        {
+          "name": "Mozart",
+          "why": "That's his surname: he was Wolfgang Amadeus Mozart."
+        },
+        {
+          "name": "Einstein",
+          "why": "That's his surname: he was Albert Einstein."
+        },
+        {
+          "name": "Shakespeare",
+          "why": "That's his surname: he was William Shakespeare."
+        },
+        {
+          "name": "Messi",
+          "why": "That's his surname: he's Lionel Messi."
+        },
+        {
+          "name": "Picasso",
+          "why": "That's his surname: he was Pablo Picasso."
+        }
+      ]
+    },
+    {
+      "id": "wildcard-red-and-white",
+      "category": "wildcard",
+      "text": "Name something that's red and white",
+      "note": "Mostly red and white, like a candy cane. Flags count!",
+      "qualifiers": true,
+      "answers": [
+        {
+          "name": "Singapore flag",
+          "aliases": [
+            "Singapore",
+            "Flag of Singapore",
+            "Our flag"
+          ],
+          "tier": "common"
+        },
+        {
+          "name": "Candy cane",
+          "tier": "common"
+        },
+        {
+          "name": "Santa Claus",
+          "aliases": [
+            "Santa",
+            "Father Christmas"
+          ],
+          "tier": "common"
+        },
+        {
+          "name": "Coca-Cola",
+          "aliases": [
+            "Coke"
+          ],
+          "tier": "common"
+        },
+        {
+          "name": "Japanese flag",
+          "aliases": [
+            "Japan",
+            "Japan flag"
+          ],
+          "tier": "trap"
+        },
+        {
+          "name": "Canadian flag",
+          "aliases": [
+            "Canada",
+            "Canada flag"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "Indonesian flag",
+          "aliases": [
+            "Indonesia",
+            "Indonesia flag"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "Polish flag",
+          "aliases": [
+            "Poland",
+            "Poland flag"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "Swiss flag",
+          "aliases": [
+            "Switzerland",
+            "Switzerland flag"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "Turkish flag",
+          "aliases": [
+            "Turkey",
+            "Türkiye"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "Red Cross",
+          "tier": "solid"
+        },
+        {
+          "name": "Kit Kat",
+          "aliases": [
+            "KitKat"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "Pokéball",
+          "aliases": [
+            "Poké Ball",
+            "Pokeball"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "Where's Wally",
+          "aliases": [
+            "Wally",
+            "Waldo",
+            "Where's Waldo"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "Stop sign",
+          "tier": "solid"
+        },
+        {
+          "name": "Peppermint",
+          "aliases": [
+            "Peppermint candy"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "Lighthouse",
+          "tier": "solid"
+        },
+        {
+          "name": "KFC",
+          "tier": "solid"
+        },
+        {
+          "name": "Hello Kitty",
+          "tier": "solid"
+        },
+        {
+          "name": "Austrian flag",
+          "aliases": [
+            "Austria"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "Danish flag",
+          "aliases": [
+            "Denmark"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "Peruvian flag",
+          "aliases": [
+            "Peru"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "Monaco",
+          "tier": "rare"
+        },
+        {
+          "name": "Tonga",
+          "tier": "rare"
+        },
+        {
+          "name": "Bahrain",
+          "tier": "rare"
+        },
+        {
+          "name": "England",
+          "aliases": [
+            "St George's Cross"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "Georgia",
+          "tier": "rare"
+        },
+        {
+          "name": "Lebanon",
+          "tier": "rare"
+        },
+        {
+          "name": "Tunisia",
+          "tier": "rare"
+        },
+        {
+          "name": "Cat in the Hat",
+          "tier": "rare"
+        },
+        {
+          "name": "Mushroom",
+          "aliases": [
+            "Toadstool",
+            "Fly agaric"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "Barber pole",
+          "tier": "rare"
+        },
+        {
+          "name": "Life buoy",
+          "aliases": [
+            "Lifebuoy",
+            "Life ring"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "No entry sign",
+          "tier": "rare"
+        },
+        {
+          "name": "Strawberries and cream",
+          "tier": "rare"
+        },
+        {
+          "name": "Red velvet cake",
+          "tier": "rare"
+        },
+        {
+          "name": "Christmas stocking",
+          "aliases": [
+            "Stocking"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "Barricade",
+          "aliases": [
+            "Road barrier",
+            "Barrier tape"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "YouTube",
+          "tier": "rare"
+        },
+        {
+          "name": "Nintendo",
+          "tier": "rare"
+        },
+        {
+          "name": "Target",
+          "tier": "rare"
+        },
+        {
+          "name": "Greenland",
+          "tier": "ulu"
+        },
+        {
+          "name": "Malta",
+          "tier": "ulu"
+        },
+        {
+          "name": "Singtel",
+          "tier": "ulu"
+        },
+        {
+          "name": "Arsenal",
+          "tier": "ulu"
+        },
+        {
+          "name": "Marlboro",
+          "tier": "ulu"
+        },
+        {
+          "name": "Budweiser",
+          "tier": "ulu"
+        },
+        {
+          "name": "Campbell's soup",
+          "aliases": [
+            "Campbell's"
+          ],
+          "tier": "ulu"
+        },
+        {
+          "name": "Crab stick",
+          "aliases": [
+            "Crabstick"
+          ],
+          "tier": "ulu"
+        },
+        {
+          "name": "Kamaboko",
+          "tier": "ulu"
+        },
+        {
+          "name": "NDP",
+          "aliases": [
+            "National Day",
+            "National Day Parade",
+            "National Day Parade outfit"
+          ],
+          "tier": "gem"
+        }
+      ],
+      "decoys": [
+        {
+          "name": "Ang pow",
+          "aliases": [
+            "Red packet"
+          ],
+          "why": "Red and gold!"
+        },
+        {
+          "name": "Qatar",
+          "aliases": [
+            "Qatari flag"
+          ],
+          "why": "That's maroon and white."
+        },
+        {
+          "name": "Doraemon",
+          "why": "Blue and white!"
+        },
+        {
+          "name": "Spider-Man",
+          "aliases": [
+            "Spiderman"
+          ],
+          "why": "Red and blue!"
+        },
+        {
+          "name": "China",
+          "aliases": [
+            "Chinese flag"
+          ],
+          "why": "Red and yellow!"
+        }
+      ]
+    },
+    {
+      "id": "wildcard-things-people-collect",
+      "category": "wildcard",
+      "text": "Name something people collect",
+      "note": "As a hobby: things people keep whole sets of, just for fun.",
+      "qualifiers": true,
+      "answers": [
+        {
+          "name": "Stamps",
+          "tier": "common"
+        },
+        {
+          "name": "Coins",
+          "tier": "common"
+        },
+        {
+          "name": "Trading cards",
+          "aliases": [
+            "Cards",
+            "Pokémon cards",
+            "Pokemon cards",
+            "Pokémon",
+            "Pokemon",
+            "Football cards",
+            "Baseball cards"
+          ],
+          "tier": "common"
+        },
+        {
+          "name": "Stickers",
+          "tier": "common"
+        },
+        {
+          "name": "Labubu",
+          "aliases": [
+            "Labubus"
+          ],
+          "tier": "trap"
+        },
+        {
+          "name": "Action figures",
+          "aliases": [
+            "Figurines",
+            "Figures"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "Lego",
+          "aliases": [
+            "Lego sets"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "Funko Pops",
+          "aliases": [
+            "Funko Pop",
+            "Funko"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "Toys",
+          "tier": "solid"
+        },
+        {
+          "name": "Dolls",
+          "aliases": [
+            "Barbie",
+            "Barbie dolls"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "Soft toys",
+          "aliases": [
+            "Teddy bears",
+            "Plushies",
+            "Plush toys",
+            "Stuffed toys"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "Comics",
+          "aliases": [
+            "Comic books",
+            "Manga"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "Books",
+          "tier": "solid"
+        },
+        {
+          "name": "Vinyl",
+          "aliases": [
+            "Vinyl records",
+            "Records"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "Sneakers",
+          "aliases": [
+            "Shoes"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "Watches",
+          "tier": "solid"
+        },
+        {
+          "name": "Model cars",
+          "aliases": [
+            "Hot Wheels",
+            "Die-cast cars",
+            "Toy cars"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "Art",
+          "aliases": [
+            "Paintings"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "Antiques",
+          "tier": "solid"
+        },
+        {
+          "name": "Wine",
+          "tier": "solid"
+        },
+        {
+          "name": "Whisky",
+          "aliases": [
+            "Whiskey"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "Postcards",
+          "tier": "solid"
+        },
+        {
+          "name": "Fridge magnets",
+          "aliases": [
+            "Magnets"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "Keychains",
+          "aliases": [
+            "Key chains",
+            "Keyrings"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "Seashells",
+          "aliases": [
+            "Shells"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "Rocks",
+          "aliases": [
+            "Stones",
+            "Crystals",
+            "Gemstones"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "Autographs",
+          "tier": "solid"
+        },
+        {
+          "name": "Erasers",
+          "aliases": [
+            "Country erasers"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "Marbles",
+          "tier": "solid"
+        },
+        {
+          "name": "Photocards",
+          "tier": "solid"
+        },
+        {
+          "name": "Snow globes",
+          "tier": "rare"
+        },
+        {
+          "name": "Beanie Babies",
+          "tier": "rare"
+        },
+        {
+          "name": "Gundam",
+          "aliases": [
+            "Gunpla"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "Tamiya",
+          "aliases": [
+            "Tamiya cars"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "Beyblades",
+          "aliases": [
+            "Beyblade"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "Tazos",
+          "tier": "rare"
+        },
+        {
+          "name": "Sylvanian Families",
+          "tier": "rare"
+        },
+        {
+          "name": "Blind boxes",
+          "aliases": [
+            "Blind box",
+            "Pop Mart",
+            "Art toys"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "Sonny Angel",
+          "tier": "rare"
+        },
+        {
+          "name": "Hello Kitty",
+          "aliases": [
+            "Sanrio"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "Happy Meal toys",
+          "aliases": [
+            "McDonald's toys"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "Banknotes",
+          "aliases": [
+            "Old notes"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "Bottle caps",
+          "tier": "rare"
+        },
+        {
+          "name": "Mugs",
+          "tier": "rare"
+        },
+        {
+          "name": "Shot glasses",
+          "tier": "rare"
+        },
+        {
+          "name": "Miniatures",
+          "tier": "rare"
+        },
+        {
+          "name": "Model trains",
+          "aliases": [
+            "Trains"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "Model planes",
+          "tier": "rare"
+        },
+        {
+          "name": "Pins",
+          "aliases": [
+            "Badges",
+            "Enamel pins"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "Tickets",
+          "aliases": [
+            "Ticket stubs",
+            "Concert tickets",
+            "Movie tickets"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "Posters",
+          "tier": "rare"
+        },
+        {
+          "name": "K-pop albums",
+          "aliases": [
+            "Albums"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "Perfume",
+          "tier": "rare"
+        },
+        {
+          "name": "Handbags",
+          "aliases": [
+            "Bags"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "Plants",
+          "aliases": [
+            "Houseplants"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "Fossils",
+          "tier": "rare"
+        },
+        {
+          "name": "Pens",
+          "aliases": [
+            "Stationery"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "Video games",
+          "aliases": [
+            "Retro games"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "Pogs",
+          "tier": "ulu"
+        },
+        {
+          "name": "NDP funpacks",
+          "aliases": [
+            "Funpacks",
+            "NDP funpack"
+          ],
+          "tier": "ulu"
+        },
+        {
+          "name": "Phone cards",
+          "tier": "ulu"
+        },
+        {
+          "name": "Bus tickets",
+          "tier": "ulu"
+        },
+        {
+          "name": "EZ-Link cards",
+          "aliases": [
+            "EZ link cards"
+          ],
+          "tier": "ulu"
+        },
+        {
+          "name": "Matchboxes",
+          "tier": "ulu"
+        },
+        {
+          "name": "Spoons",
+          "aliases": [
+            "Souvenir spoons"
+          ],
+          "tier": "ulu"
+        },
+        {
+          "name": "Thimbles",
+          "tier": "ulu"
+        },
+        {
+          "name": "Patches",
+          "tier": "ulu"
+        },
+        {
+          "name": "Lightsticks",
+          "tier": "ulu"
+        },
+        {
+          "name": "Orchids",
+          "tier": "ulu"
+        },
+        {
+          "name": "Butterflies",
+          "tier": "ulu"
+        },
+        {
+          "name": "Insects",
+          "aliases": [
+            "Beetles"
+          ],
+          "tier": "ulu"
+        },
+        {
+          "name": "Air miles",
+          "aliases": [
+            "Miles",
+            "KrisFlyer miles"
+          ],
+          "tier": "ulu"
+        },
+        {
+          "name": "Reward points",
+          "aliases": [
+            "Points",
+            "Linkpoints"
+          ],
+          "tier": "ulu"
+        },
+        {
+          "name": "Washi tape",
+          "tier": "ulu"
+        },
+        {
+          "name": "Bookmarks",
+          "tier": "ulu"
+        },
+        {
+          "name": "Medals",
+          "aliases": [
+            "Finisher medals"
+          ],
+          "tier": "ulu"
+        },
+        {
+          "name": "Ang pows",
+          "aliases": [
+            "Red packets",
+            "Hongbao",
+            "Ang pow packets"
+          ],
+          "tier": "gem"
+        }
+      ],
+      "decoys": [
+        {
+          "name": "Taxes",
+          "why": "Only the government collects those!"
+        },
+        {
+          "name": "Dust",
+          "why": "That one collects itself!"
+        }
+      ]
+    },
+    {
+      "id": "wildcard-chicken",
+      "category": "wildcard",
+      "text": "Name a word that comes after 'chicken'",
+      "note": "Together they make a thing: 'chicken rice', 'chicken wing'. Type the word, or the whole thing.",
+      "answers": [
+        {
+          "name": "Chicken rice",
+          "aliases": [
+            "Rice"
+          ],
+          "tier": "common"
+        },
+        {
+          "name": "Chicken wing",
+          "aliases": [
+            "Wing"
+          ],
+          "tier": "common"
+        },
+        {
+          "name": "Chicken nugget",
+          "aliases": [
+            "Nugget"
+          ],
+          "tier": "common"
+        },
+        {
+          "name": "Chicken burger",
+          "aliases": [
+            "Burger"
+          ],
+          "tier": "common"
+        },
+        {
+          "name": "Chicken pox",
+          "aliases": [
+            "Chickenpox",
+            "Pox"
+          ],
+          "tier": "trap"
+        },
+        {
+          "name": "Chicken soup",
+          "aliases": [
+            "Soup",
+            "Chicken Soup for the Soul"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "Chicken curry",
+          "aliases": [
+            "Curry"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "Chicken chop",
+          "aliases": [
+            "Chop"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "Chicken feet",
+          "aliases": [
+            "Feet",
+            "Chicken claws",
+            "Claws"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "Chicken satay",
+          "aliases": [
+            "Satay"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "Chicken porridge",
+          "aliases": [
+            "Porridge",
+            "Chicken congee",
+            "Congee"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "Chicken pie",
+          "aliases": [
+            "Pie"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "Chicken salad",
+          "aliases": [
+            "Salad"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "Chicken sandwich",
+          "aliases": [
+            "Sandwich"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "Chicken stock",
+          "aliases": [
+            "Stock"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "Chicken breast",
+          "aliases": [
+            "Breast"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "Chicken thigh",
+          "aliases": [
+            "Thigh"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "Chicken drumstick",
+          "aliases": [
+            "Drumstick"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "Chicken leg",
+          "aliases": [
+            "Leg"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "Chicken skin",
+          "aliases": [
+            "Skin"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "Chicken egg",
+          "aliases": [
+            "Egg"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "Chicken run",
+          "aliases": [
+            "Run"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "Chicken Little",
+          "aliases": [
+            "Little"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "Chicken dance",
+          "aliases": [
+            "Dance"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "Chicken coop",
+          "aliases": [
+            "Coop"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "Chicken noodle",
+          "aliases": [
+            "Noodle",
+            "Chicken noodle soup"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "Chicken liver",
+          "aliases": [
+            "Liver"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "Chicken heart",
+          "aliases": [
+            "Heart"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "Chicken gizzard",
+          "aliases": [
+            "Gizzard"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "Chicken bone",
+          "aliases": [
+            "Bone"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "Chicken floss",
+          "aliases": [
+            "Floss"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "Chicken cutlet",
+          "aliases": [
+            "Cutlet"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "Chicken katsu",
+          "aliases": [
+            "Katsu"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "Chicken karaage",
+          "aliases": [
+            "Karaage"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "Chicken tikka",
+          "aliases": [
+            "Tikka",
+            "Chicken tikka masala",
+            "Tikka masala"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "Chicken masala",
+          "aliases": [
+            "Masala"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "Chicken biryani",
+          "aliases": [
+            "Biryani",
+            "Briyani"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "Chicken kebab",
+          "aliases": [
+            "Kebab"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "Chicken shawarma",
+          "aliases": [
+            "Shawarma"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "Chicken korma",
+          "aliases": [
+            "Korma"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "Chicken rendang",
+          "aliases": [
+            "Rendang"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "Chicken wrap",
+          "aliases": [
+            "Wrap"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "Chicken strips",
+          "aliases": [
+            "Strips",
+            "Chicken tenders",
+            "Tenders",
+            "Chicken fingers",
+            "Fingers"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "Chicken bao",
+          "aliases": [
+            "Bao",
+            "Chicken pau",
+            "Pau"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "Chicken teriyaki",
+          "aliases": [
+            "Teriyaki"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "Chicken sausage",
+          "aliases": [
+            "Sausage"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "Chicken wire",
+          "aliases": [
+            "Wire"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "Chicken feed",
+          "aliases": [
+            "Feed"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "Chicken out",
+          "aliases": [
+            "Out"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "Chicken dinner",
+          "aliases": [
+            "Dinner"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "Chicken 65",
+          "aliases": [
+            "65"
+          ],
+          "tier": "ulu"
+        },
+        {
+          "name": "Chicken cordon bleu",
+          "aliases": [
+            "Cordon bleu"
+          ],
+          "tier": "ulu"
+        },
+        {
+          "name": "Chicken Kiev",
+          "aliases": [
+            "Kiev"
+          ],
+          "tier": "ulu"
+        },
+        {
+          "name": "Chicken parmigiana",
+          "aliases": [
+            "Parmigiana",
+            "Chicken parm",
+            "Parm"
+          ],
+          "tier": "ulu"
+        },
+        {
+          "name": "Chicken Alfredo",
+          "aliases": [
+            "Alfredo"
+          ],
+          "tier": "ulu"
+        },
+        {
+          "name": "Chicken scratch",
+          "aliases": [
+            "Scratch"
+          ],
+          "tier": "ulu"
+        },
+        {
+          "name": "Chicken hawk",
+          "aliases": [
+            "Hawk"
+          ],
+          "tier": "ulu"
+        },
+        {
+          "name": "Chicken neck",
+          "aliases": [
+            "Neck"
+          ],
+          "tier": "ulu"
+        },
+        {
+          "name": "Chicken powder",
+          "aliases": [
+            "Powder"
+          ],
+          "tier": "ulu"
+        },
+        {
+          "name": "Chicken ham",
+          "aliases": [
+            "Ham"
+          ],
+          "tier": "ulu"
+        },
+        {
+          "name": "Chicken mayo",
+          "aliases": [
+            "Mayo"
+          ],
+          "tier": "ulu"
+        },
+        {
+          "name": "Chicken macaroni",
+          "aliases": [
+            "Macaroni"
+          ],
+          "tier": "ulu"
+        },
+        {
+          "name": "Chicken hor fun",
+          "aliases": [
+            "Hor fun"
+          ],
+          "tier": "ulu"
+        },
+        {
+          "name": "Chicken essence",
+          "aliases": [
+            "Essence"
+          ],
+          "tier": "gem"
+        }
+      ]
+    },
+    {
+      "id": "wildcard-has-a-shell",
+      "category": "wildcard",
+      "text": "Name something that has a shell",
+      "note": "Animals, food, or anything else with a hard case on the outside.",
+      "qualifiers": true,
+      "answers": [
+        {
+          "name": "Turtle",
+          "tier": "common"
+        },
+        {
+          "name": "Snail",
+          "aliases": [
+            "Escargot"
+          ],
+          "tier": "common"
+        },
+        {
+          "name": "Egg",
+          "tier": "common"
+        },
+        {
+          "name": "Crab",
+          "tier": "common"
+        },
+        {
+          "name": "Taco",
+          "aliases": [
+            "Taco shell"
+          ],
+          "tier": "trap"
+        },
+        {
+          "name": "Tortoise",
+          "tier": "solid"
+        },
+        {
+          "name": "Lobster",
+          "tier": "solid"
+        },
+        {
+          "name": "Prawn",
+          "aliases": [
+            "Shrimp"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "Oyster",
+          "tier": "solid"
+        },
+        {
+          "name": "Clam",
+          "tier": "solid"
+        },
+        {
+          "name": "Mussel",
+          "tier": "solid"
+        },
+        {
+          "name": "Scallop",
+          "tier": "solid"
+        },
+        {
+          "name": "Cockle",
+          "aliases": [
+            "Hum",
+            "Blood cockle"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "Hermit crab",
+          "tier": "solid"
+        },
+        {
+          "name": "Coconut",
+          "tier": "solid"
+        },
+        {
+          "name": "Nut",
+          "tier": "solid"
+        },
+        {
+          "name": "Peanut",
+          "tier": "solid"
+        },
+        {
+          "name": "Walnut",
+          "tier": "solid"
+        },
+        {
+          "name": "Pistachio",
+          "tier": "solid"
+        },
+        {
+          "name": "Almond",
+          "tier": "solid"
+        },
+        {
+          "name": "Armadillo",
+          "tier": "solid"
+        },
+        {
+          "name": "Beetle",
+          "tier": "solid"
+        },
+        {
+          "name": "Cashew",
+          "tier": "rare"
+        },
+        {
+          "name": "Macadamia",
+          "tier": "rare"
+        },
+        {
+          "name": "Hazelnut",
+          "tier": "rare"
+        },
+        {
+          "name": "Chestnut",
+          "tier": "rare"
+        },
+        {
+          "name": "Pecan",
+          "tier": "rare"
+        },
+        {
+          "name": "Brazil nut",
+          "tier": "rare"
+        },
+        {
+          "name": "Sunflower seeds",
+          "aliases": [
+            "Kuaci",
+            "Melon seeds"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "Bullet",
+          "aliases": [
+            "Shotgun shell",
+            "Shell casing"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "Tart",
+          "aliases": [
+            "Tart shell",
+            "Egg tart"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "Abalone",
+          "tier": "rare"
+        },
+        {
+          "name": "Conch",
+          "tier": "rare"
+        },
+        {
+          "name": "Sea urchin",
+          "tier": "rare"
+        },
+        {
+          "name": "Barnacle",
+          "tier": "rare"
+        },
+        {
+          "name": "Crayfish",
+          "tier": "rare"
+        },
+        {
+          "name": "Horseshoe crab",
+          "tier": "rare"
+        },
+        {
+          "name": "Terrapin",
+          "tier": "rare"
+        },
+        {
+          "name": "Nautilus",
+          "tier": "ulu"
+        },
+        {
+          "name": "Cowrie",
+          "tier": "ulu"
+        },
+        {
+          "name": "Whelk",
+          "tier": "ulu"
+        },
+        {
+          "name": "Periwinkle",
+          "tier": "ulu"
+        },
+        {
+          "name": "Limpet",
+          "tier": "ulu"
+        },
+        {
+          "name": "Geoduck",
+          "tier": "ulu"
+        },
+        {
+          "name": "Lala",
+          "aliases": [
+            "Lala clams"
+          ],
+          "tier": "ulu"
+        },
+        {
+          "name": "Cuttlefish",
+          "tier": "ulu"
+        },
+        {
+          "name": "Cannoli",
+          "tier": "ulu"
+        },
+        {
+          "name": "Pasta shells",
+          "aliases": [
+            "Conchiglie"
+          ],
+          "tier": "ulu"
+        },
+        {
+          "name": "Kueh pie tee",
+          "aliases": [
+            "Kuih pie tee",
+            "Pie tee",
+            "Top hats"
+          ],
+          "tier": "gem"
+        }
+      ],
+      "decoys": [
+        {
+          "name": "Slug",
+          "why": "A snail without a shell!"
+        },
+        {
+          "name": "Octopus",
+          "why": "Its ancestors had shells, but it doesn't!"
+        },
+        {
+          "name": "Durian",
+          "why": "That's a spiky husk, not a shell."
         }
       ]
     }

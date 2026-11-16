@@ -1,0 +1,2757 @@
+{
+  "name": "Wordplay",
+  "asOf": "2026-11-16",
+  "prompts": [
+    {
+      "id": "wordplay-palindromes",
+      "category": "wordplay",
+      "text": "Name a word that reads the same backwards",
+      "note": "Names count too, and so does a whole phrase if you can pull one off in time.",
+      "rule": {
+        "palindrome": true
+      },
+      "answers": [
+        {
+          "name": "Mum",
+          "aliases": [
+            "Mom",
+            "Mam"
+          ],
+          "tier": "common"
+        },
+        {
+          "name": "Dad",
+          "tier": "common"
+        },
+        {
+          "name": "Wow",
+          "tier": "common"
+        },
+        {
+          "name": "Level",
+          "tier": "common"
+        },
+        {
+          "name": "Racecar",
+          "aliases": [
+            "Race car"
+          ],
+          "tier": "trap"
+        },
+        {
+          "name": "Noon",
+          "tier": "solid"
+        },
+        {
+          "name": "Radar",
+          "tier": "solid"
+        },
+        {
+          "name": "Kayak",
+          "tier": "solid"
+        },
+        {
+          "name": "Madam",
+          "aliases": [
+            "Ma'am"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "Civic",
+          "tier": "solid"
+        },
+        {
+          "name": "Refer",
+          "tier": "solid"
+        },
+        {
+          "name": "Rotor",
+          "tier": "solid"
+        },
+        {
+          "name": "Eye",
+          "tier": "solid"
+        },
+        {
+          "name": "Pop",
+          "tier": "solid"
+        },
+        {
+          "name": "Peep",
+          "tier": "solid"
+        },
+        {
+          "name": "Deed",
+          "tier": "solid"
+        },
+        {
+          "name": "Did",
+          "tier": "solid"
+        },
+        {
+          "name": "Nun",
+          "tier": "solid"
+        },
+        {
+          "name": "Bob",
+          "tier": "solid"
+        },
+        {
+          "name": "Anna",
+          "tier": "solid"
+        },
+        {
+          "name": "Hannah",
+          "tier": "solid"
+        },
+        {
+          "name": "Otto",
+          "tier": "solid"
+        },
+        {
+          "name": "Eve",
+          "tier": "solid"
+        },
+        {
+          "name": "Tenet",
+          "tier": "solid"
+        },
+        {
+          "name": "Stats",
+          "tier": "rare"
+        },
+        {
+          "name": "Solos",
+          "tier": "rare"
+        },
+        {
+          "name": "Sagas",
+          "tier": "rare"
+        },
+        {
+          "name": "Sees",
+          "tier": "rare"
+        },
+        {
+          "name": "Pup",
+          "tier": "rare"
+        },
+        {
+          "name": "Tot",
+          "tier": "rare"
+        },
+        {
+          "name": "Toot",
+          "tier": "rare"
+        },
+        {
+          "name": "Gag",
+          "tier": "rare"
+        },
+        {
+          "name": "Gig",
+          "tier": "rare"
+        },
+        {
+          "name": "Bib",
+          "tier": "rare"
+        },
+        {
+          "name": "Nan",
+          "tier": "rare"
+        },
+        {
+          "name": "Sis",
+          "tier": "rare"
+        },
+        {
+          "name": "Pip",
+          "tier": "rare"
+        },
+        {
+          "name": "Ewe",
+          "tier": "rare"
+        },
+        {
+          "name": "Aha",
+          "tier": "rare"
+        },
+        {
+          "name": "Huh",
+          "tier": "rare"
+        },
+        {
+          "name": "Tut",
+          "tier": "rare"
+        },
+        {
+          "name": "Yay",
+          "tier": "rare"
+        },
+        {
+          "name": "Lol",
+          "tier": "rare"
+        },
+        {
+          "name": "Sus",
+          "tier": "rare"
+        },
+        {
+          "name": "Redder",
+          "tier": "rare"
+        },
+        {
+          "name": "ABBA",
+          "aliases": [
+            "Abba"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "Elle",
+          "tier": "rare"
+        },
+        {
+          "name": "Ava",
+          "tier": "rare"
+        },
+        {
+          "name": "Ada",
+          "tier": "rare"
+        },
+        {
+          "name": "Minim",
+          "tier": "ulu"
+        },
+        {
+          "name": "Kook",
+          "tier": "ulu"
+        },
+        {
+          "name": "Repaper",
+          "tier": "ulu"
+        },
+        {
+          "name": "Reviver",
+          "tier": "ulu"
+        },
+        {
+          "name": "Rotator",
+          "tier": "ulu"
+        },
+        {
+          "name": "Deified",
+          "tier": "ulu"
+        },
+        {
+          "name": "Aviva",
+          "tier": "ulu"
+        },
+        {
+          "name": "Malayalam",
+          "tier": "ulu"
+        },
+        {
+          "name": "Taco cat",
+          "aliases": [
+            "Tacocat"
+          ],
+          "tier": "ulu"
+        },
+        {
+          "name": "Never odd or even",
+          "tier": "ulu"
+        },
+        {
+          "name": "Step on no pets",
+          "tier": "ulu"
+        },
+        {
+          "name": "Too hot to hoot",
+          "tier": "ulu"
+        },
+        {
+          "name": "No lemon no melon",
+          "tier": "ulu"
+        },
+        {
+          "name": "Borrow or rob",
+          "tier": "ulu"
+        },
+        {
+          "name": "Madam I'm Adam",
+          "tier": "ulu"
+        },
+        {
+          "name": "Was it a car or a cat I saw",
+          "tier": "ulu"
+        },
+        {
+          "name": "A man a plan a canal Panama",
+          "tier": "ulu"
+        },
+        {
+          "name": "Mr Owl ate my metal worm",
+          "tier": "ulu"
+        },
+        {
+          "name": "Ulu",
+          "tier": "gem"
+        }
+      ]
+    },
+    {
+      "id": "wordplay-ball",
+      "category": "wordplay",
+      "text": "Name a word that goes before 'ball'",
+      "note": "Together they make a thing: 'football', 'beach ball'. Type the word, or the whole thing.",
+      "answers": [
+        {
+          "name": "Football",
+          "aliases": [
+            "Foot"
+          ],
+          "tier": "common"
+        },
+        {
+          "name": "Basketball",
+          "aliases": [
+            "Basket"
+          ],
+          "tier": "common"
+        },
+        {
+          "name": "Meatball",
+          "aliases": [
+            "Meat"
+          ],
+          "tier": "common"
+        },
+        {
+          "name": "Fishball",
+          "aliases": [
+            "Fish"
+          ],
+          "tier": "common"
+        },
+        {
+          "name": "Eyeball",
+          "aliases": [
+            "Eye"
+          ],
+          "tier": "trap"
+        },
+        {
+          "name": "Baseball",
+          "aliases": [
+            "Base"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "Volleyball",
+          "aliases": [
+            "Volley"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "Netball",
+          "aliases": [
+            "Net"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "Handball",
+          "aliases": [
+            "Hand"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "Snowball",
+          "aliases": [
+            "Snow"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "Fireball",
+          "aliases": [
+            "Fire"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "Softball",
+          "aliases": [
+            "Soft"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "Dodgeball",
+          "aliases": [
+            "Dodge"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "Paintball",
+          "aliases": [
+            "Paint"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "Pinball",
+          "aliases": [
+            "Pin"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "Golf ball",
+          "aliases": [
+            "Golf"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "Tennis ball",
+          "aliases": [
+            "Tennis"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "Beach ball",
+          "aliases": [
+            "Beach"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "Ping pong ball",
+          "aliases": [
+            "Ping pong",
+            "Table tennis ball",
+            "Table tennis"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "Bowling ball",
+          "aliases": [
+            "Bowling"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "Crystal ball",
+          "aliases": [
+            "Crystal"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "Disco ball",
+          "aliases": [
+            "Disco",
+            "Mirror ball",
+            "Mirror"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "Rice ball",
+          "aliases": [
+            "Rice",
+            "Onigiri"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "Cotton ball",
+          "aliases": [
+            "Cotton",
+            "Cotton wool ball",
+            "Cotton wool"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "Rugby ball",
+          "aliases": [
+            "Rugby"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "Cannonball",
+          "aliases": [
+            "Cannon"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "Hairball",
+          "aliases": [
+            "Hair"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "Furball",
+          "aliases": [
+            "Fur"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "Gumball",
+          "aliases": [
+            "Gum"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "Oddball",
+          "aliases": [
+            "Odd"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "Screwball",
+          "aliases": [
+            "Screw"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "Curveball",
+          "aliases": [
+            "Curve"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "Hardball",
+          "aliases": [
+            "Hard"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "Highball",
+          "aliases": [
+            "High"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "Fastball",
+          "aliases": [
+            "Fast"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "Kickball",
+          "aliases": [
+            "Kick"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "Mothball",
+          "aliases": [
+            "Moth"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "Spitball",
+          "aliases": [
+            "Spit"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "Goofball",
+          "aliases": [
+            "Goof"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "Slimeball",
+          "aliases": [
+            "Slime"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "Cheese ball",
+          "aliases": [
+            "Cheese"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "Wrecking ball",
+          "aliases": [
+            "Wrecking"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "Medicine ball",
+          "aliases": [
+            "Medicine"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "Masked ball",
+          "aliases": [
+            "Masked",
+            "Masquerade ball",
+            "Masquerade"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "Squash ball",
+          "aliases": [
+            "Squash"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "Cricket ball",
+          "aliases": [
+            "Cricket"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "Snooker ball",
+          "aliases": [
+            "Snooker",
+            "Pool ball",
+            "Pool",
+            "Billiard ball",
+            "Billiard"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "Stress ball",
+          "aliases": [
+            "Stress"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "Exercise ball",
+          "aliases": [
+            "Exercise",
+            "Gym ball",
+            "Yoga ball"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "Eight ball",
+          "aliases": [
+            "8 ball",
+            "Magic 8 ball"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "Dragon Ball",
+          "aliases": [
+            "Dragon"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "Pork ball",
+          "aliases": [
+            "Pork"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "Beef ball",
+          "aliases": [
+            "Beef"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "Prawn ball",
+          "aliases": [
+            "Prawn"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "Sesame ball",
+          "aliases": [
+            "Sesame",
+            "Jian dui"
+          ],
+          "tier": "ulu"
+        },
+        {
+          "name": "Matzo ball",
+          "aliases": [
+            "Matzo"
+          ],
+          "tier": "ulu"
+        },
+        {
+          "name": "Plasma ball",
+          "aliases": [
+            "Plasma"
+          ],
+          "tier": "ulu"
+        },
+        {
+          "name": "Glitter ball",
+          "aliases": [
+            "Glitter"
+          ],
+          "tier": "ulu"
+        },
+        {
+          "name": "Gutterball",
+          "aliases": [
+            "Gutter"
+          ],
+          "tier": "ulu"
+        },
+        {
+          "name": "Sotong ball",
+          "aliases": [
+            "Sotong",
+            "Squid ball",
+            "Squid"
+          ],
+          "tier": "gem"
+        }
+      ]
+    },
+    {
+      "id": "wordplay-water",
+      "category": "wordplay",
+      "text": "Name a word that comes after 'water'",
+      "note": "Together they make a thing: 'waterfall', 'water bottle'. Type the word, or the whole thing.",
+      "answers": [
+        {
+          "name": "Waterfall",
+          "aliases": [
+            "Fall"
+          ],
+          "tier": "common"
+        },
+        {
+          "name": "Watermelon",
+          "aliases": [
+            "Melon"
+          ],
+          "tier": "common"
+        },
+        {
+          "name": "Water bottle",
+          "aliases": [
+            "Bottle"
+          ],
+          "tier": "common"
+        },
+        {
+          "name": "Water park",
+          "aliases": [
+            "Park"
+          ],
+          "tier": "common"
+        },
+        {
+          "name": "Waterproof",
+          "aliases": [
+            "Proof"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "Water polo",
+          "aliases": [
+            "Polo"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "Watercolour",
+          "aliases": [
+            "Colour",
+            "Watercolor",
+            "Color"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "Water gun",
+          "aliases": [
+            "Gun"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "Water pistol",
+          "aliases": [
+            "Pistol"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "Water slide",
+          "aliases": [
+            "Slide"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "Waterfront",
+          "aliases": [
+            "Front"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "Watermark",
+          "aliases": [
+            "Mark"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "Water lily",
+          "aliases": [
+            "Lily"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "Water buffalo",
+          "aliases": [
+            "Buffalo"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "Water skiing",
+          "aliases": [
+            "Skiing",
+            "Water ski",
+            "Ski"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "Water heater",
+          "aliases": [
+            "Heater"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "Water tank",
+          "aliases": [
+            "Tank"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "Water cooler",
+          "aliases": [
+            "Cooler"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "Water dispenser",
+          "aliases": [
+            "Dispenser"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "Water balloon",
+          "aliases": [
+            "Balloon"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "Water bomb",
+          "aliases": [
+            "Bomb"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "Water fountain",
+          "aliases": [
+            "Fountain"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "Water bed",
+          "aliases": [
+            "Bed"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "Water bill",
+          "aliases": [
+            "Bill"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "Water level",
+          "aliases": [
+            "Level"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "Water cycle",
+          "aliases": [
+            "Cycle"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "Water sports",
+          "aliases": [
+            "Sports"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "Water filter",
+          "aliases": [
+            "Filter"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "Water chestnut",
+          "aliases": [
+            "Chestnut"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "Water apple",
+          "aliases": [
+            "Apple"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "Water monitor",
+          "aliases": [
+            "Monitor"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "Waterway",
+          "aliases": [
+            "Way",
+            "Waterway Point"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "Water cannon",
+          "aliases": [
+            "Cannon"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "Water fight",
+          "aliases": [
+            "Fight"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "Water pump",
+          "aliases": [
+            "Pump"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "Water pipe",
+          "aliases": [
+            "Pipe"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "Water snake",
+          "aliases": [
+            "Snake"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "Water taxi",
+          "aliases": [
+            "Taxi"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "Watertight",
+          "aliases": [
+            "Tight"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "Water tower",
+          "aliases": [
+            "Tower"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "Water vapour",
+          "aliases": [
+            "Vapour",
+            "Water vapor",
+            "Vapor"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "Water wheel",
+          "aliases": [
+            "Wheel"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "Waterworks",
+          "aliases": [
+            "Works"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "Waterworld",
+          "aliases": [
+            "World"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "Waterloo",
+          "aliases": [
+            "Loo"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "Watercress",
+          "aliases": [
+            "Cress"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "Water purifier",
+          "aliases": [
+            "Purifier"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "Water rat",
+          "aliases": [
+            "Rat"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "Water bear",
+          "aliases": [
+            "Bear"
+          ],
+          "tier": "ulu"
+        },
+        {
+          "name": "Water Margin",
+          "aliases": [
+            "Margin"
+          ],
+          "tier": "ulu"
+        },
+        {
+          "name": "Water caltrop",
+          "aliases": [
+            "Caltrop"
+          ],
+          "tier": "ulu"
+        },
+        {
+          "name": "Water hyacinth",
+          "aliases": [
+            "Hyacinth"
+          ],
+          "tier": "ulu"
+        },
+        {
+          "name": "Water closet",
+          "aliases": [
+            "Closet",
+            "WC"
+          ],
+          "tier": "ulu"
+        },
+        {
+          "name": "Water dragon",
+          "aliases": [
+            "Dragon"
+          ],
+          "tier": "ulu"
+        },
+        {
+          "name": "Water sign",
+          "aliases": [
+            "Sign"
+          ],
+          "tier": "ulu"
+        },
+        {
+          "name": "Water main",
+          "aliases": [
+            "Main"
+          ],
+          "tier": "ulu"
+        },
+        {
+          "name": "Water clock",
+          "aliases": [
+            "Clock"
+          ],
+          "tier": "ulu"
+        },
+        {
+          "name": "Water wings",
+          "aliases": [
+            "Wings"
+          ],
+          "tier": "ulu"
+        },
+        {
+          "name": "Water table",
+          "aliases": [
+            "Table"
+          ],
+          "tier": "ulu"
+        },
+        {
+          "name": "Water feature",
+          "aliases": [
+            "Feature"
+          ],
+          "tier": "ulu"
+        },
+        {
+          "name": "Water jet",
+          "aliases": [
+            "Jet"
+          ],
+          "tier": "ulu"
+        },
+        {
+          "name": "Waterboy",
+          "aliases": [
+            "Boy",
+            "The Waterboy"
+          ],
+          "tier": "ulu"
+        },
+        {
+          "name": "Water bus",
+          "aliases": [
+            "Bus"
+          ],
+          "tier": "ulu"
+        },
+        {
+          "name": "Water spinach",
+          "aliases": [
+            "Spinach",
+            "Water convolvulus",
+            "Convolvulus"
+          ],
+          "tier": "gem"
+        }
+      ]
+    },
+    {
+      "id": "wordplay-colour-names",
+      "category": "wordplay",
+      "text": "Name a colour that's also the name of something else",
+      "note": "A colour named after a fruit, a stone, an animal, a place...: 'orange', 'lime'. Plain 'red' doesn't count.",
+      "answers": [
+        {
+          "name": "Orange",
+          "tier": "common"
+        },
+        {
+          "name": "Lime",
+          "tier": "common"
+        },
+        {
+          "name": "Gold",
+          "tier": "common"
+        },
+        {
+          "name": "Silver",
+          "tier": "common"
+        },
+        {
+          "name": "Salmon",
+          "tier": "trap"
+        },
+        {
+          "name": "Peach",
+          "tier": "solid"
+        },
+        {
+          "name": "Plum",
+          "tier": "solid"
+        },
+        {
+          "name": "Cherry",
+          "tier": "solid"
+        },
+        {
+          "name": "Lemon",
+          "tier": "solid"
+        },
+        {
+          "name": "Chocolate",
+          "tier": "solid"
+        },
+        {
+          "name": "Coffee",
+          "tier": "solid"
+        },
+        {
+          "name": "Rose",
+          "tier": "solid"
+        },
+        {
+          "name": "Lavender",
+          "tier": "solid"
+        },
+        {
+          "name": "Lilac",
+          "tier": "solid"
+        },
+        {
+          "name": "Violet",
+          "tier": "solid"
+        },
+        {
+          "name": "Mint",
+          "tier": "solid"
+        },
+        {
+          "name": "Olive",
+          "tier": "solid"
+        },
+        {
+          "name": "Mustard",
+          "tier": "solid"
+        },
+        {
+          "name": "Bronze",
+          "tier": "solid"
+        },
+        {
+          "name": "Copper",
+          "tier": "solid"
+        },
+        {
+          "name": "Ruby",
+          "tier": "solid"
+        },
+        {
+          "name": "Emerald",
+          "tier": "solid"
+        },
+        {
+          "name": "Sapphire",
+          "tier": "solid"
+        },
+        {
+          "name": "Turquoise",
+          "tier": "solid"
+        },
+        {
+          "name": "Amber",
+          "tier": "solid"
+        },
+        {
+          "name": "Jade",
+          "tier": "solid"
+        },
+        {
+          "name": "Ivory",
+          "tier": "solid"
+        },
+        {
+          "name": "Cream",
+          "tier": "solid"
+        },
+        {
+          "name": "Charcoal",
+          "tier": "solid"
+        },
+        {
+          "name": "Sky blue",
+          "aliases": [
+            "Sky"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "Navy",
+          "aliases": [
+            "Navy blue"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "Coral",
+          "tier": "solid"
+        },
+        {
+          "name": "Tangerine",
+          "tier": "solid"
+        },
+        {
+          "name": "Apricot",
+          "tier": "solid"
+        },
+        {
+          "name": "Indigo",
+          "tier": "solid"
+        },
+        {
+          "name": "Pearl",
+          "tier": "solid"
+        },
+        {
+          "name": "Avocado",
+          "tier": "rare"
+        },
+        {
+          "name": "Pistachio",
+          "tier": "rare"
+        },
+        {
+          "name": "Aubergine",
+          "aliases": [
+            "Eggplant"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "Cinnamon",
+          "tier": "rare"
+        },
+        {
+          "name": "Caramel",
+          "tier": "rare"
+        },
+        {
+          "name": "Honey",
+          "tier": "rare"
+        },
+        {
+          "name": "Mocha",
+          "tier": "rare"
+        },
+        {
+          "name": "Wine",
+          "tier": "rare"
+        },
+        {
+          "name": "Burgundy",
+          "tier": "rare"
+        },
+        {
+          "name": "Champagne",
+          "tier": "rare"
+        },
+        {
+          "name": "Sand",
+          "tier": "rare"
+        },
+        {
+          "name": "Slate",
+          "tier": "rare"
+        },
+        {
+          "name": "Rust",
+          "tier": "rare"
+        },
+        {
+          "name": "Brick",
+          "tier": "rare"
+        },
+        {
+          "name": "Blood red",
+          "aliases": [
+            "Blood"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "Saffron",
+          "tier": "rare"
+        },
+        {
+          "name": "Fuchsia",
+          "tier": "rare"
+        },
+        {
+          "name": "Cobalt",
+          "tier": "rare"
+        },
+        {
+          "name": "Platinum",
+          "tier": "rare"
+        },
+        {
+          "name": "Steel",
+          "tier": "rare"
+        },
+        {
+          "name": "Ash",
+          "tier": "rare"
+        },
+        {
+          "name": "Snow",
+          "tier": "rare"
+        },
+        {
+          "name": "Forest green",
+          "aliases": [
+            "Forest"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "Aqua",
+          "tier": "rare"
+        },
+        {
+          "name": "Magenta",
+          "tier": "ulu"
+        },
+        {
+          "name": "Sienna",
+          "aliases": [
+            "Burnt sienna"
+          ],
+          "tier": "ulu"
+        },
+        {
+          "name": "Mauve",
+          "tier": "ulu"
+        },
+        {
+          "name": "Periwinkle",
+          "tier": "ulu"
+        },
+        {
+          "name": "Puce",
+          "tier": "ulu"
+        },
+        {
+          "name": "Taupe",
+          "tier": "ulu"
+        },
+        {
+          "name": "Khaki",
+          "tier": "ulu"
+        },
+        {
+          "name": "Denim",
+          "tier": "ulu"
+        },
+        {
+          "name": "Maroon",
+          "tier": "ulu"
+        },
+        {
+          "name": "Cerise",
+          "tier": "ulu"
+        },
+        {
+          "name": "Bordeaux",
+          "tier": "ulu"
+        },
+        {
+          "name": "Eggshell",
+          "tier": "ulu"
+        },
+        {
+          "name": "Bubblegum",
+          "tier": "ulu"
+        },
+        {
+          "name": "Canary yellow",
+          "aliases": [
+            "Canary"
+          ],
+          "tier": "ulu"
+        },
+        {
+          "name": "Pumpkin",
+          "tier": "ulu"
+        },
+        {
+          "name": "Neon",
+          "tier": "ulu"
+        },
+        {
+          "name": "Teal",
+          "tier": "gem"
+        }
+      ],
+      "decoys": [
+        {
+          "name": "Red",
+          "why": "Plain red is only ever a colour!"
+        }
+      ]
+    },
+    {
+      "id": "wordplay-borrowed-words",
+      "category": "wordplay",
+      "text": "Name an English word that came from Malay, Chinese or Tamil",
+      "note": "Words in ordinary English dictionaries, like 'amok' or 'kung fu'. Food counts! Singlish doesn't, lah.",
+      "answers": [
+        {
+          "name": "Kung fu",
+          "tier": "common"
+        },
+        {
+          "name": "Satay",
+          "aliases": [
+            "Sate"
+          ],
+          "tier": "common"
+        },
+        {
+          "name": "Durian",
+          "tier": "common"
+        },
+        {
+          "name": "Curry",
+          "tier": "common"
+        },
+        {
+          "name": "Ketchup",
+          "aliases": [
+            "Catsup"
+          ],
+          "tier": "trap"
+        },
+        {
+          "name": "Tea",
+          "tier": "trap"
+        },
+        {
+          "name": "Amok",
+          "tier": "solid"
+        },
+        {
+          "name": "Sarong",
+          "tier": "solid"
+        },
+        {
+          "name": "Batik",
+          "tier": "solid"
+        },
+        {
+          "name": "Orangutan",
+          "aliases": [
+            "Orang-utan",
+            "Orang utan"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "Dim sum",
+          "tier": "solid"
+        },
+        {
+          "name": "Feng shui",
+          "tier": "solid"
+        },
+        {
+          "name": "Tai chi",
+          "tier": "solid"
+        },
+        {
+          "name": "Yin and yang",
+          "aliases": [
+            "Yin yang"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "Wok",
+          "tier": "solid"
+        },
+        {
+          "name": "Mango",
+          "tier": "solid"
+        },
+        {
+          "name": "Rambutan",
+          "tier": "solid"
+        },
+        {
+          "name": "Mangosteen",
+          "tier": "solid"
+        },
+        {
+          "name": "Lychee",
+          "aliases": [
+            "Litchi"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "Mahjong",
+          "aliases": [
+            "Mah-jong"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "Tofu",
+          "tier": "solid"
+        },
+        {
+          "name": "Bamboo",
+          "tier": "solid"
+        },
+        {
+          "name": "Kowtow",
+          "tier": "solid"
+        },
+        {
+          "name": "Wonton",
+          "aliases": [
+            "Wanton"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "Bok choy",
+          "aliases": [
+            "Pak choi"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "Chow mein",
+          "tier": "solid"
+        },
+        {
+          "name": "Sambal",
+          "tier": "solid"
+        },
+        {
+          "name": "Laksa",
+          "tier": "solid"
+        },
+        {
+          "name": "Gong",
+          "tier": "rare"
+        },
+        {
+          "name": "Rattan",
+          "tier": "rare"
+        },
+        {
+          "name": "Sago",
+          "tier": "rare"
+        },
+        {
+          "name": "Cockatoo",
+          "tier": "rare"
+        },
+        {
+          "name": "Paddy",
+          "tier": "rare"
+        },
+        {
+          "name": "Gecko",
+          "tier": "rare"
+        },
+        {
+          "name": "Dugong",
+          "tier": "rare"
+        },
+        {
+          "name": "Pangolin",
+          "tier": "rare"
+        },
+        {
+          "name": "Kampong",
+          "aliases": [
+            "Kampung"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "Agar",
+          "aliases": [
+            "Agar-agar"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "Kebaya",
+          "tier": "rare"
+        },
+        {
+          "name": "Rendang",
+          "tier": "rare"
+        },
+        {
+          "name": "Typhoon",
+          "tier": "rare"
+        },
+        {
+          "name": "Tycoon",
+          "tier": "rare"
+        },
+        {
+          "name": "Kumquat",
+          "tier": "rare"
+        },
+        {
+          "name": "Ginseng",
+          "tier": "rare"
+        },
+        {
+          "name": "Gung-ho",
+          "aliases": [
+            "Gung ho"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "Chop suey",
+          "tier": "rare"
+        },
+        {
+          "name": "Oolong",
+          "tier": "rare"
+        },
+        {
+          "name": "Hoisin",
+          "tier": "rare"
+        },
+        {
+          "name": "Char siu",
+          "aliases": [
+            "Char siew"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "Sampan",
+          "tier": "rare"
+        },
+        {
+          "name": "Shih tzu",
+          "tier": "rare"
+        },
+        {
+          "name": "Catamaran",
+          "tier": "rare"
+        },
+        {
+          "name": "Poppadom",
+          "aliases": [
+            "Papadum",
+            "Pappadam"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "Dosa",
+          "aliases": [
+            "Thosai"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "Idli",
+          "tier": "rare"
+        },
+        {
+          "name": "Sambar",
+          "tier": "rare"
+        },
+        {
+          "name": "Rasam",
+          "tier": "rare"
+        },
+        {
+          "name": "Cheroot",
+          "tier": "rare"
+        },
+        {
+          "name": "Lose face",
+          "tier": "rare"
+        },
+        {
+          "name": "Long time no see",
+          "tier": "rare"
+        },
+        {
+          "name": "Compound",
+          "tier": "ulu"
+        },
+        {
+          "name": "Gingham",
+          "tier": "ulu"
+        },
+        {
+          "name": "Junk",
+          "tier": "ulu"
+        },
+        {
+          "name": "Kris",
+          "aliases": [
+            "Keris"
+          ],
+          "tier": "ulu"
+        },
+        {
+          "name": "Caddy",
+          "aliases": [
+            "Tea caddy"
+          ],
+          "tier": "ulu"
+        },
+        {
+          "name": "Catty",
+          "aliases": [
+            "Kati"
+          ],
+          "tier": "ulu"
+        },
+        {
+          "name": "Cassowary",
+          "tier": "ulu"
+        },
+        {
+          "name": "Kapok",
+          "tier": "ulu"
+        },
+        {
+          "name": "Gutta-percha",
+          "tier": "ulu"
+        },
+        {
+          "name": "Trepang",
+          "tier": "ulu"
+        },
+        {
+          "name": "Siamang",
+          "tier": "ulu"
+        },
+        {
+          "name": "Pekoe",
+          "tier": "ulu"
+        },
+        {
+          "name": "Kaolin",
+          "tier": "ulu"
+        },
+        {
+          "name": "Yen",
+          "tier": "ulu"
+        },
+        {
+          "name": "Chop-chop",
+          "aliases": [
+            "Chop chop"
+          ],
+          "tier": "ulu"
+        },
+        {
+          "name": "Brainwashing",
+          "aliases": [
+            "Brainwash"
+          ],
+          "tier": "ulu"
+        },
+        {
+          "name": "Paper tiger",
+          "tier": "ulu"
+        },
+        {
+          "name": "Shanghai",
+          "tier": "ulu"
+        },
+        {
+          "name": "Mulligatawny",
+          "tier": "ulu"
+        },
+        {
+          "name": "Pandal",
+          "tier": "ulu"
+        },
+        {
+          "name": "Corundum",
+          "tier": "ulu"
+        },
+        {
+          "name": "Vetiver",
+          "tier": "ulu"
+        },
+        {
+          "name": "Patchouli",
+          "tier": "ulu"
+        },
+        {
+          "name": "Betel",
+          "tier": "ulu"
+        },
+        {
+          "name": "Copra",
+          "tier": "ulu"
+        },
+        {
+          "name": "Mandarin",
+          "tier": "gem"
+        }
+      ],
+      "decoys": [
+        {
+          "name": "Pyjamas",
+          "aliases": [
+            "Pajamas"
+          ],
+          "why": "That one's from Hindi and Persian."
+        },
+        {
+          "name": "Shampoo",
+          "why": "That's from Hindi (champo)."
+        },
+        {
+          "name": "Bungalow",
+          "why": "That's from Hindi (bangla)."
+        },
+        {
+          "name": "Jungle",
+          "why": "That's from Hindi (jangal)."
+        },
+        {
+          "name": "Sushi",
+          "why": "Japanese, not Chinese!"
+        },
+        {
+          "name": "Karaoke",
+          "why": "Japanese, not Chinese!"
+        }
+      ]
+    },
+    {
+      "id": "wordplay-food-starting-with-k",
+      "category": "wordplay",
+      "text": "Name something to eat or drink that starts with K",
+      "note": "Dishes, snacks, fruit, veg and drinks all count, and so do brands you can eat.",
+      "rule": {
+        "startsWith": "k"
+      },
+      "qualifiers": true,
+      "answers": [
+        {
+          "name": "Kiwi",
+          "aliases": [
+            "Kiwi fruit",
+            "Kiwifruit"
+          ],
+          "tier": "common"
+        },
+        {
+          "name": "Kebab",
+          "aliases": [
+            "Kabab"
+          ],
+          "tier": "common"
+        },
+        {
+          "name": "Kimchi",
+          "tier": "common"
+        },
+        {
+          "name": "Kaya",
+          "aliases": [
+            "Kaya toast"
+          ],
+          "tier": "common"
+        },
+        {
+          "name": "Kangkong",
+          "aliases": [
+            "Kang kong"
+          ],
+          "tier": "trap"
+        },
+        {
+          "name": "Kway teow",
+          "aliases": [
+            "Kuey teow",
+            "Kuay teow",
+            "Kway teow noodles"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "Ketchup",
+          "tier": "solid"
+        },
+        {
+          "name": "Kale",
+          "tier": "solid"
+        },
+        {
+          "name": "Kopi",
+          "aliases": [
+            "Kopi-O",
+            "Kopi C",
+            "Kopi siew dai",
+            "Kopi peng"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "KitKat",
+          "aliases": [
+            "Kit Kat"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "Kueh",
+          "aliases": [
+            "Kuih",
+            "Kue"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "Kueh lapis",
+          "aliases": [
+            "Kuih lapis"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "Kailan",
+          "aliases": [
+            "Kai lan"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "Kway chap",
+          "aliases": [
+            "Kuay chap"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "Korma",
+          "tier": "solid"
+        },
+        {
+          "name": "Katsu",
+          "aliases": [
+            "Katsudon",
+            "Katsu curry"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "Kimbap",
+          "tier": "solid"
+        },
+        {
+          "name": "Kombucha",
+          "tier": "solid"
+        },
+        {
+          "name": "Kidney beans",
+          "aliases": [
+            "Kidney bean"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "Kumquat",
+          "tier": "solid"
+        },
+        {
+          "name": "Key lime pie",
+          "tier": "solid"
+        },
+        {
+          "name": "King prawn",
+          "tier": "solid"
+        },
+        {
+          "name": "King crab",
+          "tier": "solid"
+        },
+        {
+          "name": "Korean fried chicken",
+          "tier": "solid"
+        },
+        {
+          "name": "Kentucky Fried Chicken",
+          "aliases": [
+            "KFC"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "Ketupat",
+          "tier": "rare"
+        },
+        {
+          "name": "Keropok",
+          "aliases": [
+            "Krupuk"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "Kohlrabi",
+          "tier": "rare"
+        },
+        {
+          "name": "Kelp",
+          "tier": "rare"
+        },
+        {
+          "name": "Kipper",
+          "tier": "rare"
+        },
+        {
+          "name": "Kefir",
+          "tier": "rare"
+        },
+        {
+          "name": "Kulfi",
+          "tier": "rare"
+        },
+        {
+          "name": "Kofta",
+          "tier": "rare"
+        },
+        {
+          "name": "Kheer",
+          "tier": "rare"
+        },
+        {
+          "name": "Karaage",
+          "aliases": [
+            "Kara-age"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "Kalamansi",
+          "tier": "rare"
+        },
+        {
+          "name": "Kopiko",
+          "tier": "rare"
+        },
+        {
+          "name": "Khong Guan",
+          "tier": "rare"
+        },
+        {
+          "name": "Kinder",
+          "aliases": [
+            "Kinder Bueno",
+            "Kinder Surprise",
+            "Kinder Joy"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "Krispy Kreme",
+          "tier": "rare"
+        },
+        {
+          "name": "Kampung chicken",
+          "aliases": [
+            "Kampong chicken"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "Kabocha",
+          "tier": "rare"
+        },
+        {
+          "name": "Kidney",
+          "tier": "rare"
+        },
+        {
+          "name": "Kedgeree",
+          "tier": "ulu"
+        },
+        {
+          "name": "Khichdi",
+          "aliases": [
+            "Kitchari"
+          ],
+          "tier": "ulu"
+        },
+        {
+          "name": "Kesari",
+          "tier": "ulu"
+        },
+        {
+          "name": "Kachori",
+          "tier": "ulu"
+        },
+        {
+          "name": "Kek lapis",
+          "tier": "ulu"
+        },
+        {
+          "name": "Kuih bahulu",
+          "aliases": [
+            "Kueh bahulu"
+          ],
+          "tier": "ulu"
+        },
+        {
+          "name": "Kueh dadar",
+          "aliases": [
+            "Kuih dadar"
+          ],
+          "tier": "ulu"
+        },
+        {
+          "name": "Kueh salat",
+          "aliases": [
+            "Kuih salat",
+            "Kueh seri muka",
+            "Kuih seri muka"
+          ],
+          "tier": "ulu"
+        },
+        {
+          "name": "Kueh tutu",
+          "aliases": [
+            "Kuih tutu"
+          ],
+          "tier": "ulu"
+        },
+        {
+          "name": "Kueh pie tee",
+          "aliases": [
+            "Kuih pie tee"
+          ],
+          "tier": "ulu"
+        },
+        {
+          "name": "Kueh bangkit",
+          "aliases": [
+            "Kuih bangkit"
+          ],
+          "tier": "ulu"
+        },
+        {
+          "name": "Kueh kosui",
+          "aliases": [
+            "Kuih kosui",
+            "Kueh ko swee"
+          ],
+          "tier": "ulu"
+        },
+        {
+          "name": "Kerabu",
+          "tier": "ulu"
+        },
+        {
+          "name": "Kombu",
+          "tier": "ulu"
+        },
+        {
+          "name": "Kingfish",
+          "tier": "ulu"
+        },
+        {
+          "name": "Kumara",
+          "tier": "ulu"
+        },
+        {
+          "name": "Kielbasa",
+          "tier": "ulu"
+        },
+        {
+          "name": "Kettle corn",
+          "tier": "ulu"
+        },
+        {
+          "name": "Kacang puteh",
+          "aliases": [
+            "Kachang puteh"
+          ],
+          "tier": "gem"
+        }
+      ],
+      "decoys": [
+        {
+          "name": "Kopitiam",
+          "why": "That's where you eat, not what you eat!"
+        }
+      ]
+    },
+    {
+      "id": "wordplay-animals-starting-with-b",
+      "category": "wordplay",
+      "text": "Name an animal that starts with B",
+      "note": "Any animal at all: wild, farm, pet, bird, fish or bug. Breeds count.",
+      "rule": {
+        "startsWith": "b"
+      },
+      "qualifiers": true,
+      "answers": [
+        {
+          "name": "Bear",
+          "tier": "common"
+        },
+        {
+          "name": "Bee",
+          "aliases": [
+            "Bumblebee"
+          ],
+          "tier": "common"
+        },
+        {
+          "name": "Butterfly",
+          "tier": "common"
+        },
+        {
+          "name": "Bat",
+          "tier": "common"
+        },
+        {
+          "name": "Buffalo",
+          "tier": "solid"
+        },
+        {
+          "name": "Beaver",
+          "tier": "solid"
+        },
+        {
+          "name": "Bison",
+          "tier": "solid"
+        },
+        {
+          "name": "Baboon",
+          "tier": "solid"
+        },
+        {
+          "name": "Badger",
+          "tier": "solid"
+        },
+        {
+          "name": "Bull",
+          "tier": "solid"
+        },
+        {
+          "name": "Bunny",
+          "tier": "solid"
+        },
+        {
+          "name": "Budgie",
+          "aliases": [
+            "Budgerigar"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "Beetle",
+          "tier": "solid"
+        },
+        {
+          "name": "Blue whale",
+          "tier": "solid"
+        },
+        {
+          "name": "Boar",
+          "tier": "solid"
+        },
+        {
+          "name": "Bird",
+          "tier": "solid"
+        },
+        {
+          "name": "Bobcat",
+          "tier": "solid"
+        },
+        {
+          "name": "Bulldog",
+          "tier": "solid"
+        },
+        {
+          "name": "Beagle",
+          "tier": "solid"
+        },
+        {
+          "name": "Barracuda",
+          "tier": "solid"
+        },
+        {
+          "name": "Bass",
+          "tier": "rare"
+        },
+        {
+          "name": "Blackbird",
+          "tier": "rare"
+        },
+        {
+          "name": "Bluebird",
+          "tier": "rare"
+        },
+        {
+          "name": "Blue jay",
+          "tier": "rare"
+        },
+        {
+          "name": "Bonobo",
+          "tier": "rare"
+        },
+        {
+          "name": "Bandicoot",
+          "tier": "rare"
+        },
+        {
+          "name": "Buzzard",
+          "tier": "rare"
+        },
+        {
+          "name": "Bullfrog",
+          "tier": "rare"
+        },
+        {
+          "name": "Boa",
+          "aliases": [
+            "Boa constrictor"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "Beluga",
+          "aliases": [
+            "Beluga whale"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "Black panther",
+          "tier": "rare"
+        },
+        {
+          "name": "Black widow",
+          "tier": "rare"
+        },
+        {
+          "name": "Black mamba",
+          "tier": "rare"
+        },
+        {
+          "name": "Ball python",
+          "tier": "rare"
+        },
+        {
+          "name": "Blue tang",
+          "tier": "rare"
+        },
+        {
+          "name": "Bed bug",
+          "aliases": [
+            "Bedbug"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "Barn owl",
+          "tier": "rare"
+        },
+        {
+          "name": "Bald eagle",
+          "tier": "rare"
+        },
+        {
+          "name": "Bearded dragon",
+          "tier": "rare"
+        },
+        {
+          "name": "Box jellyfish",
+          "tier": "rare"
+        },
+        {
+          "name": "Barnacle",
+          "tier": "rare"
+        },
+        {
+          "name": "Betta",
+          "aliases": [
+            "Betta fish"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "Bluefin tuna",
+          "tier": "rare"
+        },
+        {
+          "name": "Barramundi",
+          "tier": "rare"
+        },
+        {
+          "name": "Bengal tiger",
+          "tier": "rare"
+        },
+        {
+          "name": "Black rhino",
+          "aliases": [
+            "Black rhinoceros"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "Bottlenose dolphin",
+          "tier": "rare"
+        },
+        {
+          "name": "Blue-ringed octopus",
+          "tier": "rare"
+        },
+        {
+          "name": "Bactrian camel",
+          "tier": "rare"
+        },
+        {
+          "name": "Buck",
+          "tier": "rare"
+        },
+        {
+          "name": "Bug",
+          "tier": "rare"
+        },
+        {
+          "name": "Bloodhound",
+          "tier": "rare"
+        },
+        {
+          "name": "Border collie",
+          "tier": "rare"
+        },
+        {
+          "name": "Boxer",
+          "tier": "rare"
+        },
+        {
+          "name": "Boston terrier",
+          "tier": "rare"
+        },
+        {
+          "name": "Bichon frise",
+          "aliases": [
+            "Bichon"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "Basset hound",
+          "tier": "rare"
+        },
+        {
+          "name": "Burmese cat",
+          "tier": "rare"
+        },
+        {
+          "name": "Bengal cat",
+          "tier": "rare"
+        },
+        {
+          "name": "British shorthair",
+          "tier": "rare"
+        },
+        {
+          "name": "Bilby",
+          "tier": "ulu"
+        },
+        {
+          "name": "Bongo",
+          "tier": "ulu"
+        },
+        {
+          "name": "Booby",
+          "tier": "ulu"
+        },
+        {
+          "name": "Bushbaby",
+          "aliases": [
+            "Bush baby"
+          ],
+          "tier": "ulu"
+        },
+        {
+          "name": "Blobfish",
+          "tier": "ulu"
+        },
+        {
+          "name": "Bluebottle",
+          "tier": "ulu"
+        },
+        {
+          "name": "Bee-eater",
+          "tier": "ulu"
+        },
+        {
+          "name": "Bulbul",
+          "tier": "ulu"
+        },
+        {
+          "name": "Bullfinch",
+          "tier": "ulu"
+        },
+        {
+          "name": "Bittern",
+          "tier": "ulu"
+        },
+        {
+          "name": "Basilisk",
+          "tier": "ulu"
+        },
+        {
+          "name": "Brittle star",
+          "tier": "ulu"
+        },
+        {
+          "name": "Bream",
+          "tier": "ulu"
+        },
+        {
+          "name": "Brahminy kite",
+          "tier": "ulu"
+        },
+        {
+          "name": "Banded langur",
+          "tier": "ulu"
+        },
+        {
+          "name": "Blackbuck",
+          "tier": "ulu"
+        },
+        {
+          "name": "Bighorn sheep",
+          "tier": "ulu"
+        },
+        {
+          "name": "Bowhead whale",
+          "tier": "ulu"
+        },
+        {
+          "name": "Butterflyfish",
+          "aliases": [
+            "Butterfly fish"
+          ],
+          "tier": "ulu"
+        },
+        {
+          "name": "Batfish",
+          "tier": "ulu"
+        },
+        {
+          "name": "Bantam",
+          "tier": "ulu"
+        },
+        {
+          "name": "Birman",
+          "tier": "ulu"
+        },
+        {
+          "name": "Bernese mountain dog",
+          "tier": "ulu"
+        },
+        {
+          "name": "Binturong",
+          "aliases": [
+            "Bearcat"
+          ],
+          "tier": "gem"
+        }
+      ],
+      "decoys": [
+        {
+          "name": "Bigfoot",
+          "why": "Nobody's proven that one exists!"
+        },
+        {
+          "name": "Batman",
+          "why": "A man dressed as a bat doesn't count."
+        },
+        {
+          "name": "Bulbasaur",
+          "why": "That's a Pokémon, not an animal!"
+        }
+      ]
+    }
+  ]
+}

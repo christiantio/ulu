@@ -32,5 +32,22 @@
   "2026-11-26": ["nature-marine-life","transport-ewl-stations","politics-presidents-and-pms","culture-singapore-brands","language-malay-place-name-words","history-early-figures","food-noodle-types"],
   "2026-11-27": ["culture-newspapers","nature-reservoirs","transport-bus-interchanges","history-colonial-governors","politics-statutory-boards","places-planning-areas","food-kopitiam-drinks"],
   "2026-11-28": ["food-hawker-dishes","nature-wild-mammals","language-family-and-elder-terms","politics-ge2025-parties","places-orchard-malls","history-names-for-singapore","culture-tv-channels"],
-  "2026-11-29": ["politics-ge2025-grcs","transport-ccl-stations","culture-local-english-tv-series","nature-birds","food-desserts","places-hdb-towns","history-wwii-people"]
+  "2026-11-29": ["politics-ge2025-grcs","transport-ccl-stations","culture-local-english-tv-series","nature-birds","food-desserts","places-hdb-towns","history-wwii-people"],
+  "2026-11-30": ["entertainment-number-in-title","nature-reptiles","science-bones","culture-childhood-games","everyday-comes-in-pairs","wordplay-animals-starting-with-b","world-capital-not-biggest-city"],
+  "2026-12-01": ["everyday-you-can-peel","language-malay-words-in-singlish","wildcard-nato-alphabet","entertainment-cartoon-animals","science-dinosaurs","world-southeast-asian-islands","transport-interchange-stations"],
+  "2026-12-02": ["science-black-and-white-animals","entertainment-musical-instruments","wildcard-chinese-zodiac","wordplay-ball","food-yong-tau-foo","world-flags-with-stars","transport-tel-stations"],
+  "2026-12-03": ["wildcard-things-people-collect","politics-cabinet-ministers","science-planets-and-dwarf-planets","entertainment-pixar-films","wordplay-food-starting-with-k","world-china-neighbours","language-singlish-words"],
+  "2026-12-04": ["wildcard-has-a-shell","science-flying-not-birds","everyday-sticky","culture-festivals-holidays","nature-trees","world-equator-countries","wordplay-colour-names"],
+  "2026-12-05": ["wordplay-borrowed-words","entertainment-board-and-card-games","places-offshore-islands","world-drive-on-the-left","everyday-yellow","wildcard-red-and-white","transport-nsl-stations"],
+  "2026-12-06": ["places-hawker-centres","everyday-goes-up-and-down","politics-ge2025-smcs","entertainment-disney-princesses","wordplay-palindromes","wildcard-chicken","science-first-20-elements"],
+  "2026-12-07": ["everyday-hole-in-the-middle","wildcard-one-name-famous","entertainment-dances","science-units-of-measurement","food-kueh","world-countries-ending-in-ia","history-national-monuments"],
+  "2026-12-08": ["language-singlish-particles","world-capital-not-biggest-city","wordplay-water","entertainment-number-in-title","science-bones","culture-singapore-singers","everyday-has-buttons"],
+  "2026-12-09": ["transport-dtl-stations","wildcard-nato-alphabet","entertainment-cartoon-animals","science-dinosaurs","history-wwii-sites","wordplay-animals-starting-with-b","everyday-comes-in-pairs"],
+  "2026-12-10": ["food-durian-varieties","language-singlish-exclamations","everyday-you-can-peel","wildcard-chinese-zodiac","wordplay-ball","world-southeast-asian-islands","entertainment-musical-instruments"],
+  "2026-12-11": ["world-flags-with-stars","wildcard-things-people-collect","entertainment-pixar-films","culture-ndp-theme-songs","wordplay-food-starting-with-k","science-black-and-white-animals","politics-deputy-pms"],
+  "2026-12-12": ["nature-flowers","wildcard-has-a-shell","everyday-sticky","science-planets-and-dwarf-planets","wordplay-colour-names","politics-ministries","world-china-neighbours"],
+  "2026-12-13": ["language-ns-slang","transport-lrt-stations","wordplay-borrowed-words","entertainment-board-and-card-games","wildcard-red-and-white","science-flying-not-birds","world-equator-countries"],
+  "2026-12-14": ["wildcard-chicken","culture-radio-stations","wordplay-palindromes","everyday-yellow","science-first-20-elements","world-drive-on-the-left","history-museums"],
+  "2026-12-15": ["science-units-of-measurement","world-countries-ending-in-ia","everyday-goes-up-and-down","wildcard-one-name-famous","entertainment-disney-princesses","places-bridges","food-cai-png"],
+  "2026-12-16": ["science-bones","culture-jack-neo-films","wordplay-water","entertainment-dances","everyday-hole-in-the-middle","nature-tropical-fruits","world-capital-not-biggest-city"]
 }

@@ -1,6 +1,6 @@
 {
   "name": "Entertainment",
-  "asOf": "2026-11-10",
+  "asOf": "2026-11-16",
   "prompts": [
     {
       "id": "entertainment-disney-princesses",
@@ -325,6 +325,2492 @@
         {
           "name": "Ice Age",
           "why": "That's Blue Sky Studios."
+        }
+      ]
+    },
+    {
+      "id": "entertainment-cartoon-animals",
+      "category": "entertainment",
+      "text": "Name a cartoon animal",
+      "note": "From a cartoon, an animated film or a comic strip. Pokémon and other made-up creatures don't count!",
+      "answers": [
+        {
+          "name": "Mickey Mouse",
+          "aliases": [
+            "Mickey"
+          ],
+          "tier": "common"
+        },
+        {
+          "name": "Doraemon",
+          "tier": "common"
+        },
+        {
+          "name": "Hello Kitty",
+          "aliases": [
+            "Kitty"
+          ],
+          "tier": "common"
+        },
+        {
+          "name": "Tom and Jerry",
+          "aliases": [
+            "Tom",
+            "Jerry"
+          ],
+          "tier": "common"
+        },
+        {
+          "name": "Garfield",
+          "tier": "solid"
+        },
+        {
+          "name": "Snoopy",
+          "tier": "solid"
+        },
+        {
+          "name": "Donald Duck",
+          "aliases": [
+            "Donald"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "Bugs Bunny",
+          "aliases": [
+            "Bugs"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "Scooby-Doo",
+          "aliases": [
+            "Scooby Doo",
+            "Scooby"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "Winnie the Pooh",
+          "aliases": [
+            "Pooh Bear",
+            "Pooh",
+            "Winnie"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "Peppa Pig",
+          "aliases": [
+            "Peppa"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "Bluey",
+          "tier": "solid"
+        },
+        {
+          "name": "Simba",
+          "tier": "solid"
+        },
+        {
+          "name": "Nemo",
+          "tier": "solid"
+        },
+        {
+          "name": "Dory",
+          "tier": "solid"
+        },
+        {
+          "name": "Minnie Mouse",
+          "aliases": [
+            "Minnie"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "Goofy",
+          "tier": "solid"
+        },
+        {
+          "name": "Pluto",
+          "tier": "solid"
+        },
+        {
+          "name": "Daffy Duck",
+          "aliases": [
+            "Daffy"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "Tweety Bird",
+          "aliases": [
+            "Tweety"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "Sylvester",
+          "tier": "solid"
+        },
+        {
+          "name": "Road Runner",
+          "aliases": [
+            "Roadrunner"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "Wile E. Coyote",
+          "aliases": [
+            "Wile E Coyote"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "Pink Panther",
+          "tier": "solid"
+        },
+        {
+          "name": "Po",
+          "aliases": [
+            "Kung Fu Panda"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "Puss in Boots",
+          "tier": "solid"
+        },
+        {
+          "name": "Donkey",
+          "tier": "solid"
+        },
+        {
+          "name": "Sonic the Hedgehog",
+          "aliases": [
+            "Sonic"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "Pingu",
+          "tier": "solid"
+        },
+        {
+          "name": "Pororo",
+          "tier": "solid"
+        },
+        {
+          "name": "Rilakkuma",
+          "tier": "solid"
+        },
+        {
+          "name": "Paddington Bear",
+          "aliases": [
+            "Paddington"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "SpongeBob SquarePants",
+          "aliases": [
+            "SpongeBob"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "Patrick Star",
+          "aliases": [
+            "Patrick"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "Tigger",
+          "tier": "solid"
+        },
+        {
+          "name": "Piglet",
+          "tier": "solid"
+        },
+        {
+          "name": "Eeyore",
+          "tier": "solid"
+        },
+        {
+          "name": "Dumbo",
+          "tier": "solid"
+        },
+        {
+          "name": "Bambi",
+          "tier": "solid"
+        },
+        {
+          "name": "Scrat",
+          "tier": "solid"
+        },
+        {
+          "name": "Timon",
+          "tier": "solid"
+        },
+        {
+          "name": "Pumbaa",
+          "tier": "solid"
+        },
+        {
+          "name": "Teenage Mutant Ninja Turtles",
+          "aliases": [
+            "Ninja Turtles",
+            "TMNT",
+            "Leonardo",
+            "Donatello",
+            "Raphael",
+            "Michelangelo"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "Mufasa",
+          "tier": "rare"
+        },
+        {
+          "name": "Nala",
+          "tier": "rare"
+        },
+        {
+          "name": "Scar",
+          "tier": "rare"
+        },
+        {
+          "name": "Rafiki",
+          "tier": "rare"
+        },
+        {
+          "name": "Zazu",
+          "tier": "rare"
+        },
+        {
+          "name": "Baloo",
+          "tier": "rare"
+        },
+        {
+          "name": "Bagheera",
+          "tier": "rare"
+        },
+        {
+          "name": "Shere Khan",
+          "tier": "rare"
+        },
+        {
+          "name": "Thumper",
+          "tier": "rare"
+        },
+        {
+          "name": "Remy",
+          "tier": "rare"
+        },
+        {
+          "name": "Judy Hopps",
+          "tier": "rare"
+        },
+        {
+          "name": "Nick Wilde",
+          "tier": "rare"
+        },
+        {
+          "name": "Flash",
+          "tier": "rare"
+        },
+        {
+          "name": "Sid",
+          "tier": "rare"
+        },
+        {
+          "name": "Manny",
+          "tier": "rare"
+        },
+        {
+          "name": "Diego",
+          "tier": "rare"
+        },
+        {
+          "name": "Alex",
+          "tier": "rare"
+        },
+        {
+          "name": "Marty",
+          "tier": "rare"
+        },
+        {
+          "name": "Gloria",
+          "tier": "rare"
+        },
+        {
+          "name": "Melman",
+          "tier": "rare"
+        },
+        {
+          "name": "King Julien",
+          "tier": "rare"
+        },
+        {
+          "name": "Skipper",
+          "aliases": [
+            "Penguins of Madagascar"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "Squidward",
+          "tier": "rare"
+        },
+        {
+          "name": "Mr. Krabs",
+          "aliases": [
+            "Mr Krabs",
+            "Krabs"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "Gary",
+          "tier": "rare"
+        },
+        {
+          "name": "Odie",
+          "tier": "rare"
+        },
+        {
+          "name": "Woodstock",
+          "tier": "rare"
+        },
+        {
+          "name": "Scrappy-Doo",
+          "tier": "rare"
+        },
+        {
+          "name": "Daisy Duck",
+          "tier": "rare"
+        },
+        {
+          "name": "Scrooge McDuck",
+          "aliases": [
+            "Scrooge"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "Chip 'n' Dale",
+          "aliases": [
+            "Chip and Dale"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "Lady and the Tramp",
+          "tier": "rare"
+        },
+        {
+          "name": "Pongo",
+          "tier": "rare"
+        },
+        {
+          "name": "Abu",
+          "tier": "rare"
+        },
+        {
+          "name": "Flounder",
+          "tier": "rare"
+        },
+        {
+          "name": "Sebastian",
+          "tier": "rare"
+        },
+        {
+          "name": "Sven",
+          "tier": "rare"
+        },
+        {
+          "name": "Bolt",
+          "tier": "rare"
+        },
+        {
+          "name": "Jiminy Cricket",
+          "tier": "rare"
+        },
+        {
+          "name": "Cheshire Cat",
+          "tier": "rare"
+        },
+        {
+          "name": "White Rabbit",
+          "tier": "rare"
+        },
+        {
+          "name": "Clifford the Big Red Dog",
+          "aliases": [
+            "Clifford"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "Curious George",
+          "aliases": [
+            "George"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "Arthur Read",
+          "aliases": [
+            "Arthur the Aardvark"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "Stuart Little",
+          "tier": "rare"
+        },
+        {
+          "name": "Chicken Little",
+          "tier": "rare"
+        },
+        {
+          "name": "Wallace and Gromit",
+          "aliases": [
+            "Gromit"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "Shaun the Sheep",
+          "tier": "rare"
+        },
+        {
+          "name": "Keroppi",
+          "aliases": [
+            "Kero Kero Keroppi"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "My Melody",
+          "tier": "rare"
+        },
+        {
+          "name": "Pusheen",
+          "tier": "rare"
+        },
+        {
+          "name": "Yogi Bear",
+          "aliases": [
+            "Yogi"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "Felix the Cat",
+          "aliases": [
+            "Felix"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "Woody Woodpecker",
+          "tier": "rare"
+        },
+        {
+          "name": "Courage the Cowardly Dog",
+          "aliases": [
+            "Courage"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "Brian Griffin",
+          "aliases": [
+            "Brian"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "Yoshi",
+          "tier": "rare"
+        },
+        {
+          "name": "Donkey Kong",
+          "tier": "rare"
+        },
+        {
+          "name": "Sharity",
+          "tier": "ulu"
+        },
+        {
+          "name": "Sang Kancil",
+          "aliases": [
+            "Kancil"
+          ],
+          "tier": "ulu"
+        },
+        {
+          "name": "Pompompurin",
+          "tier": "ulu"
+        },
+        {
+          "name": "Cinnamoroll",
+          "tier": "ulu"
+        },
+        {
+          "name": "Badtz-Maru",
+          "tier": "ulu"
+        },
+        {
+          "name": "Bingo",
+          "tier": "ulu"
+        },
+        {
+          "name": "Bandit",
+          "tier": "ulu"
+        },
+        {
+          "name": "George Pig",
+          "tier": "ulu"
+        },
+        {
+          "name": "Franklin",
+          "tier": "ulu"
+        },
+        {
+          "name": "Boo Boo Bear",
+          "tier": "ulu"
+        },
+        {
+          "name": "Huckleberry Hound",
+          "tier": "ulu"
+        },
+        {
+          "name": "Top Cat",
+          "tier": "ulu"
+        },
+        {
+          "name": "Snagglepuss",
+          "tier": "ulu"
+        },
+        {
+          "name": "Droopy",
+          "tier": "ulu"
+        },
+        {
+          "name": "Mighty Mouse",
+          "tier": "ulu"
+        },
+        {
+          "name": "Danger Mouse",
+          "tier": "ulu"
+        },
+        {
+          "name": "Heathcliff",
+          "tier": "ulu"
+        },
+        {
+          "name": "Krypto",
+          "tier": "ulu"
+        },
+        {
+          "name": "Astro",
+          "tier": "ulu"
+        },
+        {
+          "name": "Dino",
+          "tier": "ulu"
+        },
+        {
+          "name": "Santa's Little Helper",
+          "tier": "ulu"
+        },
+        {
+          "name": "Oswald the Lucky Rabbit",
+          "tier": "ulu"
+        },
+        {
+          "name": "Hei Hei",
+          "tier": "ulu"
+        },
+        {
+          "name": "Pua",
+          "tier": "ulu"
+        },
+        {
+          "name": "Iago",
+          "tier": "ulu"
+        },
+        {
+          "name": "Rajah",
+          "tier": "ulu"
+        },
+        {
+          "name": "Meeko",
+          "tier": "ulu"
+        },
+        {
+          "name": "Pascal",
+          "tier": "ulu"
+        },
+        {
+          "name": "Maximus",
+          "tier": "ulu"
+        },
+        {
+          "name": "Cri-Kee",
+          "tier": "ulu"
+        },
+        {
+          "name": "Kaa",
+          "tier": "ulu"
+        },
+        {
+          "name": "King Louie",
+          "tier": "ulu"
+        },
+        {
+          "name": "Robin Hood",
+          "tier": "ulu"
+        },
+        {
+          "name": "Lucifer",
+          "tier": "ulu"
+        },
+        {
+          "name": "Splinter",
+          "tier": "ulu"
+        },
+        {
+          "name": "Rocket Raccoon",
+          "tier": "ulu"
+        },
+        {
+          "name": "Howard the Duck",
+          "tier": "ulu"
+        },
+        {
+          "name": "Tails",
+          "tier": "ulu"
+        },
+        {
+          "name": "Knuckles",
+          "tier": "ulu"
+        },
+        {
+          "name": "Master Shifu",
+          "aliases": [
+            "Shifu"
+          ],
+          "tier": "ulu"
+        },
+        {
+          "name": "Tigress",
+          "tier": "ulu"
+        },
+        {
+          "name": "Singa the Courtesy Lion",
+          "aliases": [
+            "Singa"
+          ],
+          "tier": "gem"
+        }
+      ],
+      "decoys": [
+        {
+          "name": "Pikachu",
+          "why": "A Pokémon, so a made-up creature!"
+        },
+        {
+          "name": "Totoro",
+          "why": "He's a forest spirit, not an animal."
+        },
+        {
+          "name": "Stitch",
+          "why": "He's an alien, Experiment 626!"
+        },
+        {
+          "name": "Shrek",
+          "why": "He's an ogre!"
+        },
+        {
+          "name": "Olaf",
+          "why": "He's a snowman!"
+        },
+        {
+          "name": "Gudetama",
+          "why": "That's an egg. A lazy one."
+        },
+        {
+          "name": "Minions",
+          "aliases": [
+            "Minion"
+          ],
+          "why": "Whatever they are, they aren't animals!"
+        },
+        {
+          "name": "Smurfs",
+          "aliases": [
+            "Smurf"
+          ],
+          "why": "Smurfs are... Smurfs."
+        },
+        {
+          "name": "Mushu",
+          "why": "He's a dragon, so a made-up creature!"
+        },
+        {
+          "name": "Merlion",
+          "why": "A statue, not a cartoon!"
+        }
+      ]
+    },
+    {
+      "id": "entertainment-number-in-title",
+      "category": "entertainment",
+      "text": "Name a film or TV show with a number in its title",
+      "note": "In digits or in words. Sequel numbers don't count: 'Toy Story 2' won't do!",
+      "answers": [
+        {
+          "name": "101 Dalmatians",
+          "aliases": [
+            "One Hundred and One Dalmatians"
+          ],
+          "tier": "common"
+        },
+        {
+          "name": "Ocean's Eleven",
+          "tier": "common"
+        },
+        {
+          "name": "1917",
+          "tier": "common"
+        },
+        {
+          "name": "300",
+          "tier": "common"
+        },
+        {
+          "name": "Se7en",
+          "aliases": [
+            "Seven"
+          ],
+          "tier": "trap"
+        },
+        {
+          "name": "Apollo 13",
+          "tier": "solid"
+        },
+        {
+          "name": "The Sixth Sense",
+          "tier": "solid"
+        },
+        {
+          "name": "2012",
+          "tier": "solid"
+        },
+        {
+          "name": "Fantastic Four",
+          "tier": "solid"
+        },
+        {
+          "name": "3 Idiots",
+          "tier": "solid"
+        },
+        {
+          "name": "13 Reasons Why",
+          "tier": "solid"
+        },
+        {
+          "name": "12 Angry Men",
+          "tier": "solid"
+        },
+        {
+          "name": "12 Years a Slave",
+          "tier": "solid"
+        },
+        {
+          "name": "21 Jump Street",
+          "tier": "solid"
+        },
+        {
+          "name": "50 First Dates",
+          "tier": "solid"
+        },
+        {
+          "name": "13 Going on 30",
+          "tier": "solid"
+        },
+        {
+          "name": "10 Things I Hate About You",
+          "tier": "solid"
+        },
+        {
+          "name": "The Fifth Element",
+          "tier": "solid"
+        },
+        {
+          "name": "500 Days of Summer",
+          "tier": "solid"
+        },
+        {
+          "name": "28 Days Later",
+          "tier": "solid"
+        },
+        {
+          "name": "127 Hours",
+          "tier": "solid"
+        },
+        {
+          "name": "Ocean's Twelve",
+          "tier": "solid"
+        },
+        {
+          "name": "Ocean's Thirteen",
+          "tier": "solid"
+        },
+        {
+          "name": "Ocean's 8",
+          "tier": "solid"
+        },
+        {
+          "name": "The Hateful Eight",
+          "tier": "solid"
+        },
+        {
+          "name": "District 9",
+          "tier": "solid"
+        },
+        {
+          "name": "8 Mile",
+          "tier": "solid"
+        },
+        {
+          "name": "One Piece",
+          "tier": "solid"
+        },
+        {
+          "name": "1984",
+          "tier": "solid"
+        },
+        {
+          "name": "2001: A Space Odyssey",
+          "tier": "solid"
+        },
+        {
+          "name": "3 Body Problem",
+          "aliases": [
+            "The Three-Body Problem"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "Under One Roof",
+          "tier": "solid"
+        },
+        {
+          "name": "Super 8",
+          "tier": "rare"
+        },
+        {
+          "name": "Blade Runner 2049",
+          "tier": "solid"
+        },
+        {
+          "name": "Fahrenheit 451",
+          "tier": "rare"
+        },
+        {
+          "name": "Catch-22",
+          "tier": "rare"
+        },
+        {
+          "name": "The 39 Steps",
+          "tier": "rare"
+        },
+        {
+          "name": "Seven Samurai",
+          "tier": "rare"
+        },
+        {
+          "name": "Three Billboards Outside Ebbing, Missouri",
+          "aliases": [
+            "Three Billboards"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "The Three Musketeers",
+          "tier": "rare"
+        },
+        {
+          "name": "Four Weddings and a Funeral",
+          "tier": "rare"
+        },
+        {
+          "name": "The Two Towers",
+          "tier": "rare"
+        },
+        {
+          "name": "One Punch Man",
+          "tier": "rare"
+        },
+        {
+          "name": "Brooklyn Nine-Nine",
+          "tier": "rare"
+        },
+        {
+          "name": "The 100",
+          "tier": "rare"
+        },
+        {
+          "name": "24",
+          "tier": "rare"
+        },
+        {
+          "name": "9-1-1",
+          "tier": "rare"
+        },
+        {
+          "name": "That '70s Show",
+          "tier": "rare"
+        },
+        {
+          "name": "Two and a Half Men",
+          "tier": "rare"
+        },
+        {
+          "name": "2 Broke Girls",
+          "tier": "rare"
+        },
+        {
+          "name": "30 Rock",
+          "tier": "rare"
+        },
+        {
+          "name": "Zero Dark Thirty",
+          "tier": "rare"
+        },
+        {
+          "name": "Gone in 60 Seconds",
+          "tier": "rare"
+        },
+        {
+          "name": "17 Again",
+          "tier": "rare"
+        },
+        {
+          "name": "27 Dresses",
+          "tier": "rare"
+        },
+        {
+          "name": "12 Monkeys",
+          "tier": "rare"
+        },
+        {
+          "name": "47 Ronin",
+          "tier": "rare"
+        },
+        {
+          "name": "Reply 1988",
+          "tier": "rare"
+        },
+        {
+          "name": "Twenty-Five Twenty-One",
+          "aliases": [
+            "2521"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "The Seventh Seal",
+          "tier": "ulu"
+        },
+        {
+          "name": "Sixteen Candles",
+          "tier": "ulu"
+        },
+        {
+          "name": "3:10 to Yuma",
+          "tier": "ulu"
+        },
+        {
+          "name": "1408",
+          "tier": "ulu"
+        },
+        {
+          "name": "10 Cloverfield Lane",
+          "tier": "ulu"
+        },
+        {
+          "name": "9 to 5",
+          "tier": "ulu"
+        },
+        {
+          "name": "2046",
+          "tier": "ulu"
+        },
+        {
+          "name": "12 Storeys",
+          "tier": "ulu"
+        },
+        {
+          "name": "15",
+          "tier": "ulu"
+        },
+        {
+          "name": "7 Letters",
+          "tier": "ulu"
+        },
+        {
+          "name": "3688",
+          "tier": "ulu"
+        },
+        {
+          "name": "1965",
+          "tier": "ulu"
+        },
+        {
+          "name": "One Leg Kicking",
+          "tier": "ulu"
+        },
+        {
+          "name": "881",
+          "tier": "gem"
+        }
+      ],
+      "decoys": [
+        {
+          "name": "Toy Story 2",
+          "aliases": [
+            "Toy Story 3",
+            "Toy Story 4"
+          ],
+          "why": "Sequel numbers don't count!"
+        },
+        {
+          "name": "Frozen 2",
+          "aliases": [
+            "Frozen II"
+          ],
+          "why": "Sequel numbers don't count!"
+        },
+        {
+          "name": "Inside Out 2",
+          "why": "Sequel numbers don't count!"
+        },
+        {
+          "name": "Shrek 2",
+          "why": "Sequel numbers don't count!"
+        },
+        {
+          "name": "Money No Enough 2",
+          "why": "Sequel numbers don't count!"
+        },
+        {
+          "name": "Fast Five",
+          "why": "Sneaky! That 'five' is a sequel number."
+        },
+        {
+          "name": "2 Fast 2 Furious",
+          "why": "That 2 is a sequel number in disguise!"
+        },
+        {
+          "name": "I Not Stupid Too",
+          "why": "Nice try, but 'too' isn't 'two'!"
+        },
+        {
+          "name": "Ah Boys to Men",
+          "why": "'To', not 'two'!"
+        },
+        {
+          "name": "Squid Game",
+          "why": "No number in the title, though there are 456 players!"
+        }
+      ]
+    },
+    {
+      "id": "entertainment-board-and-card-games",
+      "category": "entertainment",
+      "text": "Name a board game or card game",
+      "note": "Played at a table, with a board, cards, tiles or dice. Video games don't count.",
+      "qualifiers": true,
+      "answers": [
+        {
+          "name": "Monopoly",
+          "tier": "common"
+        },
+        {
+          "name": "Chess",
+          "tier": "common"
+        },
+        {
+          "name": "Uno",
+          "tier": "common"
+        },
+        {
+          "name": "Snakes and Ladders",
+          "aliases": [
+            "Snakes & Ladders"
+          ],
+          "tier": "common"
+        },
+        {
+          "name": "Mahjong",
+          "aliases": [
+            "Mah-jong",
+            "Mahjongg"
+          ],
+          "tier": "trap"
+        },
+        {
+          "name": "Scrabble",
+          "tier": "solid"
+        },
+        {
+          "name": "Checkers",
+          "aliases": [
+            "Draughts"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "Ludo",
+          "tier": "solid"
+        },
+        {
+          "name": "Cluedo",
+          "aliases": [
+            "Clue"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "Jenga",
+          "tier": "solid"
+        },
+        {
+          "name": "Connect Four",
+          "aliases": [
+            "Connect 4"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "Battleship",
+          "aliases": [
+            "Battleships"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "Risk",
+          "tier": "solid"
+        },
+        {
+          "name": "Catan",
+          "aliases": [
+            "Settlers of Catan"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "Monopoly Deal",
+          "tier": "solid"
+        },
+        {
+          "name": "Poker",
+          "aliases": [
+            "Texas Hold'em",
+            "Hold'em"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "Blackjack",
+          "tier": "solid"
+        },
+        {
+          "name": "Big Two",
+          "aliases": [
+            "Big 2",
+            "Choh Dai Di",
+            "Chor Dai Di",
+            "Cho Dai Di",
+            "Dai Di"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "Old Maid",
+          "tier": "solid"
+        },
+        {
+          "name": "Snap",
+          "tier": "solid"
+        },
+        {
+          "name": "Go Fish",
+          "tier": "solid"
+        },
+        {
+          "name": "Solitaire",
+          "aliases": [
+            "Patience"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "Rummy",
+          "aliases": [
+            "Gin rummy"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "Bridge",
+          "tier": "solid"
+        },
+        {
+          "name": "Chinese chess",
+          "aliases": [
+            "Xiangqi"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "Chinese checkers",
+          "tier": "solid"
+        },
+        {
+          "name": "Go",
+          "aliases": [
+            "Weiqi",
+            "Baduk"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "Carrom",
+          "tier": "solid"
+        },
+        {
+          "name": "Taboo",
+          "tier": "solid"
+        },
+        {
+          "name": "Pictionary",
+          "tier": "solid"
+        },
+        {
+          "name": "Tic-tac-toe",
+          "aliases": [
+            "Tic tac toe",
+            "Noughts and crosses",
+            "X and O"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "Exploding Kittens",
+          "tier": "solid"
+        },
+        {
+          "name": "Donkey",
+          "tier": "solid"
+        },
+        {
+          "name": "Ban Luck",
+          "tier": "rare"
+        },
+        {
+          "name": "Cheat",
+          "aliases": [
+            "Bluff"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "Happy Families",
+          "tier": "rare"
+        },
+        {
+          "name": "Hearts",
+          "tier": "rare"
+        },
+        {
+          "name": "Spades",
+          "tier": "rare"
+        },
+        {
+          "name": "Crazy Eights",
+          "tier": "rare"
+        },
+        {
+          "name": "War",
+          "tier": "rare"
+        },
+        {
+          "name": "Baccarat",
+          "tier": "rare"
+        },
+        {
+          "name": "Othello",
+          "aliases": [
+            "Reversi"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "Backgammon",
+          "tier": "rare"
+        },
+        {
+          "name": "Mancala",
+          "tier": "rare"
+        },
+        {
+          "name": "Ticket to Ride",
+          "tier": "rare"
+        },
+        {
+          "name": "Pandemic",
+          "tier": "rare"
+        },
+        {
+          "name": "Codenames",
+          "tier": "rare"
+        },
+        {
+          "name": "Werewolf",
+          "aliases": [
+            "Mafia"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "Magic: The Gathering",
+          "aliases": [
+            "Magic",
+            "MTG"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "Pokémon cards",
+          "aliases": [
+            "Pokemon TCG",
+            "Pokémon Trading Card Game"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "Yu-Gi-Oh!",
+          "aliases": [
+            "Yugioh"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "Boggle",
+          "tier": "rare"
+        },
+        {
+          "name": "Trouble",
+          "tier": "rare"
+        },
+        {
+          "name": "Sorry!",
+          "tier": "rare"
+        },
+        {
+          "name": "Guess Who?",
+          "tier": "rare"
+        },
+        {
+          "name": "Operation",
+          "tier": "rare"
+        },
+        {
+          "name": "Mouse Trap",
+          "tier": "rare"
+        },
+        {
+          "name": "Hungry Hungry Hippos",
+          "tier": "rare"
+        },
+        {
+          "name": "The Game of Life",
+          "aliases": [
+            "Game of Life"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "Mastermind",
+          "tier": "rare"
+        },
+        {
+          "name": "Yahtzee",
+          "tier": "rare"
+        },
+        {
+          "name": "Dominoes",
+          "aliases": [
+            "Domino"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "Cards Against Humanity",
+          "tier": "rare"
+        },
+        {
+          "name": "Pai Gow",
+          "tier": "ulu"
+        },
+        {
+          "name": "Pallanguzhi",
+          "tier": "ulu"
+        },
+        {
+          "name": "Dixit",
+          "tier": "ulu"
+        },
+        {
+          "name": "Coup",
+          "tier": "ulu"
+        },
+        {
+          "name": "Avalon",
+          "aliases": [
+            "The Resistance"
+          ],
+          "tier": "ulu"
+        },
+        {
+          "name": "Sushi Go",
+          "tier": "ulu"
+        },
+        {
+          "name": "Splendor",
+          "tier": "ulu"
+        },
+        {
+          "name": "Carcassonne",
+          "tier": "ulu"
+        },
+        {
+          "name": "Azul",
+          "tier": "ulu"
+        },
+        {
+          "name": "Dominion",
+          "tier": "ulu"
+        },
+        {
+          "name": "Bananagrams",
+          "tier": "ulu"
+        },
+        {
+          "name": "Stratego",
+          "tier": "ulu"
+        },
+        {
+          "name": "Nine Men's Morris",
+          "tier": "ulu"
+        },
+        {
+          "name": "Shogi",
+          "tier": "ulu"
+        },
+        {
+          "name": "Hanafuda",
+          "tier": "ulu"
+        },
+        {
+          "name": "Wingspan",
+          "tier": "ulu"
+        },
+        {
+          "name": "7 Wonders",
+          "tier": "ulu"
+        },
+        {
+          "name": "Saboteur",
+          "tier": "ulu"
+        },
+        {
+          "name": "Love Letter",
+          "tier": "ulu"
+        },
+        {
+          "name": "Congkak",
+          "aliases": [
+            "Congklak"
+          ],
+          "tier": "gem"
+        }
+      ],
+      "decoys": [
+        {
+          "name": "Twister",
+          "why": "You play that one on the floor!"
+        },
+        {
+          "name": "Minecraft",
+          "why": "That's a video game."
+        },
+        {
+          "name": "Mario Kart",
+          "why": "That's a video game."
+        },
+        {
+          "name": "Rubik's Cube",
+          "aliases": [
+            "Rubiks Cube"
+          ],
+          "why": "A puzzle, not a game for the table."
+        },
+        {
+          "name": "Jigsaw",
+          "aliases": [
+            "Jigsaw puzzle"
+          ],
+          "why": "A puzzle, not a game."
+        },
+        {
+          "name": "Five Stones",
+          "why": "A playground game, not a table one."
+        }
+      ]
+    },
+    {
+      "id": "entertainment-musical-instruments",
+      "category": "entertainment",
+      "text": "Name a musical instrument",
+      "note": "From any orchestra, band or tradition. Your voice doesn't count!",
+      "qualifiers": true,
+      "answers": [
+        {
+          "name": "Piano",
+          "tier": "common"
+        },
+        {
+          "name": "Guitar",
+          "tier": "common"
+        },
+        {
+          "name": "Drum",
+          "aliases": [
+            "Drums"
+          ],
+          "tier": "common"
+        },
+        {
+          "name": "Violin",
+          "tier": "common"
+        },
+        {
+          "name": "Ukulele",
+          "tier": "trap"
+        },
+        {
+          "name": "Flute",
+          "tier": "solid"
+        },
+        {
+          "name": "Trumpet",
+          "tier": "solid"
+        },
+        {
+          "name": "Saxophone",
+          "aliases": [
+            "Sax"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "Cello",
+          "tier": "solid"
+        },
+        {
+          "name": "Harp",
+          "tier": "solid"
+        },
+        {
+          "name": "Clarinet",
+          "tier": "solid"
+        },
+        {
+          "name": "Recorder",
+          "tier": "solid"
+        },
+        {
+          "name": "Triangle",
+          "tier": "solid"
+        },
+        {
+          "name": "Xylophone",
+          "tier": "solid"
+        },
+        {
+          "name": "Harmonica",
+          "tier": "solid"
+        },
+        {
+          "name": "Accordion",
+          "tier": "solid"
+        },
+        {
+          "name": "Tambourine",
+          "tier": "solid"
+        },
+        {
+          "name": "Keyboard",
+          "tier": "solid"
+        },
+        {
+          "name": "Bass",
+          "aliases": [
+            "Bass guitar",
+            "Double bass"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "Trombone",
+          "tier": "solid"
+        },
+        {
+          "name": "Tuba",
+          "tier": "solid"
+        },
+        {
+          "name": "French horn",
+          "aliases": [
+            "Horn"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "Oboe",
+          "tier": "solid"
+        },
+        {
+          "name": "Bassoon",
+          "tier": "solid"
+        },
+        {
+          "name": "Viola",
+          "tier": "solid"
+        },
+        {
+          "name": "Organ",
+          "tier": "solid"
+        },
+        {
+          "name": "Erhu",
+          "tier": "solid"
+        },
+        {
+          "name": "Guzheng",
+          "tier": "solid"
+        },
+        {
+          "name": "Pipa",
+          "tier": "rare"
+        },
+        {
+          "name": "Dizi",
+          "tier": "rare"
+        },
+        {
+          "name": "Gong",
+          "tier": "rare"
+        },
+        {
+          "name": "Cymbals",
+          "tier": "rare"
+        },
+        {
+          "name": "Tabla",
+          "tier": "rare"
+        },
+        {
+          "name": "Sitar",
+          "tier": "rare"
+        },
+        {
+          "name": "Veena",
+          "tier": "rare"
+        },
+        {
+          "name": "Kompang",
+          "tier": "rare"
+        },
+        {
+          "name": "Gamelan",
+          "tier": "rare"
+        },
+        {
+          "name": "Bagpipes",
+          "tier": "rare"
+        },
+        {
+          "name": "Banjo",
+          "tier": "rare"
+        },
+        {
+          "name": "Mandolin",
+          "tier": "rare"
+        },
+        {
+          "name": "Didgeridoo",
+          "tier": "rare"
+        },
+        {
+          "name": "Bongo",
+          "aliases": [
+            "Bongos"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "Conga",
+          "tier": "rare"
+        },
+        {
+          "name": "Djembe",
+          "tier": "rare"
+        },
+        {
+          "name": "Marimba",
+          "tier": "rare"
+        },
+        {
+          "name": "Glockenspiel",
+          "tier": "rare"
+        },
+        {
+          "name": "Synthesiser",
+          "aliases": [
+            "Synthesizer",
+            "Synth"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "Piccolo",
+          "tier": "rare"
+        },
+        {
+          "name": "Bugle",
+          "tier": "rare"
+        },
+        {
+          "name": "Kazoo",
+          "tier": "rare"
+        },
+        {
+          "name": "Castanets",
+          "tier": "rare"
+        },
+        {
+          "name": "Maracas",
+          "tier": "rare"
+        },
+        {
+          "name": "Timpani",
+          "aliases": [
+            "Kettle drum"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "Bells",
+          "aliases": [
+            "Handbells"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "Tin whistle",
+          "aliases": [
+            "Whistle"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "Yangqin",
+          "tier": "ulu"
+        },
+        {
+          "name": "Sheng",
+          "tier": "ulu"
+        },
+        {
+          "name": "Suona",
+          "tier": "ulu"
+        },
+        {
+          "name": "Ruan",
+          "aliases": [
+            "Zhongruan"
+          ],
+          "tier": "ulu"
+        },
+        {
+          "name": "Guqin",
+          "tier": "ulu"
+        },
+        {
+          "name": "Mridangam",
+          "tier": "ulu"
+        },
+        {
+          "name": "Nadaswaram",
+          "tier": "ulu"
+        },
+        {
+          "name": "Thavil",
+          "tier": "ulu"
+        },
+        {
+          "name": "Rebana",
+          "tier": "ulu"
+        },
+        {
+          "name": "Gendang",
+          "tier": "ulu"
+        },
+        {
+          "name": "Lute",
+          "tier": "ulu"
+        },
+        {
+          "name": "Cajón",
+          "aliases": [
+            "Cajon"
+          ],
+          "tier": "ulu"
+        },
+        {
+          "name": "Kalimba",
+          "aliases": [
+            "Thumb piano"
+          ],
+          "tier": "ulu"
+        },
+        {
+          "name": "Theremin",
+          "tier": "ulu"
+        },
+        {
+          "name": "Harpsichord",
+          "tier": "ulu"
+        },
+        {
+          "name": "Euphonium",
+          "tier": "ulu"
+        },
+        {
+          "name": "Cornet",
+          "tier": "ulu"
+        },
+        {
+          "name": "Cowbell",
+          "tier": "ulu"
+        },
+        {
+          "name": "Steelpan",
+          "aliases": [
+            "Steel drum"
+          ],
+          "tier": "ulu"
+        },
+        {
+          "name": "Melodica",
+          "aliases": [
+            "Pianica"
+          ],
+          "tier": "ulu"
+        },
+        {
+          "name": "Shamisen",
+          "tier": "ulu"
+        },
+        {
+          "name": "Koto",
+          "tier": "ulu"
+        },
+        {
+          "name": "Taiko",
+          "tier": "ulu"
+        },
+        {
+          "name": "Gayageum",
+          "tier": "ulu"
+        },
+        {
+          "name": "Handpan",
+          "aliases": [
+            "Hang drum"
+          ],
+          "tier": "ulu"
+        },
+        {
+          "name": "Harmonium",
+          "tier": "ulu"
+        },
+        {
+          "name": "Shehnai",
+          "tier": "ulu"
+        },
+        {
+          "name": "Ocarina",
+          "tier": "ulu"
+        },
+        {
+          "name": "Pan flute",
+          "aliases": [
+            "Panpipes"
+          ],
+          "tier": "ulu"
+        },
+        {
+          "name": "Spoons",
+          "tier": "ulu"
+        },
+        {
+          "name": "Tubular bells",
+          "aliases": [
+            "Chimes"
+          ],
+          "tier": "ulu"
+        },
+        {
+          "name": "Celesta",
+          "tier": "ulu"
+        },
+        {
+          "name": "Lyre",
+          "tier": "ulu"
+        },
+        {
+          "name": "Zither",
+          "tier": "ulu"
+        },
+        {
+          "name": "Dulcimer",
+          "tier": "ulu"
+        },
+        {
+          "name": "Sousaphone",
+          "tier": "ulu"
+        },
+        {
+          "name": "Flugelhorn",
+          "tier": "ulu"
+        },
+        {
+          "name": "Cor anglais",
+          "aliases": [
+            "English horn"
+          ],
+          "tier": "ulu"
+        },
+        {
+          "name": "Angklung",
+          "tier": "gem"
+        }
+      ],
+      "decoys": [
+        {
+          "name": "Voice",
+          "aliases": [
+            "Singing",
+            "Vocals"
+          ],
+          "why": "Lovely, but your voice doesn't count here!"
+        },
+        {
+          "name": "Beatbox",
+          "aliases": [
+            "Beatboxing"
+          ],
+          "why": "That's your voice!"
+        },
+        {
+          "name": "Microphone",
+          "aliases": [
+            "Mic"
+          ],
+          "why": "It makes music louder, but you don't play it."
+        },
+        {
+          "name": "Metronome",
+          "why": "It keeps time, but it doesn't play a tune."
+        }
+      ]
+    },
+    {
+      "id": "entertainment-dances",
+      "category": "entertainment",
+      "text": "Name a dance",
+      "note": "A style of dance, or a dance with its own name. Moves count too: 'the moonwalk'.",
+      "filler": [
+        "dance",
+        "dances",
+        "dancing"
+      ],
+      "answers": [
+        {
+          "name": "Ballet",
+          "tier": "common"
+        },
+        {
+          "name": "Salsa",
+          "tier": "common"
+        },
+        {
+          "name": "Hip hop",
+          "aliases": [
+            "Hip-hop"
+          ],
+          "tier": "common"
+        },
+        {
+          "name": "Breakdance",
+          "aliases": [
+            "Breakdancing",
+            "Breaking",
+            "Break"
+          ],
+          "tier": "common"
+        },
+        {
+          "name": "Lion dance",
+          "aliases": [
+            "Lion"
+          ],
+          "tier": "trap"
+        },
+        {
+          "name": "Tango",
+          "tier": "solid"
+        },
+        {
+          "name": "Waltz",
+          "tier": "solid"
+        },
+        {
+          "name": "Cha-cha",
+          "aliases": [
+            "Cha cha",
+            "Cha-cha-cha"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "Macarena",
+          "tier": "solid"
+        },
+        {
+          "name": "Moonwalk",
+          "tier": "solid"
+        },
+        {
+          "name": "Line dance",
+          "aliases": [
+            "Line"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "Tap dance",
+          "aliases": [
+            "Tap"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "Belly dance",
+          "aliases": [
+            "Belly"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "Zumba",
+          "tier": "solid"
+        },
+        {
+          "name": "Jazz",
+          "tier": "solid"
+        },
+        {
+          "name": "Contemporary",
+          "aliases": [
+            "Modern"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "Foxtrot",
+          "tier": "solid"
+        },
+        {
+          "name": "Samba",
+          "tier": "solid"
+        },
+        {
+          "name": "Rumba",
+          "tier": "solid"
+        },
+        {
+          "name": "Flamenco",
+          "tier": "solid"
+        },
+        {
+          "name": "Jive",
+          "tier": "solid"
+        },
+        {
+          "name": "Swing",
+          "tier": "solid"
+        },
+        {
+          "name": "Disco",
+          "tier": "solid"
+        },
+        {
+          "name": "Twist",
+          "tier": "solid"
+        },
+        {
+          "name": "Floss",
+          "aliases": [
+            "Flossing"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "Gangnam Style",
+          "tier": "solid"
+        },
+        {
+          "name": "Chicken dance",
+          "aliases": [
+            "Chicken"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "Hula",
+          "tier": "solid"
+        },
+        {
+          "name": "Haka",
+          "tier": "solid"
+        },
+        {
+          "name": "Dragon dance",
+          "aliases": [
+            "Dragon"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "Ballroom",
+          "tier": "solid"
+        },
+        {
+          "name": "Bhangra",
+          "tier": "rare"
+        },
+        {
+          "name": "Bharatanatyam",
+          "tier": "rare"
+        },
+        {
+          "name": "Kathak",
+          "tier": "rare"
+        },
+        {
+          "name": "Zapin",
+          "tier": "rare"
+        },
+        {
+          "name": "Joget",
+          "tier": "rare"
+        },
+        {
+          "name": "Fan dance",
+          "aliases": [
+            "Fan"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "Bamboo dance",
+          "aliases": [
+            "Tinikling"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "Limbo",
+          "tier": "rare"
+        },
+        {
+          "name": "Conga",
+          "tier": "rare"
+        },
+        {
+          "name": "Can-can",
+          "aliases": [
+            "Cancan"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "Polka",
+          "tier": "rare"
+        },
+        {
+          "name": "Charleston",
+          "tier": "rare"
+        },
+        {
+          "name": "Bachata",
+          "tier": "rare"
+        },
+        {
+          "name": "Merengue",
+          "tier": "rare"
+        },
+        {
+          "name": "Lambada",
+          "tier": "rare"
+        },
+        {
+          "name": "Mambo",
+          "tier": "rare"
+        },
+        {
+          "name": "Irish dance",
+          "aliases": [
+            "Irish",
+            "Riverdance"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "Square dance",
+          "aliases": [
+            "Square"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "Twerk",
+          "aliases": [
+            "Twerking"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "Dab",
+          "aliases": [
+            "Dabbing"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "Shuffle",
+          "aliases": [
+            "Melbourne shuffle"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "Harlem Shake",
+          "tier": "rare"
+        },
+        {
+          "name": "YMCA",
+          "tier": "rare"
+        },
+        {
+          "name": "Cha Cha Slide",
+          "tier": "rare"
+        },
+        {
+          "name": "Hokey Cokey",
+          "aliases": [
+            "Hokey Pokey"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "Robot",
+          "tier": "rare"
+        },
+        {
+          "name": "Odissi",
+          "tier": "ulu"
+        },
+        {
+          "name": "Kuchipudi",
+          "tier": "ulu"
+        },
+        {
+          "name": "Ribbon dance",
+          "aliases": [
+            "Ribbon"
+          ],
+          "tier": "ulu"
+        },
+        {
+          "name": "Saman",
+          "tier": "ulu"
+        },
+        {
+          "name": "Kecak",
+          "tier": "ulu"
+        },
+        {
+          "name": "Legong",
+          "tier": "ulu"
+        },
+        {
+          "name": "Sumazau",
+          "tier": "ulu"
+        },
+        {
+          "name": "Inang",
+          "tier": "ulu"
+        },
+        {
+          "name": "Dangdut",
+          "tier": "ulu"
+        },
+        {
+          "name": "Paso doble",
+          "tier": "ulu"
+        },
+        {
+          "name": "Quickstep",
+          "tier": "ulu"
+        },
+        {
+          "name": "Bolero",
+          "tier": "ulu"
+        },
+        {
+          "name": "Lindy hop",
+          "tier": "ulu"
+        },
+        {
+          "name": "Morris dance",
+          "aliases": [
+            "Morris"
+          ],
+          "tier": "ulu"
+        },
+        {
+          "name": "Krump",
+          "aliases": [
+            "Krumping"
+          ],
+          "tier": "ulu"
+        },
+        {
+          "name": "Popping",
+          "tier": "ulu"
+        },
+        {
+          "name": "Locking",
+          "tier": "ulu"
+        },
+        {
+          "name": "Vogue",
+          "aliases": [
+            "Voguing"
+          ],
+          "tier": "ulu"
+        },
+        {
+          "name": "Electric Slide",
+          "tier": "ulu"
+        },
+        {
+          "name": "Running man",
+          "tier": "ulu"
+        },
+        {
+          "name": "Worm",
+          "tier": "ulu"
+        },
+        {
+          "name": "Sword dance",
+          "aliases": [
+            "Sword"
+          ],
+          "tier": "ulu"
+        },
+        {
+          "name": "Rain dance",
+          "aliases": [
+            "Rain"
+          ],
+          "tier": "ulu"
+        },
+        {
+          "name": "Mexican hat dance",
+          "aliases": [
+            "Jarabe tapatío"
+          ],
+          "tier": "ulu"
+        },
+        {
+          "name": "Tarantella",
+          "tier": "ulu"
+        },
+        {
+          "name": "Minuet",
+          "tier": "ulu"
+        },
+        {
+          "name": "Sirtaki",
+          "aliases": [
+            "Zorba"
+          ],
+          "tier": "ulu"
+        },
+        {
+          "name": "Poco-poco",
+          "aliases": [
+            "Poco poco"
+          ],
+          "tier": "gem"
+        }
+      ],
+      "decoys": [
+        {
+          "name": "Karaoke",
+          "why": "That's singing, not dancing!"
+        },
+        {
+          "name": "Getai",
+          "why": "That's a song stage, not a dance."
         }
       ]
     }

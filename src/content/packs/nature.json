@@ -2057,6 +2057,24 @@
             "Neptune Cup"
           ],
           "tier": "gem"
+        },
+        {
+          "name": "Prawn",
+          "aliases": [
+            "Shrimp"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "Fish",
+          "tier": "solid"
+        },
+        {
+          "name": "Sea Snake",
+          "aliases": [
+            "Sea Krait"
+          ],
+          "tier": "rare"
         }
       ]
     },
@@ -2070,7 +2088,13 @@
           "name": "Durian",
           "aliases": [
             "Durians",
-            "King of Fruits"
+            "King of Fruits",
+            "Musang King",
+            "Mao Shan Wang",
+            "D24",
+            "Black Thorn",
+            "Red Prawn",
+            "XO"
           ],
           "tier": "common"
         },
@@ -2372,6 +2396,10 @@
           ],
           "tier": "gem"
         }
+      ],
+      "qualifiers": true,
+      "filler": [
+        "fruit"
       ]
     },
     {

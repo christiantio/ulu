@@ -233,6 +233,12 @@
         { "name": "ComfortDelGro", "aliases": ["Comfort", "CityCab", "Comfort Taxi"], "tier": "rare" },
         { "name": "Mediacorp", "tier": "rare" },
         { "name": "SMRT", "tier": "rare" },
+        { "name": "Scoot", "tier": "rare" },
+        { "name": "Cathay Cineplexes", "aliases": ["Cathay"], "tier": "rare" },
+        { "name": "SPH", "aliases": ["Singapore Press Holdings"], "tier": "rare" },
+        { "name": "Raffles Hotel", "tier": "rare" },
+        { "name": "Tai Sun", "tier": "ulu" },
+        { "name": "Times Bookstores", "aliases": ["Times", "Times Bookstore"], "tier": "ulu" },
         { "name": "Axe Brand Universal Oil", "aliases": ["Axe Brand", "Axe Oil", "Axe"], "tier": "gem" }
       ]
     },
@@ -282,7 +288,7 @@
       "note": "Traditional playground, kampong and school-recess games. Video games don't count.",
       "answers": [
         { "name": "Five Stones", "aliases": ["5 Stones", "Batu Seremban"], "tier": "common" },
-        { "name": "Zero Point", "aliases": ["Rubber Band Skipping", "Rubber Band Rope"], "tier": "common" },
+        { "name": "Zero Point", "aliases": ["Rubber Band Skipping", "Rubber Band Rope", "Rubber Band"], "tier": "common" },
         { "name": "Chapteh", "aliases": ["Chaptek", "Capteh", "Chapte"], "tier": "common" },
         { "name": "Pepsi Cola 1, 2, 3", "aliases": ["Pepsi Cola One Two Three", "Pepsi Cola"], "tier": "solid" },
         { "name": "Hopscotch", "tier": "solid" },
@@ -291,7 +297,7 @@
         { "name": "Police and Thief", "aliases": ["Cops and Robbers", "Police Catch Thief"], "tier": "solid" },
         { "name": "Catching", "aliases": ["Tag"], "tier": "solid" },
         { "name": "Hide and Seek", "tier": "solid" },
-        { "name": "Scissors Paper Stone", "aliases": ["Rock Paper Scissors", "Paper Scissors Stone", "Scissors Paper Rock"], "tier": "solid" },
+        { "name": "Scissors Paper Stone", "aliases": ["Rock Paper Scissors", "Paper Scissors Stone", "Scissors Paper Rock", "One Two Jus", "One Two Som", "Lam Ba Lam"], "tier": "solid" },
         { "name": "Kuti-kuti", "tier": "rare" },
         { "name": "Eraser Game", "aliases": ["Eraser Fighting", "Flag Eraser", "Flag Erasers", "Country Erasers", "Eraser Flipping"], "tier": "rare" },
         { "name": "Block Catching", "tier": "rare" },
@@ -303,6 +309,7 @@
         { "name": "Kite Flying", "aliases": ["Kite Fighting", "Layang-layang", "Kites"], "tier": "rare" },
         { "name": "Congkak", "aliases": ["Congkang"], "tier": "rare" },
         { "name": "Musical Chairs", "tier": "rare" },
+        { "name": "Skipping", "aliases": ["Skipping Rope", "Jump Rope"], "tier": "rare" },
         { "name": "What's the Time, Mr Wolf?", "aliases": ["Mr Wolf"], "tier": "ulu" },
         { "name": "Monkey in the Middle", "tier": "ulu" },
         { "name": "Gasing", "aliases": ["Spinning Top", "Top Spinning", "Tops"], "tier": "ulu" },

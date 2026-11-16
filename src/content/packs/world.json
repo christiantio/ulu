@@ -1,6 +1,6 @@
 {
   "name": "World",
-  "asOf": "2026-11-10",
+  "asOf": "2026-11-16",
   "prompts": [
     {
       "id": "world-equator-countries",
@@ -241,6 +241,1865 @@
             "Macao"
           ],
           "why": "A Special Administrative Region of China, not a separate country."
+        }
+      ]
+    },
+    {
+      "id": "world-flags-with-stars",
+      "category": "world",
+      "text": "Name a country whose flag has a star on it",
+      "note": "A star of any kind, big or small, however many. A sun is not a star here!",
+      "answers": [
+        {
+          "name": "United States",
+          "aliases": [
+            "USA",
+            "US",
+            "America",
+            "United States of America"
+          ],
+          "tier": "common"
+        },
+        {
+          "name": "China",
+          "tier": "common"
+        },
+        {
+          "name": "Vietnam",
+          "aliases": [
+            "Viet Nam"
+          ],
+          "tier": "common"
+        },
+        {
+          "name": "Singapore",
+          "tier": "common"
+        },
+        {
+          "name": "Australia",
+          "tier": "solid"
+        },
+        {
+          "name": "New Zealand",
+          "aliases": [
+            "NZ"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "Malaysia",
+          "tier": "solid"
+        },
+        {
+          "name": "Philippines",
+          "tier": "solid"
+        },
+        {
+          "name": "Myanmar",
+          "aliases": [
+            "Burma"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "North Korea",
+          "aliases": [
+            "DPRK"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "Turkey",
+          "aliases": [
+            "Türkiye",
+            "Turkiye"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "Israel",
+          "tier": "solid"
+        },
+        {
+          "name": "Pakistan",
+          "tier": "solid"
+        },
+        {
+          "name": "Chile",
+          "tier": "solid"
+        },
+        {
+          "name": "Cuba",
+          "tier": "solid"
+        },
+        {
+          "name": "Morocco",
+          "tier": "solid"
+        },
+        {
+          "name": "Ghana",
+          "tier": "solid"
+        },
+        {
+          "name": "Panama",
+          "tier": "rare"
+        },
+        {
+          "name": "Venezuela",
+          "tier": "rare"
+        },
+        {
+          "name": "Honduras",
+          "tier": "rare"
+        },
+        {
+          "name": "Jordan",
+          "tier": "rare"
+        },
+        {
+          "name": "Syria",
+          "tier": "rare"
+        },
+        {
+          "name": "Algeria",
+          "tier": "rare"
+        },
+        {
+          "name": "Tunisia",
+          "tier": "rare"
+        },
+        {
+          "name": "Libya",
+          "tier": "rare"
+        },
+        {
+          "name": "Senegal",
+          "tier": "rare"
+        },
+        {
+          "name": "Somalia",
+          "tier": "rare"
+        },
+        {
+          "name": "Ethiopia",
+          "tier": "rare"
+        },
+        {
+          "name": "Uzbekistan",
+          "tier": "rare"
+        },
+        {
+          "name": "Azerbaijan",
+          "tier": "rare"
+        },
+        {
+          "name": "Papua New Guinea",
+          "aliases": [
+            "PNG"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "Samoa",
+          "tier": "rare"
+        },
+        {
+          "name": "Bosnia and Herzegovina",
+          "aliases": [
+            "Bosnia"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "Kosovo",
+          "tier": "rare"
+        },
+        {
+          "name": "Timor-Leste",
+          "aliases": [
+            "East Timor"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "Cameroon",
+          "tier": "rare"
+        },
+        {
+          "name": "Liberia",
+          "tier": "rare"
+        },
+        {
+          "name": "Democratic Republic of the Congo",
+          "aliases": [
+            "DR Congo",
+            "DRC",
+            "Congo-Kinshasa"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "Zimbabwe",
+          "tier": "rare"
+        },
+        {
+          "name": "Mozambique",
+          "tier": "rare"
+        },
+        {
+          "name": "Angola",
+          "tier": "rare"
+        },
+        {
+          "name": "South Sudan",
+          "tier": "rare"
+        },
+        {
+          "name": "Tajikistan",
+          "tier": "ulu"
+        },
+        {
+          "name": "Turkmenistan",
+          "tier": "ulu"
+        },
+        {
+          "name": "Mauritania",
+          "tier": "ulu"
+        },
+        {
+          "name": "Togo",
+          "tier": "ulu"
+        },
+        {
+          "name": "Burkina Faso",
+          "tier": "ulu"
+        },
+        {
+          "name": "Djibouti",
+          "tier": "ulu"
+        },
+        {
+          "name": "Cape Verde",
+          "aliases": [
+            "Cabo Verde"
+          ],
+          "tier": "ulu"
+        },
+        {
+          "name": "Guinea-Bissau",
+          "tier": "ulu"
+        },
+        {
+          "name": "São Tomé and Príncipe",
+          "aliases": [
+            "Sao Tome"
+          ],
+          "tier": "ulu"
+        },
+        {
+          "name": "Equatorial Guinea",
+          "tier": "ulu"
+        },
+        {
+          "name": "Central African Republic",
+          "aliases": [
+            "CAR"
+          ],
+          "tier": "ulu"
+        },
+        {
+          "name": "Burundi",
+          "tier": "ulu"
+        },
+        {
+          "name": "Comoros",
+          "tier": "ulu"
+        },
+        {
+          "name": "Suriname",
+          "tier": "ulu"
+        },
+        {
+          "name": "Grenada",
+          "tier": "ulu"
+        },
+        {
+          "name": "Saint Kitts and Nevis",
+          "aliases": [
+            "St Kitts"
+          ],
+          "tier": "ulu"
+        },
+        {
+          "name": "Dominica",
+          "tier": "ulu"
+        },
+        {
+          "name": "Paraguay",
+          "tier": "ulu"
+        },
+        {
+          "name": "Slovenia",
+          "tier": "ulu"
+        },
+        {
+          "name": "Solomon Islands",
+          "tier": "ulu"
+        },
+        {
+          "name": "Tuvalu",
+          "tier": "ulu"
+        },
+        {
+          "name": "Marshall Islands",
+          "tier": "ulu"
+        },
+        {
+          "name": "Micronesia",
+          "tier": "ulu"
+        },
+        {
+          "name": "Nauru",
+          "tier": "ulu"
+        },
+        {
+          "name": "Brazil",
+          "tier": "gem"
+        }
+      ],
+      "decoys": [
+        {
+          "name": "Japan",
+          "why": "That red circle is the sun."
+        },
+        {
+          "name": "Argentina",
+          "why": "That's the Sun of May, face and all."
+        },
+        {
+          "name": "Uruguay",
+          "why": "That's a sun, not a star."
+        },
+        {
+          "name": "Kiribati",
+          "why": "A sun rising over the sea, no stars."
+        },
+        {
+          "name": "Nepal",
+          "why": "A sun and a moon, but no star."
+        },
+        {
+          "name": "India",
+          "why": "That's a wheel, the Ashoka Chakra."
+        },
+        {
+          "name": "Iraq",
+          "why": "Its three stars came off the flag in 2008."
+        },
+        {
+          "name": "European Union",
+          "aliases": [
+            "EU"
+          ],
+          "why": "Twelve stars, but it isn't a country!"
+        },
+        {
+          "name": "Republic of the Congo",
+          "aliases": [
+            "Congo",
+            "Congo-Brazzaville"
+          ],
+          "why": "That's the other Congo: the DR Congo is the one with a star."
+        }
+      ]
+    },
+    {
+      "id": "world-drive-on-the-left",
+      "category": "world",
+      "text": "Name a country where cars drive on the left",
+      "note": "Countries only, not territories.",
+      "answers": [
+        {
+          "name": "Singapore",
+          "tier": "common"
+        },
+        {
+          "name": "Malaysia",
+          "tier": "common"
+        },
+        {
+          "name": "United Kingdom",
+          "aliases": [
+            "UK",
+            "Britain",
+            "Great Britain",
+            "England",
+            "Scotland",
+            "Wales"
+          ],
+          "tier": "common"
+        },
+        {
+          "name": "Japan",
+          "tier": "common"
+        },
+        {
+          "name": "Australia",
+          "tier": "solid"
+        },
+        {
+          "name": "New Zealand",
+          "aliases": [
+            "NZ"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "India",
+          "tier": "solid"
+        },
+        {
+          "name": "Thailand",
+          "tier": "solid"
+        },
+        {
+          "name": "Indonesia",
+          "tier": "solid"
+        },
+        {
+          "name": "Brunei",
+          "tier": "solid"
+        },
+        {
+          "name": "Ireland",
+          "tier": "solid"
+        },
+        {
+          "name": "South Africa",
+          "tier": "solid"
+        },
+        {
+          "name": "Sri Lanka",
+          "tier": "solid"
+        },
+        {
+          "name": "Pakistan",
+          "tier": "solid"
+        },
+        {
+          "name": "Bangladesh",
+          "tier": "solid"
+        },
+        {
+          "name": "Kenya",
+          "tier": "solid"
+        },
+        {
+          "name": "Cyprus",
+          "tier": "solid"
+        },
+        {
+          "name": "Malta",
+          "tier": "solid"
+        },
+        {
+          "name": "Jamaica",
+          "tier": "solid"
+        },
+        {
+          "name": "Nepal",
+          "tier": "rare"
+        },
+        {
+          "name": "Bhutan",
+          "tier": "rare"
+        },
+        {
+          "name": "Maldives",
+          "tier": "rare"
+        },
+        {
+          "name": "Timor-Leste",
+          "aliases": [
+            "East Timor"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "Mauritius",
+          "tier": "rare"
+        },
+        {
+          "name": "Fiji",
+          "tier": "rare"
+        },
+        {
+          "name": "Papua New Guinea",
+          "aliases": [
+            "PNG"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "Tanzania",
+          "tier": "rare"
+        },
+        {
+          "name": "Uganda",
+          "tier": "rare"
+        },
+        {
+          "name": "Zimbabwe",
+          "tier": "rare"
+        },
+        {
+          "name": "Zambia",
+          "tier": "rare"
+        },
+        {
+          "name": "Botswana",
+          "tier": "rare"
+        },
+        {
+          "name": "Namibia",
+          "tier": "rare"
+        },
+        {
+          "name": "Mozambique",
+          "tier": "rare"
+        },
+        {
+          "name": "Malawi",
+          "tier": "rare"
+        },
+        {
+          "name": "Seychelles",
+          "tier": "rare"
+        },
+        {
+          "name": "Bahamas",
+          "tier": "rare"
+        },
+        {
+          "name": "Barbados",
+          "tier": "rare"
+        },
+        {
+          "name": "Trinidad and Tobago",
+          "aliases": [
+            "Trinidad"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "Lesotho",
+          "tier": "ulu"
+        },
+        {
+          "name": "Eswatini",
+          "aliases": [
+            "Swaziland"
+          ],
+          "tier": "ulu"
+        },
+        {
+          "name": "Guyana",
+          "tier": "ulu"
+        },
+        {
+          "name": "Suriname",
+          "tier": "ulu"
+        },
+        {
+          "name": "Antigua and Barbuda",
+          "aliases": [
+            "Antigua"
+          ],
+          "tier": "ulu"
+        },
+        {
+          "name": "Dominica",
+          "tier": "ulu"
+        },
+        {
+          "name": "Grenada",
+          "tier": "ulu"
+        },
+        {
+          "name": "Saint Lucia",
+          "aliases": [
+            "St Lucia"
+          ],
+          "tier": "ulu"
+        },
+        {
+          "name": "Saint Vincent and the Grenadines",
+          "aliases": [
+            "St Vincent"
+          ],
+          "tier": "ulu"
+        },
+        {
+          "name": "Saint Kitts and Nevis",
+          "aliases": [
+            "St Kitts"
+          ],
+          "tier": "ulu"
+        },
+        {
+          "name": "Tonga",
+          "tier": "ulu"
+        },
+        {
+          "name": "Solomon Islands",
+          "tier": "ulu"
+        },
+        {
+          "name": "Kiribati",
+          "tier": "ulu"
+        },
+        {
+          "name": "Tuvalu",
+          "tier": "ulu"
+        },
+        {
+          "name": "Nauru",
+          "tier": "ulu"
+        },
+        {
+          "name": "Samoa",
+          "tier": "gem"
+        }
+      ],
+      "decoys": [
+        {
+          "name": "Myanmar",
+          "aliases": [
+            "Burma"
+          ],
+          "why": "It drives on the right, though plenty of its cars are built for the left!"
+        },
+        {
+          "name": "Philippines",
+          "why": "It drives on the right."
+        },
+        {
+          "name": "Vietnam",
+          "why": "It drives on the right."
+        },
+        {
+          "name": "China",
+          "why": "It drives on the right."
+        },
+        {
+          "name": "South Korea",
+          "aliases": [
+            "Korea"
+          ],
+          "why": "It drives on the right."
+        },
+        {
+          "name": "United States",
+          "aliases": [
+            "USA",
+            "America"
+          ],
+          "why": "It drives on the right."
+        },
+        {
+          "name": "Sweden",
+          "why": "It switched to the right overnight in 1967."
+        },
+        {
+          "name": "Hong Kong",
+          "why": "Left, yes, but it isn't a country."
+        },
+        {
+          "name": "Macau",
+          "aliases": [
+            "Macao"
+          ],
+          "why": "Left, yes, but it isn't a country."
+        }
+      ]
+    },
+    {
+      "id": "world-capital-not-biggest-city",
+      "category": "world",
+      "text": "Name a capital city that isn't its country's biggest city",
+      "note": "Counted by the city's own population. In a country with two or three capitals, each one counts.",
+      "filler": [
+        "city"
+      ],
+      "answers": [
+        {
+          "name": "Canberra",
+          "tier": "common"
+        },
+        {
+          "name": "Washington, D.C.",
+          "aliases": [
+            "Washington",
+            "Washington DC",
+            "DC"
+          ],
+          "tier": "common"
+        },
+        {
+          "name": "Ottawa",
+          "tier": "common"
+        },
+        {
+          "name": "Beijing",
+          "aliases": [
+            "Peking"
+          ],
+          "tier": "common"
+        },
+        {
+          "name": "Hanoi",
+          "aliases": [
+            "Ha Noi"
+          ],
+          "tier": "trap"
+        },
+        {
+          "name": "Brasília",
+          "aliases": [
+            "Brasilia"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "Ankara",
+          "tier": "solid"
+        },
+        {
+          "name": "Wellington",
+          "tier": "solid"
+        },
+        {
+          "name": "Islamabad",
+          "tier": "solid"
+        },
+        {
+          "name": "Naypyidaw",
+          "aliases": [
+            "Naypyitaw",
+            "Nay Pyi Taw"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "Bern",
+          "aliases": [
+            "Berne"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "Abuja",
+          "tier": "solid"
+        },
+        {
+          "name": "Abu Dhabi",
+          "tier": "solid"
+        },
+        {
+          "name": "Rabat",
+          "tier": "solid"
+        },
+        {
+          "name": "Pretoria",
+          "tier": "solid"
+        },
+        {
+          "name": "Cape Town",
+          "tier": "solid"
+        },
+        {
+          "name": "Astana",
+          "aliases": [
+            "Nur-Sultan"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "Sri Jayawardenepura Kotte",
+          "aliases": [
+            "Kotte",
+            "Sri Jayawardenapura"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "Yamoussoukro",
+          "tier": "rare"
+        },
+        {
+          "name": "Dodoma",
+          "tier": "rare"
+        },
+        {
+          "name": "Porto-Novo",
+          "aliases": [
+            "Porto Novo"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "Sucre",
+          "tier": "rare"
+        },
+        {
+          "name": "La Paz",
+          "tier": "rare"
+        },
+        {
+          "name": "Bloemfontein",
+          "tier": "rare"
+        },
+        {
+          "name": "Belmopan",
+          "tier": "rare"
+        },
+        {
+          "name": "Valletta",
+          "tier": "rare"
+        },
+        {
+          "name": "Edinburgh",
+          "tier": "rare"
+        },
+        {
+          "name": "Banjul",
+          "tier": "rare"
+        },
+        {
+          "name": "Vaduz",
+          "tier": "ulu"
+        },
+        {
+          "name": "San Marino",
+          "tier": "ulu"
+        },
+        {
+          "name": "Ngerulmud",
+          "tier": "ulu"
+        },
+        {
+          "name": "Palikir",
+          "tier": "ulu"
+        },
+        {
+          "name": "Gitega",
+          "tier": "ulu"
+        },
+        {
+          "name": "Port of Spain",
+          "aliases": [
+            "Port-of-Spain"
+          ],
+          "tier": "ulu"
+        },
+        {
+          "name": "Manila",
+          "tier": "gem"
+        }
+      ],
+      "decoys": [
+        {
+          "name": "Kuala Lumpur",
+          "aliases": [
+            "KL"
+          ],
+          "why": "It's Malaysia's capital and its biggest city."
+        },
+        {
+          "name": "Putrajaya",
+          "why": "The government works there, but KL is the capital."
+        },
+        {
+          "name": "Singapore",
+          "why": "We're a city-state: the capital is the whole country!"
+        },
+        {
+          "name": "Ho Chi Minh City",
+          "aliases": [
+            "Saigon"
+          ],
+          "why": "The biggest city, but not the capital."
+        },
+        {
+          "name": "Sydney",
+          "why": "The biggest city, but not the capital."
+        },
+        {
+          "name": "Toronto",
+          "why": "The biggest city, but not the capital."
+        },
+        {
+          "name": "New York",
+          "aliases": [
+            "New York City",
+            "NYC"
+          ],
+          "why": "The biggest city, but not the capital."
+        },
+        {
+          "name": "Istanbul",
+          "why": "The biggest city, but not the capital."
+        },
+        {
+          "name": "Shanghai",
+          "why": "The biggest city, but not the capital."
+        },
+        {
+          "name": "Amsterdam",
+          "why": "The capital and the biggest city. The government sits in The Hague."
+        },
+        {
+          "name": "The Hague",
+          "aliases": [
+            "Den Haag"
+          ],
+          "why": "The government sits there, but Amsterdam is the capital."
+        }
+      ]
+    },
+    {
+      "id": "world-southeast-asian-islands",
+      "category": "world",
+      "text": "Name an island in Southeast Asia",
+      "note": "Big or small, from Singapore's own to the far side of Indonesia. Whole islands only, not towns on them.",
+      "filler": [
+        "island",
+        "islands",
+        "pulau",
+        "koh",
+        "nusa"
+      ],
+      "answers": [
+        {
+          "name": "Bali",
+          "tier": "common"
+        },
+        {
+          "name": "Sentosa",
+          "tier": "common"
+        },
+        {
+          "name": "Batam",
+          "tier": "common"
+        },
+        {
+          "name": "Phuket",
+          "tier": "common"
+        },
+        {
+          "name": "Pulau Ubin",
+          "aliases": [
+            "Ubin"
+          ],
+          "tier": "trap"
+        },
+        {
+          "name": "Singapore",
+          "aliases": [
+            "Pulau Ujong"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "Bintan",
+          "tier": "solid"
+        },
+        {
+          "name": "Penang",
+          "aliases": [
+            "Pulau Pinang",
+            "Pinang"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "Langkawi",
+          "tier": "solid"
+        },
+        {
+          "name": "Tioman",
+          "tier": "solid"
+        },
+        {
+          "name": "Redang",
+          "tier": "solid"
+        },
+        {
+          "name": "Perhentian",
+          "tier": "solid"
+        },
+        {
+          "name": "Koh Samui",
+          "aliases": [
+            "Samui"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "Phi Phi",
+          "aliases": [
+            "Koh Phi Phi"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "Koh Tao",
+          "aliases": [
+            "Tao"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "Koh Phangan",
+          "aliases": [
+            "Phangan"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "Boracay",
+          "tier": "solid"
+        },
+        {
+          "name": "Palawan",
+          "tier": "solid"
+        },
+        {
+          "name": "Cebu",
+          "tier": "solid"
+        },
+        {
+          "name": "Bohol",
+          "tier": "solid"
+        },
+        {
+          "name": "Luzon",
+          "tier": "solid"
+        },
+        {
+          "name": "Mindanao",
+          "tier": "solid"
+        },
+        {
+          "name": "Java",
+          "tier": "solid"
+        },
+        {
+          "name": "Sumatra",
+          "tier": "solid"
+        },
+        {
+          "name": "Borneo",
+          "tier": "solid"
+        },
+        {
+          "name": "Sulawesi",
+          "aliases": [
+            "Celebes"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "Lombok",
+          "tier": "solid"
+        },
+        {
+          "name": "Phu Quoc",
+          "tier": "solid"
+        },
+        {
+          "name": "St John's Island",
+          "aliases": [
+            "St John's"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "Kusu Island",
+          "aliases": [
+            "Kusu"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "Jurong Island",
+          "tier": "rare"
+        },
+        {
+          "name": "Komodo",
+          "tier": "rare"
+        },
+        {
+          "name": "Flores",
+          "tier": "rare"
+        },
+        {
+          "name": "Timor",
+          "tier": "rare"
+        },
+        {
+          "name": "New Guinea",
+          "aliases": [
+            "Papua"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "Bangka",
+          "tier": "rare"
+        },
+        {
+          "name": "Belitung",
+          "tier": "rare"
+        },
+        {
+          "name": "Nusa Penida",
+          "aliases": [
+            "Penida"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "Gili Islands",
+          "aliases": [
+            "Gili",
+            "Gili Trawangan",
+            "Trawangan",
+            "Gili Air",
+            "Gili Meno"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "Krakatoa",
+          "aliases": [
+            "Krakatau"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "Raja Ampat",
+          "tier": "rare"
+        },
+        {
+          "name": "Pangkor",
+          "tier": "rare"
+        },
+        {
+          "name": "Sipadan",
+          "tier": "rare"
+        },
+        {
+          "name": "Labuan",
+          "tier": "rare"
+        },
+        {
+          "name": "Koh Chang",
+          "aliases": [
+            "Chang"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "Koh Lanta",
+          "aliases": [
+            "Lanta"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "Koh Samet",
+          "aliases": [
+            "Samet"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "Koh Lipe",
+          "aliases": [
+            "Lipe"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "Siargao",
+          "tier": "rare"
+        },
+        {
+          "name": "Coron",
+          "aliases": [
+            "Busuanga"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "Mindoro",
+          "tier": "rare"
+        },
+        {
+          "name": "Negros",
+          "tier": "rare"
+        },
+        {
+          "name": "Panay",
+          "tier": "rare"
+        },
+        {
+          "name": "Leyte",
+          "tier": "rare"
+        },
+        {
+          "name": "Samar",
+          "tier": "rare"
+        },
+        {
+          "name": "Mactan",
+          "tier": "rare"
+        },
+        {
+          "name": "Con Dao",
+          "aliases": [
+            "Con Son"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "Cat Ba",
+          "tier": "rare"
+        },
+        {
+          "name": "Koh Rong",
+          "aliases": [
+            "Rong"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "Pulau Semakau",
+          "aliases": [
+            "Semakau"
+          ],
+          "tier": "ulu"
+        },
+        {
+          "name": "Pulau Hantu",
+          "aliases": [
+            "Hantu"
+          ],
+          "tier": "ulu"
+        },
+        {
+          "name": "Lazarus Island",
+          "aliases": [
+            "Lazarus"
+          ],
+          "tier": "ulu"
+        },
+        {
+          "name": "Sisters' Islands",
+          "aliases": [
+            "Sisters Islands",
+            "Sisters"
+          ],
+          "tier": "ulu"
+        },
+        {
+          "name": "Coney Island",
+          "aliases": [
+            "Pulau Serangoon"
+          ],
+          "tier": "ulu"
+        },
+        {
+          "name": "Pulau Brani",
+          "aliases": [
+            "Brani"
+          ],
+          "tier": "ulu"
+        },
+        {
+          "name": "Pulau Bukom",
+          "aliases": [
+            "Bukom"
+          ],
+          "tier": "ulu"
+        },
+        {
+          "name": "Nusa Lembongan",
+          "aliases": [
+            "Lembongan"
+          ],
+          "tier": "ulu"
+        },
+        {
+          "name": "Sumba",
+          "tier": "ulu"
+        },
+        {
+          "name": "Sumbawa",
+          "tier": "ulu"
+        },
+        {
+          "name": "Madura",
+          "tier": "ulu"
+        },
+        {
+          "name": "Nias",
+          "tier": "ulu"
+        },
+        {
+          "name": "Siberut",
+          "aliases": [
+            "Mentawai Islands",
+            "Mentawai"
+          ],
+          "tier": "ulu"
+        },
+        {
+          "name": "Karimun",
+          "tier": "ulu"
+        },
+        {
+          "name": "Halmahera",
+          "tier": "ulu"
+        },
+        {
+          "name": "Seram",
+          "tier": "ulu"
+        },
+        {
+          "name": "Ambon",
+          "tier": "ulu"
+        },
+        {
+          "name": "Ternate",
+          "tier": "ulu"
+        },
+        {
+          "name": "Tidore",
+          "tier": "ulu"
+        },
+        {
+          "name": "Banda Islands",
+          "aliases": [
+            "Banda"
+          ],
+          "tier": "ulu"
+        },
+        {
+          "name": "Rinca",
+          "tier": "ulu"
+        },
+        {
+          "name": "Alor",
+          "tier": "ulu"
+        },
+        {
+          "name": "Biak",
+          "tier": "ulu"
+        },
+        {
+          "name": "Morotai",
+          "tier": "ulu"
+        },
+        {
+          "name": "Weh",
+          "aliases": [
+            "Sabang"
+          ],
+          "tier": "ulu"
+        },
+        {
+          "name": "Natuna Islands",
+          "aliases": [
+            "Natuna"
+          ],
+          "tier": "ulu"
+        },
+        {
+          "name": "Bunaken",
+          "tier": "ulu"
+        },
+        {
+          "name": "Wakatobi",
+          "tier": "ulu"
+        },
+        {
+          "name": "Kapas",
+          "tier": "ulu"
+        },
+        {
+          "name": "Rawa",
+          "tier": "ulu"
+        },
+        {
+          "name": "Mabul",
+          "tier": "ulu"
+        },
+        {
+          "name": "Lang Tengah",
+          "tier": "ulu"
+        },
+        {
+          "name": "Tenggol",
+          "tier": "ulu"
+        },
+        {
+          "name": "Pulau Ketam",
+          "aliases": [
+            "Ketam"
+          ],
+          "tier": "ulu"
+        },
+        {
+          "name": "Gaya",
+          "tier": "ulu"
+        },
+        {
+          "name": "Mantanani",
+          "tier": "ulu"
+        },
+        {
+          "name": "Banggi",
+          "tier": "ulu"
+        },
+        {
+          "name": "Koh Kood",
+          "aliases": [
+            "Koh Kut",
+            "Kood",
+            "Kut"
+          ],
+          "tier": "ulu"
+        },
+        {
+          "name": "Koh Yao",
+          "aliases": [
+            "Yao Noi",
+            "Yao Yai"
+          ],
+          "tier": "ulu"
+        },
+        {
+          "name": "Similan Islands",
+          "aliases": [
+            "Similan"
+          ],
+          "tier": "ulu"
+        },
+        {
+          "name": "Koh Larn",
+          "aliases": [
+            "Larn"
+          ],
+          "tier": "ulu"
+        },
+        {
+          "name": "Koh Mak",
+          "aliases": [
+            "Mak"
+          ],
+          "tier": "ulu"
+        },
+        {
+          "name": "James Bond Island",
+          "aliases": [
+            "Khao Phing Kan"
+          ],
+          "tier": "ulu"
+        },
+        {
+          "name": "Camiguin",
+          "tier": "ulu"
+        },
+        {
+          "name": "Siquijor",
+          "tier": "ulu"
+        },
+        {
+          "name": "Panglao",
+          "tier": "ulu"
+        },
+        {
+          "name": "Masbate",
+          "tier": "ulu"
+        },
+        {
+          "name": "Marinduque",
+          "tier": "ulu"
+        },
+        {
+          "name": "Catanduanes",
+          "tier": "ulu"
+        },
+        {
+          "name": "Batanes",
+          "tier": "ulu"
+        },
+        {
+          "name": "Malapascua",
+          "tier": "ulu"
+        },
+        {
+          "name": "Bantayan",
+          "tier": "ulu"
+        },
+        {
+          "name": "Corregidor",
+          "tier": "ulu"
+        },
+        {
+          "name": "Basilan",
+          "tier": "ulu"
+        },
+        {
+          "name": "Jolo",
+          "tier": "ulu"
+        },
+        {
+          "name": "Tawi-Tawi",
+          "tier": "ulu"
+        },
+        {
+          "name": "Guimaras",
+          "tier": "ulu"
+        },
+        {
+          "name": "Ly Son",
+          "tier": "ulu"
+        },
+        {
+          "name": "Phu Quy",
+          "tier": "ulu"
+        },
+        {
+          "name": "Cu Lao Cham",
+          "aliases": [
+            "Cham Islands"
+          ],
+          "tier": "ulu"
+        },
+        {
+          "name": "Koh Rong Samloem",
+          "aliases": [
+            "Rong Samloem"
+          ],
+          "tier": "ulu"
+        },
+        {
+          "name": "Koh Kong",
+          "tier": "ulu"
+        },
+        {
+          "name": "Rabbit Island",
+          "aliases": [
+            "Koh Tonsay",
+            "Tonsay"
+          ],
+          "tier": "ulu"
+        },
+        {
+          "name": "Mergui Archipelago",
+          "aliases": [
+            "Mergui",
+            "Myeik Archipelago"
+          ],
+          "tier": "ulu"
+        },
+        {
+          "name": "Ramree",
+          "tier": "ulu"
+        },
+        {
+          "name": "Atauro",
+          "tier": "ulu"
+        },
+        {
+          "name": "Pulau Tekong",
+          "aliases": [
+            "Tekong"
+          ],
+          "tier": "gem"
+        }
+      ],
+      "decoys": [
+        {
+          "name": "Hainan",
+          "why": "That's China's, so it's East Asia."
+        },
+        {
+          "name": "Okinawa",
+          "why": "That's Japan's, so it's East Asia."
+        },
+        {
+          "name": "Jeju",
+          "why": "That's Korea's, so it's East Asia."
+        },
+        {
+          "name": "Andaman Islands",
+          "aliases": [
+            "Andaman"
+          ],
+          "why": "They belong to India, so they count as South Asia."
+        },
+        {
+          "name": "Maldives",
+          "why": "They're in South Asia."
+        },
+        {
+          "name": "Sri Lanka",
+          "why": "That's in South Asia."
+        },
+        {
+          "name": "Hawaii",
+          "why": "A long way from Southeast Asia!"
+        },
+        {
+          "name": "Krabi",
+          "why": "That's a province on the mainland, though its islands count!"
+        },
+        {
+          "name": "Nusa Dua",
+          "why": "That's a resort area on Bali, not an island of its own."
+        }
+      ]
+    },
+    {
+      "id": "world-countries-ending-in-ia",
+      "category": "world",
+      "text": "Name a country whose name ends in 'ia'",
+      "note": "Countries, not territories or regions, by their usual English name.",
+      "rule": {
+        "endsWith": "ia"
+      },
+      "answers": [
+        {
+          "name": "India",
+          "tier": "common"
+        },
+        {
+          "name": "Malaysia",
+          "tier": "common"
+        },
+        {
+          "name": "Indonesia",
+          "tier": "common"
+        },
+        {
+          "name": "Australia",
+          "tier": "common"
+        },
+        {
+          "name": "Russia",
+          "tier": "solid"
+        },
+        {
+          "name": "Austria",
+          "tier": "solid"
+        },
+        {
+          "name": "Cambodia",
+          "tier": "solid"
+        },
+        {
+          "name": "Mongolia",
+          "tier": "solid"
+        },
+        {
+          "name": "Colombia",
+          "tier": "solid"
+        },
+        {
+          "name": "Bolivia",
+          "tier": "solid"
+        },
+        {
+          "name": "Nigeria",
+          "tier": "solid"
+        },
+        {
+          "name": "Saudi Arabia",
+          "tier": "solid"
+        },
+        {
+          "name": "Syria",
+          "tier": "solid"
+        },
+        {
+          "name": "Georgia",
+          "tier": "solid"
+        },
+        {
+          "name": "Croatia",
+          "tier": "solid"
+        },
+        {
+          "name": "Romania",
+          "tier": "solid"
+        },
+        {
+          "name": "Bulgaria",
+          "tier": "solid"
+        },
+        {
+          "name": "Ethiopia",
+          "tier": "solid"
+        },
+        {
+          "name": "Somalia",
+          "tier": "solid"
+        },
+        {
+          "name": "Tanzania",
+          "tier": "solid"
+        },
+        {
+          "name": "Zambia",
+          "tier": "solid"
+        },
+        {
+          "name": "Algeria",
+          "tier": "solid"
+        },
+        {
+          "name": "Tunisia",
+          "tier": "solid"
+        },
+        {
+          "name": "Albania",
+          "tier": "rare"
+        },
+        {
+          "name": "Armenia",
+          "tier": "rare"
+        },
+        {
+          "name": "Estonia",
+          "tier": "rare"
+        },
+        {
+          "name": "Latvia",
+          "tier": "rare"
+        },
+        {
+          "name": "Lithuania",
+          "tier": "rare"
+        },
+        {
+          "name": "Serbia",
+          "tier": "rare"
+        },
+        {
+          "name": "Slovakia",
+          "tier": "rare"
+        },
+        {
+          "name": "Slovenia",
+          "tier": "rare"
+        },
+        {
+          "name": "Liberia",
+          "tier": "rare"
+        },
+        {
+          "name": "Namibia",
+          "tier": "rare"
+        },
+        {
+          "name": "Gambia",
+          "aliases": [
+            "The Gambia"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "Bosnia",
+          "tier": "rare"
+        },
+        {
+          "name": "North Macedonia",
+          "aliases": [
+            "Macedonia"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "Mauritania",
+          "tier": "rare"
+        },
+        {
+          "name": "Micronesia",
+          "tier": "ulu"
+        },
+        {
+          "name": "Saint Lucia",
+          "aliases": [
+            "St Lucia"
+          ],
+          "tier": "ulu"
+        },
+        {
+          "name": "Czechia",
+          "tier": "gem"
+        }
+      ],
+      "decoys": [
+        {
+          "name": "Asia",
+          "why": "A continent, not a country!"
+        },
+        {
+          "name": "Scandinavia",
+          "why": "That's a region of three countries."
+        },
+        {
+          "name": "Persia",
+          "why": "That's Iran now."
+        },
+        {
+          "name": "Abyssinia",
+          "why": "That's an old name for Ethiopia."
+        },
+        {
+          "name": "Rhodesia",
+          "why": "That's Zimbabwe now."
+        },
+        {
+          "name": "Yugoslavia",
+          "why": "It broke up in the 1990s."
+        },
+        {
+          "name": "Czechoslovakia",
+          "why": "It split in two in 1993."
+        },
+        {
+          "name": "Tasmania",
+          "why": "That's an Australian state."
+        },
+        {
+          "name": "Virginia",
+          "why": "That's an American state."
+        },
+        {
+          "name": "California",
+          "why": "That's an American state."
+        },
+        {
+          "name": "French Polynesia",
+          "aliases": [
+            "Polynesia"
+          ],
+          "why": "That's a French territory, not a country."
         }
       ]
     }

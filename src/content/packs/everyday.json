@@ -1,0 +1,2263 @@
+{
+  "name": "Everyday",
+  "asOf": "2026-11-16",
+  "prompts": [
+    {
+      "id": "everyday-comes-in-pairs",
+      "category": "everyday",
+      "text": "Name something that comes in pairs",
+      "note": "Things you'd call 'a pair of', or that usually come two at a time. Body parts count.",
+      "filler": [
+        "pair",
+        "a"
+      ],
+      "qualifiers": true,
+      "answers": [
+        {
+          "name": "Shoes",
+          "aliases": [
+            "Sneakers",
+            "Trainers",
+            "Kicks"
+          ],
+          "tier": "common"
+        },
+        {
+          "name": "Socks",
+          "tier": "common"
+        },
+        {
+          "name": "Chopsticks",
+          "tier": "common"
+        },
+        {
+          "name": "Earrings",
+          "aliases": [
+            "Ear studs",
+            "Studs"
+          ],
+          "tier": "common"
+        },
+        {
+          "name": "Scissors",
+          "aliases": [
+            "Scissor"
+          ],
+          "tier": "trap"
+        },
+        {
+          "name": "Twins",
+          "aliases": [
+            "Twin"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "Gloves",
+          "tier": "solid"
+        },
+        {
+          "name": "Eyes",
+          "tier": "solid"
+        },
+        {
+          "name": "Ears",
+          "tier": "solid"
+        },
+        {
+          "name": "Hands",
+          "tier": "solid"
+        },
+        {
+          "name": "Feet",
+          "tier": "solid"
+        },
+        {
+          "name": "Slippers",
+          "aliases": [
+            "Flip-flops",
+            "Flip flops",
+            "Selipar"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "Glasses",
+          "aliases": [
+            "Spectacles",
+            "Specs",
+            "Sunglasses",
+            "Shades"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "Trousers",
+          "aliases": [
+            "Pants",
+            "Slacks"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "Lungs",
+          "tier": "solid"
+        },
+        {
+          "name": "Kidneys",
+          "tier": "solid"
+        },
+        {
+          "name": "Wings",
+          "tier": "solid"
+        },
+        {
+          "name": "Legs",
+          "tier": "solid"
+        },
+        {
+          "name": "Arms",
+          "tier": "solid"
+        },
+        {
+          "name": "Jeans",
+          "tier": "rare"
+        },
+        {
+          "name": "Shorts",
+          "tier": "rare"
+        },
+        {
+          "name": "Dice",
+          "aliases": [
+            "Die"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "Knees",
+          "tier": "rare"
+        },
+        {
+          "name": "Eyebrows",
+          "tier": "rare"
+        },
+        {
+          "name": "Nostrils",
+          "tier": "rare"
+        },
+        {
+          "name": "Lips",
+          "tier": "rare"
+        },
+        {
+          "name": "Headphones",
+          "aliases": [
+            "Earphones",
+            "Earbuds",
+            "AirPods"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "Contact lenses",
+          "aliases": [
+            "Contact lens",
+            "Contacts"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "Goggles",
+          "aliases": [
+            "Swimming goggles"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "Binoculars",
+          "tier": "rare"
+        },
+        {
+          "name": "Boots",
+          "tier": "rare"
+        },
+        {
+          "name": "Sandals",
+          "tier": "rare"
+        },
+        {
+          "name": "High heels",
+          "aliases": [
+            "Heels",
+            "Stilettos"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "Stockings",
+          "aliases": [
+            "Tights",
+            "Pantyhose"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "Tongs",
+          "tier": "rare"
+        },
+        {
+          "name": "Tweezers",
+          "tier": "rare"
+        },
+        {
+          "name": "Pliers",
+          "tier": "rare"
+        },
+        {
+          "name": "Handcuffs",
+          "aliases": [
+            "Cuffs"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "Cufflinks",
+          "tier": "rare"
+        },
+        {
+          "name": "Mittens",
+          "tier": "rare"
+        },
+        {
+          "name": "Drumsticks",
+          "tier": "rare"
+        },
+        {
+          "name": "Cymbals",
+          "tier": "rare"
+        },
+        {
+          "name": "Maracas",
+          "tier": "rare"
+        },
+        {
+          "name": "Dumbbells",
+          "tier": "rare"
+        },
+        {
+          "name": "Skis",
+          "tier": "rare"
+        },
+        {
+          "name": "Skates",
+          "aliases": [
+            "Ice skates",
+            "Roller skates",
+            "Rollerblades"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "Oars",
+          "aliases": [
+            "Paddles"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "Wedding rings",
+          "aliases": [
+            "Wedding bands"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "Salt and pepper",
+          "aliases": [
+            "Salt and pepper shakers"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "Speakers",
+          "tier": "rare"
+        },
+        {
+          "name": "Headlights",
+          "tier": "rare"
+        },
+        {
+          "name": "Pedals",
+          "tier": "ulu"
+        },
+        {
+          "name": "Bookends",
+          "tier": "ulu"
+        },
+        {
+          "name": "Curtains",
+          "tier": "ulu"
+        },
+        {
+          "name": "Chromosomes",
+          "tier": "ulu"
+        },
+        {
+          "name": "Lovebirds",
+          "tier": "ulu"
+        },
+        {
+          "name": "Yin and yang",
+          "aliases": [
+            "Yin yang",
+            "Ying yang"
+          ],
+          "tier": "ulu"
+        },
+        {
+          "name": "Stone lions",
+          "aliases": [
+            "Guardian lions",
+            "Foo dogs",
+            "Shishi"
+          ],
+          "tier": "ulu"
+        },
+        {
+          "name": "Couplets",
+          "aliases": [
+            "Spring couplets",
+            "Chun lian",
+            "Duilian"
+          ],
+          "tier": "ulu"
+        },
+        {
+          "name": "Windscreen wipers",
+          "aliases": [
+            "Wipers"
+          ],
+          "tier": "ulu"
+        },
+        {
+          "name": "Mandarin oranges",
+          "aliases": [
+            "Mandarins",
+            "Oranges",
+            "Kam",
+            "Gam"
+          ],
+          "tier": "gem"
+        }
+      ],
+      "decoys": [
+        {
+          "name": "Triplets",
+          "why": "That's three of a kind!"
+        },
+        {
+          "name": "Tripod",
+          "why": "Three legs, one tripod."
+        },
+        {
+          "name": "Tricycle",
+          "why": "Three wheels on that one."
+        }
+      ]
+    },
+    {
+      "id": "everyday-has-buttons",
+      "category": "everyday",
+      "text": "Name something that has buttons",
+      "note": "Buttons you press and buttons you do up both count.",
+      "qualifiers": true,
+      "answers": [
+        {
+          "name": "Shirt",
+          "aliases": [
+            "Shirts",
+            "Blouse",
+            "Polo shirt",
+            "Polo tee"
+          ],
+          "tier": "common"
+        },
+        {
+          "name": "Remote control",
+          "aliases": [
+            "Remote",
+            "TV remote",
+            "Aircon remote"
+          ],
+          "tier": "common"
+        },
+        {
+          "name": "Phone",
+          "aliases": [
+            "Handphone",
+            "Mobile phone",
+            "Cellphone",
+            "Telephone",
+            "Landline"
+          ],
+          "tier": "common"
+        },
+        {
+          "name": "Keyboard",
+          "aliases": [
+            "Computer keyboard"
+          ],
+          "tier": "common"
+        },
+        {
+          "name": "Lift",
+          "aliases": [
+            "Elevator",
+            "Lift buttons"
+          ],
+          "tier": "trap"
+        },
+        {
+          "name": "Calculator",
+          "tier": "solid"
+        },
+        {
+          "name": "Jacket",
+          "aliases": [
+            "Coat",
+            "Blazer",
+            "Suit"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "Game controller",
+          "aliases": [
+            "Controller",
+            "Gamepad",
+            "Joystick"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "Microwave",
+          "aliases": [
+            "Microwave oven"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "Washing machine",
+          "tier": "solid"
+        },
+        {
+          "name": "Mouse",
+          "aliases": [
+            "Computer mouse"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "Doorbell",
+          "tier": "solid"
+        },
+        {
+          "name": "Vending machine",
+          "tier": "solid"
+        },
+        {
+          "name": "ATM",
+          "aliases": [
+            "Cash machine"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "Camera",
+          "tier": "solid"
+        },
+        {
+          "name": "Television",
+          "aliases": [
+            "TV"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "Radio",
+          "tier": "solid"
+        },
+        {
+          "name": "Cardigan",
+          "tier": "rare"
+        },
+        {
+          "name": "Jeans",
+          "tier": "rare"
+        },
+        {
+          "name": "School uniform",
+          "aliases": [
+            "Uniform"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "Pyjamas",
+          "aliases": [
+            "Pajamas"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "Dress",
+          "tier": "rare"
+        },
+        {
+          "name": "Accordion",
+          "tier": "rare"
+        },
+        {
+          "name": "Watch",
+          "aliases": [
+            "Smartwatch",
+            "Stopwatch"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "Alarm clock",
+          "tier": "rare"
+        },
+        {
+          "name": "Car",
+          "aliases": [
+            "Car key"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "Traffic light",
+          "aliases": [
+            "Pedestrian crossing",
+            "Green man"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "Standing fan",
+          "aliases": [
+            "Fan"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "Aircon",
+          "aliases": [
+            "Air conditioner"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "Rice cooker",
+          "tier": "rare"
+        },
+        {
+          "name": "Blender",
+          "tier": "rare"
+        },
+        {
+          "name": "Printer",
+          "tier": "rare"
+        },
+        {
+          "name": "Laptop",
+          "aliases": [
+            "Computer"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "Torch",
+          "aliases": [
+            "Torchlight",
+            "Flashlight"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "Walkie-talkie",
+          "tier": "rare"
+        },
+        {
+          "name": "Intercom",
+          "tier": "rare"
+        },
+        {
+          "name": "Cash register",
+          "tier": "rare"
+        },
+        {
+          "name": "Arcade machine",
+          "tier": "rare"
+        },
+        {
+          "name": "Game Boy",
+          "aliases": [
+            "Nintendo Switch"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "Teddy bear",
+          "tier": "ulu"
+        },
+        {
+          "name": "Snowman",
+          "tier": "ulu"
+        },
+        {
+          "name": "Gingerbread man",
+          "tier": "ulu"
+        },
+        {
+          "name": "Cheongsam",
+          "aliases": [
+            "Qipao"
+          ],
+          "tier": "ulu"
+        },
+        {
+          "name": "Sofa",
+          "aliases": [
+            "Cushion"
+          ],
+          "tier": "ulu"
+        },
+        {
+          "name": "Tamagotchi",
+          "tier": "ulu"
+        },
+        {
+          "name": "Hearing aid",
+          "tier": "ulu"
+        },
+        {
+          "name": "Bus",
+          "aliases": [
+            "Bus bell",
+            "Stop button"
+          ],
+          "tier": "gem"
+        }
+      ],
+      "decoys": [
+        {
+          "name": "Belly button",
+          "aliases": [
+            "Navel"
+          ],
+          "why": "That IS a button. We're after things that have them!"
+        },
+        {
+          "name": "Button mushroom",
+          "why": "That's a mushroom called a button!"
+        }
+      ]
+    },
+    {
+      "id": "everyday-sticky",
+      "category": "everyday",
+      "text": "Name something sticky",
+      "note": "Things that stick to your fingers. Things that only stick to fridges don't count.",
+      "qualifiers": true,
+      "answers": [
+        {
+          "name": "Glue",
+          "aliases": [
+            "Superglue",
+            "Glue stick",
+            "UHU",
+            "Glue gun",
+            "Epoxy"
+          ],
+          "tier": "common"
+        },
+        {
+          "name": "Honey",
+          "tier": "common"
+        },
+        {
+          "name": "Tape",
+          "aliases": [
+            "Sticky tape",
+            "Scotch tape",
+            "Sellotape",
+            "Masking tape",
+            "Duct tape"
+          ],
+          "tier": "common"
+        },
+        {
+          "name": "Chewing gum",
+          "aliases": [
+            "Gum",
+            "Bubble gum"
+          ],
+          "tier": "common"
+        },
+        {
+          "name": "Sticky rice",
+          "aliases": [
+            "Glutinous rice",
+            "Pulut",
+            "Lor mai kai",
+            "Lo mai gai"
+          ],
+          "tier": "trap"
+        },
+        {
+          "name": "Syrup",
+          "aliases": [
+            "Maple syrup",
+            "Golden syrup"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "Jam",
+          "tier": "solid"
+        },
+        {
+          "name": "Slime",
+          "tier": "solid"
+        },
+        {
+          "name": "Sticky notes",
+          "aliases": [
+            "Sticky note",
+            "Post-it",
+            "Post-it note",
+            "Post-its"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "Stickers",
+          "aliases": [
+            "Sticker"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "Toffee",
+          "aliases": [
+            "Caramel"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "Candy floss",
+          "aliases": [
+            "Cotton candy"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "Spider web",
+          "aliases": [
+            "Cobweb",
+            "Web"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "Plaster",
+          "aliases": [
+            "Band-Aid",
+            "Bandage"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "Peanut butter",
+          "tier": "solid"
+        },
+        {
+          "name": "Mochi",
+          "tier": "solid"
+        },
+        {
+          "name": "Sap",
+          "aliases": [
+            "Tree sap",
+            "Resin"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "Kaya",
+          "tier": "rare"
+        },
+        {
+          "name": "Gula Melaka",
+          "aliases": [
+            "Palm sugar"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "Condensed milk",
+          "tier": "rare"
+        },
+        {
+          "name": "Nutella",
+          "tier": "rare"
+        },
+        {
+          "name": "Lollipop",
+          "aliases": [
+            "Candy",
+            "Sweets"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "Marshmallow",
+          "tier": "rare"
+        },
+        {
+          "name": "Gummy bears",
+          "aliases": [
+            "Gummies",
+            "Gummy"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "Dates",
+          "aliases": [
+            "Kurma"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "Sticky toffee pudding",
+          "tier": "rare"
+        },
+        {
+          "name": "Cinnamon rolls",
+          "aliases": [
+            "Sticky buns"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "Kueh",
+          "aliases": [
+            "Kuih"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "Lip gloss",
+          "tier": "rare"
+        },
+        {
+          "name": "Hair gel",
+          "aliases": [
+            "Hair wax",
+            "Gel"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "Blu Tack",
+          "aliases": [
+            "Blu-Tack",
+            "Blue tack"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "Sweat",
+          "tier": "rare"
+        },
+        {
+          "name": "Mud",
+          "tier": "rare"
+        },
+        {
+          "name": "Dough",
+          "tier": "rare"
+        },
+        {
+          "name": "Tar",
+          "tier": "rare"
+        },
+        {
+          "name": "Molasses",
+          "aliases": [
+            "Treacle"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "Muah chee",
+          "tier": "ulu"
+        },
+        {
+          "name": "Ondeh-ondeh",
+          "aliases": [
+            "Onde-onde",
+            "Ondeh ondeh"
+          ],
+          "tier": "ulu"
+        },
+        {
+          "name": "Flypaper",
+          "aliases": [
+            "Fly paper",
+            "Glue trap",
+            "Mouse trap"
+          ],
+          "tier": "ulu"
+        },
+        {
+          "name": "Snail slime",
+          "aliases": [
+            "Snail",
+            "Slug"
+          ],
+          "tier": "ulu"
+        },
+        {
+          "name": "Humidity",
+          "aliases": [
+            "Singapore weather",
+            "Humid weather"
+          ],
+          "tier": "ulu"
+        },
+        {
+          "name": "Wax",
+          "aliases": [
+            "Candle wax"
+          ],
+          "tier": "ulu"
+        },
+        {
+          "name": "Nian gao",
+          "aliases": [
+            "Year cake",
+            "Tikoy",
+            "Kuih bakul"
+          ],
+          "tier": "gem"
+        }
+      ],
+      "decoys": [
+        {
+          "name": "Magnet",
+          "why": "It sticks, but it isn't sticky!"
+        },
+        {
+          "name": "Velcro",
+          "why": "It holds on with tiny hooks, not stickiness."
+        },
+        {
+          "name": "Gecko feet",
+          "aliases": [
+            "Gecko",
+            "Cicak"
+          ],
+          "why": "Not sticky at all! Millions of tiny hairs grip the wall."
+        }
+      ]
+    },
+    {
+      "id": "everyday-you-can-peel",
+      "category": "everyday",
+      "text": "Name something you can peel",
+      "note": "Fruit and veg count, and so does anything with a skin, a layer or a backing you can strip off.",
+      "qualifiers": true,
+      "answers": [
+        {
+          "name": "Banana",
+          "tier": "common"
+        },
+        {
+          "name": "Orange",
+          "tier": "common"
+        },
+        {
+          "name": "Apple",
+          "tier": "common"
+        },
+        {
+          "name": "Potato",
+          "tier": "common"
+        },
+        {
+          "name": "Prawn",
+          "aliases": [
+            "Shrimp",
+            "Udang",
+            "Har"
+          ],
+          "tier": "trap"
+        },
+        {
+          "name": "Mandarin orange",
+          "aliases": [
+            "Mandarin",
+            "Tangerine",
+            "Kam"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "Mango",
+          "tier": "solid"
+        },
+        {
+          "name": "Onion",
+          "aliases": [
+            "Shallot"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "Garlic",
+          "tier": "solid"
+        },
+        {
+          "name": "Carrot",
+          "tier": "solid"
+        },
+        {
+          "name": "Cucumber",
+          "tier": "solid"
+        },
+        {
+          "name": "Egg",
+          "aliases": [
+            "Hard-boiled egg",
+            "Boiled egg"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "Stickers",
+          "aliases": [
+            "Sticker",
+            "Label",
+            "Price tag"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "Kiwi",
+          "aliases": [
+            "Kiwi fruit",
+            "Kiwifruit"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "Lychee",
+          "aliases": [
+            "Laici"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "Longan",
+          "tier": "solid"
+        },
+        {
+          "name": "Rambutan",
+          "tier": "solid"
+        },
+        {
+          "name": "Pomelo",
+          "tier": "solid"
+        },
+        {
+          "name": "Avocado",
+          "tier": "solid"
+        },
+        {
+          "name": "Lemon",
+          "aliases": [
+            "Lime",
+            "Grapefruit"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "Pear",
+          "tier": "solid"
+        },
+        {
+          "name": "Sweet potato",
+          "tier": "solid"
+        },
+        {
+          "name": "Ginger",
+          "tier": "solid"
+        },
+        {
+          "name": "Paint",
+          "tier": "solid"
+        },
+        {
+          "name": "Wallpaper",
+          "tier": "solid"
+        },
+        {
+          "name": "Skin",
+          "aliases": [
+            "Sunburn",
+            "Sunburnt skin",
+            "Dead skin"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "Nail polish",
+          "aliases": [
+            "Nail varnish",
+            "Fake nails",
+            "Gel nails"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "Plaster",
+          "aliases": [
+            "Band-Aid"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "Mangosteen",
+          "tier": "rare"
+        },
+        {
+          "name": "Corn",
+          "aliases": [
+            "Corn on the cob"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "Pineapple",
+          "tier": "rare"
+        },
+        {
+          "name": "Papaya",
+          "tier": "rare"
+        },
+        {
+          "name": "Dragon fruit",
+          "tier": "rare"
+        },
+        {
+          "name": "Peach",
+          "tier": "rare"
+        },
+        {
+          "name": "Yam",
+          "aliases": [
+            "Taro"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "Tomato",
+          "tier": "rare"
+        },
+        {
+          "name": "Beetroot",
+          "aliases": [
+            "Beet"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "Tapioca",
+          "aliases": [
+            "Cassava"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "Lotus root",
+          "tier": "rare"
+        },
+        {
+          "name": "Water chestnut",
+          "tier": "rare"
+        },
+        {
+          "name": "Chestnuts",
+          "aliases": [
+            "Roasted chestnuts"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "Peanuts",
+          "aliases": [
+            "Groundnuts"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "Kuaci",
+          "aliases": [
+            "Melon seeds",
+            "Sunflower seeds"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "Century egg",
+          "aliases": [
+            "Pidan"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "Salted egg",
+          "tier": "rare"
+        },
+        {
+          "name": "Quail egg",
+          "tier": "rare"
+        },
+        {
+          "name": "Crayfish",
+          "aliases": [
+            "Lobster"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "String cheese",
+          "tier": "rare"
+        },
+        {
+          "name": "Cheese slice",
+          "aliases": [
+            "Kraft singles"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "Peel-off mask",
+          "aliases": [
+            "Face mask"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "Tape",
+          "aliases": [
+            "Masking tape"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "Babybel",
+          "tier": "ulu"
+        },
+        {
+          "name": "Popiah skin",
+          "tier": "ulu"
+        },
+        {
+          "name": "Bark",
+          "aliases": [
+            "Tree bark"
+          ],
+          "tier": "ulu"
+        },
+        {
+          "name": "Screen protector",
+          "aliases": [
+            "Phone film",
+            "Protective film"
+          ],
+          "tier": "gem"
+        }
+      ],
+      "decoys": [
+        {
+          "name": "Durian",
+          "why": "You prise a durian open. Nobody peels one!"
+        },
+        {
+          "name": "Eyes",
+          "why": "Keep them peeled, sure, but please don't peel them."
+        }
+      ]
+    },
+    {
+      "id": "everyday-goes-up-and-down",
+      "category": "everyday",
+      "text": "Name something that goes up and down",
+      "note": "Anything that rises and falls, again and again. Prices count!",
+      "qualifiers": true,
+      "answers": [
+        {
+          "name": "Lift",
+          "aliases": [
+            "Elevator"
+          ],
+          "tier": "common"
+        },
+        {
+          "name": "Yo-yo",
+          "aliases": [
+            "Yoyo"
+          ],
+          "tier": "common"
+        },
+        {
+          "name": "See-saw",
+          "aliases": [
+            "Seesaw",
+            "Teeter-totter"
+          ],
+          "tier": "common"
+        },
+        {
+          "name": "Escalator",
+          "tier": "common"
+        },
+        {
+          "name": "Stock market",
+          "aliases": [
+            "Stocks",
+            "Shares",
+            "Share prices",
+            "Prices"
+          ],
+          "tier": "trap"
+        },
+        {
+          "name": "Roller coaster",
+          "aliases": [
+            "Rollercoaster"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "Trampoline",
+          "tier": "solid"
+        },
+        {
+          "name": "Pogo stick",
+          "tier": "solid"
+        },
+        {
+          "name": "Ball",
+          "aliases": [
+            "Bouncing ball",
+            "Basketball"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "Tide",
+          "aliases": [
+            "Sea level"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "Temperature",
+          "tier": "solid"
+        },
+        {
+          "name": "Kite",
+          "tier": "solid"
+        },
+        {
+          "name": "Hot air balloon",
+          "aliases": [
+            "Balloon"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "Plane",
+          "aliases": [
+            "Aeroplane",
+            "Airplane"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "Helicopter",
+          "tier": "solid"
+        },
+        {
+          "name": "Stairs",
+          "aliases": [
+            "Staircase",
+            "Steps"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "Ladder",
+          "tier": "solid"
+        },
+        {
+          "name": "Blinds",
+          "aliases": [
+            "Window blinds"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "Flag",
+          "aliases": [
+            "Flagpole"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "Swing",
+          "tier": "solid"
+        },
+        {
+          "name": "Carousel",
+          "aliases": [
+            "Merry-go-round"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "Ferris wheel",
+          "aliases": [
+            "Singapore Flyer"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "Cable car",
+          "tier": "solid"
+        },
+        {
+          "name": "Sun",
+          "aliases": [
+            "Sunrise",
+            "Moon"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "Waves",
+          "tier": "solid"
+        },
+        {
+          "name": "Window",
+          "aliases": [
+            "Car window"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "Bitcoin",
+          "aliases": [
+            "Crypto"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "Exchange rate",
+          "aliases": [
+            "Currency"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "Petrol prices",
+          "aliases": [
+            "Petrol"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "Heart rate",
+          "aliases": [
+            "Heartbeat",
+            "Pulse"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "Blood pressure",
+          "tier": "rare"
+        },
+        {
+          "name": "Weight",
+          "tier": "rare"
+        },
+        {
+          "name": "Mood",
+          "aliases": [
+            "Emotions"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "Volume",
+          "tier": "rare"
+        },
+        {
+          "name": "Grades",
+          "aliases": [
+            "Marks",
+            "Results"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "Skipping rope",
+          "aliases": [
+            "Jump rope"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "Drawbridge",
+          "tier": "rare"
+        },
+        {
+          "name": "Crane",
+          "tier": "rare"
+        },
+        {
+          "name": "Piston",
+          "tier": "rare"
+        },
+        {
+          "name": "Roller shutter",
+          "aliases": [
+            "Shutters",
+            "Garage door"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "Bungee jump",
+          "aliases": [
+            "Bungee",
+            "Reverse bungee"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "Drop tower",
+          "aliases": [
+            "Free fall"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "COE",
+          "aliases": [
+            "COE prices"
+          ],
+          "tier": "ulu"
+        },
+        {
+          "name": "Car park barrier",
+          "aliases": [
+            "Barrier",
+            "Boom gate"
+          ],
+          "tier": "ulu"
+        },
+        {
+          "name": "Car jack",
+          "aliases": [
+            "Jack"
+          ],
+          "tier": "ulu"
+        },
+        {
+          "name": "Toilet seat",
+          "tier": "ulu"
+        },
+        {
+          "name": "Piano keys",
+          "aliases": [
+            "Piano"
+          ],
+          "tier": "ulu"
+        },
+        {
+          "name": "Kangaroo",
+          "tier": "ulu"
+        },
+        {
+          "name": "Bicycle pump",
+          "aliases": [
+            "Pump"
+          ],
+          "tier": "ulu"
+        },
+        {
+          "name": "Pumpjack",
+          "aliases": [
+            "Nodding donkey"
+          ],
+          "tier": "ulu"
+        },
+        {
+          "name": "Sewing machine",
+          "tier": "ulu"
+        },
+        {
+          "name": "Chest",
+          "aliases": [
+            "Breathing"
+          ],
+          "tier": "ulu"
+        },
+        {
+          "name": "Eyebrows",
+          "tier": "ulu"
+        },
+        {
+          "name": "Water level",
+          "aliases": [
+            "Reservoir level"
+          ],
+          "tier": "ulu"
+        },
+        {
+          "name": "Teh tarik",
+          "aliases": [
+            "Pulled tea",
+            "Kopi tarik"
+          ],
+          "tier": "gem"
+        }
+      ],
+      "decoys": [
+        {
+          "name": "Revolving door",
+          "why": "That one only goes round and round!"
+        },
+        {
+          "name": "Pendulum",
+          "why": "That swings side to side."
+        }
+      ]
+    },
+    {
+      "id": "everyday-hole-in-the-middle",
+      "category": "everyday",
+      "text": "Name something with a hole in the middle",
+      "note": "One hole, right in the middle.",
+      "qualifiers": true,
+      "answers": [
+        {
+          "name": "Donut",
+          "aliases": [
+            "Doughnut"
+          ],
+          "tier": "common"
+        },
+        {
+          "name": "Ring",
+          "aliases": [
+            "Wedding ring"
+          ],
+          "tier": "common"
+        },
+        {
+          "name": "Bagel",
+          "tier": "common"
+        },
+        {
+          "name": "CD",
+          "aliases": [
+            "Compact disc",
+            "DVD",
+            "Disc"
+          ],
+          "tier": "common"
+        },
+        {
+          "name": "Polo",
+          "aliases": [
+            "Polo mint",
+            "Life Savers"
+          ],
+          "tier": "trap"
+        },
+        {
+          "name": "Tyre",
+          "aliases": [
+            "Tire"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "Life buoy",
+          "aliases": [
+            "Lifebuoy",
+            "Life ring",
+            "Swim ring",
+            "Float ring"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "Hula hoop",
+          "aliases": [
+            "Hoop",
+            "Hula Hoops"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "Vinyl",
+          "aliases": [
+            "Vinyl record",
+            "Record"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "Washer",
+          "tier": "solid"
+        },
+        {
+          "name": "Key ring",
+          "aliases": [
+            "Keyring"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "Bangle",
+          "aliases": [
+            "Bracelet"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "Cheerios",
+          "aliases": [
+            "Froot Loops"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "Onion ring",
+          "tier": "solid"
+        },
+        {
+          "name": "Pineapple ring",
+          "tier": "solid"
+        },
+        {
+          "name": "Toilet roll",
+          "aliases": [
+            "Toilet paper roll"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "Toilet seat",
+          "tier": "solid"
+        },
+        {
+          "name": "Earring",
+          "aliases": [
+            "Hoop earring"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "Straw",
+          "aliases": [
+            "Drinking straw"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "Bundt cake",
+          "tier": "rare"
+        },
+        {
+          "name": "Roll of tape",
+          "aliases": [
+            "Tape"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "Beads",
+          "aliases": [
+            "Bead"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "Pipe",
+          "aliases": [
+            "Hose"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "Spool",
+          "aliases": [
+            "Cotton reel"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "Napkin ring",
+          "tier": "rare"
+        },
+        {
+          "name": "Halo",
+          "tier": "rare"
+        },
+        {
+          "name": "Atoll",
+          "tier": "rare"
+        },
+        {
+          "name": "Ferris wheel",
+          "aliases": [
+            "Singapore Flyer"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "Old Chinese coin",
+          "aliases": [
+            "Chinese coin",
+            "Cash coin"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "Yen coin",
+          "aliases": [
+            "5 yen coin",
+            "50 yen coin"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "Kuih cincin",
+          "aliases": [
+            "Kueh cincin"
+          ],
+          "tier": "ulu"
+        },
+        {
+          "name": "Neck pillow",
+          "tier": "ulu"
+        },
+        {
+          "name": "Torus",
+          "tier": "ulu"
+        },
+        {
+          "name": "Vadai",
+          "aliases": [
+            "Vada",
+            "Medu vada",
+            "Ulundu vadai"
+          ],
+          "tier": "gem"
+        }
+      ],
+      "decoys": [
+        {
+          "name": "Button",
+          "why": "Most buttons have two or four holes!"
+        },
+        {
+          "name": "Swiss cheese",
+          "why": "Plenty of holes, but none of them in the middle."
+        },
+        {
+          "name": "Pretzel",
+          "why": "Three holes, and none in the middle!"
+        }
+      ]
+    },
+    {
+      "id": "everyday-yellow",
+      "category": "everyday",
+      "text": "Name something that's usually yellow",
+      "note": "Things that are yellow most of the time. Yellow-ish counts.",
+      "qualifiers": true,
+      "answers": [
+        {
+          "name": "Banana",
+          "tier": "common"
+        },
+        {
+          "name": "Sun",
+          "aliases": [
+            "Sunshine"
+          ],
+          "tier": "common"
+        },
+        {
+          "name": "Lemon",
+          "tier": "common"
+        },
+        {
+          "name": "Egg yolk",
+          "aliases": [
+            "Yolk"
+          ],
+          "tier": "common"
+        },
+        {
+          "name": "Pikachu",
+          "tier": "trap"
+        },
+        {
+          "name": "Sunflower",
+          "tier": "solid"
+        },
+        {
+          "name": "Corn",
+          "aliases": [
+            "Sweet corn",
+            "Corn on the cob",
+            "Maize"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "Cheese",
+          "tier": "solid"
+        },
+        {
+          "name": "Butter",
+          "tier": "solid"
+        },
+        {
+          "name": "Mustard",
+          "tier": "solid"
+        },
+        {
+          "name": "Pineapple",
+          "tier": "solid"
+        },
+        {
+          "name": "Mango",
+          "tier": "solid"
+        },
+        {
+          "name": "Rubber duck",
+          "aliases": [
+            "Rubber ducky"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "Duckling",
+          "aliases": [
+            "Chick"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "Canary",
+          "tier": "solid"
+        },
+        {
+          "name": "SpongeBob",
+          "aliases": [
+            "SpongeBob SquarePants"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "Minions",
+          "aliases": [
+            "Minion"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "The Simpsons",
+          "aliases": [
+            "Simpsons",
+            "Bart Simpson",
+            "Homer Simpson"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "Tweety",
+          "aliases": [
+            "Tweety Bird"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "Big Bird",
+          "tier": "solid"
+        },
+        {
+          "name": "Smiley face",
+          "aliases": [
+            "Smiley",
+            "Emoji"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "School bus",
+          "tier": "solid"
+        },
+        {
+          "name": "Taxi",
+          "aliases": [
+            "Cab"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "Highlighter",
+          "tier": "solid"
+        },
+        {
+          "name": "Sticky note",
+          "aliases": [
+            "Post-it"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "Pencil",
+          "tier": "rare"
+        },
+        {
+          "name": "Tennis ball",
+          "tier": "rare"
+        },
+        {
+          "name": "Daffodil",
+          "tier": "rare"
+        },
+        {
+          "name": "Dandelion",
+          "tier": "rare"
+        },
+        {
+          "name": "Buttercup",
+          "tier": "rare"
+        },
+        {
+          "name": "Marigold",
+          "tier": "rare"
+        },
+        {
+          "name": "Bee",
+          "aliases": [
+            "Bumblebee"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "Gold",
+          "tier": "rare"
+        },
+        {
+          "name": "Amber light",
+          "aliases": [
+            "Traffic light"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "Hard hat",
+          "aliases": [
+            "Safety helmet"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "Safety vest",
+          "aliases": [
+            "Hi-vis vest",
+            "Reflective vest"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "Raincoat",
+          "tier": "rare"
+        },
+        {
+          "name": "Excavator",
+          "aliases": [
+            "Digger",
+            "Bulldozer",
+            "Tractor"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "Wet floor sign",
+          "aliases": [
+            "Caution sign",
+            "Warning sign"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "Curry",
+          "tier": "rare"
+        },
+        {
+          "name": "Turmeric",
+          "aliases": [
+            "Kunyit"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "Custard",
+          "tier": "rare"
+        },
+        {
+          "name": "Egg tart",
+          "aliases": [
+            "Dan tat"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "Scrambled eggs",
+          "aliases": [
+            "Omelette"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "Durian",
+          "tier": "rare"
+        },
+        {
+          "name": "Pac-Man",
+          "tier": "rare"
+        },
+        {
+          "name": "Winnie the Pooh",
+          "aliases": [
+            "Pooh"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "Lego minifigure",
+          "aliases": [
+            "Lego man",
+            "Lego figure"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "McDonald's",
+          "aliases": [
+            "Golden arches"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "Saffron",
+          "tier": "ulu"
+        },
+        {
+          "name": "Mayonnaise",
+          "aliases": [
+            "Mayo"
+          ],
+          "tier": "ulu"
+        },
+        {
+          "name": "Sulphur",
+          "aliases": [
+            "Sulfur"
+          ],
+          "tier": "ulu"
+        },
+        {
+          "name": "Yellow line",
+          "aliases": [
+            "Yellow box"
+          ],
+          "tier": "ulu"
+        },
+        {
+          "name": "Nasi kuning",
+          "aliases": [
+            "Yellow rice"
+          ],
+          "tier": "ulu"
+        },
+        {
+          "name": "Mee kuning",
+          "aliases": [
+            "Yellow noodles"
+          ],
+          "tier": "ulu"
+        },
+        {
+          "name": "Laa-Laa",
+          "tier": "ulu"
+        },
+        {
+          "name": "Bananas in Pyjamas",
+          "tier": "ulu"
+        },
+        {
+          "name": "Snapchat",
+          "tier": "ulu"
+        },
+        {
+          "name": "Yellow ribbon",
+          "tier": "ulu"
+        },
+        {
+          "name": "Pineapple tart",
+          "tier": "gem"
+        }
+      ],
+      "decoys": [
+        {
+          "name": "Lime",
+          "why": "Limes are green! Lemons are the yellow ones."
+        },
+        {
+          "name": "Orange",
+          "why": "That one's... orange."
+        }
+      ]
+    }
+  ]
+}

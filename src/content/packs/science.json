@@ -1,6 +1,6 @@
 {
   "name": "Science",
-  "asOf": "2026-11-10",
+  "asOf": "2026-11-16",
   "prompts": [
     {
       "id": "science-first-20-elements",
@@ -306,6 +306,1741 @@
             "Planet X"
           ],
           "why": "Still only a theory. Nobody has found it."
+        }
+      ]
+    },
+    {
+      "id": "science-bones",
+      "category": "science",
+      "text": "Name a bone in the human body",
+      "note": "Proper names and everyday names both count: 'thigh bone' is the femur.",
+      "qualifiers": true,
+      "answers": [
+        {
+          "name": "Skull",
+          "aliases": [
+            "Cranium"
+          ],
+          "tier": "common"
+        },
+        {
+          "name": "Femur",
+          "aliases": [
+            "Thigh bone",
+            "Thighbone"
+          ],
+          "tier": "common"
+        },
+        {
+          "name": "Rib",
+          "aliases": [
+            "Rib cage",
+            "Ribcage"
+          ],
+          "tier": "common"
+        },
+        {
+          "name": "Vertebra",
+          "aliases": [
+            "Vertebrae",
+            "Spine",
+            "Backbone",
+            "Spinal column"
+          ],
+          "tier": "common"
+        },
+        {
+          "name": "Humerus",
+          "tier": "trap"
+        },
+        {
+          "name": "Tibia",
+          "aliases": [
+            "Shin bone",
+            "Shinbone"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "Fibula",
+          "tier": "solid"
+        },
+        {
+          "name": "Radius",
+          "tier": "solid"
+        },
+        {
+          "name": "Ulna",
+          "tier": "solid"
+        },
+        {
+          "name": "Pelvis",
+          "aliases": [
+            "Hip bone",
+            "Hipbone"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "Kneecap",
+          "aliases": [
+            "Patella",
+            "Knee cap"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "Collarbone",
+          "aliases": [
+            "Clavicle",
+            "Collar bone"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "Shoulder blade",
+          "aliases": [
+            "Scapula"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "Sternum",
+          "aliases": [
+            "Breastbone",
+            "Breast bone"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "Jawbone",
+          "aliases": [
+            "Mandible",
+            "Jaw",
+            "Lower jaw"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "Coccyx",
+          "aliases": [
+            "Tailbone",
+            "Tail bone"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "Phalanges",
+          "aliases": [
+            "Phalanx",
+            "Finger bone",
+            "Toe bone"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "Cheekbone",
+          "aliases": [
+            "Zygomatic bone",
+            "Zygomatic",
+            "Cheek bone"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "Sacrum",
+          "tier": "rare"
+        },
+        {
+          "name": "Metacarpals",
+          "aliases": [
+            "Metacarpal"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "Metatarsals",
+          "aliases": [
+            "Metatarsal"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "Carpals",
+          "aliases": [
+            "Carpal",
+            "Wrist bone"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "Tarsals",
+          "aliases": [
+            "Tarsal"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "Heel bone",
+          "aliases": [
+            "Calcaneus",
+            "Heelbone"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "Talus",
+          "aliases": [
+            "Ankle bone",
+            "Anklebone"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "Maxilla",
+          "aliases": [
+            "Upper jaw"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "Stapes",
+          "aliases": [
+            "Stirrup"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "Frontal bone",
+          "aliases": [
+            "Frontal"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "Ossicles",
+          "aliases": [
+            "Ear bone"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "Incus",
+          "aliases": [
+            "Anvil"
+          ],
+          "tier": "ulu"
+        },
+        {
+          "name": "Malleus",
+          "aliases": [
+            "Hammer"
+          ],
+          "tier": "ulu"
+        },
+        {
+          "name": "Parietal bone",
+          "aliases": [
+            "Parietal"
+          ],
+          "tier": "ulu"
+        },
+        {
+          "name": "Temporal bone",
+          "aliases": [
+            "Temporal"
+          ],
+          "tier": "ulu"
+        },
+        {
+          "name": "Occipital bone",
+          "aliases": [
+            "Occipital"
+          ],
+          "tier": "ulu"
+        },
+        {
+          "name": "Sphenoid",
+          "tier": "ulu"
+        },
+        {
+          "name": "Ethmoid",
+          "tier": "ulu"
+        },
+        {
+          "name": "Nasal bone",
+          "aliases": [
+            "Nasal"
+          ],
+          "tier": "ulu"
+        },
+        {
+          "name": "Lacrimal bone",
+          "aliases": [
+            "Lacrimal"
+          ],
+          "tier": "ulu"
+        },
+        {
+          "name": "Vomer",
+          "tier": "ulu"
+        },
+        {
+          "name": "Palatine bone",
+          "aliases": [
+            "Palatine"
+          ],
+          "tier": "ulu"
+        },
+        {
+          "name": "Atlas",
+          "tier": "ulu"
+        },
+        {
+          "name": "Axis",
+          "tier": "ulu"
+        },
+        {
+          "name": "Ilium",
+          "tier": "ulu"
+        },
+        {
+          "name": "Ischium",
+          "tier": "ulu"
+        },
+        {
+          "name": "Pubis",
+          "aliases": [
+            "Pubic bone"
+          ],
+          "tier": "ulu"
+        },
+        {
+          "name": "Scaphoid",
+          "tier": "ulu"
+        },
+        {
+          "name": "Lunate",
+          "tier": "ulu"
+        },
+        {
+          "name": "Triquetrum",
+          "tier": "ulu"
+        },
+        {
+          "name": "Pisiform",
+          "tier": "ulu"
+        },
+        {
+          "name": "Trapezium",
+          "tier": "ulu"
+        },
+        {
+          "name": "Trapezoid",
+          "tier": "ulu"
+        },
+        {
+          "name": "Capitate",
+          "tier": "ulu"
+        },
+        {
+          "name": "Hamate",
+          "tier": "ulu"
+        },
+        {
+          "name": "Cuboid",
+          "tier": "ulu"
+        },
+        {
+          "name": "Navicular",
+          "tier": "ulu"
+        },
+        {
+          "name": "Cuneiform",
+          "tier": "ulu"
+        },
+        {
+          "name": "Sesamoid",
+          "tier": "ulu"
+        },
+        {
+          "name": "Hyoid",
+          "aliases": [
+            "Hyoid bone"
+          ],
+          "tier": "gem"
+        }
+      ],
+      "decoys": [
+        {
+          "name": "Funny bone",
+          "why": "Not a bone at all! It's a nerve, and that's why it tingles."
+        },
+        {
+          "name": "Wishbone",
+          "why": "That's in a chicken, not in you!"
+        },
+        {
+          "name": "Elbow",
+          "why": "That's a joint, where three bones meet."
+        },
+        {
+          "name": "Knee",
+          "why": "That's a joint. Its bone is the kneecap!"
+        },
+        {
+          "name": "Ankle",
+          "why": "That's a joint, made of several bones."
+        }
+      ]
+    },
+    {
+      "id": "science-dinosaurs",
+      "category": "science",
+      "text": "Name a dinosaur",
+      "note": "One that really lived, by any name you know it by. The flying and swimming reptiles of the time weren't dinosaurs!",
+      "answers": [
+        {
+          "name": "Tyrannosaurus rex",
+          "aliases": [
+            "T. rex",
+            "T-Rex",
+            "Tyrannosaurus"
+          ],
+          "tier": "common"
+        },
+        {
+          "name": "Triceratops",
+          "tier": "common"
+        },
+        {
+          "name": "Stegosaurus",
+          "tier": "common"
+        },
+        {
+          "name": "Velociraptor",
+          "aliases": [
+            "Raptor"
+          ],
+          "tier": "common"
+        },
+        {
+          "name": "Brontosaurus",
+          "tier": "trap"
+        },
+        {
+          "name": "Brachiosaurus",
+          "tier": "solid"
+        },
+        {
+          "name": "Diplodocus",
+          "tier": "solid"
+        },
+        {
+          "name": "Ankylosaurus",
+          "tier": "solid"
+        },
+        {
+          "name": "Spinosaurus",
+          "tier": "solid"
+        },
+        {
+          "name": "Allosaurus",
+          "tier": "solid"
+        },
+        {
+          "name": "Iguanodon",
+          "tier": "solid"
+        },
+        {
+          "name": "Parasaurolophus",
+          "tier": "solid"
+        },
+        {
+          "name": "Pachycephalosaurus",
+          "tier": "solid"
+        },
+        {
+          "name": "Dilophosaurus",
+          "tier": "solid"
+        },
+        {
+          "name": "Gallimimus",
+          "tier": "solid"
+        },
+        {
+          "name": "Carnotaurus",
+          "tier": "solid"
+        },
+        {
+          "name": "Giganotosaurus",
+          "tier": "solid"
+        },
+        {
+          "name": "Apatosaurus",
+          "tier": "solid"
+        },
+        {
+          "name": "Archaeopteryx",
+          "tier": "solid"
+        },
+        {
+          "name": "Compsognathus",
+          "aliases": [
+            "Compy"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "Therizinosaurus",
+          "tier": "rare"
+        },
+        {
+          "name": "Utahraptor",
+          "tier": "rare"
+        },
+        {
+          "name": "Deinonychus",
+          "tier": "rare"
+        },
+        {
+          "name": "Microraptor",
+          "tier": "rare"
+        },
+        {
+          "name": "Troodon",
+          "tier": "rare"
+        },
+        {
+          "name": "Maiasaura",
+          "tier": "rare"
+        },
+        {
+          "name": "Protoceratops",
+          "tier": "rare"
+        },
+        {
+          "name": "Psittacosaurus",
+          "tier": "rare"
+        },
+        {
+          "name": "Edmontosaurus",
+          "tier": "rare"
+        },
+        {
+          "name": "Hadrosaurus",
+          "aliases": [
+            "Hadrosaur",
+            "Duck-billed dinosaur"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "Styracosaurus",
+          "tier": "rare"
+        },
+        {
+          "name": "Argentinosaurus",
+          "tier": "rare"
+        },
+        {
+          "name": "Mamenchisaurus",
+          "tier": "rare"
+        },
+        {
+          "name": "Baryonyx",
+          "tier": "rare"
+        },
+        {
+          "name": "Megalosaurus",
+          "tier": "rare"
+        },
+        {
+          "name": "Ceratosaurus",
+          "tier": "rare"
+        },
+        {
+          "name": "Albertosaurus",
+          "tier": "rare"
+        },
+        {
+          "name": "Corythosaurus",
+          "tier": "ulu"
+        },
+        {
+          "name": "Pachyrhinosaurus",
+          "tier": "ulu"
+        },
+        {
+          "name": "Camarasaurus",
+          "tier": "ulu"
+        },
+        {
+          "name": "Kentrosaurus",
+          "tier": "ulu"
+        },
+        {
+          "name": "Tarbosaurus",
+          "tier": "ulu"
+        },
+        {
+          "name": "Yutyrannus",
+          "tier": "ulu"
+        },
+        {
+          "name": "Sinosauropteryx",
+          "tier": "ulu"
+        },
+        {
+          "name": "Plateosaurus",
+          "tier": "ulu"
+        },
+        {
+          "name": "Coelophysis",
+          "tier": "ulu"
+        },
+        {
+          "name": "Herrerasaurus",
+          "tier": "ulu"
+        },
+        {
+          "name": "Eoraptor",
+          "tier": "ulu"
+        },
+        {
+          "name": "Saltasaurus",
+          "tier": "ulu"
+        },
+        {
+          "name": "Amargasaurus",
+          "tier": "ulu"
+        },
+        {
+          "name": "Nodosaurus",
+          "tier": "ulu"
+        },
+        {
+          "name": "Euoplocephalus",
+          "tier": "ulu"
+        },
+        {
+          "name": "Ouranosaurus",
+          "tier": "ulu"
+        },
+        {
+          "name": "Suchomimus",
+          "tier": "ulu"
+        },
+        {
+          "name": "Irritator",
+          "tier": "ulu"
+        },
+        {
+          "name": "Dracorex",
+          "tier": "ulu"
+        },
+        {
+          "name": "Bambiraptor",
+          "tier": "ulu"
+        },
+        {
+          "name": "Oviraptor",
+          "tier": "gem"
+        }
+      ],
+      "decoys": [
+        {
+          "name": "Pterodactyl",
+          "aliases": [
+            "Pteranodon",
+            "Pterosaur"
+          ],
+          "why": "It flew over the dinosaurs, but it wasn't one."
+        },
+        {
+          "name": "Mosasaurus",
+          "aliases": [
+            "Mosasaur"
+          ],
+          "why": "A giant sea lizard, not a dinosaur."
+        },
+        {
+          "name": "Plesiosaurus",
+          "aliases": [
+            "Plesiosaur"
+          ],
+          "why": "A sea reptile, not a dinosaur."
+        },
+        {
+          "name": "Ichthyosaurus",
+          "aliases": [
+            "Ichthyosaur"
+          ],
+          "why": "A sea reptile, not a dinosaur."
+        },
+        {
+          "name": "Dimetrodon",
+          "why": "It lived before the dinosaurs, and was closer to mammals!"
+        },
+        {
+          "name": "Woolly mammoth",
+          "aliases": [
+            "Mammoth"
+          ],
+          "why": "An Ice Age mammal, long after the dinosaurs."
+        },
+        {
+          "name": "Sabre-toothed tiger",
+          "aliases": [
+            "Smilodon"
+          ],
+          "why": "An Ice Age cat, long after the dinosaurs."
+        },
+        {
+          "name": "Megalodon",
+          "why": "A giant shark, and it came long after the dinosaurs."
+        },
+        {
+          "name": "Indominus rex",
+          "why": "Made up for Jurassic World!"
+        },
+        {
+          "name": "Godzilla",
+          "why": "Only in the movies."
+        },
+        {
+          "name": "Barney",
+          "why": "A purple dinosaur, but not a real one."
+        },
+        {
+          "name": "Chicken",
+          "why": "Birds are dinosaurs, technically! We're after the ones that died out."
+        }
+      ]
+    },
+    {
+      "id": "science-black-and-white-animals",
+      "category": "science",
+      "text": "Name an animal that's black and white",
+      "note": "Mostly black and white, all over or in big patches. Breeds count.",
+      "qualifiers": true,
+      "answers": [
+        {
+          "name": "Zebra",
+          "tier": "common"
+        },
+        {
+          "name": "Panda",
+          "aliases": [
+            "Giant panda",
+            "Panda bear"
+          ],
+          "tier": "common"
+        },
+        {
+          "name": "Penguin",
+          "tier": "common"
+        },
+        {
+          "name": "Skunk",
+          "tier": "common"
+        },
+        {
+          "name": "Orca",
+          "aliases": [
+            "Killer whale"
+          ],
+          "tier": "trap"
+        },
+        {
+          "name": "Dalmatian",
+          "tier": "solid"
+        },
+        {
+          "name": "Cow",
+          "aliases": [
+            "Holstein",
+            "Friesian",
+            "Dairy cow"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "Magpie",
+          "tier": "solid"
+        },
+        {
+          "name": "Badger",
+          "tier": "solid"
+        },
+        {
+          "name": "Puffin",
+          "tier": "solid"
+        },
+        {
+          "name": "Border collie",
+          "tier": "solid"
+        },
+        {
+          "name": "Husky",
+          "aliases": [
+            "Siberian husky"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "Tuxedo cat",
+          "tier": "solid"
+        },
+        {
+          "name": "Boston terrier",
+          "tier": "rare"
+        },
+        {
+          "name": "Ruffed lemur",
+          "aliases": [
+            "Black-and-white ruffed lemur"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "Colobus monkey",
+          "aliases": [
+            "Colobus"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "Oriental magpie-robin",
+          "aliases": [
+            "Magpie robin"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "Pied hornbill",
+          "aliases": [
+            "Oriental pied hornbill",
+            "Hornbill"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "Stork",
+          "aliases": [
+            "White stork"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "Ostrich",
+          "tier": "rare"
+        },
+        {
+          "name": "Piebald horse",
+          "aliases": [
+            "Piebald",
+            "Pinto"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "Woodpecker",
+          "tier": "rare"
+        },
+        {
+          "name": "Sea krait",
+          "aliases": [
+            "Banded sea krait",
+            "Sea snake"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "Malayan krait",
+          "aliases": [
+            "Blue krait"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "Indri",
+          "tier": "ulu"
+        },
+        {
+          "name": "Avocet",
+          "tier": "ulu"
+        },
+        {
+          "name": "Oystercatcher",
+          "tier": "ulu"
+        },
+        {
+          "name": "Pied kingfisher",
+          "tier": "ulu"
+        },
+        {
+          "name": "Pied crow",
+          "tier": "ulu"
+        },
+        {
+          "name": "Wagtail",
+          "aliases": [
+            "Pied wagtail"
+          ],
+          "tier": "ulu"
+        },
+        {
+          "name": "Commerson's dolphin",
+          "tier": "ulu"
+        },
+        {
+          "name": "Jacob sheep",
+          "tier": "ulu"
+        },
+        {
+          "name": "Dutch rabbit",
+          "tier": "ulu"
+        },
+        {
+          "name": "California kingsnake",
+          "aliases": [
+            "Kingsnake"
+          ],
+          "tier": "ulu"
+        },
+        {
+          "name": "Japanese chin",
+          "tier": "ulu"
+        },
+        {
+          "name": "Banded langur",
+          "aliases": [
+            "Raffles' banded langur"
+          ],
+          "tier": "ulu"
+        },
+        {
+          "name": "Malayan tapir",
+          "aliases": [
+            "Tapir"
+          ],
+          "tier": "gem"
+        }
+      ],
+      "decoys": [
+        {
+          "name": "Red panda",
+          "why": "Red, as the name says!"
+        },
+        {
+          "name": "Zebra dove",
+          "why": "Brown and grey, despite the name!"
+        },
+        {
+          "name": "Raccoon",
+          "why": "Mostly grey."
+        }
+      ]
+    },
+    {
+      "id": "science-flying-not-birds",
+      "category": "science",
+      "text": "Name an animal that can fly but isn't a bird",
+      "note": "Gliders count, and so do the ones that died out long ago.",
+      "qualifiers": true,
+      "answers": [
+        {
+          "name": "Bat",
+          "aliases": [
+            "Fruit bat"
+          ],
+          "tier": "common"
+        },
+        {
+          "name": "Butterfly",
+          "tier": "common"
+        },
+        {
+          "name": "Bee",
+          "aliases": [
+            "Bumblebee",
+            "Honeybee"
+          ],
+          "tier": "common"
+        },
+        {
+          "name": "Mosquito",
+          "tier": "common"
+        },
+        {
+          "name": "Flying fish",
+          "tier": "trap"
+        },
+        {
+          "name": "Fly",
+          "aliases": [
+            "Housefly",
+            "House fly"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "Dragonfly",
+          "tier": "solid"
+        },
+        {
+          "name": "Moth",
+          "tier": "solid"
+        },
+        {
+          "name": "Ladybird",
+          "aliases": [
+            "Ladybug"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "Wasp",
+          "aliases": [
+            "Hornet"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "Beetle",
+          "tier": "solid"
+        },
+        {
+          "name": "Cockroach",
+          "aliases": [
+            "Flying cockroach"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "Insect",
+          "tier": "solid"
+        },
+        {
+          "name": "Flying squirrel",
+          "tier": "solid"
+        },
+        {
+          "name": "Pterodactyl",
+          "aliases": [
+            "Pterosaur",
+            "Pteranodon"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "Flying fox",
+          "tier": "rare"
+        },
+        {
+          "name": "Grasshopper",
+          "tier": "rare"
+        },
+        {
+          "name": "Locust",
+          "tier": "rare"
+        },
+        {
+          "name": "Cicada",
+          "tier": "rare"
+        },
+        {
+          "name": "Firefly",
+          "tier": "rare"
+        },
+        {
+          "name": "Termite",
+          "aliases": [
+            "Alate"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "Flying ant",
+          "tier": "rare"
+        },
+        {
+          "name": "Gnat",
+          "aliases": [
+            "Midge"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "Fruit fly",
+          "tier": "rare"
+        },
+        {
+          "name": "Horsefly",
+          "tier": "rare"
+        },
+        {
+          "name": "Praying mantis",
+          "aliases": [
+            "Mantis"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "Colugo",
+          "aliases": [
+            "Flying lemur"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "Sugar glider",
+          "tier": "rare"
+        },
+        {
+          "name": "Flying lizard",
+          "aliases": [
+            "Draco",
+            "Flying dragon"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "Mayfly",
+          "tier": "ulu"
+        },
+        {
+          "name": "Damselfly",
+          "tier": "ulu"
+        },
+        {
+          "name": "Crane fly",
+          "tier": "ulu"
+        },
+        {
+          "name": "Lacewing",
+          "tier": "ulu"
+        },
+        {
+          "name": "Hoverfly",
+          "tier": "ulu"
+        },
+        {
+          "name": "Flying frog",
+          "aliases": [
+            "Wallace's flying frog"
+          ],
+          "tier": "ulu"
+        },
+        {
+          "name": "Flying squid",
+          "tier": "ulu"
+        },
+        {
+          "name": "Flying gecko",
+          "tier": "ulu"
+        },
+        {
+          "name": "Quetzalcoatlus",
+          "tier": "ulu"
+        },
+        {
+          "name": "Microraptor",
+          "tier": "ulu"
+        },
+        {
+          "name": "Spider",
+          "aliases": [
+            "Spiderling"
+          ],
+          "tier": "ulu"
+        },
+        {
+          "name": "Flying snake",
+          "aliases": [
+            "Paradise tree snake"
+          ],
+          "tier": "gem"
+        }
+      ],
+      "decoys": [
+        {
+          "name": "Penguin",
+          "why": "That's a bird, and it can't even fly!"
+        },
+        {
+          "name": "Chicken",
+          "why": "That's a bird. Mostly a walking one."
+        },
+        {
+          "name": "Human",
+          "why": "Only with a ticket!"
+        },
+        {
+          "name": "Superman",
+          "why": "Not an animal, and not real either."
+        },
+        {
+          "name": "Dragon",
+          "why": "Only in stories!"
+        }
+      ]
+    },
+    {
+      "id": "science-units-of-measurement",
+      "category": "science",
+      "text": "Name a unit of measurement",
+      "note": "For length, weight, time, temperature, data, anything at all. Old ones count.",
+      "answers": [
+        {
+          "name": "Metre",
+          "aliases": [
+            "Meter",
+            "m"
+          ],
+          "tier": "common"
+        },
+        {
+          "name": "Kilogram",
+          "aliases": [
+            "Kilo",
+            "kg",
+            "Kilogramme"
+          ],
+          "tier": "common"
+        },
+        {
+          "name": "Litre",
+          "aliases": [
+            "Liter",
+            "l"
+          ],
+          "tier": "common"
+        },
+        {
+          "name": "Second",
+          "aliases": [
+            "Seconds",
+            "Sec"
+          ],
+          "tier": "common"
+        },
+        {
+          "name": "Centimetre",
+          "aliases": [
+            "Centimeter",
+            "cm"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "Kilometre",
+          "aliases": [
+            "Kilometer",
+            "km"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "Millimetre",
+          "aliases": [
+            "Millimeter",
+            "mm"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "Gram",
+          "aliases": [
+            "Gramme",
+            "g"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "Milligram",
+          "aliases": [
+            "mg"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "Millilitre",
+          "aliases": [
+            "Milliliter",
+            "ml"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "Minute",
+          "aliases": [
+            "Min"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "Hour",
+          "aliases": [
+            "Hr"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "Day",
+          "tier": "solid"
+        },
+        {
+          "name": "Week",
+          "tier": "solid"
+        },
+        {
+          "name": "Month",
+          "tier": "solid"
+        },
+        {
+          "name": "Year",
+          "tier": "solid"
+        },
+        {
+          "name": "Celsius",
+          "aliases": [
+            "Degree Celsius",
+            "Centigrade"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "Fahrenheit",
+          "tier": "solid"
+        },
+        {
+          "name": "Kelvin",
+          "tier": "solid"
+        },
+        {
+          "name": "Degree",
+          "tier": "solid"
+        },
+        {
+          "name": "Inch",
+          "aliases": [
+            "in"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "Foot",
+          "aliases": [
+            "ft"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "Mile",
+          "tier": "solid"
+        },
+        {
+          "name": "Pound",
+          "aliases": [
+            "lb"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "Ounce",
+          "aliases": [
+            "oz"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "Tonne",
+          "aliases": [
+            "Ton",
+            "Metric ton"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "Gallon",
+          "tier": "solid"
+        },
+        {
+          "name": "Byte",
+          "aliases": [
+            "Kilobyte",
+            "KB",
+            "Megabyte",
+            "MB",
+            "Gigabyte",
+            "GB",
+            "Terabyte",
+            "TB"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "Calorie",
+          "aliases": [
+            "Kilocalorie",
+            "Kcal",
+            "Cal"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "Volt",
+          "tier": "solid"
+        },
+        {
+          "name": "Watt",
+          "tier": "solid"
+        },
+        {
+          "name": "Bit",
+          "tier": "rare"
+        },
+        {
+          "name": "Pint",
+          "tier": "rare"
+        },
+        {
+          "name": "Ampere",
+          "aliases": [
+            "Amp"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "Joule",
+          "tier": "rare"
+        },
+        {
+          "name": "Newton",
+          "tier": "rare"
+        },
+        {
+          "name": "Hertz",
+          "aliases": [
+            "Hz",
+            "Megahertz",
+            "Gigahertz"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "Decibel",
+          "aliases": [
+            "dB"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "Light year",
+          "aliases": [
+            "Light-year",
+            "Lightyear"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "Yard",
+          "tier": "rare"
+        },
+        {
+          "name": "Acre",
+          "tier": "rare"
+        },
+        {
+          "name": "Hectare",
+          "tier": "rare"
+        },
+        {
+          "name": "Knot",
+          "tier": "rare"
+        },
+        {
+          "name": "Nautical mile",
+          "tier": "rare"
+        },
+        {
+          "name": "Carat",
+          "aliases": [
+            "Karat"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "Teaspoon",
+          "aliases": [
+            "tsp"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "Tablespoon",
+          "aliases": [
+            "tbsp"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "Cup",
+          "tier": "rare"
+        },
+        {
+          "name": "Quart",
+          "tier": "rare"
+        },
+        {
+          "name": "Pascal",
+          "tier": "rare"
+        },
+        {
+          "name": "Ohm",
+          "tier": "rare"
+        },
+        {
+          "name": "Kilowatt-hour",
+          "aliases": [
+            "kWh",
+            "Kilowatt hour"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "Kilowatt",
+          "aliases": [
+            "kW"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "Horsepower",
+          "aliases": [
+            "hp"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "Square foot",
+          "aliases": [
+            "Square feet",
+            "sq ft",
+            "sqft"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "Square metre",
+          "aliases": [
+            "Square meter",
+            "sqm"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "Decade",
+          "tier": "rare"
+        },
+        {
+          "name": "Century",
+          "tier": "rare"
+        },
+        {
+          "name": "Millisecond",
+          "aliases": [
+            "ms"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "Megapixel",
+          "aliases": [
+            "Pixel"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "Millennium",
+          "tier": "ulu"
+        },
+        {
+          "name": "Fortnight",
+          "tier": "ulu"
+        },
+        {
+          "name": "Nanosecond",
+          "tier": "ulu"
+        },
+        {
+          "name": "Micrometre",
+          "aliases": [
+            "Micron"
+          ],
+          "tier": "ulu"
+        },
+        {
+          "name": "Nanometre",
+          "aliases": [
+            "Nanometer"
+          ],
+          "tier": "ulu"
+        },
+        {
+          "name": "Angstrom",
+          "tier": "ulu"
+        },
+        {
+          "name": "Radian",
+          "tier": "ulu"
+        },
+        {
+          "name": "Mole",
+          "tier": "ulu"
+        },
+        {
+          "name": "Candela",
+          "tier": "ulu"
+        },
+        {
+          "name": "Lux",
+          "tier": "ulu"
+        },
+        {
+          "name": "Parsec",
+          "tier": "ulu"
+        },
+        {
+          "name": "Astronomical unit",
+          "aliases": [
+            "AU"
+          ],
+          "tier": "ulu"
+        },
+        {
+          "name": "Fathom",
+          "tier": "ulu"
+        },
+        {
+          "name": "Furlong",
+          "tier": "ulu"
+        },
+        {
+          "name": "Stone",
+          "tier": "ulu"
+        },
+        {
+          "name": "Hand",
+          "tier": "ulu"
+        },
+        {
+          "name": "Cubit",
+          "tier": "ulu"
+        },
+        {
+          "name": "League",
+          "tier": "ulu"
+        },
+        {
+          "name": "Grain",
+          "tier": "ulu"
+        },
+        {
+          "name": "Bushel",
+          "tier": "ulu"
+        },
+        {
+          "name": "Barrel",
+          "tier": "ulu"
+        },
+        {
+          "name": "Fluid ounce",
+          "aliases": [
+            "fl oz"
+          ],
+          "tier": "ulu"
+        },
+        {
+          "name": "Mach",
+          "tier": "ulu"
+        },
+        {
+          "name": "Bar",
+          "tier": "ulu"
+        },
+        {
+          "name": "Atmosphere",
+          "aliases": [
+            "atm"
+          ],
+          "tier": "ulu"
+        },
+        {
+          "name": "Psi",
+          "tier": "ulu"
+        },
+        {
+          "name": "Coulomb",
+          "tier": "ulu"
+        },
+        {
+          "name": "Farad",
+          "tier": "ulu"
+        },
+        {
+          "name": "Tesla",
+          "tier": "ulu"
+        },
+        {
+          "name": "Sievert",
+          "tier": "ulu"
+        },
+        {
+          "name": "Pinch",
+          "tier": "ulu"
+        },
+        {
+          "name": "Dozen",
+          "tier": "ulu"
+        },
+        {
+          "name": "Tahil",
+          "aliases": [
+            "Tael"
+          ],
+          "tier": "ulu"
+        },
+        {
+          "name": "Picul",
+          "tier": "ulu"
+        },
+        {
+          "name": "Kati",
+          "aliases": [
+            "Catty"
+          ],
+          "tier": "gem"
+        }
+      ],
+      "decoys": [
+        {
+          "name": "Ruler",
+          "why": "That's what you measure with, not what you measure in!"
+        },
+        {
+          "name": "Thermometer",
+          "why": "That's what you measure with, not what you measure in!"
+        },
+        {
+          "name": "Tape measure",
+          "why": "That's what you measure with, not what you measure in!"
+        },
+        {
+          "name": "Scale",
+          "why": "That's what you weigh with, not what you weigh in!"
         }
       ]
     }

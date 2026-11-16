@@ -205,7 +205,9 @@
           "name": "blur",
           "aliases": [
             "blur like sotong",
-            "blur sotong"
+            "blur sotong",
+            "sotong",
+            "act blur"
           ],
           "tier": "solid"
         },
@@ -294,7 +296,8 @@
         {
           "name": "die die must",
           "aliases": [
-            "die die also must"
+            "die die also must",
+            "die die must try"
           ],
           "tier": "solid"
         },
@@ -637,6 +640,36 @@
             "jiak choa"
           ],
           "tier": "gem"
+        },
+        {
+          "name": "siao",
+          "aliases": [
+            "siow",
+            "siao liao"
+          ],
+          "tier": "solid"
+        },
+        {
+          "name": "buay paiseh",
+          "aliases": [
+            "bo paiseh"
+          ],
+          "tier": "rare"
+        },
+        {
+          "name": "onz",
+          "tier": "rare"
+        },
+        {
+          "name": "bodoh",
+          "tier": "rare"
+        },
+        {
+          "name": "diam",
+          "aliases": [
+            "diam diam"
+          ],
+          "tier": "rare"
         }
       ]
     },
